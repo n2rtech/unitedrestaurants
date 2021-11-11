@@ -1,8 +1,6 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
-const passport = require("passport");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const users = require("./routes/api/users");
 
@@ -23,19 +21,6 @@ app.use(
 );
 app.use(bodyParser.json());
 
-const db = require("./config/keys").mongoURI;
-
-mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true }
-  )
-  .then(() => console.log("MongoDB successfully connected"))
-  .catch(err => console.log(err));
-
-app.use(passport.initialize());
-app.use(passport.session());
-require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", users);
