@@ -1,18 +1,83 @@
 import React,{useState} from 'react';
-import { Container, Row, Col, Form, FormGroup, Input, Label, Button,NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
-import './css/styles.css'
+import { Container, Row, Col, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
+import './css/style.css'
+
 
 const Header = (props) => {
 
   return (
-      <Container fluid={true} className="p-0">
-      <Row className="m-0">
-        <Col xs="12" className="p-0">     
-           HEADER
-           <a target = "_blank" href={`${process.env.PUBLIC_URL}/login`} >Login</a>
-        </Col>
-        </Row>
-      </Container>
+      <div className="mainheader">
+        <Container fluid={true}>
+        <Row className="m-0">
+          <Col sm="3">
+            <div className="mainlogo">
+              <img className="img-fluid" 
+               src={`${process.env.PUBLIC_URL}/assets/images/mainlogo.png`} 
+               alt="logo"/>
+            </div>
+          </Col>
+          <Col sm="5">
+            <div className="topcenter">
+              <div className="textlogo"><img className="img-fluid" 
+               src={`${process.env.PUBLIC_URL}/assets/images/textlogo.png`} 
+               alt="text-logo"/></div>
+               <div className="discountline">Discounts and Advertising Platform</div>
+               <div className="savemore">Save more, directly order from the store</div>
+               <div className="searchbar">
+                 <FormGroup>
+                        <div className="InputGroup">
+                <Input className="form-control" type="search"/>
+                <button id="search" className="btn btn-primary">Search</button>
+                </div>
+              </FormGroup>
+               </div>
+            </div>
+          </Col>
+          <Col sm="4">
+            <div className="topright">
+              <div className="topmenu">
+                <div className="clickable">
+                <p>visitors</p>
+                <a href="#">click here</a>
+              </div>
+              <div className="clickable">
+                <p>restaurants</p>
+                <a href="#">click here</a>
+              </div>
+              <div className="clickable">
+                <p>how it works</p>
+                <a href="#">click here</a>
+              </div>
+              </div>
+              <div className="socialmenu">
+                  <a href="#"><i className="fa fa-facebook"></i></a>
+                  <a href="#"><i className="fa fa-twitter"></i></a>
+                  <a href="#"><i className="fa fa-google-plus"></i></a>
+                  <a href="#"><i className="fa fa-linkedin"></i></a>
+                  <a href="#"><i className="fa fa-instagram"></i></a>
+              </div>
+              <div className="language-country">
+                <div className="language">
+                <select aria-label="Default select example" className="form-control">
+                  <option>Language</option>
+                  <option value="1">English</option>
+                  <option value="2">Hindi</option>
+                </select>
+              </div>
+              <div className="country">
+                <select aria-label="Default select example" className="form-control">
+                  <option>Country</option>
+                  <option value="1">India</option>
+                  <option value="2">One</option>
+                  <option value="2">Two</option>
+                </select>
+              </div>
+              </div>
+            </div>
+          </Col>
+          </Row>
+        </Container>
+      </div>
   );
 }
 
