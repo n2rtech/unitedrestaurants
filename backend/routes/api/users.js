@@ -5,11 +5,14 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const nodemailer = require("nodemailer");
+const User = require('../../models').User;
+const Role = require('../../models').Role;
 
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
-router.post("/registerr", (req, res) => {
+
+router.post("/register", (req, res) => {
   const {errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
@@ -25,19 +28,33 @@ router.post("/registerr", (req, res) => {
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(req.body.password, salt, (err, hash) => {
           if (err) throw err;         
-          var name = req.body.first_name+' '+req.body.last_name; 
-          var sql = "INSERT INTO `users` (`role`, `name`, `email`, `mobile`, `password`,`address`) VALUES ('vendor', '"+name+"', '"+req.body.email+"', '"+req.body.mobile+"', '"+hash+"', '"+req.body.address+"')";
-          DB.query(sql, function (err, result) {  
-            if (err) throw err;  
-            return res.json({
+          var name = req.body.first_name+' '+req.body.last_name;
+
+
+          Role.findOne({
+            where: {
+                role_name: req.body.role? req.body.role : 'vendor'
+            }
+        }).then((role) => {
+            User
+            .create({
+                email: req.body.email,
+                password: hash,
+                name: name,
+                mobile: req.body.phone,
+                phone: req.body.phone,
+                address: req.body.address,
+                role_id: role.id
+            })
+            .then((user) => res.status(201).send({
               succeed: true,
               message: "user inserted successfully!"
-            });
-          });         
-        });
+            }));               
+        })
       });     
-    }
-  });
+    });
+  }
+});
 });
 
 router.post("/login", (req, res) => {
@@ -46,6 +63,7 @@ router.post("/login", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
+
 
   const email = req.body.email;
   const password = req.body.password;
@@ -94,3 +112,4 @@ router.post("/login", (req, res) => {
 });
 
 module.exports = router;
+  

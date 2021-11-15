@@ -3,6 +3,8 @@ const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const users = require("./routes/api/users");
+const roles = require("./routes/roles");
+const permissions = require("./routes/permissions");
 
 const keys = require("./config/keys");
 const app = express();
@@ -24,6 +26,10 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/api/users", users);
+
+app.use("/api/roles", roles);
+
+app.use("/api/permissions", permissions);
 
 const port = process.env.PORT || 5000;
 
