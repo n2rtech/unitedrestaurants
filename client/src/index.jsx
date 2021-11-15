@@ -155,6 +155,7 @@ const Root = (props) =>  {
           </App>
           :
           <Redirect to={`${process.env.PUBLIC_URL}/home`} />
+          
           }      
         </Switch>
         </BrowserRouter>
