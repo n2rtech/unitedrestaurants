@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import { Container, Row, Col, Form, FormGroup, Input, Label, Button,NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
 import Header from './header.jsx'
 import Footer from './footer.jsx'
+import './css/styles.css'
 const Home = (props) => {
 
   return (
