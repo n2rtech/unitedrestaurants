@@ -2,7 +2,7 @@ import React, { Fragment,useState,useEffect } from 'react'
 import ReactDOM from 'react-dom';
 import './index.scss';
 import {firebase_app, auth0} from './data/config';
-import {BrowserRouter,Switch,Route,Redirect} from 'react-router-dom'
+import {BrowserRouter,Switch,Route,Redirect , useParams} from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { Auth0Provider } from '@auth0/auth0-react'
@@ -12,6 +12,7 @@ import { CSSTransition,TransitionGroup } from 'react-transition-group'
 import {routes} from './route';
 import ConfigDB  from './data/customizer/config'
 import {configureFakeBackend ,authHeader, handleResponse} from './services/fack.backend'
+
 
 // Signin page
 import Signin from './auth/signin'
@@ -46,10 +47,11 @@ import Maintenance from "./pages/maintenance"
 
 import Callback from './auth/callback'
 import { classes } from './data/layouts';
-
+import {useAuth0} from '@auth0/auth0-react'
 
 // setup fake backend
 configureFakeBackend();
+
 
 
 const Root = (props) =>  {
@@ -61,6 +63,11 @@ const Root = (props) =>  {
   const jwt_token = localStorage.getItem('token'); 
   const defaultLayoutObj = classes.find(item => Object.values(item).pop(1) === 'compact-wrapper');
   const layout = localStorage.getItem('layout') ||  Object.keys(defaultLayoutObj).pop();
+
+  const queryParams = new URLSearchParams(window.location.search);
+  const user_id = queryParams.get('id');
+  console.log(localStorage.getItem("role"))
+  
 
   useEffect(() => {
 
@@ -147,6 +154,10 @@ const Root = (props) =>  {
         </Auth0Provider>
       </Fragment>
       )
+}
+
+function Childq() {
+  return 12;
 }
 
 ReactDOM.render(<Root/>,

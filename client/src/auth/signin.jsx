@@ -128,12 +128,12 @@ const Logins = (props) => {
         setValue(man);
         console.log("result", user.data,decoded);
         setName(decoded.name);
-        setRole(decoded.role);
         localStorage.setItem('token', user.data.token);
+        localStorage.setItem('role', decoded.role);
         if(decoded.role == 'admin'){
-          window.location.href = `${process.env.PUBLIC_URL}/dashboard/admin/`
+          window.location.href = `${process.env.PUBLIC_URL}/dashboard/admin/Dubai`
         }else{
-          window.location.href = `${process.env.PUBLIC_URL}/dashboard/vendor/`
+          window.location.href = `${process.env.PUBLIC_URL}/dashboard/vendor/London`
         }
         return user.data;
       }).catch((error) => {

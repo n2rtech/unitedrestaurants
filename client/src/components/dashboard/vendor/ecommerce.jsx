@@ -50,7 +50,7 @@ const VendorEcommerce = (props) => {
             <Row className="size-column">
               <Col xl="7 xl-100" className="box-col-12 ">
                 <Row className="dash-chart">
-                  <Col xl="6"  className="box-col-6" md="6">
+                  <Col xl="6" className="box-col-6" md="6">
                     <Card className="o-hidden">
                       <CardHeader className="card-no-border">
                         <div className="card-header-right">
