@@ -17,6 +17,10 @@ import {configureFakeBackend ,authHeader, handleResponse} from './services/fack.
 // Signin page
 import Signin from './auth/signin'
 
+// Home Page
+import Home from './website/home'
+
+
 // Authentication
 import Login from "./pages/authentication/login"
 import LoginWithBgImage from "./pages/authentication/loginWithBgImage"
@@ -93,6 +97,7 @@ const Root = (props) =>  {
         <Switch>
 
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
+          <Route  path={`${process.env.PUBLIC_URL}/home`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/login`} component={Login}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/loginWithBgImg1`} component={LoginWithBgImage}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/loginWithBgImg2`} component={LoginWithBgVideo}></Route>
@@ -149,7 +154,7 @@ const Root = (props) =>  {
           
           </App>
           :
-          <Redirect to={`${process.env.PUBLIC_URL}/login`} />
+          <Redirect to={`${process.env.PUBLIC_URL}/home`} />
           }      
         </Switch>
         </BrowserRouter>
