@@ -52,8 +52,6 @@ import {useAuth0} from '@auth0/auth0-react'
 // setup fake backend
 configureFakeBackend();
 
-
-
 const Root = (props) =>  {
   const [anim, setAnim] = useState("");
   const animation = localStorage.getItem("animation") || ConfigDB.data.router_animation || 'fade'
@@ -64,8 +62,8 @@ const Root = (props) =>  {
   const defaultLayoutObj = classes.find(item => Object.values(item).pop(1) === 'compact-wrapper');
   const layout = localStorage.getItem('layout') ||  Object.keys(defaultLayoutObj).pop();
 
-  const queryParams = new URLSearchParams(window.location.search);
-  const user_id = queryParams.get('id');
+  // const queryParams = new URLSearchParams(window.location.search);
+  // const user_id = queryParams.get('id');
   console.log(localStorage.getItem("role"))
   
 
@@ -126,7 +124,12 @@ const Root = (props) =>  {
           
           <App>
           <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
-              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/default/${layout}`} />)
+            if(localStorage.getItem("role") == 'admin') {
+              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/admin/${layout}`} />)
+            } else {
+              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/vendor/${layout}`} />)
+            }
+              
           }} /> 
           <TransitionGroup>
               {routes.map(({ path, Component }) => (
@@ -154,10 +157,6 @@ const Root = (props) =>  {
         </Auth0Provider>
       </Fragment>
       )
-}
-
-function Childq() {
-  return 12;
 }
 
 ReactDOM.render(<Root/>,
