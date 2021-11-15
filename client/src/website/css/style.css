@@ -1,0 +1,126 @@
+/*@font-face {
+  font-family: "Hurme Geometric Sans No.1";
+  src: url('../fonts/HurmeGeometricSans1 Hairline.OTF');
+  font-family: normal;
+}
+@font-face {
+  font-family: "Hurme Geometric Sans No.1";
+  src: url('../fonts/HurmeGeometricSans1 HairlineOblique.OTF');
+  font-family: normal;
+}
+@font-face {
+  font-family: 'Lato', sans-serif;
+  src: url('../fonts/Lato-Black.TTF');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Lato', sans-serif;
+  src: url('../fonts/Lato-BlackItalic.TTF');
+  font-family: normal;
+}*/
+.mainheader{
+	background-image: url("http://localhost:3000/assets/images/headerbg.jpg"), linear-gradient(#800020, #800020);
+    width: 100%;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.mainlogo img {
+    max-width: 70%;
+}
+.topcenter{
+	text-align: center;
+	margin: 0 auto;
+	display: block;
+}
+.textlogo img {
+    max-width: 70%;
+}
+.discountline {
+    font-size: 20px;
+    color: #fff;
+    line-height: 60px;
+    letter-spacing: .5px;
+    font-family: 'Lato';
+    margin-top: 15px;
+}
+.savemore {
+    font-size: 24px;
+    color: #F3C33B;
+    line-height: 32px;
+    letter-spacing: .5px;
+    margin-top: 10px;
+    font-family: "Hurme Geometric Sans 1", sans-serif;
+}
+.topmenu {
+    width: 100%;
+    display: inline-flex;
+}
+.clickable p {
+    font-family: 'Poppins';
+    font-weight: 400;
+    color: #F3C33B;
+    font-size: 13px;
+    text-align: center;
+    width: 140px;
+    display: block;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+.clickable a {
+    color: #D0CAC7;
+    text-align: center;
+    display: block;
+    font-size: 13px;
+    font-family: 'Poppins';
+}
+.socialmenu a i {
+    color: #F3C33B;
+    font-size: 20px;
+    padding: 0 20px;
+}
+.socialmenu {
+    text-align: center;
+    margin-top: 22px;
+}
+.searchbar {
+    margin-top: 20px;
+    position: relative;
+}
+.searchbar input {
+    border-radius: 50px;
+    height: 50px;
+    padding: 0 20px;
+}
+.searchbar .InputGroup #search {
+    position: absolute;
+    top: 7.5px;
+    right: 10px;
+    border-radius: 50px;
+}
+.searchbar .btn-primary {
+    background-color: #70081C !important;
+    border-color: #70081C !important;
+}
+.topright {
+    text-align: center;
+}
+.language-country {
+    display: inline-flex;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: 85px;
+    text-align: center;
+}
+.language-country .language {
+    width: 50%;
+    margin-right: 30px;
+}
+.language-country select {
+    font-size: 14px;
+}
+.language-country .country {
+    width: 50%;
+}
