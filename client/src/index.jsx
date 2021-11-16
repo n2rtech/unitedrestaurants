@@ -20,6 +20,8 @@ import Signin from './auth/signin'
 // Home Page
 import Home from './website/home'
 
+import Permissions from './components/permissions/list'
+
 
 // Authentication
 import Login from "./pages/authentication/login"
@@ -124,7 +126,9 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/pages/maintenance`} component={Maintenance}></Route>
           
           <Route  path={`${process.env.PUBLIC_URL}/callback`} render={() => <Callback/>} />
-          
+
+          {/* <Route  path={`${process.env.PUBLIC_URL}/permissions/add`} component={Permissions} />
+           */}
           {currentUser !== null || authenticated || jwt_token  ?
           
           <App>
@@ -155,7 +159,7 @@ const Root = (props) =>  {
           </App>
           :
           <Redirect to={`${process.env.PUBLIC_URL}/home`} />
-          
+
           }      
         </Switch>
         </BrowserRouter>
