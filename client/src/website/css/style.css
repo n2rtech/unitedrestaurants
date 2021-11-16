@@ -19,7 +19,7 @@
   font-family: normal;
 }*/
 .mainheader{
-	background-image: url("http://localhost:3000/assets/images/headerbg.jpg"), linear-gradient(#800020, #800020);
+	background-image: linear-gradient(to bottom, #800020e6 0%,#800020e6 100%), url("http://localhost:3000/assets/images/headerbg.jpg");
     width: 100%;
     height: auto;
     background-position: center;
