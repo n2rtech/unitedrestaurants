@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
 						user     : 'root',
 						pasword : '',
 						port     : '3306',
-						database : 'mernunited',
+						database : 'united-restaurants',
 						charset: "utf8mb4_unicode_ci",
 						pool	   : true  
 					});

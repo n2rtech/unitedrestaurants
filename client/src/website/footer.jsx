@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { Container, Row, Col, Form, FormGroup, Input, Label, Button,NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
-import './css/styles.css'
+import './css/style.css'
 const Footer = (props) => {
 
   return (

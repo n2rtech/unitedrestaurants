@@ -3,3 +3,6 @@
 /client/node_modules
 /server/node_modules
 /client/build/
+.DS_Store
+backend/config/config.json
+backend/config/database.js
