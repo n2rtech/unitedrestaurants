@@ -8,21 +8,45 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
+const path = require('path');
+
+
+var multer  = require('multer');
+
+const imageStorage = multer.diskStorage({
+    destination: 'images', 
+      filename: (req, file, cb) => {
+          cb(null, file.fieldname + '_' + Date.now() 
+             + path.extname(file.originalname))
+    }
+});
+
+
+
+const imageUpload = multer({
+      storage: imageStorage,
+      limits: {
+        fileSize: 1000000 
+      },
+      fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(png|jpg)$/)) { 
+           return cb(new Error('Please upload a Image'))
+         }
+       cb(undefined, true)
+    }
+}) 
+
 
 // Create a new Category
 router.post('/add', passport.authenticate('jwt', {
     session: false
-}), function (req, res) {
+}), imageUpload.single('image'),  function (req, res) {
     helper.checkPermission(req.user.role_id, 'category_add').then((rolePerm) => {
         if (!req.body.name || !req.body.description) {
             res.status(400).send({
                 msg: 'Please pass Category name or description.'
             })
         } else {
-
-            console.log('kkkkkkkkk',req.body.file);
-            console.log(req.body);
-            return false;
             var slug = req.body.name
              .toLowerCase()
              .replace(/ /g, '-')
@@ -33,7 +57,7 @@ router.post('/add', passport.authenticate('jwt', {
                     name: req.body.name,
                     description: req.body.description,
                     slug: slug,
-                    image: req.body.image,
+                    image: req.file.filename,
                     parent_id: req.body.parent_id,
                     sort_order: req.body.sort_order,
                     status: req.body.status
