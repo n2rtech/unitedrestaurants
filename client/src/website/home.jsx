@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
-import { Container, Row, Col, Form, FormGroup, Input, Label, Button,NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
+import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
 import Header from './header.jsx'
 import Footer from './footer.jsx'
+import Hotdeals from './hotdeals.jsx'
 import './css/style.css'
 const Home = (props) => {
 
@@ -10,6 +11,9 @@ const Home = (props) => {
       <Row className="m-0">
         <Col xs="12" className="p-0">     
            <Header />
+
+           <Hotdeals></Hotdeals>
+
            <Footer />
         </Col>
         </Row>
