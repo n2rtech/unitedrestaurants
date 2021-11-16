@@ -18,6 +18,7 @@
   src: url('../fonts/Lato-BlackItalic.TTF');
   font-family: normal;
 }*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,400&family=Poppins:wght@200;400&display=swap');
 .mainheader{
 	background-image: linear-gradient(to bottom, #800020e6 0%,#800020e6 100%), url("http://localhost:3000/assets/images/headerbg.jpg");
     width: 100%;
@@ -180,4 +181,116 @@
 .countryflag {
     position: relative;
     top: 17px;
+}
+.mainfooter{
+	background-image: linear-gradient(to bottom, #800020e6 0%,#800020e6 100%), url("http://localhost:3000/assets/images/footerbg.jpg");
+    width: 100%;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+.copyright {
+    padding-top: 20px;
+}
+.copyright p {
+    text-align: center;
+    font-size: 15px;
+    color: #F3C33B;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+.footercategory {
+    text-align: center;
+}
+.footercategory ul li a {
+    color: #F3C33B;
+    font-size: 15px;
+    line-height: 26px;
+}
+.mainfooter .socialmenu {
+    margin-top: 30px;
+}
+.hotdeals h1 {
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    font-weight: 400;
+    line-height: 49px;
+    font-size: 37px;
+    color: #70081C;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+}
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-wrapper {
+    background: #70081c !important;
+    padding-left: 10px;
+    padding-right: 50px;
+}
+.toggle-sidebar svg{
+	color: #fff;
+}
+.toggle-sidebar {
+    position: absolute;
+    right: 15px;
+    top: 26px;
+    cursor: pointer;
+}
+.toggle-sidebar svg:hover {
+    color: #fff !important;
+}
+.page-wrapper .sidebar-main-title h6{
+	color: #70081c;
+}
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links > li:hover .sidebar-link:not(.active):hover span{
+	color: #70081c;
+}
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links > li:hover .sidebar-link:not(.active):hover .according-menu i{
+	color: #111;
+}
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links > li:hover .sidebar-link:not(.active):hover svg{
+	color: #F3C33B;
+	stroke:#70081c;
+}
+.font-primary{
+	color: #70081c !important;
+}
+.card .card-header .card-header-right .card-option li:first-child i{
+	color: #70081c;
+}
+.offer-box .offer-slider {
+    background: linear-gradient(
+26deg, #70081c 0%, #b10c2c 100%);
+}
+.btn-gradient {
+    background: linear-gradient(
+26deg, #70081c 0%, #70081c 100%);
+    letter-spacing: 0.06rem;
+}
+.total-users .goal-status .progress-gradient-primary {
+    border-radius: 15%;
+    background-image: linear-gradient(to right, transparent 25%, rgba(169, 39, 249, 0.1), #70081c);
+}
+.pill-badge-primary {
+    background-color: #70081c;
+}
+.ecommerce-widgets .ecommerce-box.light-bg-primary {
+    background-color: rgb(255 226 141 / 38%);
+}
+.ecommerce-widgets .fa-heart {
+    background: linear-gradient(to right, #70081c 10%, #f12149 100%);
+    font-size: 24px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 2px;
+}
+.progress-gradient-primary {
+    background-image: linear-gradient(to right, transparent, #70081c);
+    position: relative;
+}
+.badge-primary {
+    background-color: #70081c !important;
 }
