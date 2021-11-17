@@ -6,3 +6,4 @@
 .DS_Store
 backend/config/config.json
 backend/config/database.js
+client/package-lock.json

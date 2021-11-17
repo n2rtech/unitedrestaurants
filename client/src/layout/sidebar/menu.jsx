@@ -6,54 +6,37 @@ export const MENUITEMS = [
         menucontent:"Dashboards,Widgets",
         Items:[
             {
-                title: 'Dashboard', icon: Home, type: 'sub',badge: "badge badge-success",badgetxt:"2", active: false, children: [
-                    { path: `${process.env.PUBLIC_URL}/dashboard/default`, title: 'Default', type: 'link' },
-                    { path: `${process.env.PUBLIC_URL}/dashboard/ecommerce`, title: 'Ecommerce', type: 'link' },
-                ]
-            },
-            // {
-            //     title: 'Widgets', icon: Airplay, type: 'sub', active: false, children: [
-            //         { path: `${process.env.PUBLIC_URL}/widgets/general`, title: 'General', type: 'link' },
-            //         { path: `${process.env.PUBLIC_URL}/widgets/chart`, title: 'Chart', type: 'link' },
-            //     ]
-            // },
-        ]
-    },
-
-    {
-        menutitle:"Roles",
-        menucontent:"Roles",
-        Items:[
-            {
-                title: 'Roles', icon: Home, type: 'sub',badge: "badge badge-success",badgetxt:"2", active: false, children: [
-                    { path: `${process.env.PUBLIC_URL}/dashboard/default`, title: 'Add Role', type: 'link' },
-                    { path: `${process.env.PUBLIC_URL}/dashboard/ecommerce`, title: 'Role List', type: 'link' },
-                ]
+                title: 'Dashboard', icon: Home, path: `${process.env.PUBLIC_URL}/dashboard/default`, type: 'link', active: true,
             }
         ]
     },
 
     {
-        menutitle:"Permissions",
-        menucontent:"Manage Permissions",
+        menutitle:"Manage Roles",
+        menucontent:"Manage Roles",
         Items:[
             {
-                title: 'Permissions', icon: Home, type: 'sub',badge: "badge badge-success",badgetxt:"2", active: false, children: [
-                    { path: `${process.env.PUBLIC_URL}/widgets/general`, title: 'Add Permission', type: 'link' },
-                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/permissions/list`, title: 'Permission List', type: 'link' },
-                ]
+                title: 'Manage Roles', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false,
+            }
+        ]
+    },
+
+    {
+        menutitle:"Manage Permission",
+        menucontent:"Manage Permission",
+        Items:[
+            {
+                title: 'Manage Permission', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false,
             }
         ]
     },
     
     {
-        menutitle:"Categories",
+        menutitle:"Manage Categories",
         menucontent:"Manage Categories",
         Items:[
             {
-                title: 'Departments', icon: FileText, type: 'sub', menutitle:"Forms & Table",menucontent:"Ready to use froms & tables", active: false, children: [
-         
-            ],
+                title: 'Manage Categories', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false, 
             },
 
         ]
