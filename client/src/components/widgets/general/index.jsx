@@ -9,7 +9,7 @@ import CountUp from 'react-countup';
 import { Earnings,Messages,NewUser,Products,New,Pending,Done,Cancel } from '../../../constant'
 import {PermissionForm ,PermissionName,PermissionDesc, SEND_IT} from "../../../constant";
 import axios from 'axios'
-
+import alert from 'alert'
 
 const General = () => {
 
@@ -55,18 +55,10 @@ const General = () => {
   const handlePerdescChange = event => {
     setPerdesc(event.target.value)
   };
+  
 
   const handleSubmit = event => {
     event.preventDefault();
-    // const url = 'http://localhost:5000/api/permissions'
-    // const requestOptions = {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json'  , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78'},
-    //     body: JSON.stringify({ pername, perdesc })
-    // };
-    // fetch(url, requestOptions)
-    //     .then(response => console.log('Submitted successfully'))
-    //     .catch(error => console.log('Form submit error', error))
 
     const config = {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
@@ -78,7 +70,7 @@ const General = () => {
       axios.post(`/api/permissions`,
         bodyParameters,
         config
-      ) .then(response => console.log('Submitted successfully'))
+      ) .then(response => alert('Submiited Successfully'))
          .catch(error => console.log('Form submit error', error))
 
   };
