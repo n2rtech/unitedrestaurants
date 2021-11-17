@@ -7,7 +7,6 @@ const users = require("./routes/api/users");
 const roles = require("./routes/roles");
 const category = require("./routes/category");
 const permissions = require("./routes/permissions");
-const upload = require("./routes/upload");
 
 // Bodyparser middleware
 app.use(bodyParser.json());
@@ -35,7 +34,6 @@ app.use("/api/roles", roles);
 app.use("/api/categories", category);
 
 app.use("/api/permissions", permissions);
-app.use("/api/upload", upload);
 
 const port = process.env.PORT || 5000;
 
