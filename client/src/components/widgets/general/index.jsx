@@ -75,10 +75,11 @@ const General = () => {
         perm_name: pername,
         perm_description : perdesc
       };
-      axios.post(`http://localhost:5000/api/permissions`,
+      axios.post(`/api/permissions`,
         bodyParameters,
         config
-      ).then(console.log).catch(console.log);
+      ) .then(response => console.log('Submitted successfully'))
+         .catch(error => console.log('Form submit error', error))
 
   };
   return (
