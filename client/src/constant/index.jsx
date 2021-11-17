@@ -7,6 +7,10 @@ export const Notification =  "notification"
 export const MarketValue =  "Market Value"
 export const Chat =  "Chat"
 
+export const PermissionForm = "Permission Form"
+export const PermissionName = "Permission Name"
+export const PermissionDesc = "Permission Description"
+
 export const NewProduct =  "New Product"
 export const Location =  "Location"
 export const RiskFactor =  "Risk Factor"
