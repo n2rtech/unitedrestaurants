@@ -217,6 +217,116 @@
 .hotdeals h1 {
     text-align: center;
     margin-top: 35px;
+    margin-bottom: 15px;
+    font-weight: 400;
+    line-height: 49px;
+    font-size: 37px;
+    color: #70081C;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+}
+.react-multiple-carousel__arrow--right {
+    right: calc(4% + -45px) !important;
+}
+.react-multiple-carousel__arrow--left {
+    left: calc(4% + -45px) !important;
+}
+.react-multiple-carousel__arrow::before {
+    font-size: 30px !important;
+    color: #70081C !important;
+    display: block;
+    font-family: revicons;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    font-weight: 600 !important;
+}
+.react-multiple-carousel__arrow{
+	background: rgb(0 0 0 / 0%) !important;
+}
+.customcard .card {
+    margin-bottom: 30px;
+    border: 1px solid #dbdbdb;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    border-radius: 0;
+    box-shadow: 0 0 20px rgb(8 21 66 / 5%);
+}
+.customcard .card .card-body{
+	padding: 30px;
+}
+.customcard h5.card-title {
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Poppins';
+    color: #FF0000;
+    margin-bottom: 7px;
+    margin-top: 20px;
+}
+.customcard p.card-text {
+    font-size: 13px;
+    color: #000;
+    font-family: 'Poppins';
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.btn-secondary {
+    background-color: #70081C !important;
+    border-color: #70081C !important;
+    border-radius: 50px;
+    font-size: 19px;
+    font-family: 'Lato';
+    padding: 2px 22px;
+    display: block;
+    margin: 0 auto;
+}
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active{
+	background-color: #a90f2d !important;
+    border-color: #a90f2d !important;
+}
+.ribbon {
+    margin: auto 0 0 auto;
+    width: 110px;
+    height: 110px;
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    left: auto;
+    right: 0;
+    top: 0;
+}
+.ribbon p {
+  width: 150px;
+  height: 34px;
+  top: 20px;
+  right: -40px;
+  position: absolute;
+  display: block;
+  background: #FF0000;
+  color: #333;
+  font-family: arial;
+  font-size: 18px;
+  color:white;
+  text-align: center;
+  line-height: 34px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+}
+.seeall {
+    text-align: right;
+    padding-right: 15px;
+    margin-bottom: 15px;
+}
+.seeall a {
+    color: #0000FF;
+    font-size: 19px;
+    font-family: 'Lato';
+    text-decoration: underline;
+}
+.advertise h2 {
+    text-align: center;
+    margin-top: 35px;
     margin-bottom: 35px;
     font-weight: 400;
     line-height: 49px;
@@ -224,6 +334,146 @@
     color: #70081C;
     text-transform: uppercase;
     font-family: 'Poppins', sans-serif;
+}
+.advertise .col-sm-6 {
+    max-width: 42%;
+}
+.advertise .col-sm-3 {
+    min-width: 29% !important;
+}
+.advertise-gridlarg {
+    background-image: url(http://localhost:3000/assets/images/adlargbg.png);
+    width: 100%;
+    height: auto;
+    background-position: center right;
+    background-repeat: no-repeat;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border: 1px solid #dbdbdb;
+}
+.advertise-gridlarg .addname {
+    text-align: right;
+    font-size: 37px;
+    color: #70081C;
+    font-family: 'Poppins';
+}
+.advertise-gridlarg .addname {
+    text-align: left;
+    font-size: 26px;
+    color: #70081C;
+    font-family: 'Poppins';
+    max-width: 29%;
+    margin: auto 0 0 auto;
+    line-height: 36px;
+    margin-bottom: 50px;
+}
+.advertise-gridlarg .btn-secondary {
+    text-transform: uppercase;
+    margin: 0 35px 0px auto;
+}
+.advertise-gridsmall {
+    background-image: url(http://localhost:3000/assets/images/adsmallbg.png);
+    width: 100%;
+    height: auto;
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border: 1px solid #dbdbdb;
+}
+.advertise-gridsmall .addname {
+    text-align: right;
+    font-size: 37px;
+    color: #70081C;
+    font-family: 'Poppins';
+}
+.advertise-gridsmall .addname {
+    text-align: left;
+    font-size: 26px;
+    color: #70081C;
+    font-family: 'Poppins';
+    max-width: 33%;
+    margin: auto 0 0 auto;
+    line-height: 36px;
+    margin-bottom: 50px;
+}
+.advertise-gridsmall .btn-secondary {
+    text-transform: uppercase;
+    margin: 0 20px 0px auto;
+}
+.latestadditions{
+	background-image: linear-gradient(to bottom, #800020e6 0%,#800020e6 100%), url("http://localhost:3000/assets/images/latestbg.jpg");
+    width: 100%;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 40px;
+}
+.latestadditions h3 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    line-height: 49px;
+    font-size: 37px;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+}
+.latestadditions .seeall a {
+    color: #fff;
+}
+.latestadditions .customcard .card-subtitle {
+    font-size: 13px;
+    font-family: 'Lato';
+    color: #70081C !important;
+    line-height: 17px;
+}
+.latestadditions .btn-secondary {
+    margin-top: 20px;
+}
+.homeblog{
+	margin-top: 35px;
+}
+.homeblog h1 {
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    font-weight: 400;
+    line-height: 49px;
+    font-size: 37px;
+    color: #70081C;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+}
+.homeblog .customcard .card .card-body {
+    padding: 10px;
+}
+.homeblog .customcard h5.card-title{
+	color: #70081C;
+    font-family: 'Lato';
+    text-transform: uppercase;
+    font-size: 19px;
+}
+.homeblog .customcard .card-subtitle {
+    font-size: 11px;
+    font-family: 'Lato';
+    color: #7d7d7d !important;
+    line-height: 17px;
+}
+.homeblog .customcard p.card-text{
+	font-size: 15px;
+	line-height: 26px;
+	color: #000;
+}
+.homeblog .customcard p.card-text a.readmore{
+	color: #70081C;
+    font-size: 11px;
+    font-family: 'Lato';
+    float: right;
+    text-decoration: underline;
 }
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-wrapper {
     background: #70081c !important;

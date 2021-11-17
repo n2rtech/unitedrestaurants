@@ -7,16 +7,16 @@ import './css/style.css'
 
 
 
-const Hotdeals = (props) => {
+const Latestadditions = (props) => {
 
 const ratingChanged = (newRating) => {
   console.log(newRating);
 };
 
   return (
-      <div className="hotdeals">
+      <div className="latestadditions">
        <Container className="p-0"> 
-      <h1>hot deals you can't miss</h1>
+      <h3>latest additions</h3>
       <div className="seeall">
         <a href="#">SEE ALL</a>
       </div>
@@ -26,9 +26,7 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
+              
                 <CardBody>
                   
                   <Row>
@@ -44,22 +42,13 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />,
+                    Joined Just 2 min ago
                   </CardSubtitle>
                   </Col>
                   </Row>
-                  <CardText>
-                    deal description deal description deal description deal description deal description deal description
-                  </CardText>
+                  
                   <Button>
-                    SEE SALE
+                    VIEW
                   </Button>
                 </CardBody>
               </Card>
@@ -69,9 +58,7 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
+              
                 <CardBody>
                   
                   <Row>
@@ -87,22 +74,13 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />,
+                    Joined Just 2 min ago
                   </CardSubtitle>
                   </Col>
                   </Row>
-                  <CardText>
-                    deal description deal description deal description deal description deal description deal description
-                  </CardText>
+                  
                   <Button>
-                    SEE SALE
+                    VIEW
                   </Button>
                 </CardBody>
               </Card>
@@ -112,9 +90,7 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
+              
                 <CardBody>
                   
                   <Row>
@@ -130,22 +106,13 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />,
+                    Joined Just 2 min ago
                   </CardSubtitle>
                   </Col>
                   </Row>
-                  <CardText>
-                    deal description deal description deal description deal description deal description deal description
-                  </CardText>
+                  
                   <Button>
-                    SEE SALE
+                    VIEW
                   </Button>
                 </CardBody>
               </Card>
@@ -155,9 +122,7 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
+              
                 <CardBody>
                   
                   <Row>
@@ -173,22 +138,13 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />,
+                    Joined Just 2 min ago
                   </CardSubtitle>
                   </Col>
                   </Row>
-                  <CardText>
-                    deal description deal description deal description deal description deal description deal description
-                  </CardText>
+                  
                   <Button>
-                    SEE SALE
+                    VIEW
                   </Button>
                 </CardBody>
               </Card>
@@ -198,9 +154,7 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
+              
                 <CardBody>
                   
                   <Row>
@@ -216,22 +170,13 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />,
+                    Joined Just 2 min ago
                   </CardSubtitle>
                   </Col>
                   </Row>
-                  <CardText>
-                    deal description deal description deal description deal description deal description deal description
-                  </CardText>
+                  
                   <Button>
-                    SEE SALE
+                    VIEW
                   </Button>
                 </CardBody>
               </Card>
@@ -241,9 +186,7 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
+              
                 <CardBody>
                   
                   <Row>
@@ -259,22 +202,13 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />,
+                    Joined Just 2 min ago
                   </CardSubtitle>
                   </Col>
                   </Row>
-                  <CardText>
-                    deal description deal description deal description deal description deal description deal description
-                  </CardText>
+                  
                   <Button>
-                    SEE SALE
+                    VIEW
                   </Button>
                 </CardBody>
               </Card>
@@ -287,7 +221,7 @@ const ratingChanged = (newRating) => {
   )
 }
 
-export default Hotdeals;
+export default Latestadditions;
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
