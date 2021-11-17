@@ -3,6 +3,9 @@ import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, Unco
 import Header from './header.jsx'
 import Footer from './footer.jsx'
 import Hotdeals from './hotdeals.jsx'
+import Advertise from './advertise.jsx'
+import Latestadditions from './latestadditions.jsx'
+import Homeblog from './homeblog.jsx'
 import './css/style.css'
 const Home = (props) => {
 
@@ -13,6 +16,12 @@ const Home = (props) => {
            <Header />
 
            <Hotdeals></Hotdeals>
+
+           <Advertise></Advertise>
+
+           <Latestadditions></Latestadditions>
+
+           <Homeblog></Homeblog>
 
            <Footer />
         </Col>
