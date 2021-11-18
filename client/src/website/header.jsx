@@ -13,9 +13,11 @@ const Header = (props) => {
         <Row className="m-0">
           <Col sm="2">
             <div className="mainlogo">
+              <a href="/home">
               <img className="img-fluid" 
                src={`${process.env.PUBLIC_URL}/assets/images/mainlogo.png`} 
                alt="logo"/>
+               </a>
             </div>
           </Col>
           <Col sm="10">
