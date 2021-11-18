@@ -22,6 +22,8 @@ import Signin from './auth/signin'
 // Home Page
 import Home from './website/home'
 
+import Resturent from './website/resturent'
+
 
 
 // Authentication
@@ -101,7 +103,9 @@ const Root = (props) =>  {
 
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
           <Route  path={`${process.env.PUBLIC_URL}/home`} component={Home} />
-          <Route  path={`${process.env.PUBLIC_URL}/pages/auth/login`} component={Login}></Route>
+          <Route  path={`${process.env.PUBLIC_URL}/resturent`} component={Resturent} />
+          <Route  path={`${process.env.PUBLIC_URL}/pages/auth/login`} component={Login}>
+          </Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/loginWithBgImg1`} component={LoginWithBgImage}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/loginWithBgImg2`} component={LoginWithBgVideo}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/loginWithValidation`} component={LoginWithValidation}></Route>
@@ -160,6 +164,7 @@ const Root = (props) =>  {
           </App>
           :
           <Redirect to={`${process.env.PUBLIC_URL}/home`} />
+
 
           }      
         </Switch>

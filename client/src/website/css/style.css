@@ -483,6 +483,71 @@
     color: #F3C33B;
     cursor: pointer;
 }
+.resturentlist h1 {
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    line-height: 49px;
+    font-size: 37px;
+    color: #70081C;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+}
+.hr {
+    text-align: center;
+}
+.hr img {
+    max-width: 40%;
+    margin-bottom: 50px;
+}
+.customcardlist .card {
+    margin-bottom: 30px;
+    border: 1px solid #dbdbdb;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    border-radius: 12px;
+    box-shadow: 0px 3px 9px #00000047;
+}
+.customcardlist .card .card-body {
+    padding: 0;
+}
+.customcardlist .card .card-body img{
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+}
+.customcardlist h5.card-title {
+    font-family: 'Poppins';
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+.customcardlist .btn-secondary {
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+.page-link{
+	color: #000;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #70081c;
+    border-color: #70081c;
+}
+.page-link:hover {
+    z-index: 2;
+    color: #fff;
+    text-decoration: none;
+    background-color: #70081c;
+    border-color: #70081c;
+}
+.page-link{
+	border: 1px solid #70081c;
+}
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-wrapper {
     background: #70081c !important;
     padding-left: 10px;
