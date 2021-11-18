@@ -475,6 +475,14 @@
     float: right;
     text-decoration: underline;
 }
+.scrolltopbtn svg {
+    position: absolute;
+    right: 60px;
+    bottom: 80px;
+    font-size: 45px;
+    color: #F3C33B;
+    cursor: pointer;
+}
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-wrapper {
     background: #70081c !important;
     padding-left: 10px;
