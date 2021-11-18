@@ -6,6 +6,7 @@ import Hotdeals from './hotdeals.jsx'
 import Advertise from './advertise.jsx'
 import Latestadditions from './latestadditions.jsx'
 import Homeblog from './homeblog.jsx'
+import ScrollButton from './ScrollButton.jsx';
 import './css/style.css'
 const Home = (props) => {
 

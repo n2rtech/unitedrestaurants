@@ -9,7 +9,7 @@ import CountUp from 'react-countup';
 import { Earnings,Messages,NewUser,Products,New,Pending,Done,Cancel } from '../../../constant'
 import {PermissionForm ,PermissionName,PermissionDesc, SEND_IT} from "../../../constant";
 import axios from 'axios'
-import alert from 'alert'
+// import alert from 'alert'
 
 const General = () => {
 
@@ -70,7 +70,7 @@ const General = () => {
       axios.post(`/api/permissions`,
         bodyParameters,
         config
-      ) .then(response => alert('Submiited Successfully'))
+      ) .then(response => console.log('Submiited Successfully'))
          .catch(error => console.log('Form submit error', error))
 
   };
