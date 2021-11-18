@@ -8,6 +8,8 @@ import VendorEcommerce from '../components/dashboard/vendor/ecommerce'
 import GeneralWidget from '../components/widgets/general'
 import ChartsWidget from '../components/widgets/charts'
 
+import pagesList from '../components/pages/pagesList';
+
 // ui-kits
 import StateColor from '../components/ui-kits/statecolor'
 import Typography from '../components/ui-kits/typography'
@@ -207,6 +209,7 @@ import TodoFirebase from "../components/application/todo-firebase-app"
 
 export const routes = [
         { path:"/dashboard/admin/:layout/", Component:AdminDefault},
+        { path:"/dashboard/admin/:layout/pages", Component:pagesList},
         { path:"/dashboard/default/:layout/", Component:Default},
         { path:"/dashboard/vendor/:layout/", Component:VendorEcommerce},
         { path:"/dashboard/ecommerce/:layout/", Component:Ecommerce},
@@ -330,6 +333,7 @@ export const routes = [
 
         { path:"/pages/samplepage/:layout", Component:Sample},
         { path:"/pages/searchpage/:layout", Component:Search},
+
 
 
         { path:"/app/ecommerce/product/:layout", Component:Product},
