@@ -12,6 +12,8 @@ import { CSSTransition,TransitionGroup } from 'react-transition-group'
 import {routes} from './route';
 import ConfigDB  from './data/customizer/config'
 import {configureFakeBackend ,authHeader, handleResponse} from './services/fack.backend'
+import {FaArrowCircleUp} from 'react-icons/fa';
+
 
 
 // Signin page
@@ -19,7 +21,6 @@ import Signin from './auth/signin'
 
 // Home Page
 import Home from './website/home'
-
 
 
 
