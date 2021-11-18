@@ -20,7 +20,7 @@ import Signin from './auth/signin'
 // Home Page
 import Home from './website/home'
 
-import Permissions from './components/permissions/list'
+
 
 
 // Authentication
