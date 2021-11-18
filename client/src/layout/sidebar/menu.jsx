@@ -1,4 +1,5 @@
-import { Home, Airplay, Box, FolderPlus, Command, Cloud, FileText, Server, BarChart, Users, Layers, ShoppingBag, List, Mail, MessageCircle, GitPullRequest, Monitor, Heart, Clock, Zap, CheckSquare, Calendar, Image, Film, HelpCircle, Radio, Map, Edit, Sunrise, Package } from 'react-feather'
+import { Home, Users, Layers } from 'react-feather'
+
 
 export const MENUITEMS = [
     {
@@ -16,7 +17,7 @@ export const MENUITEMS = [
         menucontent:"Roles",
         Items:[
             {
-                title: 'Roles', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false,
+                title: 'Roles', path: `${process.env.PUBLIC_URL}/pages/searchpage`, icon: Users, type: 'link', active: false,
             }
         ]
     },
@@ -26,7 +27,11 @@ export const MENUITEMS = [
         menucontent:"Permission",
         Items:[
             {
-                title: 'Permission', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false,
+                title: 'Permission', path: `${process.env.PUBLIC_URL}/widgets/general`, icon: Users, type: 'sub', active: false,children: [
+                    { path: `${process.env.PUBLIC_URL}/widgets/general`, title: 'Add permission', type: 'link' },          
+                    { path: `${process.env.PUBLIC_URL}/app/ecommerce/product-list/Dubai`, title: 'All permission list', type: 'link' },          
+            
+                ]
             }
         ]
     },
@@ -36,7 +41,7 @@ export const MENUITEMS = [
         menucontent:"Categories",
         Items:[
             {
-                title: 'Categories', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false, 
+                title: 'Categories', path: `${process.env.PUBLIC_URL}/app/ecommerce/product/Dubai`, icon: Users, type: 'link', active: false, 
             },
 
         ]
@@ -49,10 +54,10 @@ export const MENUITEMS = [
             {
                 title: 'Vendors', icon: Layers, path: `${process.env.PUBLIC_URL}/dashboard/default`, type: 'sub', active: false, children: [
                     { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'All membership vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'No membership vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'Suspended vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'Featured Vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'Hot deals vendors', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/app/ecommerce/payment-details`, title: 'No membership vendors', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/bonus-ui/pagination`, title: 'Suspended vendors', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/app/ecommerce/pricing`, title: 'Featured Vendors', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/app/users/userProfile`, title: 'Hot deals vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/pages/searchpage`, title: 'Add spaces vendors', type: 'link' },
         
             ]
@@ -65,11 +70,11 @@ export const MENUITEMS = [
         Items:[
             {
                 title: 'Merchants', icon: Layers, path: `${process.env.PUBLIC_URL}/dashboard/default`, type: 'sub', active: false, children: [
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'Add a merchant', type: 'link' },
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'All merchants', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'Subscribed merchants', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'Video membership merchants', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'Suspended merchants', type: 'link' },              
+                    { path: `${process.env.PUBLIC_URL}/app/users/userCards`, title: 'Add a merchant', type: 'link' },
+                    { path: `${process.env.PUBLIC_URL}/app/task`, title: 'All merchants', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/app/contact`, title: 'Subscribed merchants', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/app/social-app`, title: 'Video membership merchants', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/app/todo-app/todo`, title: 'Suspended merchants', type: 'link' },              
         
             ]
             }
@@ -80,7 +85,7 @@ export const MENUITEMS = [
         menucontent:"Membership packages",
         Items:[
             {
-                title: 'Membership packages', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false, 
+                title: 'Membership packages', path: `${process.env.PUBLIC_URL}/ui-kits/avatar`, icon: Users, type: 'link', active: false, 
             },
 
         ]
@@ -90,7 +95,7 @@ export const MENUITEMS = [
         menucontent:"Notifications & messaging",
         Items:[
             {
-                title: 'Notifications & messaging', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false, 
+                title: 'Notifications & messaging', path: `${process.env.PUBLIC_URL}/ui-kits/helperclass`, icon: Users, type: 'link', active: false, 
             },
 
         ]
@@ -100,7 +105,7 @@ export const MENUITEMS = [
         menucontent:"Promotions/discounts",
         Items:[
             {
-                title: 'Promotions/discounts', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false, 
+                title: 'Promotions/discounts', path: `${process.env.PUBLIC_URL}/ui-kits/grid`, icon: Users, type: 'link', active: false, 
             },
 
         ]
@@ -110,7 +115,7 @@ export const MENUITEMS = [
         menucontent:"Accounts Payable",
         Items:[
             {
-                title: 'Accounts Payable', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false, 
+                title: 'Accounts Payable', path: `${process.env.PUBLIC_URL}/ui-kits/modal`, icon: Users, type: 'link', active: false, 
             },
 
         ]
@@ -120,7 +125,7 @@ export const MENUITEMS = [
         menucontent:"Countries",
         Items:[
             {
-                title: 'Countries', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false, 
+                title: 'Countries', path: `${process.env.PUBLIC_URL}/ui-kits/spinner`, icon: Users, type: 'link', active: false, 
             },
 
         ]
@@ -130,7 +135,7 @@ export const MENUITEMS = [
         menucontent:"Google Adsense",
         Items:[
             {
-                title: 'Google Adsense', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false, 
+                title: 'Google Adsense', path: `${process.env.PUBLIC_URL}/bonus-ui/scrollable`, icon: Users, type: 'link', active: false, 
             },
 
         ]
@@ -140,7 +145,7 @@ export const MENUITEMS = [
         menucontent:"Site settings",
         Items:[
             {
-                title: 'Site settings', path: `${process.env.PUBLIC_URL}/dashboard/default`, icon: Users, type: 'link', active: false, 
+                title: 'Site settings', path: `${process.env.PUBLIC_URL}/icons/flagIcons`, icon: Users, type: 'link', active: false, 
             },
 
         ]
