@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2021 at 02:13 PM
+-- Generation Time: Nov 18, 2021 at 07:32 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -61,6 +61,84 @@ INSERT INTO `categories` (`id`, `name`, `description`, `slug`, `parent_id`, `ima
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `couponcategories`
+--
+
+CREATE TABLE `couponcategories` (
+  `id` int(11) NOT NULL,
+  `coupon_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `couponcategories`
+--
+
+INSERT INTO `couponcategories` (`id`, `coupon_id`, `category_id`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 1, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coupons`
+--
+
+CREATE TABLE `coupons` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `discount` double(10,2) DEFAULT NULL,
+  `type` varchar(151) DEFAULT NULL,
+  `total` decimal(10,2) DEFAULT NULL,
+  `date_start` date DEFAULT NULL,
+  `date_end` date DEFAULT NULL,
+  `uses_total` int(11) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '0',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `coupons`
+--
+
+INSERT INTO `coupons` (`id`, `name`, `code`, `discount`, `type`, `total`, `date_start`, `date_end`, `uses_total`, `status`, `createdAt`, `updatedAt`) VALUES
+(1, 'sFree Shippingtaff', 'SHIP008', 10.00, 'P', '10.00', '2021-11-16', '2021-11-16', NULL, 1, '2021-11-18 06:51:02', '2021-11-18 06:51:02'),
+(2, 'sFree Shippingtaff', 'SHIP008', 10.00, 'P', '10.00', '2021-11-14', '2021-11-18', NULL, 1, '2021-11-18 06:52:18', '2021-11-18 06:52:18'),
+(3, 'sFree Shippingtaff', 'SHIP008', 10.00, 'P', '10.00', '2021-11-15', '2021-11-19', NULL, 1, '2021-11-18 06:53:19', '2021-11-18 06:53:19'),
+(4, 'sFree Shippingtaff', 'SHIP008', 10.30, 'P', '10.50', '2021-11-15', '2021-11-19', NULL, 1, '2021-11-18 06:53:56', '2021-11-18 06:53:56'),
+(5, 'sFree Shippingtaff', 'SHIP008', 10.30, 'P', '10.50', '2021-11-15', '2021-11-19', NULL, 0, '2021-11-18 06:54:10', '2021-11-18 06:54:10'),
+(6, 'sFree Shippingtaff', 'SHIP008', 10.30, 'P', '10.50', '2021-11-15', '2021-11-19', 0, 0, '2021-11-18 06:55:32', '2021-11-18 06:55:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `couponusers`
+--
+
+CREATE TABLE `couponusers` (
+  `id` int(11) NOT NULL,
+  `coupon_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `couponusers`
+--
+
+INSERT INTO `couponusers` (`id`, `coupon_id`, `user_id`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 1, '2021-11-18 00:00:00', '2021-11-18 00:00:00'),
+(2, 2, 1, '2021-11-18 00:00:00', '2021-11-18 00:00:00'),
+(3, 1, 2, '2021-11-18 00:00:00', '2021-11-18 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `memberships`
 --
 
@@ -76,6 +154,35 @@ CREATE TABLE `memberships` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `memberships`
+--
+
+INSERT INTO `memberships` (`id`, `status`, `name`, `description`, `slug`, `interval`, `price`, `expired_on`, `createdAt`, `updatedAt`) VALUES
+(1, 0, 'kri', 'description', 'kri', 'monthly', '10.3400', '2018-01-19 13:15:00', '2021-11-18 11:14:33', '2021-11-18 11:14:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pages`
+--
+
+CREATE TABLE `pages` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `body` text,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `title`, `slug`, `body`, `createdAt`, `updatedAt`) VALUES
+(36, 'ddddddddddddddd', NULL, 'ddddddddd', '2021-11-18 12:59:06', '2021-11-18 12:59:06');
 
 -- --------------------------------------------------------
 
@@ -162,7 +269,8 @@ INSERT INTO `roles` (`id`, `role_name`, `role_id`, `role_description`, `createdA
 (3, 'seratory', 0, 'seratory', '2021-11-12 08:01:30', '2021-11-12 08:01:30'),
 (4, 'customer', 0, 'customer', '2021-11-12 08:35:09', '2021-11-12 08:35:09'),
 (5, 'test', 0, 'customer', '2021-11-12 10:14:12', '2021-11-17 10:52:53'),
-(6, 'staff', 0, 'Staff', '2021-11-12 12:31:12', '2021-11-12 12:31:12');
+(6, 'staff', 0, 'Staff', '2021-11-12 12:31:12', '2021-11-12 12:31:12'),
+(7, 'sub user', 0, 'sub admin users', '2021-11-18 10:50:28', '2021-11-18 10:50:28');
 
 -- --------------------------------------------------------
 
@@ -184,7 +292,11 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 ('20211112064800-create-permission.js'),
 ('20211112064802-create-role-permission.js'),
 ('20211115055358-create-category.js'),
-('20211116135225-create-membership.js');
+('20211116135225-create-membership.js'),
+('20211117135307-create-coupon.js'),
+('20211118051724-create-coupon-category.js'),
+('20211118051731-create-coupon-user.js'),
+('20211118115407-create-page.js');
 
 -- --------------------------------------------------------
 
@@ -218,7 +330,11 @@ INSERT INTO `users` (`id`, `role_id`, `role`, `email`, `password`, `name`, `phon
 (5, 6, NULL, 'krishnabbk@gmail.com', '$2a$10$svzre/sSNH.3KrMt0jq8NueeLfRMTnaTkfgNBHQpsT06BiUJpHomu', 'Laxman Mishra', '9454045599', '9454045599', 'test address', '2021-11-12 10:08:13', '2021-11-12 10:08:13'),
 (6, 5, NULL, 'revehakyz@mailinator.com', '$2a$10$B8Ixw95iPzNlTTaeTtwe2OJU5R/tJOF6Dnw2Fb./BOcOLZV8vZp/q', 'Karina Hunt', NULL, NULL, 'Aperiam illum labor', '2021-11-12 10:11:06', '2021-11-12 10:11:06'),
 (7, 2, NULL, 'piresyruqe@mailinator.com', '$2a$10$1kzz9uajul/yfrFzYjSoJuqvlwnmvnU.A48x3ORUurLBHfn.0rkRK', 'Adena Holloway', NULL, NULL, 'Tempor consectetur r', '2021-11-12 13:40:38', '2021-11-12 13:40:38'),
-(8, 2, NULL, 'nynilufim@mailinator.com', '$2a$10$o5K1urneLd2MzLgQ9zp.W.lD9Jyb6JzRMIOnefzIvPSnwvEzqKd9u', 'Anne William', NULL, NULL, 'Numquam sunt aut qu', '2021-11-16 12:12:20', '2021-11-16 12:12:20');
+(8, 2, NULL, 'nynilufim@mailinator.com', '$2a$10$o5K1urneLd2MzLgQ9zp.W.lD9Jyb6JzRMIOnefzIvPSnwvEzqKd9u', 'Anne William', NULL, NULL, 'Numquam sunt aut qu', '2021-11-16 12:12:20', '2021-11-16 12:12:20'),
+(9, 2, NULL, 'merchant@gmail.com', '$2a$10$tj4nb2djQzI3WXT56/1hMe02kRqme7oUU.4g2ONpL1n0SBRg85gpa', 'Krishna Mishra', NULL, NULL, NULL, '2021-11-18 10:39:13', '2021-11-18 10:39:13'),
+(10, 7, NULL, 'merchant1@gmail.com', '$2a$10$nONX6CQHc3QRvpt1yNUHBuFgc1j5kh7rsTzH2hrrmcIR/0y9aDE0e', 'Krishna Mishra', '9026574061', NULL, NULL, '2021-11-18 10:51:32', '2021-11-18 10:51:32'),
+(11, 7, NULL, 'merchant2@gmail.com', '$2a$10$aXttmuYeCVJ3UI0XCdHp7OjWeUBfYGaw67BYc9Z3dYp6HmlyFp7J2', 'Krishna Mishra', '9026574061', '9026574061', NULL, '2021-11-18 10:53:24', '2021-11-18 10:53:24'),
+(12, 7, NULL, 'merchant3@gmail.com', '$2a$10$kfnPGgliibtmqHprnSQ3Aebh2l9fx0mgC2DDJjOs.dBWos.inA3zO', 'Krishna Mishra', '9026574061', '9026574061', 'test 1 address', '2021-11-18 10:54:02', '2021-11-18 10:54:02');
 
 --
 -- Indexes for dumped tables
@@ -231,9 +347,33 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `couponcategories`
+--
+ALTER TABLE `couponcategories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `couponusers`
+--
+ALTER TABLE `couponusers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `memberships`
 --
 ALTER TABLE `memberships`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pages`
+--
+ALTER TABLE `pages`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -281,16 +421,40 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `couponcategories`
+--
+ALTER TABLE `couponcategories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `couponusers`
+--
+ALTER TABLE `couponusers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `memberships`
 --
 ALTER TABLE `memberships`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `rolepermissions`
@@ -302,13 +466,13 @@ ALTER TABLE `rolepermissions`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
