@@ -145,7 +145,7 @@ export const MENUITEMS = [
         menucontent:"Site settings",
         Items:[
             {
-                title: 'Site settings', path: `${process.env.PUBLIC_URL}/icons/flagIcons`, icon: Users, type: 'link', active: false, 
+                title: 'Site settings', path: `${process.env.PUBLIC_URL}/ui-kits/tab-bootstrap`, icon: Users, type: 'link', active: false, 
             },
 
         ]
