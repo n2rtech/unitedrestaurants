@@ -21,7 +21,15 @@ export const MENUITEMS = [
             }
         ]
     },
-
+    {
+        menutitle:"Manage Pages",
+        menucontent:"Manage Pages",
+        Items:[
+            {
+                title: 'Manage Pages', path: `${process.env.PUBLIC_URL}/pages/searchpage`, icon: Users, type: 'link', active: false,
+            }
+        ]
+    },
     {
         menutitle:"Permission",
         menucontent:"Permission",
