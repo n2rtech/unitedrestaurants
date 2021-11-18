@@ -29,7 +29,7 @@ export const MENUITEMS = [
             {
                 title: 'Permission', path: `${process.env.PUBLIC_URL}/widgets/general`, icon: Users, type: 'sub', active: false,children: [
                     { path: `${process.env.PUBLIC_URL}/widgets/general`, title: 'Add permission', type: 'link' },          
-                    { path: `${process.env.PUBLIC_URL}/app/ecommerce/product-list/Dubai`, title: 'All permission list', type: 'link' },          
+                    { path: `${process.env.PUBLIC_URL}/app/ecommerce/product-list`, title: 'All permission list', type: 'link' },          
             
                 ]
             }
@@ -145,7 +145,7 @@ export const MENUITEMS = [
         menucontent:"Site settings",
         Items:[
             {
-                title: 'Site settings', path: `${process.env.PUBLIC_URL}/icons/flagIcons`, icon: Users, type: 'link', active: false, 
+                title: 'Site settings', path: `${process.env.PUBLIC_URL}/ui-kits/tab-bootstrap`, icon: Users, type: 'link', active: false, 
             },
 
         ]
