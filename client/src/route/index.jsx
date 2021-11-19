@@ -1,4 +1,5 @@
 // dashbaord
+
 import Default from '../components/dashboard/admin/default'
 import AdminDefault from '../components/dashboard/admin/default'
 import Ecommerce from '../components/dashboard/vendor/ecommerce'
@@ -163,6 +164,7 @@ import Search from "../components/search"
 
 
 // E-commerce-app 
+import RolesList from "../components/application/bookmark/roleslist"
 import Product from "../components/application/ecommerce-app/product"
 import ProductDetail from "../components/application/ecommerce-app/productpage"
 import Cart from "../components/application/ecommerce-app/cart"
@@ -182,7 +184,7 @@ import Chat from "../components/application/chat-app"
 
 // Bookmark
 import Bookmark from "../components/application/bookmark"
-import RolesList from "../components/application/bookmark"
+
 
 // Project app 
 import ProjectList from '../components/application/project/project'
@@ -350,8 +352,8 @@ export const routes = [
 
         { path:"/app/email-app/:layout", Component:Email},
         { path:"/app/chat-app/:layout", Component:Chat},
+        { path:"/dashboard/admin/:layout/roleslist", Component:RolesList},
         { path:"/app/bookmark/:layout", Component:Bookmark},
-        { path:"/app/bookmark/roleslist:layout", Component:RolesList},
         { path:"/app/task/:layout", Component:TaskApp},
 
         {path:"/app/project/project-list/:layout", Component:ProjectList},
