@@ -33,6 +33,27 @@ router.post('/', passport.authenticate('jwt', {
     });
 });
 
+
+router.get('/:id', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+
+    }).catch((error) => {
+        res.status(403).send(error);
+    });
+    Permission
+        .findByPk(
+            req.params.id
+        )
+        .then((roles) => res.status(200).send(roles))
+        .catch((error) => {
+            res.status(400).send(error);
+        });
+});
+
+
+
 // Get List of permissions
 router.get('/', passport.authenticate('jwt', {
     session: false
