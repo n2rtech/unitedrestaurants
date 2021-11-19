@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id',
         as: 'role',
       });
+
+      User.belongsToMany(models.Coupon, {
+        through: 'CouponUser',
+        as: 'user',
+        foreignKey: 'user_id'
+      });
       // define association here
     }
   };

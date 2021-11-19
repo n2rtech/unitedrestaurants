@@ -53,15 +53,22 @@ router.get('/:id', passport.authenticate('jwt', {
 });
 
 
-
 // Get List of permissions
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
     helper.checkPermission(req.user.role_id, 'permissions_get_all').then((rolePerm) => {
+         const { page, size } = req.query;
+          const { limit, offset } = getPagination(page, size);
+          console.log(page,size);
+          console.log(limit,offset);
+
         Permission
-            .findAll()
-            .then((perms) => res.status(200).send(perms))
+            .findAndCountAll({offset, limit })
+            .then(perms => {
+                 const response = getPagingData(perms, page, limit);
+                res.status(200).send(response)
+            })
             .catch((error) => {
                 res.status(400).send(error);
             });
@@ -163,5 +170,20 @@ function isIdUnique (value) {
     });
 }
 
+const getPagination = (page=1, size) => {
+  const limit = size ? +size : 3;
+  const offset =  (page-1) * limit;
+
+  return { limit, offset };
+};
+
+
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: tutorials } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, tutorials, totalPages, currentPage };
+};
 
 module.exports = router;

@@ -22,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
         as: 'sub_category'
       });
 
+      Category.belongsToMany(models.Coupon, {
+        through: 'CouponCategory',
+        as: 'categories',
+        foreignKey: 'category_id'
+      });
+
     }
   };
   Category.init({

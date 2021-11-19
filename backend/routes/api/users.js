@@ -62,6 +62,54 @@ router.post("/register", (req, res) => {
 });
 });
 
+
+
+
+router.post("/create", (req, res) => {
+  const {errors, isValid } = validateRegisterInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+
+  DB.query('SELECT email FROM users WHERE email ="' + req.body.email +'"', function (err, user) {
+    if (err) throw err;
+    if (user[0]) {
+      return res.status(400).json({ error: "Email already exists" });
+    } else {
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
+          if (err) throw err;         
+          var name = req.body.first_name+' '+req.body.last_name;
+
+
+          Role.findOne({
+            where: {
+                role_name: req.body.role? req.body.role : 'sub user'
+            }
+        }).then((role) => {
+            User
+            .create({
+                email: req.body.email,
+                password: hash,
+                name: name,
+                mobile: req.body.mobile,
+                phone: req.body.mobile,
+                address: req.body.address,
+                role_id: role.id
+            })
+            .then((user) => res.status(201).send({
+              succeed: true,
+              message: "user inserted successfully!"
+            }));               
+        })
+      });     
+    });
+  }
+});
+});
+
 router.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
