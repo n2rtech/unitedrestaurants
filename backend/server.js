@@ -7,8 +7,8 @@ const users = require("./routes/api/users");
 const roles = require("./routes/roles");
 const category = require("./routes/category");
 const permissions = require("./routes/permissions");
-const membership = require("./routes/membership");
-const coupons = require("./routes/coupons");
+// const membership = require("./routes/membership");
+// const coupons = require("./routes/coupons");
 const pages = require("./routes/pages");
 
 // Bodyparser middleware
@@ -37,8 +37,8 @@ app.use("/api/roles", roles);
 app.use("/api/categories", category);
 
 app.use("/api/permissions", permissions);
-app.use("/api/membership", membership);
-app.use("/api/coupons", coupons);
+// app.use("/api/membership", membership);
+// app.use("/api/coupons", coupons);
 app.use("/api/pages", pages);
 
 const port = process.env.PORT || 5000;
