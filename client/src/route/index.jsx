@@ -180,6 +180,7 @@ import Chat from "../components/application/chat-app"
 
 // Bookmark
 import Bookmark from "../components/application/bookmark"
+import RolesList from "../components/application/bookmark"
 
 // Project app 
 import ProjectList from '../components/application/project/project'
@@ -202,7 +203,7 @@ import Todo from "../components/application/todo-app"
 
 // todo-firebase-app
 import TodoFirebase from "../components/application/todo-firebase-app"
-
+   
 
 
 export const routes = [
@@ -346,6 +347,7 @@ export const routes = [
         { path:"/app/email-app/:layout", Component:Email},
         { path:"/app/chat-app/:layout", Component:Chat},
         { path:"/app/bookmark/:layout", Component:Bookmark},
+        { path:"/app/bookmark/roleslist:layout", Component:RolesList},
         { path:"/app/task/:layout", Component:TaskApp},
 
         {path:"/app/project/project-list/:layout", Component:ProjectList},

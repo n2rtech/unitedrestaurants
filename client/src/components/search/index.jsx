@@ -4,7 +4,7 @@ import axios from 'axios'
 import Lightbox from "react-image-lightbox";
 import { Container, Row, Col, Card, Table ,CardHeader, CardBody, Form,  Input, Media, TabContent, TabPane, Nav, NavItem, NavLink, Pagination, PaginationItem, PaginationLink, InputGroup, InputGroupAddon } from 'reactstrap';
 import {All,Images,Videos,Settings,Tools,Previous,Next,PortfolioTitle,Audios} from '../../constant'
-
+import { Home, Users, Layers } from 'react-feather'
 const Search = (props) => {
   const [rolesData, setRolesData] = useState([]);
 
@@ -37,30 +37,32 @@ const Search = (props) => {
         <Row>
           <Col sm="12">
             <Card>
-            <div className="table-responsive">
-                                <Table>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">{"#"}</th>
-                                            <th scope="col">{"Role Name"}</th>
-                                            <th scope="col">{"Description"}</th>
-                                            <th scope="col">{"Created At"}</th>
-                                            <th scope="col">{"Update At"}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {rolesData.map((item , i ) => (
-                                         <tr>
-                                              <th scope="row">{i}</th>
-                                              <th scope="row">{item.role_name}</th>
-                                              <th scope="row">{item.role_description}</th>
-                                              <th scope="row">{item.createdAt}</th>
-                                              <th scope="row">{item.updatedAt}</th>
-                                         </tr>
-                                        ))}
-                                    </tbody>
-                                </Table>
-                            </div>
+              <div className="table-responsive">
+                <Table>
+                    <thead>
+                        <tr>
+                            <th scope="col">{"#"}</th>
+                            <th scope="col">{"Role Name"}</th>
+                            <th scope="col">{"Description"}</th>
+                            <th scope="col">{"Created At"}</th>
+                            <th scope="col">{"Updated At"}</th>
+                            <th scope="col">{"Action"}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {rolesData.map((item , i ) => (
+                         <tr>
+                              <th scope="row">{i}</th>
+                              <th scope="row">{item.role_name}</th>
+                              <th scope="row">{item.role_description}</th>
+                              <th scope="row">{item.createdAt}</th>
+                              <th scope="row">{item.updatedAt}</th>
+                              <th scope="row"><a href="/application/bookmark/roleslist"><i className="fa fa-edit"></i></a></th>
+                         </tr>
+                        ))}
+                    </tbody>
+                </Table>
+              </div>
             </Card>
             </Col>
             </Row>
