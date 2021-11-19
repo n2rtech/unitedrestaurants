@@ -18,7 +18,7 @@ const Resturent = (props) => {
            <Header />
 
            <Resturentlist />
-
+           
            <Footer />
         </Col>
         </Row>
