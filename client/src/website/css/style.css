@@ -548,6 +548,81 @@
 .page-link{
 	border: 1px solid #70081c;
 }
+.detailpage {
+    margin-top: 50px;
+}
+.address {
+    padding-top: 30px;
+}
+.address h3 {
+    text-align: center;
+    font-family: 'Poppins';
+    color: #70081C;
+    margin-bottom: 15px;
+}
+.address p {
+    text-align: center;
+    margin-bottom: 7px;
+    font-size: 18px;
+    color: #222;
+    font-family: 'Poppins';
+}
+.address p b {
+    color: #000;
+}
+.unitedtab {
+    margin-top: 40px;
+}
+.unitedtab .react-tabs__tab-list li img {
+    max-width: 45%;
+}
+.unitedtab .react-tabs__tab {
+    cursor: pointer;
+    max-width: 13%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px 12px;
+}
+.unitedtab .react-tabs__tab--selected {
+    background: #fff;
+    border-color: #f1f1f1;
+    color: #000;
+    border-radius: 4px;
+    box-shadow: 0px 3px 9px #00000047;
+}
+.unitedtab .react-tabs__tab-list {
+    border-bottom: none;
+    margin: 0 0 20px;
+    padding: 0;
+    text-align: center;
+}
+.unitedtab .react-tabs__tab-list li h5 {
+    font-family: 'Poppins';
+    font-size: 17px;
+    margin-bottom: 0;
+    padding: 8px 0 0;
+    color: #222;
+}
+.unitedtab .react-tabs__tab-panel {
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+    padding: 15px;
+}
+.unitedtab .react-tabs__tab-panel h2 {
+    font-size: 22px;
+    font-family: 'Poppins';
+    color: #000;
+}
+.unitedtab .react-tabs__tab-panel p {
+    font-size: 15px;
+    font-family: 'Poppins';
+    color: #222;
+    line-height: 26px;
+    margin-bottom: 0;
+}
+.btn-secondary a {
+    color: #fff;
+}
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-wrapper {
     background: #70081c !important;
     padding-left: 10px;
