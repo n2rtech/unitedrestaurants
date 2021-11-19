@@ -18,7 +18,7 @@ const Menu = (props) => {
                   navbar
                 >
                   <NavItem>
-                    <NavLink href="#">
+                    <NavLink href="/resturent">
                       <img src={`${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`} 
                alt="Menu-Icon"/>
                       Restaurants

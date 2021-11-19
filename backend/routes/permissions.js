@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Permission = require('../models').Permission;
+const RolePermission = require('../models').RolePermission;
 const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
@@ -32,6 +33,27 @@ router.post('/', passport.authenticate('jwt', {
     });
 });
 
+
+router.get('/:id', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+
+    }).catch((error) => {
+        res.status(403).send(error);
+    });
+    Permission
+        .findByPk(
+            req.params.id
+        )
+        .then((roles) => res.status(200).send(roles))
+        .catch((error) => {
+            res.status(400).send(error);
+        });
+});
+
+
+
 // Get List of permissions
 router.get('/', passport.authenticate('jwt', {
     session: false
@@ -52,7 +74,7 @@ router.get('/', passport.authenticate('jwt', {
 router.put('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'permissions_update').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
         if (!req.params.id || !req.body.perm_name || !req.body.perm_description) {
             res.status(400).send({
                 msg: 'Please pass permission ID, name or description.'
@@ -87,7 +109,7 @@ router.put('/:id', passport.authenticate('jwt', {
 router.delete('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'permissions_delete').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
         if (!req.params.id) {
             res.status(400).send({
                 msg: 'Please pass permission ID.'
@@ -97,15 +119,23 @@ router.delete('/:id', passport.authenticate('jwt', {
                 .findByPk(req.params.id)
                 .then((perm) => {
                     if (perm) {
-                        perm.destroy({
-                            where: {
-                                id: req.params.id
+                        isIdUnique(perm.id).then(isUnique => {
+                            if (isUnique) {
+                                perm.destroy({
+                                    where: {
+                                        id: req.params.id
+                                    }
+                                }).then(_ => {
+                                    res.status(200).send({
+                                        'message': 'permission deleted'
+                                    });
+                                }).catch(err => res.status(400).send(err));
+                            }else{
+                                res.status(400).send({
+                                    msg: 'Permission already assigned!.'
+                                });
                             }
-                        }).then(_ => {
-                            res.status(200).send({
-                                'message': 'permission deleted'
-                            });
-                        }).catch(err => res.status(400).send(err));
+                        });
                     } else {
                         res.status(404).send({
                             'message': 'permission not found'
@@ -120,5 +150,18 @@ router.delete('/:id', passport.authenticate('jwt', {
         res.status(403).send(error);
     });
 });
+
+
+
+function isIdUnique (value) {
+    return RolePermission.count({ where: { perm_id : value } })
+      .then(count => {
+        if (count !== 0) {
+          return false;
+        }
+        return true;
+    });
+}
+
 
 module.exports = router;
