@@ -617,3 +617,20 @@
 .badge-primary {
     background-color: #70081c !important;
 }
+.rolling h1{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.rolling h2{
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+.rolling span{
+    margin-bottom: 15px;
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+    border: 1px solid #ddd;
+}

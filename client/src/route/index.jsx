@@ -165,6 +165,7 @@ import Search from "../components/search"
 
 // E-commerce-app 
 import RolesList from "../components/application/bookmark/roleslist"
+import ManagePages from "../components/application/bookmark/manage-pages"
 import Product from "../components/application/ecommerce-app/product"
 import ProductDetail from "../components/application/ecommerce-app/productpage"
 import Cart from "../components/application/ecommerce-app/cart"
@@ -353,6 +354,7 @@ export const routes = [
         { path:"/app/email-app/:layout", Component:Email},
         { path:"/app/chat-app/:layout", Component:Chat},
         { path:"/dashboard/admin/:layout/roleslist", Component:RolesList},
+        { path:"/dashboard/admin/:layout/manage-pages", Component:ManagePages},
         { path:"/app/bookmark/:layout", Component:Bookmark},
         { path:"/app/task/:layout", Component:TaskApp},
 

@@ -26,7 +26,7 @@ export const MENUITEMS = [
         menucontent:"Manage Pages",
         Items:[
             {
-                title: 'Manage Pages', path: `${process.env.PUBLIC_URL}/pages/searchpage`, icon: Users, type: 'link', active: false,
+                title: 'Manage Pages', path: `${process.env.PUBLIC_URL}/dashboard/admin/Dubai/manage-pages`, icon: Users, type: 'link', active: false,
             }
         ]
     },

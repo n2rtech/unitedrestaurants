@@ -9,28 +9,39 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { colourOptions } from '../../../data/data.ts';
 
-const RolesList = (props) => {
+
+const ManagePages = (props) => {
 const animatedComponents = makeAnimated();
 
   return (
     <Fragment>
-      <Breadcrumb parent="Apps" title="Roles List" />
+      <Breadcrumb parent="Apps" title="Manage Pages" />
       <Container fluid={true}>
         <Card>
         <CardBody>
-          <div className="rolling">
-            <h1>Role Name</h1>
-            <span>Accounts Manager</span>
-            <h2>Permissions</h2>
-            <Select
-              closeMenuOnSelect={false}
-              components={animatedComponents}
-              defaultValue={[colourOptions[4], colourOptions[5]]}
-              isMulti
-              options={colourOptions}
-            />
-            <div>&nbsp;</div>
-            <Button color="primary">Submit</Button>
+          <Row>
+            <Col sm="6">
+            &nbsp;
+            </Col>
+            <Col sm="6">
+            <a href='#' className="btn btn-primary pull-right">{"Add New"}</a>
+            </Col>
+          </Row>
+          <div className="table-responsive">
+              <Table>
+                  <thead>
+                      <tr>
+                          <th scope="col">{"Name"}</th>
+                          <th scope="col">{"Action"}</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <th>{"About Us"}</th>
+                          <td>{"Alexander"}</td>
+                      </tr>
+                  </tbody>
+              </Table>
           </div>
         </CardBody>
         </Card>
@@ -39,4 +50,4 @@ const animatedComponents = makeAnimated();
   );
 }
 
-export default RolesList;
+export default ManagePages;
