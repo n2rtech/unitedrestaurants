@@ -169,6 +169,15 @@ import ManagePages from "../components/application/bookmark/manage-pages"
 import EditPage from "../components/application/bookmark/edit-page"
 import Categories from "../components/application/bookmark/categories"
 import EditCategory from "../components/application/bookmark/edit-category"
+import AllVendors from "../components/application/bookmark/all-vendors"
+import EditVendor from "../components/application/bookmark/edit-vendor"
+import AllMembership from "../components/application/bookmark/all-membership"
+import NoMembership from "../components/application/bookmark/no-membership"
+import SuspendedVendors from "../components/application/bookmark/suspended-vendors"
+import FeaturedVendors from "../components/application/bookmark/featured-vendors"
+import HotDealsVendors from "../components/application/bookmark/hot-deals-vendors"
+import AddSpaceVendors from "../components/application/bookmark/add-space-vendors"
+import VideoMembershipVendors from "../components/application/bookmark/video-membership-vendors"
 import Product from "../components/application/ecommerce-app/product"
 import ProductDetail from "../components/application/ecommerce-app/productpage"
 import Cart from "../components/application/ecommerce-app/cart"
@@ -361,6 +370,15 @@ export const routes = [
         { path:"/dashboard/admin/:layout/edit-page", Component:EditPage},
         { path:"/dashboard/admin/:layout/categories", Component:Categories},
         { path:"/dashboard/admin/:layout/edit-category", Component:EditCategory},
+        { path:"/dashboard/admin/:layout/all-vendors", Component:AllVendors},
+        { path:"/dashboard/admin/:layout/edit-vendor", Component:EditVendor},
+        { path:"/dashboard/admin/:layout/all-membership", Component:AllMembership},
+        { path:"/dashboard/admin/:layout/no-membership", Component:NoMembership},
+        { path:"/dashboard/admin/:layout/suspended-vendors", Component:SuspendedVendors},
+        { path:"/dashboard/admin/:layout/featured-vendors", Component:FeaturedVendors},
+        { path:"/dashboard/admin/:layout/hot-deals-vendors", Component:HotDealsVendors},
+        { path:"/dashboard/admin/:layout/add-space-vendors", Component:AddSpaceVendors},
+        { path:"/dashboard/admin/:layout/video-membership-vendors", Component:VideoMembershipVendors},
         { path:"/app/bookmark/:layout", Component:Bookmark},
         { path:"/app/task/:layout", Component:TaskApp},
 

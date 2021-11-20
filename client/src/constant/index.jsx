@@ -126,7 +126,7 @@ export const Experience =  "Experience"
 
 export const ContactUs =  "Contact Us"
 export const Contact =  "Contact"
-export const YourName =  "Your Name"
+export const BusinessName =  "Business Name"
 export const Email =  "Email"
 export const Message =  "Message"
 export const PrivacyPolicy = "Privacy Policy"

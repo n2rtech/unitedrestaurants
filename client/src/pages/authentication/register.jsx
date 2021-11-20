@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {Container,Row,Col,Form,FormGroup,Input,Label,Button} from 'reactstrap'
-import {Password,SignIn, EmailAddress ,CreateAccount, YourName, PrivacyPolicy} from '../../constant';
+import {Password,SignIn, EmailAddress ,CreateAccount, BusinessName, PrivacyPolicy} from '../../constant';
 import { Twitter, Facebook,GitHub } from 'react-feather';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -176,10 +176,10 @@ const Register = (props) => {
               <div><a className="logo" href="#javascript"><img className="img-fluid for-light" src={require("../../assets/images/logo/login.png")} alt="looginpage"/><img className="img-fluid for-dark" src={require("../../assets/images/logo/logo_dark.png")} alt="looginpage"/></a></div>
               <div className="login-main"> 
                 <Form className="theme-form" action="#" autoComplete="off">
-                  <h4>{"Create your account"}</h4>
+                  <h4>{"Create your Vendor account"}</h4>
                   <p>{"Enter your personal details to create account"}</p>
                   <FormGroup>
-                    <Label className="col-form-label pt-0">{YourName}</Label>
+                    <Label className="col-form-label pt-0">{BusinessName}</Label>
                     <div className="form-row">
                       <Col xs="6">
                         <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="First name"/>
@@ -191,7 +191,16 @@ const Register = (props) => {
                       </Col>
                     </div>
                   </FormGroup>
-
+                  <FormGroup>
+                    <Label>{"Please Select Business Type"}</Label>
+                    <Input type="select" name="select" className="form-control digits" id="exampleFormControlSelect7">
+                      <option>{"Restaurant"}</option>
+                      <option>{"Food Market"}</option>
+                      <option>{"Beer & Alcohol"}</option>
+                      <option>{"Buy and Sell"}</option>
+                      <option>{"Suppliers"}</option>
+                    </Input>
+                  </FormGroup>
                     <FormGroup>
                     <Label className="col-form-label">{EmailAddress}</Label>
                     <Input className="form-control" name="email" value={email} onChange={handleChange} type="email" required="" placeholder="Test@gmail.com"/>
@@ -200,7 +209,7 @@ const Register = (props) => {
 
                   <FormGroup>
                     <Label className="col-form-label">Mobile Number</Label>
-                    <Input className="form-control" name="mobile" value={mobile} onChange={handleChange} type="number" required="" placeholder="Test@gmail.com"/>
+                    <Input className="form-control" name="mobile" value={mobile} onChange={handleChange} type="number" required="" placeholder="0123 456"/>
                     <div style={{color:'red'}}>{errors.mobile}</div>
                   </FormGroup>
 

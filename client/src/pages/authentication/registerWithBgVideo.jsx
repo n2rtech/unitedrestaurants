@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {Container,Row,Col,Form,FormGroup,Input,Label,Button} from 'reactstrap'
-import { Password,SignIn, EmailAddress ,CreateAccount, YourName, PrivacyPolicy} from '../../constant';
+import { Password,SignIn, EmailAddress ,CreateAccount, BusinessName, PrivacyPolicy} from '../../constant';
 import { GitHub, Twitter, Facebook } from 'react-feather';
 
 const RegisterWithBgVideo = (props) => {
@@ -30,7 +30,7 @@ const RegisterWithBgVideo = (props) => {
                   <h4>{"Create your account"}</h4>
                   <p>{"Enter your personal details to create account"}</p>
                   <FormGroup>
-                    <Label className="col-form-label pt-0">{YourName}</Label>
+                    <Label className="col-form-label pt-0">{BusinessName}</Label>
                     <div className="form-row">
                       <Col xs="6">
                         <Input className="form-control" type="text" required="" placeholder="First name"/>

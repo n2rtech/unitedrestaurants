@@ -61,12 +61,14 @@ export const MENUITEMS = [
         Items:[
             {
                 title: 'Vendors', icon: Layers, path: `${process.env.PUBLIC_URL}/dashboard/default`, type: 'sub', active: false, children: [
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'All membership vendors', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'All vendors', type: 'link' }, 
+                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'Membership vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/app/ecommerce/payment-details`, title: 'No membership vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/bonus-ui/pagination`, title: 'Suspended vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/app/ecommerce/pricing`, title: 'Featured Vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/app/users/userProfile`, title: 'Hot deals vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/pages/searchpage`, title: 'Add spaces vendors', type: 'link' },
+                    { path: `${process.env.PUBLIC_URL}/pages/searchpage`, title: 'Video Membership vendors', type: 'link' },
         
             ]
             }

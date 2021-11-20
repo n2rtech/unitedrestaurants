@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import {Container,Row,Col,Card,CardHeader,CardBody,CardFooter,Form,FormGroup,Label,Input,Button} from 'reactstrap'
-import { DefaultFormLayout,EmailAddress,Email,Password,Username,Website,BillingInformation,CompanyInformation,InlineForm,InlineFormWithLabel,InlineFormWithoutLabel,HorizontalFormLayout,MegaForm,Submit,Cancel,AccountInformation,Option,Login,ContactNumber,CompanyName,YourName,Checkboxes,Radios,Disabled } from "../../../constant";
+import { DefaultFormLayout,EmailAddress,Email,Password,Username,Website,BillingInformation,CompanyInformation,InlineForm,InlineFormWithLabel,InlineFormWithoutLabel,HorizontalFormLayout,MegaForm,Submit,Cancel,AccountInformation,Option,Login,ContactNumber,CompanyName,BusinessName,Checkboxes,Radios,Disabled } from "../../../constant";
 const FormDefault = () => { 
   return (
     <Fragment>
@@ -138,7 +138,7 @@ const FormDefault = () => {
                     <Form className="theme-form mega-form">
                       <h6>{AccountInformation}</h6>
                       <FormGroup>
-                        <Label className="col-form-label">{YourName}</Label>
+                        <Label className="col-form-label">{BusinessName}</Label>
                         <Input className="form-control" type="text" placeholder="your Name" />
                       </FormGroup>
                       <FormGroup>
