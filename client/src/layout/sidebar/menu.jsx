@@ -13,11 +13,11 @@ export const MENUITEMS = [
     },
 
     {
-        menutitle:"Roles",
-        menucontent:"Roles",
+        menutitle:"Roles & Permission",
+        menucontent:"Roles & Permission",
         Items:[
             {
-                title: 'Roles', path: `${process.env.PUBLIC_URL}/pages/searchpage`, icon: Users, type: 'link', active: false,
+                title: 'Roles & Permission', path: `${process.env.PUBLIC_URL}/pages/searchpage`, icon: Users, type: 'link', active: false,
             }
         ]
     },
@@ -30,19 +30,19 @@ export const MENUITEMS = [
             }
         ]
     },
-    {
-        menutitle:"Permission",
-        menucontent:"Permission",
-        Items:[
-            {
-                title: 'Permission', path: `${process.env.PUBLIC_URL}/widgets/general`, icon: Users, type: 'sub', active: false,children: [
-                    { path: `${process.env.PUBLIC_URL}/widgets/general`, title: 'Add permission', type: 'link' },          
-                    { path: `${process.env.PUBLIC_URL}/app/ecommerce/product-list`, title: 'All permission list', type: 'link' },          
+    // {
+    //     menutitle:"Permission",
+    //     menucontent:"Permission",
+    //     Items:[
+    //         {
+    //             title: 'Permission', path: `${process.env.PUBLIC_URL}/widgets/general`, icon: Users, type: 'sub', active: false,children: [
+    //                 { path: `${process.env.PUBLIC_URL}/widgets/general`, title: 'Add permission', type: 'link' },          
+    //                 { path: `${process.env.PUBLIC_URL}/app/ecommerce/product-list`, title: 'All permission list', type: 'link' },          
             
-                ]
-            }
-        ]
-    },
+    //             ]
+    //         }
+    //     ]
+    // },
     
     {
         menutitle:"Categories",
@@ -67,22 +67,6 @@ export const MENUITEMS = [
                     { path: `${process.env.PUBLIC_URL}/app/ecommerce/pricing`, title: 'Featured Vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/app/users/userProfile`, title: 'Hot deals vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/pages/searchpage`, title: 'Add spaces vendors', type: 'link' },
-        
-            ]
-            }
-        ]
-    },
-    {
-        menutitle:"Merchants",
-        menucontent:"Merchants",
-        Items:[
-            {
-                title: 'Merchants', icon: Layers, path: `${process.env.PUBLIC_URL}/dashboard/default`, type: 'sub', active: false, children: [
-                    { path: `${process.env.PUBLIC_URL}/app/users/userCards`, title: 'Add a merchant', type: 'link' },
-                    { path: `${process.env.PUBLIC_URL}/app/task`, title: 'All merchants', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/app/contact`, title: 'Subscribed merchants', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/app/social-app`, title: 'Video membership merchants', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/app/todo-app/todo`, title: 'Suspended merchants', type: 'link' },              
         
             ]
             }

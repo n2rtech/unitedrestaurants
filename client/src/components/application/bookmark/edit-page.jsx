@@ -28,6 +28,7 @@ const [content,setContent] = useState('content')
                   "change": onChange
               }}
           />
+          <Button color="success" className="m-t-20">{"Save"}</Button>
         </CardBody>
         </Card>
       </Container>

@@ -167,6 +167,8 @@ import Search from "../components/search"
 import RolesList from "../components/application/bookmark/roleslist"
 import ManagePages from "../components/application/bookmark/manage-pages"
 import EditPage from "../components/application/bookmark/edit-page"
+import Categories from "../components/application/bookmark/categories"
+import EditCategory from "../components/application/bookmark/edit-category"
 import Product from "../components/application/ecommerce-app/product"
 import ProductDetail from "../components/application/ecommerce-app/productpage"
 import Cart from "../components/application/ecommerce-app/cart"
@@ -357,6 +359,8 @@ export const routes = [
         { path:"/dashboard/admin/:layout/roleslist", Component:RolesList},
         { path:"/dashboard/admin/:layout/manage-pages", Component:ManagePages},
         { path:"/dashboard/admin/:layout/edit-page", Component:EditPage},
+        { path:"/dashboard/admin/:layout/categories", Component:Categories},
+        { path:"/dashboard/admin/:layout/edit-category", Component:EditCategory},
         { path:"/app/bookmark/:layout", Component:Bookmark},
         { path:"/app/task/:layout", Component:TaskApp},
 
