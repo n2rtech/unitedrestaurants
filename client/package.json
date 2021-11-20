@@ -66,6 +66,7 @@
     "react-sparklines": "^1.7.0",
     "react-stepzilla": "^6.0.2",
     "react-switch-lang": "^1.0.2",
+    "react-tabs": "^3.2.3",
     "react-times": "^3.1.12",
     "react-to-print": "^2.9.0",
     "react-toastify": "^6.0.8",
