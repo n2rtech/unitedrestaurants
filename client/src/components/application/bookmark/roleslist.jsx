@@ -1,20 +1,41 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
-import { useForm } from 'react-hook-form'
 import { Typeahead } from 'react-bootstrap-typeahead';
-import TypeaheadOne from './typeahead-one';
 import axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux'
 
 const RolesList = (props) => {
 const multiple = false
-    const [options,setOptions] = useState([])
+    // const [options,setOptions] = useState([])
+
+    // useEffect(() => {
+    //     axios.get(`${process.env.PUBLIC_URL}/api/typeaheadData.json`).then(res => setOptions(res.data))
+    // },[])
+
+      
+    const [rolesData, setRolesData] = useState([]);
 
     useEffect(() => {
-        axios.get(`${process.env.PUBLIC_URL}/api/typeaheadData.json`).then(res => setOptions(res.data))
-    },[])
+    
+        const config = {
+            headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+            };
+    
+            
+        fetch("/api/permissions" , config)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              
+              setRolesData(result);
+            },
+            (error) => {
+              
+            }
+          )
+      }, []);
+    
+    console.log(rolesData);
 
   return (
     <Fragment>
@@ -29,10 +50,10 @@ const multiple = false
             <Typeahead
               id="multiple-typeahead"
               clearButton
-              defaultSelected={options.slice(0, 5)}
-              labelKey={"name"}
+              defaultSelected={rolesData.slice(0, 5)}
+              labelKey={"perm_name"}
               multiple
-              options={options}
+              options={rolesData}
               placeholder="Choose a state..."
             />
             <div>&nbsp;</div>
