@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const users = require("./routes/api/users");
 const roles = require("./routes/roles");
+const countries = require("./routes/countries");
 const category = require("./routes/category");
 const permissions = require("./routes/permissions");
 // const membership = require("./routes/membership");
@@ -34,6 +35,7 @@ app.use(
 app.use("/api/users", users);
 
 app.use("/api/roles", roles);
+app.use("/api/countries", countries);
 app.use("/api/categories", category);
 
 app.use("/api/permissions", permissions);
