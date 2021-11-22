@@ -217,12 +217,12 @@ const Sidebar = (props) => {
                 {
                   MENUITEMS.map((Item, i) =>
                     <Fragment key={i}>
-                      <li className="sidebar-main-title">
+                      {/*<li className="sidebar-main-title">
                         <div>
                           <h6 className="lan-1">{props.t(Item.menutitle)}</h6>
                           <p className="lan-2">{props.t(Item.menucontent)}</p>
                         </div>
-                      </li>
+                      </li>*/}
                       {Item.Items.map((menuItem, i) =>
                         <li className="sidebar-list" key={i}>
                           {(menuItem.type === 'sub') ?
