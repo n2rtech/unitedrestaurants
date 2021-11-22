@@ -17,7 +17,7 @@ export const MENUITEMS = [
         menucontent:"Roles & Permission",
         Items:[
             {
-                title: 'Roles & Permission', path: `${process.env.PUBLIC_URL}/pages/searchpage`, icon: Users, type: 'link', active: false,
+                title: 'Roles & Permission', path: `${process.env.PUBLIC_URL}/pages/roles`, icon: Users, type: 'link', active: false,
             }
         ]
     },
@@ -49,7 +49,7 @@ export const MENUITEMS = [
         menucontent:"Categories",
         Items:[
             {
-                title: 'Categories', path: `${process.env.PUBLIC_URL}/app/ecommerce/product/Dubai`, icon: Users, type: 'link', active: false, 
+                title: 'Categories', path: `${process.env.PUBLIC_URL}/dashboard/admin/Dubai/categories`, icon: Users, type: 'link', active: false, 
             },
 
         ]
@@ -61,14 +61,14 @@ export const MENUITEMS = [
         Items:[
             {
                 title: 'Vendors', icon: Layers, path: `${process.env.PUBLIC_URL}/dashboard/default`, type: 'sub', active: false, children: [
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'All vendors', type: 'link' }, 
-                    { path: `${process.env.PUBLIC_URL}/pages/samplepage`, title: 'Membership vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/app/ecommerce/payment-details`, title: 'No membership vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/bonus-ui/pagination`, title: 'Suspended vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/app/ecommerce/pricing`, title: 'Featured Vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/app/users/userProfile`, title: 'Hot deals vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/pages/searchpage`, title: 'Add spaces vendors', type: 'link' },
-                    { path: `${process.env.PUBLIC_URL}/pages/searchpage`, title: 'Video Membership vendors', type: 'link' },
+                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/Dubai/all-vendors`, title: 'All vendors', type: 'link' }, 
+                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/Dubai/all-membership`, title: 'Membership vendors', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/Dubai/no-membership`, title: 'No membership vendors', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/Dubai/suspended-vendors`, title: 'Suspended vendors', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/Dubai/featured-vendors`, title: 'Featured Vendors', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/Dubai/hot-deals-vendors`, title: 'Hot deals vendors', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/add-space-vendors`, title: 'Add spaces vendors', type: 'link' },
+                    { path: `${process.env.PUBLIC_URL}/video-membership-vendors`, title: 'Video Membership vendors', type: 'link' },
         
             ]
             }

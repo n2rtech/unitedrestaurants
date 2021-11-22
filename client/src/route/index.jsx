@@ -97,6 +97,9 @@ import RaisedButton from '../components/buttons/raisedButton'
  import StylingTable from '../components/tables/stylingTable'
  import DataTable from '../components/tables/dataTable'
 
+// Roles & Permission
+ import Roles from '../components/roles/'
+
  // Charts 
 import Apexcharts from "../components/charts/apexCharts"
 import GoogleCharts from "../components/charts/googleCharts"
@@ -229,6 +232,8 @@ export const routes = [
         { path:"/dashboard/default/:layout/", Component:Default},
         { path:"/dashboard/vendor/:layout/", Component:VendorEcommerce},
         { path:"/dashboard/ecommerce/:layout/", Component:Ecommerce},
+
+	{ path:"/pages/roles/:layout", Component:Roles},
 
         { path:"/widgets/general/:layout", Component:GeneralWidget},
         { path:"/widgets/chart/:layout", Component:ChartsWidget},
@@ -365,7 +370,7 @@ export const routes = [
 
         { path:"/app/email-app/:layout", Component:Email},
         { path:"/app/chat-app/:layout", Component:Chat},
-        { path:"/dashboard/admin/:layout/roleslist", Component:RolesList},
+        { path:"/dashboard/admin/:layout/roleslist/:id", Component:RolesList},
         { path:"/dashboard/admin/:layout/manage-pages", Component:ManagePages},
         { path:"/dashboard/admin/:layout/edit-page", Component:EditPage},
         { path:"/dashboard/admin/:layout/categories", Component:Categories},

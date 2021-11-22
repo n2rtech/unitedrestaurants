@@ -27,49 +27,49 @@ const ManagePages = (props) => {
                       <tr>
                           <td>{"About Us"}</td>
                           <td className="text-right">
-                            <Button color="success">{"Edit"}</Button>
+                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
                           </td>
                       </tr>
                       <tr>
                           <td>{"Privacy Policy"}</td>
                           <td className="text-right">
-                            <Button color="success">{"Edit"}</Button>
+                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
                           </td>
                       </tr>
                       <tr>
                           <td>{"Return Policy"}</td>
                           <td className="text-right">
-                            <Button color="success">{"Edit"}</Button>
+                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
                           </td>
                       </tr>
                       <tr>
                           <td>{"Terms of Service"}</td>
                           <td className="text-right">
-                            <Button color="success">{"Edit"}</Button>
+                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
                           </td>
                       </tr>
                       <tr>
                           <td>{"Contact Us"}</td>
                           <td className="text-right">
-                            <Button color="success">{"Edit"}</Button>
+                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
                           </td>
                       </tr>
                       <tr>
                           <td>{"Customer Service"}</td>
                           <td className="text-right">
-                            <Button color="success">{"Edit"}</Button>
+                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
                           </td>
                       </tr>
                       <tr>
                           <td>{"Technical Support"}</td>
                           <td className="text-right">
-                            <Button color="success">{"Edit"}</Button>
+                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
                           </td>
                       </tr>
                       <tr>
                           <td>{"Sales"}</td>
                           <td className="text-right">
-                            <Button color="success">{"Edit"}</Button>
+                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
                           </td>
                       </tr>
                   </tbody>
