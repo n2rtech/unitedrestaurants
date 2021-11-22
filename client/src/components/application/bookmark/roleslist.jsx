@@ -7,7 +7,6 @@ import defaultImg from '../../../assets/images/lightgallry/01.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 
 const RolesList = (props) => {
-const animatedComponents = makeAnimated();
 
   return (
     <Fragment>

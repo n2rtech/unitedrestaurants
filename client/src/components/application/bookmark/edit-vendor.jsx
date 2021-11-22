@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 
 const EditVendor = (props) => {
-const animatedComponents = makeAnimated();
 
   return (
     <Fragment>
