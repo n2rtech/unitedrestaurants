@@ -1,5 +1,7 @@
 /node_modules
 /backend/node_modules
+/backend/config/database.js
+/backend/config/config.json
 /client/node_modules
 /server/node_modules
 /client/build/
