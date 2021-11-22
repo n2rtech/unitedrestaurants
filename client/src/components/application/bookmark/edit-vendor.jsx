@@ -4,9 +4,6 @@ import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, T
 import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
-import { colourOptions } from '../../../data/data.ts';
 
 
 const EditVendor = (props) => {
@@ -41,13 +38,7 @@ const animatedComponents = makeAnimated();
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Business Listed"}</Label>
-                <Select
-                  closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  defaultValue={[colourOptions[4], colourOptions[5]]}
-                  isMulti
-                  options={colourOptions}
-                />
+                
               </FormGroup>
               <FormGroup>
                 <Button color="primary">{"Save"}</Button>

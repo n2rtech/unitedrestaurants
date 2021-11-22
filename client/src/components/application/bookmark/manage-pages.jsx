@@ -5,13 +5,9 @@ import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } fr
 import { useForm } from 'react-hook-form'
 import defaultImg from '../../../assets/images/lightgallry/01.jpg'
 import { useSelector, useDispatch } from 'react-redux'
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
-import { colourOptions } from '../../../data/data.ts';
 
 
 const ManagePages = (props) => {
-const animatedComponents = makeAnimated();
 
   return (
     <Fragment>

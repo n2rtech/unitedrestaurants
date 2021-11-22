@@ -5,9 +5,6 @@ import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } fr
 import { useForm } from 'react-hook-form'
 import defaultImg from '../../../assets/images/lightgallry/01.jpg'
 import { useSelector, useDispatch } from 'react-redux'
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
-import { colourOptions } from '../../../data/data.ts';
 
 const RolesList = (props) => {
 const animatedComponents = makeAnimated();
@@ -22,13 +19,7 @@ const animatedComponents = makeAnimated();
             <h1>Role Name</h1>
             <span>Accounts Manager</span>
             <h2>Permissions</h2>
-            <Select
-              closeMenuOnSelect={false}
-              components={animatedComponents}
-              defaultValue={[colourOptions[4], colourOptions[5]]}
-              isMulti
-              options={colourOptions}
-            />
+
             <div>&nbsp;</div>
             <Button color="primary">Submit</Button>
           </div>
