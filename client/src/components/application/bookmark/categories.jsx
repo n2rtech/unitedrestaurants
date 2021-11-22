@@ -33,63 +33,63 @@ const Categories = (props) => {
                 <tr>
                   <td>{"Restaurants"}</td>
                   <td className="text-right">
-                    <Button color="success">{"Edit"}</Button> &nbsp;
+                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-category`}>Edit</a> &nbsp;
                     <Button color="danger">{"Delete"}</Button>
                   </td>
                 </tr>
                 <tr>
                   <td>{"Food Market"}</td>
                   <td className="text-right">
-                    <Button color="success">{"Edit"}</Button> &nbsp;
+                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-category`}>Edit</a> &nbsp;
                     <Button color="danger">{"Delete"}</Button>
                   </td>
                 </tr>
                 <tr>
                   <td>{"Beer & Alcohol"}</td>
                   <td className="text-right">
-                    <Button color="success">{"Edit"}</Button> &nbsp;
+                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-category`}>Edit</a> &nbsp;
                     <Button color="danger">{"Delete"}</Button>
                   </td>
                 </tr>
                 <tr>
                   <td>{"Services"}</td>
                   <td className="text-right">
-                    <Button color="success">{"Edit"}</Button> &nbsp;
+                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-category`}>Edit</a> &nbsp;
                     <Button color="danger">{"Delete"}</Button>
                   </td>
                 </tr>
                 <tr>
                   <td>{"Suppliers"}</td>
                   <td className="text-right">
-                    <Button color="success">{"Edit"}</Button> &nbsp;
+                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-category`}>Edit</a> &nbsp;
                     <Button color="danger">{"Delete"}</Button>
                   </td>
                 </tr>
                 <tr>
                   <td>{"Buy & Sell"}</td>
                   <td className="text-right">
-                    <Button color="success">{"Edit"}</Button> &nbsp;
+                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-category`}>Edit</a> &nbsp;
                     <Button color="danger">{"Delete"}</Button>
                   </td>
                 </tr>
                 <tr>
                   <td>{"Jobs"}</td>
                   <td className="text-right">
-                    <Button color="success">{"Edit"}</Button> &nbsp;
+                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-category`}>Edit</a> &nbsp;
                     <Button color="danger">{"Delete"}</Button>
                   </td>
                 </tr>
                 <tr>
                   <td>{"Videos"}</td>
                   <td className="text-right">
-                    <Button color="success">{"Edit"}</Button> &nbsp;
+                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-category`}>Edit</a> &nbsp;
                     <Button color="danger">{"Delete"}</Button>
                   </td>
                 </tr>
                 <tr>
                   <td>{"Others"}</td>
                   <td className="text-right">
-                    <Button color="success">{"Edit"}</Button> &nbsp;
+                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-category`}>Edit</a> &nbsp;
                     <Button color="danger">{"Delete"}</Button>
                   </td>
                 </tr>
