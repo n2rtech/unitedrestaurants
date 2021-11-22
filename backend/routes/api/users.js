@@ -12,6 +12,7 @@ const passport = require('passport');
 require('../../config/passport')(passport);
 const Helper = require('../../utils/helper');
 const helper = new Helper();
+const Op = require('Sequelize').Op
 
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -47,6 +48,8 @@ router.post("/register", (req, res) => {
                 password: hash,
                 name: name,
                 mobile: req.body.phone,
+                category_id: req.body.category_id,
+                country_id: req.body.country_id,
                 phone: req.body.phone,
                 address: req.body.address,
                 role_id: role.id
@@ -177,9 +180,32 @@ router.get('/by-role/:id', passport.authenticate('jwt', {
     if (role) {
       User.findAll({
         where: {
-          role_id: role.id
+          role_id: role.id,
+          [Op.or]: [
+          {
+            name: {
+              [Op.like]: req.query.name ? req.query.name : ''
+            }
+          },
+          {
+            email: {
+              [Op.like]: req.query.email ? req.query.email : ''
+            }
+          },
+          {
+            mobile: {
+              [Op.like]: req.query.mobile ? req.query.mobile : ''
+            }
+          },
+          {
+            country_id: {
+              [Op.eq]: req.query.country ? req.query.country : ''
+            }
+          },
+          ]
         }
-      }).then((users) => {
+      }   
+      ).then((users) => {
         res.status(200).send(
           users
           );

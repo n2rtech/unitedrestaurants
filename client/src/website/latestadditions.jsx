@@ -18,7 +18,7 @@ const ratingChanged = (newRating) => {
        <Container className="p-0"> 
       <h3>latest additions</h3>
       <div className="seeall">
-        <a href="#">SEE ALL</a>
+        <a href="/restaurants">SEE ALL</a>
       </div>
       <div style={{ position: "relative" }}>
         <Carousel responsive={responsive}>
@@ -36,7 +36,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                  </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -48,7 +50,9 @@ const ratingChanged = (newRating) => {
                   </Row>
                   
                   <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     VIEW
+                  </a>
                   </Button>
                 </CardBody>
               </Card>
@@ -68,7 +72,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                  </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -80,7 +86,9 @@ const ratingChanged = (newRating) => {
                   </Row>
                   
                   <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     VIEW
+                  </a>
                   </Button>
                 </CardBody>
               </Card>
@@ -100,7 +108,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                  </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -112,7 +122,9 @@ const ratingChanged = (newRating) => {
                   </Row>
                   
                   <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     VIEW
+                  </a>
                   </Button>
                 </CardBody>
               </Card>
@@ -132,7 +144,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                  </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -144,7 +158,9 @@ const ratingChanged = (newRating) => {
                   </Row>
                   
                   <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     VIEW
+                  </a>
                   </Button>
                 </CardBody>
               </Card>
@@ -164,7 +180,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                  </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -176,7 +194,9 @@ const ratingChanged = (newRating) => {
                   </Row>
                   
                   <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     VIEW
+                  </a>
                   </Button>
                 </CardBody>
               </Card>
@@ -196,7 +216,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                  </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -208,7 +230,9 @@ const ratingChanged = (newRating) => {
                   </Row>
                   
                   <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     VIEW
+                  </a>
                   </Button>
                 </CardBody>
               </Card>

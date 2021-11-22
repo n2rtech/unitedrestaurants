@@ -21,8 +21,10 @@ import Signin from './auth/signin'
 
 // Home Page
 import Home from './website/home'
-import Resturent from './website/resturent'
+import Restaurants from './website/restaurants'
+import Blog from './website/blog'
 import Details from './website/resturent/details'
+import Blogdetails from './website/blog/blogdetails'
 import Searchresturent from './website/searchresturent'
 
 
@@ -107,7 +109,9 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
           <Route  path={`${process.env.PUBLIC_URL}/home`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/resturent/details`} component={Details} />
-           <Route  path={`${process.env.PUBLIC_URL}/resturent`} component={Resturent} />
+          <Route  path={`${process.env.PUBLIC_URL}/blog/blogdetails`} component={Blogdetails} />
+           <Route  path={`${process.env.PUBLIC_URL}/restaurants`} component={Restaurants} />
+           <Route  path={`${process.env.PUBLIC_URL}/blog`} component={Blog} />
            <Route  path={`${process.env.PUBLIC_URL}/searchresturent`} component={Searchresturent} />
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/login`} component={Login}>
           </Route>

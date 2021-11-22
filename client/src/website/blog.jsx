@@ -7,9 +7,10 @@ import Advertise from './advertise.jsx'
 import Latestadditions from './latestadditions.jsx'
 import Homeblog from './homeblog.jsx'
 import ScrollButton from './ScrollButton.jsx';
-import Resturentlist from './resturentlist.jsx';
+import Restaurantlist from './restaurantlist.jsx';
+import Bloglist from './bloglist.jsx';
 import './css/style.css'
-const Resturent = (props) => {
+const Blog = (props) => {
 
   return (
       <Container fluid={true} className="p-0">
@@ -17,7 +18,7 @@ const Resturent = (props) => {
         <Col xs="12" className="p-0">     
            <Header />
 
-           <Resturentlist />
+           <Bloglist />
            
            <Footer />
         </Col>
@@ -26,4 +27,4 @@ const Resturent = (props) => {
   );
 }
 
-export default Resturent;
+export default Blog;

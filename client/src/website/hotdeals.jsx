@@ -18,7 +18,7 @@ const ratingChanged = (newRating) => {
        <Container className="p-0"> 
       <h1>hot deals you can't miss</h1>
       <div className="seeall">
-        <a href="#">SEE ALL</a>
+        <a href="/restaurants">SEE ALL</a>
       </div>
       <div style={{ position: "relative" }}>
         <Carousel responsive={responsive}>
@@ -38,7 +38,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                    </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -51,7 +53,7 @@ const ratingChanged = (newRating) => {
                       activeColor="#ffd700"
                       value="3.5"
                       
-                    />,
+                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
@@ -59,7 +61,7 @@ const ratingChanged = (newRating) => {
                     deal description deal description deal description deal description deal description deal description
                   </CardText>
                   <Button>
-                    SEE SALE
+                   <a href={`${process.env.PUBLIC_URL}/resturent/details`}> SEE SALE</a>
                   </Button>
                 </CardBody>
               </Card>
@@ -81,7 +83,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                   <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                    </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -94,7 +98,7 @@ const ratingChanged = (newRating) => {
                       activeColor="#ffd700"
                       value="3.5"
                       
-                    />,
+                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
@@ -102,7 +106,10 @@ const ratingChanged = (newRating) => {
                     deal description deal description deal description deal description deal description deal description
                   </CardText>
                   <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     SEE SALE
+                    </a>
+                    
                   </Button>
                 </CardBody>
               </Card>
@@ -124,7 +131,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                  </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -137,7 +146,7 @@ const ratingChanged = (newRating) => {
                       activeColor="#ffd700"
                       value="3.5"
                       
-                    />,
+                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
@@ -145,7 +154,9 @@ const ratingChanged = (newRating) => {
                     deal description deal description deal description deal description deal description deal description
                   </CardText>
                   <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     SEE SALE
+                  </a>
                   </Button>
                 </CardBody>
               </Card>
@@ -167,7 +178,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                  </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -180,7 +193,7 @@ const ratingChanged = (newRating) => {
                       activeColor="#ffd700"
                       value="3.5"
                       
-                    />,
+                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
@@ -188,7 +201,9 @@ const ratingChanged = (newRating) => {
                     deal description deal description deal description deal description deal description deal description
                   </CardText>
                   <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     SEE SALE
+                  </a>
                   </Button>
                 </CardBody>
               </Card>
@@ -210,7 +225,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                  </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -223,7 +240,7 @@ const ratingChanged = (newRating) => {
                       activeColor="#ffd700"
                       value="3.5"
                       
-                    />,
+                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
@@ -231,7 +248,9 @@ const ratingChanged = (newRating) => {
                     deal description deal description deal description deal description deal description deal description
                   </CardText>
                   <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     SEE SALE
+                  </a>
                   </Button>
                 </CardBody>
               </Card>
@@ -253,7 +272,9 @@ const ratingChanged = (newRating) => {
                    </Col>
                    <Col sm="8">
                   <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
+                  </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -266,7 +287,7 @@ const ratingChanged = (newRating) => {
                       activeColor="#ffd700"
                       value="3.5"
                       
-                    />,
+                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
@@ -274,7 +295,9 @@ const ratingChanged = (newRating) => {
                     deal description deal description deal description deal description deal description deal description
                   </CardText>
                   <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     SEE SALE
+                  </a>
                   </Button>
                 </CardBody>
               </Card>

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect,Fragment} from 'react';
 import {Container,Row,Col,Form,FormGroup,Input,Label,Button} from 'reactstrap'
 import {Password,SignIn, EmailAddress ,CreateAccount, BusinessName, PrivacyPolicy} from '../../constant';
 import { Twitter, Facebook,GitHub } from 'react-feather';
@@ -8,11 +8,31 @@ import { useHistory, useLocation } from 'react-router-dom'
 
 const Register = (props) => {
 
+  const [categoryData, setCategoryData] = useState([]);
+  const [countryData, setCountryData] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    axios.get(`/api/categories/list`)
+    .then((getData) => {
+      setCategoryData(getData.data);
+    });
+    axios.get(`/api/Countries/list`)
+    .then((getData) => {
+      setCountryData(getData.data);
+    });
+  }
+
   const [first_name, setFirstName ] = useState('');
   const [last_name, setLastName ] = useState('');
   const [mobile, setMobile ] = useState('');
   const [address, setAddress ] = useState('');
   const [email, setEmail ] = useState('');
+  const [category_id, setCategoryId ] = useState('');
+  const [country_id, setCountryId ] = useState('');
   const [password, setPassword ] = useState('');
 
   const [errors, setErrors] = useState('');
@@ -57,7 +77,6 @@ const Register = (props) => {
       formIsValid = false;
       errors["password"] = "field is Required!";
     }
-    console.log(errors);
     setErrors(errors);
     return formIsValid;
   }
@@ -108,6 +127,23 @@ const Register = (props) => {
       setEmail(value);
       break;
 
+      case 'category_id': 
+      errors.category_id = 
+      value.length < 1
+      ? 'field is Required!'
+      : '';
+      setCategoryId(value);
+      break;
+
+
+      case 'country_id': 
+      errors.country_id = 
+      value.length < 1
+      ? 'field is Required!'
+      : '';
+      setCountryId(value);
+      break;
+
       case 'password': 
       errors.password = 
       value.length < 1
@@ -134,6 +170,8 @@ const Register = (props) => {
         mobile:mobile,
         address:address,
         email:email,
+        category_id:category_id,
+        country_id:country_id,
         password:password
       }
       axios.post('/api/users/register',query).then(res=>
@@ -150,6 +188,7 @@ const Register = (props) => {
           setMobile('');
           setPassword('');
           setEmail('');
+          setCategoryId('');
           window.scrollTo(0, 0);
         }else{
           setError(res.data.message);
@@ -193,12 +232,12 @@ const Register = (props) => {
                   </FormGroup>
                   <FormGroup>
                     <Label>{"Please Select Business Type"}</Label>
-                    <Input type="select" name="select" className="form-control digits" id="exampleFormControlSelect7">
-                      <option>{"Restaurant"}</option>
-                      <option>{"Food Market"}</option>
-                      <option>{"Beer & Alcohol"}</option>
-                      <option>{"Buy and Sell"}</option>
-                      <option>{"Suppliers"}</option>
+                    <Input type="select" onChange={handleChange} name="category_id" className="form-control digits" id="exampleFormControlSelect7">
+                    {categoryData.map((category , i ) => (
+                      <Fragment>
+                      <option value={category.id}>{category.name}</option>
+                    </Fragment>
+                      ))}
                     </Input>
                   </FormGroup>
                     <FormGroup>
@@ -215,9 +254,18 @@ const Register = (props) => {
 
                   <FormGroup>
                     <Label className="col-form-label">Address</Label>
-                    <textarea className="form-control" placeholder="Address" name="address" onChange={handleChange} >{address}</textarea>
+                    <textarea className="form-control" placeholder="Address" defaultValue={address} name="address" onChange={handleChange} ></textarea>
                   </FormGroup>
-
+                  <FormGroup>
+                    <Label>{"Please Select Business Type"}</Label>
+                    <Input type="select" onChange={handleChange} name="country_id" className="form-control digits" id="exampleFormControlSelect7">
+                    {countryData.map((country , i ) => (
+                      <Fragment>
+                      <option value={country.id}>{country.name}</option>
+                    </Fragment>
+                      ))}
+                    </Input>
+                  </FormGroup>
                   <FormGroup>
                     <Label className="col-form-label">{Password}</Label>
                     <Input className="form-control" name="password" value={password} onChange={handleChange} type={togglePassword ?  "text" : "password" }  required="" placeholder="*********"/>

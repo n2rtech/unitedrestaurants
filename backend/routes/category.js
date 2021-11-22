@@ -73,6 +73,8 @@ router.post('/add', passport.authenticate('jwt', {
     });
 });
 
+
+
 // Get List of Roles
 router.get('/', passport.authenticate('jwt', {
     session: false
@@ -143,6 +145,24 @@ router.get('/', passport.authenticate('jwt', {
             });
     }).catch((error) => {
         res.status(403).send(error);
+    });
+});
+
+
+// Get List of Roles
+router.get("/list", (req, res) => {
+    Category
+    .findAll({
+        where: {
+          parent_id: 0
+      }
+  })
+    .then((category) => {
+
+        res.status(200).send(category)
+    })
+    .catch((error) => {
+        res.status(400).send(error);
     });
 });
 

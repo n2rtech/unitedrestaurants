@@ -55,7 +55,7 @@ return (
 				<a href="#">Terms of Service</a>
 			</li>
 			<li>
-				<a href="#">Merchant Signup</a>
+				<a target = "_blank" href={`${process.env.PUBLIC_URL}/signup`} >Merchant Signup</a>
 			</li>
 		</List>
 	</div>

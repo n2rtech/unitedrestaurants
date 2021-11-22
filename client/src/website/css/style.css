@@ -255,7 +255,7 @@
 .customcard .card .card-body{
 	padding: 30px;
 }
-.customcard h5.card-title {
+.customcard h5.card-title a{
     font-size: 15px;
     font-weight: 400;
     font-family: 'Poppins';
@@ -294,6 +294,7 @@
     left: auto;
     right: 0;
     top: 0;
+    z-index: 0;
 }
 .ribbon p {
   width: 150px;
