@@ -97,6 +97,9 @@ import RaisedButton from '../components/buttons/raisedButton'
  import StylingTable from '../components/tables/stylingTable'
  import DataTable from '../components/tables/dataTable'
 
+// Roles & Permission
+ import Roles from '../components/roles/'
+
  // Charts 
 import Apexcharts from "../components/charts/apexCharts"
 import GoogleCharts from "../components/charts/googleCharts"
@@ -229,6 +232,8 @@ export const routes = [
         { path:"/dashboard/default/:layout/", Component:Default},
         { path:"/dashboard/vendor/:layout/", Component:VendorEcommerce},
         { path:"/dashboard/ecommerce/:layout/", Component:Ecommerce},
+
+	{ path:"/pages/roles/:layout", Component:Roles},
 
         { path:"/widgets/general/:layout", Component:GeneralWidget},
         { path:"/widgets/chart/:layout", Component:ChartsWidget},

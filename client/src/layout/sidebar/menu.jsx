@@ -17,7 +17,7 @@ export const MENUITEMS = [
         menucontent:"Roles & Permission",
         Items:[
             {
-                title: 'Roles & Permission', path: `${process.env.PUBLIC_URL}/dashboard/admin/Dubai/roleslist`, icon: Users, type: 'link', active: false,
+                title: 'Roles & Permission', path: `${process.env.PUBLIC_URL}/pages/roles`, icon: Users, type: 'link', active: false,
             }
         ]
     },
