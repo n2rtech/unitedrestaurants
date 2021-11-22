@@ -55,7 +55,7 @@ const VendorEcommerce = (props) => {
                       <CardBody>
                         <div className="ecommerce-widgets media">
                           <div className="media-body">
-                            <h1 className="f-26 f-w-500 font-roboto">{"Welcome back,"}</h1>
+                            <h1 className="f-26 f-w-500 font-roboto color-maroon">{"Welcome back,"}</h1>
                             <h4 className="f-w-500 mb-0 f-26">{"Krishna Mishra"}</h4>
                           </div>
                           <div className="ecommerce-box light-bg-primary"><i className="fa fa-heart" aria-hidden="true"></i></div>
