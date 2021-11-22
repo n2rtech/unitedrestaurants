@@ -370,7 +370,7 @@ export const routes = [
 
         { path:"/app/email-app/:layout", Component:Email},
         { path:"/app/chat-app/:layout", Component:Chat},
-        { path:"/dashboard/admin/:layout/roleslist", Component:RolesList},
+        { path:"/dashboard/admin/:layout/roleslist/:id", Component:RolesList},
         { path:"/dashboard/admin/:layout/manage-pages", Component:ManagePages},
         { path:"/dashboard/admin/:layout/edit-page", Component:EditPage},
         { path:"/dashboard/admin/:layout/categories", Component:Categories},

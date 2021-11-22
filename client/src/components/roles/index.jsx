@@ -13,8 +13,7 @@ const Roles = (props) => {
       const config = {
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
           };
-  
-          
+        
       fetch("/api/roles" , config)
         .then(res => res.json())
         .then(
@@ -57,7 +56,7 @@ const Roles = (props) => {
                               <th scope="row">{item.role_description}</th>
                               <th scope="row">{item.createdAt}</th>
                               <th scope="row">{item.updatedAt}</th>
-                              <th scope="row"><a href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/roleslist`}><i className  ="fa fa-edit"></i></a></th>
+                              <th scope="row"><a href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/roleslist/${item.id}`}><i className  ="fa fa-edit"></i></a></th>
                          </tr>
                         ))}
                     </tbody>
