@@ -7,3 +7,5 @@
 backend/config/config.json
 backend/config/database.js
 client/package-lock.json
+client/package.json
+backend/package.json
