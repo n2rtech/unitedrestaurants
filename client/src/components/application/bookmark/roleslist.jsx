@@ -10,6 +10,8 @@ const multiple = false
 
 const params = useParams();
 
+const [multiSelections, setMultiSelections] = useState([]);
+
     const [bookingData, setBookingData] = useState({});
    useEffect(() => {
     const GetData = async () => {
@@ -24,7 +26,7 @@ const params = useParams();
 console.log(bookingData);
 
 const [pername, setPername] = useState('')
-const [selectedData, setSelectedData] = useState('')
+const [selectedData, setSelectedData] = useState([])
 
 const handleChange = (selectedOptions)  => {
   //console.log(selectedOptions);
@@ -34,8 +36,19 @@ const handleChange = (selectedOptions)  => {
 const handleSubmit = event => {
   event.preventDefault();
 
-const finalpername = pername.map((user) => { setSelectedData(user.id)  });
-console.log(pername);
+
+
+// console.log(multiSelections);
+var array = [];
+
+
+console.log(array)
+
+const finalpername = multiSelections.map((user) => {
+  // console.log(user.id);
+  array.indexOf(user.id) === -1 ? array.push(user.id) : console.log("This item already exists");
+});
+console.log(array);
 
   // const config = {
   //   headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
@@ -66,8 +79,9 @@ console.log(pername);
               clearButton
               labelKey={"perm_name"}
               multiple
-              onChange={handleChange}
+              onChange={setMultiSelections}
               options={bookingData}
+              selected={multiSelections}
               placeholder="Choose a state..."
             />
             <div>&nbsp;</div>
