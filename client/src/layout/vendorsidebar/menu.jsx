@@ -33,7 +33,7 @@ export const MENUITEMS = [
         menucontent:"Payment Method",
         Items:[
             {
-                title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-membership-package`, icon: Send, type: 'link', active: false,
+                title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/payment-method`, icon: Send, type: 'link', active: false,
             }
         ]
     },
