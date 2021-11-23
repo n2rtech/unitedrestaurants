@@ -12,7 +12,6 @@ const passport = require('passport');
 require('../../config/passport')(passport);
 const Helper = require('../../utils/helper');
 const helper = new Helper();
-const Op = require('Sequelize').Op
 
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -178,7 +177,11 @@ router.get('/by-role/:id', passport.authenticate('jwt', {
   Role.findByPk(req.params.id)
   .then((role) => {            
     if (role) {
-      User.findAll({
+
+
+
+      if (req.query.name || req.query.email || req.query.mobile || req.query.country) {
+      /*var conditions = {
         where: {
           role_id: role.id,
           [Op.or]: [
@@ -204,8 +207,27 @@ router.get('/by-role/:id', passport.authenticate('jwt', {
           },
           ]
         }
-      }   
-      ).then((users) => {
+      };*/
+
+      console.log('ss');
+      return false;
+
+      }else{
+        var conditions = {
+        where: {
+          role_id: role.id
+        }
+      };
+      }
+
+      console.log(conditions);
+      return false;
+
+      User.findAll({
+        where: {
+          role_id: role.id
+        }
+      }).then((users) => {
         res.status(200).send(
           users
           );

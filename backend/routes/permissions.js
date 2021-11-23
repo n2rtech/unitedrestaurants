@@ -60,11 +60,14 @@ router.get('/', passport.authenticate('jwt', {
     helper.checkPermission(req.user.role_id, 'permissions_get_all').then((rolePerm) => {
          const { page, size } = req.query;
           const { limit, offset } = getPagination(page, size);
+          console.log(page,size);
+          console.log(limit,offset);
 
         Permission
-            .findAll()
+            .findAndCountAll({offset, limit })
             .then(perms => {
-                res.status(200).send(perms)
+                 const response = getPagingData(perms, page, limit);
+                res.status(200).send(response)
             })
             .catch((error) => {
                 res.status(400).send(error);
