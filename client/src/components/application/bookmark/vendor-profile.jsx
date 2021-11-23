@@ -21,7 +21,7 @@ const VendorProfile = (props) => {
 
   return (
     <Fragment>
-      <Breadcrumb parent="Apps" title="Edit Category" />
+      <Breadcrumb parent="Apps" title="Business Profile" />
       <Container fluid={true}>
         <Card>
         <CardBody>

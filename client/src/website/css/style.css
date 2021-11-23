@@ -716,3 +716,9 @@ table th, table td{
 .color-maroon{
     color: #d63340;
 }
+.form-control{
+    border: 1px solid #efefef !important;
+}
+.form-control::placeholder{
+    color: #eee;
+}
