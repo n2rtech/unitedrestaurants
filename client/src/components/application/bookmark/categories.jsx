@@ -1,13 +1,35 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect ,useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
 import { useForm } from 'react-hook-form'
 import defaultImg from '../../../assets/images/lightgallry/01.jpg'
 import { useSelector, useDispatch } from 'react-redux'
-
+import axios from 'axios'
 
 const Categories = (props) => {
+
+  const [generalData, setGeneralData] = useState([]);
+
+  useEffect(() => {
+  
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+          };
+  
+          
+      fetch("/api/categories" , config)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            
+              setGeneralData(result);
+          },
+          (error) => {
+            
+          }
+        )
+    }, []);
 
   return (
     <Fragment>
@@ -30,69 +52,15 @@ const Categories = (props) => {
                   </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>{"Restaurants"}</td>
+              {generalData.map((item , i ) => (
+                <tr key={i}>
+                  <td>{item.name}</td>
                   <td className="text-right">
-                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category`}>Edit</a> &nbsp;
+                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category/${item.id}`}>Edit</a> &nbsp;
                     <Button color="danger">{"Delete"}</Button>
                   </td>
                 </tr>
-                <tr>
-                  <td>{"Food Market"}</td>
-                  <td className="text-right">
-                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category`}>Edit</a> &nbsp;
-                    <Button color="danger">{"Delete"}</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>{"Beer & Alcohol"}</td>
-                  <td className="text-right">
-                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category`}>Edit</a> &nbsp;
-                    <Button color="danger">{"Delete"}</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>{"Services"}</td>
-                  <td className="text-right">
-                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category`}>Edit</a> &nbsp;
-                    <Button color="danger">{"Delete"}</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>{"Suppliers"}</td>
-                  <td className="text-right">
-                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category`}>Edit</a> &nbsp;
-                    <Button color="danger">{"Delete"}</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>{"Buy & Sell"}</td>
-                  <td className="text-right">
-                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category`}>Edit</a> &nbsp;
-                    <Button color="danger">{"Delete"}</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>{"Jobs"}</td>
-                  <td className="text-right">
-                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category`}>Edit</a> &nbsp;
-                    <Button color="danger">{"Delete"}</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>{"Videos"}</td>
-                  <td className="text-right">
-                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category`}>Edit</a> &nbsp;
-                    <Button color="danger">{"Delete"}</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>{"Others"}</td>
-                  <td className="text-right">
-                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category`}>Edit</a> &nbsp;
-                    <Button color="danger">{"Delete"}</Button>
-                  </td>
-                </tr>
+              ))}
               </tbody>
             </Table>
           </div>
