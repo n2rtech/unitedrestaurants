@@ -14,8 +14,8 @@ import {Password,SignIn, EmailAddress,RememberPassword,ForgotPassword ,CreateAcc
 const Logins = (props) => {
   
     const {loginWithRedirect} = useAuth0()
-    const [email, setEmail] = useState("test@gmail.com");
-    const [password, setPassword] = useState("test123");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [loading,setLoading] = useState(false) 
     const [selected, setSelected] = useState("jwt");
     const [togglePassword,setTogglePassword] = useState(false)
@@ -138,6 +138,15 @@ const Logins = (props) => {
         return user.data;
       }).catch((error) => {
         if (error.response) {
+          if(error.response.data.error.email){
+            setTimeout(() => {
+              toast.error(error.response.data.error.email);
+          }, 200);
+          }else{
+            setTimeout(() => {
+              toast.error(error.response.data.error.password);
+          }, 200);
+          }
           setTimeout(() => {
               toast.error(error.response.data.error);
           }, 200);
@@ -185,11 +194,11 @@ const Logins = (props) => {
                       <p>{"Enter your email & password to login"}</p>
                       <FormGroup>
                         <Label className="col-form-label">{EmailAddress}</Label>
-                        <Input className="form-control" type="email" required="" onChange={e => setEmail(e.target.value)} defaultValue={email} />
+                        <Input className="form-control" placeholder="Enter Email Address" type="email" required="" onChange={e => setEmail(e.target.value)} />
                       </FormGroup>
                       <FormGroup>
                         <Label className="col-form-label">{Password}</Label>
-                        <Input className="form-control" type={togglePassword ?  "text" : "password"} onChange={e => setPassword(e.target.value)} defaultValue={password} required=""/>
+                        <Input className="form-control" autoComplete="new-password" placeholder="Enter Password" type={togglePassword ?  "text" : "password"} onChange={e => setPassword(e.target.value)} required=""/>
                         <div className="show-hide" onClick={() => setTogglePassword(!togglePassword)}><span className={togglePassword ? "" : "show"}></span></div>
                       </FormGroup>
                       <div className="form-group mb-0">
