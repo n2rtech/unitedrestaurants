@@ -147,9 +147,9 @@ const Root = (props) =>  {
           <App>
           <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
             if(localStorage.getItem("role") == 'admin') {
-              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/admin`} />)
+              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/admin/`} />)
             } else {
-              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/vendor`} />)
+              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/vendor/`} />)
             }
               
           }} /> 

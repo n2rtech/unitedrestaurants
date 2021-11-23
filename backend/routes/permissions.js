@@ -34,6 +34,26 @@ router.post('/', passport.authenticate('jwt', {
 });
 
 
+
+// Get List of permissions
+router.get('/list', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+    helper.checkPermission(req.user.role_id, 'permissions_get_all').then((rolePerm) => {
+        Permission
+            .findAll()
+            .then(perms => {
+                res.status(200).send(perms)
+            })
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+    }).catch((error) => {
+        res.status(403).send(error);
+    });
+});
+
+
 router.get('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {

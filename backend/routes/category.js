@@ -80,7 +80,6 @@ router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
     helper.checkPermission(req.user.role_id, 'role_get_all').then((rolePerm) => {
-        console.log(rolePerm);
         Category
         .findAll({
             include: [
@@ -109,7 +108,7 @@ router.get('/', passport.authenticate('jwt', {
                 }
                 ]
             },
-            {
+            /*{
                 model: Category,
                 as: 'sub_category',
                 include: [
@@ -132,7 +131,7 @@ router.get('/', passport.authenticate('jwt', {
                 }
                 ]
 
-            }
+            }*/
             ]
 
         })
@@ -204,7 +203,7 @@ router.get('/:id', passport.authenticate('jwt', {
                 }
                 ]
             },
-            {
+            /*{
                 model: Category,
                 as: 'sub_category',
                 include: [
@@ -227,7 +226,7 @@ router.get('/:id', passport.authenticate('jwt', {
                 }
                 ]
 
-            }
+            }*/
             ]
             }
         )

@@ -379,7 +379,7 @@ export const routes = [
         { path:"/dashboard/admin/manage-pages", Component:ManagePages},
         { path:"/dashboard/admin/edit-page", Component:EditPage},
         { path:"/dashboard/admin/categories", Component:Categories},
-        { path:"/dashboard/admin/edit-category", Component:EditCategory},
+        { path:"/dashboard/admin/edit-category/:id", Component:EditCategory},
         { path:"/dashboard/admin/all-vendors", Component:AllVendors},
         { path:"/dashboard/admin/edit-vendor", Component:EditVendor},
         { path:"/dashboard/admin/all-membership", Component:AllMembership},

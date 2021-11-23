@@ -13,29 +13,18 @@ const multiple = false
     // },[])
 
       
-    const [rolesData, setRolesData] = useState([]);
-
-    useEffect(() => {
-    
+    const [bookingData, setBookingData] = useState({});
+   useEffect(() => {
+    const GetData = async () => {
         const config = {
-            headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
-            };
-    
-            
-        fetch("/api/permissions" , config)
-          .then(res => res.json())
-          .then(
-            (result) => {
-              
-              setRolesData(result);
-            },
-            (error) => {
-              
-            }
-          )
-      }, []);
-    
-    console.log(rolesData);
+    headers: {'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ' }
+  };
+      const result = await axios('/api/permissions/list',config);
+      setBookingData(result.data);
+    };
+    GetData();
+  }, []);
+console.log(bookingData);
 
   return (
     <Fragment>
@@ -50,10 +39,10 @@ const multiple = false
             <Typeahead
               id="multiple-typeahead"
               clearButton
-              defaultSelected={rolesData.slice(0, 5)}
+             
               labelKey={"perm_name"}
               multiple
-              options={rolesData}
+              options={bookingData}
               placeholder="Choose a state..."
             />
             <div>&nbsp;</div>
