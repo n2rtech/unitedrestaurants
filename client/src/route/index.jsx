@@ -191,6 +191,7 @@ import OrderHistory from "../components/application/ecommerce-app/orderHistory"
 import Checkout from "../components/application/ecommerce-app/checkout"
 import Invoice from "../components/application/ecommerce-app/invoice"
 import Pricing from "../components/application/ecommerce-app/pricing"
+import VendorProfile from "../components/application/bookmark/vendor-profile"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -233,7 +234,7 @@ export const routes = [
         { path:"/dashboard/vendor/", Component:VendorEcommerce},
         { path:"/dashboard/ecommerce/", Component:Ecommerce},
 
-	{ path:"/pages/roles", Component:Roles},
+    { path:"/pages/roles", Component:Roles},
 
         { path:"/widgets/general", Component:GeneralWidget},
         { path:"/widgets/chart", Component:ChartsWidget},
@@ -374,7 +375,7 @@ export const routes = [
         { path:"/dashboard/admin/manage-pages", Component:ManagePages},
         { path:"/dashboard/admin/edit-page", Component:EditPage},
         { path:"/dashboard/admin/categories", Component:Categories},
-        { path:"/dashboard/admin/edit-category", Component:EditCategory},
+        { path:"/dashboard/admin/edit-category/:id", Component:EditCategory},
         { path:"/dashboard/admin/all-vendors", Component:AllVendors},
         { path:"/dashboard/admin/edit-vendor", Component:EditVendor},
         { path:"/dashboard/admin/all-membership", Component:AllMembership},
@@ -386,6 +387,7 @@ export const routes = [
         { path:"/dashboard/admin/video-membership-vendors", Component:VideoMembershipVendors},
         { path:"/app/bookmark", Component:Bookmark},
         { path:"/app/task", Component:TaskApp},
+        { path:"/dashboard/vendor/:layout/vendor-profile", Component:VendorProfile},
 
         {path:"/app/project/project-list", Component:ProjectList},
         {path:"/app/project/new-project", Component:NewProject},

@@ -713,3 +713,12 @@
 table th, table td{
     vertical-align: middle !important;
 }
+.color-maroon{
+    color: #d63340;
+}
+.form-control{
+    border: 1px solid #efefef !important;
+}
+.form-control::placeholder{
+    color: #eee;
+}

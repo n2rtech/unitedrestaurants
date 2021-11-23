@@ -6,7 +6,7 @@ export const MENUITEMS = [
         menucontent:"Manage Vendors",
         Items:[
             {
-                title: 'Dashboard', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London`, icon: Layers, type: 'link', active: false,
+                title: 'Dashboard', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-profile`, icon: Layers, type: 'link', active: false,
             }
         ]
     },
