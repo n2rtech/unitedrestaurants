@@ -26,6 +26,11 @@ import Blog from './website/blog'
 import Details from './website/resturent/details'
 import Blogdetails from './website/blog/blogdetails'
 import Searchresturent from './website/searchresturent'
+import Gallery from './website/gallery'
+import Aboutus from './website/aboutus'
+import Customerservices from './website/customerservices'
+import Technicalsupport from './website/technicalsupport'
+import Sales from './website/sales'
 
 
 
@@ -112,6 +117,11 @@ const Root = (props) =>  {
            <Route  path={`${process.env.PUBLIC_URL}/restaurants`} component={Restaurants} />
            <Route  path={`${process.env.PUBLIC_URL}/blog`} component={Blog} />
            <Route  path={`${process.env.PUBLIC_URL}/searchresturent`} component={Searchresturent} />
+           <Route  path={`${process.env.PUBLIC_URL}/gallery`} component={Gallery} />
+           <Route  path={`${process.env.PUBLIC_URL}/aboutus`} component={Aboutus} />
+           <Route  path={`${process.env.PUBLIC_URL}/customerservices`} component={Customerservices} />
+           <Route  path={`${process.env.PUBLIC_URL}/technicalsupport`} component={Technicalsupport} />
+           <Route  path={`${process.env.PUBLIC_URL}/sales`} component={Sales} />
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/login`} component={Login}>
           </Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/loginWithBgImg1`} component={LoginWithBgImage}></Route>

@@ -10,7 +10,7 @@ const Blogdetails = (props) => {
   return (
       <div className="detailmain">
       	<Header />
-      <Container className="p-0">
+      <Container fluid={true} className="p-0">
 
       	<Blogdetailpage />
       	
