@@ -30,7 +30,7 @@ const ScrollButton = () =>{
   window.addEventListener('scroll', toggleVisible);
   
   return (
-    <div className="scrolltopbtn">
+    <div className="scrolltopbtn" style={{'position' : 'relative'}}>
      <FaArrowCircleUp onClick={scrollToTop} 
      style={{display: visible ? 'inline' : 'none'}} />
     </div>

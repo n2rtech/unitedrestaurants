@@ -10,34 +10,46 @@ const Advertise = (props) => {
         <Container fluid={true} className="p-0">
           <h2>advertise your business here</h2>
         <Row className="m-0">
-          <Col sm="6" className="p-0">
+          <Col sm="4" className="p-0">
             <div className="advertise-gridlarg">
+              <img className="img-fluid" src={`${process.env.PUBLIC_URL}/assets/images/adlargbg.png`} 
+                     alt="Menu-Icon"/>
+                <div className="clickevent">     
               <div className="addname">
                 Your AD Here
               </div>
               <Button>
                 click to rent
               </Button>
+              </div>
             </div>
           </Col>
-          <Col sm="3" className="pl-1 pr-1">
-            <div className="advertise-gridsmall">
+          <Col sm="4" className="pl-1 pr-1">
+            <div className="advertise-gridlarg">
+              <img className="img-fluid" src={`${process.env.PUBLIC_URL}/assets/images/adlargbg.png`} 
+                     alt="Menu-Icon"/>
+                <div className="clickevent">     
               <div className="addname">
                 Your AD Here
               </div>
               <Button>
                 click to rent
               </Button>
+              </div>
             </div>
           </Col>
-          <Col sm="3" className="p-0">
-            <div className="advertise-gridsmall">
+          <Col sm="4" className="p-0">
+            <div className="advertise-gridlarg">
+              <img className="img-fluid" src={`${process.env.PUBLIC_URL}/assets/images/adlargbg.png`} 
+                     alt="Menu-Icon"/>
+                <div className="clickevent">     
               <div className="addname">
                 Your AD Here
               </div>
               <Button>
                 click to rent
               </Button>
+              </div>
             </div>
           </Col>
           </Row>

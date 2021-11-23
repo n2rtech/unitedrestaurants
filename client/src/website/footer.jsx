@@ -25,19 +25,19 @@ return (
 		<div className="footercategory">
 			<List type="unstyled">
 				<li>
-					<a href="#">About us</a>
+					<a href={`${process.env.PUBLIC_URL}/aboutus`}>About us</a>
 				</li>
 				<li>
 					<a href="#">Contact us</a>
 				</li>
 				<li>
-					<a href="#">Customer Service</a>
+					<a href={`${process.env.PUBLIC_URL}/customerservices`}>Customer Service</a>
 				</li>
 				<li>
-					<a href="#">Technical Support</a>
+					<a href={`${process.env.PUBLIC_URL}/technicalsupport`}>Technical Support</a>
 				</li>
 				<li>
-					<a href="#">Sales</a>
+					<a href={`${process.env.PUBLIC_URL}/sales`}>Sales</a>
 				</li>
 			</List>
 		</div>

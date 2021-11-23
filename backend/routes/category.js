@@ -275,7 +275,7 @@ router.put('/:id', passport.authenticate('jwt', {
 router.delete('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'category_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
         if (!req.params.id) {
             res.status(400).send({
                 msg: 'Please pass ID.'

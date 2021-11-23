@@ -12,6 +12,7 @@ const passport = require('passport');
 require('../../config/passport')(passport);
 const Helper = require('../../utils/helper');
 const helper = new Helper();
+const Op = require('Sequelize').Op
 
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -46,10 +47,10 @@ router.post("/register", (req, res) => {
                 email: req.body.email,
                 password: hash,
                 name: name,
-                mobile: req.body.phone,
+                mobile: req.body.mobile,
                 category_id: req.body.category_id,
                 country_id: req.body.country_id,
-                phone: req.body.phone,
+                phone: req.body.mobile,
                 address: req.body.address,
                 role_id: role.id
             })
@@ -178,26 +179,30 @@ router.get('/by-role/:id', passport.authenticate('jwt', {
   .then((role) => {            
     if (role) {
 
-
+      const { page, size } = req.query;
+          const { limit, offset } = getPagination(page, size);
 
       if (req.query.name || req.query.email || req.query.mobile || req.query.country) {
-      /*var conditions = {
+      var conditions = {
+        offset, 
+        limit,
         where: {
           role_id: role.id,
+
           [Op.or]: [
           {
             name: {
-              [Op.like]: req.query.name ? req.query.name : ''
+              [Op.like]: req.query.name ? '%'+req.query.name+'%' : ''
             }
           },
           {
             email: {
-              [Op.like]: req.query.email ? req.query.email : ''
+              [Op.like]: req.query.email ? '%'+req.query.email+'%' : ''
             }
           },
           {
             mobile: {
-              [Op.like]: req.query.mobile ? req.query.mobile : ''
+              [Op.like]: req.query.mobile ? '%'+req.query.mobile+'%' : ''
             }
           },
           {
@@ -206,11 +211,76 @@ router.get('/by-role/:id', passport.authenticate('jwt', {
             }
           },
           ]
-        }
-      };*/
+        }};
 
-      console.log('ss');
-      return false;
+      }else{
+        var conditions = {
+          offset,
+          limit,
+        where: {
+          role_id: role.id
+        }
+      };
+      }
+
+      User.findAndCountAll(conditions)
+      .then(users => {
+       const response = getPagingData(users, page, limit);
+       res.status(200).send(response)
+     })
+      .catch(err => res.status(400).send(err));
+    } else {
+      res.status(404).send({
+        'message': 'Role not found'
+      });
+    }
+  })
+  .catch((error) => {
+    res.status(400).send(error);
+  });
+});
+
+
+// Get Users by Role ID
+router.get('/vendors', passport.authenticate('jwt', {
+  session: false
+}), function (req, res) {
+  helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+
+  }).catch((error) => {
+    res.status(403).send(error);
+  });
+  Role.findByPk(2)
+  .then((role) => {            
+    if (role) {
+      if (req.query.name || req.query.email || req.query.mobile || req.query.country) {
+      var conditions = {
+        where: {
+          role_id: role.id,
+
+          [Op.or]: [
+          {
+            name: {
+              [Op.like]: req.query.name ? '%'+req.query.name+'%' : ''
+            }
+          },
+          {
+            email: {
+              [Op.like]: req.query.email ? '%'+req.query.email+'%' : ''
+            }
+          },
+          {
+            mobile: {
+              [Op.like]: req.query.mobile ? '%'+req.query.mobile+'%' : ''
+            }
+          },
+          {
+            country_id: {
+              [Op.eq]: req.query.country ? req.query.country : ''
+            }
+          },
+          ]
+        }};
 
       }else{
         var conditions = {
@@ -220,18 +290,11 @@ router.get('/by-role/:id', passport.authenticate('jwt', {
       };
       }
 
-      console.log(conditions);
-      return false;
-
-      User.findAll({
-        where: {
-          role_id: role.id
-        }
-      }).then((users) => {
-        res.status(200).send(
-          users
-          );
-      }).catch(err => res.status(400).send(err));
+      User.findAll(conditions)
+      .then(users => {
+       res.status(200).send(users)
+     })
+      .catch(err => res.status(400).send(err));
     } else {
       res.status(404).send({
         'message': 'Role not found'
@@ -310,6 +373,22 @@ router.put('/:id', passport.authenticate('jwt', {
     res.status(403).send(error);
   });
 });
+
+const getPagination = (page=1, size) => {
+  const limit = size ? +size : 3;
+  const offset =  (page-1) * limit;
+
+  return { limit, offset };
+};
+
+
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: tutorials } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, tutorials, totalPages, currentPage };
+};
 
 
 function generatePassword(pwd) {
