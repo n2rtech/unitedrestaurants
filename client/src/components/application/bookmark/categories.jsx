@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import defaultImg from '../../../assets/images/lightgallry/01.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
+import {toast} from 'react-toastify';
 
 const Categories = (props) => {
 
@@ -30,6 +31,20 @@ const Categories = (props) => {
           }
         )
     }, []);
+
+    const handleRemoveCategory = (todoId) => {
+      
+      const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+        };
+
+        axios.delete('/api/categories/'+`${todoId}`,
+          config
+        ) .then(response => console.log('Deleted Successfully'))
+           .catch(error => console.log('Delete error', error))
+
+      toast.success("Deleted Category !");
+    }
 
   return (
     <Fragment>
@@ -57,7 +72,7 @@ const Categories = (props) => {
                   <td>{item.name}</td>
                   <td className="text-right">
                     <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category/${item.id}`}>Edit</a> &nbsp;
-                    <Button color="danger">{"Delete"}</Button>
+                    <Button color="danger" onClick={() => handleRemoveCategory(item.id)}>{"Delete"}</Button>
                   </td>
                 </tr>
               ))}

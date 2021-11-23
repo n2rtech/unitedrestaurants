@@ -196,6 +196,11 @@ import MyWallet from "../components/application/bookmark/my-wallet"
 import VendorMembershipPackage from "../components/application/bookmark/vendor-membership-package"
 import VendorCoupon from "../components/application/bookmark/vendor-coupon"
 import EditVendorCoupon from "../components/application/bookmark/edit-vendor-coupon"
+import VendorPhotogallery from "../components/application/bookmark/vendor-photogallery"
+import VendorVideoGallery from "../components/application/bookmark/vendor-videogallery"
+import EditVideoGallery from "../components/application/bookmark/edit-video-gallery"
+import JobOpenings from "../components/application/bookmark/job-openings"
+import EditJobOpenings from "../components/application/bookmark/edit-job-openings"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -396,6 +401,11 @@ export const routes = [
         { path:"/dashboard/vendor/:layout/vendor-membership-package", Component:VendorMembershipPackage},
         { path:"/dashboard/vendor/:layout/vendor-coupon", Component:VendorCoupon},
         { path:"/dashboard/vendor/:layout/edit-vendor-coupon", Component:EditVendorCoupon},
+        { path:"/dashboard/vendor/:layout/vendor-photogallery", Component:VendorPhotogallery},
+        { path:"/dashboard/vendor/:layout/vendor-videogallery", Component:VendorVideoGallery},
+        { path:"/dashboard/vendor/:layout/edit-video-gallery", Component:EditVideoGallery},
+        { path:"/dashboard/vendor/:layout/job-openings", Component:JobOpenings},
+        { path:"/dashboard/vendor/:layout/edit-job-openings", Component:EditJobOpenings},
 
         {path:"/app/project/project-list", Component:ProjectList},
         {path:"/app/project/new-project", Component:NewProject},

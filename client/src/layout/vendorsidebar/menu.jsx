@@ -60,7 +60,7 @@ export const MENUITEMS = [
         menucontent:"Photo Gallery",
         Items:[
             {
-                title: 'Photo Gallery', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London`, icon: Image, type: 'link', active: false,
+                title: 'Photo Gallery', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-photogallery`, icon: Image, type: 'link', active: false,
             }
         ]
     },
@@ -69,7 +69,7 @@ export const MENUITEMS = [
         menucontent:"Videos",
         Items:[
             {
-                title: 'Videos', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London`, icon: Film, type: 'link', active: false,
+                title: 'Videos', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-videogallery`, icon: Film, type: 'link', active: false,
             }
         ]
     },
@@ -78,7 +78,7 @@ export const MENUITEMS = [
         menucontent:"Job Openings",
         Items:[
             {
-                title: 'Job Openings', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London`, icon: Calendar, type: 'link', active: false,
+                title: 'Job Openings', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/job-openings`, icon: Calendar, type: 'link', active: false,
             }
         ]
     },
@@ -87,7 +87,7 @@ export const MENUITEMS = [
         menucontent:"Add Spaces",
         Items:[
             {
-                title: 'Add Spaces', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London`, icon: Package, type: 'link', active: false,
+                title: 'Add Spaces', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/job-openings`, icon: Package, type: 'link', active: false,
             }
         ]
     },
