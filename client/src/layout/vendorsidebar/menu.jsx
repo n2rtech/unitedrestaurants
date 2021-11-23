@@ -2,11 +2,11 @@ import { Home, Airplay, Box, Gift, Send, HardDrive, DollarSign, FolderPlus, Comm
 export const MENUITEMS = [
 
     {
-        menutitle:"Vendors",
-        menucontent:"Manage Vendors",
+        menutitle:"Dashboard",
+        menucontent:"Dashboard",
         Items:[
             {
-                title: 'Dashboard', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-profile`, icon: Layers, type: 'link', active: false,
+                title: 'Dashboard', path: `${process.env.PUBLIC_URL}/dashboard/ecommerce`, icon: Layers, type: 'link', active: false,
             }
         ]
     },
@@ -15,7 +15,7 @@ export const MENUITEMS = [
         menucontent:"Business Profile",
         Items:[
             {
-                title: 'Business Profile', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London`, icon: Box, type: 'link', active: false,
+                title: 'Business Profile', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-profile`, icon: Box, type: 'link', active: false,
             }
         ]
     },
@@ -24,7 +24,7 @@ export const MENUITEMS = [
         menucontent:"My Wallet",
         Items:[
             {
-                title: 'My Wallet', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London`, icon: DollarSign, type: 'link', active: false,
+                title: 'My Wallet', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/my-wallet`, icon: DollarSign, type: 'link', active: false,
             }
         ]
     },
@@ -33,7 +33,7 @@ export const MENUITEMS = [
         menucontent:"Payment Method",
         Items:[
             {
-                title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London`, icon: Send, type: 'link', active: false,
+                title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-membership-package`, icon: Send, type: 'link', active: false,
             }
         ]
     },
@@ -42,7 +42,7 @@ export const MENUITEMS = [
         menucontent:"Membership Package",
         Items:[
             {
-                title: 'Membership Package', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London`, icon: ShoppingBag, type: 'link', active: false,
+                title: 'Membership Package', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-membership-package`, icon: ShoppingBag, type: 'link', active: false,
             }
         ]
     },
@@ -51,7 +51,7 @@ export const MENUITEMS = [
         menucontent:"Deals (Coupons)",
         Items:[
             {
-                title: 'Deals (Coupons)', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London`, icon: Gift, type: 'link', active: false,
+                title: 'Deals (Coupons)', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-coupon`, icon: Gift, type: 'link', active: false,
             }
         ]
     },

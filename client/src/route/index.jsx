@@ -192,6 +192,10 @@ import Checkout from "../components/application/ecommerce-app/checkout"
 import Invoice from "../components/application/ecommerce-app/invoice"
 import Pricing from "../components/application/ecommerce-app/pricing"
 import VendorProfile from "../components/application/bookmark/vendor-profile"
+import MyWallet from "../components/application/bookmark/my-wallet"
+import VendorMembershipPackage from "../components/application/bookmark/vendor-membership-package"
+import VendorCoupon from "../components/application/bookmark/vendor-coupon"
+import EditVendorCoupon from "../components/application/bookmark/edit-vendor-coupon"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -388,6 +392,10 @@ export const routes = [
         { path:"/app/bookmark", Component:Bookmark},
         { path:"/app/task", Component:TaskApp},
         { path:"/dashboard/vendor/:layout/vendor-profile", Component:VendorProfile},
+        { path:"/dashboard/vendor/:layout/my-wallet", Component:MyWallet},
+        { path:"/dashboard/vendor/:layout/vendor-membership-package", Component:VendorMembershipPackage},
+        { path:"/dashboard/vendor/:layout/vendor-coupon", Component:VendorCoupon},
+        { path:"/dashboard/vendor/:layout/edit-vendor-coupon", Component:EditVendorCoupon},
 
         {path:"/app/project/project-list", Component:ProjectList},
         {path:"/app/project/new-project", Component:NewProject},
