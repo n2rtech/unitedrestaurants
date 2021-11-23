@@ -3,16 +3,13 @@ import Breadcrumb from '../../../layout/breadcrumb'
 import { Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { Typeahead } from 'react-bootstrap-typeahead';
 import axios from 'axios'
+import { useParams } from "react-router-dom";
 
 const RolesList = (props) => {
 const multiple = false
-    // const [options,setOptions] = useState([])
 
-    // useEffect(() => {
-    //     axios.get(`${process.env.PUBLIC_URL}/api/typeaheadData.json`).then(res => setOptions(res.data))
-    // },[])
+const params = useParams();
 
-      
     const [bookingData, setBookingData] = useState({});
    useEffect(() => {
     const GetData = async () => {
@@ -25,6 +22,34 @@ const multiple = false
     GetData();
   }, []);
 console.log(bookingData);
+
+const [pername, setPername] = useState('')
+const [selectedData, setSelectedData] = useState('')
+
+const handleChange = (selectedOptions)  => {
+  //console.log(selectedOptions);
+  setPername(selectedOptions);
+} 
+
+const handleSubmit = event => {
+  event.preventDefault();
+
+const finalpername = pername.map((user) => { setSelectedData(user.id)  });
+console.log(pername);
+
+  // const config = {
+  //   headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+  //   };
+  //   const bodyParameters = {
+  //     permissions: pername
+  //   };
+  //   axios.post(`/api/roles/permissions/`+`${params.id}`,
+  //     bodyParameters,
+  //     config
+  //   ) .then(response => console.log('Submiited Successfully'))
+  //      .catch(error => console.log('Form submit error', error))
+
+};
 
   return (
     <Fragment>
@@ -39,14 +64,14 @@ console.log(bookingData);
             <Typeahead
               id="multiple-typeahead"
               clearButton
-             
               labelKey={"perm_name"}
               multiple
+              onChange={handleChange}
               options={bookingData}
               placeholder="Choose a state..."
             />
             <div>&nbsp;</div>
-            <Button color="primary" >Submit</Button>
+            <Button color="primary" onClick = {handleSubmit}>Submit</Button>
           </div>
         </CardBody>
         </Card>

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button, Table } from 'reactstrap'
 import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
@@ -8,6 +8,28 @@ import { useSelector, useDispatch } from 'react-redux'
 
 
 const ManagePages = (props) => {
+
+  const [generalData, setGeneralData] = useState([]);
+
+  useEffect(() => {
+  
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+          };
+  
+          
+      fetch("/api/pages" , config)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            
+              setGeneralData(result);
+          },
+          (error) => {
+            
+          }
+        )
+    }, []);
 
   return (
     <Fragment>
@@ -24,54 +46,14 @@ const ManagePages = (props) => {
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <td>{"About Us"}</td>
-                          <td className="text-right">
-                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>{"Privacy Policy"}</td>
-                          <td className="text-right">
-                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>{"Return Policy"}</td>
-                          <td className="text-right">
-                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>{"Terms of Service"}</td>
-                          <td className="text-right">
-                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>{"Contact Us"}</td>
-                          <td className="text-right">
-                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>{"Customer Service"}</td>
-                          <td className="text-right">
-                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>{"Technical Support"}</td>
-                          <td className="text-right">
-                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>{"Sales"}</td>
-                          <td className="text-right">
-                            <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/edit-page`}>Edit</a>
-                          </td>
-                      </tr>
+                  {generalData.map((item , i ) => (
+                       <tr>
+                       <td>{item.title}</td>
+                       <td className="text-right">
+                         <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-page/${item.id}`}>Edit</a>
+                       </td>
+                   </tr>
+                  ))}
                   </tbody>
               </Table>
           </div>

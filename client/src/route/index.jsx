@@ -382,7 +382,7 @@ export const routes = [
         { path:"/app/chat-app", Component:Chat},
         { path:"/dashboard/admin/roleslist/:id", Component:RolesList},
         { path:"/dashboard/admin/manage-pages", Component:ManagePages},
-        { path:"/dashboard/admin/edit-page", Component:EditPage},
+        { path:"/dashboard/admin/edit-page/:id", Component:EditPage},
         { path:"/dashboard/admin/categories", Component:Categories},
         { path:"/dashboard/admin/edit-category/:id", Component:EditCategory},
         { path:"/dashboard/admin/all-vendors", Component:AllVendors},
