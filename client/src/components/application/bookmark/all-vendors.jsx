@@ -1,12 +1,203 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
+import { Pagination, PaginationItem, PaginationLink } from "reactstrap"
 
+import axios from 'axios';
 
 const AllVendors = (props) => {
+
+  const [vendorData, setVendorData] = useState([]);
+  const [countryData, setCountryData] = useState([]);
+
+  const [filterName, setFilterName] = useState('');  
+  const [filterEmail, setFilterEmail] = useState('');  
+  const [filterMobile, setFilterMobile] = useState('');  
+  const [filterCountry, setFilterCountry] = useState(''); 
+
+  const [currentPage, setCurrentPage] = useState(1); 
+
+  const [activePage, setActivePage] = useState(0);
+  const [itemsCountPerPage, setItemsCountPerPage] = useState(1);  
+  const [totalItemsCount, setTotalItemsCount] = useState(1);  
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(3);
+  const [pagesCount, setPagesCount] = useState(4);
+
+  useEffect(() => {
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' },
+      params : {
+        'page': 1,
+        'size': 4 
+      }
+    };
+
+    fetch("/api/users/vendors" , config)
+    .then(res => res.json())
+    .then(
+      (result) => { 
+        setVendorData(result); 
+        // setVendorData(result.tutorials); 
+        setTotalItemsCount(result.totalItems);  
+        setActivePage(result.currentPage);
+        setPagesCount(result.totalPages);
+      },
+      (error) => { 
+      });
+    axios.get(`/api/Countries/list`)
+    .then((getData) => {
+      setCountryData(getData.data);
+    });
+  }, []);
+
+
+const handleNameChange = e => {
+    const filterName = e.target.value;
+    setFilterName(filterName);
+  };
+
+  const handleCountryChange = e => {
+    const filterCountry = e.target.value;
+    setFilterCountry(filterCountry);
+  };
+
+  const handleEmailChange = e => {
+    const filterEmail = e.target.value;
+    setFilterEmail(filterEmail);
+  };
+
+  const handleMobileChange = e => {
+    const filterMobile = e.target.value;
+    setFilterMobile(filterMobile);
+  };
+
+
+  const resetFilter = () => {
+   setFilterName("");
+   setFilterEmail("");
+   setFilterMobile("");
+   setFilterCountry("");
+   const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+    };
+   axios.get('/api/users/by-role/2',config)
+   .then(result=>{
+     setVendorData(result.data.tutorials); 
+     setTotalItemsCount(result.data.totalItems);  
+     setActivePage(result.data.currentPage);
+     setPagesCount(result.data.totalPages);  
+   }); 
+ }
+
+  const findByFilter = () => {
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+    };
+
+    axios(`/api/users/by-role/2?name=${filterName}&email=${filterEmail}&mobile=${filterMobile}&country=${filterCountry}`,config)
+    .then(result => {
+      setVendorData(result.data.tutorials); 
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage+1);
+      setPagesCount(result.data.totalPages);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  };
+
+
+
+  const handlePreviousClick = (e) => {
+    e.preventDefault();
+    var config = {
+      method: 'get',
+      url: '/api/users/by-role/2',
+      headers: { 
+        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ', 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params : {
+        'page': activePage-1,
+        'size': 4 
+      }
+    };
+
+    axios(config)
+    .then(function (response) {
+      setVendorData(response.data.tutorials);
+      setItemsCountPerPage(4);  
+      setTotalItemsCount(response.data.totalItems);  
+      setActivePage(response.data.currentPage);
+      setPagesCount(response.data.totalPages);
+    })
+    .catch(function (error) {
+
+    });
+  }
+
+
+  const handleNextClick = (e) => {
+
+    e.preventDefault();
+    var config = {
+      method: 'get',
+      url: '/api/users/by-role/2',
+      headers: { 
+        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ', 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params : {
+        'page': activePage+1,
+        'size': 4 
+      }
+    };
+
+    axios(config)
+    .then(function (response) {
+      setVendorData(response.data.tutorials);
+      setItemsCountPerPage(4);  
+      setTotalItemsCount(response.data.totalItems);  
+      setActivePage(response.data.currentPage);
+      setPagesCount(response.data.totalPages);
+    })
+    .catch(function (error) {
+
+    });
+  }
+
+  const handlePageClick = (e, pageNumber) => {
+    e.preventDefault();
+    var config = {
+      method: 'get',
+      url: '/api/users/by-role/2',
+      headers: { 
+        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ', 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params : {
+        'page': pageNumber+1,
+        'size': 4 
+      }
+    };
+
+    axios(config)
+    .then(function (response) {
+      setVendorData(response.data.tutorials);
+      setItemsCountPerPage(4);  
+      setTotalItemsCount(response.data.totalItems);  
+      setActivePage(response.data.currentPage);
+      setPagesCount(response.data.totalPages);
+    })
+    .catch(function (error) {
+
+    });
+  }
 
   return (
     <Fragment>
@@ -20,28 +211,30 @@ const AllVendors = (props) => {
                   <Form className="form theme-form">
                     <FormGroup>
                       <Label htmlFor="exampleFormControlInput">{"Name"}</Label>
-                      <Input className="form-control"  type="name" placeholder="Name" />
+                      <Input className="form-control" name="name" onChange={handleNameChange} type="name" placeholder="Name" />
                     </FormGroup>
                     <FormGroup>
                       <Label htmlFor="exampleFormControlInput1">{"Email"}</Label>
-                      <Input className="form-control"  type="email" placeholder="Email" />
+                      <Input className="form-control" name="email" onChange={handleEmailChange} type="email" placeholder="Email" />
                     </FormGroup>
                     <FormGroup>
                       <Label htmlFor="exampleFormControlInput1">{"Phone Number"}</Label>
-                      <Input className="form-control"  type="tel" placeholder="Phone Number" />
+                      <Input className="form-control" name="mobile" onChange={handleMobileChange} type="tel" placeholder="Phone Number" />
                     </FormGroup>
                     <FormGroup>
                       <Label htmlFor="exampleFormControlInput1">{"Country"}</Label>
-                      <Input type="select" name="select" className="form-control digits" defaultValue="United Kingdom">
-                        <option>{"United States"}</option>
-                        <option>{"Canada"}</option>
-                        <option>{"Italy"}</option>
-                        <option>{"Australia"}</option>
-                        <option>{"Spain"}</option>
+                      <Input type="select" name="country" onChange={handleCountryChange} className="form-control digits" defaultValue="">
+                      <option value="">Please Select Country</option>
+                      {countryData.map((country , i ) => (
+                        <Fragment key={i}>
+                        <option value={country.id}>{country.name}</option>
+                        </Fragment>
+                        ))}
                       </Input>
                     </FormGroup>
                     <FormGroup>
-                      <Button color="primary">{"Filter Results"}</Button>
+                      <Button onClick={findByFilter} color="primary">{"Filter Results"}</Button>
+                      <Button onClick={resetFilter} color="danger">Reset Filter</Button>
                     </FormGroup>
                   </Form>
                 </CardBody>
@@ -59,44 +252,29 @@ const AllVendors = (props) => {
                           </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>{"Mohd Sohrab Khan"}</td>
+                      {vendorData.map((vendor , i ) => (
+                        <tr key={i}>
+                          <td>{vendor.name}</td>
                           <td className="text-right">
                             <Button color="success">{"Edit"}</Button> &nbsp;
                           </td>
                         </tr>
-                        <tr>
-                          <td>{"Krishna Mishra"}</td>
-                          <td className="text-right">
-                            <Button color="success">{"Edit"}</Button> &nbsp;
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>{"Nurul Hasan"}</td>
-                          <td className="text-right">
-                            <Button color="success">{"Edit"}</Button> &nbsp;
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>{"Ganesh Negi"}</td>
-                          <td className="text-right">
-                            <Button color="success">{"Edit"}</Button> &nbsp;
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>{"Mohd Danish"}</td>
-                          <td className="text-right">
-                            <Button color="success">{"Edit"}</Button> &nbsp;
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>{"Avinash Kumar"}</td>
-                          <td className="text-right">
-                            <Button color="success">{"Edit"}</Button> &nbsp;
-                          </td>
-                        </tr>
+                       ))}
                       </tbody>
                     </Table>
+                    {/*<Pagination>
+                    <PaginationItem disabled={activePage <= 1}>
+                    <PaginationLink onClick={handlePreviousClick} previous/></PaginationItem>
+                    {[...Array(pagesCount)].map((page, i) => (                                    
+                      <PaginationItem page={activePage} cc={(i+1)} active={(i+1) === activePage} key={i}>
+                      <PaginationLink disabled={(i+1) === activePage} onClick={e => handlePageClick(e, i)}>
+                      {i + 1}
+                      </PaginationLink>
+                      </PaginationItem>
+                      ))}
+                    <PaginationItem disabled={activePage === pagesCount}>
+                    <PaginationLink onClick={handleNextClick} next /></PaginationItem>
+                    </Pagination>*/}
                   </div>
                 </CardBody>
               </Card>
