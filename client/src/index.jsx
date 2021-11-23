@@ -104,7 +104,7 @@ const Root = (props) =>  {
         <Provider store={store}>
         <BrowserRouter basename={`/`}>
         <Switch>
-
+          <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
           <Route  path={`${process.env.PUBLIC_URL}/home`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/resturent/details`} component={Details} />
@@ -171,7 +171,7 @@ const Root = (props) =>  {
           
           </App>
           :
-          <Redirect to={`${process.env.PUBLIC_URL}/login`} />
+          <Redirect to={`${process.env.PUBLIC_URL}/home`} />
 
 
           }      
