@@ -56,9 +56,8 @@ import Comingsoon from "./pages/comingSoon/comingsoon"
 import ComingsoonImg from "./pages/comingSoon/comingsoonImg"
 import ComingsoonVideo from "./pages/comingSoon/comingsoonVideo"
 
-// Maintenanc
+// Maintenance
 import Maintenance from "./pages/maintenance"
-
 import Callback from './auth/callback'
 import { classes } from './data/layouts';
 import {useAuth0} from '@auth0/auth0-react'
@@ -78,7 +77,7 @@ const Root = (props) =>  {
 
   // const queryParams = new URLSearchParams(window.location.search);
   // const user_id = queryParams.get('id');
-  console.log(localStorage.getItem("role"))
+  // console.log(localStorage.getItem("role"))
   
 
   useEffect(() => {
@@ -148,9 +147,9 @@ const Root = (props) =>  {
           <App>
           <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
             if(localStorage.getItem("role") == 'admin') {
-              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/admin/${layout}`} />)
+              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/admin`} />)
             } else {
-              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/vendor/${layout}`} />)
+              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/vendor`} />)
             }
               
           }} /> 
