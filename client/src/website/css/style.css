@@ -713,3 +713,6 @@
 table th, table td{
     vertical-align: middle !important;
 }
+.color-maroon{
+    color: #d63340;
+}

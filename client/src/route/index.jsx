@@ -191,6 +191,7 @@ import OrderHistory from "../components/application/ecommerce-app/orderHistory"
 import Checkout from "../components/application/ecommerce-app/checkout"
 import Invoice from "../components/application/ecommerce-app/invoice"
 import Pricing from "../components/application/ecommerce-app/pricing"
+import VendorProfile from "../components/application/bookmark/vendor-profile"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -386,6 +387,7 @@ export const routes = [
         { path:"/dashboard/admin/:layout/video-membership-vendors", Component:VideoMembershipVendors},
         { path:"/app/bookmark/:layout", Component:Bookmark},
         { path:"/app/task/:layout", Component:TaskApp},
+        { path:"/dashboard/vendor/:layout/vendor-profile", Component:VendorProfile},
 
         {path:"/app/project/project-list/:layout", Component:ProjectList},
         {path:"/app/project/new-project/:layout", Component:NewProject},
