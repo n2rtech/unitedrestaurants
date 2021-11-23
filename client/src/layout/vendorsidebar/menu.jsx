@@ -83,11 +83,15 @@ export const MENUITEMS = [
         ]
     },
     {
-        menutitle:"Add Spaces",
-        menucontent:"Add Spaces",
+        menutitle:"Advertisement",
+        menucontent:"Advertisement",
         Items:[
             {
-                title: 'Add Spaces', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/job-openings`, icon: Package, type: 'link', active: false,
+                title: 'Advertisement', icon: Layers, type: 'sub', badge2: true, active: false, children: [
+                    { path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/adds-membership`, title: 'Membership', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/ad-spaces`, title: 'Ad Spaces', type: 'link' },
+        
+            ]
             }
         ]
     },

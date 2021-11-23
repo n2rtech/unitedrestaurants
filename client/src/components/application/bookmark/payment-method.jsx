@@ -3,6 +3,7 @@ import Breadcrumb from '../../../layout/breadcrumb'
 import {
   Container,
   Row,
+  Label,
   Col,
   Card,
   CardHeader,
@@ -30,28 +31,32 @@ const PaymentMethod = props => {
                   <Col md="7">
                     <Form className="theme-form mega-form">
                       <FormGroup>
+                       <Label>{"Card Number"}</Label>
                         <Input
                           className="form-control"
                           type="text"
-                          placeholder="Card number"
                         />
                       </FormGroup>
                       <FormGroup>
+                      <Label>{"Name on Card"}</Label>
                         <Input
                           className="form-control"
                           type="text"
-                          placeholder="First Name"
                         />
                       </FormGroup>
                       <FormGroup>
+                        <Label>{"Expiry Date"}</Label>
                         <Input className="form-control" type="date" />
                       </FormGroup>
                       <FormGroup>
+                        <Label>{"CVV"}</Label>
                         <Input
                           className="form-control"
-                          type="text"
-                          placeholder="Full Name"
+                          type="number"
                         />
+                      </FormGroup>
+                      <FormGroup>
+                        <Button  color="primary">{"Save"}</Button>
                       </FormGroup>
                     </Form>
                   </Col>

@@ -202,6 +202,8 @@ import EditVideoGallery from "../components/application/bookmark/edit-video-gall
 import JobOpenings from "../components/application/bookmark/job-openings"
 import EditJobOpenings from "../components/application/bookmark/edit-job-openings"
 import PaymentMethod from "../components/application/bookmark/payment-method"
+import AddsMembership from "../components/application/bookmark/adds-membership"
+import AddSpaces from "../components/application/bookmark/ad-spaces"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -408,6 +410,8 @@ export const routes = [
         { path:"/dashboard/vendor/:layout/job-openings", Component:JobOpenings},
         { path:"/dashboard/vendor/:layout/edit-job-openings", Component:EditJobOpenings},
         { path:"/dashboard/vendor/:layout/payment-method", Component:PaymentMethod},
+        { path:"/dashboard/vendor/:layout/adds-membership", Component:AddsMembership},
+        { path:"/dashboard/vendor/:layout/ad-spaces", Component:AddSpaces},
 
         {path:"/app/project/project-list", Component:ProjectList},
         {path:"/app/project/new-project", Component:NewProject},

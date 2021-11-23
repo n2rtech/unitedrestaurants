@@ -722,3 +722,14 @@ table th, table td{
 .form-control::placeholder{
     color: #eee;
 }
+.AddsMembership h1 span{
+    color: #7364f6;
+}
+.AddsMembership h6{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.AddsMembership .card{
+    min-height: 340px;
+}
