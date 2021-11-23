@@ -84,9 +84,10 @@ const handleNameChange = e => {
    const config = {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
     };
-   axios.get('/api/users/by-role/2',config)
+   axios.get('/api/users/vendors',config)
    .then(result=>{
-     setVendorData(result.data.tutorials); 
+     setVendorData(result.data); 
+     // setVendorData(result.data.tutorials); 
      setTotalItemsCount(result.data.totalItems);  
      setActivePage(result.data.currentPage);
      setPagesCount(result.data.totalPages);  
@@ -99,9 +100,10 @@ const handleNameChange = e => {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
     };
 
-    axios(`/api/users/by-role/2?name=${filterName}&email=${filterEmail}&mobile=${filterMobile}&country=${filterCountry}`,config)
+    axios(`/api/users/vendors?name=${filterName}&email=${filterEmail}&mobile=${filterMobile}&country=${filterCountry}`,config)
     .then(result => {
-      setVendorData(result.data.tutorials); 
+      // setVendorData(result.data.tutorials); 
+      setVendorData(result.data); 
       setTotalItemsCount(result.data.totalItems);  
       setActivePage(result.data.currentPage+1);
       setPagesCount(result.data.totalPages);
