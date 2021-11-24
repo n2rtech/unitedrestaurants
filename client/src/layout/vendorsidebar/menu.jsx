@@ -15,7 +15,7 @@ export const MENUITEMS = [
         menucontent:"Business Profile",
         Items:[
             {
-                title: 'Business Profile', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-profile`, icon: Box, type: 'link', active: false,
+                title: 'Business Profile', path: `${process.env.PUBLIC_URL}/dashboard/vendor/vendor-profile`, icon: Box, type: 'link', active: false,
             }
         ]
     },
@@ -24,7 +24,7 @@ export const MENUITEMS = [
         menucontent:"My Wallet",
         Items:[
             {
-                title: 'My Wallet', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/my-wallet`, icon: DollarSign, type: 'link', active: false,
+                title: 'My Wallet', path: `${process.env.PUBLIC_URL}/dashboard/vendor/my-wallet`, icon: DollarSign, type: 'link', active: false,
             }
         ]
     },
@@ -33,7 +33,7 @@ export const MENUITEMS = [
         menucontent:"Payment Method",
         Items:[
             {
-                title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/payment-method`, icon: Send, type: 'link', active: false,
+                title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/payment-method`, icon: Send, type: 'link', active: false,
             }
         ]
     },
@@ -42,7 +42,7 @@ export const MENUITEMS = [
         menucontent:"Membership Package",
         Items:[
             {
-                title: 'Membership Package', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-membership-package`, icon: ShoppingBag, type: 'link', active: false,
+                title: 'Membership Package', path: `${process.env.PUBLIC_URL}/dashboard/vendor/vendor-membership-package`, icon: ShoppingBag, type: 'link', active: false,
             }
         ]
     },
@@ -51,7 +51,7 @@ export const MENUITEMS = [
         menucontent:"Deals (Coupons)",
         Items:[
             {
-                title: 'Deals (Coupons)', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-coupon`, icon: Gift, type: 'link', active: false,
+                title: 'Deals (Coupons)', path: `${process.env.PUBLIC_URL}/dashboard/vendor/vendor-coupon`, icon: Gift, type: 'link', active: false,
             }
         ]
     },
@@ -60,7 +60,7 @@ export const MENUITEMS = [
         menucontent:"Photo Gallery",
         Items:[
             {
-                title: 'Photo Gallery', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-photogallery`, icon: Image, type: 'link', active: false,
+                title: 'Photo Gallery', path: `${process.env.PUBLIC_URL}/dashboard/vendor/vendor-photogallery`, icon: Image, type: 'link', active: false,
             }
         ]
     },
@@ -69,7 +69,7 @@ export const MENUITEMS = [
         menucontent:"Videos",
         Items:[
             {
-                title: 'Videos', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/vendor-videogallery`, icon: Film, type: 'link', active: false,
+                title: 'Videos', path: `${process.env.PUBLIC_URL}/dashboard/vendor/vendor-videogallery`, icon: Film, type: 'link', active: false,
             }
         ]
     },
@@ -78,7 +78,7 @@ export const MENUITEMS = [
         menucontent:"Job Openings",
         Items:[
             {
-                title: 'Job Openings', path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/job-openings`, icon: Calendar, type: 'link', active: false,
+                title: 'Job Openings', path: `${process.env.PUBLIC_URL}/dashboard/vendor/job-openings`, icon: Calendar, type: 'link', active: false,
             }
         ]
     },
@@ -88,8 +88,8 @@ export const MENUITEMS = [
         Items:[
             {
                 title: 'Advertisement', icon: Layers, type: 'sub', badge2: true, active: false, children: [
-                    { path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/adds-membership`, title: 'Membership', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/dashboard/vendor/London/ad-spaces`, title: 'Ad Spaces', type: 'link' },
+                    { path: `${process.env.PUBLIC_URL}/dashboard/vendor/adds-membership`, title: 'Membership', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/dashboard/vendor/ad-spaces`, title: 'Ad Spaces', type: 'link' },
         
             ]
             }
