@@ -20,6 +20,15 @@ export const MENUITEMS = [
         ]
     },
     {
+        menutitle:"Menu items",
+        menucontent:"Menu items",
+        Items:[
+            {
+                title: 'Menu items', path: `${process.env.PUBLIC_URL}/dashboard/vendor/menu-items`, icon: Box, type: 'link', active: false,
+            }
+        ]
+    },
+    {
         menutitle:"My Wallet",
         menucontent:"My Wallet",
         Items:[

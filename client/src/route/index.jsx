@@ -204,6 +204,7 @@ import EditJobOpenings from "../components/application/bookmark/edit-job-opening
 import PaymentMethod from "../components/application/bookmark/payment-method"
 import AddsMembership from "../components/application/bookmark/adds-membership"
 import AddSpaces from "../components/application/bookmark/ad-spaces"
+import MenuItems from "../components/application/bookmark/menu-items"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -412,6 +413,7 @@ export const routes = [
         { path:"/dashboard/vendor/payment-method", Component:PaymentMethod},
         { path:"/dashboard/vendor/adds-membership", Component:AddsMembership},
         { path:"/dashboard/vendor/ad-spaces", Component:AddSpaces},
+        { path:"/dashboard/vendor/menu-items", Component:MenuItems},
 
         {path:"/app/project/project-list", Component:ProjectList},
         {path:"/app/project/new-project", Component:NewProject},
