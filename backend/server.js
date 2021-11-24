@@ -7,6 +7,7 @@ const users = require("./routes/api/users");
 const roles = require("./routes/roles");
 const countries = require("./routes/countries");
 const category = require("./routes/category");
+const gallery = require("./routes/gallery");
 const permissions = require("./routes/permissions");
 // const membership = require("./routes/membership");
 // const coupons = require("./routes/coupons");
@@ -37,6 +38,7 @@ app.use("/api/users", users);
 app.use("/api/roles", roles);
 app.use("/api/countries", countries);
 app.use("/api/categories", category);
+app.use("/api/gallery", gallery);
 
 app.use("/api/permissions", permissions);
 // app.use("/api/membership", membership);

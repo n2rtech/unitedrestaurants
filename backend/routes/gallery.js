@@ -16,8 +16,10 @@ var multer  = require('multer');
 const imageStorage = multer.diskStorage({
     destination: 'images', 
       filename: (req, file, cb) => {
-          cb(null, file.fieldname + '_' + Date.now() 
-             + path.extname(file.originalname))
+        var image_na = file.fieldname + '_' + Date.now() 
+             + path.extname(file.originalname);
+          cb(null, image_na);
+          Category.create({'image':image_na});
     }
 });
 
@@ -26,31 +28,26 @@ const imageStorage = multer.diskStorage({
 const imageUpload = multer({
       storage: imageStorage,
       limits: {
-        fileSize: 1000000 
+        fileSize: 100000000
       },
       fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(png|jpg)$/)) { 
+        if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) { 
            return cb(new Error('Please upload a Image'))
          }
        cb(undefined, true)
     }
 }) 
 
-
 // Create a new Category
 router.post('/add', passport.authenticate('jwt', {
     session: false
-}), imageUpload.single('image'),  function (req, res) {
+}), imageUpload.array('image',12),  function (req, res) {
     helper.checkPermission(req.user.role_id, 'category_add').then((rolePerm) => {
-        if (!req.body.name || !req.body.description) {
+        if (!req.file[0]) {
             res.status(400).send({
-                msg: 'Please pass Category name or description.'
+                msg: 'Please pass Image.'
             })
         } else {
-            var slug = req.body.name
-             .toLowerCase()
-             .replace(/ /g, '-')
-             .replace(/[^\w-]+/g, '');
 
             Category
                 .create({
