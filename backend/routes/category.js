@@ -41,7 +41,7 @@ const imageUpload = multer({
 router.post('/add', passport.authenticate('jwt', {
     session: false
 }), imageUpload.single('image'),  function (req, res) {
-    helper.checkPermission(req.user.role_id, 'category_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Categories').then((rolePerm) => {
         if (!req.body.name || !req.body.description) {
             res.status(400).send({
                 msg: 'Please pass Category name or description.'
@@ -79,7 +79,7 @@ router.post('/add', passport.authenticate('jwt', {
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_get_all').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Categories').then((rolePerm) => {
         Category
         .findAll({
             include: [
@@ -169,7 +169,7 @@ router.get("/list", (req, res) => {
 router.get('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Categories').then((rolePerm) => {
 
     }).catch((error) => {
         res.status(403).send(error);
@@ -240,7 +240,7 @@ router.get('/:id', passport.authenticate('jwt', {
 router.put('/:id', passport.authenticate('jwt', {
     session: false
 }), imageUpload.single('image'), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Categories').then((rolePerm) => {
         if (!req.params.id || !req.body.name || !req.body.description) {
             res.status(400).send({
                 msg: 'Please pass Category ID, name or description.'
@@ -248,12 +248,12 @@ router.put('/:id', passport.authenticate('jwt', {
         } else {
             Category
                 .findByPk(req.params.id)
-                .then((role) => {
+                .then((category) => {
 
                     if (req.file) {
                         var image = req.file.filename;
                     }else{
-                        var image = role.image;
+                        var image = category.image;
                     }
 
                     Category.update({
@@ -283,7 +283,7 @@ router.put('/:id', passport.authenticate('jwt', {
 router.delete('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Categories').then((rolePerm) => {
         if (!req.params.id) {
             res.status(400).send({
                 msg: 'Please pass ID.'
@@ -321,7 +321,7 @@ router.delete('/:id', passport.authenticate('jwt', {
 router.post('/permissions/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Categories').then((rolePerm) => {
         if (!req.body.permissions) {
             res.status(400).send({
                 msg: 'Please pass permissions.'
