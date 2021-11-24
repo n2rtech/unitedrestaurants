@@ -14,7 +14,7 @@ const VendorProfile = (props) => {
         });
     }
 
-    
+
  const multiple = false
     const [options,setOptions] = useState([])
 
@@ -28,6 +28,11 @@ const VendorProfile = (props) => {
     const [manageremail, setManagerEmail] = useState()
     const [phone, setPhone] = useState()
     const [fax, setFax] = useState()
+    const [address, setAddress] = useState()
+    const [websitelink, setWebsitelink] = useState()
+    const [fblink, setFblink] = useState()
+    const [instalink, setInstalink] = useState()
+    const [youtubelink, setYoutubelink] = useState()
 
     const onChangeName = (event) => {
       setName(event.target.value);
@@ -50,6 +55,26 @@ const VendorProfile = (props) => {
       setFax(event.target.value);
     };
 
+    const onChangeaddress = (event) => {
+      setAddress(event.target.value);
+    };
+
+    const onChangewebsitelink = (event) => {
+      setWebsitelink(event.target.value);
+    };
+
+    const onChangeFblink = (event) => {
+      setFblink(event.target.value);
+    };
+
+    const onChangeInstalink = (event) => {
+      setInstalink(event.target.value);
+    };
+
+    const onChangeYoutubelink = (event) => {
+      setYoutubelink(event.target.value);
+    };
+
     const [profileData, setProfileData] = useState({});
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
@@ -66,7 +91,11 @@ const VendorProfile = (props) => {
         setManagerEmail(result.data.manager_email)
         setPhone(result.data.phone_number)
         setFax(result.data.fax)
-        
+        setAddress(result.data.address)
+        setWebsitelink(result.data.website_link)
+        setFblink(result.data.facebook)
+        setInstalink(result.data.instagram)
+        setYoutubelink(result.data.youtube)
       };
       GetData();
     }, []);
@@ -126,7 +155,7 @@ const VendorProfile = (props) => {
           </Row>
             <FormGroup>
                <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
-               <Input type="textarea" className="form-control"  rows="3"/>
+               <Input type="textarea" className="form-control" value={address} onChange={onChangeaddress} rows="3"/>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Please select categories that best describe your business"}</Label>
@@ -142,15 +171,15 @@ const VendorProfile = (props) => {
             </FormGroup>
             <FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Website Link"}</Label>
-              <Input className="form-control"  type="name" placeholder="" />
+              <Input className="form-control"  value={websitelink} onChange= {onChangewebsitelink}type="name" placeholder="" />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Media Links"}</Label>
-              <Input className="form-control"  type="name" placeholder="Facebook" />
+              <Input className="form-control"  value={fblink} onChange={onChangeFblink} type="name" placeholder="Facebook" />
               <div>&nbsp;</div>
-              <Input className="form-control"  type="name" placeholder="Instagram" />
+              <Input className="form-control"  value={instalink} onChange={onChangeInstalink} type="name" placeholder="Instagram" />
               <div>&nbsp;</div>
-              <Input className="form-control"  type="name" placeholder="Youtube" />
+              <Input className="form-control"  value={youtubelink} onChange={onChangeYoutubelink} type="name" placeholder="Youtube" />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Business banner"}</Label>

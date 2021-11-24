@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models').User;
 const Profile = require('../models').Profile;
+const Category = require('../models').Category;
 const Role = require('../models').Role;
 const Permission = require('../models').Permission;
 const passport = require('passport');
@@ -56,11 +57,35 @@ router.get('/:id', passport.authenticate('jwt', {
     }).catch((error) => {
         res.status(403).send(error);
     });
+
     Profile
-        .findOne({
-            user_id: req.params.id
-        })
-        .then((profile) => res.status(200).send(profile))
+            .findOne({ where:{
+                user_id: req.params.id
+            }
+            })
+            .then((profile2) => {
+                if (profile2) {
+
+                    Profile
+                    .findByPk(profile2.id,
+                    {
+                        include: [{
+                            model: Category,
+                            as: 'category',
+                        }]
+                    }
+                    )
+                    .then((profile1) => res.status(200).send(profile1))
+                    .catch((error) => {
+                        res.status(400).send(error);
+                    });
+
+                }else{
+                    res.status(400).send({
+                        msg: 'profile not found.'
+                    })
+                }            
+            })
         .catch((error) => {
             res.status(400).send(error);
         });
@@ -90,7 +115,6 @@ router.put('/:id', passport.authenticate('jwt', {
                         phone_number: req.body.phone_number || profile.phone_number,
                         fax: req.body.fax || profile.fax,
                         address: req.body.address || profile.address,
-                        categories: req.body.categories || profile.categories,
                         website_link: req.body.website_link || profile.website_link,
                         media_links: req.body.media_links || profile.media_links,
                         facebook: req.body.facebook || profile.facebook,
@@ -101,6 +125,25 @@ router.put('/:id', passport.authenticate('jwt', {
                             user_id: req.params.id
                         }
                     }).then(_ => {
+
+                        req.body.categories.forEach(function (item, index) {
+                        Category
+                        .findByPk(item)
+                        .then(async (category) => {
+                            await profile.addCategory(category, {
+                                through: {
+                                    selfGranted: false
+                                }
+                            });
+                        })
+                        .catch((error) => {
+                            res.status(400).send(error);
+                        });
+                    });
+                      res.status(200).send({
+                        'message': 'Permissions added'
+                    });
+
                         res.status(200).send({
                             'message': 'Profile updated'
                         });
