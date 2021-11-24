@@ -811,7 +811,7 @@ table th, table td{
     border: 1px solid #efefef !important;
 }
 .form-control::placeholder{
-    color: #eee;
+    color: #ddd;
 }
 .AddsMembership h1 span{
     color: #7364f6;
@@ -823,4 +823,7 @@ table th, table td{
 }
 .AddsMembership .card{
     min-height: 445px;
+}
+.adminDash .card .card-body{
+    padding: 40px 15px;
 }

@@ -80,14 +80,14 @@ const AdminDefault = (props) => {
     <Fragment>
       <Breadcrumb parent="Dashboard" title="Default" />
       <Container fluid={true}>
-        <Row>
+        <Row className="adminDash">
         <Col sm="6" xl="3" lg="6">
             <Card className="o-hidden">
               <CardBody className="bg-primary b-r-4 card-body">
                 <div className="media static-top-widget">
                   <div className="align-self-center text-center"><Database /></div>
-                  <div className="media-body"><span className="m-0">{TotalVisitors}</span>
-                    <h4 className="mb-0 counter"><CountUp end={6659} /></h4><Database className="icon-bg" />
+                  <div className="media-body"><span className="m-0">{TotalVendors}</span>
+                    <h4 className="mb-0 counter"><CountUp end={325} /></h4><Database className="icon-bg" />
                   </div>
                 </div>
               </CardBody>
@@ -95,24 +95,11 @@ const AdminDefault = (props) => {
           </Col>
           <Col sm="6" xl="3" lg="6">
             <Card className="o-hidden">
-              <div className="bg-secondary b-r-4 card-body">
-                <div className="media static-top-widget">
-                  <div className="align-self-center text-center"><ShoppingBag /></div>
-                  <div className="media-body"><span className="m-0">{TotalVendors}</span>
-                    <h4 className="mb-0 counter"><CountUp end={9856} /></h4><ShoppingBag className="icon-bg" />
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </Col>
-
-          <Col sm="6" xl="3" lg="6">
-            <Card className="o-hidden">
-              <CardBody className="bg-primary b-r-4">
+              <CardBody className="bg-secondary b-r-4">
                 <div className="media static-top-widget">
                   <div className="align-self-center text-center"><MessageCircle /></div>
                   <div className="media-body"><span className="m-0">{MembershipsVendor}</span>
-                    <h4 className="mb-0 counter"><CountUp end={893} /></h4><MessageCircle className="icon-bg" />
+                    <h4 className="mb-0 counter"><CountUp end={120} /></h4><MessageCircle className="icon-bg" />
                   </div>
                 </div>
               </CardBody>
@@ -124,217 +111,50 @@ const AdminDefault = (props) => {
                 <div className="media static-top-widget">
                   <div className="align-self-center text-center"><UserPlus /></div>
                   <div className="media-body"><span className="m-0">{SupendedVendors}</span>
-                    <h4 className="mb-0 counter"><CountUp end={4563} />{"1"}</h4><UserPlus className="icon-bg" />
+                    <h4 className="mb-0 counter"><CountUp end={205} />{"1"}</h4><UserPlus className="icon-bg" />
                   </div>
                 </div>
               </CardBody>
             </Card>
           </Col>
-
-          <Col sm="6" xl="3" lg="6">
+           <Col sm="6" xl="3" lg="6">
             <Card className="o-hidden">
-              <CardBody className="bg-primary b-r-4">
+              <div className="bg-secondary b-r-4 card-body">
                 <div className="media static-top-widget">
-                  <div className="align-self-center text-center"><UserPlus /></div>
-                  <div className="media-body"><span className="m-0">{CancelledMembers}</span>
-                    <h4 className="mb-0 counter"><CountUp end={4563} />{"1"}</h4><UserPlus className="icon-bg" />
+                  <div className="align-self-center text-center"><ShoppingBag /></div>
+                  <div className="media-body"><span className="m-0">{"Featured Vendors"}</span>
+                    <h4 className="mb-0 counter"><CountUp end={25} /></h4><ShoppingBag className="icon-bg" />
                   </div>
                 </div>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col sm="6" xl="3" lg="6">
-            <Card className="o-hidden">
-              <CardBody className="bg-primary b-r-4">
-                <div className="media static-top-widget">
-                  <div className="align-self-center text-center"><UserPlus /></div>
-                  <div className="media-body"><span className="m-0">Total Revenue</span>
-                    <h4 className="mb-0 counter"><CountUp end={4563} />{"1"}</h4><UserPlus className="icon-bg" />
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col sm="6" xl="3" lg="6">
-            <Card className="o-hidden">
-              <CardBody className="bg-primary b-r-4">
-                <div className="media static-top-widget">
-                  <div className="align-self-center text-center"><UserPlus /></div>
-                  <div className="media-body"><span className="m-0">Total Sales</span>
-                    <h4 className="mb-0 counter"><CountUp end={4563} />{"1"}</h4><UserPlus className="icon-bg" />
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col sm="6" xl="3" lg="6">
-            <Card className="o-hidden">
-              <CardBody className="bg-primary b-r-4">
-                <div className="media static-top-widget">
-                  <div className="align-self-center text-center"><UserPlus /></div>
-                  <div className="media-body"><span className="m-0">Messages</span>
-                    <h4 className="mb-0 counter"><CountUp end={4563} />{"1"}</h4><UserPlus className="icon-bg" />
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-          
-          <Col xl="9 xl-100" className="chart_data_left box-col-12">
-            <Card>
-              <CardBody className="p-0">
-                <Row className="m-0 chart-main">
-                  <Col xl="3" md="6" sm="6" className="p-0 box-col-6">
-                    <div className="media align-items-center">
-                      <div className="hospital-small-chart">
-                        <div className="small-bar">
-                          <ChartistChart
-                            className="small-chart flot-chart-container"
-                            data={smallchart1data}
-                            options={smallchart1option}
-                            type={'Bar'}
-                            listener={{
-                              'draw': function (data) {
-                                if (data.type === 'bar') {
-                                  data.element.attr({
-                                    style: 'stroke-width: 3px'
-                                  });
-                                }
-                              }
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="media-body">
-                        <div className="right-chart-content">
-                          <h4>{"1001"}</h4><span>{Purchase} </span>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col xl="3" md="6" sm="6" className="p-0 box-col-6">
-                    <div className="media align-items-center">
-                      <div className="hospital-small-chart">
-                        <div className="small-bar">
-                          <ChartistChart
-                            className="small-chart1 flot-chart-container"
-                            data={smallchart2data}
-                            options={smallchart2option}
-                            type={'Bar'}
-                            listener={{
-                              'draw': function (data) {
-                                if (data.type === 'bar') {
-                                  data.element.attr({
-                                    style: 'stroke-width: 3px'
-                                  });
-                                }
-                              }
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="media-body">
-                        <div className="right-chart-content">
-                          <h4>{"1005"}</h4><span>{Sales}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col xl="3" md="6" sm="6" className="p-0 box-col-6">
-                    <div className="media align-items-center">
-                      <div className="hospital-small-chart">
-                        <div className="small-bar">
-                          <ChartistChart
-                            className="small-chart2 flot-chart-container"
-                            data={smallchart3data}
-                            options={smallchart3option}
-                            type={'Bar'}
-                            listener={{
-                              'draw': function (data) {
-                                if (data.type === 'bar') {
-                                  data.element.attr({
-                                    style: 'stroke-width: 3px'
-                                  });
-                                }
-                              }
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="media-body">
-                        <div className="right-chart-content">
-                          <h4>{"100"}</h4><span>{SalesReturn}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col xl="3" md="6" sm="6" className="p-0 box-col-6">
-                    <div className="media border-none align-items-center">
-                      <div className="hospital-small-chart">
-                        <div className="small-bar">
-                          <ChartistChart
-                            className="small-chart3 flot-chart-container"
-                            data={smallchart4data}
-                            options={smallchart4option}
-                            type={'Bar'}
-                            listener={{
-                              'draw': function (data) {
-                                if (data.type === 'bar') {
-                                  data.element.attr({
-                                    style: 'stroke-width: 3px'
-                                  });
-                                }
-                              }
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="media-body">
-                        <div className="right-chart-content">
-                          <h4>{"101"}</h4><span>{PurchaseRet}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
-         
-          <Col xl="4 xl-50" className="news box-col-6">
-            <Card>
-              <CardHeader>
-                <div className="header-top">
-                  <h5 className="m-0">{AdminNotifications}</h5>
-                  <div className="card-header-right-icon">
-                    <select className="button btn btn-primary">
-                      <option>{Today}</option>
-                      <option>{Tomorrow}</option>
-                      <option>{Yesterday}</option>
-                    </select>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardBody className="p-0">
-                <div className="news-update">
-                  <h6>{"36% off For pixel lights Couslations Types."}</h6><span>{"Lorem Ipsum is simply dummy..."}</span>
-                </div>
-                <div className="news-update">
-                  <h6>{"We are produce new product this"}</h6><span> {"Lorem Ipsum is simply text of the printing... "}</span>
-                </div>
-                <div className="news-update">
-                  <h6>{"50% off For COVID Couslations Types."}</h6><span>{"Lorem Ipsum is simply dummy..."}</span>
-                </div>
-              </CardBody>
-              <div className="card-footer">
-                <div className="bottom-btn"><a href="#javascript">{"More..."}</a></div>
               </div>
             </Card>
           </Col>
-          <Col xl="4 xl-50" className="appointment-sec box-col-6">
+          <Col sm="6" xl="3" lg="6">
+            <Card className="o-hidden">
+              <CardBody className="bg-primary b-r-4">
+                <div className="media static-top-widget">
+                  <div className="align-self-center text-center"><UserPlus /></div>
+                  <div className="media-body"><span className="m-0">{"Ad space vendors"}</span>
+                    <h4 className="mb-0 counter"><CountUp end={45} />{"1"}</h4><UserPlus className="icon-bg" />
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Col sm="6" xl="3" lg="6">
+            <Card className="o-hidden">
+              <CardBody className="bg-secondary b-r-4">
+                <div className="media static-top-widget">
+                  <div className="align-self-center text-center"><UserPlus /></div>
+                  <div className="media-body"><span className="m-0">Messages</span>
+                    <h4 className="mb-0 counter"><CountUp end={10} />{"1"}</h4><UserPlus className="icon-bg" />
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col xl="4 xl-100" className="appointment-sec box-col-6">
             <Row>
               <Col xl="12" className="appointment">
                 <Card>
@@ -344,8 +164,7 @@ const AdminDefault = (props) => {
                       <div className="card-header-right-icon">
                         <select className="button btn btn-primary">
                           <option>{Today}</option>
-                          <option>{Tomorrow}</option>
-                          <option>{Yesterday}</option>
+                          <option>{"All time"}</option>
                         </select>
                       </div>
                     </div>
@@ -362,9 +181,6 @@ const AdminDefault = (props) => {
                             <td>
                               <p className="m-0 font-primary">{"28 Sept"}</p>
                             </td>
-                            <td className="text-right">
-                              <div className="button btn btn-primary">{Done}<i className="fa fa-check-circle ml-2"></i></div>
-                            </td>
                           </tr>
                           <tr>
                             <td><img className="img-fluid img-40 rounded-circle" src={require("../../../assets/images/appointment/app-ent.jpg")} alt="" />
@@ -374,9 +190,6 @@ const AdminDefault = (props) => {
                             <td>
                               <p className="m-0 font-primary">{"22 Sept"}</p>
                             </td>
-                            <td className="text-right">
-                              <div className="button btn btn-danger">{Pending}<i className="fa fa-check-circle ml-2"></i></div>
-                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -384,25 +197,8 @@ const AdminDefault = (props) => {
                   </CardBody>
                 </Card>
               </Col>
-              <Col xl="12" className="alert-sec">
-                <Card className="bg-img">
-                  <CardHeader>
-                    <div className="header-top">
-                      <h5 className="m-0">{"Alert"}  </h5>
-                      <div className="dot-right-icon"><i className="fa fa-ellipsis-h"></i></div>
-                    </div>
-                  </CardHeader>
-                  <CardBody>
-                    <div className="body-bottom">
-                      <h6>  {"10% off For drama lights Couslations..."}</h6><span className="font-roboto">{"Lorem Ipsum is simply dummy...It is a long established fact that a reader will be distracted by "} </span>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Col>
             </Row>
           </Col>
-     
-      
         </Row>
       </Container>
     </Fragment>

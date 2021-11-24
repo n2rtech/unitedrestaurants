@@ -10,7 +10,7 @@ import axios from 'axios'
 import { BasicDemo,MultipleSelections,CustomSelections,Remote } from "../../../constant";
 
 
-const EditVendor = (props) => {
+const AddVendor = (props) => {
 
 const multiple = false
     const [options,setOptions] = useState([])
@@ -21,7 +21,7 @@ const multiple = false
 
   return (
     <Fragment>
-      <Breadcrumb parent="Apps" title="Edit Vendor" />
+      <Breadcrumb parent="Apps" title="Add Vendor" />
       <Container fluid={true}>
         <Card>
           <CardBody>
@@ -69,4 +69,4 @@ const multiple = false
   );
 }
 
-export default EditVendor;
+export default AddVendor;

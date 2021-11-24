@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
+import { Table, Container, Row, Col, Card, ButtonGroup, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
@@ -235,8 +235,10 @@ const handleNameChange = e => {
                       </Input>
                     </FormGroup>
                     <FormGroup>
-                      <Button onClick={findByFilter} color="primary">{"Filter Results"}</Button>
-                      <Button onClick={resetFilter} color="danger">Reset Filter</Button>
+                      <ButtonGroup>
+                        <Button onClick={findByFilter} color="primary">{"Filter"}</Button> &nbsp; 
+                        <Button onClick={resetFilter} color="danger">Reset</Button>
+                      </ButtonGroup>
                     </FormGroup>
                   </Form>
                 </CardBody>
@@ -245,7 +247,15 @@ const handleNameChange = e => {
             <Col sm="8">
               <Card>
                 <CardBody>
-                  <div className="table-responsive">
+                <Row>
+                  <Col sm="6">&nbsp;</Col>
+                  <Col sm="6">
+                    <div className="pull-right">
+                      <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/admin/add-vendor`}>Add New</a>
+                    </div>
+                  </Col>
+                </Row>
+                  <div className="table-responsive m-t-20">
                     <Table>
                       <thead>
                           <tr>
@@ -258,7 +268,7 @@ const handleNameChange = e => {
                         <tr key={i}>
                           <td>{vendor.name}</td>
                           <td className="text-right">
-                            <Button color="success">{"Edit"}</Button> &nbsp;
+                            <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-vendor`}>Edit</a>
                           </td>
                         </tr>
                        ))}

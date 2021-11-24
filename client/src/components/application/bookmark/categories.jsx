@@ -71,7 +71,7 @@ const Categories = (props) => {
                 <tr key={i}>
                   <td>{item.name}</td>
                   <td className="text-right">
-                    <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category/${item.id}`}>Edit</a> &nbsp;
+                    <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category/${item.id}`}>Edit</a> &nbsp;
                     <Button color="danger" onClick={() => handleRemoveCategory(item.id)}>{"Delete"}</Button>
                   </td>
                 </tr>

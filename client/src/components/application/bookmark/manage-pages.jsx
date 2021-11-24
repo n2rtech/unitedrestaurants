@@ -50,7 +50,7 @@ const ManagePages = (props) => {
                        <tr>
                        <td>{item.title}</td>
                        <td className="text-right">
-                         <a color="success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-page/${item.id}`}>Edit</a>
+                         <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-page/${item.id}`}>Edit</a>
                        </td>
                    </tr>
                   ))}

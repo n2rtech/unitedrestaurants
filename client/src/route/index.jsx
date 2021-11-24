@@ -167,6 +167,7 @@ import Search from "../components/search"
 
 
 // E-commerce-app 
+import AddVendor from "../components/application/bookmark/add-vendor"
 import RolesList from "../components/application/bookmark/roleslist"
 import ManagePages from "../components/application/bookmark/manage-pages"
 import EditPage from "../components/application/bookmark/edit-page"
@@ -398,6 +399,7 @@ export const routes = [
         { path:"/dashboard/admin/hot-deals-vendors", Component:HotDealsVendors},
         { path:"/dashboard/admin/add-space-vendors", Component:AddSpaceVendors},
         { path:"/dashboard/admin/video-membership-vendors", Component:VideoMembershipVendors},
+        { path:"/dashboard/admin/add-vendor", Component:AddVendor},
         { path:"/app/bookmark", Component:Bookmark},
         { path:"/app/task", Component:TaskApp},
         { path:"/dashboard/vendor/vendor-profile", Component:VendorProfile},
