@@ -35,6 +35,11 @@ const Detailpage = (props) => {
         <div className="unitedtab">
         	<Tabs>
 		    <TabList>
+		    <Tab>
+	      	<img src={`${process.env.PUBLIC_URL}/assets/images/icons/menuitem.png`} 
+	                 alt="Menu-Icon"/> 
+	             <h5>Menu Items</h5>
+	         </Tab>	
 		      <Tab>
 	      	<img src={`${process.env.PUBLIC_URL}/assets/images/icons/about.png`} 
 	                 alt="Menu-Icon"/> 
@@ -50,8 +55,14 @@ const Detailpage = (props) => {
 	                 alt="Menu-Icon"/> <h5>Photos</h5></Tab>
 		      <Tab><img src={`${process.env.PUBLIC_URL}/assets/images/icons/video.png`} 
 	                 alt="Menu-Icon"/> <h5>Videos</h5></Tab>
+	          <Tab><img src={`${process.env.PUBLIC_URL}/assets/images/icons/jobs-o.png`} 
+	                 alt="Menu-Icon"/> <h5>Job Openings</h5></Tab>       
 		    </TabList>
 
+		    <TabPanel>
+		      <h2>Menu Items</h2>
+		      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+		    </TabPanel>
 		    <TabPanel>
 		      <h2>About</h2>
 		      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -111,6 +122,10 @@ San Francisco, CA 94107</span></li>
 			  <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
 			</div>
 
+		    </TabPanel>
+		    <TabPanel>
+		      <h2>Job Openings</h2>
+		      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 		    </TabPanel>
 		  </Tabs>
         </div>

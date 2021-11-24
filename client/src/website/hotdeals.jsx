@@ -32,11 +32,11 @@ const ratingChanged = (newRating) => {
                 <CardBody>
                   
                   <Row>
-                    <Col sm="4">
+                    <Col sm="4" xs="4">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
                      alt="Menu-Icon"/>
                    </Col>
-                   <Col sm="8">
+                   <Col sm="8" xs="8">
                   <CardTitle tag="h5">
                     <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
@@ -77,11 +77,11 @@ const ratingChanged = (newRating) => {
                 <CardBody>
                   
                   <Row>
-                    <Col sm="4">
+                    <Col sm="4" xs="4">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
                      alt="Menu-Icon"/>
                    </Col>
-                   <Col sm="8">
+                   <Col sm="8" xs="8">
                   <CardTitle tag="h5">
                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
@@ -125,11 +125,11 @@ const ratingChanged = (newRating) => {
                 <CardBody>
                   
                   <Row>
-                    <Col sm="4">
+                    <Col sm="4" xs="4">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
                      alt="Menu-Icon"/>
                    </Col>
-                   <Col sm="8">
+                   <Col sm="8" xs="8">
                   <CardTitle tag="h5">
                     <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
@@ -172,11 +172,11 @@ const ratingChanged = (newRating) => {
                 <CardBody>
                   
                   <Row>
-                    <Col sm="4">
+                    <Col sm="4" xs="4">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
                      alt="Menu-Icon"/>
                    </Col>
-                   <Col sm="8">
+                   <Col sm="8" xs="8">
                   <CardTitle tag="h5">
                     <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
@@ -219,11 +219,11 @@ const ratingChanged = (newRating) => {
                 <CardBody>
                   
                   <Row>
-                    <Col sm="4">
+                    <Col sm="4" xs="4">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
                      alt="Menu-Icon"/>
                    </Col>
-                   <Col sm="8">
+                   <Col sm="8" xs="8">
                   <CardTitle tag="h5">
                     <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name
@@ -266,11 +266,11 @@ const ratingChanged = (newRating) => {
                 <CardBody>
                   
                   <Row>
-                    <Col sm="4">
+                    <Col sm="4" xs="4">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
                      alt="Menu-Icon"/>
                    </Col>
-                   <Col sm="8">
+                   <Col sm="8" xs="8">
                   <CardTitle tag="h5">
                     <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
                     Restaurant Name

@@ -4,15 +4,15 @@ import './css/style.css'
 
 
 const Menu = (props) => {
-
+const [isOpen, setIsOpen] = React.useState(false);
   return (
       <div className="headermenu">
         <Container fluid={true} className="p-0">
         <Row className="m-0">
           <Col sm="12" className="p-0">
             <Navbar expand="md" className="p-0 mmenu">
-              <NavbarToggler onClick={function noRefCheck(){}} />
-              <Collapse navbar>
+              <NavbarToggler onClick={() => { setIsOpen(!isOpen) }} />
+              <Collapse isOpen={isOpen} navbar>
                 <Nav
                   className="me-auto"
                   navbar

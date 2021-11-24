@@ -34,6 +34,7 @@ import Sales from './website/sales'
 import Privacypolicy from './website/privacypolicy'
 import Returnpolicy from './website/returnpolicy'
 import Termsofservice from './website/termsofservice'
+import Contactus from './website/contactus'
 
 
 
@@ -127,6 +128,8 @@ const Root = (props) =>  {
            <Route  path={`${process.env.PUBLIC_URL}/privacypolicy`} component={Privacypolicy} />
            <Route  path={`${process.env.PUBLIC_URL}/returnpolicy`} component={Returnpolicy} />
            <Route  path={`${process.env.PUBLIC_URL}/termsofservice`} component={Termsofservice} />
+           <Route  path={`${process.env.PUBLIC_URL}/contactus`} component={Contactus} />
+           
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/login`} component={Login}>
           </Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/loginWithBgImg1`} component={LoginWithBgImage}></Route>
