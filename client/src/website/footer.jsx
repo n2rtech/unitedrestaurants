@@ -46,13 +46,13 @@ return (
 	<div className="footercategory">
 		<List type="unstyled">
 			<li>
-				<a href="#">Privacy Policy</a>
+				<a href={`${process.env.PUBLIC_URL}/privacypolicy`}>Privacy Policy</a>
 			</li>
 			<li>
-				<a href="#">Return Policy</a>
+				<a href={`${process.env.PUBLIC_URL}/returnpolicy`}>Return Policy</a>
 			</li>
 			<li>
-				<a href="#">Terms of Service</a>
+				<a href={`${process.env.PUBLIC_URL}/termsofservice`}>Terms of Service</a>
 			</li>
 			<li>
 				<a target = "_blank" href={`${process.env.PUBLIC_URL}/signup`} >Merchant Signup</a>
