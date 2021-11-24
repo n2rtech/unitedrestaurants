@@ -10,7 +10,6 @@ const Helper = require('../utils/helper');
 const helper = new Helper();
 const path = require('path');
 
-
 var multer  = require('multer');
 
 const imageStorage = multer.diskStorage({

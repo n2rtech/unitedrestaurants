@@ -28,6 +28,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'category_id'
       });
 
+      Category.belongsToMany(models.Profile, {
+        through: 'ProfileCategory',
+        as: 'categoriess',
+        foreignKey: 'category_id'
+      });
+
     }
   };
   Category.init({

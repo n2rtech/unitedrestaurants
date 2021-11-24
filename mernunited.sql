@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2021 at 01:33 PM
+-- Generation Time: Nov 24, 2021 at 09:51 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -48,15 +48,21 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`, `description`, `slug`, `parent_id`, `image`, `sort_order`, `status`, `createdAt`, `updatedAt`) VALUES
 (1, 'Bracelets', 'Bracelets', NULL, 0, '', 1, 1, '2021-11-15 07:41:01', '2021-11-15 07:41:01'),
 (2, 'Sunglasses', 'Sunglasses', NULL, 1, '', 1, 1, '2021-11-15 07:41:15', '2021-11-15 07:41:15'),
-(3, 'Underwears', 'Underwears', NULL, 0, '', 1, 1, '2021-11-15 07:41:30', '2021-11-15 07:41:30'),
-(4, 'Coffee', 'Coffee', NULL, 2, '', 1, 1, '2021-11-15 07:46:54', '2021-11-15 07:46:54'),
+(4, 'krishna', 'Krishna Mishra', NULL, 2, 'image_1637739295874.jpg', 1, 1, '2021-11-15 07:46:54', '2021-11-24 07:34:55'),
 (5, 'watches', 'watches', NULL, 2, '', 1, 1, '2021-11-15 07:47:27', '2021-11-15 07:47:27'),
 (6, 'Bags', 'Bags', NULL, 4, '', 1, 1, '2021-11-15 07:48:36', '2021-11-15 07:48:36'),
 (7, 'Chains', 'Chains', NULL, 6, '', 1, 1, '2021-11-15 07:49:09', '2021-11-15 07:49:09'),
 (8, 'Bevrages', 'Bevrages', NULL, 3, '', 1, 1, '2021-11-15 07:49:30', '2021-11-15 07:49:30'),
 (9, ' Bevrages2,', ' Bevrages1,', NULL, 4, ',', 1, 1, '2021-11-15 11:58:26', '2021-11-15 11:58:26'),
-(10, 'Bevrages5', 'Bevrages6', NULL, 4, 'image_1637056608286.jpg', 1, 1, '2021-11-16 09:56:48', '2021-11-16 09:56:48'),
-(11, 'Bevrages7', 'Bevrages6', NULL, 7, 'image_1637057493463.jpg', 1, 1, '2021-11-16 10:11:33', '2021-11-16 10:11:33');
+(10, 'krishna', 'Krishna Mishra', NULL, 4, 'image_1637678071773.jpg', 1, 1, '2021-11-16 09:56:48', '2021-11-23 14:34:31'),
+(11, 'Bevrages7', 'Bevrages6', NULL, 7, 'image_1637057493463.jpg', 1, 1, '2021-11-16 10:11:33', '2021-11-16 10:11:33'),
+(12, '', NULL, NULL, NULL, 'image_1637695236415.jpg', NULL, 0, '2021-11-23 19:20:36', '2021-11-23 19:20:36'),
+(13, '', NULL, NULL, NULL, 'image_1637695236443.JPG', NULL, 0, '2021-11-23 19:20:36', '2021-11-23 19:20:36'),
+(14, '', NULL, NULL, NULL, 'image_1637695236722.jpg', NULL, 0, '2021-11-23 19:20:36', '2021-11-23 19:20:36'),
+(15, '', NULL, NULL, NULL, 'image_1637695259251.JPG', NULL, 0, '2021-11-23 19:20:59', '2021-11-23 19:20:59'),
+(16, '', NULL, NULL, NULL, 'image_1637695259233.jpg', NULL, 0, '2021-11-23 19:20:59', '2021-11-23 19:20:59'),
+(17, '', NULL, NULL, NULL, 'image_1637695259471.jpg', NULL, 0, '2021-11-23 19:20:59', '2021-11-23 19:20:59'),
+(18, 'Bevrages711', 'Bevrages6', NULL, 7, 'image_1637737637873.jpg', 1, 1, '2021-11-24 07:07:17', '2021-11-24 07:07:17');
 
 -- --------------------------------------------------------
 
@@ -208,7 +214,7 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `title`, `slug`, `body`, `createdAt`, `updatedAt`) VALUES
-(36, 'ddddddddddddddd', NULL, 'ddddddddd', '2021-11-18 12:59:06', '2021-11-18 12:59:06');
+(36, 'admin ee', 'admin-ee', 'Admin Application dd', '2021-11-18 12:59:06', '2021-11-24 05:56:26');
 
 -- --------------------------------------------------------
 
@@ -229,18 +235,58 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `perm_name`, `perm_description`, `createdAt`, `updatedAt`) VALUES
-(2, 'role_add', 'role_add', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'edit_user', 'edit_user', '2021-11-12 08:03:34', '2021-11-12 08:03:34'),
-(6, 'delete_user', 'edit_user', '2021-11-12 08:31:08', '2021-11-12 08:31:08'),
-(7, 'test_add', 'edit_user', '2021-11-12 10:14:28', '2021-11-12 10:14:28'),
-(8, 'permissions_get_all', 'permissions_get_all', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(9, 'role_get_all', 'Get all roles', '2021-11-12 13:26:25', '2021-11-12 13:26:25'),
-(25, 'role_add1', 'role_add', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(26, 'edit_user1', 'edit_user', '2021-11-12 08:03:34', '2021-11-12 08:03:34'),
-(27, 'delete_user1', 'edit_user', '2021-11-12 08:31:08', '2021-11-12 08:31:08'),
-(28, 'test_add1', 'edit_user', '2021-11-12 10:14:28', '2021-11-12 10:14:28'),
-(29, 'permissions_get_all1', 'permissions_get_all', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(30, 'role_get_all1', 'Get all roles', '2021-11-12 13:26:25', '2021-11-12 13:26:25');
+(1, 'Roles & Permission', 'Admin Roles & Permission', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Manage Pages', 'Manage Pages', '2021-11-24 06:51:15', '2021-11-24 06:51:15'),
+(3, 'Categories', 'Categories', '2021-11-24 06:51:45', '2021-11-24 06:51:45'),
+(4, 'Vendors', 'Vendors', '2021-11-24 06:52:18', '2021-11-24 06:52:18'),
+(5, 'Membership packages', 'Membership packages', '2021-11-24 06:52:35', '2021-11-24 06:52:35'),
+(6, 'Notifications & messaging', 'Notifications & messaging', '2021-11-24 06:52:56', '2021-11-24 06:52:56'),
+(7, 'Promotions/discounts', 'Promotions/discounts', '2021-11-24 06:53:17', '2021-11-24 06:53:17'),
+(8, 'Accounts Payable', 'Accounts Payable', '2021-11-24 06:53:43', '2021-11-24 06:53:43'),
+(9, 'Countries', 'Countries', '2021-11-24 06:54:02', '2021-11-24 06:54:02'),
+(10, 'Google Adsense', 'Google Adsense', '2021-11-24 06:54:18', '2021-11-24 06:54:18'),
+(11, 'Site settings', 'Site settings', '2021-11-24 06:54:40', '2021-11-24 06:54:40'),
+(12, 'Business Profile', 'Business Profile', '2021-11-24 06:55:35', '2021-11-24 06:55:35'),
+(13, 'My Wallet', 'My Wallet', '2021-11-24 06:55:51', '2021-11-24 06:55:51'),
+(14, 'Payment Method', 'Payment Method', '2021-11-24 06:56:14', '2021-11-24 06:56:14'),
+(15, 'Deals (Coupons)', 'Deals (Coupons)', '2021-11-24 06:56:28', '2021-11-24 06:56:28'),
+(16, 'Photo Gallery', 'Photo Gallery', '2021-11-24 06:56:45', '2021-11-24 06:56:45'),
+(17, 'Videos', 'Videos', '2021-11-24 06:57:05', '2021-11-24 06:57:05'),
+(18, 'Job Openings', 'Job Openings', '2021-11-24 06:57:17', '2021-11-24 06:57:17'),
+(19, 'Advertisement', 'Advertisement', '2021-11-24 06:57:42', '2021-11-24 06:57:42'),
+(20, 'Dashboard', 'Dashboard', '2021-11-24 06:58:06', '2021-11-24 06:58:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profiles`
+--
+
+CREATE TABLE `profiles` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `business_name` varchar(255) DEFAULT NULL,
+  `business_email` varchar(255) DEFAULT NULL,
+  `manager_name` varchar(255) DEFAULT NULL,
+  `manager_email` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `fax` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `categories` varchar(255) DEFAULT NULL,
+  `website_link` varchar(255) DEFAULT NULL,
+  `facebook` varchar(255) DEFAULT NULL,
+  `instagram` varchar(255) DEFAULT NULL,
+  `youtube` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `profiles`
+--
+
+INSERT INTO `profiles` (`id`, `user_id`, `business_name`, `business_email`, `manager_name`, `manager_email`, `phone_number`, `fax`, `address`, `categories`, `website_link`, `facebook`, `instagram`, `youtube`, `createdAt`, `updatedAt`) VALUES
+(1, 2, 'string11', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', '2021-11-24 08:20:23', '2021-11-24 08:40:53');
 
 -- --------------------------------------------------------
 
@@ -262,17 +308,17 @@ CREATE TABLE `rolepermissions` (
 
 INSERT INTO `rolepermissions` (`id`, `role_id`, `perm_id`, `createdAt`, `updatedAt`) VALUES
 (1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 2, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 2, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(5, 1, 8, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(6, 1, 6, '2021-11-12 13:04:30', '2021-11-12 13:04:30'),
-(7, 1, 7, '2021-11-12 13:04:30', '2021-11-12 13:04:30'),
-(8, 1, 3, '2021-11-12 13:11:48', '2021-11-12 13:11:48'),
-(9, 4, 3, '2021-11-12 13:12:05', '2021-11-12 13:12:05'),
-(10, 4, 6, '2021-11-12 13:12:05', '2021-11-12 13:12:05'),
-(11, 1, 9, '2021-11-12 13:26:50', '2021-11-12 13:26:50'),
-(12, 1, 10, '2021-11-15 06:39:21', '2021-11-15 06:39:21');
+(2, 1, 3, '2021-11-24 06:59:16', '2021-11-24 06:59:16'),
+(3, 1, 2, '2021-11-24 06:59:16', '2021-11-24 06:59:16'),
+(4, 1, 10, '2021-11-24 06:59:16', '2021-11-24 06:59:16'),
+(5, 1, 8, '2021-11-24 06:59:16', '2021-11-24 06:59:16'),
+(6, 1, 5, '2021-11-24 06:59:16', '2021-11-24 06:59:16'),
+(7, 1, 7, '2021-11-24 06:59:16', '2021-11-24 06:59:16'),
+(8, 1, 6, '2021-11-24 06:59:16', '2021-11-24 06:59:16'),
+(9, 1, 4, '2021-11-24 06:59:16', '2021-11-24 06:59:16'),
+(10, 1, 11, '2021-11-24 06:59:16', '2021-11-24 06:59:16'),
+(11, 1, 9, '2021-11-24 06:59:16', '2021-11-24 06:59:16'),
+(13, 2, 12, '2021-11-24 08:04:29', '2021-11-24 08:04:29');
 
 -- --------------------------------------------------------
 
@@ -297,10 +343,9 @@ INSERT INTO `roles` (`id`, `role_name`, `role_id`, `role_description`, `createdA
 (1, 'admin', 0, 'admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (2, 'vendor', 0, 'vendor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 'seratory', 0, 'seratory', '2021-11-12 08:01:30', '2021-11-12 08:01:30'),
-(4, 'customer', 0, 'customer', '2021-11-12 08:35:09', '2021-11-12 08:35:09'),
-(5, 'test', 0, 'customer', '2021-11-12 10:14:12', '2021-11-17 10:52:53'),
-(6, 'staff', 0, 'Staff', '2021-11-12 12:31:12', '2021-11-12 12:31:12'),
-(7, 'sub user', 0, 'sub admin users', '2021-11-18 10:50:28', '2021-11-18 10:50:28');
+(4, 'staff', 0, 'Staff', '2021-11-12 12:31:12', '2021-11-12 12:31:12'),
+(5, 'sub user', 0, 'sub admin users', '2021-11-18 10:50:28', '2021-11-18 10:50:28'),
+(6, 'customer', 0, 'customer', '2021-11-12 08:35:09', '2021-11-12 08:35:09');
 
 -- --------------------------------------------------------
 
@@ -327,7 +372,8 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 ('20211118051724-create-coupon-category.js'),
 ('20211118051731-create-coupon-user.js'),
 ('20211118115407-create-page.js'),
-('20211122090051-create-country.js');
+('20211122090051-create-country.js'),
+('20211124075049-create-profile.js');
 
 -- --------------------------------------------------------
 
@@ -358,7 +404,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `role_id`, `category_id`, `country_id`, `role`, `email`, `password`, `name`, `business_type`, `phone`, `mobile`, `address`, `createdAt`, `updatedAt`) VALUES
 (1, 1, NULL, NULL, 'admin', 'krishna@gmail.com', '$2a$10$xK/80r6a.M7YQ8b0QndXhutktRT59DEXE09VkDSUpiDuHPdYo5FLC', 'Krishna Mishra', NULL, '9026574061', '9026574061', 'test addess', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 4, NULL, NULL, 'vendor', 'laxman@gmail.com', '$2a$10$lbKBJSi7KQk5gVB0cayE1O/xwpL4kLf4G/HcAGkYLKT5NoA0Jt/VG', 'Laxman Mishra', NULL, '9454045599', '9454045599', 'test address', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 2, NULL, NULL, 'vendor', 'laxman@gmail.com', '$2a$10$lbKBJSi7KQk5gVB0cayE1O/xwpL4kLf4G/HcAGkYLKT5NoA0Jt/VG', 'Laxman Mishra', NULL, '9454045599', '9454045599', 'test address', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 3, NULL, NULL, NULL, 'laxmanbbk@gmail.com', '$2a$10$sN3FTdd3Fra30tqsUP5iU..eK06TRkKsEsE/rz7XRl/X2Xmj9dwlm', 'Laxman Mishra', NULL, NULL, NULL, 'test address', '2021-11-12 09:54:35', '2021-11-12 09:54:35'),
 (4, 3, NULL, NULL, NULL, 'didin@djamware.com', '$2a$10$yhuWdDz8YRqvAgKW7o7JxeS/6ABtol3m7N6wY3lEsI9ulvn2KvEmK', 'Laxman Mishra', NULL, '0998998998', '9454045599', 'test address', '2021-11-12 10:05:27', '2021-11-17 12:39:33'),
 (5, 6, NULL, NULL, NULL, 'krishnabbk@gmail.com', '$2a$10$svzre/sSNH.3KrMt0jq8NueeLfRMTnaTkfgNBHQpsT06BiUJpHomu', 'Laxman Mishra', NULL, '9454045599', '9454045599', 'test address', '2021-11-12 10:08:13', '2021-11-12 10:08:13'),
@@ -375,7 +421,10 @@ INSERT INTO `users` (`id`, `role_id`, `category_id`, `country_id`, `role`, `emai
 (16, 2, 1, NULL, NULL, 'nydarin@mailinator.com', '$2a$10$q/h0XJ004R4SLmXCY8cEzuTxIUksj/27KfpkV4fL/MGHaQEfs0DH2', 'Cheyenne Rowe', NULL, NULL, NULL, 'Veniam quo nobis cu', '2021-11-22 08:23:33', '2021-11-22 08:23:33'),
 (17, 2, 3, NULL, NULL, 'jarefiwoko@mailinator.com', '$2a$10$LaiKB0gIRot.GeT.74.L2u2B4gg2591wr.eOy1wgf8iYMOoci2992', 'Quin Barrera', NULL, NULL, NULL, 'Maiores voluptas sim', '2021-11-22 08:24:36', '2021-11-22 08:24:36'),
 (18, 2, 3, 3, NULL, 'pyzob@mailinator.com', '$2a$10$jiZcr/Ae7htdNeoyZ4Qs2eZbe5hL7nxSunQV0ZOzVqVSQNQ./W7Ba', 'Abbot Maldonado', NULL, NULL, NULL, 'Maiores facere culpa', '2021-11-22 09:27:59', '2021-11-22 09:27:59'),
-(19, 2, 1, 2, NULL, 'qonifixup@mailinator.com', '$2a$10$RJaff32OJkXkM.E1F9MO/ug9Pp3VHq51c4C.3DYQCvo58WzH0reM.', 'Kimberly Hayes', NULL, NULL, NULL, 'Fugit id repellendu', '2021-11-22 09:29:46', '2021-11-22 09:29:46');
+(19, 2, 1, 2, NULL, 'qonifixup@mailinator.com', '$2a$10$RJaff32OJkXkM.E1F9MO/ug9Pp3VHq51c4C.3DYQCvo58WzH0reM.', 'Kimberly Hayes', NULL, NULL, NULL, 'Fugit id repellendu', '2021-11-22 09:29:46', '2021-11-22 09:29:46'),
+(20, 2, 1, 2, NULL, 'wesocimyx@mailinator.com', '$2a$10$R4IA2nu7flHCrJNXC.30SeH9vacHav0kbWKYWlPhGkaJTgYulBsdG', 'Anthony Acevedo', NULL, NULL, NULL, 'Corporis architecto ', '2021-11-23 08:17:39', '2021-11-23 08:17:39'),
+(21, 2, 3, 2, NULL, 'tuwazy@mailinator.com', '$2a$10$7vjQBU.b7fYJIcy.vcDEduaALCeacI284wvsRPvXXTOHao4YVSbOq', 'Rosalyn Mcconnell', NULL, NULL, NULL, 'Quisquam sit aut ip', '2021-11-23 08:18:20', '2021-11-23 08:18:20'),
+(22, 2, 3, 3, NULL, 'tafow@mailinator.com', '$2a$10$kKvZRqlZA3ne7Zf9dY/PnehRHjVOaThdSGaVIhz6KeIVg6KC/3ZjG', 'Iris Campbell', NULL, '75', '75', 'Rerum labore quas la', '2021-11-23 08:21:25', '2021-11-23 08:21:25');
 
 --
 -- Indexes for dumped tables
@@ -431,6 +480,12 @@ ALTER TABLE `permissions`
   ADD UNIQUE KEY `perm_name` (`perm_name`);
 
 --
+-- Indexes for table `profiles`
+--
+ALTER TABLE `profiles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `rolepermissions`
 --
 ALTER TABLE `rolepermissions`
@@ -465,7 +520,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -507,25 +562,31 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `profiles`
+--
+ALTER TABLE `profiles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rolepermissions`
 --
 ALTER TABLE `rolepermissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
