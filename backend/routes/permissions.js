@@ -11,7 +11,7 @@ const helper = new Helper();
 router.post('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'permissions_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
         if (!req.body.perm_name || !req.body.perm_description) {
             res.status(400).send({
                 msg: 'Please pass permission name or description.'
@@ -39,7 +39,7 @@ router.post('/', passport.authenticate('jwt', {
 router.get('/list', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'permissions_get_all').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
         Permission
             .findAll()
             .then(perms => {
@@ -57,7 +57,7 @@ router.get('/list', passport.authenticate('jwt', {
 router.get('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
 
     }).catch((error) => {
         res.status(403).send(error);
@@ -77,7 +77,7 @@ router.get('/:id', passport.authenticate('jwt', {
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'permissions_get_all').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
          const { page, size } = req.query;
           const { limit, offset } = getPagination(page, size);
           console.log(page,size);
@@ -101,7 +101,7 @@ router.get('/', passport.authenticate('jwt', {
 router.put('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
         if (!req.params.id || !req.body.perm_name || !req.body.perm_description) {
             res.status(400).send({
                 msg: 'Please pass permission ID, name or description.'
@@ -136,7 +136,7 @@ router.put('/:id', passport.authenticate('jwt', {
 router.delete('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
         if (!req.params.id) {
             res.status(400).send({
                 msg: 'Please pass permission ID.'

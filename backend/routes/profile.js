@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models').User;
+const Profile = require('../models').Profile;
 const Role = require('../models').Role;
 const Permission = require('../models').Permission;
 const passport = require('passport');
@@ -8,24 +9,35 @@ require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
 
-// Create a new Role
+// Create a new Profile
 router.post('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
-        if (!req.body.role_name || !req.body.role_description) {
+    helper.checkPermission(req.user.role_id, 'Business Profile').then((rolePerm) => {
+        if (!req.body.business_name || !req.body.business_name) {
             res.status(400).send({
-                msg: 'Please pass Role name or description.'
+                msg: 'Please pass Business Name or Email.'
             })
         } else {
-            Role
-                .create({
-                    role_name: req.body.role_name,
-                    role_description: req.body.role_description
+            Profile
+            .create({
+                    user_id: req.body.user_id,
+                    business_name: req.body.business_name,
+                    business_email: req.body.business_email,
+                    manager_name: req.body.manager_name,
+                    manager_email: req.body.manager_email,
+                    phone_number: req.body.phone_number,
+                    fax: req.body.fax,
+                    address: req.body.address,
+                    categories: req.body.categories,
+                    website_link: req.body.website_link,
+                    media_links: req.body.media_links,
+                    facebook: req.body.facebook,
+                    instagram: req.body.instagram,
+                    youtube: req.body.youtube
                 })
-                .then((role) => res.status(201).send(role))
+                .then((profile) => res.status(201).send(profile))
                 .catch((error) => {
-                    console.log(error);
                     res.status(400).send(error);
                 });
         }
@@ -34,82 +46,63 @@ router.post('/', passport.authenticate('jwt', {
     });
 });
 
-// Get List of Roles
-router.get('/', passport.authenticate('jwt', {
-    session: false
-}), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
-        console.log(rolePerm);
-        Role
-            .findAll({
-                include: [
-                    {
-                        model: Permission,
-                        as: 'permissions',
-                    }
-                    /*,
-                    {
-                        model: User,
-                        as: 'users',
-                    }*/
-                ]
-            })
-            .then((roles) => res.status(200).send(roles))
-            .catch((error) => {
-                res.status(400).send(error);
-            });
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
-});
 
-// Get Role by ID
+// Get Profile by ID
 router.get('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Business Profile').then((rolePerm) => {
 
     }).catch((error) => {
         res.status(403).send(error);
     });
-    Role
-        .findByPk(
-            req.params.id, {
-                include: {
-                    model: Permission,
-                    as: 'permissions',
-                }
-            }
-        )
-        .then((roles) => res.status(200).send(roles))
+    Profile
+        .findOne({
+            user_id: req.params.id
+        })
+        .then((profile) => res.status(200).send(profile))
         .catch((error) => {
             res.status(400).send(error);
         });
 });
 
-// Update a Role
+// Update a Profile
 router.put('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_update').then((rolePerm) => {
-        if (!req.params.id || !req.body.role_name || !req.body.role_description) {
+
+    helper.checkPermission(req.user.role_id, 'Business Profile').then((rolePerm) => {
+        if (!req.params.id || !req.body.business_name || !req.body.business_email) {
             res.status(400).send({
-                msg: 'Please pass Role ID, name or description.'
+                msg: 'Please pass Profile ID, name or email.'
             })
         } else {
-            Role
-                .findByPk(req.params.id)
-                .then((role) => {
-                    Role.update({
-                        role_name: req.body.role_name || role.role_name,
-                        role_description: req.body.role_description || role.role_description
+            Profile
+                .findOne({
+                            user_id: req.params.id
+                        })
+                .then((profile) => {
+                    Profile.update({
+                        business_name: req.body.business_name || profile.business_name,
+                        business_email: req.body.business_email || profile.business_email,
+                        manager_name: req.body.manager_name || profile.manager_name,
+                        manager_email: req.body.manager_email || profile.manager_email,
+                        phone_number: req.body.phone_number || profile.phone_number,
+                        fax: req.body.fax || profile.fax,
+                        address: req.body.address || profile.address,
+                        categories: req.body.categories || profile.categories,
+                        website_link: req.body.website_link || profile.website_link,
+                        media_links: req.body.media_links || profile.media_links,
+                        facebook: req.body.facebook || profile.facebook,
+                        instagram: req.body.instagram || profile.instagram,
+                        youtube: req.body.youtube || profile.youtube
                     }, {
                         where: {
-                            id: req.params.id
+                            user_id: req.params.id
                         }
                     }).then(_ => {
                         res.status(200).send({
-                            'message': 'Role updated'
+                            'message': 'Profile updated'
                         });
                     }).catch(err => res.status(400).send(err));
                 })
@@ -122,7 +115,7 @@ router.put('/:id', passport.authenticate('jwt', {
     });
 });
 
-// Delete a Role
+// Delete a Profile
 router.delete('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
@@ -132,22 +125,22 @@ router.delete('/:id', passport.authenticate('jwt', {
                 msg: 'Please pass role ID.'
             })
         } else {
-            Role
+            Profile
                 .findByPk(req.params.id)
                 .then((role) => {
                     if (role) {
-                        Role.destroy({
+                        Profile.destroy({
                             where: {
                                 id: req.params.id
                             }
                         }).then(_ => {
                             res.status(200).send({
-                                'message': 'Role deleted'
+                                'message': 'Profile deleted'
                             });
                         }).catch(err => res.status(400).send(err));
                     } else {
                         res.status(404).send({
-                            'message': 'Role not found'
+                            'message': 'Profile not found'
                         });
                     }
                 })
@@ -160,17 +153,17 @@ router.delete('/:id', passport.authenticate('jwt', {
     });
 });
 
-// Add Permissions to Role
+// Add Permissions to Profile
 router.post('/permissions/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Business Profile').then((rolePerm) => {
         if (!req.body.permissions) {
             res.status(400).send({
                 msg: 'Please pass permissions.'
             })
         } else {
-            Role
+            Profile
                 .findByPk(req.params.id)
                 .then((role) => {
                     req.body.permissions.forEach(function (item, index) {
