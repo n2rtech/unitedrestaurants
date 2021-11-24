@@ -148,7 +148,7 @@ const Rightbar = (props) => {
             <div className="media profile-media">
               <img className="b-r-10" src={authenticated ? auth0_profile.picture : profile} alt="" />
               <div className="media-body"><span>{authenticated ? auth0_profile.name :  name}</span>
-                <p className="mb-0 font-roboto">{Admin} <i className="middle fa fa-angle-down"></i></p>
+                <p className="mb-0 font-roboto">{localStorage.getItem("role")} <i className="middle fa fa-angle-down"></i></p>
               </div>
             </div>
             <ul className="profile-dropdown onhover-show-div">
