@@ -9,7 +9,7 @@ return (
 <div className="mainfooter">
 	<Container fluid={true}>
 		<Row className="m-0">
-			<Col sm="4" xs="12">     
+			<Col sm="4" xs="12" className="fmenudesktop">     
 			<div className="socialmenu">
 				<a href="#"><i className="fa fa-facebook"></i></a>
 				<a href="#"><i className="fa fa-twitter"></i></a>
@@ -21,14 +21,14 @@ return (
 				<p>© Copyright 2021 Gabal Global Group</p>
 			</div>
 		</Col>
-		<Col sm="4" xs="12">     
+		<Col sm="4" xs="6">     
 		<div className="footercategory">
 			<List type="unstyled">
 				<li>
 					<a href={`${process.env.PUBLIC_URL}/aboutus`}>About us</a>
 				</li>
 				<li>
-					<a href="#">Contact us</a>
+					<a href={`${process.env.PUBLIC_URL}/contactus`}>Contact us</a>
 				</li>
 				<li>
 					<a href={`${process.env.PUBLIC_URL}/customerservices`}>Customer Service</a>
@@ -42,7 +42,7 @@ return (
 			</List>
 		</div>
 	</Col>
-	<Col sm="4" xs="12">     
+	<Col sm="4" xs="6">     
 	<div className="footercategory">
 		<List type="unstyled">
 			<li>
@@ -60,6 +60,18 @@ return (
 		</List>
 	</div>
 </Col>
+<Col sm="4" xs="12" className="fmenumobile">     
+			<div className="socialmenu">
+				<a href="#"><i className="fa fa-facebook"></i></a>
+				<a href="#"><i className="fa fa-twitter"></i></a>
+				<a href="#"><i className="fa fa-google-plus"></i></a>
+				<a href="#"><i className="fa fa-linkedin"></i></a>
+				<a href="#"><i className="fa fa-instagram"></i></a>
+			</div>
+			<div className="copyright">
+				<p>© Copyright 2021 Gabal Global Group</p>
+			</div>
+		</Col>
 </Row>
 <ScrollButton />
 </Container>

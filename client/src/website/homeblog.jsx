@@ -28,11 +28,11 @@ const ratingChanged = (newRating) => {
               >
                 <CardBody>
                   <Row>
-                    <Col sm="3">
+                    <Col sm="3" xs="12">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
-                     alt="Menu-Icon"/>
+                     alt="Menu-Icon" className="img-fluid" />
                    </Col>
-                   <Col sm="9">
+                   <Col sm="9" xs="12">
                   <CardTitle tag="h5">
                     Lorem ipsum
                   </CardTitle>
@@ -58,11 +58,11 @@ const ratingChanged = (newRating) => {
               >
                 <CardBody>
                   <Row>
-                    <Col sm="3">
+                    <Col sm="3" xs="12">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
-                     alt="Menu-Icon"/>
+                     alt="Menu-Icon" className="img-fluid" />
                    </Col>
-                   <Col sm="9">
+                   <Col sm="9" xs="12">
                   <CardTitle tag="h5">
                     Lorem ipsum
                   </CardTitle>
@@ -88,11 +88,11 @@ const ratingChanged = (newRating) => {
               >
                 <CardBody>
                   <Row>
-                    <Col sm="3">
+                    <Col sm="3" xs="12">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
-                     alt="Menu-Icon"/>
+                     alt="Menu-Icon" className="img-fluid" />
                    </Col>
-                   <Col sm="9">
+                   <Col sm="9" xs="12">
                   <CardTitle tag="h5">
                     Lorem ipsum
                   </CardTitle>
@@ -118,11 +118,11 @@ const ratingChanged = (newRating) => {
               >
                 <CardBody>
                   <Row>
-                    <Col sm="3">
+                    <Col sm="3" xs="12">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
-                     alt="Menu-Icon"/>
+                     alt="Menu-Icon" className="img-fluid" />
                    </Col>
-                   <Col sm="9">
+                   <Col sm="9" xs="12">
                   <CardTitle tag="h5">
                     Lorem ipsum
                   </CardTitle>
@@ -148,11 +148,11 @@ const ratingChanged = (newRating) => {
               >
                 <CardBody>
                   <Row>
-                    <Col sm="3">
+                    <Col sm="3" xs="12">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
-                     alt="Menu-Icon"/>
+                     alt="Menu-Icon" className="img-fluid" />
                    </Col>
-                   <Col sm="9">
+                   <Col sm="9" xs="12">
                   <CardTitle tag="h5">
                     Lorem ipsum
                   </CardTitle>
@@ -178,11 +178,11 @@ const ratingChanged = (newRating) => {
               >
                 <CardBody>
                   <Row>
-                    <Col sm="3">
+                    <Col sm="3" xs="12">
                     <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
-                     alt="Menu-Icon"/>
+                     alt="Menu-Icon" className="img-fluid" />
                    </Col>
-                   <Col sm="9">
+                   <Col sm="9" xs="12">
                   <CardTitle tag="h5">
                     Lorem ipsum
                   </CardTitle>
