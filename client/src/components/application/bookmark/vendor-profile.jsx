@@ -3,9 +3,18 @@ import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { Typeahead } from 'react-bootstrap-typeahead';
 import axios from 'axios'
-
+import ImageUploader from 'react-images-upload';
 
 const VendorProfile = (props) => {
+  const [image, setimage] = useState({ pictures: [] })
+
+    const onDrop = (pictureFiles, pictureDataURLs) => {
+        setimage({
+            ...image, pictureFiles
+        });
+    }
+
+    
  const multiple = false
     const [options,setOptions] = useState([])
 
