@@ -7,17 +7,27 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Typeahead } from 'react-bootstrap-typeahead';
 import TypeaheadOne from './typeahead-one';
 import axios from 'axios'
+import ImageUploader from 'react-images-upload';
 import { BasicDemo,MultipleSelections,CustomSelections,Remote } from "../../../constant";
+import {SelectSingleImageUpload,MultipleImageUpload} from '../../../constant'
 
 
 
 const VendorProfile = (props) => {
+  const [image, setimage] = useState({ pictures: [] })
+  const onDrop = (pictureFiles, pictureDataURLs) => {
+        setimage({
+            ...image, pictureFiles
+        });
+    }
  const multiple = false
     const [options,setOptions] = useState([])
 
     useEffect(() => {
         axios.get(`${process.env.PUBLIC_URL}/api/typeaheadData.json`).then(res => setOptions(res.data))
     },[])
+
+    
 
   return (
     <Fragment>
@@ -95,6 +105,19 @@ const VendorProfile = (props) => {
               <Input className="form-control"  type="name" placeholder="Instagram" />
               <div>&nbsp;</div>
               <Input className="form-control"  type="name" placeholder="Youtube" />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="exampleFormControlInput1">{"Business banner"}</Label>
+              <ImageUploader
+                withIcon={false}
+                withPreview={true}
+                label=""
+                buttonText="Upload"
+                onChange={onDrop}
+                imgExtension={[".jpg", ".gif", ".png", ".gif", ".svg"]}
+                maxFileSize={1048576}
+                fileSizeError=" file size is too big"
+              />
             </FormGroup>
             <div className="text-center">
               <Button color="primary">{"Save"}</Button>
