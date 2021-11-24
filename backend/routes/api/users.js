@@ -12,7 +12,7 @@ const passport = require('passport');
 require('../../config/passport')(passport);
 const Helper = require('../../utils/helper');
 const helper = new Helper();
-const Op = require('Sequelize').Op
+const Op = require('sequelize').Op
 
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
