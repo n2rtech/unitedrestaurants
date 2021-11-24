@@ -31,7 +31,9 @@ import Aboutus from './website/aboutus'
 import Customerservices from './website/customerservices'
 import Technicalsupport from './website/technicalsupport'
 import Sales from './website/sales'
-
+import Privacypolicy from './website/privacypolicy'
+import Returnpolicy from './website/returnpolicy'
+import Termsofservice from './website/termsofservice'
 
 
 
@@ -122,6 +124,9 @@ const Root = (props) =>  {
            <Route  path={`${process.env.PUBLIC_URL}/customerservices`} component={Customerservices} />
            <Route  path={`${process.env.PUBLIC_URL}/technicalsupport`} component={Technicalsupport} />
            <Route  path={`${process.env.PUBLIC_URL}/sales`} component={Sales} />
+           <Route  path={`${process.env.PUBLIC_URL}/privacypolicy`} component={Privacypolicy} />
+           <Route  path={`${process.env.PUBLIC_URL}/returnpolicy`} component={Returnpolicy} />
+           <Route  path={`${process.env.PUBLIC_URL}/termsofservice`} component={Termsofservice} />
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/login`} component={Login}>
           </Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/loginWithBgImg1`} component={LoginWithBgImage}></Route>

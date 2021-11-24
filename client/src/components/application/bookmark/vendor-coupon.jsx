@@ -34,21 +34,21 @@ const VendorCoupon = (props) => {
                   <tr>
                     <td>{"Black Friday"}</td>
                     <td className="text-right">
-                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/London/edit-vendor-coupon`} className="btn btn-success">Edit</a> &nbsp;
+                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-vendor-coupon`} className="btn btn-success">Edit</a> &nbsp;
                       <a href={"#"} className="btn btn-danger">Delete</a> 
                     </td>
                   </tr>
                   <tr>
                     <td>{"One plus One Offer"}</td>
                     <td className="text-right">
-                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/London/edit-vendor-coupon`} className="btn btn-success">Edit</a> &nbsp;
+                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-vendor-coupon`} className="btn btn-success">Edit</a> &nbsp;
                       <a href={"#"} className="btn btn-danger">Delete</a>
                     </td>
                   </tr>
                   <tr>
                     <td>{"Combos"}</td>
                     <td className="text-right">
-                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/London/edit-vendor-coupon`} className="btn btn-success">Edit</a> &nbsp;
+                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-vendor-coupon`} className="btn btn-success">Edit</a> &nbsp;
                       <a href={"#"} className="btn btn-danger">Delete</a>
                     </td>
                   </tr>

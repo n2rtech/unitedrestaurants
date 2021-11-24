@@ -204,6 +204,7 @@ import EditJobOpenings from "../components/application/bookmark/edit-job-opening
 import PaymentMethod from "../components/application/bookmark/payment-method"
 import AddsMembership from "../components/application/bookmark/adds-membership"
 import AddSpaces from "../components/application/bookmark/ad-spaces"
+import MenuItems from "../components/application/bookmark/menu-items"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -399,19 +400,20 @@ export const routes = [
         { path:"/dashboard/admin/video-membership-vendors", Component:VideoMembershipVendors},
         { path:"/app/bookmark", Component:Bookmark},
         { path:"/app/task", Component:TaskApp},
-        { path:"/dashboard/vendor/:layout/vendor-profile", Component:VendorProfile},
-        { path:"/dashboard/vendor/:layout/my-wallet", Component:MyWallet},
-        { path:"/dashboard/vendor/:layout/vendor-membership-package", Component:VendorMembershipPackage},
-        { path:"/dashboard/vendor/:layout/vendor-coupon", Component:VendorCoupon},
-        { path:"/dashboard/vendor/:layout/edit-vendor-coupon", Component:EditVendorCoupon},
-        { path:"/dashboard/vendor/:layout/vendor-photogallery", Component:VendorPhotogallery},
-        { path:"/dashboard/vendor/:layout/vendor-videogallery", Component:VendorVideoGallery},
-        { path:"/dashboard/vendor/:layout/edit-video-gallery", Component:EditVideoGallery},
-        { path:"/dashboard/vendor/:layout/job-openings", Component:JobOpenings},
-        { path:"/dashboard/vendor/:layout/edit-job-openings", Component:EditJobOpenings},
-        { path:"/dashboard/vendor/:layout/payment-method", Component:PaymentMethod},
-        { path:"/dashboard/vendor/:layout/adds-membership", Component:AddsMembership},
-        { path:"/dashboard/vendor/:layout/ad-spaces", Component:AddSpaces},
+        { path:"/dashboard/vendor/vendor-profile", Component:VendorProfile},
+        { path:"/dashboard/vendor/my-wallet", Component:MyWallet},
+        { path:"/dashboard/vendor/vendor-membership-package", Component:VendorMembershipPackage},
+        { path:"/dashboard/vendor/vendor-coupon", Component:VendorCoupon},
+        { path:"/dashboard/vendor/edit-vendor-coupon", Component:EditVendorCoupon},
+        { path:"/dashboard/vendor/vendor-photogallery", Component:VendorPhotogallery},
+        { path:"/dashboard/vendor/vendor-videogallery", Component:VendorVideoGallery},
+        { path:"/dashboard/vendor/edit-video-gallery", Component:EditVideoGallery},
+        { path:"/dashboard/vendor/job-openings", Component:JobOpenings},
+        { path:"/dashboard/vendor/edit-job-openings", Component:EditJobOpenings},
+        { path:"/dashboard/vendor/payment-method", Component:PaymentMethod},
+        { path:"/dashboard/vendor/adds-membership", Component:AddsMembership},
+        { path:"/dashboard/vendor/ad-spaces", Component:AddSpaces},
+        { path:"/dashboard/vendor/menu-items", Component:MenuItems},
 
         {path:"/app/project/project-list", Component:ProjectList},
         {path:"/app/project/new-project", Component:NewProject},

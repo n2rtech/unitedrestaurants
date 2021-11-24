@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import ImageUploader from 'react-images-upload';
 import {SelectSingleImageUpload,MultipleImageUpload} from '../../../constant'
 import { useParams } from "react-router-dom";
+import {toast} from 'react-toastify';
+import axios from 'axios'
 
 
 const EditCategory = (props) => {
@@ -17,11 +19,16 @@ const [image, setimage] = useState({ pictures: [] })
 
     const onDrop = (pictureFiles, pictureDataURLs) => {
         setimage({
-            ...image, pictureFiles
+            ...image, pictureDataURLs
         });
     }
 
-    const [generalData, setGeneralData] = useState([]);
+    const [catname,setCatname] = useState('') 
+    const handleChange = (evt) => {
+      setCatname(evt.target.value)
+    }
+
+    console.log(image.pictureDataURLs);
 
     useEffect(() => {
     
@@ -34,7 +41,7 @@ const [image, setimage] = useState({ pictures: [] })
           .then(
             (result) => {
               
-                setGeneralData(result);
+                setCatname(result.name);
             },
             (error) => {
               
@@ -42,8 +49,26 @@ const [image, setimage] = useState({ pictures: [] })
           )
       }, []);
 
-      const cat = generalData.name;
-      console.log(generalData);
+      const handleSubmit = event => {
+        event.preventDefault();
+    
+        const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+          };
+          const bodyParameters = {
+            name: catname,
+            description: catname,
+            image: 'save.png'
+          };
+          axios.put(`/api/categories/`+`${params.id}`,
+            bodyParameters,
+            config
+          ) .then(response => toast.success("Category updated !")  )
+             .catch(error => console.log('Form submit error', error))
+
+      };
+
+    console.log(catname);
 
   return (
     <Fragment>
@@ -54,7 +79,7 @@ const [image, setimage] = useState({ pictures: [] })
           <Form className="form theme-form">
             <FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Category Name"}</Label>
-              <Input className="form-control" value= {cat} type="name" placeholder={generalData.name} />
+              <Input className="form-control" value= {catname} onChange = {handleChange} type="name" placeholder={catname} />
             </FormGroup>
             <FormGroup>
               <ImageUploader
@@ -69,7 +94,7 @@ const [image, setimage] = useState({ pictures: [] })
               />
             </FormGroup>
             <div className="text-center">
-              <Button color="primary">{"Save"}</Button>
+              <Button color="primary" onClick = {handleSubmit} >{"Save"}</Button>
             </div>
           </Form>
         </CardBody>
