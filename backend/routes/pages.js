@@ -97,6 +97,11 @@ router.put('/:id', passport.authenticate('jwt', {
             Page
                 .findByPk(req.params.id)
                 .then((page) => {
+                    if (page == null) {
+                        res.status(200).send({
+                            'message': 'Page not found'
+                        });
+                    }
                     if (req.body.title) {
                         var slug = req.body.title
                         .toLowerCase()
@@ -107,7 +112,7 @@ router.put('/:id', passport.authenticate('jwt', {
                     }
                     Page.update({
                         title: req.body.title || page.title,
-                        title: slug,
+                        slug: slug,
                         body: req.body.body || page.body
                     }, {
                         where: {
@@ -156,46 +161,6 @@ router.delete('/:id', passport.authenticate('jwt', {
                             'message': 'Page not found'
                         });
                     }
-                })
-                .catch((error) => {
-                    res.status(400).send(error);
-                });
-        }
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
-});
-
-// Add Permissions to Role
-router.post('/permissions/:id', passport.authenticate('jwt', {
-    session: false
-}), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
-        if (!req.body.permissions) {
-            res.status(400).send({
-                msg: 'Please pass permissions.'
-            })
-        } else {
-            Role
-                .findByPk(req.params.id)
-                .then((role) => {
-                    req.body.permissions.forEach(function (item, index) {
-                        Permission
-                            .findByPk(item)
-                            .then(async (perm) => {
-                                await role.addPermissions(perm, {
-                                    through: {
-                                        selfGranted: false
-                                    }
-                                });
-                            })
-                            .catch((error) => {
-                                res.status(400).send(error);
-                            });
-                    });
-                    res.status(200).send({
-                        'message': 'Permissions added'
-                    });
                 })
                 .catch((error) => {
                     res.status(400).send(error);
