@@ -1,25 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
-import { useForm } from 'react-hook-form'
-import { useSelector, useDispatch } from 'react-redux'
 import { Typeahead } from 'react-bootstrap-typeahead';
-import TypeaheadOne from './typeahead-one';
 import axios from 'axios'
-import ImageUploader from 'react-images-upload';
-import { BasicDemo,MultipleSelections,CustomSelections,Remote } from "../../../constant";
-import {SelectSingleImageUpload,MultipleImageUpload} from '../../../constant'
-
 
 
 const VendorProfile = (props) => {
-  const [image, setimage] = useState({ pictures: [] })
-  const onDrop = (pictureFiles, pictureDataURLs) => {
-        setimage({
-            ...image, pictureFiles
-        });
-    }
  const multiple = false
     const [options,setOptions] = useState([])
 
@@ -27,7 +13,58 @@ const VendorProfile = (props) => {
         axios.get(`${process.env.PUBLIC_URL}/api/typeaheadData.json`).then(res => setOptions(res.data))
     },[])
 
+    const [name, setName] = useState()
+    const [email, setEmail] = useState()
+    const [managername, setManagerName] = useState()
+    const [manageremail, setManagerEmail] = useState()
+    const [phone, setPhone] = useState()
+    const [fax, setFax] = useState()
+
+    const onChangeName = (event) => {
+      setName(event.target.value);
+    };
+
+    const onChangeEmail = (event) => {
+      setEmail(event.target.value);
+    };
+
+    const onChangeManagerEmail = (event) => {
+      setManagerEmail(event.target.value);
+    };
+    const onChangeManagerName = (event) => {
+      setManagerName(event.target.value);
+    };
+    const onChangePhone = (event) => {
+      setPhone(event.target.value);
+    };
+    const onChangefax = (event) => {
+      setFax(event.target.value);
+    };
+
+    const [profileData, setProfileData] = useState({});
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+    useEffect(() => {
+      const GetData = async () => {
+          const config = {
+      headers: {'Authorization': 'JWT '+token }
+    };
+        const result = await axios('/api/profile/'+`${id}`,config);
+        setProfileData(result.data);
+        setName(result.data.business_name)
+        setEmail(result.data.business_email)
+        setManagerName(result.data.manager_name)
+        setManagerEmail(result.data.manager_email)
+        setPhone(result.data.phone_number)
+        setFax(result.data.fax)
+        
+      };
+      GetData();
+    }, []);
     
+
+
+  console.log(profileData);
 
   return (
     <Fragment>
@@ -40,13 +77,13 @@ const VendorProfile = (props) => {
             <Col xl="6" sm="12">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Business Name"}</Label>
-                <Input className="form-control"  type="name" placeholder="" />
+                <Input className="form-control" value= {name}  onChange={onChangeName} type="name" placeholder="" />
               </FormGroup>
             </Col>
             <Col xl="6" sm="12">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Business Email"}</Label>
-                <Input className="form-control"  type="email" placeholder="" />
+                <Input className="form-control" value={email} onChange={onChangeEmail} type="email" placeholder="" />
               </FormGroup>
             </Col>
           </Row>
@@ -54,13 +91,13 @@ const VendorProfile = (props) => {
             <Col xl="6" sm="12">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Owner/Manager Name"}</Label>
-                <Input className="form-control"  type="name" placeholder="" />
+                <Input className="form-control"  value={managername} onChange = {onChangeManagerName} type="name" placeholder="" />
               </FormGroup>
             </Col>
             <Col xl="6" sm="12">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Owner/Manager Email"}</Label>
-                <Input className="form-control"  type="email" placeholder="" />
+                <Input className="form-control"  value={manageremail} onChange= {onChangeManagerEmail} type="email" placeholder="" />
               </FormGroup>
             </Col>
           </Row>
@@ -68,13 +105,13 @@ const VendorProfile = (props) => {
             <Col xl="6" sm="12">
               <FormGroup>
                <Label htmlFor="exampleFormControlInput1">{"Phone Number"}</Label>
-               <Input className="form-control"  type="tel" placeholder="" />
+               <Input className="form-control"  value={phone}  onChange={onChangePhone} type="tel" placeholder="" />
               </FormGroup>
             </Col>
             <Col xl="6" sm="12">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Fax"}</Label>
-                <Input className="form-control"  type="name" placeholder="" />
+                <Input className="form-control"  value={fax} onChange={onChangefax} type="name" placeholder="" />
               </FormGroup>
             </Col>
           </Row>
