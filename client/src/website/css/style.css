@@ -814,7 +814,10 @@ table th, table td{
     border: 1px solid #efefef !important;
 }
 .form-control::placeholder{
-    color: #eee;
+    color: #ddd;
+}
+.adminDash .card .card-body{
+    padding: 40px 15px;
 }
 .AddsMembership h1 span{
     color: #7364f6;
