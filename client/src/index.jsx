@@ -19,6 +19,10 @@ import {FaArrowCircleUp} from 'react-icons/fa';
 // Signin page
 import Signin from './auth/signin'
 
+
+// Vendor Signin page
+import Vendorsignin from './auth/vendorsignin'
+
 // Home Page
 import Home from './website/home'
 import Restaurants from './website/restaurants'
@@ -114,6 +118,7 @@ const Root = (props) =>  {
         <Switch>
           <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
+          <Route  path={`${process.env.PUBLIC_URL}/vendor/login`} component={Vendorsignin} />
           <Route  path={`${process.env.PUBLIC_URL}/home`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/resturent/details`} component={Details} />
           <Route  path={`${process.env.PUBLIC_URL}/blog/blogdetails`} component={Blogdetails} />
