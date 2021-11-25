@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2021 at 10:51 AM
+-- Generation Time: Nov 25, 2021 at 01:21 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -184,8 +184,11 @@ CREATE TABLE `jobopenings` (
 --
 
 INSERT INTO `jobopenings` (`id`, `user_id`, `job_name`, `job_description`, `status`, `createdAt`, `updatedAt`) VALUES
-(1, NULL, 'admin', 'Admin Application1', NULL, '2021-11-25 06:20:13', '2021-11-25 06:42:02'),
-(3, 2, 'sub user', 'sub admin users', NULL, '2021-11-25 06:41:03', '2021-11-25 06:41:03');
+(1, NULL, 'admin', 'Admin Application', NULL, '2021-11-25 06:20:13', '2021-11-25 11:17:19'),
+(3, 2, 'sub user', 'sub admin users', NULL, '2021-11-25 06:41:03', '2021-11-25 06:41:03'),
+(4, NULL, 'krishna', 'Mishra1', NULL, '2021-11-25 11:18:23', '2021-11-25 11:18:55'),
+(5, 2, 'sub user', 'sub admin users', NULL, '2021-11-25 11:55:39', '2021-11-25 11:55:39'),
+(6, 3, 'sub user', 'sub admin users', NULL, '2021-11-25 11:55:54', '2021-11-25 11:55:54');
 
 -- --------------------------------------------------------
 
@@ -419,7 +422,8 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 ('20211124075049-create-profile.js'),
 ('20211124092748-create-profile-category.js'),
 ('20211125050654-create-vendor.js'),
-('20211125061100-create-job-opening.js');
+('20211125061100-create-job-opening.js'),
+('20211125112234-create-video-gallery.js');
 
 -- --------------------------------------------------------
 
@@ -506,7 +510,33 @@ INSERT INTO `vendors` (`id`, `name`, `email`, `mobile`, `address`, `password`, `
 (1, 'Krishna Mishra', 'krishna34@gmail.com', 'dd', 'dd', '$2a$10$IDreqkicRs4BH/vC.5mgIu7O9UvaeUlLl3DSMVJWolcjDSaaKTlqG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:30:16', '2021-11-25 09:30:16'),
 (2, 'Krishna Mishra', 'krishna1@gmail.com', 'dd', 'dd', '$2a$10$YsgTqlhEiBLifEhSH8JvruclDxNhHnHpI7h3kKsT.TLCuuklVpsaa', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:32:10', '2021-11-25 09:32:10'),
 (3, 'Krishna Mishra', 'krishna14@gmail.com', 'dd', 'dd', '$2a$10$VM15vS82yX5E6VV7K8/DvefqPHZTkbgAGcCaJLrBVJc9A30Xk.l3i', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:36:43', '2021-11-25 09:36:43'),
-(4, 'Krishna Mishra', 'krishna143@gmail.com', 'dd', 'dd', '$2a$10$.mhh1axeEUvdjPyWpCaMXuhT6dRneZwGptkn2U.7fPZ.2YvlWkAeG', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:48:02', '2021-11-25 09:48:02');
+(4, 'Krishna Mishra', 'krishna143@gmail.com', 'dd', 'dd', '$2a$10$.mhh1axeEUvdjPyWpCaMXuhT6dRneZwGptkn2U.7fPZ.2YvlWkAeG', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:48:02', '2021-11-25 09:48:02'),
+(5, 'Krishna Mishra', 'krishna143w@gmail.com', 'dd', 'dd', '$2a$10$I7U0S0snB8v7ZJmW.PqzQ.kV/ENFJ5L4IGiyQ4l099FFdiHua5eUm', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 12:00:43', '2021-11-25 12:00:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `videogalleries`
+--
+
+CREATE TABLE `videogalleries` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `video_name` varchar(255) DEFAULT NULL,
+  `youtube_link` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `videogalleries`
+--
+
+INSERT INTO `videogalleries` (`id`, `user_id`, `video_name`, `youtube_link`, `status`, `createdAt`, `updatedAt`) VALUES
+(1, 2, 'admin', 'Admin Application', NULL, '2021-11-25 11:30:35', '2021-11-25 11:52:27'),
+(3, 2, 'sub user1', 'sub admin users', NULL, '2021-11-25 11:40:22', '2021-11-25 11:40:22'),
+(4, 3, 'sub user3', 'sub admin users', NULL, '2021-11-25 11:40:30', '2021-11-25 11:40:30');
 
 --
 -- Indexes for dumped tables
@@ -613,6 +643,12 @@ ALTER TABLE `vendors`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `videogalleries`
+--
+ALTER TABLE `videogalleries`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -650,7 +686,7 @@ ALTER TABLE `couponusers`
 -- AUTO_INCREMENT for table `jobopenings`
 --
 ALTER TABLE `jobopenings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `memberships`
@@ -704,6 +740,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `videogalleries`
+--
+ALTER TABLE `videogalleries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
