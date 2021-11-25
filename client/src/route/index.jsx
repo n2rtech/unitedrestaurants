@@ -168,6 +168,8 @@ import Search from "../components/search"
 
 // E-commerce-app 
 import AddVendor from "../components/application/bookmark/add-vendor"
+import EditAccountsPayable from "../components/application/bookmark/edit-payable"
+import AddAccountsPayable from "../components/application/bookmark/add-payable"
 import EditAdminMembership from "../components/application/bookmark/edit-admin-membership"
 import PromotionsDiscount from "../components/application/bookmark/promotions-discount"
 import EditPromotionsDiscount from "../components/application/bookmark/edit-promotions-discount"
@@ -211,6 +213,10 @@ import PaymentMethod from "../components/application/bookmark/payment-method"
 import AddsMembership from "../components/application/bookmark/adds-membership"
 import AddSpaces from "../components/application/bookmark/ad-spaces"
 import MenuItems from "../components/application/bookmark/menu-items"
+import AccountsPayable from "../components/application/bookmark/accounts-payable"
+import AddCountries from "../components/application/bookmark/add-countries"
+import EditCountries from "../components/application/bookmark/edit-countries"
+import Countries from "../components/application/bookmark/countries"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -426,6 +432,12 @@ export const routes = [
         { path:"/dashboard/vendor/adds-membership", Component:AddsMembership},
         { path:"/dashboard/vendor/ad-spaces", Component:AddSpaces},
         { path:"/dashboard/vendor/menu-items", Component:MenuItems},
+        { path:"/dashboard/admin/accounts-payable", Component:AccountsPayable},
+        { path:"/dashboard/admin/edit-payable", Component:EditAccountsPayable},
+        { path:"/dashboard/admin/add-payable", Component:AddAccountsPayable},
+        { path:"/dashboard/admin/countries", Component:Countries},
+        { path:"/dashboard/admin/add-countries", Component:AddCountries},
+        { path:"/dashboard/admin/edit-countries", Component:EditCountries},
 
         {path:"/app/project/project-list", Component:ProjectList},
         {path:"/app/project/new-project", Component:NewProject},
