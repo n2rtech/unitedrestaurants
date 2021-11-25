@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
+import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane, Dropdown } from 'reactstrap'
 import './css/style.css'
 
 
@@ -95,7 +95,21 @@ const [isOpen, setIsOpen] = React.useState(false);
                         Reset
                       </DropdownItem>
                     </DropdownMenu>
+                    <DropdownMenu right>
+                      <DropdownItem>
+                        Option 1
+                      </DropdownItem>
+                      <DropdownItem>
+                        Option 2
+                      </DropdownItem>
+                      <DropdownItem divider />
+                      <DropdownItem>
+                        Reset
+                      </DropdownItem>
+                    </DropdownMenu>
+
                   </UncontrolledDropdown>
+                  
                 </Nav>
               </Collapse>
             </Navbar>
