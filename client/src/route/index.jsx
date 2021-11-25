@@ -205,6 +205,7 @@ import VendorPhotogallery from "../components/application/bookmark/vendor-photog
 import VendorVideoGallery from "../components/application/bookmark/vendor-videogallery"
 import EditVideoGallery from "../components/application/bookmark/edit-video-gallery"
 import JobOpenings from "../components/application/bookmark/job-openings"
+import AddJobOpenings from "../components/application/bookmark/add-job-openings"
 import EditJobOpenings from "../components/application/bookmark/edit-job-openings"
 import PaymentMethod from "../components/application/bookmark/payment-method"
 import AddsMembership from "../components/application/bookmark/adds-membership"
@@ -419,6 +420,7 @@ export const routes = [
         { path:"/dashboard/vendor/vendor-videogallery", Component:VendorVideoGallery},
         { path:"/dashboard/vendor/edit-video-gallery", Component:EditVideoGallery},
         { path:"/dashboard/vendor/job-openings", Component:JobOpenings},
+        { path:"/dashboard/vendor/add-job-openings", Component:AddJobOpenings},
         { path:"/dashboard/vendor/edit-job-openings/:id", Component:EditJobOpenings},
         { path:"/dashboard/vendor/payment-method", Component:PaymentMethod},
         { path:"/dashboard/vendor/adds-membership", Component:AddsMembership},
