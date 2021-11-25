@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2021 at 09:51 AM
+-- Generation Time: Nov 25, 2021 at 06:22 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -34,6 +34,7 @@ CREATE TABLE `categories` (
   `description` text,
   `slug` varchar(151) DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
   `image` text,
   `sort_order` int(10) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
@@ -45,24 +46,18 @@ CREATE TABLE `categories` (
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `description`, `slug`, `parent_id`, `image`, `sort_order`, `status`, `createdAt`, `updatedAt`) VALUES
-(1, 'Bracelets', 'Bracelets', NULL, 0, '', 1, 1, '2021-11-15 07:41:01', '2021-11-15 07:41:01'),
-(2, 'Sunglasses', 'Sunglasses', NULL, 1, '', 1, 1, '2021-11-15 07:41:15', '2021-11-15 07:41:15'),
-(4, 'krishna', 'Krishna Mishra', NULL, 2, 'image_1637739295874.jpg', 1, 1, '2021-11-15 07:46:54', '2021-11-24 07:34:55'),
-(5, 'watches', 'watches', NULL, 2, '', 1, 1, '2021-11-15 07:47:27', '2021-11-15 07:47:27'),
-(6, 'Bags', 'Bags', NULL, 4, '', 1, 1, '2021-11-15 07:48:36', '2021-11-15 07:48:36'),
-(7, 'Chains', 'Chains', NULL, 6, '', 1, 1, '2021-11-15 07:49:09', '2021-11-15 07:49:09'),
-(8, 'Bevrages', 'Bevrages', NULL, 3, '', 1, 1, '2021-11-15 07:49:30', '2021-11-15 07:49:30'),
-(9, ' Bevrages2,', ' Bevrages1,', NULL, 4, ',', 1, 1, '2021-11-15 11:58:26', '2021-11-15 11:58:26'),
-(10, 'krishna', 'Krishna Mishra', NULL, 4, 'image_1637678071773.jpg', 1, 1, '2021-11-16 09:56:48', '2021-11-23 14:34:31'),
-(11, 'Bevrages7', 'Bevrages6', NULL, 7, 'image_1637057493463.jpg', 1, 1, '2021-11-16 10:11:33', '2021-11-16 10:11:33'),
-(12, '', NULL, NULL, NULL, 'image_1637695236415.jpg', NULL, 0, '2021-11-23 19:20:36', '2021-11-23 19:20:36'),
-(13, '', NULL, NULL, NULL, 'image_1637695236443.JPG', NULL, 0, '2021-11-23 19:20:36', '2021-11-23 19:20:36'),
-(14, '', NULL, NULL, NULL, 'image_1637695236722.jpg', NULL, 0, '2021-11-23 19:20:36', '2021-11-23 19:20:36'),
-(15, '', NULL, NULL, NULL, 'image_1637695259251.JPG', NULL, 0, '2021-11-23 19:20:59', '2021-11-23 19:20:59'),
-(16, '', NULL, NULL, NULL, 'image_1637695259233.jpg', NULL, 0, '2021-11-23 19:20:59', '2021-11-23 19:20:59'),
-(17, '', NULL, NULL, NULL, 'image_1637695259471.jpg', NULL, 0, '2021-11-23 19:20:59', '2021-11-23 19:20:59'),
-(18, 'Bevrages711', 'Bevrages6', NULL, 7, 'image_1637737637873.jpg', 1, 1, '2021-11-24 07:07:17', '2021-11-24 07:07:17');
+INSERT INTO `categories` (`id`, `name`, `description`, `slug`, `parent_id`, `category_id`, `image`, `sort_order`, `status`, `createdAt`, `updatedAt`) VALUES
+(1, 'Bracelets', 'Bracelets', NULL, 0, NULL, '', 1, 1, '2021-11-15 07:41:01', '2021-11-15 07:41:01'),
+(2, 'Sunglasses', 'Sunglasses', NULL, 1, NULL, '', 1, 1, '2021-11-15 07:41:15', '2021-11-15 07:41:15'),
+(4, 'krishna', 'Krishna Mishra', NULL, 2, NULL, 'image_1637739295874.jpg', 1, 1, '2021-11-15 07:46:54', '2021-11-24 07:34:55'),
+(5, 'watches', 'watches', NULL, 2, NULL, '', 1, 1, '2021-11-15 07:47:27', '2021-11-15 07:47:27'),
+(6, 'Bags', 'Bags', NULL, 4, NULL, '', 1, 1, '2021-11-15 07:48:36', '2021-11-15 07:48:36'),
+(7, 'Chains', 'Chains', NULL, 6, NULL, '', 1, 1, '2021-11-15 07:49:09', '2021-11-15 07:49:09'),
+(8, 'Bevrages', 'Bevrages', NULL, 3, NULL, '', 1, 1, '2021-11-15 07:49:30', '2021-11-15 07:49:30'),
+(9, ' Bevrages2,', ' Bevrages1,', NULL, 4, NULL, ',', 1, 1, '2021-11-15 11:58:26', '2021-11-15 11:58:26'),
+(10, 'krishna', 'Krishna Mishra', NULL, 4, NULL, 'image_1637678071773.jpg', 1, 1, '2021-11-16 09:56:48', '2021-11-23 14:34:31'),
+(11, 'Bevrages7', 'Bevrages6', NULL, 7, NULL, 'image_1637057493463.jpg', 1, 1, '2021-11-16 10:11:33', '2021-11-16 10:11:33'),
+(18, 'Bevrages711', 'Bevrages6', NULL, 7, NULL, 'image_1637737637873.jpg', 1, 1, '2021-11-24 07:07:17', '2021-11-24 07:07:17');
 
 -- --------------------------------------------------------
 
@@ -259,6 +254,28 @@ INSERT INTO `permissions` (`id`, `perm_name`, `perm_description`, `createdAt`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `profilecategories`
+--
+
+CREATE TABLE `profilecategories` (
+  `id` int(11) NOT NULL,
+  `profile_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `profilecategories`
+--
+
+INSERT INTO `profilecategories` (`id`, `profile_id`, `category_id`, `createdAt`, `updatedAt`) VALUES
+(10, 1, 2, '2021-11-25 05:03:33', '2021-11-25 05:03:33'),
+(11, 1, 5, '2021-11-25 05:03:33', '2021-11-25 05:03:33');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `profiles`
 --
 
@@ -273,6 +290,7 @@ CREATE TABLE `profiles` (
   `fax` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `categories` varchar(255) DEFAULT NULL,
+  `banner` varchar(151) DEFAULT NULL,
   `website_link` varchar(255) DEFAULT NULL,
   `facebook` varchar(255) DEFAULT NULL,
   `instagram` varchar(255) DEFAULT NULL,
@@ -285,8 +303,8 @@ CREATE TABLE `profiles` (
 -- Dumping data for table `profiles`
 --
 
-INSERT INTO `profiles` (`id`, `user_id`, `business_name`, `business_email`, `manager_name`, `manager_email`, `phone_number`, `fax`, `address`, `categories`, `website_link`, `facebook`, `instagram`, `youtube`, `createdAt`, `updatedAt`) VALUES
-(1, 2, 'string11', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', '2021-11-24 08:20:23', '2021-11-24 08:40:53');
+INSERT INTO `profiles` (`id`, `user_id`, `business_name`, `business_email`, `manager_name`, `manager_email`, `phone_number`, `fax`, `address`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `createdAt`, `updatedAt`) VALUES
+(1, 2, 'string11', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'banner_1637816612642.jpg', 'string', 'string', 'string', 'string', '2021-11-24 08:20:23', '2021-11-25 05:03:32');
 
 -- --------------------------------------------------------
 
@@ -341,7 +359,7 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `role_name`, `role_id`, `role_description`, `createdAt`, `updatedAt`) VALUES
 (1, 'admin', 0, 'admin', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'vendor', 0, 'vendor', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'vendor', 0, 'vendor', '2021-11-24 00:00:00', '2021-11-24 00:00:00'),
 (3, 'seratory', 0, 'seratory', '2021-11-12 08:01:30', '2021-11-12 08:01:30'),
 (4, 'staff', 0, 'Staff', '2021-11-12 12:31:12', '2021-11-12 12:31:12'),
 (5, 'sub user', 0, 'sub admin users', '2021-11-18 10:50:28', '2021-11-18 10:50:28'),
@@ -373,7 +391,9 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 ('20211118051731-create-coupon-user.js'),
 ('20211118115407-create-page.js'),
 ('20211122090051-create-country.js'),
-('20211124075049-create-profile.js');
+('20211124075049-create-profile.js'),
+('20211124092748-create-profile-category.js'),
+('20211125050654-create-vendor.js');
 
 -- --------------------------------------------------------
 
@@ -424,7 +444,29 @@ INSERT INTO `users` (`id`, `role_id`, `category_id`, `country_id`, `role`, `emai
 (19, 2, 1, 2, NULL, 'qonifixup@mailinator.com', '$2a$10$RJaff32OJkXkM.E1F9MO/ug9Pp3VHq51c4C.3DYQCvo58WzH0reM.', 'Kimberly Hayes', NULL, NULL, NULL, 'Fugit id repellendu', '2021-11-22 09:29:46', '2021-11-22 09:29:46'),
 (20, 2, 1, 2, NULL, 'wesocimyx@mailinator.com', '$2a$10$R4IA2nu7flHCrJNXC.30SeH9vacHav0kbWKYWlPhGkaJTgYulBsdG', 'Anthony Acevedo', NULL, NULL, NULL, 'Corporis architecto ', '2021-11-23 08:17:39', '2021-11-23 08:17:39'),
 (21, 2, 3, 2, NULL, 'tuwazy@mailinator.com', '$2a$10$7vjQBU.b7fYJIcy.vcDEduaALCeacI284wvsRPvXXTOHao4YVSbOq', 'Rosalyn Mcconnell', NULL, NULL, NULL, 'Quisquam sit aut ip', '2021-11-23 08:18:20', '2021-11-23 08:18:20'),
-(22, 2, 3, 3, NULL, 'tafow@mailinator.com', '$2a$10$kKvZRqlZA3ne7Zf9dY/PnehRHjVOaThdSGaVIhz6KeIVg6KC/3ZjG', 'Iris Campbell', NULL, '75', '75', 'Rerum labore quas la', '2021-11-23 08:21:25', '2021-11-23 08:21:25');
+(22, 2, 4, 3, NULL, 'tafow@mailinator.com', '$2a$10$kKvZRqlZA3ne7Zf9dY/PnehRHjVOaThdSGaVIhz6KeIVg6KC/3ZjG', 'Iris Campbell', NULL, '75', '75', 'Rerum labore quas la', '2021-11-23 08:21:25', '2021-11-23 08:21:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendors`
+--
+
+CREATE TABLE `vendors` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `department` varchar(255) DEFAULT NULL,
+  `subscription_plan` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `membership_id` int(11) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -480,6 +522,12 @@ ALTER TABLE `permissions`
   ADD UNIQUE KEY `perm_name` (`perm_name`);
 
 --
+-- Indexes for table `profilecategories`
+--
+ALTER TABLE `profilecategories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `profiles`
 --
 ALTER TABLE `profiles`
@@ -511,6 +559,12 @@ ALTER TABLE `sequelizemeta`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `vendors`
+--
+ALTER TABLE `vendors`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -565,6 +619,12 @@ ALTER TABLE `permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT for table `profilecategories`
+--
+ALTER TABLE `profilecategories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
@@ -587,6 +647,12 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `vendors`
+--
+ALTER TABLE `vendors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
