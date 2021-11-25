@@ -1,12 +1,59 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
-import { useForm } from 'react-hook-form'
-import { useSelector, useDispatch } from 'react-redux'
-
+import { useParams } from "react-router-dom";
+import {toast} from 'react-toastify';
+import axios from 'axios'
 
 const EditJobOpenings = (props) => {
+
+    const [jobname, setJobname] = useState()
+    const [description, setDescription] = useState()
+    const params = useParams();
+    const token = localStorage.getItem("token");
+
+    const onChangeJobname = (event) => {
+      setJobname(event.target.value);
+    };
+
+    const onChangeDescription = (event) => {
+      setDescription(event.target.value);
+    };
+
+    useEffect(() => {
+      const GetData = async () => {
+          const config = {
+      headers: {'Authorization': 'JWT '+token }
+    };
+        const result = await axios('/api/jobs/'+`${params.id}`,config);
+        setJobname(result.data.job_name)
+        setDescription(result.data.job_description)
+      };
+      GetData();
+    }, []);
+
+
+
+
+  // Edit Api
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+      };
+      const bodyParameters = {
+        job_name: jobname,
+        job_description: description
+      };
+      axios.put(`/api/jobs/`+`${params.id}`,
+        bodyParameters,
+        config
+      ) .then(response => toast.success("Jobs updated !")  )
+         .catch(error => console.log('Form submit error', error))
+
+  };
 
   return (
     <Fragment>
@@ -17,14 +64,14 @@ const EditJobOpenings = (props) => {
             <Form className="form theme-form">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Job name"}</Label>
-                <Input className="form-control"  type="name" />
+                <Input className="form-control" value = {jobname}  onChange = {onChangeJobname} type="name" />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Description"}</Label>
-                <Input type="textarea" className="form-control"  rows="3"/>
+                <Input type="textarea" className="form-control" value = {description} onChange = {onChangeDescription} rows="3"/>
               </FormGroup>
               <FormGroup>
-                <Button  color="primary">{"Save"}</Button>
+                <Button  color="primary" onClick = {handleSubmit}>{"Save"}</Button>
               </FormGroup>
             </Form>
           </CardBody>

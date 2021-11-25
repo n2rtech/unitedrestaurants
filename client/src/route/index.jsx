@@ -419,7 +419,7 @@ export const routes = [
         { path:"/dashboard/vendor/vendor-videogallery", Component:VendorVideoGallery},
         { path:"/dashboard/vendor/edit-video-gallery", Component:EditVideoGallery},
         { path:"/dashboard/vendor/job-openings", Component:JobOpenings},
-        { path:"/dashboard/vendor/edit-job-openings", Component:EditJobOpenings},
+        { path:"/dashboard/vendor/edit-job-openings/:id", Component:EditJobOpenings},
         { path:"/dashboard/vendor/payment-method", Component:PaymentMethod},
         { path:"/dashboard/vendor/adds-membership", Component:AddsMembership},
         { path:"/dashboard/vendor/ad-spaces", Component:AddSpaces},
