@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Vendor.init({
     name: DataTypes.STRING,
     email: DataTypes.STRING,
+    mobile: DataTypes.STRING,
+    address: DataTypes.TEXT,
     password: DataTypes.STRING,
     country_id: DataTypes.INTEGER,
     category_id: DataTypes.INTEGER,

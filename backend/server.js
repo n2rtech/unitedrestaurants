@@ -4,6 +4,7 @@ const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const users = require("./routes/api/users");
+const vendors = require("./routes/api/vendors");
 const roles = require("./routes/roles");
 const countries = require("./routes/countries");
 const category = require("./routes/category");
@@ -36,6 +37,7 @@ app.use(
 
 // Routes
 app.use("/api/users", users);
+app.use("/api/vendors", vendors);
 
 app.use("/api/roles", roles);
 app.use("/api/countries", countries);

@@ -11,7 +11,7 @@ const Role = require('../../models').Role;
 const Category = require('../../models').Category;
 const Country = require('../../models').Country;
 const passport = require('passport');
-require('../../config/passport')(passport);
+require('../../config/vendor_passport')(passport);
 const Helper = require('../../utils/helper');
 const helper = new Helper();
 const Op = require('sequelize').Op
@@ -28,7 +28,7 @@ router.post("/register", (req, res) => {
   }
 
 
-  DB.query('SELECT email FROM users WHERE email ="' + req.body.email +'"', function (err, user) {
+  DB.query('SELECT email FROM vendors WHERE email ="' + req.body.email +'"', function (err, user) {
     if (err) throw err;
     if (user[0]) {
       return res.status(400).json({ error: "Email already exists" });
@@ -36,36 +36,27 @@ router.post("/register", (req, res) => {
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(req.body.password, salt, (err, hash) => {
           if (err) throw err;         
-          var name = req.body.first_name+' '+req.body.last_name;
-
-
-          Role.findOne({
-            where: {
-                role_name: req.body.role? req.body.role : 'vendor'
-            }
-        }).then((role) => {
-            User
+          var name = req.body.first_name+' '+req.body.last_name;      
+            Vendor
             .create({
                 email: req.body.email,
                 password: hash,
                 name: name,
                 mobile: req.body.mobile,
-                category_id: req.body.category_id,
-                country_id: req.body.country_id,
-                phone: req.body.mobile,
                 address: req.body.address,
-                role_id: role.id
+                category_id: req.body.category_id,
+                country_id: req.body.country_id
             })
             .then((user) => res.status(201).send({
               succeed: true,
-              message: "user inserted successfully!"
+              message: "vendor created successfully!"
             }));               
-        })
       });     
     });
   }
 });
 });
+
 
 router.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
@@ -78,14 +69,13 @@ router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  let sql = "SELECT * FROM users where email = '"+email+"'";
+  let sql = "SELECT * FROM vendors where email = '"+email+"'";
   DB.query(sql,(err,user)=>{
     if(err){
       return res.status(404).json({ error: "Error in sql!" });   
     }else if (!user[0]) {
       return res.status(404).json({ error: "Email or Password not found" });
     }else {
-      console.log(user[0]);
       bcrypt.compare(password, user[0].password).then(isMatch => {
         if (isMatch) {
           const payload = {
@@ -117,6 +107,7 @@ router.post("/login", (req, res) => {
     }
   });
 });
+
 
 
 // Get Users by Role ID

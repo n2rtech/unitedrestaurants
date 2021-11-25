@@ -136,7 +136,7 @@ router.put('/:id', imageUpload.single('banner'), (req, res) => {
                     if (req.file) {
                         var image = req.file.filename;
                     }else{
-                        var image = category.banner;
+                        var image = profile.banner;
                     }
 
                     Profile.update({
@@ -155,13 +155,14 @@ router.put('/:id', imageUpload.single('banner'), (req, res) => {
                         youtube: req.body.youtube || profile.youtube
                     }, {
                         where: {
-                            user_id: req.params.id
+                            id: profile.id
                         }
                     }).then((dddd) => {
 
                         ProfileCategory.destroy({ where: { profile_id: profile.id }});
-
-                        req.body.categories.forEach(function (item, index) {
+                        var arr = req.body.categories.split(',');
+                        arr.forEach(function (item, index) {
+                            console.log(item);
                         Category
                         .findByPk(item)
                         .then(async (category) => {
@@ -176,16 +177,16 @@ router.put('/:id', imageUpload.single('banner'), (req, res) => {
                         });
                     });
                       res.status(200).send({
-                        'message': 'Permissions added'
+                        'message': 'Profile added'
                     });
 
                         res.status(200).send({
                             'message': 'Profile updated'
                         });
-                    }).catch(err => res.status(400).send(err));
+                    }).catch(err => res.status(400).send('err'));
                 })
                 .catch((error) => {
-                    res.status(400).send(error);
+                    res.status(400).send('error');
                 });
         }
 });

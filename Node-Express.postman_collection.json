@@ -2081,7 +2081,7 @@
 			"response": []
 		},
 		{
-			"name": "Roles Get",
+			"name": "Jobs Get",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -2218,6 +2218,114 @@
 						"api",
 						"jobs",
 						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vendor register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "first_name",
+							"value": "Krishna",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "krishna143@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Mishra",
+							"type": "text"
+						},
+						{
+							"key": "mobile",
+							"value": "dd",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "dd",
+							"type": "text"
+						},
+						{
+							"key": "country_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "category_id",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vendor login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "krishna143@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"login"
 					]
 				}
 			},

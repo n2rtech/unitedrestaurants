@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2021 at 06:22 AM
+-- Generation Time: Nov 25, 2021 at 10:51 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -49,8 +49,8 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`, `description`, `slug`, `parent_id`, `category_id`, `image`, `sort_order`, `status`, `createdAt`, `updatedAt`) VALUES
 (1, 'Bracelets', 'Bracelets', NULL, 0, NULL, '', 1, 1, '2021-11-15 07:41:01', '2021-11-15 07:41:01'),
 (2, 'Sunglasses', 'Sunglasses', NULL, 1, NULL, '', 1, 1, '2021-11-15 07:41:15', '2021-11-15 07:41:15'),
-(4, 'krishna', 'Krishna Mishra', NULL, 2, NULL, 'image_1637739295874.jpg', 1, 1, '2021-11-15 07:46:54', '2021-11-24 07:34:55'),
-(5, 'watches', 'watches', NULL, 2, NULL, '', 1, 1, '2021-11-15 07:47:27', '2021-11-15 07:47:27'),
+(4, 'krishna', 'Krishna Mishra', NULL, 0, NULL, 'image_1637739295874.jpg', 1, 1, '2021-11-15 07:46:54', '2021-11-24 07:34:55'),
+(5, 'watches', 'watches', NULL, 0, NULL, '', 1, 1, '2021-11-15 07:47:27', '2021-11-15 07:47:27'),
 (6, 'Bags', 'Bags', NULL, 4, NULL, '', 1, 1, '2021-11-15 07:48:36', '2021-11-15 07:48:36'),
 (7, 'Chains', 'Chains', NULL, 6, NULL, '', 1, 1, '2021-11-15 07:49:09', '2021-11-15 07:49:09'),
 (8, 'Bevrages', 'Bevrages', NULL, 3, NULL, '', 1, 1, '2021-11-15 07:49:30', '2021-11-15 07:49:30'),
@@ -166,6 +166,30 @@ INSERT INTO `couponusers` (`id`, `coupon_id`, `user_id`, `createdAt`, `updatedAt
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jobopenings`
+--
+
+CREATE TABLE `jobopenings` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `job_name` varchar(255) DEFAULT NULL,
+  `job_description` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jobopenings`
+--
+
+INSERT INTO `jobopenings` (`id`, `user_id`, `job_name`, `job_description`, `status`, `createdAt`, `updatedAt`) VALUES
+(1, NULL, 'admin', 'Admin Application1', NULL, '2021-11-25 06:20:13', '2021-11-25 06:42:02'),
+(3, 2, 'sub user', 'sub admin users', NULL, '2021-11-25 06:41:03', '2021-11-25 06:41:03');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `memberships`
 --
 
@@ -270,8 +294,9 @@ CREATE TABLE `profilecategories` (
 --
 
 INSERT INTO `profilecategories` (`id`, `profile_id`, `category_id`, `createdAt`, `updatedAt`) VALUES
-(10, 1, 2, '2021-11-25 05:03:33', '2021-11-25 05:03:33'),
-(11, 1, 5, '2021-11-25 05:03:33', '2021-11-25 05:03:33');
+(25, 1, 1, '2021-11-25 08:27:40', '2021-11-25 08:27:40'),
+(26, 1, 6, '2021-11-25 08:27:40', '2021-11-25 08:27:40'),
+(27, 1, 5, '2021-11-25 08:27:40', '2021-11-25 08:27:40');
 
 -- --------------------------------------------------------
 
@@ -304,7 +329,7 @@ CREATE TABLE `profiles` (
 --
 
 INSERT INTO `profiles` (`id`, `user_id`, `business_name`, `business_email`, `manager_name`, `manager_email`, `phone_number`, `fax`, `address`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `createdAt`, `updatedAt`) VALUES
-(1, 2, 'string11', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'banner_1637816612642.jpg', 'string', 'string', 'string', 'string', '2021-11-24 08:20:23', '2021-11-25 05:03:32');
+(1, 2, 'string11', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'banner_1637828860275.jpg', 'string', 'string', 'string', 'string', '2021-11-24 08:20:23', '2021-11-25 08:27:40');
 
 -- --------------------------------------------------------
 
@@ -393,7 +418,8 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 ('20211122090051-create-country.js'),
 ('20211124075049-create-profile.js'),
 ('20211124092748-create-profile-category.js'),
-('20211125050654-create-vendor.js');
+('20211125050654-create-vendor.js'),
+('20211125061100-create-job-opening.js');
 
 -- --------------------------------------------------------
 
@@ -444,7 +470,9 @@ INSERT INTO `users` (`id`, `role_id`, `category_id`, `country_id`, `role`, `emai
 (19, 2, 1, 2, NULL, 'qonifixup@mailinator.com', '$2a$10$RJaff32OJkXkM.E1F9MO/ug9Pp3VHq51c4C.3DYQCvo58WzH0reM.', 'Kimberly Hayes', NULL, NULL, NULL, 'Fugit id repellendu', '2021-11-22 09:29:46', '2021-11-22 09:29:46'),
 (20, 2, 1, 2, NULL, 'wesocimyx@mailinator.com', '$2a$10$R4IA2nu7flHCrJNXC.30SeH9vacHav0kbWKYWlPhGkaJTgYulBsdG', 'Anthony Acevedo', NULL, NULL, NULL, 'Corporis architecto ', '2021-11-23 08:17:39', '2021-11-23 08:17:39'),
 (21, 2, 3, 2, NULL, 'tuwazy@mailinator.com', '$2a$10$7vjQBU.b7fYJIcy.vcDEduaALCeacI284wvsRPvXXTOHao4YVSbOq', 'Rosalyn Mcconnell', NULL, NULL, NULL, 'Quisquam sit aut ip', '2021-11-23 08:18:20', '2021-11-23 08:18:20'),
-(22, 2, 4, 3, NULL, 'tafow@mailinator.com', '$2a$10$kKvZRqlZA3ne7Zf9dY/PnehRHjVOaThdSGaVIhz6KeIVg6KC/3ZjG', 'Iris Campbell', NULL, '75', '75', 'Rerum labore quas la', '2021-11-23 08:21:25', '2021-11-23 08:21:25');
+(22, 2, 4, 3, NULL, 'tafow@mailinator.com', '$2a$10$kKvZRqlZA3ne7Zf9dY/PnehRHjVOaThdSGaVIhz6KeIVg6KC/3ZjG', 'Iris Campbell', NULL, '75', '75', 'Rerum labore quas la', '2021-11-23 08:21:25', '2021-11-23 08:21:25'),
+(23, 2, 3, 3, NULL, 'krishna14@gmail.com', '$2a$10$1U0gSBBwES0PoSBBQ3t0z.gk6woqOkUF8Y0agtW9ivBiY1Jl9/ifm', 'Krishna Mishra', NULL, 'dd', 'dd', 'dd', '2021-11-25 09:45:58', '2021-11-25 09:45:58'),
+(24, 2, 3, 3, NULL, 'krishna143@gmail.com', '$2a$10$sdvchuXdx28dNPw76A5hM.jju4fFefeqdoPOGjpk6XQNP1p1xGEiG', 'Krishna Mishra', NULL, 'dd', 'dd', 'dd', '2021-11-25 09:46:42', '2021-11-25 09:46:42');
 
 -- --------------------------------------------------------
 
@@ -456,6 +484,8 @@ CREATE TABLE `vendors` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `mobile` varchar(14) DEFAULT NULL,
+  `address` text,
   `password` varchar(255) DEFAULT NULL,
   `country_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
@@ -467,6 +497,16 @@ CREATE TABLE `vendors` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vendors`
+--
+
+INSERT INTO `vendors` (`id`, `name`, `email`, `mobile`, `address`, `password`, `country_id`, `category_id`, `country`, `department`, `subscription_plan`, `status`, `membership_id`, `createdAt`, `updatedAt`) VALUES
+(1, 'Krishna Mishra', 'krishna34@gmail.com', 'dd', 'dd', '$2a$10$IDreqkicRs4BH/vC.5mgIu7O9UvaeUlLl3DSMVJWolcjDSaaKTlqG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:30:16', '2021-11-25 09:30:16'),
+(2, 'Krishna Mishra', 'krishna1@gmail.com', 'dd', 'dd', '$2a$10$YsgTqlhEiBLifEhSH8JvruclDxNhHnHpI7h3kKsT.TLCuuklVpsaa', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:32:10', '2021-11-25 09:32:10'),
+(3, 'Krishna Mishra', 'krishna14@gmail.com', 'dd', 'dd', '$2a$10$VM15vS82yX5E6VV7K8/DvefqPHZTkbgAGcCaJLrBVJc9A30Xk.l3i', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:36:43', '2021-11-25 09:36:43'),
+(4, 'Krishna Mishra', 'krishna143@gmail.com', 'dd', 'dd', '$2a$10$.mhh1axeEUvdjPyWpCaMXuhT6dRneZwGptkn2U.7fPZ.2YvlWkAeG', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:48:02', '2021-11-25 09:48:02');
 
 --
 -- Indexes for dumped tables
@@ -500,6 +540,12 @@ ALTER TABLE `coupons`
 -- Indexes for table `couponusers`
 --
 ALTER TABLE `couponusers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jobopenings`
+--
+ALTER TABLE `jobopenings`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -601,6 +647,12 @@ ALTER TABLE `couponusers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `jobopenings`
+--
+ALTER TABLE `jobopenings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `memberships`
 --
 ALTER TABLE `memberships`
@@ -622,7 +674,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `profilecategories`
 --
 ALTER TABLE `profilecategories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `profiles`
@@ -646,13 +698,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
