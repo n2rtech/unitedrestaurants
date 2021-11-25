@@ -77,9 +77,29 @@ const Register = (props) => {
       formIsValid = false;
       errors["password"] = "field is Required!";
     }
+
+    if (!category_id) {
+      formIsValid = false;
+      errors["category_id"] = "Category is Required!";
+    }
+
+    if (!country_id) {
+      formIsValid = false;
+      errors["country_id"] = "Country is Required!";
+    }
     setErrors(errors);
     return formIsValid;
   }
+
+  console.log(errors);
+
+  const categorychange = (event) => {
+    setCategoryId(event.target.value);
+  };
+
+  const countrychange = (event) => {
+    setCountryId(event.target.value);
+  };
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -127,23 +147,6 @@ const Register = (props) => {
       setEmail(value);
       break;
 
-      case 'category_id': 
-      errors.category_id = 
-      value.length < 1
-      ? 'field is Required!'
-      : '';
-      setCategoryId(value);
-      break;
-
-
-      case 'country_id': 
-      errors.country_id = 
-      value.length < 1
-      ? 'field is Required!'
-      : '';
-      setCountryId(value);
-      break;
-
       case 'password': 
       errors.password = 
       value.length < 1
@@ -174,11 +177,13 @@ const Register = (props) => {
         country_id:country_id,
         password:password
       }
-      axios.post('/api/users/register',query).then(res=>
+
+      console.log(query);
+      axios.post('/api/vendors/register',query).then(res=>
       { 
         if (res.data.succeed === true) {
           setTimeout(() => {
-            toast.error(res.data.message);
+            toast.success(res.data.message);
           }, 200);
           setTimeout(() => {
             history.push('/login');
@@ -231,15 +236,20 @@ const Register = (props) => {
                     </div>
                   </FormGroup>
                   <FormGroup>
+                  <div style={{color:'red'}}>{errors.category_id}</div>
                     <Label>{"Please Select Business Type"}</Label>
-                    <Input type="select" onChange={handleChange} name="category_id" className="form-control digits" id="exampleFormControlSelect7">
+                    <Input type="select" onChange={categorychange} name="category_id" className="form-control digits" id="exampleFormControlSelect7">
+                    
+                    <option>Select Category</option>
                     {categoryData.map((category , i ) => (
                       <Fragment>
                       <option value={category.id}>{category.name}</option>
                     </Fragment>
                       ))}
                     </Input>
+                    
                   </FormGroup>
+                  
                     <FormGroup>
                     <Label className="col-form-label">{EmailAddress}</Label>
                     <Input className="form-control" name="email" value={email} onChange={handleChange} type="email" required="" placeholder="Test@gmail.com"/>
@@ -257,8 +267,11 @@ const Register = (props) => {
                     <textarea className="form-control" placeholder="Address" defaultValue={address} name="address" onChange={handleChange} ></textarea>
                   </FormGroup>
                   <FormGroup>
-                    <Label>{"Please Select Business Type"}</Label>
-                    <Input type="select" onChange={handleChange} name="country_id" className="form-control digits" id="exampleFormControlSelect7">
+                  <div style={{color:'red'}}>{errors.country_id}</div>
+                    <Label>{"Please Select Country"}</Label>
+                    <Input type="select" onChange={countrychange} name="country_id" className="form-control digits" id="exampleFormControlSelect8">
+                    
+                     <option>Select Country</option>
                     {countryData.map((country , i ) => (
                       <Fragment>
                       <option value={country.id}>{country.name}</option>
