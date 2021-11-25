@@ -28,23 +28,27 @@ const multiple = false
             <Form className="form theme-form">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput">{"Business Name"}</Label>
-                <Input className="form-control"  type="name" placeholder="Mohd Sohrab Khan" />
+                <Input className="form-control"  type="name" />
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="exampleFormControlInput1">{"Email"}</Label>
-                <Input className="form-control"  type="email" placeholder="sohrab@n2rtechnologies.com" />
+                <Label htmlFor="exampleFormControlInput1">{"Username/Email"}</Label>
+                <Input className="form-control"  type="email" />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="exampleFormControlInput1">{"Password"}</Label>
+                <Input className="form-control"  type="password" />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Phone Number"}</Label>
-                <Input className="form-control"  type="tel" placeholder="8090895865" />
+                <Input className="form-control"  type="tel" />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
-                <Input className="form-control"  type="name" placeholder="C6, Sector 7, Noida" />
+                <Input className="form-control"  type="name" />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Country"}</Label>
-                <Input className="form-control"  type="name" placeholder="United Kingdom" />
+                <Input className="form-control"  type="name" />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Business Listed"}</Label>
