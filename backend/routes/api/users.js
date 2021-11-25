@@ -8,6 +8,7 @@ const nodemailer = require("nodemailer");
 const User = require('../../models').User;
 const Role = require('../../models').Role;
 const Category = require('../../models').Category;
+const Country = require('../../models').Country;
 const passport = require('passport');
 require('../../config/passport')(passport);
 const Helper = require('../../utils/helper');
@@ -306,22 +307,96 @@ router.get('/vendors', passport.authenticate('jwt', {
   });
 });
 
+router.get('/role/:id', (req, res) => {
+  User
+  .findByPk(req.params.id)
+  .then((user) => { 
+    Role
+    .findByPk(user.role_id)
+    .then((role) => {
+      if (role == null) {
 
-// Get User by ID
-router.get('/:id', passport.authenticate('jwt', {
-  session: false
-}), function (req, res) {
-  helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
-    User
-      .findByPk(req.params.id)
-      .then((user) => res.status(200).send(user))
-      .catch((error) => {
-        res.status(400).send(error);
-      });
-  }).catch((error) => {
-    res.status(403).send(error);
+        res.status(200).send({
+          succeed: false,
+          message: "Role not found!"
+        })
+      }
+      res.status(200).send(role)
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
+  })
+  .catch((error) => {
+    res.status(400).send(error);
   });
 });
+
+
+// Get User by ID
+router.get('/category/:id', (req, res) => {
+  User
+  .findByPk(req.params.id)
+  .then((user) => { 
+    Category
+    .findByPk(user.category_id)
+    .then((category) => {
+      if (category == null) {
+
+        res.status(200).send({
+          succeed: false,
+          message: "Category not found!"
+        })
+      }
+      res.status(200).send(category)
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
+  })
+  .catch((error) => {
+    res.status(400).send(error);
+  });
+});
+
+
+// Get User by ID
+// Get User by ID
+router.get('/country/:id', (req, res) => {
+  User
+  .findByPk(req.params.id)
+  .then((user) => { 
+    Country
+    .findByPk(user.country_id)
+    .then((country) => {
+      if (country == null) {
+
+        res.status(200).send({
+          succeed: false,
+          message: "Country not found!"
+        })
+      }
+      res.status(200).send(country)
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
+  })
+  .catch((error) => {
+    res.status(400).send(error);
+  });
+});
+
+// Get User by ID
+router.get('/:id', (req, res) => {
+  User
+  .findByPk(req.params.id)
+  .then((user) => res.status(200).send(user))
+  .catch((error) => {
+    res.status(400).send(error);
+  });
+});
+
 
 
 

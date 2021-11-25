@@ -23,6 +23,9 @@ module.exports = {
       manager_email: {
         type: Sequelize.STRING
       },
+      banner: {
+        type: Sequelize.STRING
+      },
       phone_number: {
         type: Sequelize.STRING
       },

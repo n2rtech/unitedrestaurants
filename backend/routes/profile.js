@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models').User;
 const Profile = require('../models').Profile;
+const ProfileCategory = require('../models').ProfileCategory;
 const Category = require('../models').Category;
 const Role = require('../models').Role;
 const Permission = require('../models').Permission;
@@ -9,6 +10,33 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
+const path = require('path');
+var multer  = require('multer');
+
+
+
+
+const imageStorage = multer.diskStorage({
+    destination: 'banner', 
+    filename: (req, file, cb) => {
+      cb(null, file.fieldname + '_' + Date.now() 
+       + path.extname(file.originalname))
+  }
+});
+
+const imageUpload = multer({
+  storage: imageStorage,
+  limits: {
+    fileSize: 1000000 
+},
+fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(png|jpg)$/)) { 
+     return cb(new Error('Please upload a Image'))
+ }
+ cb(undefined, true)
+}
+}) 
+
 
 // Create a new Profile
 router.post('/', passport.authenticate('jwt', {
@@ -94,7 +122,7 @@ router.get('/:id', passport.authenticate('jwt', {
 // Update a Profile
 router.put('/:id', passport.authenticate('jwt', {
     session: false
-}), function (req, res) {
+}), imageUpload.single('banner'), function (req, res) {
 
     helper.checkPermission(req.user.role_id, 'Business Profile').then((rolePerm) => {
         if (!req.params.id || !req.body.business_name || !req.body.business_email) {
@@ -107,6 +135,13 @@ router.put('/:id', passport.authenticate('jwt', {
                             user_id: req.params.id
                         })
                 .then((profile) => {
+
+                    if (req.file) {
+                        var image = req.file.filename;
+                    }else{
+                        var image = category.banner;
+                    }
+
                     Profile.update({
                         business_name: req.body.business_name || profile.business_name,
                         business_email: req.body.business_email || profile.business_email,
@@ -114,6 +149,7 @@ router.put('/:id', passport.authenticate('jwt', {
                         manager_email: req.body.manager_email || profile.manager_email,
                         phone_number: req.body.phone_number || profile.phone_number,
                         fax: req.body.fax || profile.fax,
+                        banner: image,
                         address: req.body.address || profile.address,
                         website_link: req.body.website_link || profile.website_link,
                         media_links: req.body.media_links || profile.media_links,
@@ -124,7 +160,9 @@ router.put('/:id', passport.authenticate('jwt', {
                         where: {
                             user_id: req.params.id
                         }
-                    }).then(_ => {
+                    }).then((dddd) => {
+
+                        ProfileCategory.destroy({ where: { profile_id: profile.id }});
 
                         req.body.categories.forEach(function (item, index) {
                         Category

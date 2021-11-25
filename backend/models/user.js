@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
         as: 'role',
       });
 
+
+      User.hasOne(models.Category, {
+        foreignKey: 'id',
+        as: 'category',
+      });
+
       User.belongsToMany(models.Coupon, {
         through: 'CouponUser',
         as: 'user',
