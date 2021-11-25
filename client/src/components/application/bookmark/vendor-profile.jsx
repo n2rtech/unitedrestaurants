@@ -4,8 +4,27 @@ import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, T
 import { Typeahead } from 'react-bootstrap-typeahead';
 import axios from 'axios'
 import ImageUploader from 'react-images-upload';
+import {toast} from 'react-toastify';
 
 const VendorProfile = (props) => {
+
+  const [catdata, setCatdata] = useState({});
+  const [catdata1, setCatdata1] = useState({});
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const GetData = async () => {
+        const config = {
+    headers: {'Authorization': 'JWT '+token }
+  };
+      const result = await axios('/api/categories/list',config);
+      setCatdata(result.data);
+    };
+    GetData();
+  }, []);
+
+  console.log(token);
+
+
   const [image, setimage] = useState({ pictures: [] })
 
     const onDrop = (pictureFiles, pictureDataURLs) => {
@@ -14,8 +33,7 @@ const VendorProfile = (props) => {
         });
     }
 
-
- const multiple = false
+    const multiple = false
     const [options,setOptions] = useState([])
 
     useEffect(() => {
@@ -76,7 +94,6 @@ const VendorProfile = (props) => {
     };
 
     const [profileData, setProfileData] = useState({});
-    const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
     useEffect(() => {
       const GetData = async () => {
@@ -99,10 +116,38 @@ const VendorProfile = (props) => {
       };
       GetData();
     }, []);
+
+
+    // Update details query
+
+    const handleSubmit = event => {
+      event.preventDefault();
+  
+      const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+        };
+        const bodyParameters = {
+          business_name: name,
+          business_email : email,
+          manager_name:managername,
+          manager_email : manageremail,
+          phone_number: phone,
+          fax: fax,
+          address: address,
+          categories: [1,2,3],
+          website_link: websitelink,
+          facebook: fblink,
+          instagram : instalink,
+          youtube : youtubelink
+        };
     
-
-
-  console.log(profileData);
+        axios.put('/api/profile/'+`${id}`,
+          bodyParameters,
+          config
+        ) .then(response => toast.success("Profile updated !"))
+           .catch(error => console.log('Form submit error', error))
+  
+    };
 
   return (
     <Fragment>
@@ -135,7 +180,7 @@ const VendorProfile = (props) => {
             <Col xl="6" sm="12">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Owner/Manager Email"}</Label>
-                <Input className="form-control"  value={manageremail} onChange= {onChangeManagerEmail} type="email" placeholder="" />
+                <Input className="form-control" value={manageremail} onChange= {onChangeManagerEmail} type="email" placeholder="" />
               </FormGroup>
             </Col>
           </Row>
@@ -162,10 +207,9 @@ const VendorProfile = (props) => {
               <Typeahead
                   id="multiple-typeahead"
                   clearButton
-                  defaultSelected={options.slice(0, 5)}
                   labelKey={"name"}
                   multiple
-                  options={options}
+                  options={catdata}
                   placeholder="Select..."
               />
             </FormGroup>
@@ -195,7 +239,7 @@ const VendorProfile = (props) => {
               />
             </FormGroup>
             <div className="text-center">
-              <Button color="primary">{"Save"}</Button>
+              <Button color="primary" onClick={handleSubmit}>{"Save"}</Button>
             </div>
           </Form>
         </CardBody>
