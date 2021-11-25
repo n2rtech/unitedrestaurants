@@ -1,12 +1,31 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
-import { useForm } from 'react-hook-form'
-import { useSelector, useDispatch } from 'react-redux'
-
+import axios from 'axios'
 
 const JobOpenings = (props) => {
+
+  const [jobsData, setJobsData] = useState([]);
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+  
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+          };
+   
+      fetch("/api/jobs" , config)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            
+            setJobsData(result);
+          },
+          (error) => {
+            
+          }
+        )
+    }, []);
+
 
   return (
     <Fragment>
@@ -31,27 +50,15 @@ const JobOpenings = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>{"Customer Support"}</td>
+                  {jobsData.map((item , i) => (
+                    <tr key={i}>
+                    <td>{item.job_name}</td>
                     <td className="text-right">
-                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/London/edit-job-openings`} className="btn btn-success">Edit</a> &nbsp;
+                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-job-openings/`+`${item.id}`} className="btn btn-success">Edit</a> &nbsp;
                       <a href={"#"} className="btn btn-danger">Delete</a> 
                     </td>
                   </tr>
-                  <tr>
-                    <td>{"Hotel Manager"}</td>
-                    <td className="text-right">
-                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/London/edit-job-openings`} className="btn btn-success">Edit</a> &nbsp;
-                      <a href={"#"} className="btn btn-danger">Delete</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>{"House Keeping"}</td>
-                    <td className="text-right">
-                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/London/edit-job-openings`} className="btn btn-success">Edit</a> &nbsp;
-                      <a href={"#"} className="btn btn-danger">Delete</a>
-                    </td>
-                  </tr>
+                  ))}
                 </tbody>
               </Table>
             </div>
