@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane, Dropdown } from 'reactstrap'
+import Dropdown from 'react-multilevel-dropdown';
+import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
 import './css/style.css'
 
 
@@ -17,12 +18,58 @@ const [isOpen, setIsOpen] = React.useState(false);
                   className="me-auto"
                   navbar
                 >
+                
                   <NavItem>
-                    <NavLink href="/restaurants">
                       <img src={`${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`} 
                alt="Menu-Icon"/>
-                      Restaurants
-                    </NavLink>
+                      
+                      <Dropdown
+                    title='Restaurants'
+                  >
+                    <Dropdown.Item
+                    >
+                      3 Star
+                      <Dropdown.Submenu>
+                        <Dropdown.Item>
+                          Indian
+                          <Dropdown.Submenu>
+                        <Dropdown.Item>
+                        <NavLink href="#">
+                          Veg
+                        </NavLink>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                        <NavLink href="#">
+                          Non Veg
+                        </NavLink>
+                        </Dropdown.Item>
+                      </Dropdown.Submenu>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                        <NavLink href="#">
+                          Chinese
+                        </NavLink>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                        <NavLink href="#">
+                          Italian
+                        </NavLink>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                        <NavLink href="#">
+                          Syrian
+                        </NavLink>
+                        </Dropdown.Item>
+                      </Dropdown.Submenu>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      5 Star
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      7 Star
+                    </Dropdown.Item>
+                  </Dropdown>
+                   
                   </NavItem>
                   <NavItem>
                     <NavLink href="#">
@@ -109,6 +156,8 @@ const [isOpen, setIsOpen] = React.useState(false);
                     </DropdownMenu>
 
                   </UncontrolledDropdown>
+
+
                   
                 </Nav>
               </Collapse>
