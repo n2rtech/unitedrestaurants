@@ -3,26 +3,26 @@ const router = express.Router();
 const User = require('../models').User;
 const Role = require('../models').Role;
 const Permission = require('../models').Permission;
-const JobOpening = require('../models').JobOpening;
+const VideoGallery = require('../models').VideoGallery;
 const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
 
-// Create a new Role
+// Create a new Video Gallery
 router.post('/', (req, res) => {
-        if (!req.body.job_name || !req.body.job_description) {
+        if (!req.body.video_name || !req.body.youtube_link) {
             res.status(400).send({
-                msg: 'Please pass Job name or description.'
+                msg: 'Please pass Video Gallery name or description.'
             })
         } else {
-            JobOpening
+            VideoGallery
                 .create({
-                    job_name: req.body.job_name,
+                    video_name: req.body.video_name,
                     user_id: req.body.user_id,
-                    job_description: req.body.job_description
+                    youtube_link: req.body.youtube_link
                 })
-                .then((job) => res.status(201).send(job))
+                .then((videogallery) => res.status(201).send(videogallery))
                 .catch((error) => {
                     console.log(error);
                     res.status(400).send(error);
@@ -30,65 +30,54 @@ router.post('/', (req, res) => {
         }
 });
 
-// Get List of Roles
 
 
-router.get('/list', (req, res) => {
-        JobOpening
-            .findAll()
-            .then((jobs) => res.status(200).send(jobs))
-            .catch((error) => {
-                res.status(400).send(error);
-            });
-});
-
-
+// Get List of Video Gallery
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    JobOpening
+    VideoGallery
     .findAll({where:{user_id:req.user.id}})
-    .then((jobs) => res.status(200).send(jobs))
+    .then((videogalleries) => res.status(200).send(videogalleries))
     .catch((error) => {
         res.status(400).send(error);
     });
 });
 
 
-
-// Get Role by ID
+// Get Video Gallery by ID
 router.get('/:id', (req, res) => {
-    JobOpening
+    VideoGallery
         .findByPk(
             req.params.id
         )
-        .then((jobs) => res.status(200).send(jobs))
+        .then((videogallery) => res.status(200).send(videogallery))
         .catch((error) => {
             res.status(400).send(error);
         });
 });
 
-// Update a Role
+// Update a Video Gallery
 router.put('/:id', function (req, res) {
-        if (!req.params.id || !req.body.job_name || !req.body.job_description) {
+        if (!req.params.id || !req.body.video_name || !req.body.youtube_link) {
             res.status(400).send({
-                msg: 'Please pass Job ID, name or description.'
+                msg: 'Please pass Video Gallery ID, name or description.'
             })
         } else {
-            JobOpening
+            VideoGallery
                 .findByPk(req.params.id)
-                .then((job) => {
-                    JobOpening.update({
-                        job_name: req.body.job_name || job.job_name,
-                        user_id: req.body.user_id || job.user_id,
-                        job_description: req.body.job_description || job.job_description
+                .then((videogallery) => {
+                    VideoGallery.update({
+                        video_name: req.body.video_name || videogallery.video_name,
+                        user_id: req.body.user_id || videogallery.user_id,
+                        youtube_link: req.body.youtube_link || videogallery.youtube_link
                     }, {
                         where: {
                             id: req.params.id
                         }
                     }).then(_ => {
                         res.status(200).send({
-                            'message': 'Job updated'
+                            'message': 'Video Gallery updated'
                         });
                     }).catch(err => res.status(400).send(err));
                 })
@@ -98,29 +87,29 @@ router.put('/:id', function (req, res) {
         }
 });
 
-// Delete a Role
+// Delete a Video Gallery
 router.delete('/:id', (req, res) => {
         if (!req.params.id) {
             res.status(400).send({
-                msg: 'Please pass job ID.'
+                msg: 'Please pass videogallery ID.'
             })
         } else {
-            JobOpening
+            VideoGallery
                 .findByPk(req.params.id)
-                .then((job) => {
-                    if (job) {
-                        JobOpening.destroy({
+                .then((videogallery) => {
+                    if (videogallery) {
+                        VideoGallery.destroy({
                             where: {
                                 id: req.params.id
                             }
                         }).then(_ => {
                             res.status(200).send({
-                                'message': 'Job deleted'
+                                'message': 'Video Gallery deleted'
                             });
                         }).catch(err => res.status(400).send(err));
                     } else {
                         res.status(404).send({
-                            'message': 'Job not found'
+                            'message': 'Video Gallery not found'
                         });
                     }
                 })
@@ -129,5 +118,6 @@ router.delete('/:id', (req, res) => {
                 });
         }
 });
+
 
 module.exports = router;

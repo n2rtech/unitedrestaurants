@@ -12,6 +12,7 @@ const gallery = require("./routes/gallery");
 const profile = require("./routes/profile");
 const permissions = require("./routes/permissions");
 const jobopenings = require("./routes/jobopenings");
+const videogallery = require("./routes/videogallery");
 // const membership = require("./routes/membership");
 // const coupons = require("./routes/coupons");
 const pages = require("./routes/pages");
@@ -47,6 +48,7 @@ app.use("/api/profile", profile);
 
 app.use("/api/permissions", permissions);
 app.use("/api/jobs", jobopenings);
+app.use("/api/video-gallery", videogallery);
 // app.use("/api/membership", membership);
 // app.use("/api/coupons", coupons);
 app.use("/api/pages", pages);
