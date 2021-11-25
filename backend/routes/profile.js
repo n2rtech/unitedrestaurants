@@ -120,11 +120,8 @@ router.get('/:id', passport.authenticate('jwt', {
 });
 
 // Update a Profile
-router.put('/:id', passport.authenticate('jwt', {
-    session: false
-}), imageUpload.single('banner'), function (req, res) {
+router.put('/:id', imageUpload.single('banner'), (req, res) => {
 
-    helper.checkPermission(req.user.role_id, 'Business Profile').then((rolePerm) => {
         if (!req.params.id || !req.body.business_name || !req.body.business_email) {
             res.status(400).send({
                 msg: 'Please pass Profile ID, name or email.'
@@ -191,9 +188,6 @@ router.put('/:id', passport.authenticate('jwt', {
                     res.status(400).send(error);
                 });
         }
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
 });
 
 // Delete a Profile
