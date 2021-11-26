@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2021 at 01:21 PM
+-- Generation Time: Nov 26, 2021 at 12:17 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -57,7 +57,10 @@ INSERT INTO `categories` (`id`, `name`, `description`, `slug`, `parent_id`, `cat
 (9, ' Bevrages2,', ' Bevrages1,', NULL, 4, NULL, ',', 1, 1, '2021-11-15 11:58:26', '2021-11-15 11:58:26'),
 (10, 'krishna', 'Krishna Mishra', NULL, 4, NULL, 'image_1637678071773.jpg', 1, 1, '2021-11-16 09:56:48', '2021-11-23 14:34:31'),
 (11, 'Bevrages7', 'Bevrages6', NULL, 7, NULL, 'image_1637057493463.jpg', 1, 1, '2021-11-16 10:11:33', '2021-11-16 10:11:33'),
-(18, 'Bevrages711', 'Bevrages6', NULL, 7, NULL, 'image_1637737637873.jpg', 1, 1, '2021-11-24 07:07:17', '2021-11-24 07:07:17');
+(18, 'Bevrages711', 'Bevrages6', NULL, 7, NULL, 'image_1637737637873.jpg', 1, 1, '2021-11-24 07:07:17', '2021-11-24 07:07:17'),
+(19, '', NULL, NULL, NULL, NULL, 'image_1637843673038.jpg', NULL, 0, '2021-11-25 12:34:33', '2021-11-25 12:34:33'),
+(20, '', NULL, NULL, NULL, NULL, 'image_1637843673080.JPG', NULL, 0, '2021-11-25 12:34:33', '2021-11-25 12:34:33'),
+(21, '', NULL, NULL, NULL, NULL, 'image_1637843673302.jpg', NULL, 0, '2021-11-25 12:34:33', '2021-11-25 12:34:33');
 
 -- --------------------------------------------------------
 
@@ -166,6 +169,27 @@ INSERT INTO `couponusers` (`id`, `coupon_id`, `user_id`, `createdAt`, `updatedAt
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `galleries`
+--
+
+CREATE TABLE `galleries` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `galleries`
+--
+
+INSERT INTO `galleries` (`id`, `user_id`, `image`, `createdAt`, `updatedAt`) VALUES
+(3, 2, 'image_1637849145012.jpg', '2021-11-25 14:05:45', '2021-11-25 14:05:45');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jobopenings`
 --
 
@@ -186,9 +210,11 @@ CREATE TABLE `jobopenings` (
 INSERT INTO `jobopenings` (`id`, `user_id`, `job_name`, `job_description`, `status`, `createdAt`, `updatedAt`) VALUES
 (1, NULL, 'admin', 'Admin Application', NULL, '2021-11-25 06:20:13', '2021-11-25 11:17:19'),
 (3, 2, 'sub user', 'sub admin users', NULL, '2021-11-25 06:41:03', '2021-11-25 06:41:03'),
-(4, NULL, 'krishna', 'Mishra1', NULL, '2021-11-25 11:18:23', '2021-11-25 11:18:55'),
+(4, 5, 'krishna', 'Mishra1', NULL, '2021-11-25 11:18:23', '2021-11-25 11:18:55'),
 (5, 2, 'sub user', 'sub admin users', NULL, '2021-11-25 11:55:39', '2021-11-25 11:55:39'),
-(6, 3, 'sub user', 'sub admin users', NULL, '2021-11-25 11:55:54', '2021-11-25 11:55:54');
+(6, 3, 'sub user', 'sub admin users', NULL, '2021-11-25 11:55:54', '2021-11-25 11:55:54'),
+(7, NULL, 'laxman', 'msihara', NULL, '2021-11-26 06:54:23', '2021-11-26 06:54:23'),
+(8, 5, 'dddd', 'ffffffffff', NULL, '2021-11-26 08:04:55', '2021-11-26 08:04:55');
 
 -- --------------------------------------------------------
 
@@ -423,7 +449,9 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 ('20211124092748-create-profile-category.js'),
 ('20211125050654-create-vendor.js'),
 ('20211125061100-create-job-opening.js'),
-('20211125112234-create-video-gallery.js');
+('20211125112234-create-video-gallery.js'),
+('20211125123254-create-gallery.js'),
+('20211126083444-create-vendor-coupon.js');
 
 -- --------------------------------------------------------
 
@@ -481,6 +509,29 @@ INSERT INTO `users` (`id`, `role_id`, `category_id`, `country_id`, `role`, `emai
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `vendorcoupons`
+--
+
+CREATE TABLE `vendorcoupons` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `deal_name` varchar(255) DEFAULT NULL,
+  `deal_description` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vendorcoupons`
+--
+
+INSERT INTO `vendorcoupons` (`id`, `user_id`, `deal_name`, `deal_description`, `status`, `createdAt`, `updatedAt`) VALUES
+(1, 3, 'sub user', 'sub admin users', NULL, '2021-11-26 09:03:21', '2021-11-26 09:03:21');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `vendors`
 --
 
@@ -511,7 +562,8 @@ INSERT INTO `vendors` (`id`, `name`, `email`, `mobile`, `address`, `password`, `
 (2, 'Krishna Mishra', 'krishna1@gmail.com', 'dd', 'dd', '$2a$10$YsgTqlhEiBLifEhSH8JvruclDxNhHnHpI7h3kKsT.TLCuuklVpsaa', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:32:10', '2021-11-25 09:32:10'),
 (3, 'Krishna Mishra', 'krishna14@gmail.com', 'dd', 'dd', '$2a$10$VM15vS82yX5E6VV7K8/DvefqPHZTkbgAGcCaJLrBVJc9A30Xk.l3i', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:36:43', '2021-11-25 09:36:43'),
 (4, 'Krishna Mishra', 'krishna143@gmail.com', 'dd', 'dd', '$2a$10$.mhh1axeEUvdjPyWpCaMXuhT6dRneZwGptkn2U.7fPZ.2YvlWkAeG', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 09:48:02', '2021-11-25 09:48:02'),
-(5, 'Krishna Mishra', 'krishna143w@gmail.com', 'dd', 'dd', '$2a$10$I7U0S0snB8v7ZJmW.PqzQ.kV/ENFJ5L4IGiyQ4l099FFdiHua5eUm', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 12:00:43', '2021-11-25 12:00:43');
+(5, 'Krishna Mishra', 'krishna143w@gmail.com', 'dd', 'dd', '$2a$10$I7U0S0snB8v7ZJmW.PqzQ.kV/ENFJ5L4IGiyQ4l099FFdiHua5eUm', 3, 3, NULL, NULL, NULL, NULL, NULL, '2021-11-25 12:00:43', '2021-11-25 12:00:43'),
+(6, 'Orlando Jennings', 'wugy@mailinator.com', '1', 'Autem consequatur S', '$2a$10$5HK0x2xAvGcc/.4Oli4XI.3X/9fmLKWuRl/c.EBE74Iu.OBL1in9O', 3, 4, NULL, NULL, NULL, NULL, NULL, '2021-11-26 07:21:13', '2021-11-26 07:21:13');
 
 -- --------------------------------------------------------
 
@@ -570,6 +622,12 @@ ALTER TABLE `coupons`
 -- Indexes for table `couponusers`
 --
 ALTER TABLE `couponusers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `galleries`
+--
+ALTER TABLE `galleries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -637,6 +695,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexes for table `vendorcoupons`
+--
+ALTER TABLE `vendorcoupons`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `vendors`
 --
 ALTER TABLE `vendors`
@@ -656,7 +720,7 @@ ALTER TABLE `videogalleries`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -683,10 +747,16 @@ ALTER TABLE `couponusers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `galleries`
+--
+ALTER TABLE `galleries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `jobopenings`
 --
 ALTER TABLE `jobopenings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `memberships`
@@ -737,10 +807,16 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT for table `vendorcoupons`
+--
+ALTER TABLE `vendorcoupons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `videogalleries`
