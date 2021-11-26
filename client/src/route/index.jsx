@@ -129,8 +129,6 @@ import JobApply from "../components/jobSearch/job-apply"
 import Learninglist from "../components/learning/learning-list"
 import LearningDeatil from "../components/learning/learning-deatil"
 
-
-
 // Calendar
 import BasicCalender from "../components/calendar/basicCalendar"
 import DraggableCalendar from "../components/calendar/draggableCalendar"
@@ -164,7 +162,6 @@ import Sample from "../components/sample"
 
 // Search page 
 import Search from "../components/search"
-
 
 // E-commerce-app 
 import AddVendor from "../components/application/bookmark/add-vendor"
@@ -205,6 +202,7 @@ import VendorCoupon from "../components/application/bookmark/vendor-coupon"
 import EditVendorCoupon from "../components/application/bookmark/edit-vendor-coupon"
 import VendorPhotogallery from "../components/application/bookmark/vendor-photogallery"
 import VendorVideoGallery from "../components/application/bookmark/vendor-videogallery"
+import AddVendorVideoGallery from "../components/application/bookmark/add-video-gallery"
 import EditVideoGallery from "../components/application/bookmark/edit-video-gallery"
 import JobOpenings from "../components/application/bookmark/job-openings"
 import AddJobOpenings from "../components/application/bookmark/add-job-openings"
@@ -424,6 +422,7 @@ export const routes = [
         { path:"/dashboard/vendor/edit-vendor-coupon", Component:EditVendorCoupon},
         { path:"/dashboard/vendor/vendor-photogallery", Component:VendorPhotogallery},
         { path:"/dashboard/vendor/vendor-videogallery", Component:VendorVideoGallery},
+        { path:"/dashboard/vendor/add-video-gallery/", Component:AddVendorVideoGallery},
         { path:"/dashboard/vendor/edit-video-gallery/:id", Component:EditVideoGallery},
         { path:"/dashboard/vendor/job-openings", Component:JobOpenings},
         { path:"/dashboard/vendor/add-job-openings", Component:AddJobOpenings},

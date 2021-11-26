@@ -6,13 +6,14 @@ import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
-const EditVideoGallery = (props) => {
+const AddVideoGallery = (props) => {
 
     const [videoname, setVideoname] = useState()
     const [youtubelink, setYoutubelink] = useState()
     const [video, setVideo] = useState()
     const params = useParams();
     const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
 
     const onChangeVideoname = (event) => {
       setVideoname(event.target.value);
@@ -22,39 +23,27 @@ const EditVideoGallery = (props) => {
       setYoutubelink(event.target.value);
     };
 
-    useEffect(() => {
-      const GetData = async () => {
-          const config = {
-      headers: {'Authorization': 'JWT '+token }
-    };
-        const result = await axios('/api/video-gallery/'+`${params.id}`,config);
-        setVideo(result.data)
-        setVideoname(result.data.video_name)
-        setYoutubelink(result.data.youtube_link)
-      };
-      GetData();
-    }, []);
 
-
-
-  // Edit Api
+    console.log(token);
+  // Add Video Api
   const history = useHistory()
 
   const handleSubmit = event => {
     event.preventDefault();
 
     const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
       };
       const bodyParameters = {
         video_name: videoname,
-        youtube_link: youtubelink
+        youtube_link: youtubelink,
+        user_id : id
       };
-      axios.put(`/api/video-gallery/`+`${params.id}`,
+      axios.post(`/api/video-gallery/`,
         bodyParameters,
         config
       ) .then(response => {
-        toast.success("Video updated !")
+        toast.success("Video Added !")
           setTimeout(() => {
             history.push('/dashboard/vendor/vendor-videogallery/');
           }, 1000);
@@ -68,7 +57,7 @@ const EditVideoGallery = (props) => {
 
   return (
     <Fragment>
-      <Breadcrumb parent="Apps" title="Edit Video" />
+      <Breadcrumb parent="Apps" title="Add Video" />
       <Container fluid={true}>
         <Card>
           <CardBody>
@@ -92,4 +81,4 @@ const EditVideoGallery = (props) => {
   );
 }
 
-export default EditVideoGallery;
+export default AddVideoGallery;
