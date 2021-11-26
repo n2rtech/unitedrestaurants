@@ -43,7 +43,7 @@ router.get('/list', (req, res) => {
 });
 
 
-router.get('/', passport.authenticate('jwt', {
+router.get('/', passport.authenticate('vendor', {
     session: false
 }), function (req, res) {
     JobOpening
