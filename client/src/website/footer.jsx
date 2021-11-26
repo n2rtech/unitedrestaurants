@@ -55,6 +55,9 @@ return (
 				<a href={`${process.env.PUBLIC_URL}/termsofservice`}>Terms of Service</a>
 			</li>
 			<li>
+				<a href={`${process.env.PUBLIC_URL}/howitwork`}>How it Works</a>
+			</li>
+			<li>
 				<a target = "_blank" href={`${process.env.PUBLIC_URL}/signup`} >Merchant Signup</a>
 			</li>
 		</List>

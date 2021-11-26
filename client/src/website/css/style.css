@@ -884,6 +884,33 @@ table th, table td{
     color: #70081C !important;
 }
 @media (max-width: 767px){
+.togglebtn h1 {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    line-height: 10px !important;
+    margin-bottom: 0 !important;
+    background: #fff !important;
+    padding-bottom: 7px !important;
+    padding-top: 7px !important;
+    border-bottom: 1px solid #edebeb;
+}
+.togglebtn svg {
+    width: 37px;
+    height: 37px;
+    position: relative;
+    bottom: 3px;
+    left: 10px;
+} 
+.togglebtn ul li {
+    padding: 10px 20px !important;
+    border-bottom: 1px solid #edebeb;
+}
+.togglebtn ul li a {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 13px;
+    color: #000;
+}   
 .desktopheader{
     display: none;
 }
@@ -1145,18 +1172,25 @@ table th, table td{
     height: 40px;
     padding: 0 20px;
     font-size: 13px;
-    border: 1px solid #70081c !important;
+    border: 1px solid #2b2b2b !important;
 }
 .mbcountry ul .list-inline-item a img {
     width: 40px;
 }
 .mbcountry {
-    padding-left: 15px;
+    padding-left: 5px;
+    margin-bottom: 15px;
+    margin-top: 20px;
 }
 .filtercountry {
-    color: #70081c;
+    color: #000;
     font-weight: 400;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    letter-spacing: .5px;
+}
+.mbcountry ul li.list-inline-item {
+    padding: 0 0px !important;
 }
 .mobileheader hr {
     margin-top: 10px;
@@ -1172,13 +1206,13 @@ table th, table td{
     font-weight: 500;
 }
 .mobileheader .searchbar input::placeholder {
-  color: #70081c;
+  color: #2b2b2b;
   opacity: 1;
 }
 .mobileheader .searchbar input:-ms-input-placeholder {
- color: #70081c;
+ color: #2b2b2b;
 }
 .mobileheader .searchbar input::-ms-input-placeholder {
- color: #70081c;
+ color: #2b2b2b;
 }
 }

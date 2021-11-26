@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
-import { Container, Row, Col, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavbarToggler, NavItem, NavLink, Nav,TabContent,TabPane,Collapse,Offcanvas,NavDropdown } from 'reactstrap'
+import SideNav, { MenuIcon } from 'react-simple-sidenav';
+import { Container, Row, Col, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavbarToggler, NavItem, NavLink,List,ListInlineItem, Nav,TabContent,TabPane,Collapse,Offcanvas,NavDropdown } from 'reactstrap'
 import './css/style.css'
 import Menu from './menu.jsx'
 import Mobilemenu from './mobilemenu.jsx'
@@ -7,6 +8,88 @@ import Countryflag from './countryflag.jsx'
 
 
 const Header = (props) => {
+const [showNav, setShowNav] = useState();
+const navItems = [
+    
+    <a href="/restaurants">
+      Restaurants
+    </a>,
+    <a href="#">
+      Food Markets
+    </a>,
+    <a href="#">
+      Beer & Alcohol
+    </a>,
+    <a href="#">
+      Services
+    </a>,
+    <a href="#">
+      Suppliers
+    </a>,
+    <a href="#">
+      Buy & Sell
+    </a>,
+    <a href="#">
+      Jobs
+    </a>,
+    <a href="#">
+      Videos
+    </a>,
+    <a href="#">
+      Others
+    </a>,
+  ];
+
+const title = <div className="searchbar">
+                <FormGroup>
+                    <div className="InputGroup">
+                      <Input className="form-control" placeholder="Search in the department..." type="search"/>
+                    </div>
+                </FormGroup>
+                <div className="mbcountry">
+                          <div className="filtercountry">Filter by Country</div>
+                          <List type="inline">
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/USA.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/CANADA.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/UNITED-KINGDOM.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/ITALY.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/AUSTRALIA.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/SPAIN.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                          </List>
+                        </div>
+              </div>;
+                      
+  
 
   return (
       <div className="mainheader">
@@ -47,8 +130,8 @@ const Header = (props) => {
                 <a target = "_blank" href={`${process.env.PUBLIC_URL}/login`} >Login</a>
               </div>
               <div className="clickable">
-                <p>how it works</p>
-                <a href="#">click here</a>
+                <p>Vendor login</p>
+                <a target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >Login</a>
               </div>
               </div>
               <div className="socialmenu">
@@ -118,7 +201,8 @@ const Header = (props) => {
         <Row className="m-0">
           <Col xs="2" className="p-0">
             <div className="togglebtn">
-              <Mobilemenu />
+              <MenuIcon onClick={() => setShowNav(true)} />
+              <SideNav showNav={showNav} onHideNav={() => setShowNav(false)} title={title} items={navItems} />
             </div>
           </Col>
           <Col xs="5" className="pr-0">
@@ -165,8 +249,8 @@ const Header = (props) => {
                 <a target = "_blank" href={`${process.env.PUBLIC_URL}/login`} >Login</a>
               </div>
               <div className="clickable">
-                <p>how it works</p>
-                <a href="#">click here</a>
+                <p>Vendor login</p>
+                <a target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >Login</a>
               </div>
               </div>
               <div className="socialmenu">
