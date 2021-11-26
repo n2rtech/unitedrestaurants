@@ -119,17 +119,11 @@ const VendorProfile = (props) => {
 
 
 // Category Array
-var category = [];
-
-console.log(category)
+var categories_arr = [];
 
 const categorys = multiSelections.map((user) => {
-  // console.log(user.id);
-  category.indexOf(user.id) === -1 ? category.push(user.id) : console.log("This item already exists");
+  categories_arr.indexOf(user.id) === -1 ? categories_arr.push(user.id) : console.log("This item already exists");
 });
-console.log(category);
-// Category Array
-
       const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
         };
@@ -142,13 +136,13 @@ console.log(category);
           bodyParameters.set('fax', fax);
           bodyParameters.set('banner', image.pictureFiles[0]);
           bodyParameters.set('address', address);
-          bodyParameters.set('categories', category);
+          bodyParameters.set('categories', categories_arr);
           bodyParameters.set('website_link', websitelink);
           bodyParameters.set('facebook', fblink);
           bodyParameters.set('instagram' , instalink);
           bodyParameters.set('youtube' , youtubelink);
-
-        axios.put('/api/profile/'+`${id}`,
+          var profile_id = profileData.id;
+        axios.put('/api/profile/'+`${profile_id}`,
           bodyParameters,
           config
         ) .then(response => toast.success("Profile updated !"))

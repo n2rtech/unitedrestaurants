@@ -1673,7 +1673,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3ODQwMzQ1LCJleHAiOjE2NjkzOTcyNzF9.AWmJwsT2GH9-UwlHzerO56U0pXps4nTet5dN4E1D4Hg",
 						"type": "text"
 					}
 				],
@@ -1681,44 +1681,24 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "name",
-							"value": "Bevrages7",
-							"type": "text",
-							"disabled": true
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/laxman/Desktop/Screenshot_2.png"
 						},
 						{
-							"key": "description",
-							"value": "Bevrages6",
-							"type": "text",
-							"disabled": true
+							"key": "user_id",
+							"value": "2",
+							"type": "text"
 						},
 						{
-							"key": "parent_id",
-							"value": "7",
-							"type": "text",
-							"disabled": true
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/laxman/Desktop/DSC_0912.JPG"
 						},
 						{
 							"key": "image",
 							"type": "file",
 							"src": "/C:/Users/laxman/Desktop/IMG-20210616-WA0012.jpg"
-						},
-						{
-							"key": "sort_order",
-							"value": "1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "status",
-							"value": "1",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "image",
-							"type": "file",
-							"src": "/C:/Users/laxman/Desktop/IMG-20210616-WA0011.jpg"
 						}
 					],
 					"options": {
@@ -1728,7 +1708,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/gallery/add",
+					"raw": "http://127.0.0.1:5000/api/gallery",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -1739,8 +1719,7 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"gallery",
-						"add"
+						"gallery"
 					]
 				}
 			},

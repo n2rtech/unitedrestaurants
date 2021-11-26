@@ -12,12 +12,10 @@ const Helper = require('../utils/helper');
 const helper = new Helper();
 const path = require('path');
 var multer  = require('multer');
-
-
-
+var fs = require('fs');
 
 const imageStorage = multer.diskStorage({
-    destination: 'banner', 
+    destination: 'uploads/banner', 
     filename: (req, file, cb) => {
       cb(null, file.fieldname + '_' + Date.now() 
        + path.extname(file.originalname))
@@ -77,46 +75,48 @@ router.post('/', passport.authenticate('jwt', {
 
 
 // Get Profile by ID
-router.get('/:id', passport.authenticate('jwt', {
+router.get('/:id', passport.authenticate('vendor', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Business Profile').then((rolePerm) => {
-
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
-
     Profile
-            .findOne({ where:{
-                user_id: req.params.id
+    .findOne({ where:{
+        user_id: req.params.id|req.user.id
+    }
+})
+    .then((profile2) => {
+        if (profile2) {
+
+            Profile
+            .findByPk(profile2.id,
+            {
+                include: [{
+                    model: Category,
+                    as: 'category',
+                }]
             }
-            })
-            .then((profile2) => {
-                if (profile2) {
+            )
+            .then((profile1) => res.status(200).send(profile1))
+            .catch((error) => {
+                res.status(400).send(error);
+            });
 
-                    Profile
-                    .findByPk(profile2.id,
-                    {
-                        include: [{
-                            model: Category,
-                            as: 'category',
-                        }]
-                    }
-                    )
-                    .then((profile1) => res.status(200).send(profile1))
-                    .catch((error) => {
-                        res.status(400).send(error);
-                    });
+        }else{
 
-                }else{
-                    res.status(400).send({
-                        msg: 'profile not found.'
-                    })
-                }            
-            })
-        .catch((error) => {
-            res.status(400).send(error);
-        });
+            Profile
+            .create({
+                    user_id: req.user.id,
+                    business_name: req.user.name,
+                    business_email: req.user.email,
+                    manager_name: req.user.name,
+                    manager_email: req.user.email,
+                    phone_number: req.user.mobile
+                })
+                .then((profile) => res.status(201).send(profile))
+        }            
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
 });
 
 // Update a Profile
@@ -128,12 +128,12 @@ router.put('/:id', imageUpload.single('banner'), (req, res) => {
             })
         } else {
             Profile
-                .findOne({
-                            user_id: req.params.id
-                        })
+                .findByPk(req.params.id)
                 .then((profile) => {
 
                     if (req.file) {
+                        var filePath = path.resolve('./')+'/uploads/banner/'+profile.banner; 
+                        fs.unlinkSync(filePath);
                         var image = req.file.filename;
                     }else{
                         var image = profile.banner;
