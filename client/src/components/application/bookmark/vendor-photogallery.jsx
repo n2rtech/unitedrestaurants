@@ -60,14 +60,17 @@ const VendorPhotogallery = () => {
   }
 
   const handleSubmit = event => {
-      console.log('images',image);
     event.preventDefault();
     const config = {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
       };
         const bodyParameters = new FormData();
-        bodyParameters.set('user_id', user_id);
-        bodyParameters.set('image', image.pictures.pictureFiles);
+        bodyParameters.append('user_id', user_id);
+
+        for (let i = 0; i < (image.pictureFiles).length; i++) {
+           bodyParameters.append('image', image.pictureFiles[i])
+        }
+
 
       axios.post('/api/gallery/',
         bodyParameters,
