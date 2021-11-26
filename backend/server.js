@@ -13,6 +13,7 @@ const profile = require("./routes/profile");
 const permissions = require("./routes/permissions");
 const jobopenings = require("./routes/jobopenings");
 const videogallery = require("./routes/videogallery");
+// const vendorcoupons = require("./routes/vendorcoupons");
 // const membership = require("./routes/membership");
 // const coupons = require("./routes/coupons");
 const pages = require("./routes/pages");
@@ -24,6 +25,12 @@ app.use(
     extended: true
   })
 );
+
+
+app.use(express.static(__dirname + '/gallery'));
+app.use(express.static(__dirname + '/images'));
+app.use(express.static(__dirname + '/uploads'));
+app.use(express.static(__dirname + '/banner'));
 
 
 const keys = require("./config/keys");
@@ -49,6 +56,7 @@ app.use("/api/profile", profile);
 app.use("/api/permissions", permissions);
 app.use("/api/jobs", jobopenings);
 app.use("/api/video-gallery", videogallery);
+// app.use("/api/vendor-coupons", vendorcoupons);
 // app.use("/api/membership", membership);
 // app.use("/api/coupons", coupons);
 app.use("/api/pages", pages);
