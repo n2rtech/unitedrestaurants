@@ -23,6 +23,8 @@ const AddVideoGallery = (props) => {
       setYoutubelink(event.target.value);
     };
 
+
+    console.log(token);
   // Add Video Api
   const history = useHistory()
 

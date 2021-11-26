@@ -22,8 +22,6 @@ const VendorProfile = (props) => {
     GetData();
   }, []);
 
-  console.log(token);
-
 
   const [image, setimage] = useState({ pictures: [] })
 
@@ -36,9 +34,9 @@ const VendorProfile = (props) => {
     const multiple = false
     const [options,setOptions] = useState([])
 
-    useEffect(() => {
+  /*  useEffect(() => {
         axios.get(`${process.env.PUBLIC_URL}/api/typeaheadData.json`).then(res => setOptions(res.data))
-    },[])
+    },[])*/
 
     const [name, setName] = useState()
     const [email, setEmail] = useState()
@@ -48,7 +46,7 @@ const VendorProfile = (props) => {
     const [fax, setFax] = useState()
     const [address, setAddress] = useState()
     const [websitelink, setWebsitelink] = useState()
-    const [fblink, setFblink] = useState()
+    const [fblink, setFblink] =  useState()
     const [instalink, setInstalink] = useState()
     const [youtubelink, setYoutubelink] = useState()
 
@@ -94,7 +92,7 @@ const VendorProfile = (props) => {
     };
 
     const [profileData, setProfileData] = useState({});
-    const id = localStorage.getItem("id");
+    const id = localStorage.getItem("id")|2;
     useEffect(() => {
       const GetData = async () => {
           const config = {
@@ -122,24 +120,45 @@ const VendorProfile = (props) => {
 
     const handleSubmit = event => {
       event.preventDefault();
+
+      // console.log(image.pictureFiles[0]);
+      // return false;
   
       const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
         };
-        const bodyParameters = {
+      /*  const bodyParameters = {
           business_name: name,
           business_email : email,
           manager_name:managername,
           manager_email : manageremail,
           phone_number: phone,
           fax: fax,
+          banner: image.pictureFiles[0],
           address: address,
           categories: [1,2,3],
           website_link: websitelink,
           facebook: fblink,
           instagram : instalink,
           youtube : youtubelink
-        };
+        };*/
+
+
+
+        const bodyParameters = new FormData();
+     bodyParameters.set('business_name', name);
+          bodyParameters.set('business_email' , email);
+          bodyParameters.set('manager_name',managername);
+          bodyParameters.set('manager_email' , manageremail);
+          bodyParameters.set('phone_number', phone);
+          bodyParameters.set('fax', fax);
+          bodyParameters.set('banner', image.pictureFiles[0]);
+          bodyParameters.set('address', address);
+          bodyParameters.set('categories', ['2','4']);
+          bodyParameters.set('website_link', websitelink);
+          bodyParameters.set('facebook', fblink);
+          bodyParameters.set('instagram' , instalink);
+          bodyParameters.set('youtube' , youtubelink);
     
         axios.put('/api/profile/'+`${id}`,
           bodyParameters,
