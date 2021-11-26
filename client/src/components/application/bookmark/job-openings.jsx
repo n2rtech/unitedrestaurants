@@ -27,6 +27,8 @@ const JobOpenings = (props) => {
         )
     }, []);
 
+    console.log(token);
+
     // Delete functionality
 
     const handleDelete = (id) => {

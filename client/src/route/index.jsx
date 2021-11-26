@@ -424,7 +424,7 @@ export const routes = [
         { path:"/dashboard/vendor/edit-vendor-coupon", Component:EditVendorCoupon},
         { path:"/dashboard/vendor/vendor-photogallery", Component:VendorPhotogallery},
         { path:"/dashboard/vendor/vendor-videogallery", Component:VendorVideoGallery},
-        { path:"/dashboard/vendor/edit-video-gallery", Component:EditVideoGallery},
+        { path:"/dashboard/vendor/edit-video-gallery/:id", Component:EditVideoGallery},
         { path:"/dashboard/vendor/job-openings", Component:JobOpenings},
         { path:"/dashboard/vendor/add-job-openings", Component:AddJobOpenings},
         { path:"/dashboard/vendor/edit-job-openings/:id", Component:EditJobOpenings},
