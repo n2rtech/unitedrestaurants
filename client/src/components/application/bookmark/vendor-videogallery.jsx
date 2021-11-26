@@ -38,7 +38,7 @@ console.log(videoData);
             <Col sm="6"></Col>
             <Col sm="6">
               <div className="pull-right">
-                <a href="{#}" className="btn btn-primary">Add New</a>
+                <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/add-video-gallery`} className="btn btn-primary">Add New</a>
               </div>
             </Col>
           </Row>
