@@ -96,7 +96,7 @@ export const MENUITEMS = [
         menucontent:"Accounts Payable",
         Items:[
             {
-                title: 'Accounts Payable', path: `${process.env.PUBLIC_URL}/ui-kits/modal`, icon: Package, type: 'link', active: false, 
+                title: 'Accounts Payable', path: `${process.env.PUBLIC_URL}/dashboard/admin/accounts-payable`, icon: Package, type: 'link', active: false, 
             },
 
         ]
@@ -106,7 +106,7 @@ export const MENUITEMS = [
         menucontent:"Countries",
         Items:[
             {
-                title: 'Countries', path: `${process.env.PUBLIC_URL}/ui-kits/spinner`, icon: Flag, type: 'link', active: false, 
+                title: 'Countries', path: `${process.env.PUBLIC_URL}/dashboard/admin/countries`, icon: Flag, type: 'link', active: false, 
             },
 
         ]
