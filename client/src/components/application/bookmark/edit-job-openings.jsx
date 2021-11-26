@@ -32,9 +32,6 @@ const EditJobOpenings = (props) => {
       GetData();
     }, []);
 
-
-
-
   // Edit Api
 
   const handleSubmit = event => {
