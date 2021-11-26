@@ -7,9 +7,9 @@ import ImageUploader from 'react-images-upload';
 import {toast} from 'react-toastify';
 
 const VendorProfile = (props) => {
-
-  const [catdata, setCatdata] = useState({});
-  const [catdata1, setCatdata1] = useState({});
+  const [multiSelections, setMultiSelections] = useState([]);
+  const multiple = false
+  const [options,setOptions] = useState([])
   const token = localStorage.getItem("token");
   useEffect(() => {
     const GetData = async () => {
@@ -17,7 +17,7 @@ const VendorProfile = (props) => {
     headers: {'Authorization': 'JWT '+token }
   };
       const result = await axios('/api/categories/list',config);
-      setCatdata(result.data);
+      setOptions(result.data);
     };
     GetData();
   }, []);
@@ -31,13 +31,6 @@ const VendorProfile = (props) => {
         });
     }
 
-    const multiple = false
-    const [options,setOptions] = useState([])
-
-  /*  useEffect(() => {
-        axios.get(`${process.env.PUBLIC_URL}/api/typeaheadData.json`).then(res => setOptions(res.data))
-    },[])*/
-
     const [name, setName] = useState()
     const [email, setEmail] = useState()
     const [managername, setManagerName] = useState()
@@ -49,6 +42,7 @@ const VendorProfile = (props) => {
     const [fblink, setFblink] =  useState()
     const [instalink, setInstalink] = useState()
     const [youtubelink, setYoutubelink] = useState()
+    const [category, setCategory] = useState()
 
     const onChangeName = (event) => {
       setName(event.target.value);
@@ -92,7 +86,7 @@ const VendorProfile = (props) => {
     };
 
     const [profileData, setProfileData] = useState({});
-    const id = localStorage.getItem("id")|2;
+    const id = localStorage.getItem("id");
     useEffect(() => {
       const GetData = async () => {
           const config = {
@@ -115,38 +109,32 @@ const VendorProfile = (props) => {
       GetData();
     }, []);
 
+    console.log(profileData);
+
 
     // Update details query
 
     const handleSubmit = event => {
       event.preventDefault();
 
-      // console.log(image.pictureFiles[0]);
-      // return false;
-  
+
+// Category Array
+var category = [];
+
+console.log(category)
+
+const categorys = multiSelections.map((user) => {
+  // console.log(user.id);
+  category.indexOf(user.id) === -1 ? category.push(user.id) : console.log("This item already exists");
+});
+console.log(category);
+// Category Array
+
       const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
         };
-      /*  const bodyParameters = {
-          business_name: name,
-          business_email : email,
-          manager_name:managername,
-          manager_email : manageremail,
-          phone_number: phone,
-          fax: fax,
-          banner: image.pictureFiles[0],
-          address: address,
-          categories: [1,2,3],
-          website_link: websitelink,
-          facebook: fblink,
-          instagram : instalink,
-          youtube : youtubelink
-        };*/
-
-
-
-        const bodyParameters = new FormData();
-     bodyParameters.set('business_name', name);
+          const bodyParameters = new FormData();
+          bodyParameters.set('business_name', name);
           bodyParameters.set('business_email' , email);
           bodyParameters.set('manager_name',managername);
           bodyParameters.set('manager_email' , manageremail);
@@ -154,12 +142,12 @@ const VendorProfile = (props) => {
           bodyParameters.set('fax', fax);
           bodyParameters.set('banner', image.pictureFiles[0]);
           bodyParameters.set('address', address);
-          bodyParameters.set('categories', ['2','4']);
+          bodyParameters.set('categories', category);
           bodyParameters.set('website_link', websitelink);
           bodyParameters.set('facebook', fblink);
           bodyParameters.set('instagram' , instalink);
           bodyParameters.set('youtube' , youtubelink);
-    
+
         axios.put('/api/profile/'+`${id}`,
           bodyParameters,
           config
@@ -228,7 +216,9 @@ const VendorProfile = (props) => {
                   clearButton
                   labelKey={"name"}
                   multiple
-                  options={catdata}
+                  onChange={setMultiSelections}
+                  options={options}
+                  selected={multiSelections}
                   placeholder="Select..."
               />
             </FormGroup>
