@@ -15,8 +15,6 @@ const AddVideoGallery = (props) => {
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
 
-    console.log('id'+id);
-
     const onChangeVideoname = (event) => {
       setVideoname(event.target.value);
     };
