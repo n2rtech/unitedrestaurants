@@ -54,7 +54,7 @@ const EditVideoGallery = (props) => {
         bodyParameters,
         config
       ) .then(response => {
-        toast.success("Jobs updated !")
+        toast.success("Video updated !")
           setTimeout(() => {
             history.push('/dashboard/vendor/vendor-videogallery/');
           }, 1000);

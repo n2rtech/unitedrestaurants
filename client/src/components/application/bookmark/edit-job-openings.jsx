@@ -4,6 +4,7 @@ import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, T
 import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const EditJobOpenings = (props) => {
 
@@ -33,7 +34,7 @@ const EditJobOpenings = (props) => {
     }, []);
 
   // Edit Api
-
+  const history = useHistory()
   const handleSubmit = event => {
     event.preventDefault();
 
@@ -47,7 +48,12 @@ const EditJobOpenings = (props) => {
       axios.put(`/api/jobs/`+`${params.id}`,
         bodyParameters,
         config
-      ) .then(response => toast.success("Jobs updated !")  )
+      ) .then(response => {
+        toast.success("Jobs updated !")
+          setTimeout(() => {
+            history.push('/dashboard/vendor/job-openings/');
+          }, 1000);
+      })
          .catch(error => console.log('Form submit error', error))
 
   };
