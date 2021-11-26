@@ -5,7 +5,6 @@ import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
-
 const VendorVideoGallery = (props) => {
 
   const [videoData, setVideoData] = useState([]);
