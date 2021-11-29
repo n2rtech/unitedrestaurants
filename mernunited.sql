@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2021 at 12:17 PM
+-- Generation Time: Nov 29, 2021 at 06:36 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -185,7 +185,20 @@ CREATE TABLE `galleries` (
 --
 
 INSERT INTO `galleries` (`id`, `user_id`, `image`, `createdAt`, `updatedAt`) VALUES
-(3, 2, 'image_1637849145012.jpg', '2021-11-25 14:05:45', '2021-11-25 14:05:45');
+(3, 2, 'image_1637849145012.jpg', '2021-11-25 14:05:45', '2021-11-25 14:05:45'),
+(4, 2, 'image_1637933112772.png', '2021-11-26 13:25:12', '2021-11-26 13:25:12'),
+(5, 2, 'image_1637933112783.JPG', '2021-11-26 13:25:12', '2021-11-26 13:25:12'),
+(6, 2, 'image_1637933113498.jpg', '2021-11-26 13:25:13', '2021-11-26 13:25:13'),
+(7, 4, 'image_1637934454644.png', '2021-11-26 13:47:34', '2021-11-26 13:47:34'),
+(8, 4, 'image_1637934454652.png', '2021-11-26 13:47:34', '2021-11-26 13:47:34'),
+(9, 4, 'image_1637934528102.png', '2021-11-26 13:48:48', '2021-11-26 13:48:48'),
+(10, 4, 'image_1637934528112.png', '2021-11-26 13:48:48', '2021-11-26 13:48:48'),
+(11, 4, 'image_1637934598513.png', '2021-11-26 13:49:58', '2021-11-26 13:49:58'),
+(12, 4, 'image_1637934598516.png', '2021-11-26 13:49:58', '2021-11-26 13:49:58'),
+(13, 4, 'image_1637934672665.png', '2021-11-26 13:51:12', '2021-11-26 13:51:12'),
+(14, 4, 'image_1637934672672.png', '2021-11-26 13:51:12', '2021-11-26 13:51:12'),
+(15, 4, 'image_1637934724337.png', '2021-11-26 13:52:04', '2021-11-26 13:52:04'),
+(16, 4, 'image_1637934724351.jpg', '2021-11-26 13:52:04', '2021-11-26 13:52:04');
 
 -- --------------------------------------------------------
 
@@ -318,15 +331,6 @@ CREATE TABLE `profilecategories` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `profilecategories`
---
-
-INSERT INTO `profilecategories` (`id`, `profile_id`, `category_id`, `createdAt`, `updatedAt`) VALUES
-(25, 1, 1, '2021-11-25 08:27:40', '2021-11-25 08:27:40'),
-(26, 1, 6, '2021-11-25 08:27:40', '2021-11-25 08:27:40'),
-(27, 1, 5, '2021-11-25 08:27:40', '2021-11-25 08:27:40');
-
 -- --------------------------------------------------------
 
 --
@@ -358,7 +362,8 @@ CREATE TABLE `profiles` (
 --
 
 INSERT INTO `profiles` (`id`, `user_id`, `business_name`, `business_email`, `manager_name`, `manager_email`, `phone_number`, `fax`, `address`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `createdAt`, `updatedAt`) VALUES
-(1, 2, 'string11', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'banner_1637828860275.jpg', 'string', 'string', 'string', 'string', '2021-11-24 08:20:23', '2021-11-25 08:27:40');
+(1, 2, 'Krishna Mishra', 'krishna143@gmail.com', 'Krishna Mishra', 'krishna143@gmail.com', 'dd', 'null', 'null', 'string', 'banner_1637927622677.png', 'null', 'null', 'null', 'null', '2021-11-24 08:20:23', '2021-11-26 11:53:42'),
+(4, 4, 'Krishna Mishra', 'krishna143@gmail.com', 'Krishna Mishra', 'krishna143@gmail.com', '77777777', 'fddddddddddd', 'nulffffff', NULL, 'banner_1637929555970.png', 'null', 'null', 'null', 'null', '2021-11-26 11:43:58', '2021-11-26 12:25:55');
 
 -- --------------------------------------------------------
 
@@ -527,7 +532,8 @@ CREATE TABLE `vendorcoupons` (
 --
 
 INSERT INTO `vendorcoupons` (`id`, `user_id`, `deal_name`, `deal_description`, `status`, `createdAt`, `updatedAt`) VALUES
-(1, 3, 'sub user', 'sub admin users', NULL, '2021-11-26 09:03:21', '2021-11-26 09:03:21');
+(1, 3, 'sub user', 'sub admin users', NULL, '2021-11-26 09:03:21', '2021-11-26 09:03:21'),
+(3, 2, 'sub user', 'sub admin users', NULL, '2021-11-29 05:33:46', '2021-11-29 05:33:46');
 
 -- --------------------------------------------------------
 
@@ -750,7 +756,7 @@ ALTER TABLE `couponusers`
 -- AUTO_INCREMENT for table `galleries`
 --
 ALTER TABLE `galleries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `jobopenings`
@@ -780,13 +786,13 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `profilecategories`
 --
 ALTER TABLE `profilecategories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `rolepermissions`
@@ -810,7 +816,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vendorcoupons`
 --
 ALTER TABLE `vendorcoupons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vendors`
