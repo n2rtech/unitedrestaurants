@@ -40,6 +40,7 @@ const AllVendors = (props) => {
     .then(res => res.json())
     .then(
       (result) => { 
+        console.log()
         setVendorData(result); 
         // setVendorData(result.tutorials); 
         setTotalItemsCount(result.totalItems);  
