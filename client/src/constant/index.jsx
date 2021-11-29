@@ -260,6 +260,7 @@ export const FirstName = "First Name"
 export const LastName = "Last Name"
 export const Phone = "Phone"
 export const EmailAddress = "Email Address"
+export const BusinessEmailAddress = "Business Email Address"
 export const Country = "Country"
 
 export const CountryMenu = ["India","South Africa","United State","Australia"]
