@@ -126,13 +126,13 @@ export const MENUITEMS = [
         menucontent:"Site settings",
         Items:[
             {
-                title: 'Site settings', icon: Settings, path: `${process.env.PUBLIC_URL}/dashboard/admin/`, type: 'sub', active: false, children: [
-                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/general-settings`, title: 'General', type: 'link' }, 
-                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/all-membership`, title: 'trash', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/no-membership`, title: 'Backup', type: 'link' },
-        
+                title: 'Site settings', path: `${process.env.PUBLIC_URL}/app/bookmark`, icon: Settings, type: 'sub', active: false, children: [
+                    { path: `${process.env.PUBLIC_URL}/app/bookmark`, title: 'Site settings', type: 'link' },
+                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/trash`, title: 'Trash', type: 'link' },
+                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/backup`, title: 'Backup', type: 'link' },
             ]
-            }
+            },
+
         ]
     },
 ]
