@@ -198,7 +198,7 @@ router.get('/by-role/:id', passport.authenticate('jwt', {
 router.get('/vendors', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
-  helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+  helper.checkPermission(req.user.role_id, 'Vendors').then((rolePerm) => {
 
   }).catch((error) => {
     res.status(403).send(error);
