@@ -52,7 +52,7 @@ const VendorPhotogallery = () => {
       ) .then(response => {
         toast.success("Image Deleted !")
         setTimeout(() => {
-          history.push('/dashboard/vendor/vendor-photogallery/');
+            window.location.reload();
         }, 1000);
       })
          .catch(error => console.log('Form submit error', error))
