@@ -165,7 +165,6 @@ import Search from "../components/search"
 
 // E-commerce-app 
 import AddVendor from "../components/application/bookmark/add-vendor"
-import GeneralSettings from "../components/application/bookmark/general-settings"
 import EditAccountsPayable from "../components/application/bookmark/edit-payable"
 import AddAccountsPayable from "../components/application/bookmark/add-payable"
 import EditAdminMembership from "../components/application/bookmark/edit-admin-membership"
@@ -200,6 +199,7 @@ import VendorProfile from "../components/application/bookmark/vendor-profile"
 import MyWallet from "../components/application/bookmark/my-wallet"
 import VendorMembershipPackage from "../components/application/bookmark/vendor-membership-package"
 import VendorCoupon from "../components/application/bookmark/vendor-coupon"
+import AddVendorCoupon from "../components/application/bookmark/add-vendor-coupon"
 import EditVendorCoupon from "../components/application/bookmark/edit-vendor-coupon"
 import VendorPhotogallery from "../components/application/bookmark/vendor-photogallery"
 import VendorVideoGallery from "../components/application/bookmark/vendor-videogallery"
@@ -216,6 +216,8 @@ import AccountsPayable from "../components/application/bookmark/accounts-payable
 import AddCountries from "../components/application/bookmark/add-countries"
 import EditCountries from "../components/application/bookmark/edit-countries"
 import Countries from "../components/application/bookmark/countries"
+import Trash from "../components/application/bookmark/trash"
+import Backup from "../components/application/bookmark/backup"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -396,7 +398,8 @@ export const routes = [
         { path:"/app/email-app", Component:Email},
         { path:"/app/chat-app", Component:Chat},
         { path:"/dashboard/admin/roleslist/:id", Component:RolesList},
-        { path:"/dashboard/admin/general-settings/:id", Component:GeneralSettings},
+        { path:"/dashboard/admin/trash/:id", Component:Trash},
+        { path:"/dashboard/admin/backup/:id", Component:Backup},
         { path:"/dashboard/admin/manage-pages", Component:ManagePages},
         { path:"/dashboard/admin/edit-page/:id", Component:EditPage},
         { path:"/dashboard/admin/categories", Component:Categories},
@@ -421,7 +424,8 @@ export const routes = [
         { path:"/dashboard/vendor/my-wallet", Component:MyWallet},
         { path:"/dashboard/vendor/vendor-membership-package", Component:VendorMembershipPackage},
         { path:"/dashboard/vendor/vendor-coupon", Component:VendorCoupon},
-        { path:"/dashboard/vendor/edit-vendor-coupon", Component:EditVendorCoupon},
+        { path:"/dashboard/vendor/add-vendor-coupon", Component:AddVendorCoupon},
+        { path:"/dashboard/vendor/edit-vendor-coupon/:id", Component:EditVendorCoupon},
         { path:"/dashboard/vendor/vendor-photogallery", Component:VendorPhotogallery},
         { path:"/dashboard/vendor/vendor-videogallery", Component:VendorVideoGallery},
         { path:"/dashboard/vendor/add-video-gallery/", Component:AddVendorVideoGallery},
