@@ -14,6 +14,14 @@ const Backup = (props) => {
       <Container fluid={true}>
         <Card>
           <CardBody>
+          <Row>
+            <Col sm="6">&nbsp;</Col>
+            <Col sm="6">
+              <div class="pull-right">
+                <Button color="primary">Backup Database</Button>
+              </div>
+            </Col>
+          </Row>
             <div className="table-responsive m-t-20">
               <Table>
                 <thead>
@@ -28,7 +36,7 @@ const Backup = (props) => {
                     <td>{"united-restaurants.sql"}</td>
                     <td>{"01-12-2021"}</td>
                     <td className="text-right">
-                      <Button color="primary">Download</Button>
+                      <Button color="success">Download</Button>
                     </td>
                   </tr>
                 </tbody>
