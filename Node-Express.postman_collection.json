@@ -3011,6 +3011,40 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Adds Membership Get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3ODQwMzQ1LCJleHAiOjE2NjkzOTcyNzF9.AWmJwsT2GH9-UwlHzerO56U0pXps4nTet5dN4E1D4Hg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/adds-membership",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"adds-membership"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
