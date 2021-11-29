@@ -50,7 +50,7 @@ const VendorPhotogallery = () => {
 
       axios.delete(`/api/gallery/`+`${id}`,config
       ) .then(response => {
-        toast.success("Video Deleted !")
+        toast.success("Image Deleted !")
         setTimeout(() => {
           history.push('/dashboard/vendor/vendor-photogallery/');
         }, 1000);
@@ -75,7 +75,12 @@ const VendorPhotogallery = () => {
       axios.post('/api/gallery/',
         bodyParameters,
         config
-      ) .then(response => toast.success("Gallery Images Added !"))
+      ) .then(response => {
+        toast.success("Gallery Images Added!")
+        setTimeout(() => {
+          history.push('/dashboard/vendor/vendor-photogallery/');
+        }, 1000);
+      })
          .catch(error => console.log('Form submit error', error))
 
   };
@@ -91,16 +96,18 @@ const VendorPhotogallery = () => {
                                 <h5>{"Images in Gallery"}</h5>
                             </CardHeader>
                             <CardBody>
+                            <Row>
                                 {galleryData.map((item , i) => (
-                                <Row key = {i}>
+                                
                                     <Col sm="3">
                                         <div className="imgGallery">
-                                            <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/../../../assets/images/resturent/2.jpg`} />
+                                            <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/gallery/${item.image}`} />
                                             <a className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</a> 
                                         </div>
                                     </Col>                               
-                                </Row> 
+                               
                                 ))}
+                                 </Row> 
                             </CardBody>
                         </Card>
                     </Col>
