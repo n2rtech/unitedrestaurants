@@ -2578,7 +2578,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"user_id\":3,\n    \"deal_name\": \"sub user\",\n    \"deal_description\": \"sub admin users\"\n}"
+					"raw": "{\n    \"user_id\":2,\n    \"deal_name\": \"sub user\",\n    \"deal_description\": \"sub admin users\"\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/vendor-coupons",
@@ -2685,10 +2685,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"job_name\": \"admin\",\n    \"job_description\": \"Admin Application1\"\n}"
+					"raw": "{\n    \"deal_name\": \"admin\",\n    \"deal_description\": \"Admin Application1\"\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/vendor-coupons/1",
+					"raw": "http://127.0.0.1:5000/api/vendor-coupons/2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -2700,26 +2700,26 @@
 					"path": [
 						"api",
 						"vendor-coupons",
-						"1"
+						"2"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Video Gallery Delete",
+			"name": "Vendor coupon Delete",
 			"request": {
 				"method": "DELETE",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					},
 					{
 						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
-						"type": "text"
+						"type": "text",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ"
 					}
 				],
 				"url": {
