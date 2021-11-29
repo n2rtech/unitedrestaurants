@@ -165,6 +165,7 @@ import Search from "../components/search"
 
 // E-commerce-app 
 import AddVendor from "../components/application/bookmark/add-vendor"
+import GeneralSettings from "../components/application/bookmark/general-settings"
 import EditAccountsPayable from "../components/application/bookmark/edit-payable"
 import AddAccountsPayable from "../components/application/bookmark/add-payable"
 import EditAdminMembership from "../components/application/bookmark/edit-admin-membership"
@@ -395,6 +396,7 @@ export const routes = [
         { path:"/app/email-app", Component:Email},
         { path:"/app/chat-app", Component:Chat},
         { path:"/dashboard/admin/roleslist/:id", Component:RolesList},
+        { path:"/dashboard/admin/general-settings/:id", Component:GeneralSettings},
         { path:"/dashboard/admin/manage-pages", Component:ManagePages},
         { path:"/dashboard/admin/edit-page/:id", Component:EditPage},
         { path:"/dashboard/admin/categories", Component:Categories},
