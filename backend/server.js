@@ -21,6 +21,7 @@ const paymentmethods = require("./routes/paymentmethods");
 // const membership = require("./routes/membership");
 // const coupons = require("./routes/coupons");
 const pages = require("./routes/pages");
+// const sitesetting = require("./routes/sitesetting");
 
 // Bodyparser middleware
 app.use(bodyParser.json());
@@ -68,6 +69,7 @@ app.use("/api/payment-methods", paymentmethods);
 // app.use("/api/membership", membership);
 // app.use("/api/coupons", coupons);
 app.use("/api/pages", pages);
+// app.use("/api/site-settings", sitesetting);
 
 const port = process.env.PORT || 5000;
 
