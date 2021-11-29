@@ -421,7 +421,7 @@ export const routes = [
         { path:"/dashboard/vendor/my-wallet", Component:MyWallet},
         { path:"/dashboard/vendor/vendor-membership-package", Component:VendorMembershipPackage},
         { path:"/dashboard/vendor/vendor-coupon", Component:VendorCoupon},
-        { path:"/dashboard/vendor/edit-vendor-coupon", Component:EditVendorCoupon},
+        { path:"/dashboard/vendor/edit-vendor-coupon/:id", Component:EditVendorCoupon},
         { path:"/dashboard/vendor/vendor-photogallery", Component:VendorPhotogallery},
         { path:"/dashboard/vendor/vendor-videogallery", Component:VendorVideoGallery},
         { path:"/dashboard/vendor/add-video-gallery/", Component:AddVendorVideoGallery},
