@@ -2,7 +2,9 @@ import React, { Fragment , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import CKEditors from "react-ckeditor-component";
 import {Container,Row,Col,Card,CardHeader,CardBody, Button} from 'reactstrap'
-import { CKEditorExample } from "../../../constant";
+import {toast} from 'react-toastify';
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const MenuItems =  () =>  {
     
