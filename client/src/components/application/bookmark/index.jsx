@@ -35,8 +35,8 @@ const GeneralSettings = (props) => {
                   </Col>
                   <Col sm="1">
                     <div className="radio radio-primary">
-                      <Input id="radio1" type="radio" name="radio1" value="option1" />
-                      <Label for="radio1">{Option}<span className="digits"> {"Yes"}</span></Label>
+                      <Input id="radio2" type="radio" name="radio1" value="option2  " />
+                      <Label for="radio2">{Option}<span className="digits"> {"Yes"}</span></Label>
                     </div>
                   </Col>
                 </Row>
