@@ -31,6 +31,25 @@ const VendorCoupon = (props) => {
 
     console.log(couponData);
 
+       // Delete functionality
+
+   const handleDelete = (id) => {
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+
+      axios.delete(`/api/vendor-coupons/`+`${id}`,config
+      ) .then(response => {
+        toast.success("Coupon Deleted !")
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      })
+         .catch(error => console.log('Form submit error', error))
+    
+  }
+
+
   return (
     <Fragment>
       <Breadcrumb parent="Apps" title="Deals or Promotions" />
@@ -41,7 +60,7 @@ const VendorCoupon = (props) => {
             <Col sm="6"></Col>
             <Col sm="6">
               <div className="pull-right">
-                <a href="{#}" className="btn btn-primary">Add New</a>
+                <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/add-vendor-coupon`} className="btn btn-primary">Add New</a>
               </div>
             </Col>
           </Row>
@@ -59,7 +78,7 @@ const VendorCoupon = (props) => {
                    <td>{item.deal_name}</td>
                    <td className="text-right">
                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-vendor-coupon/${item.id}`} className="btn btn-success">Edit</a> &nbsp;
-                     <a href={"#"} className="btn btn-danger">Delete</a> 
+                     <a onClick={() => handleDelete(item.id)}className="btn btn-danger">Delete</a> 
                    </td>
                  </tr>
                 ))}
