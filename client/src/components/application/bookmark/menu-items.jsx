@@ -9,7 +9,8 @@ import { useHistory } from 'react-router-dom'
 
 const MenuItems =  () =>  {
     
-    const [content,setContent] = useState('content') 
+    const [content,setContent] = useState('')
+    const [id,setId] = useState('') 
     const onChange = (evt) => {
         const newContent = evt.editor.getData();
         setContent(newContent)
@@ -29,6 +30,7 @@ const MenuItems =  () =>  {
           .then(
             (result) => {
                 setContent(result.content);
+                setId(result.id);
             },
             (error) => {
               
@@ -48,13 +50,13 @@ const MenuItems =  () =>  {
       const bodyParameters = {
         content: content,
       };
-      axios.put(`/api/menu-items/`+`${params.id}`,
+      axios.put(`/api/menu-items/`+`${id}`,
         bodyParameters,
         config
       ) .then(response => {
         toast.success("Menu Items updated !")
           setTimeout(() => {
-            history.push('/dashboard/vendor/menu-items/1');
+            history.push('/dashboard/vendor/menu-items/'+`${params.id}`);
           }, 1000);
       })
          .catch(error => console.log('Form submit error', error))
