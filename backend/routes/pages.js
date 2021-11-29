@@ -13,7 +13,7 @@ const helper = new Helper();
 router.post('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Manage Pages').then((rolePerm) => {
         if (!req.body.title) {
             res.status(400).send({
                 msg: 'Please pass Tile.'
@@ -51,8 +51,7 @@ router.post('/', passport.authenticate('jwt', {
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_get_all').then((rolePerm) => {
-        console.log(rolePerm);
+    helper.checkPermission(req.user.role_id, 'Manage Pages').then((rolePerm) => {
         Page
             .findAll({})
             .then((roles) => res.status(200).send(roles))
@@ -68,7 +67,7 @@ router.get('/', passport.authenticate('jwt', {
 router.get('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Manage Pages').then((rolePerm) => {
 
     }).catch((error) => {
         res.status(403).send(error);
@@ -87,7 +86,7 @@ router.get('/:id', passport.authenticate('jwt', {
 router.put('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Manage Pages').then((rolePerm) => {
         if (!req.params.id || !req.body.title || !req.body.body) {
             res.status(400).send({
                 msg: 'Please pass Role ID, title or description.'
@@ -137,7 +136,7 @@ router.put('/:id', passport.authenticate('jwt', {
 router.delete('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Manage Pages').then((rolePerm) => {
         if (!req.params.id) {
             res.status(400).send({
                 msg: 'Please pass role ID.'

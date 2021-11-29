@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2021 at 06:36 AM
+-- Generation Time: Nov 29, 2021 at 09:24 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -21,6 +21,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `mernunited`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adspaces`
+--
+
+CREATE TABLE `adspaces` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `link` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `adspaces`
+--
+
+INSERT INTO `adspaces` (`id`, `user_id`, `link`, `image`, `createdAt`, `updatedAt`) VALUES
+(2, 2, 'link', 'image_1638173962544.png', '2021-11-29 08:19:22', '2021-11-29 08:19:22');
 
 -- --------------------------------------------------------
 
@@ -258,6 +280,28 @@ INSERT INTO `memberships` (`id`, `status`, `name`, `description`, `slug`, `inter
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `menuitems`
+--
+
+CREATE TABLE `menuitems` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `menuitems`
+--
+
+INSERT INTO `menuitems` (`id`, `user_id`, `name`, `content`, `createdAt`, `updatedAt`) VALUES
+(1, 1, NULL, 'ttttt', '0000-00-00 00:00:00', '2021-11-29 06:10:17');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pages`
 --
 
@@ -276,6 +320,30 @@ CREATE TABLE `pages` (
 
 INSERT INTO `pages` (`id`, `title`, `slug`, `body`, `createdAt`, `updatedAt`) VALUES
 (36, 'admin ee', 'admin-ee', 'Admin Application dd', '2021-11-18 12:59:06', '2021-11-24 05:56:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paymentmethods`
+--
+
+CREATE TABLE `paymentmethods` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `card_number` varchar(255) DEFAULT NULL,
+  `name_on_card` varchar(255) DEFAULT NULL,
+  `expiry_date` date DEFAULT NULL,
+  `cvv` int(11) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `paymentmethods`
+--
+
+INSERT INTO `paymentmethods` (`id`, `user_id`, `card_number`, `name_on_card`, `expiry_date`, `cvv`, `createdAt`, `updatedAt`) VALUES
+(1, 1, '1234655LHH3', 'Krishna Mishra', '2024-08-08', NULL, '0000-00-00 00:00:00', '2021-11-29 07:25:01');
 
 -- --------------------------------------------------------
 
@@ -363,7 +431,8 @@ CREATE TABLE `profiles` (
 
 INSERT INTO `profiles` (`id`, `user_id`, `business_name`, `business_email`, `manager_name`, `manager_email`, `phone_number`, `fax`, `address`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `createdAt`, `updatedAt`) VALUES
 (1, 2, 'Krishna Mishra', 'krishna143@gmail.com', 'Krishna Mishra', 'krishna143@gmail.com', 'dd', 'null', 'null', 'string', 'banner_1637927622677.png', 'null', 'null', 'null', 'null', '2021-11-24 08:20:23', '2021-11-26 11:53:42'),
-(4, 4, 'Krishna Mishra', 'krishna143@gmail.com', 'Krishna Mishra', 'krishna143@gmail.com', '77777777', 'fddddddddddd', 'nulffffff', NULL, 'banner_1637929555970.png', 'null', 'null', 'null', 'null', '2021-11-26 11:43:58', '2021-11-26 12:25:55');
+(4, 4, 'Krishna Mishra', 'krishna143@gmail.com', 'Krishna Mishra', 'krishna143@gmail.com', '77777777', 'fddddddddddd', 'nulffffff', NULL, 'banner_1637929555970.png', 'null', 'null', 'null', 'null', '2021-11-26 11:43:58', '2021-11-26 12:25:55'),
+(5, 1, 'Krishna Mishra', 'krishna34@gmail.com', 'Krishna Mishra', 'krishna34@gmail.com', 'dd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-11-29 06:35:09', '2021-11-29 06:35:09');
 
 -- --------------------------------------------------------
 
@@ -456,7 +525,10 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 ('20211125061100-create-job-opening.js'),
 ('20211125112234-create-video-gallery.js'),
 ('20211125123254-create-gallery.js'),
-('20211126083444-create-vendor-coupon.js');
+('20211126083444-create-vendor-coupon.js'),
+('20211129055400-create-menu-item.js'),
+('20211129064546-create-payment-method.js'),
+('20211129075343-create-ad-space.js');
 
 -- --------------------------------------------------------
 
@@ -601,6 +673,12 @@ INSERT INTO `videogalleries` (`id`, `user_id`, `video_name`, `youtube_link`, `st
 --
 
 --
+-- Indexes for table `adspaces`
+--
+ALTER TABLE `adspaces`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
@@ -649,9 +727,21 @@ ALTER TABLE `memberships`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `menuitems`
+--
+ALTER TABLE `menuitems`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pages`
 --
 ALTER TABLE `pages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `paymentmethods`
+--
+ALTER TABLE `paymentmethods`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -723,6 +813,12 @@ ALTER TABLE `videogalleries`
 --
 
 --
+-- AUTO_INCREMENT for table `adspaces`
+--
+ALTER TABLE `adspaces`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -771,10 +867,22 @@ ALTER TABLE `memberships`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `menuitems`
+--
+ALTER TABLE `menuitems`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `paymentmethods`
+--
+ALTER TABLE `paymentmethods`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -792,7 +900,7 @@ ALTER TABLE `profilecategories`
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `rolepermissions`

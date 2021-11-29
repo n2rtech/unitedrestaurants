@@ -199,6 +199,7 @@ import VendorProfile from "../components/application/bookmark/vendor-profile"
 import MyWallet from "../components/application/bookmark/my-wallet"
 import VendorMembershipPackage from "../components/application/bookmark/vendor-membership-package"
 import VendorCoupon from "../components/application/bookmark/vendor-coupon"
+import AddVendorCoupon from "../components/application/bookmark/add-vendor-coupon"
 import EditVendorCoupon from "../components/application/bookmark/edit-vendor-coupon"
 import VendorPhotogallery from "../components/application/bookmark/vendor-photogallery"
 import VendorVideoGallery from "../components/application/bookmark/vendor-videogallery"
@@ -423,6 +424,7 @@ export const routes = [
         { path:"/dashboard/vendor/my-wallet", Component:MyWallet},
         { path:"/dashboard/vendor/vendor-membership-package", Component:VendorMembershipPackage},
         { path:"/dashboard/vendor/vendor-coupon", Component:VendorCoupon},
+        { path:"/dashboard/vendor/add-vendor-coupon", Component:AddVendorCoupon},
         { path:"/dashboard/vendor/edit-vendor-coupon/:id", Component:EditVendorCoupon},
         { path:"/dashboard/vendor/vendor-photogallery", Component:VendorPhotogallery},
         { path:"/dashboard/vendor/vendor-videogallery", Component:VendorVideoGallery},
