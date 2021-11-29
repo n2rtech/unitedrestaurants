@@ -71,7 +71,6 @@ const VendorPhotogallery = () => {
            bodyParameters.append('image', image.pictureFiles[i])
         }
 
-
       axios.post('/api/gallery/',
         bodyParameters,
         config
