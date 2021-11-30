@@ -1,8 +1,38 @@
-import React, { Fragment } from 'react';
+import React, { Fragment ,useEffect , useState} from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container, Row, Col, Card, CardHeader, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
 import { SimplePricingCard,BecomeMember, Standard, LorumIpsum, Purchase, Business,Premium,Extra,SignUp } from '../../../constant';
+import {toast} from 'react-toastify';
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+
 const AddsMembership = (props) => {
+
+  const [membershipsData, setAddmemberships] = useState([]);
+  const user_id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
+  const history = useHistory()
+  useEffect(() => {
+  
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+          };
+   
+      fetch("/api/membership" , config)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            
+            setAddmemberships(result);
+          },
+          (error) => {
+            
+          }
+        )
+    }, []);
+
+    console.log(membershipsData);
+
   return (
     <Fragment>
       <Breadcrumb parent="Price" title="Adds Membership" />

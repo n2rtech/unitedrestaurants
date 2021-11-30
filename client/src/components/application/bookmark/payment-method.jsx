@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment , useEffect , useState } from "react";
 import Breadcrumb from '../../../layout/breadcrumb'
 import {
   Container,
@@ -14,8 +14,40 @@ import {
   Button
 } from "reactstrap";
 import { CreditCard, DebitCard, ExpirationDate, SelectMonth, SelectYear, Submit, COD, EMI, BankName, SelectCard, SelectDuration,NetBanking } from "../../../constant";
+import {toast} from 'react-toastify';
+import axios from 'axios'
+import { useParams } from "react-router-dom";
+import { useHistory } from 'react-router-dom'
 
 const PaymentMethod = props => {
+
+  const [cardnumber,setCardnumber] = useState('')
+  const [namecard,setNamecard] = useState('')
+  const [expiry,setExpiry] = useState('')
+
+  const params = useParams();
+  const token = localStorage.getItem("token");
+  const history = useHistory()
+  useEffect(() => {
+  
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+   
+      fetch("/api/payment-methods/"+`${params.id}` , config)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setCardnumber(result.card_number);
+            setNamecard(result.name_on_card);
+            setExpiry(result.expiry_date);
+          },
+          (error) => {
+            
+          }
+        )
+    }, []);
+
   return (
     <Fragment>
       <Breadcrumb parent="Ecommerce" title="Payment Details" />
@@ -34,19 +66,19 @@ const PaymentMethod = props => {
                        <Label>{"Card Number"}</Label>
                         <Input
                           className="form-control"
-                          type="text"
+                          type="text" value= {cardnumber}
                         />
                       </FormGroup>
                       <FormGroup>
                       <Label>{"Name on Card"}</Label>
                         <Input
                           className="form-control"
-                          type="text"
+                          type="text" value= {namecard}
                         />
                       </FormGroup>
                       <FormGroup>
                         <Label>{"Expiry Date"}</Label>
-                        <Input className="form-control" type="date" />
+                        <Input className="form-control" type="date"  value= {expiry}/>
                       </FormGroup>
                       <FormGroup>
                         <Label>{"CVV"}</Label>
