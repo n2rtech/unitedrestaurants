@@ -24,6 +24,7 @@ const PaymentMethod = props => {
   const [cardnumber,setCardnumber] = useState('')
   const [namecard,setNamecard] = useState('')
   const [expiry,setExpiry] = useState('')
+  const [id,setId] = useState('') 
 
   const params = useParams();
   const token = localStorage.getItem("token");
@@ -41,12 +42,50 @@ const PaymentMethod = props => {
             setCardnumber(result.card_number);
             setNamecard(result.name_on_card);
             setExpiry(result.expiry_date);
+            setId(result.id);
           },
           (error) => {
             
           }
         )
     }, []);
+
+    const onChangeCardnumber = (event) => {
+      setCardnumber(event.target.value)
+    }
+
+    const onChangeNamecard = (event) => {
+      setNamecard(event.target.value)
+    }
+
+    const onChangeExpiry = (event) => {
+      setExpiry(event.target.value)
+    }
+
+    // Edit Api
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+      const bodyParameters = {
+        card_number: cardnumber,
+        name_on_card: namecard,
+        expiry: expiry
+      };
+      axios.put(`/api/payment-methods/`+`${id}`,
+        bodyParameters,
+        config
+      ) .then(response => {
+        toast.success("Payment Methods updated !")
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+      })
+         .catch(error => console.log('Form submit error', error))
+
+  };
 
   return (
     <Fragment>
@@ -66,19 +105,19 @@ const PaymentMethod = props => {
                        <Label>{"Card Number"}</Label>
                         <Input
                           className="form-control"
-                          type="text" value= {cardnumber}
+                          type="text" onChange  = {onChangeCardnumber} value= {cardnumber}
                         />
                       </FormGroup>
                       <FormGroup>
                       <Label>{"Name on Card"}</Label>
                         <Input
                           className="form-control"
-                          type="text" value= {namecard}
+                          type="text" onChange  = {onChangeNamecard} value= {namecard}
                         />
                       </FormGroup>
                       <FormGroup>
                         <Label>{"Expiry Date"}</Label>
-                        <Input className="form-control" type="date"  value= {expiry}/>
+                        <Input className="form-control"  onChange = {onChangeExpiry} type="date"  value= {expiry}/>
                       </FormGroup>
                       <FormGroup>
                         <Label>{"CVV"}</Label>
@@ -88,7 +127,7 @@ const PaymentMethod = props => {
                         />
                       </FormGroup>
                       <FormGroup>
-                        <Button  color="primary">{"Save"}</Button>
+                        <Button  color="primary" onClick = {handleSubmit}>{"Save"}</Button>
                       </FormGroup>
                     </Form>
                   </Col>

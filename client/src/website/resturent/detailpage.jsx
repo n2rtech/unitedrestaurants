@@ -12,9 +12,8 @@ import '../css/style.css'
 
 const Detailpage = (props) => {
 
-const [images,setImage] = useState([]) 
+		const [images,setImage] = useState([]) 
         const [smallImages,setsmallImages] = useState([])
-        
         const initilindex = {index:0,isOpen:false}
         const[photoIndex,setPhotoIndex] = useState(initilindex)
         const onMovePrev = () => {
@@ -53,7 +52,7 @@ const [images,setImage] = useState([])
 	          <div className="contact-group">
 	            <img src={`${process.env.PUBLIC_URL}/assets/images/icons/website.png`} 
 	                 alt="Web" className="addweb" />
-	            <div className="contactdetail"><a href="https://www.unitedrestaurants.com/">www.unitedrestaurants.com</a></div>
+	            <div className="contactdetail"><a>www.unitedrestaurants.com</a></div>
 	          </div><br/>
 	          <div className="contact-group">
 	            <img src={`${process.env.PUBLIC_URL}/assets/images/icons/call.png`} 
@@ -68,11 +67,11 @@ const [images,setImage] = useState([])
       	<Container>
       		<Row>
       			<Col sm="12" xs="12">
-      				<div class="historyabout">
+      				<div className="historyabout">
       					<h2>Our History</h2>
       					<p>Pellentesque habitant morbi tristique senectus netus et malesuada fames turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas 
 						Pellentesque habitant morbi tristique senectus netus et malesuada fames turpisas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet qu</p>
-      					<a href="javascript:void(0)" class="showmorebtn">Show more</a>
+      					<a href={void(0)} className="showmorebtn">Show more</a>
       				</div>
       			</Col>
       		</Row>
@@ -85,23 +84,24 @@ const [images,setImage] = useState([])
       				<div className="wehave">
       					<h3>What Do We Have</h3>
       					<List type="unstyled">
-      						<li><a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-	                 alt="Hand Symbol" className="handsymbol" /> Salad With Vagitable</a></li>
-	                 <li><a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+      				<li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+	                 alt="Hand Symbol" className="handsymbol" /> Salad With Vagitable</a>
+					</li>
+	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /> Teriyaki salmon</a></li>
-	                 <li><a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /> Roasted prawns coriander</a></li>
-	                 <li><a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /> Pumpkin and goat cheese</a></li>
-	                 <li><a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /> Mince & steak pie</a></li>
-	                 <li><a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /> Veal mini escalopes</a></li>
-	                 <li><a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /> Ravioli filled with baked</a></li>
-	                 <li><a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /> Teriyaki salmon</a></li>
-	                 <li><a href="javascript:void(0)"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /> Roasted prawns coriander</a></li>
       					</List>
       				</div>
@@ -223,10 +223,10 @@ const [images,setImage] = useState([])
       		<h5>Videos</h5>
       		<Row>
       			<Col sm="4" xs="6">
-      				<div class="videodiv">
-      					<div class="embed-responsive embed-responsive-16by9">
+      				<div className="videodiv">
+      					<div className="embed-responsive embed-responsive-16by9">
 					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-					        allowfullscreen="allowfullscreen"
+					        allowFullScreen="allowfullscreen"
 					        mozallowfullscreen="mozallowfullscreen" 
 					        msallowfullscreen="msallowfullscreen" 
 					        oallowfullscreen="oallowfullscreen" 
@@ -235,10 +235,10 @@ const [images,setImage] = useState([])
       				</div>
       			</Col>
       			<Col sm="4" xs="6">
-      				<div class="videodiv">
-      					<div class="embed-responsive embed-responsive-16by9">
+      				<div className="videodiv">
+      					<div className="embed-responsive embed-responsive-16by9">
 					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-					        allowfullscreen="allowfullscreen"
+					        allowFullScreen="allowfullscreen"
 					        mozallowfullscreen="mozallowfullscreen" 
 					        msallowfullscreen="msallowfullscreen" 
 					        oallowfullscreen="oallowfullscreen" 
@@ -247,10 +247,10 @@ const [images,setImage] = useState([])
       				</div>
       			</Col>
       			<Col sm="4" xs="6">
-      				<div class="videodiv">
-      					<div class="embed-responsive embed-responsive-16by9">
+      				<div className="videodiv">
+      					<div className="embed-responsive embed-responsive-16by9">
 					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-					        allowfullscreen="allowfullscreen"
+					        allowFullScreen="allowfullscreen"
 					        mozallowfullscreen="mozallowfullscreen" 
 					        msallowfullscreen="msallowfullscreen" 
 					        oallowfullscreen="oallowfullscreen" 
@@ -259,10 +259,10 @@ const [images,setImage] = useState([])
       				</div>
       			</Col>
       			<Col sm="4" xs="6">
-      				<div class="videodiv">
-      					<div class="embed-responsive embed-responsive-16by9">
+      				<div className="videodiv">
+      					<div className="embed-responsive embed-responsive-16by9">
 					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-					        allowfullscreen="allowfullscreen"
+					        allowFullScreen="allowfullscreen"
 					        mozallowfullscreen="mozallowfullscreen" 
 					        msallowfullscreen="msallowfullscreen" 
 					        oallowfullscreen="oallowfullscreen" 
@@ -271,10 +271,10 @@ const [images,setImage] = useState([])
       				</div>
       			</Col>
       			<Col sm="4" xs="6">
-      				<div class="videodiv">
-      					<div class="embed-responsive embed-responsive-16by9">
+      				<div className="videodiv">
+      					<div className="embed-responsive embed-responsive-16by9">
 					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-					        allowfullscreen="allowfullscreen"
+					        allowFullScreen="allowfullscreen"
 					        mozallowfullscreen="mozallowfullscreen" 
 					        msallowfullscreen="msallowfullscreen" 
 					        oallowfullscreen="oallowfullscreen" 
@@ -283,10 +283,10 @@ const [images,setImage] = useState([])
       				</div>
       			</Col>
       			<Col sm="4" xs="6">
-      				<div class="videodiv">
-      					<div class="embed-responsive embed-responsive-16by9">
+      				<div className="videodiv">
+      					<div className="embed-responsive embed-responsive-16by9">
 					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-					        allowfullscreen="allowfullscreen"
+					        allowFullScreen="allowfullscreen"
 					        mozallowfullscreen="mozallowfullscreen" 
 					        msallowfullscreen="msallowfullscreen" 
 					        oallowfullscreen="oallowfullscreen" 
@@ -357,9 +357,9 @@ const [images,setImage] = useState([])
       					<h6>Job Opening</h6>
       					<p><b>Need Bakery Chef</b></p>
       					<List type="unstyled">
-						  <li><spna>Experience:</spna> 5 to 10 years</li>
-						  <li><spna>Salary:</spna> $2500 / Month</li>
-						  <li><spna>Vacancy:</spna> 5</li>
+						  <li>Experience: 5 to 10 years</li>
+						  <li>Salary: $2500 / Month</li>
+						  <li>Vacancy: 5</li>
       					</List>
       				</div>
       			</Col>
