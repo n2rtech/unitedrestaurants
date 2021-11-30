@@ -23,7 +23,7 @@ a {
     text-decoration: none !important;
 }
 .mainheader{
-    background-image: linear-gradient(to bottom, #800020e6 0%,#800020e6 100%), url("http://localhost:3000/assets/images/headerbg.jpg");
+    background-image: linear-gradient(to bottom, #800020e6 0%,#800020e6 100%), url("/assets/images/headerbg.jpg");
     width: 100%;
     height: auto;
     background-position: center;
@@ -187,7 +187,7 @@ a {
     top: 17px;
 }
 .mainfooter{
-    background-image: linear-gradient(to bottom, #800020e6 0%,#800020e6 100%), url("http://localhost:3000/assets/images/footerbg.jpg");
+    background-image: linear-gradient(to bottom, #800020e6 0%,#800020e6 100%), url("/assets/images/footerbg.jpg");
     width: 100%;
     height: auto;
     background-position: center;
@@ -883,6 +883,219 @@ table th, table td{
 .Item_item__2XwzF:hover{
     color: #70081C !important;
 }
+/*********detailpage********/
+.resturentcontact {
+    text-align: center;
+    box-shadow: 0px 3px 9px #00000047;
+    border-radius: 12px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.resturentcontact h1 {
+    font-family: 'Poppins';
+    font-size: 30px;
+    font-weight: bold;
+    color: #70081C;
+    line-height: 46px;
+}
+.contact-group {
+    display: inline-flex;
+    margin-bottom: 10px;
+}
+.contact-group .contactdetail {
+    color: #2D2C2C;
+    font-size: 15px;
+}
+.contact-group .contactdetail a{
+    color: #2D2C2C;
+    font-size: 15px;
+}
+.contact-group img.addmap {
+    margin-right: 10px;
+}
+.contact-group img.addweb {
+    width: 17px;
+    height: 17px;
+    margin-right: 10px;
+    position: relative;
+    top: 3px;
+}
+.contact-group img.addcall {
+    width: 17px;
+    height: 17px;
+    margin-right: 10px;
+    position: relative;
+    top: 2px;
+}
+.ourhistory{
+    background-image: url("/assets/images/historybg.jpg");
+    width: 100%;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-top: 40px;
+}
+.historyabout{
+    text-align: center;
+}
+.historyabout h2 {
+    font-family: 'Helvetica now';
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #1E1E1E;
+    margin-bottom: 20px;
+}
+.historyabout p {
+    font-size: 16px;
+    font-family: 'Poppins';
+    text-align: center;
+    color: #2D2C2C;
+    line-height: 40px;
+}
+.showmorebtn {
+    background-color: #70081C;
+    padding: 12px 20px;
+    font-size: 15px;
+    border-radius: 3px;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Poppins';
+    line-height: 25px;
+    font-weight: 600;
+}
+.showmorebtn:hover{
+    background-color: #a90f2d;
+    color: #fff;
+}
+.historyabout a{
+    display: inline-block;
+}
+.whatdowehave{
+    background-image: url("/assets/images/whatdobg.jpg");
+    width: 100%;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-bottom: 80px;
+}
+.wehave {
+    width: 100%;
+    position: relative;
+    top: 40px;
+}
+.wehave h3 {
+    font-family: 'Helvetica now';
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 20px;
+}
+.wehave ul li {
+    line-height: 50px;
+}
+.wehave ul li a img {
+    margin-right: 10px;
+}
+.wehave ul li a {
+    font-size: 18px;
+    font-family: 'Poppins';
+    color: #fff;
+}
+.imagegallery h5 {
+    font-family: 'Helvetica now';
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #1E1E1E;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+.videossection h5 {
+    font-family: 'Helvetica now';
+    text-align: center;
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #1E1E1E;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+.videossection .videodiv{
+    margin-bottom: 30px;
+}
+.dealsinformation {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.dealsinfo {
+    margin-bottom: 50px;
+}
+.dealsinfo h6 {
+    font-family: 'Helvetica now';
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #1E1E1E;
+}
+.dealsinfo .fridaydeals {
+    font-size: 18px;
+    line-height: 33px;
+    color: #1E1E1E;
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+.dealsinfo p {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111;
+    font-family: 'Poppins';
+}
+.dealsinfo ul li b {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111;
+    font-family: 'Poppins';
+    margin-bottom: 15px;
+    display: inline-block;
+}
+.dealsinfo ul li ul {
+    margin-left: 40px;
+}
+.dealsinfo ul li ul li {
+    font-size: 13px;
+    line-height: 28px;
+    font-family: 'Poppins';
+    color: #1E1E1E;
+    list-style-type: disc;
+}
+.contactusinfo h6 {
+    font-family: 'Helvetica now';
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #1E1E1E;
+}
+.jobinfo h6 {
+    font-family: 'Helvetica now';
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #1E1E1E;
+}
+.saleinfo h6 {
+    font-family: 'Helvetica now';
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 600;
+    color: #1E1E1E;
+}
+/**********detailpage-end*********/
 @media (max-width: 767px){
 .togglebtn h1 {
     padding-left: 8px !important;
