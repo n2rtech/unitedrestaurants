@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2021 at 09:24 AM
+-- Generation Time: Nov 29, 2021 at 01:39 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -21,6 +21,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `mernunited`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `addsmemberships`
+--
+
+CREATE TABLE `addsmemberships` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` text,
+  `slug` varchar(255) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `interval` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `addsmemberships`
+--
+
+INSERT INTO `addsmemberships` (`id`, `user_id`, `name`, `description`, `slug`, `price`, `interval`, `status`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 'Bronze', 'Your ad will appear in all sections you are listed in in the country your business resides.', 'bronze', 4.99, 'monthly', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 1, 'Silver', 'All what is included in Bronze package + Your ad will appear on homepage', 'silver', 6.99, 'monthly', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 1, 'Gold', 'All what is included in Bronze and Silver package + Your ad will appear on homepage, every departments all over worldwide', 'gold', 9.99, 'monthly', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -528,7 +556,31 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 ('20211126083444-create-vendor-coupon.js'),
 ('20211129055400-create-menu-item.js'),
 ('20211129064546-create-payment-method.js'),
-('20211129075343-create-ad-space.js');
+('20211129075343-create-ad-space.js'),
+('20211129114259-create-site-setting.js'),
+('20211129122322-create-adds-membership.js');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sitesettings`
+--
+
+CREATE TABLE `sitesettings` (
+  `id` int(11) NOT NULL,
+  `maintenance_mode` varchar(255) DEFAULT NULL,
+  `site_name` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `address` text,
+  `facebook_links` varchar(255) DEFAULT NULL,
+  `twitter_links` varchar(255) DEFAULT NULL,
+  `google_plus_links` varchar(255) DEFAULT NULL,
+  `linkedin_links` varchar(255) DEFAULT NULL,
+  `instagram_links` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -673,6 +725,12 @@ INSERT INTO `videogalleries` (`id`, `user_id`, `video_name`, `youtube_link`, `st
 --
 
 --
+-- Indexes for table `addsmemberships`
+--
+ALTER TABLE `addsmemberships`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `adspaces`
 --
 ALTER TABLE `adspaces`
@@ -784,6 +842,12 @@ ALTER TABLE `sequelizemeta`
   ADD UNIQUE KEY `name` (`name`);
 
 --
+-- Indexes for table `sitesettings`
+--
+ALTER TABLE `sitesettings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -811,6 +875,12 @@ ALTER TABLE `videogalleries`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `addsmemberships`
+--
+ALTER TABLE `addsmemberships`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `adspaces`
@@ -913,6 +983,12 @@ ALTER TABLE `rolepermissions`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `sitesettings`
+--
+ALTER TABLE `sitesettings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`

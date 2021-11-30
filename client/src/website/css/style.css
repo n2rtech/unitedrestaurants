@@ -1081,11 +1081,38 @@ table th, table td{
     font-weight: 600;
     color: #1E1E1E;
 }
+.contactusinfo ul li b {
+    font-family: 'Poppins';
+    font-size: 14px;
+    color: #1e1e1e;
+}
+.contactusinfo ul li span {
+    font-family: 'Poppins';
+    font-size: 14px;
+    color: #474747;
+    margin-left: 5px;
+}
+.contactusinfo ul li {
+    line-height: 36px;
+}
 .jobinfo h6 {
     font-family: 'Helvetica now';
     font-size: 30px;
     line-height: 40px;
     font-weight: 600;
+    color: #1E1E1E;
+}
+.jobinfo p b {
+    font-size: 18px;
+    line-height: 33px;
+    color: #1E1E1E;
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+.jobinfo ul li {
+    font-size: 14px;
+    line-height: 28px;
+    font-family: 'Poppins';
     color: #1E1E1E;
 }
 .saleinfo h6 {

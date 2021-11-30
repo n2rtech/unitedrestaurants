@@ -1,8 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect , useState } from 'react';
 import ImageUploader from 'react-images-upload';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Container, Row, Col, Card, CardHeader, CardBody, Button } from 'reactstrap'
-import {SelectSingleImageUpload,MultipleImageUpload} from '../../../constant'
+import { Container, Row, Col,FormGroup,  Card, CardHeader, CardBody, Button } from 'reactstrap'
+import {toast} from 'react-toastify';
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const AddSpaces = () => {
 
@@ -13,6 +15,77 @@ const AddSpaces = () => {
             ...image, pictureFiles
         });
     }
+
+  const [addspacesData, setAddspaces] = useState([]);
+  const user_id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
+  const history = useHistory()
+  useEffect(() => {
+  
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+          };
+   
+      fetch("/api/ad-spaces" , config)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            
+            setAddspaces(result);
+          },
+          (error) => {
+            
+          }
+        )
+    }, []);
+
+    console.log(addspacesData);
+
+
+    // Delete functionality
+
+   const handleDelete = (id) => {
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+
+      axios.delete(`/api/ad-spaces/`+`${id}`,config
+      ) .then(response => {
+        toast.success("Deleted !")
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+      })
+         .catch(error => console.log('Form submit error', error))
+    
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+        const bodyParameters = new FormData();
+        bodyParameters.append('user_id', user_id);
+        bodyParameters.append('link', '');
+
+        for (let i = 0; i < (image.pictureFiles).length; i++) {
+           bodyParameters.append('image', image.pictureFiles[i])
+        }
+
+      axios.post('/api/ad-spaces/',
+        bodyParameters,
+        config
+      ) .then(response => {
+        toast.success("Submit")
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+      })
+         .catch(error => console.log('Form submit error', error))
+
+  };
+
     return (
         <Fragment>
             <Breadcrumb parent="Vendor" title="Ad Space" />
@@ -25,11 +98,33 @@ const AddSpaces = () => {
                             </CardHeader>
                             <CardBody>
                                 <Row>
+                                {addspacesData.map((item , i) => (
                                     <Col sm="4">
                                         <div className="imgGallery">
-                                            <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/../../../assets/images/resturent/2.jpg`} />
+                                            <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/adspaces/${item.image}`} />
                                         </div>
-                                        <ImageUploader
+                                        
+                                        <div className="text-center">
+                                            <Button color="danger" onClick={() => handleDelete(item.id)} className="btn-pill">Delete Banner</Button>
+                                        </div>
+                                    </Col> 
+                                ))}
+
+                                        
+                                </Row>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col sm="12">
+                        <Card>
+                            <CardHeader>
+                                <h5>{"Upload Image"}</h5>
+                            </CardHeader>
+                            <CardBody>
+                            <ImageUploader
                                             withIcon={false}
                                             withPreview={true}
                                             label=""
@@ -39,15 +134,14 @@ const AddSpaces = () => {
                                             maxFileSize={1048576}
                                             fileSizeError=" file size is too big"
                                         />
-                                        <div className="text-center">
-                                            <Button color="danger" className="btn-pill">Delete Banner</Button>
-                                        </div>
-                                    </Col> 
-                                </Row>
+                                <FormGroup>
+                                    <Button  color="primary" onClick = {handleSubmit}>{"Save"}</Button>
+                                </FormGroup>
                             </CardBody>
                         </Card>
                     </Col>
                 </Row>
+
             </Container>
         </Fragment>
     );

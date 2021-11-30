@@ -1,6 +1,6 @@
 import React,{useState,useEffect,Fragment} from 'react';
 import {Container,Row,Col,Form,FormGroup,Input,Label,Button} from 'reactstrap'
-import {Password,SignIn, EmailAddress ,CreateAccount, BusinessName, PrivacyPolicy} from '../../constant';
+import {Password,SignIn, BusinessEmailAddress ,CreateAccount, BusinessName, PrivacyPolicy} from '../../constant';
 import { Twitter, Facebook,GitHub } from 'react-feather';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -58,11 +58,6 @@ const Register = (props) => {
       errors["first_name"] = "field is Required!";
     }
 
-    if (!last_name) {
-      formIsValid = false;
-      errors["last_name"] = "field is Required!";
-    }
-
     if (!mobile) {
       formIsValid = false;
       errors["mobile"] = "field is Required!";
@@ -115,14 +110,6 @@ const Register = (props) => {
       setFirstName(value);
       break;
 
-      case 'last_name': 
-      errors.last_name = 
-      value.length < 1
-      ? 'field is Required!'
-      : '';
-      setLastName(value);
-      break;
-
       case 'mobile': 
       errors.mobile = 
       value.length < 1
@@ -169,7 +156,7 @@ const Register = (props) => {
     if(validateForm(errors)) {
       const query = {
         first_name:first_name,
-        last_name:last_name,
+        last_name:'.',
         mobile:mobile,
         address:address,
         email:email,
@@ -189,7 +176,6 @@ const Register = (props) => {
             history.push('/login');
           }, 1000);
           setFirstName('');
-          setLastName('');
           setMobile('');
           setPassword('');
           setEmail('');
@@ -225,14 +211,10 @@ const Register = (props) => {
                   <FormGroup>
                     <Label className="col-form-label pt-0">{BusinessName}</Label>
                     <div className="form-row">
-                      <Col xs="6">
-                        <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="First name"/>
+                      <Col xs="12">
+                        <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="name"/>
                         <div style={{color:'red'}}>{errors.first_name}</div>
                       </Col>                      
-                      <Col xs="6">
-                        <Input className="form-control" name="last_name" value={last_name} onChange={handleChange} type="text" required="" placeholder="Last name"/>
-                        <div style={{color:'red'}}>{errors.last_name}</div>
-                      </Col>
                     </div>
                   </FormGroup>
                   <FormGroup>
@@ -251,13 +233,13 @@ const Register = (props) => {
                   </FormGroup>
                   
                     <FormGroup>
-                    <Label className="col-form-label">{EmailAddress}</Label>
+                    <Label className="col-form-label">{BusinessEmailAddress}</Label>
                     <Input className="form-control" name="email" value={email} onChange={handleChange} type="email" required="" placeholder="Test@gmail.com"/>
                     <div style={{color:'red'}}>{errors.email}</div>
                   </FormGroup>
 
                   <FormGroup>
-                    <Label className="col-form-label">Mobile Number</Label>
+                    <Label className="col-form-label">Business Mobile Number</Label>
                     <Input className="form-control" name="mobile" value={mobile} onChange={handleChange} type="number" required="" placeholder="0123 456"/>
                     <div style={{color:'red'}}>{errors.mobile}</div>
                   </FormGroup>

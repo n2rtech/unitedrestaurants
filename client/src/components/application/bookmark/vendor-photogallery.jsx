@@ -41,7 +41,7 @@ const VendorPhotogallery = () => {
 
     console.log(galleryData);
 
-       // Delete functionality
+   // Delete functionality
 
    const handleDelete = (id) => {
     const config = {
