@@ -433,7 +433,7 @@ export const routes = [
         { path:"/dashboard/vendor/job-openings", Component:JobOpenings},
         { path:"/dashboard/vendor/add-job-openings", Component:AddJobOpenings},
         { path:"/dashboard/vendor/edit-job-openings/:id", Component:EditJobOpenings},
-        { path:"/dashboard/vendor/payment-method", Component:PaymentMethod},
+        { path:"/dashboard/vendor/payment-method/:id", Component:PaymentMethod},
         { path:"/dashboard/vendor/adds-membership", Component:AddsMembership},
         { path:"/dashboard/vendor/ad-spaces", Component:AddSpaces},
         { path:"/dashboard/vendor/menu-items/:id", Component:MenuItems},

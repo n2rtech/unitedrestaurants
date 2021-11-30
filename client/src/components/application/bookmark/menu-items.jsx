@@ -56,7 +56,7 @@ const MenuItems =  () =>  {
       ) .then(response => {
         toast.success("Menu Items updated !")
           setTimeout(() => {
-            history.push('/dashboard/vendor/menu-items/'+`${params.id}`);
+            window.location.reload();
           }, 1000);
       })
          .catch(error => console.log('Form submit error', error))

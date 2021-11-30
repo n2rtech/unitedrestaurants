@@ -41,7 +41,7 @@ router.post('/', passport.authenticate('jwt', {
             })
         } else {
             AdSpace.create({image:req.file.filename,link:req.body.link,user_id:req.user.id});
-            res.status(400).send({
+            res.status(200).send({
                 msg: 'Ad Space added.'
             })
         }
