@@ -45,20 +45,20 @@ const [images,setImage] = useState([])
         <Col sm="12" xs="12">
         	<div className="resturentcontact">
         		<h1>Tumbleweed Bar</h1>
-        		<div class="contact-group">
+        		<div className="contact-group">
 	            <img src={`${process.env.PUBLIC_URL}/assets/images/icons/location_map.png`} 
 	                 alt="Location" className="addmap" />
-	            <div class="contactdetail">4070 County Road 211, WY, Burns, 82053</div>
+	            <div className="contactdetail">4070 County Road 211, WY, Burns, 82053</div>
 	          </div><br/>
-	          <div class="contact-group">
+	          <div className="contact-group">
 	            <img src={`${process.env.PUBLIC_URL}/assets/images/icons/website.png`} 
 	                 alt="Web" className="addweb" />
-	            <div class="contactdetail"><a href="https://www.unitedrestaurants.com/">www.unitedrestaurants.com</a></div>
+	            <div className="contactdetail"><a href="https://www.unitedrestaurants.com/">www.unitedrestaurants.com</a></div>
 	          </div><br/>
-	          <div class="contact-group">
+	          <div className="contact-group">
 	            <img src={`${process.env.PUBLIC_URL}/assets/images/icons/call.png`} 
 	                 alt="Call" className="addcall" />
-	            <div class="contactdetail"><a href="tel:3075473660">3075473660</a></div>
+	            <div className="contactdetail"><a href="tel:3075473660">3075473660</a></div>
 	          </div>
         	</div>
         </Col>
