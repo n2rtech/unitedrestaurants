@@ -1,5 +1,7 @@
 import React,{Fragment,useState,useEffect} from 'react';
 import Lightbox from "react-image-lightbox";
+import { Player } from 'video-react';
+import 'video-react/dist/video-react.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { Container, Row, Col, CardHeader, Media, iframe, Pagination, PaginationItem, PaginationLink, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
 import 'react-tabs/style/react-tabs.css';
@@ -220,60 +222,52 @@ const [images,setImage] = useState([])
       	<Container className="p-0">
       		<h5>Videos</h5>
       		<Row>
-      			<Col sm="3" xs="6">
+      			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-						  <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-						</div>
+      					<Player>
+
+					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+					    </Player>
       				</div>
       			</Col>
-      			<Col sm="3" xs="6">
+      			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-						  <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-						</div>
+      					<Player>
+
+					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+					    </Player>
       				</div>
       			</Col>
-      			<Col sm="3" xs="6">
+      			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-						  <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-						</div>
+      					<Player>
+
+					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+					    </Player>
       				</div>
       			</Col>
-      			<Col sm="3" xs="6">
+      			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-						  <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-						</div>
+      					<Player>
+
+					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+					    </Player>
       				</div>
       			</Col>
-      			<Col sm="3" xs="6">
+      			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-						  <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-						</div>
+      					<Player>
+
+					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+					    </Player>
       				</div>
       			</Col>
-      			<Col sm="3" xs="6">
+      			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-						  <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-						</div>
-      				</div>
-      			</Col>
-      			<Col sm="3" xs="6">
-      				<div class="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-						  <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-						</div>
-      				</div>
-      			</Col>
-      			<Col sm="3" xs="6">
-      				<div class="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-						  <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-						</div>
+      					<Player>
+
+					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+					    </Player>
       				</div>
       			</Col>
       		</Row>
@@ -325,11 +319,11 @@ const [images,setImage] = useState([])
 						  </li>
       					</List>
       					<div className="socialmenucontact">
-      						<a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/facebookD.png`} 
+      						<a href="#" className="facebookD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/facebookD.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
-	                 <a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/twitterD.png`} 
+	                 <a href="#" className="twitterD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/twitterD.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
-	                 <a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/envelopeD.png`} 
+	                 <a href="#" className="envelopeD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/envelopeD.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
       					</div>
       				</div>
