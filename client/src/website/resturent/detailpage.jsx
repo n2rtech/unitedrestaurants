@@ -224,50 +224,74 @@ const [images,setImage] = useState([])
       		<Row>
       			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<Player>
-
-					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-					    </Player>
+      					<div class="embed-responsive embed-responsive-16by9">
+					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
+					        allowfullscreen="allowfullscreen"
+					        mozallowfullscreen="mozallowfullscreen" 
+					        msallowfullscreen="msallowfullscreen" 
+					        oallowfullscreen="oallowfullscreen" 
+					        webkitallowfullscreen="webkitallowfullscreen"> </iframe>
+					  </div>
       				</div>
       			</Col>
       			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<Player>
-
-					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-					    </Player>
+      					<div class="embed-responsive embed-responsive-16by9">
+					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
+					        allowfullscreen="allowfullscreen"
+					        mozallowfullscreen="mozallowfullscreen" 
+					        msallowfullscreen="msallowfullscreen" 
+					        oallowfullscreen="oallowfullscreen" 
+					        webkitallowfullscreen="webkitallowfullscreen"> </iframe>
+					  </div>
       				</div>
       			</Col>
       			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<Player>
-
-					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-					    </Player>
+      					<div class="embed-responsive embed-responsive-16by9">
+					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
+					        allowfullscreen="allowfullscreen"
+					        mozallowfullscreen="mozallowfullscreen" 
+					        msallowfullscreen="msallowfullscreen" 
+					        oallowfullscreen="oallowfullscreen" 
+					        webkitallowfullscreen="webkitallowfullscreen"> </iframe>
+					  </div>
       				</div>
       			</Col>
       			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<Player>
-
-					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-					    </Player>
+      					<div class="embed-responsive embed-responsive-16by9">
+					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
+					        allowfullscreen="allowfullscreen"
+					        mozallowfullscreen="mozallowfullscreen" 
+					        msallowfullscreen="msallowfullscreen" 
+					        oallowfullscreen="oallowfullscreen" 
+					        webkitallowfullscreen="webkitallowfullscreen"> </iframe>
+					  </div>
       				</div>
       			</Col>
       			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<Player>
-
-					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-					    </Player>
+      					<div class="embed-responsive embed-responsive-16by9">
+					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
+					        allowfullscreen="allowfullscreen"
+					        mozallowfullscreen="mozallowfullscreen" 
+					        msallowfullscreen="msallowfullscreen" 
+					        oallowfullscreen="oallowfullscreen" 
+					        webkitallowfullscreen="webkitallowfullscreen"> </iframe>
+					  </div>
       				</div>
       			</Col>
       			<Col sm="4" xs="6">
       				<div class="videodiv">
-      					<Player>
-
-					      <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-					    </Player>
+      					<div class="embed-responsive embed-responsive-16by9">
+					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
+					        allowfullscreen="allowfullscreen"
+					        mozallowfullscreen="mozallowfullscreen" 
+					        msallowfullscreen="msallowfullscreen" 
+					        oallowfullscreen="oallowfullscreen" 
+					        webkitallowfullscreen="webkitallowfullscreen"> </iframe>
+					  </div>
       				</div>
       			</Col>
       		</Row>
