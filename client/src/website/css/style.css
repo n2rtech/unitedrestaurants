@@ -1160,6 +1160,22 @@ table th, table td{
     border-radius: 50px;
     padding: 11px 8px;
 }
+.headermenu .navbar-nav .nav-item div button{
+    background: none;
+    color: #fff;
+    font-weight: 400;
+}
+.headermenu .navbar-nav li.nav-item:first-child img{
+    margin-bottom: -2px !important;
+}
+.nav-item .Submenu_submenu__1PCnm{
+    left: 100% !important;
+    right: unset !important;
+}
+.nav-item .Submenu_submenu__1PCnm ul li a{
+    font-size: 14px !important;
+    color: #000 !important;
+}
 /**********detailpage-end*********/
 @media (max-width: 767px){
 .togglebtn h1 {
