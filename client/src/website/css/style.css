@@ -1004,7 +1004,7 @@ table th, table td{
 .wehave ul li a {
     font-size: 18px;
     font-family: 'Poppins';
-    color: #fff;
+    color: #fff !important;
 }
 .imagegallery h5 {
     font-family: 'Helvetica now';
@@ -1578,7 +1578,7 @@ table th, table td{
 .wehave ul li a {
     font-size: 13px;
     font-family: 'Poppins';
-    color: #fff;
+    color: #fff !important;
 }
 .imagegallery h5 {
     font-family: 'Helvetica now';
