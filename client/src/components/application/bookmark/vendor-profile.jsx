@@ -199,6 +199,10 @@ const categorys = multiSelections.map((user) => {
               </FormGroup>
             </Col>
           </Row>
+          <FormGroup>
+            <Label htmlFor="exampleFormControlInput1">{"About Business"}</Label>
+            <Input type="textarea" className="form-control" value="" rows="3"/>
+          </FormGroup>
             <FormGroup>
                <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
                <Input type="textarea" className="form-control" value={address} onChange={onChangeaddress} rows="3"/>
