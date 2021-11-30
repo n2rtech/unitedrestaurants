@@ -1122,6 +1122,14 @@ table th, table td{
     font-weight: 600;
     color: #1E1E1E;
 }
+.headermenu .navbar-nav .nav-item div button{
+    background: none;
+    color: #fff;
+    font-weight: 400;
+}
+.headermenu .navbar-nav li.nav-item:first-child img{
+    margin-bottom: -2px !important;
+}
 /**********detailpage-end*********/
 @media (max-width: 767px){
 .togglebtn h1 {
