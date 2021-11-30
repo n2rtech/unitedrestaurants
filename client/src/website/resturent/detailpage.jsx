@@ -310,16 +310,51 @@ const [images,setImage] = useState([])
       			<Col sm="6" xs="12">
       				<div className="contactusinfo">
       					<h6>Contact Us</h6>
+      					<List type="unstyled">
+      						<li>
+						    <b>Location:</b><span>4070 County Road 211, WY, Burns, 82053</span>
+						  </li>
+						  <li>
+						    <b>Phone:</b><span>+02 3525425669</span>
+						  </li>
+						  <li>
+						    <b>Email:</b><span>info.clients@unitedrestaurant.com</span>
+						  </li>
+						  <li>
+						    <b>Website:</b><span>www.unitedrestaurant.com</span>
+						  </li>
+      					</List>
+      					<div className="socialmenucontact">
+      						<a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/facebookD.png`} 
+	                 alt="Hand Symbol" className="handsymbol" /></a>
+	                 <a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/twitterD.png`} 
+	                 alt="Hand Symbol" className="handsymbol" /></a>
+	                 <a href="#"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/envelopeD.png`} 
+	                 alt="Hand Symbol" className="handsymbol" /></a>
+      					</div>
       				</div>
       			</Col>
       			<Col sm="6" xs="12">
       				<div className="jobinfo">
       					<h6>Job Opening</h6>
+      					<p><b>Need Bakery Chef</b></p>
+      					<List type="unstyled">
+						  <li><spna>Experience:</spna> 5 to 10 years</li>
+						  <li><spna>Salary:</spna> $2500 / Month</li>
+						  <li><spna>Vacancy:</spna> 5</li>
+      					</List>
       				</div>
       			</Col>
       			<Col sm="6" xs="12">
       				<div className="saleinfo">
       					<h6>Items for Sale</h6>
+      					<List type="unstyled">
+      						<li>
+						    Roasted prawns coriander
+						  </li>
+						  <li>Pumpkin and goat cheese</li>
+						  <li>Ravioli filled with baked</li>
+      					</List>
       				</div>
       			</Col>
       		</Row>
