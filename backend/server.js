@@ -14,14 +14,16 @@ const permissions = require("./routes/permissions");
 const jobopenings = require("./routes/jobopenings");
 const videogallery = require("./routes/videogallery");
 const vendorcoupons = require("./routes/vendorcoupons");
-// const addsmembership = require("./routes/addsmembership");
+const addsmembership = require("./routes/addsmembership");
 const menuitems = require("./routes/menuitems");
 const adspace = require("./routes/adspace");
 const paymentmethods = require("./routes/paymentmethods");
-// const membership = require("./routes/membership");
-// const coupons = require("./routes/coupons");
+const membership = require("./routes/membership");
+const vendormembership = require("./routes/vendormembership");
+const coupons = require("./routes/coupons");
 const pages = require("./routes/pages");
-// const sitesetting = require("./routes/sitesetting");
+const sitesetting = require("./routes/sitesetting");
+const accountspayables = require("./routes/accountspayables");
 
 // Bodyparser middleware
 app.use(bodyParser.json());
@@ -62,14 +64,16 @@ app.use("/api/permissions", permissions);
 app.use("/api/jobs", jobopenings);
 app.use("/api/video-gallery", videogallery);
 app.use("/api/vendor-coupons", vendorcoupons);
-// app.use("/api/adds-membership", addsmembership);
+app.use("/api/adds-membership", addsmembership);
+app.use("/api/vendor-membership", vendormembership);
 app.use("/api/menu-items", menuitems);
 app.use("/api/ad-spaces", adspace);
 app.use("/api/payment-methods", paymentmethods);
-// app.use("/api/membership", membership);
-// app.use("/api/coupons", coupons);
+app.use("/api/membership", membership);
+app.use("/api/coupons", coupons);
 app.use("/api/pages", pages);
-// app.use("/api/site-settings", sitesetting);
+app.use("/api/site-settings", sitesetting);
+app.use("/api/accounts-payable", accountspayables);
 
 const port = process.env.PORT || 5000;
 
