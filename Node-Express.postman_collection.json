@@ -1449,6 +1449,41 @@
 			"response": []
 		},
 		{
+			"name": "Category Get all list wo token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/categories/get",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"categories",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Countries Add",
 			"request": {
 				"method": "POST",
@@ -1701,12 +1736,7 @@
 							"type": "file",
 							"src": "/C:/Users/laxman/Desktop/IMG-20210616-WA0012.jpg"
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					]
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/gallery",
@@ -2919,12 +2949,7 @@
 							"value": "link",
 							"type": "text"
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					]
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/ad-spaces",
@@ -3150,12 +3175,7 @@
 							"type": "file",
 							"src": "/C:/Users/laxman/Desktop/IMG-20210616-WA0011.jpg"
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					]
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/site-settings",

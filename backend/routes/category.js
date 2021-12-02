@@ -74,7 +74,7 @@ router.post('/add', passport.authenticate('jwt', {
 
 
 
-// Get List of Roles
+// Get List of Categories
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
@@ -147,7 +147,59 @@ router.get('/', passport.authenticate('jwt', {
 });
 
 
-// Get List of Roles
+
+
+
+// Get List of Categories
+router.get('/get', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+    helper.checkPermission(req.user.role_id, 'Categories').then((rolePerm) => {
+        Category
+        .findAll({
+            include: [
+            {
+                model: Category,
+                as: 'parent_category',
+                include: [
+                {
+                    model: Category,
+                    as: 'parent_category',
+                    include: [
+                    {
+                        model: Category,
+                        as: 'parent_category',
+                        include: [
+                        {
+                            model: Category,
+                            as: 'parent_category',
+
+                        }
+                        ]
+
+                    }
+                    ]
+
+                }
+                ]
+            },
+            ]
+
+        })
+            .then((category) => {
+                res.status(200).send(category)
+            })
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+    }).catch((error) => {
+        res.status(403).send(error);
+    });
+});
+
+
+
+// Get List of Categories
 router.get("/list", (req, res) => {
     Category
     .findAll({
@@ -164,7 +216,18 @@ router.get("/list", (req, res) => {
     });
 });
 
-// Get Role by ID
+router.get("/all", (req, res) => {
+    Category
+    .findAll()
+    .then((category) => {
+        res.status(200).send(category)
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+// Get Category by ID
 router.get('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
@@ -235,7 +298,7 @@ router.get('/:id', passport.authenticate('jwt', {
         });
 });
 
-// Update a Role
+// Update a Category
 router.put('/:id', passport.authenticate('jwt', {
     session: false
 }), imageUpload.single('image'), function (req, res) {
@@ -258,6 +321,7 @@ router.put('/:id', passport.authenticate('jwt', {
                     Category.update({
                         name: req.body.name || role.name,
                         description: req.body.description || role.description,
+                        parent_id: req.body.parent_id,
                         image: image
                     }, {
                         where: {
@@ -278,7 +342,7 @@ router.put('/:id', passport.authenticate('jwt', {
     });
 });
 
-// Delete a Role
+// Delete a Category
 router.delete('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
@@ -316,7 +380,7 @@ router.delete('/:id', passport.authenticate('jwt', {
     });
 });
 
-// Add Permissions to Role
+// Add Permissions to Category
 router.post('/permissions/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {

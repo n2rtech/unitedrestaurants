@@ -45,6 +45,16 @@ router.get('/', passport.authenticate('jwt', {
 });
 
 
+router.get('/list/:id', (req, res) => {
+    VideoGallery
+    .findAll({where:{user_id:req.params.id}})
+    .then((videogalleries) => res.status(200).send(videogalleries))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+
 // Get Video Gallery by ID
 router.get('/:id', (req, res) => {
     VideoGallery

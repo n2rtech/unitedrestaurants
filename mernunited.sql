@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2021 at 03:30 PM
+-- Generation Time: Dec 02, 2021 at 02:20 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -122,17 +122,19 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`, `description`, `slug`, `parent_id`, `category_id`, `image`, `sort_order`, `status`, `createdAt`, `updatedAt`) VALUES
 (1, 'Bracelets', 'Bracelets', NULL, 0, NULL, '', 1, 1, '2021-11-15 07:41:01', '2021-11-15 07:41:01'),
 (4, 'krishna', 'Krishna Mishra', NULL, 0, NULL, 'image_1637739295874.jpg', 1, 1, '2021-11-15 07:46:54', '2021-11-24 07:34:55'),
-(5, 'watches', 'watches', NULL, 0, NULL, '', 1, 1, '2021-11-15 07:47:27', '2021-11-15 07:47:27'),
+(5, 'watches', 'watches', NULL, 1, NULL, 'image_1638448695775.jpg', 1, 1, '2021-11-15 07:47:27', '2021-12-02 12:38:15'),
 (6, 'Bags', 'Bags', NULL, 4, NULL, '', 1, 1, '2021-11-15 07:48:36', '2021-11-15 07:48:36'),
 (7, 'Chains', 'Chains', NULL, 6, NULL, '', 1, 1, '2021-11-15 07:49:09', '2021-11-15 07:49:09'),
 (8, 'Bevrages', 'Bevrages', NULL, 3, NULL, '', 1, 1, '2021-11-15 07:49:30', '2021-11-15 07:49:30'),
-(9, ' Bevrages2,', ' Bevrages1,', NULL, 4, NULL, ',', 1, 1, '2021-11-15 11:58:26', '2021-11-15 11:58:26'),
-(10, 'krishna', 'Krishna Mishra', NULL, 4, NULL, 'image_1637678071773.jpg', 1, 1, '2021-11-16 09:56:48', '2021-11-23 14:34:31'),
+(9, ' Bevrages2', ' Bevrages1,', NULL, 4, NULL, ',', 1, 1, '2021-11-15 11:58:26', '2021-11-15 11:58:26'),
+(10, 'krishna', 'krishna', NULL, 7, NULL, 'image_1638448793721.jpg', 1, 1, '2021-11-16 09:56:48', '2021-12-02 12:39:53'),
 (11, 'Bevrages7', 'Bevrages6', NULL, 7, NULL, 'image_1637057493463.jpg', 1, 1, '2021-11-16 10:11:33', '2021-11-16 10:11:33'),
 (18, 'Bevrages711', 'Bevrages6', NULL, 7, NULL, 'image_1637737637873.jpg', 1, 1, '2021-11-24 07:07:17', '2021-11-24 07:07:17'),
-(19, '', NULL, NULL, NULL, NULL, 'image_1637843673038.jpg', NULL, 0, '2021-11-25 12:34:33', '2021-11-25 12:34:33'),
-(20, '', NULL, NULL, NULL, NULL, 'image_1637843673080.JPG', NULL, 0, '2021-11-25 12:34:33', '2021-11-25 12:34:33'),
-(21, '', NULL, NULL, NULL, NULL, 'image_1637843673302.jpg', NULL, 0, '2021-11-25 12:34:33', '2021-11-25 12:34:33');
+(22, 'Bevrages3', 'Bevrages1', NULL, 4, NULL, NULL, 1, 1, '2021-12-02 09:24:40', '2021-12-02 09:24:40'),
+(25, 'Components', 'Components', NULL, 0, NULL, 'image_1638439787903.jpg', NULL, 0, '2021-12-02 10:09:47', '2021-12-02 10:09:47'),
+(26, 'Monitors ', 'Monitors ', NULL, 25, NULL, 'image_1638439854196.jpg', NULL, 0, '2021-12-02 10:10:54', '2021-12-02 10:10:54'),
+(27, 'dekstop', 'dekstop', NULL, 26, NULL, 'image_1638440053618.jpg', NULL, 0, '2021-12-02 10:14:13', '2021-12-02 10:14:13'),
+(28, 'keybord', 'keybord', NULL, 27, NULL, 'image_1638440096162.jpg', NULL, 0, '2021-12-02 10:14:56', '2021-12-02 10:14:56');
 
 -- --------------------------------------------------------
 
@@ -976,7 +978,7 @@ ALTER TABLE `adspaces`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `countries`

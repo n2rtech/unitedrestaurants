@@ -34,12 +34,22 @@ router.post('/', (req, res) => {
 
 
 router.get('/list', (req, res) => {
-        VendorCoupon
-            .findAll()
-            .then((vendorcoupons) => res.status(200).send(vendorcoupons))
-            .catch((error) => {
-                res.status(400).send(error);
-            });
+    VendorCoupon
+    .findAll()
+    .then((vendorcoupons) => res.status(200).send(vendorcoupons))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+
+router.get('/list/:id', (req, res) => {
+    VendorCoupon
+    .findAll({where:{user_id:req.params.id}})
+    .then((vendorcoupons) => res.status(200).send(vendorcoupons))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
 });
 
 

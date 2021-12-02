@@ -13,7 +13,7 @@ const helper = new Helper();
 router.post('/', (req, res) => {
         if (!req.body.deal_name || !req.body.deal_description) {
             res.status(400).send({
-                msg: 'Please pass Job name or description.'
+                msg: 'Please pass menuitem name or description.'
             })
         } else {
             MenuItem
@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
                     user_id: req.body.user_id,
                     deal_description: req.body.deal_description
                 })
-                .then((vendorcoupon) => res.status(201).send(vendorcoupon))
+                .then((menuitem) => res.status(201).send(menuitem))
                 .catch((error) => {
                     console.log(error);
                     res.status(400).send(error);
@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 router.get('/list', (req, res) => {
         MenuItem
             .findAll()
-            .then((vendorcoupons) => res.status(200).send(vendorcoupons))
+            .then((menuitem) => res.status(200).send(menuitem))
             .catch((error) => {
                 res.status(400).send(error);
             });
@@ -48,11 +48,23 @@ router.get('/', passport.authenticate('jwt', {
 }), function (req, res) {   
     MenuItem
     .findAll({where:{user_id:req.user.id}})
-    .then((vendorcoupons) => res.status(200).send(vendorcoupons))
+    .then((menuitem) => res.status(200).send(menuitem))
     .catch((error) => {
         res.status(400).send(error);
     });
 });
+
+
+
+router.get('/list/:id', (req, res) => {   
+    MenuItem
+    .findAll({where:{user_id:req.params.id}})
+    .then((menuitem) => res.status(200).send(menuitem))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
 
 
 
@@ -63,7 +75,7 @@ router.get('/:id', (req, res) => {
             where:{
            user_id : req.params.id
         }})
-        .then((vendorcoupons) => res.status(200).send(vendorcoupons))
+        .then((menuitem) => res.status(200).send(menuitem))
         .catch((error) => {
             res.status(400).send(error);
         });
@@ -78,10 +90,10 @@ router.put('/:id', function (req, res) {
         } else {
             MenuItem
                 .findByPk(req.params.id)
-                .then((vendorcoupon) => {
+                .then((menuitem) => {
                     MenuItem.update({
-                        user_id: req.body.user_id || vendorcoupon.user_id,
-                        content: req.body.content || vendorcoupon.content
+                        user_id: req.body.user_id || menuitem.user_id,
+                        content: req.body.content || menuitem.content
                     }, {
                         where: {
                             id: req.params.id
@@ -102,13 +114,13 @@ router.put('/:id', function (req, res) {
 router.delete('/:id', (req, res) => {
         if (!req.params.id) {
             res.status(400).send({
-                msg: 'Please pass vendorcoupon ID.'
+                msg: 'Please pass menuitem ID.'
             })
         } else {
             MenuItem
                 .findByPk(req.params.id)
-                .then((vendorcoupon) => {
-                    if (vendorcoupon) {
+                .then((menuitem) => {
+                    if (menuitem) {
                         MenuItem.destroy({
                             where: {
                                 id: req.params.id
