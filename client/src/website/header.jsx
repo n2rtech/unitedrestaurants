@@ -245,10 +245,6 @@ const title = <div className="searchbar">
                 <a href="#">click here</a>
               </div>
               <div className="clickable">
-                <p>restaurants</p>
-                <a target = "_blank" href={`${process.env.PUBLIC_URL}/login`} >Login</a>
-              </div>
-              <div className="clickable">
                 <p>Vendor login</p>
                 <a target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >Login</a>
               </div>
