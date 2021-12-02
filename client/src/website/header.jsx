@@ -121,17 +121,17 @@ const title = <div className="searchbar">
               <Col sm="4">
             <div className="topright">
               <div className="topmenu">
+                <div className="clickable opacity0">
+                  <p>visitors</p>
+                  <a href="#">click here</a>
+                </div>
                 <div className="clickable">
-                <p>visitors</p>
-                <a href="#">click here</a>
-              </div>
+                  <p>visitors</p>
+                  <a href="#">click here</a>
+                </div>
               <div className="clickable">
-                <p>restaurants</p>
-                <a target = "_blank" href={`${process.env.PUBLIC_URL}/login`} >Login</a>
-              </div>
-              <div className="clickable">
-                <p>Vendor login</p>
-                <a target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >Login</a>
+                <p>Vendors</p>
+                <a target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >login here</a>
               </div>
               </div>
               <div className="socialmenu">
@@ -240,13 +240,17 @@ const title = <div className="searchbar">
           <Col xs="12" className="p-0">
             <div className="topright">
               <div className="topmenu">
+                <div className="clickable opacity0">
+                  <p>visitors</p>
+                  <a href="#">click here</a>
+                </div>
                 <div className="clickable">
                 <p>visitors</p>
                 <a href="#">click here</a>
               </div>
               <div className="clickable">
-                <p>Vendor login</p>
-                <a target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >Login</a>
+                <p>Vendors</p>
+                <a target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >login here</a>
               </div>
               </div>
               <div className="socialmenu">

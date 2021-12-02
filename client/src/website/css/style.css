@@ -1176,6 +1176,9 @@ table th, table td{
     font-size: 14px !important;
     color: #000 !important;
 }
+.opacity0{
+    opacity: 0;
+}
 /**********detailpage-end*********/
 @media (max-width: 767px){
 .togglebtn h1 {
