@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2021 at 01:39 PM
+-- Generation Time: Dec 01, 2021 at 03:30 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -21,6 +21,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `mernunited`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accountspayables`
+--
+
+CREATE TABLE `accountspayables` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` text,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accountspayables`
+--
+
+INSERT INTO `accountspayables` (`id`, `name`, `description`, `createdAt`, `updatedAt`) VALUES
+(2, 'sub user', 'sub admin users', '2021-12-01 09:39:22', '2021-12-01 09:39:22');
 
 -- --------------------------------------------------------
 
@@ -70,7 +91,9 @@ CREATE TABLE `adspaces` (
 --
 
 INSERT INTO `adspaces` (`id`, `user_id`, `link`, `image`, `createdAt`, `updatedAt`) VALUES
-(2, 2, 'link', 'image_1638173962544.png', '2021-11-29 08:19:22', '2021-11-29 08:19:22');
+(2, 2, 'link', 'image_1638173962544.png', '2021-11-29 08:19:22', '2021-11-29 08:19:22'),
+(4, 1, '', 'image_1638364475438.jpg', '2021-12-01 13:14:35', '2021-12-01 13:14:35'),
+(5, 1, '', 'image_1638364700330.jpg', '2021-12-01 13:18:20', '2021-12-01 13:18:20');
 
 -- --------------------------------------------------------
 
@@ -98,7 +121,6 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`, `description`, `slug`, `parent_id`, `category_id`, `image`, `sort_order`, `status`, `createdAt`, `updatedAt`) VALUES
 (1, 'Bracelets', 'Bracelets', NULL, 0, NULL, '', 1, 1, '2021-11-15 07:41:01', '2021-11-15 07:41:01'),
-(2, 'Sunglasses', 'Sunglasses', NULL, 1, NULL, '', 1, 1, '2021-11-15 07:41:15', '2021-11-15 07:41:15'),
 (4, 'krishna', 'Krishna Mishra', NULL, 0, NULL, 'image_1637739295874.jpg', 1, 1, '2021-11-15 07:46:54', '2021-11-24 07:34:55'),
 (5, 'watches', 'watches', NULL, 0, NULL, '', 1, 1, '2021-11-15 07:47:27', '2021-11-15 07:47:27'),
 (6, 'Bags', 'Bags', NULL, 4, NULL, '', 1, 1, '2021-11-15 07:48:36', '2021-11-15 07:48:36'),
@@ -131,12 +153,11 @@ CREATE TABLE `countries` (
 --
 
 INSERT INTO `countries` (`id`, `name`, `image`, `createdAt`, `updatedAt`) VALUES
-(1, 'Australia', NULL, '2021-11-22 09:08:09', '2021-11-22 09:08:09'),
-(2, 'Canada', NULL, '2021-11-22 09:08:46', '2021-11-22 09:08:46'),
-(3, 'Italy', NULL, '2021-11-22 09:11:04', '2021-11-22 09:11:04'),
-(4, 'Spain', NULL, '2021-11-22 09:11:11', '2021-11-22 09:11:11'),
-(5, 'United Kingdom', NULL, '2021-11-22 09:11:20', '2021-11-22 09:11:20'),
-(6, 'Usa', NULL, '2021-11-22 09:11:28', '2021-11-22 09:11:28');
+(1, 'Australia', NULL, '2021-11-22 09:08:09', '2021-12-01 08:17:11'),
+(3, 'United Kingdom', NULL, '2021-11-22 09:11:04', '2021-12-01 08:17:41'),
+(4, 'Canada', NULL, '2021-11-22 09:11:11', '2021-12-01 08:17:53'),
+(5, 'Italy', NULL, '2021-11-22 09:11:20', '2021-12-01 08:18:04'),
+(6, 'Spain', NULL, '2021-11-22 09:11:28', '2021-12-01 08:18:20');
 
 -- --------------------------------------------------------
 
@@ -325,7 +346,7 @@ CREATE TABLE `menuitems` (
 --
 
 INSERT INTO `menuitems` (`id`, `user_id`, `name`, `content`, `createdAt`, `updatedAt`) VALUES
-(1, 1, NULL, 'ttttt', '0000-00-00 00:00:00', '2021-11-29 06:10:17');
+(1, 1, NULL, '<p>krishna mishra<br />\nHeloo<br />\n<strong>How <em>are</em></strong></p>\n', '0000-00-00 00:00:00', '2021-12-01 13:27:11');
 
 -- --------------------------------------------------------
 
@@ -347,7 +368,15 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `title`, `slug`, `body`, `createdAt`, `updatedAt`) VALUES
-(36, 'admin ee', 'admin-ee', 'Admin Application dd', '2021-11-18 12:59:06', '2021-11-24 05:56:26');
+(1, 'ABOUT US', 'about-us', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\n\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\n\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\n\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\n\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\n\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\n\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\n\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\n\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\n\n<p>-Lunch Bux it is more of a message than a for profit businessqq.</p>\n\n<p>Krishna <strong>Mishra</strong></p>\n', '2021-11-18 12:59:06', '2021-12-01 06:27:47'),
+(2, 'Contact Us', 'contact-us', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\r\n\r\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\r\n\r\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\r\n\r\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\r\n\r\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\r\n\r\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\r\n\r\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\r\n\r\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\r\n\r\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\r\n\r\n<p>-Lunch Bux it is more of a message than a for profit business.</p>\r\n', '2021-11-18 12:59:06', '2021-12-01 05:42:47'),
+(3, 'CUSTOMER SERVICES', 'customer-services', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\r\n\r\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\r\n\r\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\r\n\r\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\r\n\r\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\r\n\r\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\r\n\r\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\r\n\r\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\r\n\r\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\r\n\r\n<p>-Lunch Bux it is more of a message than a for profit business.</p>\r\n', '2021-11-18 12:59:06', '2021-12-01 05:42:47'),
+(4, 'TECHNICAL SUPPORT', 'technical-support', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\r\n\r\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\r\n\r\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\r\n\r\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\r\n\r\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\r\n\r\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\r\n\r\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\r\n\r\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\r\n\r\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\r\n\r\n<p>-Lunch Bux it is more of a message than a for profit business.</p>\r\n', '2021-11-18 12:59:06', '2021-12-01 05:42:47'),
+(5, 'SALES', 'sales', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\r\n\r\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\r\n\r\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\r\n\r\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\r\n\r\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\r\n\r\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\r\n\r\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\r\n\r\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\r\n\r\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\r\n\r\n<p>-Lunch Bux it is more of a message than a for profit business.</p>\r\n', '2021-11-18 12:59:06', '2021-12-01 05:42:47'),
+(6, 'PRIVACY POLICY', 'privacy-policy', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\r\n\r\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\r\n\r\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\r\n\r\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\r\n\r\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\r\n\r\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\r\n\r\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\r\n\r\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\r\n\r\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\r\n\r\n<p>-Lunch Bux it is more of a message than a for profit business.</p>\r\n', '2021-11-18 12:59:06', '2021-12-01 05:42:47'),
+(7, 'Return Policy', 'return-policy', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\r\n\r\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\r\n\r\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\r\n\r\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\r\n\r\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\r\n\r\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\r\n\r\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\r\n\r\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\r\n\r\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\r\n\r\n<p>-Lunch Bux it is more of a message than a for profit business.</p>\r\n', '2021-11-18 12:59:06', '2021-12-01 05:42:47'),
+(8, 'Terms Of Service', 'terms-of-service', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\r\n\r\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\r\n\r\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\r\n\r\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\r\n\r\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\r\n\r\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\r\n\r\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\r\n\r\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\r\n\r\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\r\n\r\n<p>-Lunch Bux it is more of a message than a for profit business.</p>\r\n', '2021-11-18 12:59:06', '2021-12-01 05:42:47'),
+(9, 'How It Work', 'how-it-work', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\r\n\r\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\r\n\r\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\r\n\r\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\r\n\r\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\r\n\r\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\r\n\r\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\r\n\r\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\r\n\r\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\r\n\r\n<p>-Lunch Bux it is more of a message than a for profit business.</p>\r\n', '2021-11-18 12:59:06', '2021-12-01 05:42:47');
 
 -- --------------------------------------------------------
 
@@ -558,7 +587,9 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 ('20211129064546-create-payment-method.js'),
 ('20211129075343-create-ad-space.js'),
 ('20211129114259-create-site-setting.js'),
-('20211129122322-create-adds-membership.js');
+('20211129122322-create-adds-membership.js'),
+('20211201050055-create-vendor-membership.js'),
+('20211201091813-create-accounts-payable.js');
 
 -- --------------------------------------------------------
 
@@ -581,6 +612,13 @@ CREATE TABLE `sitesettings` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sitesettings`
+--
+
+INSERT INTO `sitesettings` (`id`, `maintenance_mode`, `site_name`, `phone_number`, `address`, `facebook_links`, `twitter_links`, `google_plus_links`, `linkedin_links`, `instagram_links`, `logo`, `createdAt`, `updatedAt`) VALUES
+(1, ' no', ' United Restaurants', ' 9026574061', ' sss', ' ', ' ', ' ff', ' ss', ' kk', 'logo_1638348925122.jpg', '2021-11-29 13:37:30', '2021-12-01 08:55:25');
 
 -- --------------------------------------------------------
 
@@ -657,7 +695,35 @@ CREATE TABLE `vendorcoupons` (
 
 INSERT INTO `vendorcoupons` (`id`, `user_id`, `deal_name`, `deal_description`, `status`, `createdAt`, `updatedAt`) VALUES
 (1, 3, 'sub user', 'sub admin users', NULL, '2021-11-26 09:03:21', '2021-11-26 09:03:21'),
-(3, 2, 'sub user', 'sub admin users', NULL, '2021-11-29 05:33:46', '2021-11-29 05:33:46');
+(3, 2, 'sub user', 'sub admin users', NULL, '2021-11-29 05:33:46', '2021-11-29 05:33:46'),
+(4, 1, 'test ', 'deal', NULL, '2021-12-01 13:20:07', '2021-12-01 13:20:07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendormemberships`
+--
+
+CREATE TABLE `vendormemberships` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `interval` varchar(255) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vendormemberships`
+--
+
+INSERT INTO `vendormemberships` (`id`, `name`, `description`, `slug`, `interval`, `price`, `status`, `createdAt`, `updatedAt`) VALUES
+(1, 'FREE', 'Listing on the Website\r\nYour Business Name\r\nStore Address + Phone Number + Email + Social media links\r\nWebsite Info and Link\r\nUpload Business Images & Videos\r\nComplete use of our platform', 'free', 'yearly', 0, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'STANDARD', 'All what is included in Free Membership Package +\r\nBusiness featured on appropriate departments\r\nGet priority in search results', 'standard', 'monthly', 5.99, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'PREMIUM', 'All what is included in Free & Standard membership +\r\nGet Featured on Homepage in the country your business is located', 'premium', 'monthly', 7.99, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -723,6 +789,12 @@ INSERT INTO `videogalleries` (`id`, `user_id`, `video_name`, `youtube_link`, `st
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `accountspayables`
+--
+ALTER TABLE `accountspayables`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `addsmemberships`
@@ -861,6 +933,12 @@ ALTER TABLE `vendorcoupons`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `vendormemberships`
+--
+ALTER TABLE `vendormemberships`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `vendors`
 --
 ALTER TABLE `vendors`
@@ -877,6 +955,12 @@ ALTER TABLE `videogalleries`
 --
 
 --
+-- AUTO_INCREMENT for table `accountspayables`
+--
+ALTER TABLE `accountspayables`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `addsmemberships`
 --
 ALTER TABLE `addsmemberships`
@@ -886,7 +970,7 @@ ALTER TABLE `addsmemberships`
 -- AUTO_INCREMENT for table `adspaces`
 --
 ALTER TABLE `adspaces`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -946,7 +1030,7 @@ ALTER TABLE `menuitems`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `paymentmethods`
@@ -988,7 +1072,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sitesettings`
 --
 ALTER TABLE `sitesettings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1000,6 +1084,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vendorcoupons`
 --
 ALTER TABLE `vendorcoupons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `vendormemberships`
+--
+ALTER TABLE `vendormemberships`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --

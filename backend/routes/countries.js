@@ -9,11 +9,11 @@ require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
 
-// Create a new Role
+// Create a new Country
 router.post('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Countries').then((rolePerm) => {
         if (!req.body.name) {
             res.status(400).send({
                 msg: 'Please pass Country name.'
@@ -34,95 +34,89 @@ router.post('/', passport.authenticate('jwt', {
     });
 });
 
-// Get List of Roles
+// Get List of countries
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.country_id, 'role_get_all').then((rolePerm) => {
-        console.log(rolePerm);
-        Role
-            .findAll({
-                include: [
-                    {
-                        model: Permission,
-                        as: 'permissions',
-                    }
-                    /*,
-                    {
-                        model: User,
-                        as: 'users',
-                    }*/
-                ]
-            })
-            .then((roles) => res.status(200).send(roles))
-            .catch((error) => {
-                res.status(400).send(error);
-            });
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
-});
-
-
-
-
-// Get List of Roles
-router.get('/list', (req, res) => {
+    helper.checkPermission(req.user.role_id, 'Countries').then((rolePerm) => {
         Country
             .findAll()
             .then((countries) => res.status(200).send(countries))
             .catch((error) => {
                 res.status(400).send(error);
             });
+    }).catch((error) => {
+        res.status(403).send(error);
+    });
 });
 
-// Get Role by ID
+
+
+
+// Get List of Countries
+router.get('/list', (req, res) => {
+    Country
+    .findAll()
+    .then((countries) => res.status(200).send(countries))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+// Get Country by ID
 router.get('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_get').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Countries').then((rolePerm) => {
 
     }).catch((error) => {
         res.status(403).send(error);
     });
-    Role
+    Country
         .findByPk(
-            req.params.id, {
-                include: {
-                    model: Permission,
-                    as: 'permissions',
-                }
-            }
+            req.params.id
         )
-        .then((roles) => res.status(200).send(roles))
+        .then((country) => { 
+            if (country == null) {
+               res.status(200).send({
+                'status':false,
+                'message':'country not found'
+               }) 
+            }
+            res.status(200).send(country)
+        })
         .catch((error) => {
             res.status(400).send(error);
         });
 });
 
-// Update a Role
+// Update a Country
 router.put('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_update').then((rolePerm) => {
-        if (!req.params.id || !req.body.role_name || !req.body.role_description) {
+    helper.checkPermission(req.user.role_id, 'Countries').then((rolePerm) => {
+        if (!req.params.id || !req.body.name) {
             res.status(400).send({
-                msg: 'Please pass Role ID, name or description.'
+                msg: 'Please pass Country ID, name.'
             })
         } else {
-            Role
+            Country
                 .findByPk(req.params.id)
-                .then((role) => {
-                    Role.update({
-                        role_name: req.body.role_name || role.role_name,
-                        role_description: req.body.role_description || role.role_description
+                .then((country) => {
+                    if (country == null) {
+                        res.status(200).send({
+                            'message': 'Country not found'
+                        });
+                    }
+                    Country.update({
+                        name: req.body.name || country.name
                     }, {
                         where: {
                             id: req.params.id
                         }
                     }).then(_ => {
                         res.status(200).send({
-                            'message': 'Role updated'
+                            'message': 'Country updated'
                         });
                     }).catch(err => res.status(400).send(err));
                 })
@@ -135,74 +129,34 @@ router.put('/:id', passport.authenticate('jwt', {
     });
 });
 
-// Delete a Role
+// Delete a Country
 router.delete('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_delete').then((rolePerm) => {
+    helper.checkPermission(req.user.role_id, 'Countries').then((rolePerm) => {
         if (!req.params.id) {
             res.status(400).send({
-                msg: 'Please pass role ID.'
+                msg: 'Please pass Country ID.'
             })
         } else {
-            Role
+            Country
                 .findByPk(req.params.id)
-                .then((role) => {
-                    if (role) {
-                        Role.destroy({
+                .then((country) => {
+                    if (country) {
+                        Country.destroy({
                             where: {
                                 id: req.params.id
                             }
                         }).then(_ => {
                             res.status(200).send({
-                                'message': 'Role deleted'
+                                'message': 'Country deleted'
                             });
                         }).catch(err => res.status(400).send(err));
                     } else {
                         res.status(404).send({
-                            'message': 'Role not found'
+                            'message': 'Country not found'
                         });
                     }
-                })
-                .catch((error) => {
-                    res.status(400).send(error);
-                });
-        }
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
-});
-
-// Add Permissions to Role
-router.post('/permissions/:id', passport.authenticate('jwt', {
-    session: false
-}), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
-        if (!req.body.permissions) {
-            res.status(400).send({
-                msg: 'Please pass permissions.'
-            })
-        } else {
-            Role
-                .findByPk(req.params.id)
-                .then((role) => {
-                    req.body.permissions.forEach(function (item, index) {
-                        Permission
-                            .findByPk(item)
-                            .then(async (perm) => {
-                                await role.addPermissions(perm, {
-                                    through: {
-                                        selfGranted: false
-                                    }
-                                });
-                            })
-                            .catch((error) => {
-                                res.status(400).send(error);
-                            });
-                    });
-                    res.status(200).send({
-                        'message': 'Permissions added'
-                    });
                 })
                 .catch((error) => {
                     res.status(400).send(error);
