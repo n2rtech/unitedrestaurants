@@ -216,6 +216,38 @@ router.get("/list", (req, res) => {
     });
 });
 
+router.get("/subcat/:id", (req, res) => {
+    Category
+    .findAll({
+        where: {
+          parent_id: req.params.id
+      }
+  })
+    .then((category) => {
+
+        const category_data = category;
+        for (const [i, element] of category_data.entries()) {
+            Category.findAll({where:{parent_id:element.id}})
+            .then((category1) => {
+                category_data[i].parent = category1;
+            console.log('ddjkskjjdf',category_data);
+
+
+            });
+
+        }
+
+        res.status(200).send(category_data)
+        return false;
+
+
+        res.status(200).send(category_data)
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
 router.get("/all", (req, res) => {
     Category
     .findAll()
@@ -419,5 +451,18 @@ router.post('/permissions/:id', passport.authenticate('jwt', {
         res.status(403).send(error);
     });
 });
+
+const getSubCat = (value) => {
+    return new Promise((reject,resolve)=>{
+        Category.findAll({ where: { parent_id: value } })
+        .then((err,result)=>{
+            if(err){
+                reject(err)
+            }else{
+                resolve(result);
+            }
+        });
+    });
+}
 
 module.exports = router;
