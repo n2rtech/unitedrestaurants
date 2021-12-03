@@ -225,23 +225,7 @@ router.get("/subcat/:id", (req, res) => {
   })
     .then((category) => {
 
-        const category_data = category;
-        for (const [i, element] of category_data.entries()) {
-            Category.findAll({where:{parent_id:element.id}})
-            .then((category1) => {
-                category_data[i].parent = category1;
-            console.log('ddjkskjjdf',category_data);
-
-
-            });
-
-        }
-
-        res.status(200).send(category_data)
-        return false;
-
-
-        res.status(200).send(category_data)
+        res.status(200).send(category)
     })
     .catch((error) => {
         res.status(400).send(error);
