@@ -41,11 +41,11 @@ const multiple = false
               <h5 className="m-t-30">Show in Featured Business</h5>
               <FormGroup className="m-checkbox-inline custom-radio-ml">
                 <div className="radio radio-primary">
-                  <Input id="radioinline1" type="radio" name="radio1" value="option1" defaultChecked />
+                  <Input id="radioinline1" type="radio" name="radio2" value="option1" defaultChecked />
                   <Label className="mb-0" for="radioinline1">No</Label>
                 </div>
                 <div className="radio radio-primary">
-                  <Input id="radioinline2" type="radio" name="radio1" value="option1"  />
+                  <Input id="radioinline2" type="radio" name="radio2" value="option1"  />
                   <Label className="mb-0" for="radioinline2">Yes</Label>
                 </div>
               </FormGroup>
