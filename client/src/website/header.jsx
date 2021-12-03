@@ -10,13 +10,24 @@ import axios from 'axios';
 const Header = (props) => {
 const [showNav, setShowNav] = useState();
 const [countryData, setCountryData] = useState([]);
+const [categoryData, setCategoryData] = useState([]);
 
 useEffect(() => {
     axios.get(`/api/Countries/list`)
     .then((getData) => {
       setCountryData(getData.data);
     });
+
+
+    axios.get(`/api/categories/list`)
+    .then((result_data) => {
+
+      const result = result_data.data;
+      setCategoryData(result);
+    }); 
+
   }, []);
+
 
 const navItems = [
     

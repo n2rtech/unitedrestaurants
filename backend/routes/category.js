@@ -216,6 +216,22 @@ router.get("/list", (req, res) => {
     });
 });
 
+router.get("/subcat/:id", (req, res) => {
+    Category
+    .findAll({
+        where: {
+          parent_id: req.params.id
+      }
+  })
+    .then((category) => {
+
+        res.status(200).send(category)
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
 router.get("/all", (req, res) => {
     Category
     .findAll()
@@ -419,5 +435,18 @@ router.post('/permissions/:id', passport.authenticate('jwt', {
         res.status(403).send(error);
     });
 });
+
+const getSubCat = (value) => {
+    return new Promise((reject,resolve)=>{
+        Category.findAll({ where: { parent_id: value } })
+        .then((err,result)=>{
+            if(err){
+                reject(err)
+            }else{
+                resolve(result);
+            }
+        });
+    });
+}
 
 module.exports = router;

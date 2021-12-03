@@ -532,7 +532,7 @@
 						{
 							"key": "image",
 							"type": "file",
-							"src": "/C:/Users/laxman/Desktop/DSC_0912.JPG"
+							"src": "/C:/Users/laxman/Desktop/IMG-20210616-WA0012.jpg"
 						},
 						{
 							"key": "sort_order",
@@ -1465,7 +1465,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/categories/get",
+					"raw": "http://127.0.0.1:5000/api/categories/list",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -1477,7 +1477,43 @@
 					"path": [
 						"api",
 						"categories",
-						"get"
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sub Category By ID list wo token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/categories/subcat/29",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"categories",
+						"subcat",
+						"29"
 					]
 				}
 			},
@@ -2808,7 +2844,81 @@
 			"response": []
 		},
 		{
+			"name": "sale Items get by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/sale-items/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"sale-items",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Menu Items Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"dd\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/menu-items/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"menu-items",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sale Items Update",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -2828,7 +2938,7 @@
 					"raw": "{\n    \"content\": \"ttttt\"\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/menu-items/1",
+					"raw": "http://127.0.0.1:5000/api/sale-items/1",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -2839,7 +2949,7 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"menu-items",
+						"sale-items",
 						"1"
 					]
 				}
@@ -3807,7 +3917,7 @@
 			"response": []
 		},
 		{
-			"name": "Menu Items get list wo token",
+			"name": "Sale Items get list wo token",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -3836,6 +3946,78 @@
 					"path": [
 						"api",
 						"menu-items",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Menu Items get list wo token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/sale-items/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"sale-items",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Slae Items get list wo token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/sale-items/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"sale-items",
 						"1"
 					]
 				}
