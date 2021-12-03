@@ -165,6 +165,9 @@ import Search from "../components/search"
 
 // E-commerce-app 
 import AddVendor from "../components/application/bookmark/add-vendor"
+import Blogs from "../components/application/bookmark/blogs"
+import EditBlog from "../components/application/bookmark/edit-blog"
+import AddBlog from "../components/application/bookmark/add-blog"
 import EditAccountsPayable from "../components/application/bookmark/edit-payable"
 import AddAccountsPayable from "../components/application/bookmark/add-payable"
 import EditAdminMembership from "../components/application/bookmark/edit-admin-membership"
@@ -443,6 +446,9 @@ export const routes = [
         { path:"/dashboard/admin/countries", Component:Countries},
         { path:"/dashboard/admin/add-countries", Component:AddCountries},
         { path:"/dashboard/admin/edit-countries", Component:EditCountries},
+        { path:"/dashboard/admin/blogs", Component:Blogs},
+        { path:"/dashboard/admin/add-blog", Component:AddBlog},
+        { path:"/dashboard/admin/edit-blog", Component:EditBlog},
 
         {path:"/app/project/project-list", Component:ProjectList},
         {path:"/app/project/new-project", Component:NewProject},

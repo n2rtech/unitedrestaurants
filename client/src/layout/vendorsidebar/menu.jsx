@@ -29,6 +29,15 @@ export const MENUITEMS = [
         ]
     },
     {
+        menutitle:"Items for sale",
+        menucontent:"Items for sale",
+        Items:[
+            {
+                title: 'Items for sale', path: `${process.env.PUBLIC_URL}/dashboard/vendor/sale-items`, icon: BarChart, type: 'link', active: false,
+            }
+        ]
+    },
+    {
         menutitle:"My Wallet",
         menucontent:"My Wallet",
         Items:[

@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
+import {CustomRadio,InlineCheckbox,CustomCheckbox, PrimaryState,BrandState,SuccessState,AnimatedCheckboxButtons,SquareCheckbox, Default,Disabled,Checked,RadioStates,CheckboxStates,SolidCheckbox,AnimatedRadioButtons,Option} from "../../../constant";
 import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
@@ -26,6 +27,29 @@ const multiple = false
         <Card>
           <CardBody>
             <Form className="form theme-form">
+              <h5>Show in Hot deals</h5>
+              <FormGroup className="m-checkbox-inline custom-radio-ml">
+                <div className="radio radio-primary">
+                  <Input id="radioinline1" type="radio" name="radio1" value="option1" defaultChecked />
+                  <Label className="mb-0" for="radioinline1">No</Label>
+                </div>
+                <div className="radio radio-primary">
+                  <Input id="radioinline2" type="radio" name="radio1" value="option1"  />
+                  <Label className="mb-0" for="radioinline2">Yes</Label>
+                </div>
+              </FormGroup>
+              <h5 className="m-t-30">Show in Featured Business</h5>
+              <FormGroup className="m-checkbox-inline custom-radio-ml">
+                <div className="radio radio-primary">
+                  <Input id="radioinline1" type="radio" name="radio1" value="option1" defaultChecked />
+                  <Label className="mb-0" for="radioinline1">No</Label>
+                </div>
+                <div className="radio radio-primary">
+                  <Input id="radioinline2" type="radio" name="radio1" value="option1"  />
+                  <Label className="mb-0" for="radioinline2">Yes</Label>
+                </div>
+              </FormGroup>
+              <div>&nbsp;</div>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput">{"Business Name"}</Label>
                 <Input className="form-control"  type="name" placeholder="Mohd Sohrab Khan" />

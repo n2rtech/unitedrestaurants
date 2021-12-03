@@ -30,7 +30,15 @@ export const MENUITEMS = [
             }
         ]
     },
-    
+    {
+        menutitle:"Blogs",
+        menucontent:"Blogs",
+        Items:[
+            {
+                title: 'Manage Blogs', path: `${process.env.PUBLIC_URL}/dashboard/admin/blogs`, icon: FileText, type: 'link', active: false,
+            }
+        ]
+    },
     {
         menutitle:"Categories",
         menucontent:"Categories",
