@@ -52,7 +52,17 @@ router.get('/', passport.authenticate('jwt', {
 }), function (req, res) {
     Gallery
     .findAll({where:{user_id:req.user.id}})
-    .then((jobs) => res.status(200).send(jobs))
+    .then((galleries) => res.status(200).send(galleries))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+
+router.get('/list/:id', (req, res) => {
+    Gallery
+    .findAll({where:{user_id:req.params.id}})
+    .then((gallery) => res.status(200).send(gallery))
     .catch((error) => {
         res.status(400).send(error);
     });

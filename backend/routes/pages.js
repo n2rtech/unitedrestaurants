@@ -82,6 +82,19 @@ router.get('/:id', passport.authenticate('jwt', {
         });
 });
 
+
+//Get page by slug for frontend
+router.get('/slug/:slug', (req, res) => {
+    Page
+    .findOne({ where : {
+        slug : req.params.slug
+    }})
+    .then((page) => res.status(200).send(page))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
 // Update a Role
 router.put('/:id', passport.authenticate('jwt', {
     session: false

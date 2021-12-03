@@ -58,6 +58,14 @@ router.get('/', passport.authenticate('jwt', {
     });
 });
 
+router.get('/list/:id', (req, res) => {
+    AdSpace
+    .findAll({where:{user_id:req.params.id}})
+    .then((adspace) => res.status(200).send(adspace))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
 
 // Delete a AdSpace
 router.delete('/:id', (req, res) => {

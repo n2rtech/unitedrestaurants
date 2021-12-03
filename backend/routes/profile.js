@@ -119,6 +119,43 @@ router.get('/:id', passport.authenticate('vendor', {
     });
 });
 
+
+
+
+// Get Profile by ID
+router.get('/get/:id', (req, res) => {
+    Profile
+    .findOne({ where:{
+        user_id: req.params.id
+    }
+})
+    .then((profile2) => {
+        if (profile2) {
+
+            Profile
+            .findByPk(profile2.id,
+            {
+                include: [{
+                    model: Category,
+                    as: 'category',
+                }]
+            }
+            )
+            .then((profile1) => res.status(200).send(profile1))
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+
+        }else{
+            res.status(200).send({'message' : 'profile not found'});
+        }            
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+
 // Update a Profile
 router.put('/:id', imageUpload.single('banner'), (req, res) => {
 
@@ -229,44 +266,5 @@ router.delete('/:id', passport.authenticate('jwt', {
     });
 });
 
-// Add Permissions to Profile
-router.post('/permissions/:id', passport.authenticate('jwt', {
-    session: false
-}), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Business Profile').then((rolePerm) => {
-        if (!req.body.permissions) {
-            res.status(400).send({
-                msg: 'Please pass permissions.'
-            })
-        } else {
-            Profile
-                .findByPk(req.params.id)
-                .then((role) => {
-                    req.body.permissions.forEach(function (item, index) {
-                        Permission
-                            .findByPk(item)
-                            .then(async (perm) => {
-                                await role.addPermissions(perm, {
-                                    through: {
-                                        selfGranted: false
-                                    }
-                                });
-                            })
-                            .catch((error) => {
-                                res.status(400).send(error);
-                            });
-                    });
-                    res.status(200).send({
-                        'message': 'Permissions added'
-                    });
-                })
-                .catch((error) => {
-                    res.status(400).send(error);
-                });
-        }
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
-});
 
 module.exports = router;

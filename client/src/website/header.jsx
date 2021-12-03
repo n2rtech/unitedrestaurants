@@ -1,14 +1,23 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect,Fragment} from 'react';
 import SideNav, { MenuIcon } from 'react-simple-sidenav';
 import { Container, Row, Col, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavbarToggler, NavItem, NavLink,List,ListInlineItem, Nav,TabContent,TabPane,Collapse,Offcanvas,NavDropdown } from 'reactstrap'
 import './css/style.css'
 import Menu from './menu.jsx'
 import Mobilemenu from './mobilemenu.jsx'
 import Countryflag from './countryflag.jsx'
-
+import axios from 'axios';
 
 const Header = (props) => {
 const [showNav, setShowNav] = useState();
+const [countryData, setCountryData] = useState([]);
+
+useEffect(() => {
+    axios.get(`/api/Countries/list`)
+    .then((getData) => {
+      setCountryData(getData.data);
+    });
+  }, []);
+
 const navItems = [
     
     <a href="/restaurants">
@@ -168,10 +177,11 @@ const title = <div className="searchbar">
               
               <div className="country">
                 <select aria-label="Default select example" className="form-control">
-                  <option>Country</option>
-                  <option value="1">India</option>
-                  <option value="2">One</option>
-                  <option value="2">Two</option>
+                {countryData.map((country , i ) => (
+                  <Fragment key={i}>
+                  <option value={country.id}>{country.name}</option>
+                  </Fragment>
+                  ))}
                 </select>
               </div>
               </div>

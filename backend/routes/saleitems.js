@@ -3,26 +3,26 @@ const router = express.Router();
 const User = require('../models').User;
 const Role = require('../models').Role;
 const Permission = require('../models').Permission;
-const MenuItem = require('../models').MenuItem;
+const SaleItem = require('../models').SaleItem;
 const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
 
-// Create a new MenuItem
+// Create a new SaleItem
 router.post('/', (req, res) => {
         if (!req.body.deal_name || !req.body.deal_description) {
             res.status(400).send({
-                msg: 'Please pass menuitem name or description.'
+                msg: 'Please pass saleitem name or description.'
             })
         } else {
-            MenuItem
+            SaleItem
                 .create({
                     deal_name: req.body.deal_name,
                     user_id: req.body.user_id,
                     deal_description: req.body.deal_description
                 })
-                .then((menuitem) => res.status(201).send(menuitem))
+                .then((saleitem) => res.status(201).send(saleitem))
                 .catch((error) => {
                     console.log(error);
                     res.status(400).send(error);
@@ -30,13 +30,13 @@ router.post('/', (req, res) => {
         }
 });
 
-// Get List of MenuItems
+// Get List of SaleItems
 
 
 router.get('/list', (req, res) => {
-        MenuItem
+        SaleItem
             .findAll()
-            .then((menuitem) => res.status(200).send(menuitem))
+            .then((saleitem) => res.status(200).send(saleitem))
             .catch((error) => {
                 res.status(400).send(error);
             });
@@ -46,9 +46,9 @@ router.get('/list', (req, res) => {
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {   
-    MenuItem
+    SaleItem
     .findAll({where:{user_id:req.user.id}})
-    .then((menuitem) => res.status(200).send(menuitem))
+    .then((saleitem) => res.status(200).send(saleitem))
     .catch((error) => {
         res.status(400).send(error);
     });
@@ -57,9 +57,9 @@ router.get('/', passport.authenticate('jwt', {
 
 
 router.get('/list/:id', (req, res) => {   
-    MenuItem
+    SaleItem
     .findAll({where:{user_id:req.params.id}})
-    .then((menuitem) => res.status(200).send(menuitem))
+    .then((saleitem) => res.status(200).send(saleitem))
     .catch((error) => {
         res.status(400).send(error);
     });
@@ -68,14 +68,14 @@ router.get('/list/:id', (req, res) => {
 
 
 
-// Get MenuItem by ID
+// Get SaleItem by ID
 router.get('/:id', (req, res) => {
-    MenuItem
+    SaleItem
         .findOne({
             where:{
            user_id : req.params.id
         }})
-        .then((menuitem) => res.status(200).send(menuitem))
+        .then((saleitem) => res.status(200).send(saleitem))
         .catch((error) => {
             res.status(400).send(error);
         });
@@ -88,12 +88,12 @@ router.put('/:id', function (req, res) {
                 msg: 'Please pass Job ID, description.'
             })
         } else {
-            MenuItem
+            SaleItem
                 .findByPk(req.params.id)
-                .then((menuitem) => {
-                    MenuItem.update({
-                        user_id: req.body.user_id || menuitem.user_id,
-                        content: req.body.content || menuitem.content
+                .then((saleitem) => {
+                    SaleItem.update({
+                        user_id: req.body.user_id || saleitem.user_id,
+                        content: req.body.content || saleitem.content
                     }, {
                         where: {
                             id: req.params.id
@@ -110,18 +110,18 @@ router.put('/:id', function (req, res) {
         }
 });
 
-// Delete a MenuItem
+// Delete a SaleItem
 router.delete('/:id', (req, res) => {
         if (!req.params.id) {
             res.status(400).send({
-                msg: 'Please pass menuitem ID.'
+                msg: 'Please pass saleitem ID.'
             })
         } else {
-            MenuItem
+            SaleItem
                 .findByPk(req.params.id)
-                .then((menuitem) => {
-                    if (menuitem) {
-                        MenuItem.destroy({
+                .then((saleitem) => {
+                    if (saleitem) {
+                        SaleItem.destroy({
                             where: {
                                 id: req.params.id
                             }
