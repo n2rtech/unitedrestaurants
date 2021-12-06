@@ -13,7 +13,7 @@ const helper = new Helper();
 router.post('/', (req, res) => {
         if (!req.body.deal_name || !req.body.deal_description) {
             res.status(400).send({
-                msg: 'Please pass saleitem name or description.'
+                msg: 'Please pass sale item name or description.'
             })
         } else {
             SaleItem
@@ -30,9 +30,7 @@ router.post('/', (req, res) => {
         }
 });
 
-// Get List of SaleItems
-
-
+// Get List of Sale Items
 router.get('/list', (req, res) => {
         SaleItem
             .findAll()
@@ -85,7 +83,7 @@ router.get('/:id', (req, res) => {
 router.put('/:id', function (req, res) {
         if (!req.params.id || !req.body.content) {
             res.status(400).send({
-                msg: 'Please pass Job ID, description.'
+                msg: 'Please pass Slet Item ID, description.'
             })
         } else {
             SaleItem
@@ -100,7 +98,7 @@ router.put('/:id', function (req, res) {
                         }
                     }).then(_ => {
                         res.status(200).send({
-                            'message': 'Menu Item updated'
+                            'message': 'Sales Item updated'
                         });
                     }).catch(err => res.status(400).send(err));
                 })
@@ -110,36 +108,6 @@ router.put('/:id', function (req, res) {
         }
 });
 
-// Delete a SaleItem
-router.delete('/:id', (req, res) => {
-        if (!req.params.id) {
-            res.status(400).send({
-                msg: 'Please pass saleitem ID.'
-            })
-        } else {
-            SaleItem
-                .findByPk(req.params.id)
-                .then((saleitem) => {
-                    if (saleitem) {
-                        SaleItem.destroy({
-                            where: {
-                                id: req.params.id
-                            }
-                        }).then(_ => {
-                            res.status(200).send({
-                                'message': 'Job deleted'
-                            });
-                        }).catch(err => res.status(400).send(err));
-                    } else {
-                        res.status(404).send({
-                            'message': 'Job not found'
-                        });
-                    }
-                })
-                .catch((error) => {
-                    res.status(400).send(error);
-                });
-        }
-});
+
 
 module.exports = router;

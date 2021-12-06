@@ -21,11 +21,12 @@ const MenuItems =  () =>  {
     const history = useHistory()
     useEffect(() => {
     
+    const userId = localStorage.getItem("id");
         const config = {
             headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
         };
      
-        fetch("/api/menu-items/"+`${params.id}` , config)
+        fetch("/api/menu-items/"+`${userId}` , config)
           .then(res => res.json())
           .then(
             (result) => {

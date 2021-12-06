@@ -20,12 +20,14 @@ const SaleItems =  () =>  {
     const token = localStorage.getItem("token");
     const history = useHistory()
     useEffect(() => {
-    
+
+        const items = { ...localStorage };
+
         const config = {
             headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
         };
      
-        fetch("/api/menu-items/"+`${params.id}` , config)
+        fetch("/api/sale-items/"+`${items.id}` , config)
           .then(res => res.json())
           .then(
             (result) => {
@@ -50,11 +52,11 @@ const SaleItems =  () =>  {
       const bodyParameters = {
         content: content,
       };
-      axios.put(`/api/menu-items/`+`${id}`,
+      axios.put(`/api/sale-items/`+`${id}`,
         bodyParameters,
         config
       ) .then(response => {
-        toast.success("Menu Items updated !")
+        toast.success("Sale Items updated !")
           setTimeout(() => {
             window.location.reload();
           }, 1000);
@@ -82,7 +84,7 @@ const SaleItems =  () =>  {
                                         }}
                                     />
                                     <div className="m-t-20">
-                                    <Button color="primary">{"Save"}</Button>
+                                    <Button onClick = {handleSubmit} color="primary">{"Save"}</Button>
                                     </div>
                                 </CardBody>
                             </Card>
