@@ -119,13 +119,13 @@ const PaymentMethod = props => {
                         <Label>{"Expiry Date"}</Label>
                         <Input className="form-control"  onChange = {onChangeExpiry} type="date"  value= {expiry}/>
                       </FormGroup>
-                      <FormGroup>
+                      {/*<FormGroup>
                         <Label>{"CVV"}</Label>
                         <Input
                           className="form-control"
                           type="number"
                         />
-                      </FormGroup>
+                      </FormGroup>*/}
                       <FormGroup>
                         <Button  color="primary" onClick = {handleSubmit}>{"Save"}</Button>
                       </FormGroup>
