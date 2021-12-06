@@ -51,7 +51,7 @@ export const MENUITEMS = [
         menucontent:"Payment Method",
         Items:[
             {
-                title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/payment-method`, icon: Send, type: 'link', active: false,
+                title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/payment-method/${localStorage.getItem("id")}`, icon: Send, type: 'link', active: false,
             }
         ]
     },
