@@ -5,8 +5,17 @@ import CKEditors from "react-ckeditor-component";
 import {BrowserRouter,Switch,Route,Redirect , useParams} from 'react-router-dom'
 import {toast} from 'react-toastify';
 import axios from 'axios'
+import ImageUploader from 'react-images-upload';
+import {SelectSingleImageUpload,MultipleImageUpload} from '../../../constant'
+
 
 const EditBlog = () => {
+const [image, setimage] = useState({ pictures: [] })
+const onDrop = (pictureFiles, pictureDataURLs) => {
+setimage({
+    ...image, pictureFiles
+});
+}
 const [content,setContent] = useState('') 
     const onChange = (evt) => {
         const newContent = evt.editor.getData();
@@ -55,13 +64,45 @@ const [content,setContent] = useState('')
       <Container fluid={true}>
         <Card>
         <CardBody>
-          <CKEditors
+          <h5>Show on Home page</h5>
+          <FormGroup className="m-checkbox-inline custom-radio-ml">
+            <div className="radio radio-primary">
+              <Input id="radioinline2" type="radio" name="radio1" value="option1" defaultChecked />
+              <Label className="mb-0" for="radioinline1">No</Label>
+            </div>
+            <div className="radio radio-primary">
+              <Input id="radioinline2" type="radio" name="radio1" value="option1"  />
+              <Label className="mb-0" for="radioinline2">Yes</Label>
+            </div>
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="exampleFormControlInput1">{"Post Name"}</Label>
+            <Input className="form-control"  type="name" />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="exampleFormControlInput1">{"Content"}</Label>
+            <CKEditors
               activeclassName="p10"
               content={content}
               events={{
                   "change": onChange
               }}
-          />
+            />
+          </FormGroup>
+          <FormGroup className="m-t-20">
+            <Label htmlFor="exampleFormControlInput1">{"Blog Banner"}</Label>
+            <ImageUploader
+              withIcon={false}
+              withPreview={true}
+              label=""
+              singleImage={true}
+              buttonText="Upload Image"
+              onChange={onDrop}
+              imgExtension={[".jpg", ".gif", ".png", ".gif", ".svg"]}
+              maxFileSize={1048576}
+              fileSizeError=" file size is too big"
+            />
+          </FormGroup>
           <Button color="success" className="m-t-20">{"Save"}</Button>
         </CardBody>
         </Card>
