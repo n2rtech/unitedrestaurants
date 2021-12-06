@@ -1,7 +1,7 @@
 import { PayPalButton } from "react-paypal-button-v2";
 import React from 'react';
 
-const paypalstandardmonthly = (props) => {
+const paypalpremiumyearly = (props) => {
   const { amount, currency, createSubscription, onApprove, catchError,onError, onCancel} = props;
   const paypalKey = "AXPEKGBNnTg-16vrrVO_KBxYrNr3x7GUl9zVlppx4OYPfRAxCIvMfKNewkiTXCnptPuIZDxJVkslkyIX"
 
@@ -13,7 +13,7 @@ const paypalstandardmonthly = (props) => {
       currency={currency}
       createSubscription={(data, details) => { 
         return details.subscription.create({
-        plan_id: 'P-9S8026110V486523FMGW5QYA'
+        plan_id: 'P-1BR04865BX6773455MGW5XKI'
       });
     }}
       onApprove={(data, details) => {
@@ -21,7 +21,7 @@ const paypalstandardmonthly = (props) => {
           return details.subscription.get().then(function(details) {
             // Show a success message to your buyer
             alert("Subscription completed");
-            console.log("Subscriptions" , data.subscriptionID)
+            console.log("Subscriptions" , details)
 
             // OPTIONAL: Call your server to save the subscription
             // return fetch("/paypal-subscription-complete", {
@@ -57,4 +57,4 @@ const paypalstandardmonthly = (props) => {
   );
 }
 
-export default paypalstandardmonthly;
+export default paypalpremiumyearly;
