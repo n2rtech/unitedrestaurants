@@ -1,7 +1,7 @@
 import { PayPalButton } from "react-paypal-button-v2";
 import React from 'react';
 
-const paypalstandardmonthly = (props) => {
+const paypalstandardquarterly = (props) => {
   const { amount, currency, createSubscription, onApprove, catchError,onError, onCancel} = props;
   const paypalKey = "AXPEKGBNnTg-16vrrVO_KBxYrNr3x7GUl9zVlppx4OYPfRAxCIvMfKNewkiTXCnptPuIZDxJVkslkyIX"
 
@@ -13,7 +13,7 @@ const paypalstandardmonthly = (props) => {
       currency={currency}
       createSubscription={(data, details) => { 
         return details.subscription.create({
-        plan_id: 'P-9S8026110V486523FMGW5QYA'
+        plan_id: 'P-60508956GS002480AMGW3GVA'
       });
     }}
       onApprove={(data, details) => {
@@ -57,4 +57,4 @@ const paypalstandardmonthly = (props) => {
   );
 }
 
-export default paypalstandardmonthly;
+export default paypalstandardquarterly;
