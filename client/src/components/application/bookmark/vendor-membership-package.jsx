@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
+import PaypalStandardMonthly from './paypalplans/paypalstandardmonthly.jsx'
+import PaypalPremiumMonthly from './paypalplans/paypalstandardmonthly.jsx'
 import { Container, Row, Col, Card, CardHeader, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
 import { SimplePricingCard,BecomeMember, Standard, LorumIpsum, Purchase, Business,Premium,Extra,SignUp } from '../../../constant';
 const VendorMembershipPackage = (props) => {
@@ -48,7 +50,7 @@ const VendorMembershipPackage = (props) => {
                             <option>{"Yearly"}</option>
                           </Input>
                         </FormGroup>
-                        <div className="pricingtable-signup"><Button color="primary" size="lg">{"Buy Now"}</Button></div>
+                        <div className="pricingtable-signup"><PaypalStandardMonthly /></div>
                       </div>
                     </Col>
                     <Col md="4" sm="6">
@@ -70,7 +72,7 @@ const VendorMembershipPackage = (props) => {
                             <option>{"Yearly"}</option>
                           </Input>
                         </FormGroup>
-                        <div className="pricingtable-signup"><Button color="primary" size="lg">{"Buy Now"}</Button></div>
+                        <div className="pricingtable-signup"><PaypalPremiumMonthly /></div>
                       </div>
                     </Col>
                   </CardBody>
