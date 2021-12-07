@@ -7,7 +7,8 @@ import {toast} from 'react-toastify';
 import axios from 'axios'
 
 const AddBlog = () => {
-const [content,setContent] = useState('') 
+const [content,setContent] = useState('');
+const [id,setId] = useState('');
     const onChange = (evt) => {
         const newContent = evt.editor.getData();
         setContent(newContent)
@@ -18,11 +19,18 @@ const [content,setContent] = useState('')
 
     const [titleData, setTitleData] = useState({});
    useEffect(() => {
+
+    const token = localStorage.getItem("token");
+
+    const userItem = localStorage.getItem("id");
+
+    setId(userItem);
+
     const GetData = async () => {
         const config = {
-    headers: {'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ' }
+    headers: {'Authorization': 'JWT '+token }
   };
-      const result = await axios('/api/pages/'+`${params.id}`,config);
+      const result = await axios('/api/blogs/'+`${userItem}`,config);
       setTitleData(result.data);
       setContent(result.data.body);
     };
@@ -36,17 +44,13 @@ const [content,setContent] = useState('')
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
         };
         const bodyParameters = {
-          title: titleData.title,
-          body: content
+          content: content
         };
-        axios.put(`/api/pages/`+`${params.id}`,
+        axios.post(`/api/blogs/`,
           bodyParameters,
           config
-        ) .then(response => toast.success("Page content updated !")  )
+        ) .then(response => toast.success("Blog content added !")  )
            .catch(error => console.log('Form submit error', error))
-
-           
-  
     };
 
   return (
@@ -62,7 +66,7 @@ const [content,setContent] = useState('')
                   "change": onChange
               }}
           />
-          <Button color="success" className="m-t-20">{"Save"}</Button>
+          <Button color="success" onClick = {handleSubmit} className="m-t-20">{"Save"}</Button>
         </CardBody>
         </Card>
       </Container>

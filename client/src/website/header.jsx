@@ -21,7 +21,6 @@ useEffect(() => {
 
     axios.get(`/api/categories/list`)
     .then((result_data) => {
-
       const result = result_data.data;
       setCategoryData(result);
     }); 

@@ -185,22 +185,15 @@ router.get('/by-role/:id', passport.authenticate('jwt', {
 });
 
 
-// Get Users by Role ID
-router.get('/vendors', passport.authenticate('jwt', {
-  session: false
-}), function (req, res) {
-  helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+// Get Vendors
+router.get('/', (req, res) => {
 
-  }).catch((error) => {
-    res.status(403).send(error);
-  });
-  Role.findByPk(2)
-  .then((role) => {            
-    if (role) {
+  Vendor.findAll()
+  .then((roles) => {          
+    if (roles) {
       if (req.query.name || req.query.email || req.query.mobile || req.query.country) {
       var conditions = {
         where: {
-          role_id: role.id,
 
           [Op.or]: [
           {
@@ -228,9 +221,6 @@ router.get('/vendors', passport.authenticate('jwt', {
 
       }else{
         var conditions = {
-        where: {
-          role_id: role.id
-        }
       };
       }
 
@@ -241,7 +231,7 @@ router.get('/vendors', passport.authenticate('jwt', {
       .catch(err => res.status(400).send(err));
     } else {
       res.status(404).send({
-        'message': 'Role not found'
+        'message': 'Vendors not found'
       });
     }
   })

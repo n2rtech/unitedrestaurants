@@ -215,6 +215,7 @@ import PaymentMethod from "../components/application/bookmark/payment-method"
 import AddsMembership from "../components/application/bookmark/adds-membership"
 import AddSpaces from "../components/application/bookmark/ad-spaces"
 import MenuItems from "../components/application/bookmark/menu-items"
+import SaleItems from "../components/application/bookmark/sale-items"
 import AccountsPayable from "../components/application/bookmark/accounts-payable"
 import AddCountries from "../components/application/bookmark/add-countries"
 import EditCountries from "../components/application/bookmark/edit-countries"
@@ -439,7 +440,8 @@ export const routes = [
         { path:"/dashboard/vendor/payment-method/:id", Component:PaymentMethod},
         { path:"/dashboard/vendor/adds-membership", Component:AddsMembership},
         { path:"/dashboard/vendor/ad-spaces", Component:AddSpaces},
-        { path:"/dashboard/vendor/menu-items/:id", Component:MenuItems},
+        { path:"/dashboard/vendor/menu-items", Component:MenuItems},
+        { path:"/dashboard/vendor/sale-items", Component:SaleItems},
         { path:"/dashboard/admin/accounts-payable", Component:AccountsPayable},
         { path:"/dashboard/admin/edit-payable", Component:EditAccountsPayable},
         { path:"/dashboard/admin/add-payable", Component:AddAccountsPayable},
@@ -448,7 +450,7 @@ export const routes = [
         { path:"/dashboard/admin/edit-countries", Component:EditCountries},
         { path:"/dashboard/admin/blogs", Component:Blogs},
         { path:"/dashboard/admin/add-blog", Component:AddBlog},
-        { path:"/dashboard/admin/edit-blog", Component:EditBlog},
+        { path:"/dashboard/admin/edit-blog/:id", Component:EditBlog},
 
         {path:"/app/project/project-list", Component:ProjectList},
         {path:"/app/project/new-project", Component:NewProject},

@@ -14,9 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Blog.init({
-    user_id: DataTypes.INTEGER,
+    show_on_home: DataTypes.INTEGER,
     name: DataTypes.STRING,
-    content: DataTypes.STRING
+    content: DataTypes.STRING,
+    image: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Blog',

@@ -1,17 +1,28 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Carousel from "react-multi-carousel";
 import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
 import ReactStars from "react-rating-stars-component";
 import "react-multi-carousel/lib/styles.css";
 import './css/style.css'
-
-
+import axios from 'axios';
 
 const Homeblog = (props) => {
 
-const ratingChanged = (newRating) => {
-  console.log(newRating);
-};
+  const [blogData, setBlogData] = useState([]);
+
+  useEffect(() => {
+
+    axios.get(`/api/blogs/get`)
+    .then((result) => {
+      setBlogData(result.data);
+    }); 
+
+  }, []);
+
+
+  const ratingChanged = (newRating) => {
+    console.log(newRating);
+  };
 
   return (
       <div className="homeblog">
@@ -22,19 +33,21 @@ const ratingChanged = (newRating) => {
       </div>
       <div style={{ position: "relative" }}>
         <Carousel responsive={responsive}>
-          <Col sm="12">
+
+        {blogData.map((blog , i ) => (
+          <Col key={i} sm="12">
             <div className="customcard">
               <Card
               >
                 <CardBody>
                   <Row>
                     <Col sm="3" xs="12">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
+                    <img src={`${process.env.PUBLIC_URL}/blogs/${blog.image}`} 
                      alt="Menu-Icon" className="img-fluid" />
                    </Col>
                    <Col sm="9" xs="12">
                   <CardTitle tag="h5">
-                    Lorem ipsum
+                    {blog.name}
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -43,7 +56,7 @@ const ratingChanged = (newRating) => {
                   7 Hours ago
                   </CardSubtitle>
                   <CardText>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est sit.....<a href={`${process.env.PUBLIC_URL}/blog/blogdetails`} className="readmore">READ MORE</a>
+                   {`${(blog.content).substring(0, 270)}...`}<a href={`${process.env.PUBLIC_URL}/blog/blogdetails`} className="readmore">READ MORE</a>
                   </CardText>
                   
                   </Col>
@@ -52,6 +65,7 @@ const ratingChanged = (newRating) => {
               </Card>
             </div>
           </Col>
+          ))}
           <Col sm="12">
             <div className="customcard">
               <Card

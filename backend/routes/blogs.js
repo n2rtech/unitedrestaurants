@@ -6,11 +6,40 @@ const Permission = require('../models').Permission;
 const Blog = require('../models').Blog;
 const passport = require('passport');
 require('../config/passport')(passport);
-const Helper = require('../utils/helper');
-const helper = new Helper();
+const path = require('path');
+var fs = require('fs');
+var multer  = require('multer');
+
+
+
+const imageStorage = multer.diskStorage({
+    destination: 'uploads/blogs', 
+      filename: (req, file, cb) => {
+          cb(null, file.fieldname + '_' + Date.now() 
+             + path.extname(file.originalname))
+    }
+});
+
+
+
+const imageUpload = multer({
+      storage: imageStorage,
+      limits: {
+        fileSize: 1000000 
+      },
+      fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(png|jpg)$/)) { 
+           return cb(new Error('Please upload a Image'))
+         }
+       cb(undefined, true)
+    }
+}) 
+
+
+
 
 // Create a new Blog
-router.post('/', (req, res) => {
+router.post('/', imageUpload.single('image'), (req, res) => {
         if (!req.body.content) {
             res.status(400).send({
                 msg: 'Please pass Blog Content.'
@@ -19,6 +48,8 @@ router.post('/', (req, res) => {
             Blog
                 .create({
                     name: req.body.name,
+                    image: req.file.filename,
+                    show_on_home: req.body.show_on_home,
                     content: req.body.content
                 })
                 .then((Blog) => res.status(201).send(Blog))
@@ -45,6 +76,16 @@ router.get('/', passport.authenticate('jwt', {
 }), function (req, res) {   
     Blog
     .findAll()
+    .then((blog) => res.status(200).send(blog))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+
+router.get('/get', (req, res) => { 
+    Blog
+    .findAll({where:{show_on_home:1}})
     .then((blog) => res.status(200).send(blog))
     .catch((error) => {
         res.status(400).send(error);
@@ -79,7 +120,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Update a Blog Items
-router.put('/:id', function (req, res) {
+router.put('/:id',imageUpload.single('image'), function (req, res) {
         if (!req.body.content) {
             res.status(400).send({
                 msg: 'Please pass Blog Content.'
@@ -88,9 +129,22 @@ router.put('/:id', function (req, res) {
             Blog
                 .findByPk(req.params.id)
                 .then((blog) => {
+
+                    if (req.file) {
+                        var image = req.file.filename;
+                        if (blog.image) {
+                            var filePath = path.resolve('./')+'/uploads/blogs/'+blog.image; 
+                            fs.unlinkSync(filePath);
+                        }
+                    }else{
+                        var image = blog.image;
+                    }
+
                     Blog.update({
                         name: req.body.name || blog.name,
-                        content: req.body.content || blog.content
+                        content: req.body.content || blog.content,
+                        show_on_home: req.body.show_on_home || blog.show_on_home,
+                        image: image
                     }, {
                         where: {
                             id: req.params.id
@@ -118,8 +172,11 @@ router.delete('/:id', (req, res) => {
         } else {
             Blog
                 .findByPk(req.params.id)
-                .then((Blog) => {
-                    if (Blog) {
+                .then((blog) => {
+                    if (blog) {
+                        var filePath = path.resolve('./')+'/uploads/blogs/'+blog.image; 
+                        fs.unlinkSync(filePath);
+
                         Blog.destroy({
                             where: {
                                 id: req.params.id

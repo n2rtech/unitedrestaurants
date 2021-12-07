@@ -197,8 +197,29 @@
 					}
 				],
 				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\":\"sjjsd\",\n    \"content\": \"Staff\"\n}"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "djd",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "dddd",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/laxman/Desktop/IMG-20210616-WA0011.jpg"
+						},
+						{
+							"key": "show_on_home",
+							"value": "1",
+							"type": "text"
+						}
+					]
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/blogs",
@@ -871,6 +892,41 @@
 			"response": []
 		},
 		{
+			"name": "users get by role ID Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Membership Add",
 			"request": {
 				"method": "POST",
@@ -1342,6 +1398,41 @@
 			"response": []
 		},
 		{
+			"name": "Blog Get home page",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/blogs/get",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"blogs",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "page get by ID",
 			"request": {
 				"method": "GET",
@@ -1393,7 +1484,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/blogs/1",
+					"raw": "http://127.0.0.1:5000/api/blogs/8",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -1405,7 +1496,7 @@
 					"path": [
 						"api",
 						"blogs",
-						"1"
+						"8"
 					]
 				}
 			},
@@ -1467,11 +1558,32 @@
 					}
 				],
 				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"content\": \"Admin Application\"\n}"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "LOREM IPSUM",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est sit.....Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est sit.....",
+							"type": "text"
+						},
+						{
+							"key": "show_on_home",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/laxman/Downloads/blogone.jpg"
+						}
+					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/blogs/1",
+					"raw": "http://127.0.0.1:5000/api/blogs/5",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -1483,7 +1595,7 @@
 					"path": [
 						"api",
 						"blogs",
-						"1"
+						"5"
 					]
 				}
 			},
@@ -1541,7 +1653,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/blogs/3",
+					"raw": "http://127.0.0.1:5000/api/blogs/14",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -1553,7 +1665,7 @@
 					"path": [
 						"api",
 						"blogs",
-						"3"
+						"14"
 					]
 				}
 			},
