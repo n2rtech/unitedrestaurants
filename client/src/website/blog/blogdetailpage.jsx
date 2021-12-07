@@ -1,17 +1,43 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { Container, Row, Col, Pagination, PaginationItem, PaginationLink, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
 import { BsChatFill } from "react-icons/bs";
 import 'react-tabs/style/react-tabs.css';
 import '../css/style.css'
+import { useParams } from "react-router-dom";
+import axios from 'axios'
 
 const Detailpage = (props) => {
 
+  const params = useParams();	
+  const [blogDetails, setBlogDetails] = useState([]);
+
+  useEffect(() => {
+  
+    const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
+        };
+
+	axios.get('/api/blogs/'+`${params.id}` , config).then((response) => {
+		setBlogDetails(response.data);
+	  });
+
+  }, []);
+
+  console.log(blogDetails);
+  console.log(blogDetails.name);
+
+
   return (
+	
     <div className="blogsingle">             
-      <Container fluid={true} className="p-0">       
+      <Container fluid={true} className="p-0">    
+	  
       <Row className="m-0">
+		  
+	  
         <Col sm="12" xs="12">
+		
         <div className="blogmedia">
         	<img src={`${process.env.PUBLIC_URL}/assets/images/blog/blog-single.jpg`} 
                      alt="blog-single" className="img-fluid" />
@@ -32,12 +58,10 @@ const Detailpage = (props) => {
 			  </ListInlineItem>
 			</List>   
 			</div>   
-			<h2>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</h2> 
+			<h2>{blogDetails.name}</h2> 
 			<hr/> 
 			<div className="Comments">
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-				<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like</p>
+				<p>{blogDetails.content}</p>	
 			</div> 
 			<div className="comment-box">
 				<h2>Comment</h2>
@@ -78,9 +102,10 @@ const Detailpage = (props) => {
 				  
 				</List>  
 			</div>
+			
         </Col>
         </Row>
-
+		
         
       </Container>
     </div>

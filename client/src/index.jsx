@@ -122,7 +122,7 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/vendor/login`} component={Vendorsignin} />
           <Route  path={`${process.env.PUBLIC_URL}/home`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/resturent/details`} component={Details} />
-          <Route  path={`${process.env.PUBLIC_URL}/blog/blogdetails`} component={Blogdetails} />
+          <Route  path={`${process.env.PUBLIC_URL}/blog/blogdetails/:id`} component={Blogdetails} />
            <Route  path={`${process.env.PUBLIC_URL}/restaurants`} component={Restaurants} />
            <Route  path={`${process.env.PUBLIC_URL}/blog`} component={Blog} />
            <Route  path={`${process.env.PUBLIC_URL}/searchresturent`} component={Searchresturent} />

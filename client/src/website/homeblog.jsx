@@ -6,18 +6,30 @@ import "react-multi-carousel/lib/styles.css";
 import './css/style.css'
 import axios from 'axios';
 
-const Homeblog = (props) => {
+const Homeblog = () => {
 
   const [blogData, setBlogData] = useState([]);
 
   useEffect(() => {
-
-    axios.get(`/api/blogs/get`)
-    .then((result) => {
-      setBlogData(result.data);
-    }); 
-
+  
+    const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
+        };
+ 
+    fetch("/api/blogs" , config)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          
+          setBlogData(result);
+        },
+        (error) => {
+          
+        }
+      )
   }, []);
+
+  console.log(blogData);
 
 
   const ratingChanged = (newRating) => {
@@ -56,7 +68,7 @@ const Homeblog = (props) => {
                   7 Hours ago
                   </CardSubtitle>
                   <CardText>
-                   {`${(blog.content).substring(0, 270)}...`}<a href={`${process.env.PUBLIC_URL}/blog/blogdetails`} className="readmore">READ MORE</a>
+                   {`${(blog.content).substring(0, 270)}...`}<a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`} className="readmore">READ MORE</a>
                   </CardText>
                   
                   </Col>
@@ -66,156 +78,8 @@ const Homeblog = (props) => {
             </div>
           </Col>
           ))}
-          <Col sm="12">
-            <div className="customcard">
-              <Card
-              >
-                <CardBody>
-                  <Row>
-                    <Col sm="3" xs="12">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
-                     alt="Menu-Icon" className="img-fluid" />
-                   </Col>
-                   <Col sm="9" xs="12">
-                  <CardTitle tag="h5">
-                    Lorem ipsum
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  >
-                  7 Hours ago
-                  </CardSubtitle>
-                  <CardText>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est sit.....<a href={`${process.env.PUBLIC_URL}/blog/blogdetails`} className="readmore">READ MORE</a>
-                  </CardText>
-                  
-                  </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-            </div>
-          </Col>
-          <Col sm="12">
-            <div className="customcard">
-              <Card
-              >
-                <CardBody>
-                  <Row>
-                    <Col sm="3" xs="12">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
-                     alt="Menu-Icon" className="img-fluid" />
-                   </Col>
-                   <Col sm="9" xs="12">
-                  <CardTitle tag="h5">
-                    Lorem ipsum
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  >
-                  7 Hours ago
-                  </CardSubtitle>
-                  <CardText>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est sit.....<a href={`${process.env.PUBLIC_URL}/blog/blogdetails`} className="readmore">READ MORE</a>
-                  </CardText>
-                  
-                  </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-            </div>
-          </Col>
-          <Col sm="12">
-            <div className="customcard">
-              <Card
-              >
-                <CardBody>
-                  <Row>
-                    <Col sm="3" xs="12">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
-                     alt="Menu-Icon" className="img-fluid" />
-                   </Col>
-                   <Col sm="9" xs="12">
-                  <CardTitle tag="h5">
-                    Lorem ipsum
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  >
-                  7 Hours ago
-                  </CardSubtitle>
-                  <CardText>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est sit.....<a href={`${process.env.PUBLIC_URL}/blog/blogdetails`} className="readmore">READ MORE</a>
-                  </CardText>
-                  
-                  </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-            </div>
-          </Col>
-          <Col sm="12">
-            <div className="customcard">
-              <Card
-              >
-                <CardBody>
-                  <Row>
-                    <Col sm="3" xs="12">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
-                     alt="Menu-Icon" className="img-fluid" />
-                   </Col>
-                   <Col sm="9" xs="12">
-                  <CardTitle tag="h5">
-                    Lorem ipsum
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  >
-                  7 Hours ago
-                  </CardSubtitle>
-                  <CardText>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est sit.....<a href={`${process.env.PUBLIC_URL}/blog/blogdetails`} className="readmore">READ MORE</a>
-                  </CardText>
-                  
-                  </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-            </div>
-          </Col>
-          <Col sm="12">
-            <div className="customcard">
-              <Card
-              >
-                <CardBody>
-                  <Row>
-                    <Col sm="3" xs="12">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/blogone.jpg`} 
-                     alt="Menu-Icon" className="img-fluid" />
-                   </Col>
-                   <Col sm="9" xs="12">
-                  <CardTitle tag="h5">
-                    Lorem ipsum
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  >
-                  7 Hours ago
-                  </CardSubtitle>
-                  <CardText>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est sit.....<a href={`${process.env.PUBLIC_URL}/blog/blogdetails`} className="readmore">READ MORE</a>
-                  </CardText>
-                  
-                  </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-            </div>
-          </Col>
+          
+         
         </Carousel>
       </div>
     </Container>
