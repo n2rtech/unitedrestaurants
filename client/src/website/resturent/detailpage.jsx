@@ -37,6 +37,9 @@ const Detailpage = (props) => {
 
         },[])
 
+
+		
+
   return (
     <div className="detailpage">             
       <Container className="p-0">        
