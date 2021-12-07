@@ -1,11 +1,28 @@
+import React, { useEffect , useState } from 'react';
 import { PayPalButton } from "react-paypal-button-v2";
-import React from 'react';
+
 
 const paypalstandardmonthly = (props) => {
   const { amount, currency, createSubscription, onApprove, catchError,onError, onCancel} = props;
-  const paypalKey = "AXPEKGBNnTg-16vrrVO_KBxYrNr3x7GUl9zVlppx4OYPfRAxCIvMfKNewkiTXCnptPuIZDxJVkslkyIX"
+  const paypalKey = "AYVHVHUfQuFd3o0L6bYflBZwU6KbCURHbh7ROB7Np68bsWwe27tqMhGglLoBLrNmjnc_SrKWHprxAnUK"
 
   console.log(props);
+
+//   const [loadState, setLoadState] = useState({ loading: false, loaded: false });
+
+//   useEffect(() => {
+//     if (!loadState.loading && !loadState.loaded) {
+//       setLoadState({ loading: true, loaded: false });
+//       const script = document.createElement("script");
+//       script.src = `https://www.paypal.com/sdk/js?client-id=AXPEKGBNnTg-16vrrVO_KBxYrNr3x7GUl9zVlppx4OYPfRAxCIvMfKNewkiTXCnptPuIZDxJVkslkyIX&vault=true&intent=subscription&currency=USD`;
+//       script.addEventListener("load", () =>
+//         setLoadState({ loading: false, loaded: true })
+//       );
+//       document.body.appendChild(script);
+//       console.log("append script");
+//     }
+// // ...
+//   }, [loadState,...]);
 
   return (
     <PayPalButton
@@ -13,17 +30,16 @@ const paypalstandardmonthly = (props) => {
       currency={currency}
       createSubscription={(data, details) => { 
         return details.subscription.create({
-        plan_id: 'P-9S8026110V486523FMGW5QYA'
+        plan_id: 'P-8F429145L3966945YMGXPB3I'
       });
     }}
       onApprove={(data, details) => {
           // Capture the funds from the transaction
           return details.subscription.get().then(function(details) {
             // Show a success message to your buyer
-            alert("Subscription completed");
-            console.log("Subscriptions" , data.subscriptionID)
+            alert("Subscription completed" , data.subscriptionID);
+            console.log("Subscriptions" , data.subscriptionID);
 
-            // OPTIONAL: Call your server to save the subscription
             // return fetch("/paypal-subscription-complete", {
             //   method: "post",
             //   body: JSON.stringify({
@@ -31,6 +47,7 @@ const paypalstandardmonthly = (props) => {
             //     subscriptionID: data.subscriptionID
             //   })
             // });
+
           });
         }
       }
@@ -45,13 +62,14 @@ const paypalstandardmonthly = (props) => {
       }}
       options={{
         clientId: paypalKey,
-        vault:true
+        vault:true,
+        intent: 'subscription'
       }}
       style={{
-        shape: 'rect',
-        color: 'blue',
-        layout: 'vertical',
-        label: 'subscribe',
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'subscribe'
       }}
     />
   );
