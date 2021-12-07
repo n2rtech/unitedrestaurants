@@ -45,13 +45,14 @@ const paypalpremiummonthly = (props) => {
       }}
       options={{
         clientId: paypalKey,
-        vault:true
+        vault:true,
+        intent: 'subscription'
       }}
       style={{
-        shape: 'rect',
+        shape: 'pill',
         color: 'blue',
         layout: 'vertical',
-        label: 'subscribe',
+        label: 'subscribe'
       }}
     />
   );
