@@ -156,6 +156,7 @@ const Register = (props) => {
     if(validateForm(errors)) {
       const query = {
         first_name:first_name,
+        name:first_name,
         last_name:'.',
         mobile:mobile,
         address:address,

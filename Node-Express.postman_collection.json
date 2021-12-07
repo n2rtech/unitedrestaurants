@@ -418,6 +418,88 @@
 			"response": []
 		},
 		{
+			"name": "Vendor Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"Komal Mishra\",\n    \"name\": \"komal@gmail.com\",\n    \"mobile\": \"902657474\",\n    \"address\": \"The Djamware\",\n    \"country_id\": 3,\n    \"category_id\": 3,\n    \"featured_business\":1,\n    \"hot_deals\":1\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/23",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"23"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor get Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hMTQzQGdtYWlsLmNvbSIsInJvbGUiOiJ2ZW5kb3IiLCJpYXQiOjE2Mzg4ODI3NDQsImV4cCI6MTY3MDQzOTY3MH0.0BOagU7WTkTSNSYBBpN1mMHU9MA2Th30JvKqBkQu2_4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"Komal Mishra\",\n    \"name\": \"komal@gmail.com\",\n    \"mobile\": \"902657474\",\n    \"address\": \"The Djamware\",\n    \"country_id\": 3,\n    \"category_id\": 3,\n    \"featured_business\":1,\n    \"hot_deals\":1\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/profile/26",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"profile",
+						"26"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Permissions Update",
 			"request": {
 				"method": "PUT",

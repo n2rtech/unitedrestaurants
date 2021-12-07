@@ -27,7 +27,6 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-
   DB.query('SELECT email FROM vendors WHERE email ="' + req.body.email +'"', function (err, user) {
     if (err) throw err;
     if (user[0]) {
@@ -36,25 +35,55 @@ router.post("/register", (req, res) => {
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(req.body.password, salt, (err, hash) => {
           if (err) throw err;         
-          var name = req.body.first_name+' '+req.body.last_name;      
-            Vendor
-            .create({
-                email: req.body.email,
-                password: hash,
-                name: name,
-                mobile: req.body.mobile,
-                address: req.body.address,
-                category_id: req.body.category_id,
-                country_id: req.body.country_id
-            })
-            .then((user) => res.status(201).send({
-              succeed: true,
-              message: "vendor created successfully!"
-            }));               
-      });     
-    });
-  }
-});
+          var name = req.body.name;      
+          Vendor
+          .create({
+            email: req.body.email,
+            password: hash,
+            name: name,
+            mobile: req.body.mobile,
+            address: req.body.address,
+            category_id: req.body.category_id,
+            country_id: req.body.country_id
+          })
+          .then((user) => {
+
+
+            DB.query('SELECT code FROM countries WHERE id ="' + req.body.country_id +'"', function (err, country) {
+              if (err) throw err;
+              if (country[0]) {
+                var code = country[0].code;
+
+                if (code == 'ita') {
+                  var table_name = 'vendorita';
+                }else{
+                  var table_name = 'vendor' + code +'s';
+                }
+
+                var user_id = user.id;
+                var email = req.body.email;
+                var name = req.body.name;
+                var address = req.body.address;
+                var mobile = req.body.mobile;
+
+                DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `fax`, `address`, `city`, `state`, `post_code`, `latitude`, `longitude`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+name+"', NULL, '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', NULL, '"+address+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NOW(), '')");
+                res.status(201).send({
+                  succeed: true,
+                  message: "vendor created successfully!"
+                })
+
+              } else {
+                res.status(200).send({
+                  succeed: false,
+                  message: "vendor creation error!"
+                })
+              }
+            });
+          });               
+        });     
+      });
+    }
+  });
 });
 
 
@@ -224,7 +253,7 @@ router.get('/', (req, res) => {
       };
       }
 
-      User.findAll(conditions)
+      Vendor.findAll(conditions)
       .then(users => {
        res.status(200).send(users)
      })
@@ -335,50 +364,141 @@ router.get('/:id', (req, res) => {
 
 
 // Update a User
-router.put('/:id', passport.authenticate('jwt', {
-  session: false
-}), function (req, res) {
-  helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
-    if (!req.body.role_id || !req.body.email || !req.body.password || !req.body.fullname || !req.body.phone) {
-      res.status(400).send({
-        msg: 'Please pass Role ID, email, password, phone or fullname.'
-      })
-    } else {
-      User
-        .findByPk(req.params.id)
-        .then((user) => {
+router.put('/:id', (req, res) => {
+  if (!req.body.name || !req.body.email || !req.body.mobile) {
+    res.status(400).send({
+      msg: 'Please pass Role ID, email, password, phone or fullname.'
+    })
+  } else {
+    Vendor
+    .findByPk(req.params.id)
+    .then((user) => {
 
 
-          if (req.body.password) {
-            var password = generatePassword(req.body.password);
+      Vendor.update({
+        email: req.body.email || user.email,
+        name: req.body.name || user.name,
+        phone: req.body.mobile || user.phone,
+        mobile: req.body.mobile || user.mobile,
+        country_id: req.body.country_id || user.country_id,
+        category_id: req.body.category_id || user.category_id,
+        address: req.body.address || user.address,
+      }, {
+        where: {
+          id: req.params.id
+        }
+      }).then(_ => {
+
+
+        DB.query('SELECT code,name FROM countries WHERE id ="' + user.country_id +'"', function (err, country) {
+          if (err) throw err;
+          if (country[0]) {
+            var code = country[0].code;
+            var country = country[0].code;
+
+            if (code == 'ita') {
+              var table_name = vendorita;
+            }else{
+              var table_name = 'vendor' + code +'s';
+            }
+
+            DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + user.id +'"', function (err, vendor_pro) {
+              if (err) throw err;
+              if (vendor_pro[0]) {
+
+                var user_id = user.id;
+                var country_id = user.country_id;
+                var name = req.body.name;
+                var banner = vendor_pro[0].banner;
+
+                DB.query("DELETE  FROM hotdeals where user_id="+user_id);
+                DB.query("DELETE  FROM featuredbusinesses where user_id="+user_id);
+                if (req.body.hot_deals) {
+                  DB.query("INSERT INTO hotdeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                }
+
+                if (req.body.featured_business){
+                  DB.query("INSERT INTO featuredbusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                }
+
+                res.status(200).send({
+                  'message': 'User updated'
+                });
+              }else{
+                res.status(200).send({
+                  'message': 'User updated2'
+                });
+              }
+            })
           }else{
-            var password = user.password;
+            res.status(200).send({
+              'message': 'User updated3'
+            });
+          }
+        })
+
+
+      }).catch(err => res.status(400).send(err));
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
+  }
+});
+
+
+
+
+// Get Profile by ID
+router.get('/profile/:id', (req, res) => {
+  Vendor
+  .findByPk(req.params.id)
+  .then((vendor) => {
+    if (vendor) {
+
+      DB.query('SELECT code FROM countries WHERE id ="' + vendor.country_id +'"', function (err, country) {
+        if (err) throw err;
+        if (country[0]) {
+          var code = country[0].code;
+
+          if (code == 'ita') {
+            var table_name = 'vendorita';
+          }else{
+            var table_name = 'vendor' + code +'s';
           }
 
-          User.update({
-            email: req.body.email || user.email,
-            name: req.body.name || user.name,
-            phone: req.body.phone || user.phone,
-            mobile: req.body.mobile || user.mobile,
-            password: password,
-            role_id: req.body.role_id || user.role_id,
-            address: req.body.address || user.address,
-          }, {
-            where: {
-              id: req.params.id
+          DB.query("SELECT * FROM " + table_name +" WHERE user_id =" + vendor.id, function (err, profile) {
+            if (err) throw err;
+            if (profile[0]) {
+
+              res.status(201).send(profile[0])
+            }else{
+              var user_id = vendor.id;
+              var email = vendor.email;
+              var name = vendor.name;
+              var address = vendor.address;
+              var mobile = vendor.mobile;
+
+              DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `fax`, `address`, `city`, `state`, `post_code`, `latitude`, `longitude`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+name+"', NULL, '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', NULL, '"+address+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NOW(), '')");
+
+              DB.query("SELECT * FROM " + table_name +" WHERE user_id =" + vendor.id, function (err, profile) {
+                if (err) throw err;
+                if (profile[0]) {
+
+                  res.status(201).send(profile[0])
+                }
+              });
+
+              res.status(201).send({
+                succeed: true,
+                message: "vendor created successfully!"
+              })
+
             }
-          }).then(_ => {
-            res.status(200).send({
-              'message': 'User updated'
-            });
-          }).catch(err => res.status(400).send(err));
-        })
-        .catch((error) => {
-          res.status(400).send(error);
-        });
-    }
-  }).catch((error) => {
-    res.status(403).send(error);
+          });
+        }    
+      });
+    }       
   });
 });
 

@@ -92,7 +92,7 @@ const VendorProfile = (props) => {
           const config = {
       headers: {'Authorization': 'JWT '+token }
     };
-        const result = await axios('/api/profile/'+`${id}`,config);
+        const result = await axios('/api/vendors/profile/'+`${id}`,config);
         setProfileData(result.data);
         setName(result.data.business_name)
         setEmail(result.data.business_email)
