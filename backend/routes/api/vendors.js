@@ -10,12 +10,7 @@ const User = require('../../models').User;
 const db = require('../../models');
 const Vendor = require('../../models').Vendor;
 const HotDeal = require('../../models').HotDeal;
-const VendorAu = require('../../models').VendorAu;
-const VendorCan = require('../../models').VendorCan;
-const VendorEsp = require('../../models').VendorEsp;
-const VendorIta = require('../../models').VendorIta;
-const VendorUk = require('../../models').VendorUk;
-const VendorUsa = require('../../models').VendorUsa;
+const FeaturedBusiness = require('../../models').FeaturedBusiness;
 const Role = require('../../models').Role;
 const Category = require('../../models').Category;
 const Country = require('../../models').Country;
@@ -388,14 +383,14 @@ router.get('/country/:id', (req, res) => {
 });
 
 // Get User by ID
-router.get('/:id', (req, res) => {
+/*router.get('/:id', (req, res) => {
   User
   .findByPk(req.params.id)
   .then((user) => res.status(200).send(user))
   .catch((error) => {
     res.status(400).send(error);
   });
-});
+});*/
 
 
 
@@ -609,6 +604,19 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
               business_name : req.body.business_name || profile.business_name,
               about_business : req.body.about_business || profile.about_business,
               categories: categories,
+              banner:image,
+              country_id : profile.country_id,
+              country : code,
+              }, {
+            where: {
+              user_id: profile.id
+            }
+          }).then((dddd) => {
+             FeaturedBusiness.update({
+              business_name : req.body.business_name || profile.business_name,
+              about_business : req.body.about_business || profile.about_business,
+              categories: categories,
+              banner:image,
               country_id : profile.country_id,
               country : code,
               }, {
@@ -619,6 +627,7 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
             res.status(200).send({
               'message': 'Profile updated'
             });
+          }); 
           }); 
 
           }).catch(err => res.status(400).send('err'));
