@@ -1,12 +1,21 @@
 const express = require("express");
 const router = express.Router();
+const Sequelize = require('sequelize');
 const {DB} = require('../../config/database');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const nodemailer = require("nodemailer");
 const User = require('../../models').User;
+const db = require('../../models');
 const Vendor = require('../../models').Vendor;
+const HotDeal = require('../../models').HotDeal;
+const VendorAu = require('../../models').VendorAu;
+const VendorCan = require('../../models').VendorCan;
+const VendorEsp = require('../../models').VendorEsp;
+const VendorIta = require('../../models').VendorIta;
+const VendorUk = require('../../models').VendorUk;
+const VendorUsa = require('../../models').VendorUsa;
 const Role = require('../../models').Role;
 const Category = require('../../models').Category;
 const Country = require('../../models').Country;
@@ -15,6 +24,35 @@ require('../../config/vendor_passport')(passport);
 const Helper = require('../../utils/helper');
 const helper = new Helper();
 const Op = require('sequelize').Op
+
+const app = express();
+app.db = (model) => db[model];
+
+const path = require('path');
+var multer  = require('multer');
+var fs = require('fs');
+
+const imageStorage = multer.diskStorage({
+    destination: 'uploads/banner', 
+    filename: (req, file, cb) => {
+      cb(null, file.fieldname + '_' + Date.now() 
+       + path.extname(file.originalname))
+  }
+});
+
+const imageUpload = multer({
+  storage: imageStorage,
+  limits: {
+    fileSize: 1000000 
+},
+fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(png|jpg)$/)) { 
+     return cb(new Error('Please upload a Image'))
+ }
+ cb(undefined, true)
+}
+}) 
+
 
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -501,6 +539,120 @@ router.get('/profile/:id', (req, res) => {
     }       
   });
 });
+
+
+// Update a Profile
+router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
+
+  if (!req.params.id || !req.body.business_name || !req.body.business_email) {
+    res.status(400).send({
+      msg: 'Please pass Profile ID, name or email.'
+    })
+  } else {
+    Vendor
+    .findByPk(req.params.id)
+    .then((profile) => {
+
+      if (req.file) {
+        /*var filePath = path.resolve('./')+'/uploads/banner/'+profile.banner; 
+        fs.unlinkSync(filePath);*/
+        var image = req.file.filename;
+      }else{
+        var image = profile.banner;
+      }
+
+
+      DB.query('SELECT code FROM countries WHERE id ="' + profile.country_id +'"', function (err, country) {
+        if (err) throw err;
+        if (country[0]) {
+          var code = country[0].code;
+
+          if (code == 'ita') {
+            var table_name = 'VendorIta';
+          }else{
+            var codee = code.charAt(0).toUpperCase() + code.slice(1);
+            var table_name = 'Vendor' + codee;
+          }
+
+          if (req.body.categories) {
+            var categories = JSON.stringify(req.body.categories);
+          }else{
+            var categories = profile.categories;
+          }
+
+          app.db(table_name)
+          .update({
+            business_name: req.body.business_name || profile.business_name,
+            business_email: req.body.business_email || profile.business_email,
+            manager_name: req.body.manager_name || profile.manager_name,
+            about_business: req.body.about_business || profile.about_business,
+            manager_email: req.body.manager_email || profile.manager_email,
+            phone: req.body.phone || profile.phone,
+            mobile: req.body.mobile || profile.mobile,
+            fax: req.body.fax || profile.fax,
+            banner: image,
+            address: req.body.address || profile.address,
+            categories: categories,
+            website_link: req.body.website_link || profile.website_link,
+            media_links: req.body.media_links || profile.media_links,
+            facebook: req.body.facebook || profile.facebook,
+            instagram: req.body.instagram || profile.instagram,
+            youtube: req.body.youtube || profile.youtube,
+            status: req.body.status || profile.status
+          }, {
+            where: {
+              user_id: profile.id
+            }
+          }).then((dddd) => {
+
+            HotDeal.update({
+              business_name : req.body.business_name || profile.business_name,
+              about_business : req.body.about_business || profile.about_business,
+              categories: categories,
+              country_id : profile.country_id,
+              country : code,
+              }, {
+            where: {
+              user_id: profile.id
+            }
+          }).then((dddd) => {
+            res.status(200).send({
+              'message': 'Profile updated'
+            });
+          }); 
+
+          }).catch(err => res.status(400).send('err'));
+
+
+        } else {
+          res.status(200).send({
+            succeed: false,
+            message: "vendor creation error!"
+          })
+        }
+      });      
+    })
+    .catch((error) => {
+      res.status(400).send('error');
+    });
+  }
+});
+
+
+
+// Get Profile by ID
+router.get('/:id', (req, res) => {
+    Vendor
+    .findOne({ where:{
+        id: req.params.id
+    }
+})
+    .then((profile2) => res.status(200).send(profile1))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
 
 const getPagination = (page=1, size) => {
   const limit = size ? +size : 3;
