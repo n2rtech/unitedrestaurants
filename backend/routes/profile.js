@@ -164,7 +164,8 @@ router.put('/:id', imageUpload.single('banner'), (req, res) => {
                 msg: 'Please pass Profile ID, name or email.'
             })
         } else {
-            Profile
+            // Note for krishna
+            Profile  // Need to set dynamic table please look here now we updated profile data in vendor_countrycode name table not profiles table
                 .findByPk(req.params.id)
                 .then((profile) => {
 
@@ -222,8 +223,8 @@ router.put('/:id', imageUpload.single('banner'), (req, res) => {
                         });
                     }).catch(err => res.status(400).send('err'));
                 })
-                .catch((error) => {
-                    res.status(400).send('error');
+                .catch((err) => {
+                    res.status(400).send('err');
                 });
         }
 });

@@ -11,6 +11,7 @@ const VendorProfile = (props) => {
   const multiple = false
   const [options,setOptions] = useState([])
   const token = localStorage.getItem("token");
+  const vendor_id  = localStorage.getItem("id");
   useEffect(() => {
     const GetData = async () => {
         const config = {
@@ -23,7 +24,7 @@ const VendorProfile = (props) => {
   }, []);
 
 
-  const [image, setimage] = useState({ pictures: [] })
+  const [image, setimage] = useState({ pictures: [] , pictureFiles: [] })
 
     const onDrop = (pictureFiles, pictureDataURLs) => {
         setimage({
@@ -109,7 +110,7 @@ const VendorProfile = (props) => {
       GetData();
     }, []);
 
-    console.log(profileData);
+    console.log('profiledata',profileData);
 
 
     // Update details query
@@ -134,7 +135,14 @@ const categorys = multiSelections.map((user) => {
           bodyParameters.set('manager_email' , manageremail);
           bodyParameters.set('phone_number', phone);
           bodyParameters.set('fax', fax);
-          bodyParameters.set('banner', image.pictureFiles[0]);
+          console.log('Image', image);
+          console.log('Image Length', image.pictureFiles.length);
+          if(image.pictureFiles.length != 0) {
+            bodyParameters.set('banner', image.pictureFiles[0]);
+          } else {
+            bodyParameters.set('banner', image.pictureFiles);
+          }
+          
           bodyParameters.set('address', address);
           bodyParameters.set('categories', categories_arr);
           bodyParameters.set('website_link', websitelink);
