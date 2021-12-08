@@ -130,23 +130,23 @@ console.log('Category_id' , category_id);
               <h5>Show in Hot deals</h5>
               <FormGroup className="m-checkbox-inline custom-radio-ml">
                 <div className="radio radio-primary">
-                  <Input id="radioinline2" type="radio"  onChange={onChangehotdeals} value={Hotdeals} name="radio1" defaultChecked />
-                  <Label className="mb-0" for="radioinline1">No</Label>
+                  <Input id="no-deals" type="radio"  onChange={onChangehotdeals} value={Hotdeals} name="radio1" defaultChecked />
+                  <Label className="mb-0" for="no-deals">No</Label>
                 </div>
                 <div className="radio radio-primary">
-                  <Input id="radioinline2.2" type="radio" onChange={onChangehotdeals} value={Hotdeals}  name="radio1.1" />
-                  <Label className="mb-0" for="radioinline2">Yes</Label>
+                  <Input id="yes-deals" type="radio" onChange={onChangehotdeals} value={Hotdeals}  name="radio1" />
+                  <Label className="mb-0" for="yes-deals">Yes</Label>
                 </div>
               </FormGroup>
               <h5 className="m-t-30">Show in Featured Business</h5>
               <FormGroup className="m-checkbox-inline custom-radio-ml">
                 <div className="radio radio-primary">
-                  <Input id="radioinline1" type="radio" onChange={onChangefeatured} value={Featured} name="radio2" defaultChecked />
-                  <Label className="mb-0" for="radioinline1">No</Label>
+                  <Input id="no-featured" type="radio" onChange={onChangefeatured} value={Featured} name="radio2" defaultChecked />
+                  <Label className="mb-0" for="no-featured">No</Label>
                 </div>
                 <div className="radio radio-primary">
-                  <Input id="radioinline1.2" type="radio" onChange={onChangefeatured} value={Featured} name="radio2.1" />
-                  <Label className="mb-0" for="radioinline2">Yes</Label>
+                  <Input id="yes-featured" type="radio" onChange={onChangefeatured} value={Featured} name="radio2" />
+                  <Label className="mb-0" for="yes-featured">Yes</Label>
                 </div>
               </FormGroup>
               <div>&nbsp;</div>
