@@ -9,7 +9,7 @@ import { Pagination, PaginationItem, PaginationLink } from "reactstrap"
 import axios from 'axios';
 
 const AllVendors = (props) => {
-
+  const token = localStorage.getItem("token");
   const [vendorData, setVendorData] = useState([]);
   const [countryData, setCountryData] = useState([]);
 
@@ -29,7 +29,7 @@ const AllVendors = (props) => {
   useEffect(() => {
 
     const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' },
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
       params : {
         'page': 1,
         'size': 4 
@@ -83,7 +83,7 @@ const handleNameChange = e => {
    setFilterMobile("");
    setFilterCountry("");
    const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
     };
    axios.get('/api/vendors',config)
    .then(result=>{
@@ -98,7 +98,7 @@ const handleNameChange = e => {
   const findByFilter = () => {
 
     const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
     };
 
     axios(`/api/vendors?name=${filterName}&email=${filterEmail}&mobile=${filterMobile}&country=${filterCountry}`,config)
@@ -122,7 +122,7 @@ const handleNameChange = e => {
       method: 'get',
       url: '/api/users/by-role/2',
       headers: { 
-        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ', 
+        'Authorization': 'JWT '+token, 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       params : {
@@ -152,7 +152,7 @@ const handleNameChange = e => {
       method: 'get',
       url: '/api/users/by-role/2',
       headers: { 
-        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ', 
+        'Authorization': 'JWT '+token, 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       params : {
@@ -180,7 +180,7 @@ const handleNameChange = e => {
       method: 'get',
       url: '/api/users/by-role/2',
       headers: { 
-        'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ', 
+        'Authorization': 'JWT '+token, 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       params : {
@@ -269,7 +269,7 @@ const handleNameChange = e => {
                         <tr key={i}>
                           <td>{vendor.name}</td>
                           <td className="text-right">
-                            <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-vendor`}>Edit</a>
+                            <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-vendor/${vendor.id}`}>Edit</a>
                           </td>
                         </tr>
                        ))}
