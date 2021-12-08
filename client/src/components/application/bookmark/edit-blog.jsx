@@ -10,6 +10,8 @@ import {SelectSingleImageUpload,MultipleImageUpload} from '../../../constant'
 
 
 const EditBlog = () => {
+
+const token = localStorage.getItem("token");
 const [image, setimage] = useState({ pictures: [] })
 const onDrop = (pictureFiles, pictureDataURLs) => {
 setimage({
@@ -29,9 +31,9 @@ const [content,setContent] = useState('')
    useEffect(() => {
     const GetData = async () => {
         const config = {
-    headers: {'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ' }
+    headers: {'Authorization': 'JWT '+token }
   };
-      const result = await axios('/api/pages/'+`${params.id}`,config);
+      const result = await axios('/api/blogs/'+`${params.id}`,config);
       setTitleData(result.data);
       setContent(result.data.body);
     };

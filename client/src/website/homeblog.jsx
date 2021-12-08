@@ -1,10 +1,12 @@
 import React,{useState,useEffect} from 'react';
 import Carousel from "react-multi-carousel";
 import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
-import ReactStars from "react-rating-stars-component";
 import "react-multi-carousel/lib/styles.css";
 import './css/style.css'
-import axios from 'axios';
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
+import ReactTimeAgo from 'react-time-ago'
+TimeAgo.addLocale(en)
 
 const Homeblog = () => {
 
@@ -16,7 +18,7 @@ const Homeblog = () => {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
  
-    fetch("/api/blogs" , config)
+    fetch("/api/blogs/get" , config)
       .then(res => res.json())
       .then(
         (result) => {
@@ -65,7 +67,7 @@ const Homeblog = () => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                  7 Hours ago
+                  <ReactTimeAgo date={blog.createdAt} locale="en-US"/>
                   </CardSubtitle>
                   <CardText>
                    {`${(blog.content).substring(0, 270)}...`}<a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`} className="readmore">READ MORE</a>
