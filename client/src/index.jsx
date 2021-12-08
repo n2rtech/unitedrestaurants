@@ -198,7 +198,7 @@ const Root = (props) =>  {
           
           </App>
           :
-          <Redirect to={`${process.env.PUBLIC_URL}/home`} />
+          <Redirect to={`${process.env.PUBLIC_URL}/home/usa`} />
 
 
           }      
