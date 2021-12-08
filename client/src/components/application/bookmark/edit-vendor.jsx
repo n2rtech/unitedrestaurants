@@ -32,19 +32,6 @@ const [category_id , setCategory] = useState();
   }, []);
   console.log(options);
 
-  // useEffect(() => {
-    
-  // const config = {
-  //       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
-  //       };
-
-  // axios.get('/api/vendor/'+`${params.id}` , config).then((response) => {
-  //     setName(response.data.content);
-  //     setTitleData(response.data.name);
-  //     setShowhome(response.data.show_on_home);
-  //   });
-
-  // }, []);
 
   const onChangeName = (event) => {
     setName(event.target.value);
@@ -81,6 +68,27 @@ const [category_id , setCategory] = useState();
       setCategory('');
     }
   }
+
+  const [details , setDetails] = useState();
+  useEffect(() => {
+    
+  const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
+        };
+
+  axios.get('/api/vendors/'+`${params.id}` , config).then((response) => {
+      setDetails(response.data);
+      setName(response.data.name);
+      setEmail(response.data.email);
+      setMobile(response.data.mobile);
+      setAddress(response.data.address);
+      setCountry(response.data.country_id);
+      setCategory(response.data.category_id);
+    });
+
+  }, []);
+
+  console.log('Vendors' ,details);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -126,7 +134,7 @@ console.log('Category_id' , category_id);
                   <Label className="mb-0" for="radioinline1">No</Label>
                 </div>
                 <div className="radio radio-primary">
-                  <Input id="radioinline2" type="radio" onChange={onChangehotdeals} value={Hotdeals}  name="radio1" />
+                  <Input id="radioinline2.2" type="radio" onChange={onChangehotdeals} value={Hotdeals}  name="radio1.1" />
                   <Label className="mb-0" for="radioinline2">Yes</Label>
                 </div>
               </FormGroup>
@@ -137,7 +145,7 @@ console.log('Category_id' , category_id);
                   <Label className="mb-0" for="radioinline1">No</Label>
                 </div>
                 <div className="radio radio-primary">
-                  <Input id="radioinline1" type="radio" onChange={onChangefeatured} value={Featured} name="radio2" />
+                  <Input id="radioinline1.2" type="radio" onChange={onChangefeatured} value={Featured} name="radio2.1" />
                   <Label className="mb-0" for="radioinline2">Yes</Label>
                 </div>
               </FormGroup>

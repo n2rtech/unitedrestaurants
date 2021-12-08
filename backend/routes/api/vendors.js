@@ -389,7 +389,7 @@ router.get('/country/:id', (req, res) => {
 
 // Get User by ID
 router.get('/:id', (req, res) => {
-  User
+  Vendor
   .findByPk(req.params.id)
   .then((user) => res.status(200).send(user))
   .catch((error) => {
