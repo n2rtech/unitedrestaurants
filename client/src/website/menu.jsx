@@ -1,11 +1,25 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Dropdown from 'react-multilevel-dropdown';
 import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
 import './css/style.css'
-
+import {useParams} from 'react-router-dom'
+import axios from 'axios'
 
 const Menu = (props) => {
 const [isOpen, setIsOpen] = React.useState(false);
+
+const [categoryData, setCategoryData] = useState([]);
+const params = useParams();
+
+useEffect(() => {
+     axios.get(`/api/categories/list`)
+  .then((result_data) => {
+    const result = result_data.data;
+    setCategoryData(result);
+  }); 
+
+}, []);
+
   return (
       <div className="headermenu">
         <Container fluid={true} className="p-0">
@@ -18,8 +32,18 @@ const [isOpen, setIsOpen] = React.useState(false);
                   className="me-auto"
                   navbar
                 >
+
+                    {categoryData.map((item , i) => (
+                          <NavItem>
+                            <NavLink href="#">
+                            <img src={`${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`}
+                    alt="Menu-Icon"/>
+                            {item.name}
+                          </NavLink>
+                          </NavItem>
+                      ))}
                 
-                  <NavItem>
+                  {/* <NavItem>
                       <img src={`${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`} 
                alt="Menu-Icon"/>
                       
@@ -155,7 +179,7 @@ const [isOpen, setIsOpen] = React.useState(false);
                       </DropdownItem>
                     </DropdownMenu>
 
-                  </UncontrolledDropdown>
+                  </UncontrolledDropdown> */}
 
 
                   
