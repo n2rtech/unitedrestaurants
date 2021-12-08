@@ -56,19 +56,19 @@ const [image, setimage] = useState({ pictures: [] })
 
   return (
     <Fragment>
-    <Breadcrumb parent="Apps" title="Edit Blog" />
+    <Breadcrumb parent="Apps" title="Add Blog" />
     <Container fluid={true}>
       <Card>
       <CardBody>
         <h5>Show on Home page</h5>
         <FormGroup className="m-checkbox-inline custom-radio-ml">
           <div className="radio radio-primary">
-            <Input id="radioinline2" type="radio" name="radio1" onChange = {onChangehome} defaultChecked />
-            <Label className="mb-0" for="radioinline1">No</Label>
+            <Input id="no-home" type="radio" name="radio1" onChange = {onChangehome} defaultChecked />
+            <Label className="mb-0" for="no-home">No</Label>
           </div>
           <div className="radio radio-primary">
-            <Input id="radioinline2" type="radio" name="radio1" onChange = {onChangehome} />
-            <Label className="mb-0" for="radioinline2">Yes</Label>
+            <Input id="yes-home" type="radio" name="radio1" onChange = {onChangehome} />
+            <Label className="mb-0" for="yes-home">Yes</Label>
           </div>
         </FormGroup>
         <FormGroup>
