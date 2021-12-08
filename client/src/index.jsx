@@ -40,6 +40,7 @@ import Howitwork from './website/howitwork'
 import Returnpolicy from './website/returnpolicy'
 import Termsofservice from './website/termsofservice'
 import Contactus from './website/contactus'
+import Visitors from './website/visitors'
 
 
 
@@ -136,6 +137,7 @@ const Root = (props) =>  {
            <Route  path={`${process.env.PUBLIC_URL}/returnpolicy`} component={Returnpolicy} />
            <Route  path={`${process.env.PUBLIC_URL}/termsofservice`} component={Termsofservice} />
            <Route  path={`${process.env.PUBLIC_URL}/contactus`} component={Contactus} />
+           <Route  path={`${process.env.PUBLIC_URL}/visitors`} component={Visitors} />
            
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/login`} component={Login}>
           </Route>
