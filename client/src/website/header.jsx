@@ -142,11 +142,11 @@ const title = <div className="searchbar">
               <div className="topmenu">
                 <div className="clickable opacity0">
                   <p>visitors</p>
-                  <a href="#">click here</a>
+                  <a href={`${process.env.PUBLIC_URL}/visitors`}>click here</a>
                 </div>
                 <div className="clickable">
                   <p>visitors</p>
-                  <a href="#">click here</a>
+                  <a href={`${process.env.PUBLIC_URL}/visitors`}>click here</a>
                 </div>
               <div className="clickable">
                 <p>Vendors</p>
