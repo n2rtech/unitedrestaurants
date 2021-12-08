@@ -134,7 +134,7 @@ router.put('/:id',imageUpload.single('image'), function (req, res) {
                         var image = req.file.filename;
                         if (blog.image) {
                             var filePath = path.resolve('./')+'/uploads/blogs/'+blog.image; 
-                            fs.unlinkSync(filePath);
+                            //fs.unlinkSync(filePath);
                         }
                     }else{
                         var image = blog.image;

@@ -19,38 +19,56 @@ setimage({
 });
 }
 const [content,setContent] = useState('') 
+const [titleData, setTitleData] = useState('');
+const [showhome , setShowhome]  = useState('0');
     const onChange = (evt) => {
         const newContent = evt.editor.getData();
         setContent(newContent)
     }
 
+    const OnChangeTitle = (event) => {
+      setTitleData(event.target.value);
+    }
+
+    const onChangehome = (event) => {
+      setShowhome(event.target.value)
+    }
+
     const params = useParams();
 
+    const [blogDetails, setBlogDetails] = useState([]);
 
-    const [titleData, setTitleData] = useState({});
-   useEffect(() => {
-    const GetData = async () => {
-        const config = {
-    headers: {'Authorization': 'JWT '+token }
-  };
-      const result = await axios('/api/blogs/'+`${params.id}`,config);
-      setTitleData(result.data);
-      setContent(result.data.body);
-    };
-    GetData();
-  }, []);
+    useEffect(() => {
+    
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
+          };
+  
+    axios.get('/api/blogs/'+`${params.id}` , config).then((response) => {
+        setBlogDetails(response.data);
+        setContent(response.data.content);
+        setTitleData(response.data.name);
+        setShowhome(response.data.show_on_home);
+      });
+  
+    }, []);
+  
+    console.log(blogDetails);
 
     const handleSubmit = event => {
       event.preventDefault();
   
       const config = {
-        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
         };
-        const bodyParameters = {
-          title: titleData.title,
-          body: content
-        };
-        axios.put(`/api/pages/`+`${params.id}`,
+
+          const bodyParameters = new FormData();
+          bodyParameters.set('name', titleData);
+          bodyParameters.set('content' , content);
+          bodyParameters.set('show_on_home',showhome);
+          bodyParameters.set('image', image.pictureFiles[0]);
+
+        axios.put(`/api/blogs/`+`${params.id}`,
           bodyParameters,
           config
         ) .then(response => toast.success("Page content updated !")  )
@@ -69,17 +87,17 @@ const [content,setContent] = useState('')
           <h5>Show on Home page</h5>
           <FormGroup className="m-checkbox-inline custom-radio-ml">
             <div className="radio radio-primary">
-              <Input id="radioinline2" type="radio" name="radio1" value="option1" defaultChecked />
+              <Input id="radioinline2" type="radio" name="radio1" onChange = {onChangehome} defaultChecked />
               <Label className="mb-0" for="radioinline1">No</Label>
             </div>
             <div className="radio radio-primary">
-              <Input id="radioinline2" type="radio" name="radio1" value="option1"  />
+              <Input id="radioinline2" type="radio" name="radio1" onChange = {onChangehome} />
               <Label className="mb-0" for="radioinline2">Yes</Label>
             </div>
           </FormGroup>
           <FormGroup>
             <Label htmlFor="exampleFormControlInput1">{"Post Name"}</Label>
-            <Input className="form-control"  type="name" />
+            <Input className="form-control" value = {titleData} onChange = {OnChangeTitle} type="name" />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="exampleFormControlInput1">{"Content"}</Label>
@@ -105,7 +123,7 @@ const [content,setContent] = useState('')
               fileSizeError=" file size is too big"
             />
           </FormGroup>
-          <Button color="success" className="m-t-20">{"Save"}</Button>
+          <Button color="success" onClick = {handleSubmit} className="m-t-20">{"Save"}</Button>
         </CardBody>
         </Card>
       </Container>
