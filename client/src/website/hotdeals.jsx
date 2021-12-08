@@ -26,9 +26,6 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
                 <CardBody>
                   
                   <Row>
@@ -46,14 +43,6 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
@@ -71,9 +60,6 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
                 <CardBody>
                   
                   <Row>
@@ -91,14 +77,6 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
@@ -119,9 +97,6 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
                 <CardBody>
                   
                   <Row>
@@ -139,14 +114,6 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
@@ -166,9 +133,6 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
                 <CardBody>
                   
                   <Row>
@@ -186,14 +150,6 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
@@ -213,9 +169,6 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
                 <CardBody>
                   
                   <Row>
@@ -233,14 +186,6 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
@@ -260,9 +205,6 @@ const ratingChanged = (newRating) => {
             <div className="customcard">
               <Card
               >
-              <div className="ribbon">
-                    <p>20% off</p>
-                  </div>
                 <CardBody>
                   
                   <Row>
@@ -280,14 +222,6 @@ const ratingChanged = (newRating) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    <ReactStars
-                      count={5}
-                      onChange={ratingChanged}
-                      size={22}
-                      activeColor="#ffd700"
-                      value="3.5"
-                      
-                    />
                   </CardSubtitle>
                   </Col>
                   </Row>
