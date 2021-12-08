@@ -1,58 +1,38 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
 import './css/style.css'
-
+import axios from 'axios'
 
 const Countryflag = (props) => {
+
+const [countryData, setCountryData] = useState([]);
+
+useEffect(() => {
+    axios.get(`/api/Countries/list`)
+    .then((getData) => {
+      setCountryData(getData.data);
+    });
+}, []);
+
+console.log('countryDataq',countryData);
+
 
   return (
       <div className="countryflag">
         <Container fluid={true} className="p-0">
         <Row className="m-0">
           <Col sm="12" className="p-0">
+          
             <List type="inline">
+            {countryData.map((item , i) => (
               <ListInlineItem>
                 <a href="#">
-                  <img src={`${process.env.PUBLIC_URL}/assets/images/flag/USA.png`} 
+                  <img src={`${process.env.PUBLIC_URL}/assets/images/flag/${item.code.toUpperCase()}.png`} 
                alt="Menu-Icon"/>
-                      USA
+                      {item.code.toUpperCase()}
                 </a>
               </ListInlineItem>
-              <ListInlineItem>
-                <a href="#">
-                  <img src={`${process.env.PUBLIC_URL}/assets/images/flag/CANADA.png`} 
-               alt="Menu-Icon"/>
-                      CAN
-                </a>
-              </ListInlineItem>
-              <ListInlineItem>
-                <a href="#">
-                  <img src={`${process.env.PUBLIC_URL}/assets/images/flag/UNITED-KINGDOM.png`} 
-               alt="Menu-Icon"/>
-                      UK
-                </a>
-              </ListInlineItem>
-              <ListInlineItem>
-                <a href="#">
-                  <img src={`${process.env.PUBLIC_URL}/assets/images/flag/ITALY.png`} 
-               alt="Menu-Icon"/>
-                      ITA
-                </a>
-              </ListInlineItem>
-              <ListInlineItem>
-                <a href="#">
-                  <img src={`${process.env.PUBLIC_URL}/assets/images/flag/AUSTRALIA.png`} 
-               alt="Menu-Icon"/>
-                      AU
-                </a>
-              </ListInlineItem>
-              <ListInlineItem>
-                <a href="#">
-                  <img src={`${process.env.PUBLIC_URL}/assets/images/flag/SPAIN.png`} 
-               alt="Menu-Icon"/>
-                      ESP
-                </a>
-              </ListInlineItem>
+            ))}
             </List>
           </Col>
           </Row>
