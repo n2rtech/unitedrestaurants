@@ -175,6 +175,7 @@ console.log('Category_id' , category_id);
                   onChange={onChangeCategory}
                   // onInputChange={handleInputChange}
                   options={options}
+                  
                   placeholder="Choose categories..."
                 />
               </FormGroup>
