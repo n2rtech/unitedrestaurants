@@ -2,7 +2,7 @@ import React, { Fragment, useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button, Table } from 'reactstrap'
 import CKEditors from "react-ckeditor-component";
-import {BrowserRouter,Switch,Route,Redirect , useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import ImageUploader from 'react-images-upload';
@@ -74,8 +74,6 @@ const [showhome , setShowhome]  = useState('0');
         ) .then(response => toast.success("Page content updated !")  )
            .catch(error => console.log('Form submit error', error))
 
-           
-  
     };
 
   return (

@@ -175,7 +175,7 @@ router.delete('/:id', (req, res) => {
                 .then((blog) => {
                     if (blog) {
                         var filePath = path.resolve('./')+'/uploads/blogs/'+blog.image; 
-                        fs.unlinkSync(filePath);
+                        //fs.unlinkSync(filePath);
 
                         Blog.destroy({
                             where: {

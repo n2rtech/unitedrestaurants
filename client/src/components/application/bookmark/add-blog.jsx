@@ -8,6 +8,7 @@ import axios from 'axios'
 import ImageUploader from 'react-images-upload';
 
 const AddBlog = () => {
+const token = localStorage.getItem("token");
 const [content,setContent] = useState('');
 const [id,setId] = useState('');
 const [titleData, setTitleData] = useState('');
@@ -37,9 +38,9 @@ const [image, setimage] = useState({ pictures: [] })
       event.preventDefault();
   
       const config = {
-        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
         };
-        
+
         const bodyParameters = new FormData();
         bodyParameters.set('name', titleData);
         bodyParameters.set('content' , content);
