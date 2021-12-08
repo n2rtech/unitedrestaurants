@@ -1,24 +1,116 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import {CustomRadio,InlineCheckbox,CustomCheckbox, PrimaryState,BrandState,SuccessState,AnimatedCheckboxButtons,SquareCheckbox, Default,Disabled,Checked,RadioStates,CheckboxStates,SolidCheckbox,AnimatedRadioButtons,Option} from "../../../constant";
-import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
-import { useForm } from 'react-hook-form'
-import { useSelector, useDispatch } from 'react-redux'
+import { Table, Container, Row, Col, Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { Typeahead } from 'react-bootstrap-typeahead';
-import TypeaheadOne from './typeahead-one';
-import axios from 'axios'
-import { BasicDemo,MultipleSelections,CustomSelections,Remote } from "../../../constant";
-
+import { useParams } from "react-router-dom";
+import axios from 'axios';
+import {toast} from 'react-toastify';
 
 const EditVendor = (props) => {
 
-const multiple = false
-    const [options,setOptions] = useState([])
+const params = useParams();	
+const token = localStorage.getItem("token");
+const [options,setOptions] = useState([])
+const [name , setName] = useState();
+const [Email , setEmail] = useState();
+const [Mobile , setMobile] = useState();
+const [Address , setAddress] = useState();
+const [Country , setCountry] = useState();
+const [Featured , setFeatured] = useState('1');
+const [Hotdeals , setHotdeals] = useState('1');
+const [category_id , setCategory] = useState();
 
-    useEffect(() => {
-        axios.get(`${process.env.PUBLIC_URL}/api/typeaheadData.json`).then(res => setOptions(res.data))
-    },[])
+  useEffect(() => {
+  const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
+        };
+
+	axios.get('/api/categories/' , config).then((response) => {
+		setOptions(response.data);
+	  });
+
+  }, []);
+  console.log(options);
+
+  // useEffect(() => {
+    
+  // const config = {
+  //       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
+  //       };
+
+  // axios.get('/api/vendor/'+`${params.id}` , config).then((response) => {
+  //     setName(response.data.content);
+  //     setTitleData(response.data.name);
+  //     setShowhome(response.data.show_on_home);
+  //   });
+
+  // }, []);
+
+  const onChangeName = (event) => {
+    setName(event.target.value);
+  }
+
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+  }
+
+  const onChangeMobile = (event) => {
+    setMobile(event.target.value);
+  }
+
+  const onChangeAddress = (event) => {
+    setAddress(event.target.value);
+  }
+
+  const onChangeCountry = (event) => {
+    setCountry(event.target.value);
+  }
+
+  const onChangefeatured = (event) => {
+    setFeatured(event.target.value);
+  }
+
+  const onChangehotdeals = (event) => {
+    setHotdeals(event.target.value);
+  }
+
+  const onChangeCategory = (selectedOptions) => {
+    if(selectedOptions.length != 0) {
+      setCategory(selectedOptions[0].id);
+    } else {
+      setCategory('');
+    }
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+      
+      const bodyParameters = {
+        name: name,
+        email: Email,
+        mobile: Mobile,
+        address: Address,
+        country_id: 5,
+        category_id: category_id,
+        featured_business: Featured,
+        Hotdeals: Hotdeals,
+      };
+
+        console.log('BODY PARAMETERS',bodyParameters);
+
+      axios.put(`/api/vendors/`+`${params.id}`,
+        bodyParameters,
+        config
+      ) .then(response => toast.success("Vendor details are updated !")  )
+         .catch(error => console.log('Form submit error', error))
+
+  };
+
+console.log('Category_id' , category_id);
 
   return (
     <Fragment>
@@ -30,60 +122,56 @@ const multiple = false
               <h5>Show in Hot deals</h5>
               <FormGroup className="m-checkbox-inline custom-radio-ml">
                 <div className="radio radio-primary">
-                  <Input id="radioinline2" type="radio" name="radio1" value="option1" defaultChecked />
+                  <Input id="radioinline2" type="radio"  onChange={onChangehotdeals} value={Hotdeals} name="radio1" defaultChecked />
                   <Label className="mb-0" for="radioinline1">No</Label>
                 </div>
                 <div className="radio radio-primary">
-                  <Input id="radioinline2" type="radio" name="radio1" value="option1"  />
+                  <Input id="radioinline2" type="radio" onChange={onChangehotdeals} value={Hotdeals}  name="radio1" />
                   <Label className="mb-0" for="radioinline2">Yes</Label>
                 </div>
               </FormGroup>
               <h5 className="m-t-30">Show in Featured Business</h5>
               <FormGroup className="m-checkbox-inline custom-radio-ml">
                 <div className="radio radio-primary">
-                  <Input id="radioinline1" type="radio" name="radio2" value="option1" defaultChecked />
+                  <Input id="radioinline1" type="radio" onChange={onChangefeatured} value={Featured} name="radio2" defaultChecked />
                   <Label className="mb-0" for="radioinline1">No</Label>
                 </div>
                 <div className="radio radio-primary">
-                  <Input id="radioinline1" type="radio" name="radio2" value="option1"  />
+                  <Input id="radioinline1" type="radio" onChange={onChangefeatured} value={Featured} name="radio2" />
                   <Label className="mb-0" for="radioinline2">Yes</Label>
                 </div>
               </FormGroup>
               <div>&nbsp;</div>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput">{"Business Name"}</Label>
-                <Input className="form-control"  type="name" placeholder="Mohd Sohrab Khan" />
+                <Input className="form-control"  onChange = {onChangeName} value={name} type="name" placeholder="Mohd Sohrab Khan" />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Email"}</Label>
-                <Input className="form-control"  type="email" placeholder="sohrab@n2rtechnologies.com" />
+                <Input className="form-control" onChange = {onChangeEmail}  value={Email}  type="email" placeholder="sohrab@n2rtechnologies.com" />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Phone Number"}</Label>
-                <Input className="form-control"  type="tel" placeholder="8090895865" />
+                <Input className="form-control"  onChange = {onChangeMobile}  value={Mobile}  type="tel" placeholder="8090895865" />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
-                <Input className="form-control"  type="name" placeholder="C6, Sector 7, Noida" />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="exampleFormControlInput1">{"Country"}</Label>
-                <Input className="form-control"  type="name" placeholder="United Kingdom" />
+                <Input className="form-control"  onChange = {onChangeAddress}  value={Address} type="name" placeholder="C6, Sector 7, Noida" />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Business Listed"}</Label>
                 <Typeahead
                   id="multiple-typeahead"
                   clearButton
-                  defaultSelected={options.slice(0, 5)}
                   labelKey={"name"}
-                  multiple
+                  onChange={onChangeCategory}
+                  // onInputChange={handleInputChange}
                   options={options}
                   placeholder="Choose categories..."
                 />
               </FormGroup>
               <FormGroup>
-                <Button color="primary">{"Save"}</Button>
+                <Button color="primary" onClick = {handleSubmit}>{"Save"}</Button>
               </FormGroup>
             </Form>
           </CardBody>
