@@ -136,7 +136,7 @@ router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  let sql = "SELECT * FROM Vendors where email = '"+email+"'";
+  let sql = "SELECT * FROM vendors where email = '"+email+"'";
   DB.query(sql,(err,user)=>{
     if(err){
       return res.status(404).json({ error: "Error in sql!" });   
@@ -389,13 +389,17 @@ router.get('/country/:id', (req, res) => {
 
 // Get User by ID
 router.get('/:id', (req, res) => {
-  Vendor
+  User
   .findByPk(req.params.id)
   .then((user) => res.status(200).send(user))
   .catch((error) => {
     res.status(400).send(error);
   });
 });
+
+
+
+
 
 // Update a User
 router.put('/:id', (req, res) => {
@@ -513,7 +517,7 @@ router.get('/profile/:id', (req, res) => {
               var address = vendor.address;
               var mobile = vendor.mobile;
 
-              DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `fax`, `address`, `city`, `state`, `post_code`, `latitude`, `longitude`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+name+"', NULL, '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', NULL, '"+address+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NOW(), NOW())");
+              DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `fax`, `address`, `city`, `state`, `post_code`, `latitude`, `longitude`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+name+"', NULL, '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', NULL, '"+address+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NOW(), '')");
 
               DB.query("SELECT * FROM " + table_name +" WHERE user_id =" + vendor.id, function (err, profile) {
                 if (err) throw err;
