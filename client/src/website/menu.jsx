@@ -12,13 +12,61 @@ const [categoryData, setCategoryData] = useState([]);
 const params = useParams();
 
 useEffect(() => {
-     axios.get(`/api/categories/list`)
-  .then((result_data) => {
-    const result = result_data.data;
-    setCategoryData(result);
-  }); 
+  //    axios.get(`/api/categories/list`)
+  // .then((result_data) => {
+  //   const result = result_data.data;
+  //   setCategoryData(result);
+  // }); 
+
+  axios.get(`/api/categories/list`)
+    .then((result_data) => {
+      const result = result_data.data;
+      setCategoryData(result);
+      for (const [i, element] of result.entries()) {
+        
+        result[i].parent = [];
+        var parent = element.id;
+        if(parent){
+          axios.get("/api/categories/subcat/"+parent)
+          .then((result1) => {
+            result[i].parent = result1.data;
+            setCategoryData(result);
+            if(result1.data){
+              const subparent = result1.data;
+              for (const [j, element1] of subparent.entries()) {
+                axios.get("/api/categories/subcat/"+element1.id)
+                .then((result2) => {
+                  if(result2.data){
+                    result[i].parent[j].parent_2 = result2.data;
+                  }
+                  setCategoryData(result);
+                  if(result2.data){
+                    const subsubparent = result2.data;
+                    for (const [k, element2] of subsubparent.entries()) {
+                      axios.get("/api/categories/subcat/"+element2.id)
+                      .then((result3) => {
+                        if(result3.data){
+                          result[i].parent[j].parent_2[k].parent_3 = result3.data;
+                        }
+                        setCategoryData(result);
+                      })
+                    }
+                  }else{
+                    setCategoryData(result);
+                  }
+                })
+              }
+            }else{
+              setCategoryData(result);
+            }
+          });
+        }
+      }
+    });
 
 }, []);
+
+console.log('Menu' , categoryData);
 
   return (
       <div className="headermenu">
@@ -34,12 +82,24 @@ useEffect(() => {
                 >
 
                     {categoryData.map((item , i) => (
-                          <NavItem>
-                            <NavLink href="#">
-                            <img src={`${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`}
-                    alt="Menu-Icon"/>
-                            {item.name}
-                          </NavLink>
+                          
+                          <NavItem key={i}>
+                            <img src={`${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`} alt="Menu-Icon"/>
+                             {item.parent_id == 0 ? 
+
+                               <Dropdown title={item.name} >
+                                <Dropdown.Item>
+                                {item.name}
+                                                         
+                              </Dropdown.Item>  
+                              </Dropdown>     
+                            
+                              :
+
+                              null
+                          
+                            }
+                            
                           </NavItem>
                       ))}
                 
