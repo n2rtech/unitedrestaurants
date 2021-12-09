@@ -150,7 +150,7 @@ const categorys = multiSelections.map((user) => {
           bodyParameters.set('instagram' , instalink);
           bodyParameters.set('youtube' , youtubelink);
           var profile_id = profileData.id;
-        axios.put('/api/vendors/profile/'+`${profile_id}`,
+        axios.put('/api/vendors/profile/'+`${id}`,
           bodyParameters,
           config
         ) .then(response => toast.success("Profile updated !"))
