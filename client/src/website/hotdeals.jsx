@@ -6,7 +6,6 @@ import "react-multi-carousel/lib/styles.css";
 import './css/style.css'
 import {useParams} from 'react-router-dom'
 
-
 const Hotdeals = (props) => {
 
   const params = useParams();

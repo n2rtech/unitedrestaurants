@@ -1,56 +1,81 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Carousel from "react-multi-carousel";
 import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
 import ReactStars from "react-rating-stars-component";
 import "react-multi-carousel/lib/styles.css";
 import './css/style.css'
-
-
+import {useParams} from 'react-router-dom'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
+import ReactTimeAgo from 'react-time-ago'
+TimeAgo.addLocale(en)
 
 const Latestadditions = (props) => {
 
-const ratingChanged = (newRating) => {
-  console.log(newRating);
-};
+  const params = useParams();
+  const [latestData, setLatestData] = useState([]);
+
+  useEffect(() => {
+  
+    const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
+        };
+ 
+    fetch('/api/latest-additions?country='+`${params.id}` , config)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setLatestData(result);
+        },
+        (error) => {
+          
+        }
+        )
+  }, []);
+
+  console.log('LatestData=',latestData);
+
+const addDefaultSrc = (ev) => {
+  ev.target.src = `${process.env.PUBLIC_URL}/assets/images/foodimg1.png`;
+}
+
 
   return (
       <div className="latestadditions">
        <Container className="p-0"> 
-      <h3>latest additions</h3>
-      <div className="seeall">
+       {latestData.length ?  <h3>latest additions</h3> : '' }
+       {latestData.length > 2 ?  <div className="seeall">
         <a href="/restaurants">SEE ALL</a>
-      </div>
+      </div> : '' }
       <div style={{ position: "relative" }}>
         <Carousel responsive={responsive}>
+        {latestData.map((item , i ) => (
           <Col sm="12">
             <div className="customcard">
-              <Card
-              >
-              
-                <CardBody>
-                  
-                  <Row>
+              <Card>
+                 <CardBody>
+                   <Row>
                     <Col sm="4" xs="4">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
+                    <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
                      alt="Menu-Icon"/>
                    </Col>
                    <Col sm="8" xs="8">
                   <CardTitle tag="h5">
                     <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
-                    Restaurant Name
+                    {item.business_name}
                   </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    Joined Just 2 min ago
+                    Joined <ReactTimeAgo date={item.createdAt} locale="en-US"/>
                   </CardSubtitle>
                   </Col>
                   </Row>
                   
                   <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.id}`}>
                     VIEW
                   </a>
                   </Button>
@@ -58,186 +83,7 @@ const ratingChanged = (newRating) => {
               </Card>
             </div>
           </Col>
-          <Col sm="12">
-            <div className="customcard">
-              <Card
-              >
-              
-                <CardBody>
-                  
-                  <Row>
-                    <Col sm="4" xs="4">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
-                     alt="Menu-Icon"/>
-                   </Col>
-                   <Col sm="8" xs="8">
-                  <CardTitle tag="h5">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
-                    Restaurant Name
-                  </a>
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  >
-                    Joined Just 2 min ago
-                  </CardSubtitle>
-                  </Col>
-                  </Row>
-                  
-                  <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
-                    VIEW
-                  </a>
-                  </Button>
-                </CardBody>
-              </Card>
-            </div>
-          </Col>
-          <Col sm="12">
-            <div className="customcard">
-              <Card
-              >
-              
-                <CardBody>
-                  
-                  <Row>
-                    <Col sm="4" xs="4">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
-                     alt="Menu-Icon"/>
-                   </Col>
-                   <Col sm="8" xs="8">
-                  <CardTitle tag="h5">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
-                    Restaurant Name
-                  </a>
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  >
-                    Joined Just 2 min ago
-                  </CardSubtitle>
-                  </Col>
-                  </Row>
-                  
-                  <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
-                    VIEW
-                  </a>
-                  </Button>
-                </CardBody>
-              </Card>
-            </div>
-          </Col>
-          <Col sm="12">
-            <div className="customcard">
-              <Card
-              >
-              
-                <CardBody>
-                  
-                  <Row>
-                    <Col sm="4" xs="4">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
-                     alt="Menu-Icon"/>
-                   </Col>
-                   <Col sm="8" xs="8">
-                  <CardTitle tag="h5">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
-                    Restaurant Name
-                  </a>
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  >
-                    Joined Just 2 min ago
-                  </CardSubtitle>
-                  </Col>
-                  </Row>
-                  
-                  <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
-                    VIEW
-                  </a>
-                  </Button>
-                </CardBody>
-              </Card>
-            </div>
-          </Col>
-          <Col sm="12">
-            <div className="customcard">
-              <Card
-              >
-              
-                <CardBody>
-                  
-                  <Row>
-                    <Col sm="4" xs="4">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
-                     alt="Menu-Icon"/>
-                   </Col>
-                   <Col sm="8" xs="8">
-                  <CardTitle tag="h5">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
-                    Restaurant Name
-                  </a>
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  >
-                    Joined Just 2 min ago
-                  </CardSubtitle>
-                  </Col>
-                  </Row>
-                  
-                  <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
-                    VIEW
-                  </a>
-                  </Button>
-                </CardBody>
-              </Card>
-            </div>
-          </Col>
-          <Col sm="12">
-            <div className="customcard">
-              <Card
-              >
-              
-                <CardBody>
-                  
-                  <Row>
-                    <Col sm="4" xs="4">
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
-                     alt="Menu-Icon"/>
-                   </Col>
-                   <Col sm="8" xs="8">
-                  <CardTitle tag="h5">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
-                    Restaurant Name
-                  </a>
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  >
-                    Joined Just 2 min ago
-                  </CardSubtitle>
-                  </Col>
-                  </Row>
-                  
-                  <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details`}>
-                    VIEW
-                  </a>
-                  </Button>
-                </CardBody>
-              </Card>
-            </div>
-          </Col>
+        ))}
         </Carousel>
       </div>
     </Container>

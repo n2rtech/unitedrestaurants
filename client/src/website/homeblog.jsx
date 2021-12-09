@@ -31,12 +31,6 @@ const Homeblog = () => {
       )
   }, []);
 
-console.log('Blogs' , blogData);
-
-  const ratingChanged = (newRating) => {
-    console.log(newRating);
-  };
-
   const addDefaultSrc = (ev) => {
     ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/user.png`;
   }
