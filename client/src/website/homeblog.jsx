@@ -31,12 +31,15 @@ const Homeblog = () => {
       )
   }, []);
 
-  console.log(blogData);
-
+console.log('Blogs' , blogData);
 
   const ratingChanged = (newRating) => {
     console.log(newRating);
   };
+
+  const addDefaultSrc = (ev) => {
+    ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/user.png`;
+  }
 
   return (
       <div className="homeblog">
@@ -56,7 +59,7 @@ const Homeblog = () => {
                 <CardBody>
                   <Row>
                     <Col sm="3" xs="12">
-                    <img src={`${process.env.PUBLIC_URL}/blogs/${blog.image}`} 
+                    <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/blogs/${blog.image}`} 
                      alt="Menu-Icon" className="img-fluid" />
                    </Col>
                    <Col sm="9" xs="12">
