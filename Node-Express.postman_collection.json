@@ -40,6 +40,182 @@
 			"response": []
 		},
 		{
+			"name": "Get Hot Deals",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/hot-deals?country=uk&category=3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"hot-deals"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "uk"
+						},
+						{
+							"key": "category",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Latest Additions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/hot-deals?country=uk&category=3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"hot-deals"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "uk"
+						},
+						{
+							"key": "category",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Feachered products",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/featured-businesses?country=uk&category=3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"featured-businesses"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "uk"
+						},
+						{
+							"key": "category",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Latest Additions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/latest-additions?country=uk&category=3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"latest-additions"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "uk"
+						},
+						{
+							"key": "category",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Users List",
 			"request": {
 				"method": "GET",
@@ -494,6 +670,182 @@
 						"vendors",
 						"profile",
 						"26"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor update Profile",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hMTQzQGdtYWlsLmNvbSIsInJvbGUiOiJ2ZW5kb3IiLCJpYXQiOjE2Mzg4ODI3NDQsImV4cCI6MTY3MDQzOTY3MH0.0BOagU7WTkTSNSYBBpN1mMHU9MA2Th30JvKqBkQu2_4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "business_name",
+							"value": "Oscar",
+							"type": "text"
+						},
+						{
+							"key": "about_business",
+							"value": "laxman Mishra",
+							"type": "text"
+						},
+						{
+							"key": "business_email",
+							"value": "wybaru@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "manager_name",
+							"value": "Oscar",
+							"type": "text"
+						},
+						{
+							"key": "manager_email",
+							"value": "wybaru@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "owner_name",
+							"value": "Oscar",
+							"type": "text"
+						},
+						{
+							"key": "owner_email",
+							"value": "wybaru@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "8188888888888",
+							"type": "text"
+						},
+						{
+							"key": "mobile",
+							"value": "816666666",
+							"type": "text"
+						},
+						{
+							"key": "fax",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "In harum minima amet",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "post_code",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "latitude",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "longitude",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "categories",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "banner",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "website_link",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "facebook",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "instagram",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "youtube",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "gallery",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "video",
+							"value": "null",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "banner",
+							"type": "file",
+							"src": "/C:/Users/laxman/Desktop/RQrHvtwMlwMcMwcckahmQdEY5ZfDsKrW.jpg"
+						},
+						{
+							"key": "categories",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/profile/23",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"profile",
+						"23"
 					]
 				}
 			},
@@ -2234,6 +2586,41 @@
 					"path": [
 						"api",
 						"profile",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor get by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3NzQxMjY5LCJleHAiOjE2NjkyOTgxOTV9.HA8Hpt2mqggxYas9PV9RX65azDYQ2NiYTMglNJ-6fsc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
 						"2"
 					]
 				}
@@ -4429,6 +4816,50 @@
 						"api",
 						"profile",
 						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Latest Adds",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/business-advertises?country=uk&category=3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"business-advertises"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "uk"
+						},
+						{
+							"key": "category",
+							"value": "3"
+						}
 					]
 				}
 			},

@@ -209,6 +209,18 @@ router.get("/list", (req, res) => {
   })
     .then((category) => {
 
+        /* Object.entries(category).forEach(([key, value]) => {
+        Object.assign(category[key], {sub: 'kkkkkkkk'});
+        console.log('inloop',category[key].sub);
+        {where:
+    {parent_id: 0},
+    include: [{
+        model: Category,
+                as: 'sub_category'
+    }]
+}*/
+
+
         res.status(200).send(category)
     })
     .catch((error) => {

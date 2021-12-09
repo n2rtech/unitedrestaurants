@@ -1,4 +1,5 @@
 const express = require("express");
+const db = require('./models');
 const app = express();
 const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
@@ -25,6 +26,10 @@ const vendormembership = require("./routes/vendormembership");
 const coupons = require("./routes/coupons");
 const pages = require("./routes/pages");
 const sitesetting = require("./routes/sitesetting");
+const hotdeals = require("./routes/hotdeals");
+const latestadditions = require("./routes/latestadditions");
+const businessadvertises = require("./routes/businessadvertises");
+const featuredbusinesses = require("./routes/featuredbusinesses");
 const accountspayables = require("./routes/accountspayables");
 
 // Bodyparser middleware
@@ -34,7 +39,6 @@ app.use(
     extended: true
   })
 );
-
 
 app.use(express.static(__dirname + '/gallery'));
 app.use(express.static(__dirname + '/images'));
@@ -77,6 +81,10 @@ app.use("/api/membership", membership);
 app.use("/api/coupons", coupons);
 app.use("/api/pages", pages);
 app.use("/api/site-settings", sitesetting);
+app.use("/api/hot-deals", hotdeals);
+app.use("/api/latest-additions", latestadditions);
+app.use("/api/business-advertises", businessadvertises);
+app.use("/api/featured-businesses", featuredbusinesses);
 app.use("/api/accounts-payable", accountspayables);
 
 const port = process.env.PORT || 5000;

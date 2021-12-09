@@ -11,6 +11,7 @@ const db = require('../../models');
 const Vendor = require('../../models').Vendor;
 const HotDeal = require('../../models').HotDeal;
 const FeaturedBusiness = require('../../models').FeaturedBusiness;
+const BusinessAdvertise = require('../../models').BusinessAdvertise;
 const Role = require('../../models').Role;
 const Category = require('../../models').Category;
 const Country = require('../../models').Country;
@@ -445,6 +446,7 @@ router.put('/:id', (req, res) => {
                 var banner = vendor_pro[0].banner;
 
                 DB.query("DELETE  FROM hotdeals where user_id="+user_id);
+                DB.query("DELETE  FROM businessadvertises where user_id="+user_id);
                 DB.query("DELETE  FROM featuredbusinesses where user_id="+user_id);
                 if (req.body.hot_deals) {
                   DB.query("INSERT INTO hotdeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
@@ -452,6 +454,10 @@ router.put('/:id', (req, res) => {
 
                 if (req.body.featured_business){
                   DB.query("INSERT INTO featuredbusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                }
+
+                if (req.body.hot_deals || req.body.featured_business) {
+                  DB.query("INSERT INTO businessadvertises (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
                 }
 
                 res.status(200).send({
@@ -624,9 +630,22 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
               user_id: profile.id
             }
           }).then((dddd) => {
+            BusinessAdvertise.update({
+              business_name : req.body.business_name || profile.business_name,
+              about_business : req.body.about_business || profile.about_business,
+              categories: categories,
+              banner:image,
+              country_id : profile.country_id,
+              country : code,
+              }, {
+            where: {
+              user_id: profile.id
+            }
+          }).then((dddd) => {
             res.status(200).send({
               'message': 'Profile updated'
             });
+          }); 
           }); 
           }); 
 
