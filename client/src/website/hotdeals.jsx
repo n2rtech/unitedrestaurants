@@ -33,10 +33,6 @@ const Hotdeals = (props) => {
 
   console.log('HotdealsData=',hotData);
 
-const ratingChanged = (newRating) => {
-  console.log(newRating);
-};
-
 const addDefaultSrc = (ev) => {
   ev.target.src = `${process.env.PUBLIC_URL}/assets/images/foodimg1.png`;
 }
@@ -45,7 +41,7 @@ const addDefaultSrc = (ev) => {
       <div className="hotdeals">
        <Container className="p-0"> 
        {hotData.length ? <h1>hot deals you can't miss</h1> : '' }
-       {hotData.length ? <div className="seeall">
+       {hotData.length  > 6 ? <div className="seeall">
         <a href="/restaurants">SEE ALL</a>
       </div> : '' }
        
