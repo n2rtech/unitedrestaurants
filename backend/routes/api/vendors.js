@@ -429,8 +429,8 @@ router.put('/:id', (req, res) => {
         }
       }).then(_ => {
 
-
-        DB.query('SELECT code,name FROM countries WHERE id ="' + user.country_id +'"', function (err, country) {
+        var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
+        DB.query('SELECT code,name FROM '+table_name+' WHERE id ="' + user.country_id +'"', function (err, country) {
           if (err) throw err;
           if (country[0]) {
             var code = country[0].code;
@@ -501,8 +501,8 @@ router.get('/profile/:id', (req, res) => {
   .findByPk(req.params.id)
   .then((vendor) => {
     if (vendor) {
-
-      DB.query('SELECT code FROM countries WHERE id ="' + vendor.country_id +'"', function (err, country) {
+      var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
+      DB.query('SELECT code FROM '+table_name+' WHERE id ="' + vendor.country_id +'"', function (err, country) {
         if (err) throw err;
         if (country[0]) {
           var code = country[0].code;
@@ -570,8 +570,8 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
         var image = profile.banner;
       }
 
-
-      DB.query('SELECT code FROM countries WHERE id ="' + profile.country_id +'"', function (err, country) {
+      var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
+      DB.query('SELECT code FROM '+table_name+' WHERE id ="' + profile.country_id +'"', function (err, country) {
         if (err) throw err;
         if (country[0]) {
           var code = country[0].code;
