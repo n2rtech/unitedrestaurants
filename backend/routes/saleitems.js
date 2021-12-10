@@ -73,7 +73,22 @@ router.get('/:id', (req, res) => {
             where:{
            user_id : req.params.id
         }})
-        .then((saleitem) => res.status(200).send(saleitem))
+        .then((saleitem) => {
+            if (saleitem == null) {
+                SaleItem
+                .create({
+                    name: '',
+                    user_id: req.params.id,
+                    content: ''
+                })
+                .then((saleitem) => res.status(201).send(saleitem))
+                .catch((error) => {
+                    res.status(400).send(error);
+                });
+            }else{
+               res.status(201).send(saleitem); 
+            }
+        })
         .catch((error) => {
             res.status(400).send(error);
         });

@@ -75,7 +75,22 @@ router.get('/:id', (req, res) => {
             where:{
            user_id : req.params.id
         }})
-        .then((menuitem) => res.status(200).send(menuitem))
+        .then((menuitem) => {
+            if (menuitem == null) {
+                MenuItem
+                .create({
+                    name: '',
+                    user_id: req.params.id,
+                    content: ''
+                })
+                .then((menuitem) => res.status(201).send(menuitem))
+                .catch((error) => {
+                    res.status(400).send(error);
+                });
+            }else{
+               res.status(201).send(menuitem); 
+            }
+        })
         .catch((error) => {
             res.status(400).send(error);
         });

@@ -670,15 +670,15 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
 
 // Get Profile by ID
 router.get('/:id', (req, res) => {
-    Vendor
-    .findOne({ where:{
-        id: req.params.id
-    }
+  Vendor
+  .findOne({ where:{
+    id: req.params.id
+  }
 })
-    .then((profile2) => res.status(200).send(profile1))
-    .catch((error) => {
-        res.status(400).send(error);
-    });
+  .then((vendor) => res.status(200).send(vendor))
+  .catch((error) => {
+    res.status(400).send(error);
+  });
 });
 
 
