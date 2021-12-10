@@ -9,10 +9,13 @@ import Gallery from '../gallery.jsx';
 import {IMAGE_GALLERY} from "../../constant";
 import axios from 'axios'
 import '../css/style.css'
+import {useParams} from 'react-router-dom'
 
 const Detailpage = (props) => {
+    const params = useParams();
 
-    var id = 29;
+    const id = `${params.id}`;
+    console.log('Id' , id);
 
 		const [images,setImage] = useState([]) 
         const [smallImages,setsmallImages] = useState([])
@@ -38,7 +41,7 @@ const Detailpage = (props) => {
 
         useEffect(() => {
 
-            axios.get(`/api/gallery/list/29`)
+            axios.get(`/api/gallery/list/${id}`)
             .then((getData) => {
               setGalleryData(getData.data);
 
@@ -58,33 +61,33 @@ const Detailpage = (props) => {
         });
 
 
-            axios.get(`/api/video-gallery/list/29`)
+            axios.get(`/api/video-gallery/list/${id}`)
                 .then((result_data) => {
                   const result = result_data.data;
                   setVideoGalleryData(result);
             });
 
-            axios.get(`/api/menu-items/29`)
+            axios.get(`/api/menu-items/${id}`)
                 .then((result_data) => {
                   setMenuItemsData(result_data.data);
             });
 
-            axios.get(`/api/sale-items/29`)
+            axios.get(`/api/sale-items/${id}`)
                 .then((result_data) => {
                   setSaleItemsData(result_data.data);
             });
 
-            axios.get(`/api/jobs/list/29`)
+            axios.get(`/api/jobs/list/${id}`)
                 .then((result_data) => {
                   setJobsData(result_data.data);
             });
 
-            axios.get(`/api/vendors/profile/29`)
+            axios.get(`/api/vendors/profile/${id}`)
                 .then((result_data) => {
                   setVendorProfileData(result_data.data);
             });
 
-            axios.get(`/api/vendor-coupons/list/29`)
+            axios.get(`/api/vendor-coupons/list/${id}`)
                 .then((result_data) => {
                   setVendorProfileData(result_data.data);
             });
