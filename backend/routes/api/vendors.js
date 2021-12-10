@@ -501,8 +501,8 @@ router.get('/profile/:id', (req, res) => {
   .findByPk(req.params.id)
   .then((vendor) => {
     if (vendor) {
-      var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
-      DB.query('SELECT code FROM '+table_name+' WHERE id ="' + vendor.country_id +'"', function (err, country) {
+      var tables_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
+      DB.query('SELECT code FROM '+tables_name+' WHERE id ="' + vendor.country_id +'"', function (err, country) {
         if (err) throw err;
         if (country[0]) {
           var code = country[0].code;
@@ -570,8 +570,8 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
         var image = profile.banner;
       }
 
-      var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
-      DB.query('SELECT code FROM '+table_name+' WHERE id ="' + profile.country_id +'"', function (err, country) {
+      var tables_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
+      DB.query('SELECT code FROM '+tables_name+' WHERE id ="' + profile.country_id +'"', function (err, country) {
         if (err) throw err;
         if (country[0]) {
           var code = country[0].code;
@@ -580,7 +580,7 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
             var table_name = 'VendorItas';
           }else{
             var codee = code.charAt(0).toUpperCase() + code.slice(1);
-            var table_name = 'Vendor' + codee + 's';
+            var table_name = 'Vendor' + codee ;
           }
 
           if (req.body.categories) {
@@ -588,6 +588,8 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
           }else{
             var categories = profile.categories;
           }
+
+          console.log('Table Name' , table_name);
 
           app.db(table_name)
           .update({
@@ -597,17 +599,17 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
             about_business: req.body.about_business || profile.about_business,
             manager_email: req.body.manager_email || profile.manager_email,
             phone: req.body.phone || profile.phone,
-            mobile: req.body.mobile || profile.mobile,
+            // mobile: req.body.mobile || profile.mobile,
             fax: req.body.fax || profile.fax,
             banner: image,
             address: req.body.address || profile.address,
             categories: categories,
             website_link: req.body.website_link || profile.website_link,
-            media_links: req.body.media_links || profile.media_links,
+            //media_links: req.body.media_links || profile.media_links,
             facebook: req.body.facebook || profile.facebook,
             instagram: req.body.instagram || profile.instagram,
             youtube: req.body.youtube || profile.youtube,
-            status: req.body.status || profile.status
+            // status: req.body.status || profile.status
           }, {
             where: {
               user_id: profile.id

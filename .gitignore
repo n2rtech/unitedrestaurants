@@ -11,3 +11,4 @@ backend/config/database.js
 client/package-lock.json
 client/package.json
 backend/package.json
+backend/uploads
