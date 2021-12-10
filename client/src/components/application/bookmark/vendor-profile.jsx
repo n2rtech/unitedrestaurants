@@ -164,7 +164,7 @@ const categorys = multiSelections.map((user) => {
           bodyParameters.set('business_email' , email);
           bodyParameters.set('manager_name',managername);
           bodyParameters.set('manager_email' , manageremail);
-          bodyParameters.set('phone_number', phone);
+          bodyParameters.set('phone', phone);
           bodyParameters.set('fax', fax);
           console.log('Image', image);
           console.log('Image Length', image.pictureFiles.length);
