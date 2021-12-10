@@ -16,8 +16,8 @@ const [Email , setEmail] = useState();
 const [Mobile , setMobile] = useState();
 const [Address , setAddress] = useState();
 const [Country , setCountry] = useState();
-const [Featured , setFeatured] = useState('1');
-const [Hotdeals , setHotdeals] = useState('1');
+const [Featured , setFeatured] = useState('');
+const [Hotdeals , setHotdeals] = useState('');
 const [category_id , setCategory] = useState();
 
   useEffect(() => {
@@ -84,6 +84,8 @@ const [category_id , setCategory] = useState();
       setAddress(response.data.address);
       setCountry(response.data.country_id);
       setCategory(response.data.category_id);
+      setFeatured(response.data.featured_business)
+      setHotdeals(response.data.hot_deal)
     });
 
   }, []);
@@ -105,7 +107,7 @@ const [category_id , setCategory] = useState();
         country_id: 5,
         category_id: category_id,
         featured_business: Featured,
-        Hotdeals: Hotdeals,
+        hot_deals: Hotdeals,
       };
 
         console.log('BODY PARAMETERS',bodyParameters);
@@ -129,25 +131,62 @@ console.log('Category_id' , category_id);
             <Form className="form theme-form">
               <h5>Show in Hot deals</h5>
               <FormGroup className="m-checkbox-inline custom-radio-ml">
+              { (Hotdeals == 0) ?
+              <div>
                 <div className="radio radio-primary">
-                  <Input id="no-deals" type="radio"  onChange={onChangehotdeals} value={Hotdeals} name="radio1" defaultChecked />
+                  <Input id="no-deals" type="radio"  onChange={onChangehotdeals} value="0" name="radio1" defaultChecked />
                   <Label className="mb-0" for="no-deals">No</Label>
                 </div>
                 <div className="radio radio-primary">
-                  <Input id="yes-deals" type="radio" onChange={onChangehotdeals} value={Hotdeals}  name="radio1" />
+                  <Input id="yes-deals" type="radio" onChange={onChangehotdeals} value="1"  name="radio1" />
                   <Label className="mb-0" for="yes-deals">Yes</Label>
                 </div>
+              </div>
+                : 
+                <div>
+                <div className="radio radio-primary">
+                  <Input id="no-deals" type="radio"  onChange={onChangehotdeals} value="0" name="radio1" />
+                  <Label className="mb-0" for="no-deals">No</Label>
+                </div>
+                <div className="radio radio-primary">
+                  <Input id="yes-deals" type="radio" onChange={onChangehotdeals} value="1"  name="radio1" defaultChecked/>
+                  <Label className="mb-0" for="yes-deals">Yes</Label>
+                </div>
+                </div>
+                
+                }
               </FormGroup>
               <h5 className="m-t-30">Show in Featured Business</h5>
               <FormGroup className="m-checkbox-inline custom-radio-ml">
+              { (Featured == 0) ? 
+              
+              <div>
                 <div className="radio radio-primary">
-                  <Input id="no-featured" type="radio" onChange={onChangefeatured} value={Featured} name="radio2" defaultChecked />
+                  <Input id="no-featured" type="radio" onChange={onChangefeatured} value="0" name="radio2" defaultChecked/>
                   <Label className="mb-0" for="no-featured">No</Label>
                 </div>
+
                 <div className="radio radio-primary">
-                  <Input id="yes-featured" type="radio" onChange={onChangefeatured} value={Featured} name="radio2" />
-                  <Label className="mb-0" for="yes-featured">Yes</Label>
+                <Input id="yes-featured" type="radio" onChange={onChangefeatured} value="1" name="radio2" />
+                <Label className="mb-0" for="yes-featured">Yes</Label>
                 </div>
+                </div>
+              
+              :  
+              
+              <div>
+                <div className="radio radio-primary">
+                  <Input id="no-featured" type="radio" onChange={onChangefeatured} value="0" name="radio2" />
+                  <Label className="mb-0" for="no-featured">No</Label>
+                </div>
+                  <div className="radio radio-primary">
+                  <Input id="yes-featured" type="radio" onChange={onChangefeatured} value="1" name="radio2" defaultChecked/>
+                  <Label className="mb-0" for="yes-featured">Yes</Label>
+                  </div>
+                 </div> 
+              }
+                
+               
               </FormGroup>
               <div>&nbsp;</div>
               <FormGroup>

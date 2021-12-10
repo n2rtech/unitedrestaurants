@@ -172,8 +172,7 @@ const categorys = multiSelections.map((user) => {
             bodyParameters.set('banner', image.pictureFiles[0]);
           } else {
             bodyParameters.set('banner', image.pictureFiles);
-          }
-          
+          } 
           bodyParameters.set('address', address);
           bodyParameters.set('about_business', aboutbusiness);
           bodyParameters.set('categories', categories_arr);
@@ -274,6 +273,7 @@ const categorys = multiSelections.map((user) => {
             </FormGroup>
             <FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Business banner"}</Label>
+             
               <ImageUploader
                 withIcon={false}
                 withPreview={true}
