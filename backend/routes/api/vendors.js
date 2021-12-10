@@ -504,9 +504,10 @@ router.get('/profile/:id', (req, res) => {
           var code = country[0].code;
 
           if (code == 'ita') {
-            var table_name = 'vendorita';
+            var table_name = 'VendorItas';
           }else{
-            var table_name = 'vendor' + code +'s';
+            var codee = code.charAt(0).toUpperCase() + code.slice(1);
+            var table_name = 'Vendor' + codee + 's';
           }
 
           DB.query("SELECT * FROM " + table_name +" WHERE user_id =" + vendor.id, function (err, profile) {
