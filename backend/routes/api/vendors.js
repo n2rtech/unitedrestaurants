@@ -60,8 +60,8 @@ router.post("/register", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
-  DB.query('SELECT email FROM vendors WHERE email ="' + req.body.email +'"', function (err, user) {
+  var table_name  = 'vendors'.charAt(0).toUpperCase() + 'vendors'.slice(1);
+  DB.query('SELECT email FROM '+table_name+' WHERE email ="' + req.body.email +'"', function (err, user) {
     if (err) throw err;
     if (user[0]) {
       return res.status(400).json({ error: "Email already exists" });
@@ -82,16 +82,17 @@ router.post("/register", (req, res) => {
           })
           .then((user) => {
 
-
-            DB.query('SELECT code FROM countries WHERE id ="' + req.body.country_id +'"', function (err, country) {
+            var table_name  = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
+            DB.query('SELECT code FROM '+table_name+' WHERE id ="' + req.body.country_id +'"', function (err, country) {
               if (err) throw err;
               if (country[0]) {
                 var code = country[0].code;
 
                 if (code == 'ita') {
-                  var table_name = 'vendorita';
+                  var table_name = 'VendorIta';
                 }else{
-                  var table_name = 'vendor' + code +'s';
+                  var codee = code.charAt(0).toUpperCase() + code.slice(1);
+                  var table_name = 'Vendor' + codee + 's';
                 }
 
                 var user_id = user.id;
@@ -113,7 +114,9 @@ router.post("/register", (req, res) => {
                 })
               }
             });
-          });               
+          }).catch((error) => {
+            res.status(400).send(error);
+          });              
         });     
       });
     }
@@ -131,8 +134,8 @@ router.post("/login", (req, res) => {
 
   const email = req.body.email;
   const password = req.body.password;
-
-  let sql = "SELECT * FROM vendors where email = '"+email+"'";
+  var table_name  = 'vendors'.charAt(0).toUpperCase() + 'vendors'.slice(1);
+  let sql = "SELECT * FROM "+table_name+" where email = '"+email+"'";
   DB.query(sql,(err,user)=>{
     if(err){
       return res.status(404).json({ error: "Error in sql!" });   
@@ -434,9 +437,10 @@ router.put('/:id', (req, res) => {
             var country = country[0].code;
 
             if (code == 'ita') {
-              var table_name = vendorita;
+              var table_name = 'VendorIta';
             }else{
-              var table_name = 'vendor' + code +'s';
+              var codee = code.charAt(0).toUpperCase() + code.slice(1);
+              var table_name = 'Vendor' + codee + 's';
             }
 
             DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + user.id +'"', function (err, vendor_pro) {
