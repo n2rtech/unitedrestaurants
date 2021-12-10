@@ -93,19 +93,12 @@ const VendorProfile = (props) => {
           const config = {
       headers: {'Authorization': 'JWT '+token }
     };
-        const result = await axios('/api/vendors/profile/'+`${id}`,config);
+        const result = await axios('/api/vendors/'+`${id}`,config);
         setProfileData(result.data);
-        setName(result.data.business_name)
-        setEmail(result.data.business_email)
-        setManagerName(result.data.manager_name)
-        setManagerEmail(result.data.manager_email)
-        setPhone(result.data.phone_number)
-        setFax(result.data.fax)
+        setName(result.data.name)
+        setEmail(result.data.email)
+        setPhone(result.data.mobile)
         setAddress(result.data.address)
-        setWebsitelink(result.data.website_link)
-        setFblink(result.data.facebook)
-        setInstalink(result.data.instagram)
-        setYoutubelink(result.data.youtube)
       };
       GetData();
     }, []);
