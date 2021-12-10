@@ -73,7 +73,7 @@ const Featured = (props) => {
                   {item.about_business}
                   </CardText>
                   <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.id}`}>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
                     SEE SALE
                   </a>
                   </Button>

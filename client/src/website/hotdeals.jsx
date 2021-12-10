@@ -74,7 +74,7 @@ const addDefaultSrc = (ev) => {
                   {item.about_business}
                   </CardText>
                   <Button>
-                   <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.id}`}> SEE SALE</a>
+                   <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}> SEE SALE</a>
                   </Button>
                 </CardBody>
               </Card>
