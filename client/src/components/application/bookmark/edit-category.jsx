@@ -96,9 +96,9 @@ const [catData, setCatData] = useState([]);
             </FormGroup>
 
             <FormGroup>
-            <Label htmlFor="exampleFormControlSelect9">{ExampleSelect}</Label>
+            <Label htmlFor="exampleFormControlSelect9">Parent category(if any?)</Label>
             <Input type="select" name="select" onChange={handleParentChange} className="form-control digits" value={parentCat} defaultValue={parentCat}>
-            <option value="">{"Please select parent category"}</option>
+            <option value="">{"Select, if you want to make as a subcategory"}</option>
             {parentCat}
             {catData.map((country , i ) => (
                 <Fragment key={i}>

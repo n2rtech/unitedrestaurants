@@ -213,7 +213,7 @@ const Register = (props) => {
                     <Label className="col-form-label pt-0">{BusinessName}</Label>
                     <div className="form-row">
                       <Col xs="12">
-                        <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="name"/>
+                        <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="Tumble Weed Bar"/>
                         <div style={{color:'red'}}>{errors.first_name}</div>
                       </Col>                      
                     </div>
@@ -235,13 +235,13 @@ const Register = (props) => {
                   
                     <FormGroup>
                     <Label className="col-form-label">{BusinessEmailAddress}</Label>
-                    <Input className="form-control" name="email" value={email} onChange={handleChange} type="email" required="" placeholder="Test@gmail.com"/>
+                    <Input className="form-control" name="email" value={email} onChange={handleChange} type="email" required="" placeholder="johndoe@gmail.com"/>
                     <div style={{color:'red'}}>{errors.email}</div>
                   </FormGroup>
 
                   <FormGroup>
                     <Label className="col-form-label">Business Mobile Number</Label>
-                    <Input className="form-control" name="mobile" value={mobile} onChange={handleChange} type="number" required="" placeholder="0123 456"/>
+                    <Input className="form-control" name="mobile" value={mobile} onChange={handleChange} type="number" required="" placeholder="987 889 779"/>
                     <div style={{color:'red'}}>{errors.mobile}</div>
                   </FormGroup>
 

@@ -1179,6 +1179,16 @@ table th, table td{
 .opacity0{
     opacity: 0;
 }
+.login-card .login-main .theme-form input{
+    background: #fff !important;
+}
+input::placeholder, textarea::placeholder{
+    color: #eee !important;
+    font-weight: normal !important;
+}
+.form-control{
+    font-size: 14px !important;
+}
 /**********detailpage-end*********/
 @media (max-width: 767px){
 .togglebtn h1 {
