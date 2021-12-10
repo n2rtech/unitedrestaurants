@@ -12,10 +12,21 @@ import '../css/style.css'
 
 const Detailpage = (props) => {
 
+    var id = 29;
+
 		const [images,setImage] = useState([]) 
         const [smallImages,setsmallImages] = useState([])
         const initilindex = {index:0,isOpen:false}
         const[photoIndex,setPhotoIndex] = useState(initilindex)
+
+        const[galleryData,setGalleryData] = useState([])
+        const[videoGalleryData,setVideoGalleryData] = useState([])
+        const[menuItemsData,setMenuItemsData] = useState({})
+        const[saleItemsData,setSaleItemsData] = useState({})
+        const[jobsData,setJobsData] = useState([])
+        const[couponsData,setCouponsData] = useState([])
+        const[vendorProfileData,setVendorProfileData] = useState({})
+
         const onMovePrev = () => {
            const prev = (photoIndex.index + images.length - 1) % images.length
            setPhotoIndex({...photoIndex,index:prev})
@@ -27,18 +38,59 @@ const Detailpage = (props) => {
 
         useEffect(() => {
 
-            axios.get(`${process.env.PUBLIC_URL}/api/image-light.json`).then((response) => {
-                setImage(response.data.src);
-            })
+            axios.get(`/api/gallery/list/29`)
+            .then((getData) => {
+              setGalleryData(getData.data);
 
-            axios.get(`${process.env.PUBLIC_URL}/api/image-big-light.json`).then((response) => {
-                setsmallImages(response.data.src);
-            })
+              const result = getData.data;
+              for (const [i, element] of result.entries()) 
+              {
+                setImage((images) => [
+                    ...images,
+                    element.image,
+                    ]);
+
+                setsmallImages((smallImages) => [
+                    ...smallImages,
+                    element.image,
+                    ]);
+            }                  
+        });
+
+
+            axios.get(`/api/video-gallery/list/29`)
+                .then((result_data) => {
+                  const result = result_data.data;
+                  setVideoGalleryData(result);
+            });
+
+            axios.get(`/api/menu-items/29`)
+                .then((result_data) => {
+                  setMenuItemsData(result_data.data);
+            });
+
+            axios.get(`/api/sale-items/29`)
+                .then((result_data) => {
+                  setSaleItemsData(result_data.data);
+            });
+
+            axios.get(`/api/jobs/list/29`)
+                .then((result_data) => {
+                  setJobsData(result_data.data);
+            });
+
+            axios.get(`/api/vendors/profile/29`)
+                .then((result_data) => {
+                  setVendorProfileData(result_data.data);
+            });
+
+            axios.get(`/api/vendor-coupons/list/29`)
+                .then((result_data) => {
+                  setVendorProfileData(result_data.data);
+            });
+
 
         },[])
-
-
-		
 
   return (
     <div className="detailpage">             
@@ -46,16 +98,16 @@ const Detailpage = (props) => {
       <Row className="m-0">
         <Col sm="12" xs="12">
         	<div className="resturentcontact">
-        		<h1>Tumbleweed Bar</h1>
+        		<h1>{vendorProfileData.business_name}</h1>
         		<div className="contact-group">
 	            <img src={`${process.env.PUBLIC_URL}/assets/images/icons/location_map.png`} 
 	                 alt="Location" className="addmap" />
-	            <div className="contactdetail">4070 County Road 211, WY, Burns, 82053</div>
+	            <div className="contactdetail">{vendorProfileData.address}</div>
 	          </div><br/>
 	          <div className="contact-group">
 	            <img src={`${process.env.PUBLIC_URL}/assets/images/icons/website.png`} 
 	                 alt="Web" className="addweb" />
-	            <div className="contactdetail"><a>www.unitedrestaurants.com</a></div>
+	            <div className="contactdetail"><a>{vendorProfileData.website_link}</a></div>
 	          </div><br/>
 	          <div className="contact-group">
 	            <img src={`${process.env.PUBLIC_URL}/assets/images/icons/call.png`} 
@@ -72,8 +124,7 @@ const Detailpage = (props) => {
       			<Col sm="12" xs="12">
       				<div className="historyabout">
       					<h2>Our History</h2>
-      					<p>Pellentesque habitant morbi tristique senectus netus et malesuada fames turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas 
-						Pellentesque habitant morbi tristique senectus netus et malesuada fames turpisas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet qu</p>
+      					<p>{vendorProfileData.about_business}</p>
       					<a href={void(0)} className="showmorebtn">Show more</a>
       				</div>
       			</Col>
@@ -86,27 +137,28 @@ const Detailpage = (props) => {
       			<Col sm="4" xs="12">
       				<div className="wehave">
       					<h3>What Do We Have</h3>
-      					<List type="unstyled">
-      				<li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-	                 alt="Hand Symbol" className="handsymbol" /> Salad With Vagitable</a>
-					</li>
-	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-	                 alt="Hand Symbol" className="handsymbol" /> Teriyaki salmon</a></li>
-	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-	                 alt="Hand Symbol" className="handsymbol" /> Roasted prawns coriander</a></li>
-	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-	                 alt="Hand Symbol" className="handsymbol" /> Pumpkin and goat cheese</a></li>
-	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-	                 alt="Hand Symbol" className="handsymbol" /> Mince & steak pie</a></li>
-	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-	                 alt="Hand Symbol" className="handsymbol" /> Veal mini escalopes</a></li>
-	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-	                 alt="Hand Symbol" className="handsymbol" /> Ravioli filled with baked</a></li>
-	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-	                 alt="Hand Symbol" className="handsymbol" /> Teriyaki salmon</a></li>
-	                 <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-	                 alt="Hand Symbol" className="handsymbol" /> Roasted prawns coriander</a></li>
-      					</List>
+                        <div dangerouslySetInnerHTML={{ __html: menuItemsData.content }} />
+                        {/*<List type="unstyled">
+                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+                        alt="Hand Symbol" className="handsymbol" /> Salad With Vagitable</a>
+                        </li>
+                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+                        alt="Hand Symbol" className="handsymbol" /> Teriyaki salmon</a></li>
+                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+                        alt="Hand Symbol" className="handsymbol" /> Roasted prawns coriander</a></li>
+                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+                        alt="Hand Symbol" className="handsymbol" /> Pumpkin and goat cheese</a></li>
+                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+                        alt="Hand Symbol" className="handsymbol" /> Mince & steak pie</a></li>
+                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+                        alt="Hand Symbol" className="handsymbol" /> Veal mini escalopes</a></li>
+                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+                        alt="Hand Symbol" className="handsymbol" /> Ravioli filled with baked</a></li>
+                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+                        alt="Hand Symbol" className="handsymbol" /> Teriyaki salmon</a></li>
+                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
+                        alt="Hand Symbol" className="handsymbol" /> Roasted prawns coriander</a></li>
+                        </List>*/}
       				</div>
       			</Col>
       		</Row>
@@ -117,90 +169,22 @@ const Detailpage = (props) => {
       	<Fragment>
                 <Container className="p-0">
                     <Row>
-                        {smallImages.length > 0 ? 
+                        {galleryData.length > 0 ? 
                         <Col sm="12" xs="12">
                         <h5>Our Gallery</h5>
                             <div className="my-gallery row">
+                            { galleryData .map((gallery , i ) => (
                                     <figure className="col-xl-3 col-sm-6">
                                         <Media
-                                            src={require(`../../assets/images/${smallImages[0]}`)}
+                                            src={`${process.env.PUBLIC_URL}/gallery/${gallery.image}`}
                                             alt="Gallery"
                                             className="img-thumbnail"
                                             onClick={() =>
-                                                setPhotoIndex({ ...photoIndex,index:0, isOpen:true})
+                                                setPhotoIndex({ ...photoIndex,index:i, isOpen:true})
                                             }
                                         />
                                     </figure>
-                                    <figure className="col-xl-3 col-sm-6">
-                                        <Media
-                                            src={require(`../../assets/images/${smallImages[2]}`)}
-                                            alt="Gallery"
-                                            className="img-thumbnail"
-                                            onClick={() =>
-                                                setPhotoIndex({ ...photoIndex,index:2, isOpen:true})
-                                            }
-                                        />
-                                    </figure>
-                                    <figure className="col-xl-3 col-sm-6">
-                                        <Media
-                                            src={require(`../../assets/images/${smallImages[1]}`)}
-                                            alt="Gallery"
-                                            className="img-thumbnail"
-                                            onClick={() =>
-                                                setPhotoIndex({ ...photoIndex,index:1, isOpen:true})
-                                            }
-                                        />
-                                    </figure>
-                                    <figure className="col-xl-3 col-sm-6">
-                                        <Media
-                                            src={require(`../../assets/images/${smallImages[3]}`)}
-                                            alt="Gallery"
-                                            className="img-thumbnail"
-                                            onClick={() =>
-                                                setPhotoIndex({ ...photoIndex,index:3, isOpen:true})
-                                            }
-                                        />
-                                    </figure>
-                                    <figure className="col-xl-3 col-sm-6">
-                                        <Media
-                                            src={require(`../../assets/images/${smallImages[8]}`)}
-                                            alt="Gallery"
-                                            className="img-thumbnail"
-                                            onClick={() =>
-                                                setPhotoIndex({ ...photoIndex,index:8, isOpen:true})
-                                            }
-                                        />
-                                    </figure>
-                                    <figure className="col-xl-3 col-sm-6">
-                                        <Media
-                                            src={require(`../../assets/images/${smallImages[5]}`)}
-                                            alt="Gallery"
-                                            className="img-thumbnail"
-                                            onClick={() =>
-                                                setPhotoIndex({ ...photoIndex,index:5, isOpen:true})
-                                            }
-                                        />
-                                    </figure>
-                                    <figure className="col-xl-3 col-sm-6">
-                                        <Media
-                                            src={require(`../../assets/images/${smallImages[4]}`)}
-                                            alt="Gallery"
-                                            className="img-thumbnail"
-                                            onClick={() =>
-                                                setPhotoIndex({ ...photoIndex,index:4, isOpen:true})
-                                            }
-                                        />
-                                    </figure>
-                                    <figure className="col-xl-3 col-sm-6">
-                                        <Media
-                                            src={require(`../../assets/images/${smallImages[9]}`)}
-                                            alt="Gallery"
-                                            className="img-thumbnail"
-                                            onClick={() =>
-                                                setPhotoIndex({ ...photoIndex,index:9, isOpen:true})
-                                            }
-                                        />
-                                    </figure>
+                                    ))}
                                     
                                 </div>
                         </Col>
@@ -209,9 +193,9 @@ const Detailpage = (props) => {
                 </Container>
                 {photoIndex.isOpen && (
                     <Lightbox
-                        mainSrc={require(`../../assets/images/${images[photoIndex.index]}`)}
-                        nextSrc={require(`../../assets/images/${images[(photoIndex.index + 1) % images.length]}`)}
-                        prevSrc={require(`../../assets/images/${images[(photoIndex.index + images.length - 1) % images.length]}`)}
+                        mainSrc={`${process.env.PUBLIC_URL}/gallery/${images[photoIndex.index]}`}
+                        nextSrc={`${process.env.PUBLIC_URL}/gallery//${images[(photoIndex.index + 1) % images.length]}`}
+                        prevSrc={`${process.env.PUBLIC_URL}/gallery//${images[(photoIndex.index + images.length - 1) % images.length]}`}
                         imageTitle={photoIndex.index + 1 + "/" + images.length}
                         onCloseRequest={() => setPhotoIndex({ ...photoIndex,isOpen:false})}
                         onMovePrevRequest={onMovePrev}
@@ -225,10 +209,12 @@ const Detailpage = (props) => {
       	<Container className="p-0">
       		<h5>Videos</h5>
       		<Row>
+
+            { videoGalleryData .map((videoGallery , i ) => (
       			<Col sm="4" xs="6">
       				<div className="videodiv">
       					<div className="embed-responsive embed-responsive-16by9">
-					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
+					    <iframe src={videoGallery.youtube_link} 
 					        allowFullScreen="allowfullscreen"
 					        mozallowfullscreen="mozallowfullscreen" 
 					        msallowfullscreen="msallowfullscreen" 
@@ -237,66 +223,7 @@ const Detailpage = (props) => {
 					  </div>
       				</div>
       			</Col>
-      			<Col sm="4" xs="6">
-      				<div className="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-					        allowFullScreen="allowfullscreen"
-					        mozallowfullscreen="mozallowfullscreen" 
-					        msallowfullscreen="msallowfullscreen" 
-					        oallowfullscreen="oallowfullscreen" 
-					        webkitallowfullscreen="webkitallowfullscreen"> </iframe>
-					  </div>
-      				</div>
-      			</Col>
-      			<Col sm="4" xs="6">
-      				<div className="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-					        allowFullScreen="allowfullscreen"
-					        mozallowfullscreen="mozallowfullscreen" 
-					        msallowfullscreen="msallowfullscreen" 
-					        oallowfullscreen="oallowfullscreen" 
-					        webkitallowfullscreen="webkitallowfullscreen"> </iframe>
-					  </div>
-      				</div>
-      			</Col>
-      			<Col sm="4" xs="6">
-      				<div className="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-					        allowFullScreen="allowfullscreen"
-					        mozallowfullscreen="mozallowfullscreen" 
-					        msallowfullscreen="msallowfullscreen" 
-					        oallowfullscreen="oallowfullscreen" 
-					        webkitallowfullscreen="webkitallowfullscreen"> </iframe>
-					  </div>
-      				</div>
-      			</Col>
-      			<Col sm="4" xs="6">
-      				<div className="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-					        allowFullScreen="allowfullscreen"
-					        mozallowfullscreen="mozallowfullscreen" 
-					        msallowfullscreen="msallowfullscreen" 
-					        oallowfullscreen="oallowfullscreen" 
-					        webkitallowfullscreen="webkitallowfullscreen"> </iframe>
-					  </div>
-      				</div>
-      			</Col>
-      			<Col sm="4" xs="6">
-      				<div className="videodiv">
-      					<div className="embed-responsive embed-responsive-16by9">
-					    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-					        allowFullScreen="allowfullscreen"
-					        mozallowfullscreen="mozallowfullscreen" 
-					        msallowfullscreen="msallowfullscreen" 
-					        oallowfullscreen="oallowfullscreen" 
-					        webkitallowfullscreen="webkitallowfullscreen"> </iframe>
-					  </div>
-      				</div>
-      			</Col>
+      			))}
       		</Row>
       	</Container>
       </div>
@@ -309,23 +236,12 @@ const Detailpage = (props) => {
       					<h6>Deals</h6>
       					<div className="fridaydeals"><b>Black Friday Deal</b></div>
       					<p>United Restaurants New User</p>
+                        {couponsData.map((coupons , i ) => (
       					<List type="unstyled">
-      						<li>
-						    <b>How to avail the offer</b>
-						    <ul>
-						      <li>
-						        Enter the Promo Code APP100 to get Flat 30% OFF on total transaction
-						      </li>
-						      <li>
-						        Offer valid only on United Restaurants for first time users
-						      </li>
-						      <li>
-						        Max. Discount that can be availed per transaction is 30% OFF
-						      </li>
-						    </ul>
-						  </li>
-
+                            <p><b>{coupons.deal_name}</b></p>
+                            <p>{coupons.deal_description}</p>
       					</List>
+                        ))}
       				</div>
       			</Col>
       			<Col sm="6" xs="12">
@@ -333,16 +249,16 @@ const Detailpage = (props) => {
       					<h6>Contact Us</h6>
       					<List type="unstyled">
       						<li>
-						    <b>Location:</b><span>4070 County Road 211, WY, Burns, 82053</span>
+						    <b>Location:</b><span>{vendorProfileData.address}</span>
 						  </li>
 						  <li>
-						    <b>Phone:</b><span>+02 3525425669</span>
+						    <b>Phone:</b><span>{vendorProfileData.phone}</span>
 						  </li>
 						  <li>
-						    <b>Email:</b><span>info.clients@unitedrestaurant.com</span>
+						    <b>Email:</b><span>{vendorProfileData.business_email}</span>
 						  </li>
 						  <li>
-						    <b>Website:</b><span>www.unitedrestaurant.com</span>
+						    <b>Website:</b><span>{vendorProfileData.website_link}</span>
 						  </li>
       					</List>
       					<div className="socialmenucontact">
@@ -358,24 +274,25 @@ const Detailpage = (props) => {
       			<Col sm="6" xs="12">
       				<div className="jobinfo">
       					<h6>Job Opening</h6>
-      					<p><b>Need Bakery Chef</b></p>
+                        {jobsData.map((jobs , i ) => (
       					<List type="unstyled">
-						  <li>Experience: 5 to 10 years</li>
-						  <li>Salary: $2500 / Month</li>
-						  <li>Vacancy: 5</li>
+          					<p><b>{jobs.job_name}</b></p>
+                            <p>{jobs.job_description}</p>
       					</List>
+                        ))}
       				</div>
       			</Col>
       			<Col sm="6" xs="12">
       				<div className="saleinfo">
       					<h6>Items for Sale</h6>
-      					<List type="unstyled">
+                        <div dangerouslySetInnerHTML={{ __html: saleItemsData.content }} />
+      					{/*<List type="unstyled">
       						<li>
 						    Roasted prawns coriander
 						  </li>
 						  <li>Pumpkin and goat cheese</li>
 						  <li>Ravioli filled with baked</li>
-      					</List>
+      					</List>*/}
       				</div>
       			</Col>
       		</Row>

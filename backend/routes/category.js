@@ -40,7 +40,6 @@ const imageUpload = multer({
 router.post('/add', passport.authenticate('jwt', {
     session: false
 }), imageUpload.single('image'),  function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Categories').then((rolePerm) => {
         if (!req.body.name || !req.body.description) {
             res.status(400).send({
                 msg: 'Please pass Category name or description.'
@@ -51,12 +50,18 @@ router.post('/add', passport.authenticate('jwt', {
              .replace(/ /g, '-')
              .replace(/[^\w-]+/g, '');
 
+             if (req.file) {
+                image = req.file.filename;
+             }else{
+                image = '';
+             }
+
             Category
                 .create({
                     name: req.body.name,
                     description: req.body.description,
                     slug: slug,
-                    image: req.file.filename,
+                    image: image,
                     parent_id: req.body.parent_id,
                     sort_order: req.body.sort_order,
                     status: req.body.status
@@ -64,12 +69,9 @@ router.post('/add', passport.authenticate('jwt', {
                 .then((category) => res.status(201).send(category))
                 .catch((error) => {
                     console.log(error);
-                    res.status(400).send(error);
+                    res.status(400).send('error');
                 });
         }
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
 });
 
 
