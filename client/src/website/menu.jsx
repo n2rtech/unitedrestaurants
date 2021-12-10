@@ -91,21 +91,27 @@ console.log('Menu' , categoryData);
                         <Fragment>
 {(item.parent).map((item1 , i) => (
   <Dropdown.Item>{item1.name}
-
+{item1.parent_2 &&
+                        <Fragment>
   {(item1.parent_2).map((item2 , i) => (
     <Dropdown.Submenu>
       <Dropdown.Item>{item2.name}
-
+{item2.parent_3 &&
+                        <Fragment>
       {(item2.parent_3).map((item3 , i) => (
         <Dropdown.Submenu>
           <Dropdown.Item><NavLink href="#">{item3.name}</NavLink></Dropdown.Item>
         </Dropdown.Submenu>
         ))}
+      </Fragment>
+    }
 
       </Dropdown.Item>   
 
     </Dropdown.Submenu>
     ))}
+  </Fragment>
+}
     
   </Dropdown.Item>
   ))}
