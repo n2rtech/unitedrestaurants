@@ -89,7 +89,7 @@ router.post("/register", (req, res) => {
                 var code = country[0].code;
 
                 if (code == 'ita') {
-                  var table_name = 'VendorIta';
+                  var table_name = 'VendorItas';
                 }else{
                   var codee = code.charAt(0).toUpperCase() + code.slice(1);
                   var table_name = 'Vendor' + codee + 's';
@@ -437,7 +437,7 @@ router.put('/:id', (req, res) => {
             var country = country[0].code;
 
             if (code == 'ita') {
-              var table_name = 'VendorIta';
+              var table_name = 'VendorItas';
             }else{
               var codee = code.charAt(0).toUpperCase() + code.slice(1);
               var table_name = 'Vendor' + codee + 's';
@@ -577,10 +577,10 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
           var code = country[0].code;
 
           if (code == 'ita') {
-            var table_name = 'VendorIta';
+            var table_name = 'VendorItas';
           }else{
             var codee = code.charAt(0).toUpperCase() + code.slice(1);
-            var table_name = 'Vendor' + codee;
+            var table_name = 'Vendor' + codee + 's';
           }
 
           if (req.body.categories) {
