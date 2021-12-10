@@ -11,10 +11,6 @@ const MenuItems =  () =>  {
     
     const [content,setContent] = useState('')
     const [id,setId] = useState('') 
-    const onChange = (evt) => {
-        const newContent = evt.editor.getData();
-        setContent(newContent)
-    }
 
     const params = useParams();
     const token = localStorage.getItem("token");
@@ -22,6 +18,9 @@ const MenuItems =  () =>  {
     useEffect(() => {
     
     const userId = localStorage.getItem("id");
+
+    console.log('userid',userId);
+
         const config = {
             headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
         };
@@ -39,7 +38,12 @@ const MenuItems =  () =>  {
           )
       }, []);
   
-      console.log(content);
+      console.log('content',content);
+
+      const onChange = (evt) => {
+        const newContent = evt.editor.getData();
+        setContent(newContent)
+    }
 
   // Edit Api
   const handleSubmit = event => {

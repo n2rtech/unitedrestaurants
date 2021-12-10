@@ -440,7 +440,7 @@ export const routes = [
         { path:"/dashboard/vendor/payment-method/:id", Component:PaymentMethod},
         { path:"/dashboard/vendor/adds-membership", Component:AddsMembership},
         { path:"/dashboard/vendor/ad-spaces", Component:AddSpaces},
-        { path:"/dashboard/vendor/menu-items", Component:MenuItems},
+        { path:"/dashboard/vendor/menu-items/:id", Component:MenuItems},
         { path:"/dashboard/vendor/sale-items", Component:SaleItems},
         { path:"/dashboard/admin/accounts-payable", Component:AccountsPayable},
         { path:"/dashboard/admin/edit-payable", Component:EditAccountsPayable},

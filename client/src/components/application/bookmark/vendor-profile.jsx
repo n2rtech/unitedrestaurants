@@ -43,6 +43,7 @@ const VendorProfile = (props) => {
     const [fblink, setFblink] =  useState()
     const [instalink, setInstalink] = useState()
     const [youtubelink, setYoutubelink] = useState()
+    const [aboutbusiness, setAboutBusiness] = useState()
     const [category, setCategory] = useState()
 
     const onChangeName = (event) => {
@@ -86,19 +87,56 @@ const VendorProfile = (props) => {
       setYoutubelink(event.target.value);
     };
 
+    const onChangeAboutbusiness = (event) => {
+      setAboutBusiness(event.target.value);
+    };
+
     const [profileData, setProfileData] = useState({});
     const id = localStorage.getItem("id");
+
+    const [flagData, setFlagData] = useState({});
+
     useEffect(() => {
       const GetData = async () => {
           const config = {
       headers: {'Authorization': 'JWT '+token }
     };
-        const result = await axios('/api/vendors/'+`${id}`,config);
+        const result = await axios('/api/vendors/profile/'+`${id}`,config);
+        setFlagData(result.data);
+      };
+      GetData();
+    }, []);
+
+    useEffect(() => {
+      const GetData = async () => {
+          const config = {
+      headers: {'Authorization': 'JWT '+token }
+    };
+
+    if(flagData != '') {
+      const result = await axios('/api/vendors/profile/'+`${id}`,config);
+        setProfileData(result.data);
+        setName(result.data.business_name)
+        setEmail(result.data.business_email)
+        setPhone(result.data.mobile)
+        setAddress(result.data.address)
+        setManagerName(result.data.manager_name)
+        setManagerEmail(result.data.manager_email)
+        setWebsitelink(result.data.website_link)
+        setFblink(result.data.facebook)
+        setInstalink(result.data.instagram)
+        setYoutubelink(result.data.youtube)
+        setFax(result.data.fax)
+        setAboutBusiness(result.data.about_business)
+    } else {
+      const result = await axios('/api/vendors/'+`${id}`,config);
         setProfileData(result.data);
         setName(result.data.name)
         setEmail(result.data.email)
         setPhone(result.data.mobile)
         setAddress(result.data.address)
+    }
+        
       };
       GetData();
     }, []);
@@ -137,6 +175,7 @@ const categorys = multiSelections.map((user) => {
           }
           
           bodyParameters.set('address', address);
+          bodyParameters.set('about_business', aboutbusiness);
           bodyParameters.set('categories', categories_arr);
           bodyParameters.set('website_link', websitelink);
           bodyParameters.set('facebook', fblink);
@@ -202,7 +241,7 @@ const categorys = multiSelections.map((user) => {
           </Row>
           <FormGroup>
             <Label htmlFor="exampleFormControlInput1">{"About Business"}</Label>
-            <Input type="textarea" className="form-control" value="" rows="3"/>
+            <Input type="textarea" className="form-control" onChange = {onChangeAboutbusiness} value={aboutbusiness} rows="3"/>
           </FormGroup>
             <FormGroup>
                <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
