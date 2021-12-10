@@ -174,7 +174,7 @@ const Register = (props) => {
             toast.success(res.data.message);
           }, 200);
           setTimeout(() => {
-            history.push('/login');
+            history.push('/vendor/login');
           }, 1000);
           setFirstName('');
           setMobile('');

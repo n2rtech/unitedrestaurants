@@ -62,12 +62,17 @@ router.post('/', imageUpload.single('image'), (req, res) => {
 
 // Get List of Sale Items
 router.get('/list', (req, res) => {
-        Blog
-            .findAll()
-            .then((blog) => res.status(200).send(blog))
-            .catch((error) => {
-                res.status(400).send(error);
-            });
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+    Blog
+    .findAndCountAll({offset, limit })
+    .then(perms => {
+        const response = getPagingData(perms, page, limit);
+        res.status(200).send(response)
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
 });
 
 
@@ -198,6 +203,22 @@ router.delete('/:id', (req, res) => {
         }
 });
 
+
+const getPagination = (page=1, size) => {
+  const limit = size ? +size : 3;
+  const offset =  (page-1) * limit;
+
+  return { limit, offset };
+};
+
+
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: blogs } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, tutorials, totalPages, currentPage };
+};
 
 
 module.exports = router;

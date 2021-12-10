@@ -53,7 +53,7 @@ router.get('/list/:id', (req, res) => {
 });
 
 
-router.get('/', passport.authenticate('jwt', {
+router.get('/', passport.authenticate('vendor', {
     session: false
 }), function (req, res) {   
     VendorCoupon

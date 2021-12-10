@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 
 
 // Get List of Video Gallery
-router.get('/', passport.authenticate('jwt', {
+router.get('/', passport.authenticate('vendor', {
     session: false
 }), function (req, res) {
     VideoGallery

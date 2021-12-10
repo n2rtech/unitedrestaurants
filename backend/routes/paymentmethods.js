@@ -65,12 +65,26 @@ router.get('/:id', (req, res) => {
         }})
         .then((paymentmethod) => {
             if (paymentmethod == null) {
-                res.status(200).send({
-                    'status' : true,
-                    'data' : []
+                PaymentMethod
+                .create({
+                    card_number: '',
+                    name_on_card: '',
+                    expiry_date: '',
+                    cvv: '',
+                    user_id: req.params.id
                 })
+                .then((paymentmethod) => {
+                    res.status(200).send({
+                    'status' : true,
+                    'data' : paymentmethod
+                })
+                })
+                .catch((error) => {
+                    res.status(400).send(error);
+                });
+            }else{
+               res.status(201).send(paymentmethod); 
             }
-            res.status(200).send(paymentmethod)
         })
         .catch((error) => {
             res.status(400).send(error);

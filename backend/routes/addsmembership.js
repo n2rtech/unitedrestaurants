@@ -32,7 +32,7 @@ const imageUpload = multer({
 }) 
 
 // Create a new AddsMembership
-router.post('/', passport.authenticate('jwt', {
+router.post('/', passport.authenticate('vendor', {
     session: false
 }), imageUpload.single('image'),  function (req, res) {
         if (!req.file) {
@@ -47,7 +47,7 @@ router.post('/', passport.authenticate('jwt', {
         }
 });
 
-router.get('/', passport.authenticate('jwt', {
+router.get('/', passport.authenticate('vendor', {
     session: false
 }), function (req, res) {
     AddsMembership

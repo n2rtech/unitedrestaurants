@@ -32,7 +32,7 @@ const imageUpload = multer({
 }) 
 
 // Create a new Gallery
-router.post('/', passport.authenticate('jwt', {
+router.post('/', passport.authenticate('vendor', {
     session: false
 }), imageUpload.array('image',12),  function (req, res) {
         if (!req.files[0]) {
@@ -41,13 +41,13 @@ router.post('/', passport.authenticate('jwt', {
             })
         } else {
 
-            res.status(400).send({
+            res.status(200).send({
                 msg: 'Gallery images uploaded.'
             })
         }
 });
 
-router.get('/', passport.authenticate('jwt', {
+router.get('/', passport.authenticate('vendor', {
     session: false
 }), function (req, res) {
     Gallery
