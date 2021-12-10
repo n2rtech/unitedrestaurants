@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,Fragment} from 'react';
 import Dropdown from 'react-multilevel-dropdown';
 import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
 import './css/style.css'
@@ -81,7 +81,49 @@ console.log('Menu' , categoryData);
                   navbar
                 >
 
+
+
                     {categoryData.map((item , i) => (
+                      <NavItem key={i}>
+                            <img src={`${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`} alt="Menu-Icon"/>
+                      <Dropdown title={item.name} key={i}>
+                      {item.parent &&
+                        <Fragment>
+{(item.parent).map((item1 , i) => (
+  <Dropdown.Item>{item1.name}
+{item1.parent_2 &&
+                        <Fragment>
+  {(item1.parent_2).map((item2 , i) => (
+    <Dropdown.Submenu>
+      <Dropdown.Item>{item2.name}
+{item2.parent_3 &&
+                        <Fragment>
+      {(item2.parent_3).map((item3 , i) => (
+        <Dropdown.Submenu>
+          <Dropdown.Item><NavLink href="#">{item3.name}</NavLink></Dropdown.Item>
+        </Dropdown.Submenu>
+        ))}
+      </Fragment>
+    }
+
+      </Dropdown.Item>   
+
+    </Dropdown.Submenu>
+    ))}
+  </Fragment>
+}
+    
+  </Dropdown.Item>
+  ))}
+</Fragment>
+}
+
+</Dropdown>
+</NavItem>
+))}
+
+
+                   {/* {categoryData.map((item , i) => (
                           
                           <NavItem key={i}>
                             <img src={`${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`} alt="Menu-Icon"/>
@@ -101,7 +143,7 @@ console.log('Menu' , categoryData);
                             }
                             
                           </NavItem>
-                      ))}
+                      ))}*/}
                 
                   {/* <NavItem>
                       <img src={`${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`} 
