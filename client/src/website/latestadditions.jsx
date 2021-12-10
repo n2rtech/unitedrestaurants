@@ -14,6 +14,7 @@ const Latestadditions = (props) => {
 
   const params = useParams();
   const [latestData, setLatestData] = useState([]);
+  const code = localStorage.getItem('country_code');
 
   useEffect(() => {
   
@@ -21,7 +22,7 @@ const Latestadditions = (props) => {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
  
-    fetch('/api/latest-additions?country='+`${params.id}` , config)
+    fetch('/api/latest-additions?country='+`${code}` , config)
       .then(res => res.json())
       .then(
         (result) => {
