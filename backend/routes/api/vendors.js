@@ -89,7 +89,7 @@ router.post("/register", (req, res) => {
                 var code = country[0].code;
 
                 if (code == 'ita') {
-                  var table_name = 'VendorItas';
+                  var table_name = 'VendorIta';
                 }else{
                   var codee = code.charAt(0).toUpperCase() + code.slice(1);
                   var table_name = 'Vendor' + codee + 's';
@@ -508,7 +508,7 @@ router.get('/profile/:id', (req, res) => {
           var code = country[0].code;
 
           if (code == 'ita') {
-            var table_name = 'VendorItas';
+            var table_name = 'VendorIta';
           }else{
             var codee = code.charAt(0).toUpperCase() + code.slice(1);
             var table_name = 'Vendor' + codee + 's';
@@ -536,10 +536,10 @@ router.get('/profile/:id', (req, res) => {
                 }
               });
 
-              res.status(201).send({
+              /*res.status(201).send({
                 succeed: true,
                 message: "vendor created successfully!"
-              })
+              })*/
 
             }
           });
@@ -577,7 +577,7 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
           var code = country[0].code;
 
           if (code == 'ita') {
-            var table_name = 'VendorItas';
+            var table_name = 'VendorIta';
           }else{
             var codee = code.charAt(0).toUpperCase() + code.slice(1);
             var table_name = 'Vendor' + codee ;
@@ -588,8 +588,6 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
           }else{
             var categories = profile.categories;
           }
-
-          console.log('Table Name' , table_name);
 
           app.db(table_name)
           .update({
