@@ -23,6 +23,7 @@ const VendorProfile = (props) => {
     GetData();
   }, []);
 
+  console.log('Categories',options);
 
   const [image, setimage] = useState({ pictures: [] , pictureFiles: [] })
 
@@ -44,7 +45,7 @@ const VendorProfile = (props) => {
     const [instalink, setInstalink] = useState()
     const [youtubelink, setYoutubelink] = useState()
     const [aboutbusiness, setAboutBusiness] = useState()
-    const [category, setCategory] = useState()
+    const [categories, setCategory] = useState()
 
     const onChangeName = (event) => {
       setName(event.target.value);
@@ -251,7 +252,7 @@ const categorys = multiSelections.map((user) => {
               <Typeahead
                   id="multiple-typeahead"
                   clearButton
-                  labelKey={"name"}
+                  labelKey={'name'}
                   multiple
                   onChange={setMultiSelections}
                   options={options}
@@ -273,7 +274,7 @@ const categorys = multiSelections.map((user) => {
             </FormGroup>
             <FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Business banner"}</Label>
-             
+              <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/banner/${profileData.banner}`} />
               <ImageUploader
                 withIcon={false}
                 withPreview={true}
