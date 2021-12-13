@@ -215,6 +215,7 @@ import PaymentMethod from "../components/application/bookmark/payment-method"
 import AddsMembership from "../components/application/bookmark/adds-membership"
 import AddSpaces from "../components/application/bookmark/ad-spaces"
 import MenuItems from "../components/application/bookmark/menu-items"
+import AddCategory from "../components/application/bookmark/add-category"
 import SaleItems from "../components/application/bookmark/sale-items"
 import AccountsPayable from "../components/application/bookmark/accounts-payable"
 import AddCountries from "../components/application/bookmark/add-countries"
@@ -405,6 +406,7 @@ export const routes = [
         { path:"/dashboard/admin/trash/:id", Component:Trash},
         { path:"/dashboard/admin/backup/:id", Component:Backup},
         { path:"/dashboard/admin/manage-pages", Component:ManagePages},
+        { path:"/dashboard/admin/add-category", Component:AddCategory},
         { path:"/dashboard/admin/edit-page/:id", Component:EditPage},
         { path:"/dashboard/admin/categories", Component:Categories},
         { path:"/dashboard/admin/edit-category/:id", Component:EditCategory},

@@ -74,7 +74,7 @@ const PaymentMethod = props => {
         name_on_card: namecard,
         expiry: expiry
       };
-      axios.put(`/api/payment-methods/`+`${id}`,
+      axios.put(`/api/payment-methods/`+`${params.id}`,
         bodyParameters,
         config
       ) .then(response => {

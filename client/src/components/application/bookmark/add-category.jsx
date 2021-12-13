@@ -9,12 +9,12 @@ import {SelectSingleImageUpload,MultipleImageUpload,ExampleSelect} from '../../.
 import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios'
-
+import { useHistory } from 'react-router-dom'
 
 const AddCategory = (props) => {
 
 const params = useParams();
-
+const history = useHistory();
 const [image, setimage] = useState({ pictures: [] })
 const [catData, setCatData] = useState([]);
 
@@ -65,7 +65,13 @@ const [catData, setCatData] = useState([]);
           axios.post(`/api/categories/add`,
             bodyParameters,
             config
-          ) .then(response => toast.success("Category updated !")  )
+          ) .then(response => {
+            toast.success("Category updated !")  
+            setTimeout(() => {
+              history.push('/dashboard/admin/categories/');
+            }, 1000);
+          })
+ 
              .catch(error => console.log('Form submit error', error))
 
       };
