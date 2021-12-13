@@ -78,7 +78,9 @@ router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  let sql = "SELECT * FROM users where email = '"+email+"'";
+
+
+  let sql = "SELECT * FROM Users where email = '"+email+"'";
   DB.query(sql,(err,user)=>{
     if(err){
       return res.status(404).json({ error: "Error in sql1!"+err });   
