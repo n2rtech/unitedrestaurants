@@ -40,10 +40,18 @@ app.use(
   })
 );
 
-app.use(express.static(__dirname + '/gallery'));
+/*app.use(express.static(__dirname + '/gallery'));
 app.use(express.static(__dirname + '/images'));
 app.use(express.static(__dirname + '/uploads'));
 app.use(express.static(__dirname + '/banner'));
+*/
+
+app.use('/banner', express.static(__dirname + '/uploads/banner'));
+app.use('/adspaces', express.static(__dirname + '/uploads/adspaces'));
+app.use('/blogs', express.static(__dirname + '/uploads/blogs'));
+app.use('/gallery', express.static(__dirname + '/uploads/gallery'));
+app.use('/site', express.static(__dirname + '/uploads/site'));
+app.use('/images', express.static(__dirname + '/images'));
 
 
 const keys = require("./config/keys");
@@ -86,7 +94,6 @@ app.use("/api/latest-additions", latestadditions);
 app.use("/api/business-advertises", businessadvertises);
 app.use("/api/featured-businesses", featuredbusinesses);
 app.use("/api/accounts-payable", accountspayables);
-
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
