@@ -81,7 +81,7 @@ router.post("/login", (req, res) => {
   let sql = "SELECT * FROM users where email = '"+email+"'";
   DB.query(sql,(err,user)=>{
     if(err){
-      return res.status(404).json({ error: "Error in sql!" });   
+      return res.status(404).json({ error: "Error in sql!"+err });   
     }else if (!user[0]) {
       return res.status(404).json({ error: "Email or Password not found" });
     }else {
