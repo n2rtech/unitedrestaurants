@@ -7,6 +7,7 @@ import defaultImg from '../../../assets/images/lightgallry/01.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import {toast} from 'react-toastify';
+import SweetAlert from 'sweetalert2'
 
 const Categories = (props) => {
 
@@ -71,18 +72,37 @@ const Categories = (props) => {
     }, []);
 
 
-    const handleRemoveCategory = (todoId) => {
-      
-      const config = {
-        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
-        };
-
-        axios.delete('/api/categories/'+`${todoId}`,
-          config
-        ) .then(response => console.log('Deleted Successfully'))
-           .catch(error => console.log('Delete error', error))
-
-      toast.success("Deleted Category !");
+    const handleRemoveCategory = (id) => {
+      SweetAlert.fire({
+        title: 'Are you sure?',
+        text: "Once deleted, you will not be able to recover this category id!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ok',
+        cancelButtonText: 'cancel',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          const config = {
+            headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+            };
+    
+            axios.delete('/api/categories/'+`${id}`,
+              config
+            ) .then(response => console.log('Deleted Successfully'))
+               .catch(error => console.log('Delete error', error))
+          SweetAlert.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+        else {
+          SweetAlert.fire(
+            'Category is safe!'
+          )
+        }
+      })
     }
 
   return (

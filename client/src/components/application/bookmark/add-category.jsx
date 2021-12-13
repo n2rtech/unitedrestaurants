@@ -15,7 +15,7 @@ const AddCategory = (props) => {
 
 const params = useParams();
 const history = useHistory();
-const [image, setimage] = useState({ pictures: [] })
+const [image, setimage] = useState({ pictures: [] , pictureFiles: [] })
 const [catData, setCatData] = useState([]);
 
     const onDrop = (pictureFiles) => {
@@ -41,9 +41,6 @@ const [catData, setCatData] = useState([]);
         setCatData(getData.data);
       });
     
-    
-       
-    
       }, []);
 
       const handleSubmit = event => {
@@ -58,7 +55,11 @@ const [catData, setCatData] = useState([]);
 
           const bodyParameters = new FormData();
           bodyParameters.set('name', catname);
-          bodyParameters.set('image', image.pictureFiles[0]);
+          if(image.pictureFiles.length != 0) {
+            bodyParameters.set('banner', image.pictureFiles[0]);
+          } else {
+            bodyParameters.set('banner', image.pictureFiles);
+          } 
           bodyParameters.set('parent_id', parentCat);
           bodyParameters.set('description', catname);
 

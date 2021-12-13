@@ -56,13 +56,21 @@ router.post('/add', passport.authenticate('jwt', {
                 image = '';
              }
 
+             if(req.body.parent_id == '') {
+                 parent_id = 0;
+             } else {
+                parent_id = req.body.parent_id;
+             }
+
+             console.log('Parent Id',parent_id);
+
             Category
                 .create({
                     name: req.body.name,
                     description: req.body.description,
                     slug: slug,
                     image: image,
-                    parent_id: req.body.parent_id,
+                    parent_id: parent_id,
                     sort_order: req.body.sort_order,
                     status: req.body.status
                 })
