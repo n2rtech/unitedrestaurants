@@ -116,6 +116,17 @@ const VendorProfile = (props) => {
 
     if(flagData != '') {
       const result = await axios('/api/vendors/profile/'+`${id}`,config);
+        if(result.data.categories == null){
+          axios('/api/vendors/'+`${id}`).then(response => {
+            axios('/api/categories/get/'+response.data.category_id).then(response1 => {
+              setMultiSelections(response1.data)
+            })
+          })
+
+        }else{
+          const cates = await axios.post('/api/categories/getByIds/',{categories:JSON.parse(result.data.categories)});
+          setMultiSelections(cates.data)
+        }
         setProfileData(result.data);
         setName(result.data.business_name)
         setEmail(result.data.business_email)
@@ -176,7 +187,7 @@ const categorys = multiSelections.map((user) => {
           } 
           bodyParameters.set('address', address);
           bodyParameters.set('about_business', aboutbusiness);
-          bodyParameters.set('categories', categories_arr);
+          bodyParameters.set('categories', JSON.stringify(categories_arr));
           bodyParameters.set('website_link', websitelink);
           bodyParameters.set('facebook', fblink);
           bodyParameters.set('instagram' , instalink);
@@ -274,7 +285,7 @@ const categorys = multiSelections.map((user) => {
             </FormGroup>
             <FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Business banner"}</Label>
-              <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/banner/${profileData.banner}`} />
+              <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/api/uploads/banner/${profileData.banner}`} />
               <ImageUploader
                 withIcon={false}
                 withPreview={true}
