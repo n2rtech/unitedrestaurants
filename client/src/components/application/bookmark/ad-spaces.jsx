@@ -5,6 +5,8 @@ import { Container, Row, Col,FormGroup,  Card, CardHeader, CardBody, Button } fr
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import SweetAlert from 'sweetalert2'
+
 
 const AddSpaces = () => {
 
@@ -43,22 +45,43 @@ const AddSpaces = () => {
 
 
     // Delete functionality
-
-   const handleDelete = (id) => {
-    const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
-      };
-
-      axios.delete(`/api/ad-spaces/`+`${id}`,config
-      ) .then(response => {
-        toast.success("Deleted !")
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
-      })
-         .catch(error => console.log('Form submit error', error))
-    
-  }
+    const handleDelete = (id) => {
+        SweetAlert.fire({
+          title: 'Are you sure?',
+          text: "Once deleted, you will not be able to recover!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Ok',
+          cancelButtonText: 'cancel',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.value) {
+            const config = {
+                headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+                };
+          
+                axios.delete(`/api/ad-spaces/`+`${id}`,config
+                ) .then(response => {
+                  toast.success("Deleted !")
+                  setTimeout(() => {
+                      window.location.reload();
+                  }, 1000);
+                })
+                   .catch(error => console.log('Form submit error', error))
+            
+            SweetAlert.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+          else {
+            SweetAlert.fire(
+              'Coupon is safe!'
+            )
+          }
+        })
+      }
 
   const handleSubmit = event => {
     event.preventDefault();
