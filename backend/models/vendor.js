@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     category_id: DataTypes.INTEGER,
     country: DataTypes.STRING,
     department: DataTypes.STRING,
+    wallet_balance: DataTypes.DOUBLE,
     subscription_plan: DataTypes.STRING,
     featured_business: DataTypes.INTEGER,
     hot_deal: DataTypes.INTEGER,

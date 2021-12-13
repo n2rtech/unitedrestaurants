@@ -583,8 +583,11 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
             var table_name = 'Vendor' + codee ;
           }
 
+          console.log(req.body.categories);
+          // return false;
+
           if (req.body.categories) {
-            var categories = JSON.stringify(req.body.categories);
+            var categories = req.body.categories;
           }else{
             var categories = profile.categories;
           }

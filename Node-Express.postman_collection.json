@@ -3735,7 +3735,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/payment-methods/1",
+					"raw": "http://127.0.0.1:5000/api/payment-methods/27",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -3747,7 +3747,7 @@
 					"path": [
 						"api",
 						"payment-methods",
-						"1"
+						"27"
 					]
 				}
 			},
@@ -4905,6 +4905,265 @@
 							"key": "size",
 							"value": "3"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get vendor profile by ID wo token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3NzQxMjY5LCJleHAiOjE2NjkyOTgxOTV9.HA8Hpt2mqggxYas9PV9RX65azDYQ2NiYTMglNJ-6fsc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/profile/29",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"profile",
+						"29"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category get by IDS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "categories",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "categories",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/categories/getByIds",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"categories",
+						"getByIds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add wallet details",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":3,\n    \"transaction_id\": \"sdsdfjsd2323\",\n    \"comment\": \"Added to wallet\",\n    \"type\":\"deposit\",\n    \"amount\":100.55\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/wallet",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"wallet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get wallet",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":3,\n    \"transaction_id\": \"sdsdfjsd2323\",\n    \"comment\": \"Added to wallet\",\n    \"type\":\"deposit\",\n    \"amount\":100.55\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/wallet/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"wallet",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Membership to User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3ODQwMzQ1LCJleHAiOjE2NjkzOTcyNzF9.AWmJwsT2GH9-UwlHzerO56U0pXps4nTet5dN4E1D4Hg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "membership_id",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendor-membership/asign-to-user/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendor-membership",
+						"asign-to-user",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Adds Membership to User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3ODQwMzQ1LCJleHAiOjE2NjkzOTcyNzF9.AWmJwsT2GH9-UwlHzerO56U0pXps4nTet5dN4E1D4Hg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "membership_id",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendor-membership/asign-to-user/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendor-membership",
+						"asign-to-user",
+						"2"
 					]
 				}
 			},
