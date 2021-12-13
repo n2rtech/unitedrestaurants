@@ -285,7 +285,7 @@ const categorys = multiSelections.map((user) => {
             </FormGroup>
             <FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Business banner"}</Label>
-              <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/api/uploads/banner/${profileData.banner}`} />
+              <img className="img-thumbnail" src={`/api/uploads/banner/${profileData.banner}`} />
               <ImageUploader
                 withIcon={false}
                 withPreview={true}
