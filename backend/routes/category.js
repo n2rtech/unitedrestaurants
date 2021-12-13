@@ -9,7 +9,7 @@ require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
 const path = require('path');
-
+const Op = require('sequelize').Op
 var multer  = require('multer');
 
 const imageStorage = multer.diskStorage({
@@ -470,5 +470,44 @@ const getSubCat = (value) => {
         });
     });
 }
+
+
+router.post("/getByIds", (req, res) => {
+    console.log(req.body.categories);
+    console.log({
+      where: {
+        id: {
+          [Op.in]: req.body.categories
+      }
+  }
+});
+    Category
+    .findAll({
+      where: {
+        id: {
+          [Op.in]: req.body.categories
+      }
+  }
+})
+    .then((category) => {
+        res.status(200).send(category)
+    })
+    .catch((error) => {
+        res.status(400).send('error');
+    });
+});
+
+
+router.get('/get/:id', (req, res) => {
+    Category
+        .findByPk(req.params.id)
+        .then((category) => {
+            if (category == null) {
+                res.status(200).send('not found')
+            }
+            res.status(200).send([category])
+        })
+});
+
 
 module.exports = router;
