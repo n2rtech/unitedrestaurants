@@ -9,7 +9,7 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
-
+var sequelize = require('sequelize');
 // Create a new Job
 router.post('/', (req, res) => {
     if (!req.body.amount) {
@@ -18,7 +18,8 @@ router.post('/', (req, res) => {
         })
     } else {
         Vendor.update({
-            wallet_balance:req.body.amount
+            wallet_balance: sequelize.literal('wallet_balance +' + req.body.amount)
+            // wallet_balance:req.body.amount
         }, { where: {
             id: req.body.user_id
         }
