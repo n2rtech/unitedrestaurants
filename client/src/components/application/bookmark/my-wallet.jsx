@@ -5,10 +5,7 @@ import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } fr
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
 import {BasicModal,Simple,StaticExample,NewMessage,SendMessage,ModalTitle,Close,SaveChanges,VerticallyCentered,TooltipsAndPopovers,UsingTheGrid,SizesModal,LargeModal,SmallModal,ScrollingLongContent,VaryingModalContent} from '../../../constant'
-
-
-
-
+import Paypalwallet from './paypalplans/paypalwallet.jsx'
 
 const MyWallet = (props) => {
 
@@ -26,7 +23,7 @@ const VaryingContentonetoggle = () => setVaryingContentone(!VaryingContentone);
             <div className="media-body">
               <p className="f-w-500 font-roboto f-18">{"Amount in Wallet"}</p>
               <div className="progress-box">
-                <h4 className="f-w-500 mb-0 f-26">{"$2300"}</h4>
+                <h4 className="f-w-500 mb-0 f-26"></h4>
               </div>
             </div>
           </div>
@@ -47,7 +44,7 @@ const VaryingContentonetoggle = () => setVaryingContentone(!VaryingContentone);
               </Form>
             </ModalBody>
             <ModalFooter>
-                  <Button color="primary" onClick={VaryingContentonetoggle}>{"Make Payment"}</Button>
+                  <Paypalwallet />
             </ModalFooter>
         </Modal>
       </Container>

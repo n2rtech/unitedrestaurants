@@ -114,6 +114,8 @@ const VendorProfile = (props) => {
       headers: {'Authorization': 'JWT '+token }
     };
 
+    console.log('flagdata' , flagData);
+
     if(flagData != '') {
       const result = await axios('/api/vendors/profile/'+`${id}`,config);
         if(result.data.categories == null){
