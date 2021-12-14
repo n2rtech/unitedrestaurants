@@ -271,7 +271,7 @@ const Register = (props) => {
                   <div className="form-group mb-0">
                     <Button color="primary" onClick={handleSubmit} className="btn-block" type="submit">{CreateAccount}</Button>
                   </div>
-                  <p className="mt-4 mb-0">{"Already have an account?"}<a className="ml-2" href="/login">{SignIn}</a></p>
+                  <p className="mt-4 mb-0">{"Already have an account?"}<a className="ml-2" href="/vendor/login">{SignIn}</a></p>
                 </Form>
               </div>
             </div>
