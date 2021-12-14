@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Vendor.hasMany(models.FeaturedBusiness, {as: 'featured',foreignKey: 'user_id'});
+      Vendor.hasMany(models.HotDeal, {as: 'hot_deals',foreignKey: 'user_id'});
       // define association here
     }
   };
@@ -29,7 +31,13 @@ module.exports = (sequelize, DataTypes) => {
     hot_deal: DataTypes.INTEGER,
     business_dvertise: DataTypes.INTEGER,
     status: DataTypes.INTEGER,
-    membership_id: DataTypes.INTEGER
+    membership_id: DataTypes.INTEGER,
+    is_suspended: DataTypes.INTEGER,
+    membership_start_date: DataTypes.DATE,
+    membership_end_date: DataTypes.DATE,
+    adds_membership_id: DataTypes.INTEGER,
+    adds_membership_start_date: DataTypes.DATE,
+    adds_membership_end_date: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Vendor',

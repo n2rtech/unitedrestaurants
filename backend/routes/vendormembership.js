@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const VendorMembership = require('../models').VendorMembership;
+const MembershipTransaction = require('../models').MembershipTransaction;
 const Vendor = require('../models').Vendor;
 const passport = require('passport');
 require('../config/passport')(passport);
@@ -104,24 +105,65 @@ router.put('/asign-to-user/:id', (req, res) => {
                 msg: 'Please pass User Id or Membership ID.'
             })
         } else {
+
+            switch (req.body.interval) {
+                case 'Monthly':
+                day = 1;
+                break;
+                case 'HalfYearly':
+                day = 6;
+                break;
+                case 'Quarterly':
+                day = 3;
+                break;
+                case 'Yearly':
+                day = 12;
+                break;
+            }
+
+            const date = new Date()
+            date.setMonth(date.getMonth() + day);
+
             Vendor
-                .findByPk(req.params.id)
-                .then((vendor) => {
-                    Vendor.update({
-                        membership_id: req.body.membership_id || membership.membership_id,
-                     }, {
-                        where: {
-                            id: req.params.id
-                        }
-                    }).then(_ => {
-                        res.status(200).send({
-                            'message': 'Membership asigned to user'
-                        });
-                    }).catch(err => res.status(400).send(err));
-                })
-                .catch((error) => {
-                    res.status(400).send(error);
+            .findByPk(req.params.id)
+            .then((vendor) => {
+                Vendor.update({
+                    membership_id: req.body.membership_id || membership.membership_id,
+                    membership_start_date:new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+                    membership_end_date:date.toISOString().replace(/T/, ' ').replace(/\..+/, '')
+                }, {
+                    where: {
+                        id: req.params.id
+                    }
+                }).then(_ => {
+                    MembershipTransaction
+                    .create({
+                        price: req.body.price,
+                        type: 'membership',
+                        user_id: req.params.id,
+                        membership_subscription_id: req.body.membership_subscription_id,
+                        membership_id: req.body.membership_id,
+                        comment: req.body.comment,
+                        start_date: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+                        end_date: date.toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+                        interval: req.body.interval
+                    })
+                    .then((wallet) => {
+                        res.status(201).send(wallet)
+                    })
+                    .catch((error) => {
+                        res.status(400).send('error4');
+                    });
+
+                }).catch(err => {
+                    console.log(err);   
+                    res.status(400).send('err1')
                 });
+            })
+            .catch((error) => {
+                console.log(error);   
+                res.status(400).send('error');
+            });
         }
 });
 

@@ -2609,7 +2609,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/vendors/2",
+					"raw": "http://127.0.0.1:5000/api/vendors/3",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -2621,7 +2621,7 @@
 					"path": [
 						"api",
 						"vendors",
-						"2"
+						"3"
 					]
 				}
 			},
@@ -5100,6 +5100,26 @@
 							"key": "membership_id",
 							"value": "2",
 							"type": "text"
+						},
+						{
+							"key": "membership_subscription_id",
+							"value": "3662372hdjd",
+							"type": "text"
+						},
+						{
+							"key": "interval",
+							"value": "Yearly",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "comment",
+							"value": "test mmm",
+							"type": "text"
 						}
 					]
 				},
@@ -5143,14 +5163,35 @@
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "membership_id",
+							"key": "adds_membership_id",
 							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "membership_subscription_id",
+							"value": "3662372hdjd",
+							"type": "text"
+						},
+						{
+							"key": "interval",
+							"value": "Yearly",
+							"description": "HalfYearly/Quarterly/Yearly/Monthly",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "comment",
+							"value": "test mmm",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/vendor-membership/asign-to-user/2",
+					"raw": "http://127.0.0.1:5000/api/adds-membership/asign-to-user/2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -5161,9 +5202,288 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"vendor-membership",
+						"adds-membership",
 						"asign-to-user",
 						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Vendors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3NzQxMjY5LCJleHAiOjE2NjkyOTgxOTV9.HA8Hpt2mqggxYas9PV9RX65azDYQ2NiYTMglNJ-6fsc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All membership Vendors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3NzQxMjY5LCJleHAiOjE2NjkyOTgxOTV9.HA8Hpt2mqggxYas9PV9RX65azDYQ2NiYTMglNJ-6fsc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/membership",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"membership"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All No membership Vendors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3NzQxMjY5LCJleHAiOjE2NjkyOTgxOTV9.HA8Hpt2mqggxYas9PV9RX65azDYQ2NiYTMglNJ-6fsc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/no-membership",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"no-membership"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All suspended Vendors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3NzQxMjY5LCJleHAiOjE2NjkyOTgxOTV9.HA8Hpt2mqggxYas9PV9RX65azDYQ2NiYTMglNJ-6fsc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/suspended",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"suspended"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All featured Vendors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3NzQxMjY5LCJleHAiOjE2NjkyOTgxOTV9.HA8Hpt2mqggxYas9PV9RX65azDYQ2NiYTMglNJ-6fsc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/featured",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"featured"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All hot-deals Vendors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3NzQxMjY5LCJleHAiOjE2NjkyOTgxOTV9.HA8Hpt2mqggxYas9PV9RX65azDYQ2NiYTMglNJ-6fsc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/hot-deals",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"hot-deals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All add-space Vendors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3NzQxMjY5LCJleHAiOjE2NjkyOTgxOTV9.HA8Hpt2mqggxYas9PV9RX65azDYQ2NiYTMglNJ-6fsc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/add-space",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"add-space"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All video-membership Vendors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkxheG1hbiBNaXNocmEiLCJlbWFpbCI6ImxheG1hbkBnbWFpbC5jb20iLCJyb2xlIjoidmVuZG9yIiwiaWF0IjoxNjM3NzQxMjY5LCJleHAiOjE2NjkyOTgxOTV9.HA8Hpt2mqggxYas9PV9RX65azDYQ2NiYTMglNJ-6fsc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/vendors/video-membership",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendors",
+						"video-membership"
 					]
 				}
 			},
