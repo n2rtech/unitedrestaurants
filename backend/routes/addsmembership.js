@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const AddsMembership = require('../models').AddsMembership;
+const Vendor = require('../models').Vendor;
 const passport = require('passport');
 require('../config/passport')(passport);
 const path = require('path');
@@ -95,6 +96,34 @@ router.delete('/:id', (req, res) => {
     }
 });
 
+
+// assign membership to user a Membership
+router.put('/asign-to-user/:id', (req, res) => {
+        if (!req.params.id || !req.body.adds_membership_id) {
+            res.status(400).send({
+                msg: 'Please pass User Id or Membership ID.'
+            })
+        } else {
+            Vendor
+                .findByPk(req.params.id)
+                .then((vendor) => {
+                    Vendor.update({
+                        adds_membership_id: req.body.adds_membership_id || membership.membership_id,
+                     }, {
+                        where: {
+                            id: req.params.id
+                        }
+                    }).then(_ => {
+                        res.status(200).send({
+                            'message': 'Adds Membership asigned to user'
+                        });
+                    }).catch(err => res.status(400).send(err));
+                })
+                .catch((error) => {
+                    res.status(400).send(error);
+                });
+        }
+});
 
 
 module.exports = router;
