@@ -24,6 +24,10 @@ const Paypalwallet = (props) => {
           // Capture the funds from the transaction
           return details.order.capture().then(function(details) {
             // Show a success message to your buyer
+            console.log('Details' , details);
+            // details.5TB18426XL472184P = id
+            // details.intent = CAPTURE
+            // details.status = COMPLETED
             alert('Transaction completed by ' + details.payer.name.given_name);
 
           });
