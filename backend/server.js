@@ -30,7 +30,7 @@ const hotdeals = require("./routes/hotdeals");
 const latestadditions = require("./routes/latestadditions");
 const businessadvertises = require("./routes/businessadvertises");
 const featuredbusinesses = require("./routes/featuredbusinesses");
-// const wallet = require("./routes/wallet");
+const wallet = require("./routes/wallet");
 const accountspayables = require("./routes/accountspayables");
 const path = require('path')
 // app.use('/static', express.static(path.join(__dirname, 'public')))
@@ -97,7 +97,7 @@ app.use("/api/latest-additions", latestadditions);
 app.use("/api/business-advertises", businessadvertises);
 app.use("/api/featured-businesses", featuredbusinesses);
 app.use("/api/accounts-payable", accountspayables);
-// app.use("/api/wallet", wallet);
+app.use("/api/wallet", wallet);
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
