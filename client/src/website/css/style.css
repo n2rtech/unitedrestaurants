@@ -983,6 +983,9 @@ table th, table td{
     padding-bottom: 80px;
     min-height: 500px;
 }
+.contactusinfo{
+    margin-bottom: 50px;
+}
 .wehave {
     width: 100%;
     position: relative;
