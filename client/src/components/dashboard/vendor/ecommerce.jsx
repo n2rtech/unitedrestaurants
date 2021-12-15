@@ -1,4 +1,4 @@
-import React, { Fragment,useState } from 'react';
+import React, { Fragment,useState ,useEffect} from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import ApexCharts from 'react-apexcharts'
 import Slider from "react-slick";
@@ -7,6 +7,7 @@ import CountUp from 'react-countup';
 import {Monthlysales,columnCharts,totalearning,Riskfactorchart} from '../chartsData/apex-charts-data'
 import { withGoogleMap, GoogleMap, withScriptjs } from "react-google-maps";
 import {NewProduct,NewsUpdate,RiskFactor,BestSeller,Location,TodayTotalSale,TodayTotalVisits,OurSaleValue,New,Hot,TotalProfit,HikeShoes,CouponCode,TreePot,Watch,TShirt,TotalGoal,GoalArchive,Duration,DownloadDetails,Johnketer,HerryVenter,Done,Pending,LoainDeo,TodayStockValue,Bag,HorenHors,InProcess,FenterJessy,Success} from '../../../constant'
+import axios from 'axios'
 
 const VendorEcommerce = (props) => {
     // eslint-disable-next-line
@@ -43,6 +44,22 @@ const VendorEcommerce = (props) => {
         slidesToScroll: 1
     };
 
+    const[walletbalance,setWalletBallance] = useState()
+    const token = localStorage.getItem("token");
+    useEffect(() => {
+      const GetData = async () => {
+      const config = {
+        headers: {'Authorization': 'JWT '+token }
+      };
+      const user_id = localStorage.getItem("id");
+      const result = await axios('/api/wallet/'+`${user_id}`,config);
+      setWalletBallance(result.data.wallet_balance);
+  };
+  GetData();
+}, []);
+
+console.log('walletbalance', walletbalance);
+
     return (
         <Fragment>
             <Breadcrumb parent="Dashboard" title="Vendor Dashboard" />
@@ -70,7 +87,7 @@ const VendorEcommerce = (props) => {
                           <div className="media-body">
                             <p className="f-w-500 font-roboto f-18">{"Amount in Wallet"}</p>
                             <div className="progress-box">
-                              <h4 className="f-w-500 mb-0 f-26">{"$2300"}</h4>
+                              <h4 className="f-w-500 mb-0 f-26">{walletbalance == undefined ? '0' : walletbalance}</h4>
                             </div>
                           </div>
                         </div>
