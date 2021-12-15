@@ -240,7 +240,7 @@ const Detailpage = (props) => {
       		<h5>Videos</h5>
       		<Row>
 
-            { videoGalleryData .map((videoGallery , i ) => (
+            { videoGalleryData != '' ? videoGalleryData.map((videoGallery , i ) => (
       			<Col sm="4" xs="6">
       				<div className="videodiv">
       					<div className="embed-responsive embed-responsive-16by9">
@@ -253,7 +253,7 @@ const Detailpage = (props) => {
 					  </div>
       				</div>
       			</Col>
-      			))}
+      			)) : 'Not Available' }
       		</Row>
       	</Container>
       </div>
