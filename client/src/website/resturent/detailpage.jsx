@@ -235,16 +235,19 @@ const Detailpage = (props) => {
       	<Container className="p-0">
       		<Row>
       			<Col sm="6" xs="12">
-      				<div className="dealsinfo">
+      			<div className="dealsinfo">
       					<h6>Deals</h6>
-      					<div className="fridaydeals"><b>Black Friday Deal</b></div>
-      					<p>United Restaurants New User</p>
-                        {couponsData.map((coupons , i ) => (
+                 {couponsData.map((coupons , i ) => (
+                  
+      					<div className="fridaydeals">
+                  
+                  <b>{coupons.deal_name}</b>
+                        
       					<List type="unstyled">
-                            <p><b>{coupons.deal_name}</b></p>
-                            <p>{coupons.deal_description}</p>
+                   <p>{coupons.deal_description}</p>
       					</List>
-                        ))}
+                </div>
+                ))}
       				</div>
       			</Col>
       			<Col sm="6" xs="12">
