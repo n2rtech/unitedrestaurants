@@ -199,11 +199,11 @@ const Detailpage = (props) => {
       	<Fragment>
                 <Container className="p-0">
                     <Row>
-                        {galleryData.length > 0 ? 
+                        
                         <Col sm="12" xs="12">
                         <h5>Our Gallery</h5>
                             <div className="my-gallery row">
-                            { galleryData .map((gallery , i ) => (
+                            { galleryData.length > 0 ? galleryData.map((gallery , i ) => (
                                     <figure className="col-xl-3 col-sm-6">
                                         <Media
                                             src={`${process.env.PUBLIC_URL}/gallery/${gallery.image}`}
@@ -214,11 +214,11 @@ const Detailpage = (props) => {
                                             }
                                         />
                                     </figure>
-                                    ))}
+                                    )) : <span style={{color:'red'}}> Not Available </span> }
                                     
                                 </div>
                         </Col>
-                        :""}
+                       
                     </Row>
                 </Container>
                 {photoIndex.isOpen && (
