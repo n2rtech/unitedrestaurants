@@ -981,6 +981,7 @@ table th, table td{
     background-position: center;
     background-repeat: no-repeat;
     padding-bottom: 80px;
+    min-height: 500px;
 }
 .wehave {
     width: 100%;
@@ -996,7 +997,7 @@ table th, table td{
     margin-bottom: 20px;
 }
 .wehave ul li {
-    line-height: 50px;
+    color: #fff;
 }
 .wehave ul li a img {
     margin-right: 10px;
