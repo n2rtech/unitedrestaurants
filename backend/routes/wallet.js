@@ -18,8 +18,8 @@ router.post('/', (req, res) => {
         })
     } else {
         Vendor.update({
-            wallet_balance: sequelize.literal('wallet_balance +' + req.body.amount)
-            // wallet_balance:req.body.amount
+            //wallet_balance: sequelize.literal('wallet_balance +' + req.body.amount)
+            wallet_balance:req.body.amount
         }, { where: {
             id: req.body.user_id
         }
@@ -66,6 +66,7 @@ router.get('/list/:id', (req, res) => {
 router.get('/', passport.authenticate('vendor', {
     session: false
 }), function (req, res) {
+  
     Transaction
     .findAll({where:{user_id:req.user.id}})
     .then((jobs) => res.status(200).send(jobs))
@@ -78,6 +79,7 @@ router.get('/', passport.authenticate('vendor', {
 
 // Get Job by ID
 router.get('/:id', (req, res) => {
+    console.log("userid", req.params.id);
     Vendor
         .findByPk(
             req.params.id
