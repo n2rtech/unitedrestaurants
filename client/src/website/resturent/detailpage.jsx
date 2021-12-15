@@ -137,6 +137,8 @@ const Detailpage = (props) => {
       					<h2>Our History</h2>
       				
       					{/* <a href={void(0)} className="showmorebtn">Show more</a> */}
+
+                { vendorProfileData.about_business != '' ?
                 <ShowMoreText
                 /* Default options */
                 lines={3}
@@ -150,6 +152,10 @@ const Detailpage = (props) => {
                 truncatedEndingComponent={"... "}>
                   {vendorProfileData.about_business}
                 </ShowMoreText>
+                
+                : 'Not Available'}
+
+                
       				</div>
       			</Col>
       		</Row>
