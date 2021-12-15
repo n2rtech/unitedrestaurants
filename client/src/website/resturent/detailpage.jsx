@@ -153,7 +153,7 @@ const Detailpage = (props) => {
                   {vendorProfileData.about_business}
                 </ShowMoreText>
                 
-                : 'Not Available'}
+                : <span style={{color:'red'}}> Not Available </span> }
 
                 
       				</div>
@@ -253,7 +253,7 @@ const Detailpage = (props) => {
 					  </div>
       				</div>
       			</Col>
-      			)) : 'Not Available' }
+      			)) : <span style={{color:'red'}}> Not Available </span> }
       		</Row>
       	</Container>
       </div>
