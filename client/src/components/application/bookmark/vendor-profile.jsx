@@ -289,7 +289,7 @@ const categorys = multiSelections.map((user) => {
               <div>&nbsp;</div>
               <Input className="form-control"  value={youtubelink} onChange={onChangeYoutubelink} type="name" placeholder="Youtube" />
             </FormGroup>
-            <FormGroup>
+            {/*<FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Business banner"}</Label>
               {(profileData.banner != 0) ? 
                 <img className="img-thumbnail" src={`/api/uploads/banner/${profileData.banner}`} />
@@ -305,7 +305,7 @@ const categorys = multiSelections.map((user) => {
                 maxFileSize={1048576}
                 fileSizeError=" file size is too big"
               />
-            </FormGroup>
+            </FormGroup>*/}
             <div className="text-center">
               <Button color="primary" onClick={handleSubmit}>{"Save"}</Button>
             </div>
