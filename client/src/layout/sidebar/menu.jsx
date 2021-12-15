@@ -57,13 +57,12 @@ export const MENUITEMS = [
             {
                 title: 'Vendors', icon: FolderPlus, path: `${process.env.PUBLIC_URL}/dashboard/default`, type: 'sub', active: false, children: [
                     { path: `${process.env.PUBLIC_URL}/dashboard/admin/all-vendors`, title: 'All vendors', type: 'link' }, 
-                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/all-membership`, title: 'Membership vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/no-membership`, title: 'No membership vendors', type: 'link' },  
+                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/all-membership`, title: 'Membership vendors', type: 'link' },   
                     { path: `${process.env.PUBLIC_URL}/dashboard/admin/suspended-vendors`, title: 'Suspended vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/dashboard/admin/featured-vendors`, title: 'Featured Vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/dashboard/admin/hot-deals-vendors`, title: 'Hot deals vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/add-space-vendors`, title: 'Add spaces vendors', type: 'link' },
-                    { path: `${process.env.PUBLIC_URL}/video-membership-vendors`, title: 'Video Membership vendors', type: 'link' },
+                    { path: `${process.env.PUBLIC_URL}/add-space-vendors`, title: 'Ad space vendors', type: 'link' },
+                   
         
             ]
             }

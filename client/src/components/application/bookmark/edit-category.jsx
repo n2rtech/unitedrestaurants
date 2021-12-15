@@ -107,7 +107,13 @@ const [catData, setCatData] = useState([]);
                 ))}
             </Input>
             </FormGroup>
-
+            <FormGroup>
+              <Label>Status</Label>
+              <Input type="select" name="select" className="form-control digits" placeholder="Please Select">
+                <option>{"Enabled"}</option>
+                <option>{"Disabled"}</option>
+              </Input>
+            </FormGroup>
             <FormGroup>
               <ImageUploader
                   withIcon={false}
