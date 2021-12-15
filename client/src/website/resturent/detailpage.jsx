@@ -10,8 +10,12 @@ import {IMAGE_GALLERY} from "../../constant";
 import axios from 'axios'
 import '../css/style.css'
 import {useParams} from 'react-router-dom'
+import ShowMoreText from "react-show-more-text";
 
 const Detailpage = (props) => {
+
+
+
     const params = useParams();
 
     const id = `${params.id}`;
@@ -38,6 +42,10 @@ const Detailpage = (props) => {
             const next = (photoIndex.index + 1) % images.length
             setPhotoIndex({...photoIndex,index:next})
         }
+
+        const executeOnClick = (isExpanded) => {
+          console.log(isExpanded);
+      }
 
         useEffect(() => {
 
@@ -127,8 +135,21 @@ const Detailpage = (props) => {
       			<Col sm="12" xs="12">
       				<div className="historyabout">
       					<h2>Our History</h2>
-      					<p>{vendorProfileData.about_business}</p>
-      					<a href={void(0)} className="showmorebtn">Show more</a>
+      				
+      					{/* <a href={void(0)} className="showmorebtn">Show more</a> */}
+                <ShowMoreText
+                /* Default options */
+                lines={3}
+                more="Show more"
+                less="Show less"
+                className="content-css"
+                anchorClass="my-anchor-css-class"
+                onClick={executeOnClick}
+                expanded={false}
+                width={600}
+                truncatedEndingComponent={"... "}>
+                  {vendorProfileData.about_business}
+                </ShowMoreText>
       				</div>
       			</Col>
       		</Row>
