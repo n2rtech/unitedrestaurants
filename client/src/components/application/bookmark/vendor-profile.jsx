@@ -203,6 +203,10 @@ const categorys = multiSelections.map((user) => {
   
     };
 
+    const addDefaultImage = (event) => {
+      event.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/user.png`;
+    }
+
   return (
     <Fragment>
       <Breadcrumb parent="Apps" title="Business Profile" />
@@ -285,9 +289,12 @@ const categorys = multiSelections.map((user) => {
               <div>&nbsp;</div>
               <Input className="form-control"  value={youtubelink} onChange={onChangeYoutubelink} type="name" placeholder="Youtube" />
             </FormGroup>
-            {/*<FormGroup>
+            <FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Business banner"}</Label>
-              <img className="img-thumbnail" src={`/api/uploads/banner/${profileData.banner}`} />
+              {(profileData.banner != 0) ? 
+                <img className="img-thumbnail" src={`/api/uploads/banner/${profileData.banner}`} />
+              : ''  
+              }
               <ImageUploader
                 withIcon={false}
                 withPreview={true}
@@ -298,7 +305,7 @@ const categorys = multiSelections.map((user) => {
                 maxFileSize={1048576}
                 fileSizeError=" file size is too big"
               />
-            </FormGroup>*/}
+            </FormGroup>
             <div className="text-center">
               <Button color="primary" onClick={handleSubmit}>{"Save"}</Button>
             </div>
