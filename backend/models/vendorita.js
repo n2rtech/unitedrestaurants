@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   VendorIta.init({
     user_id: DataTypes.INTEGER,
     business_name: DataTypes.STRING,
-    about_business: DataTypes.STRING,
+    about_business: DataTypes.TEXT('long'),
     business_email: DataTypes.STRING,
     manager_name: DataTypes.STRING,
     manager_email: DataTypes.STRING,
