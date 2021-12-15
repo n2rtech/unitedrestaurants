@@ -89,7 +89,7 @@ const Detailpage = (props) => {
 
             axios.get(`/api/vendor-coupons/list/${id}`)
                 .then((result_data) => {
-                  setVendorProfileData(result_data.data);
+                  setCouponsData(result_data.data);
             });
 
 
