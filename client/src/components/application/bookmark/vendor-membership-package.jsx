@@ -107,7 +107,7 @@ const VendorMembershipPackage = (props) => {
                               <PaypalStandardMonthly amount = {5.99} currency = {'USD'}/>
                             )}  else if (cycle == 'Quarterly') {
                               return (
-                                <PaypalPremiumQuatertly amount = {16.00} currency = {'USD'}/>
+                                <PaypalStandardQuarterly amount = {16.00} currency = {'USD'}/>
                               )
                             } else if (cycle == 'Yearly') {
                               return (
@@ -163,24 +163,23 @@ const VendorMembershipPackage = (props) => {
                         </FormGroup>
                         <div className="pricingtable-signup">
                         {(() => {
-                          
                           if (premiumcycle == 'Monthly') {
                             return (
                               <PaypalPremiumMonthly/>
-                            )}  else if (premiumcycle == 'Quarterly') {
+                          )} else if (premiumcycle == 'Quarterly') {
                               return (
                                 <PaypalPremiumQuatertly/>
                               )
-                            } else if (premiumcycle == 'Yearly') {
+                          } else if (premiumcycle == 'Yearly') {
                               return (
                                 <PaypalPremiumYearly/>
                               )
-                            } else {
+                          } else {
                               return (
                                 <PaypalPremiumHalfyearly/>
                               )
-                            }
-                          })()}
+                          }
+                        })()}
                         </div>
                       </div>
                     </Col>
