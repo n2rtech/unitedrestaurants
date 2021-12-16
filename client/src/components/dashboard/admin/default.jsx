@@ -38,6 +38,8 @@ const AdminDefault = (props) => {
   const [totalAddspaceVendors, setTotalAddspaceVendors] = useState(0);
   const [totalMessages, setTotalMessages] = useState(0);
 
+   const [selectedClient,setSelectedClient] = useState([]);
+
 
   useEffect(() => {
 
@@ -158,6 +160,23 @@ const AdminDefault = (props) => {
     // eslint-disable-next-line
   }, [])
 
+
+  const handleSelectChange = e => {
+    var type = e.target.value;
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+    };
+
+    fetch(`/api/vendors/new?search=${type}` , config)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setTotalVendorData(result);
+      },
+      (error) => {
+      });
+  }
+
   return (
     <Fragment>
       <Breadcrumb parent="Dashboard" title="Default" />
@@ -244,9 +263,9 @@ const AdminDefault = (props) => {
                     <div className="header-top">
                           <h5 className="m-0">{VendorAdded}</h5>
                       <div className="card-header-right-icon">
-                        <select className="button btn btn-primary">
-                          <option>{Today}</option>
-                          <option>{"All time"}</option>
+                        <select onChange={handleSelectChange} className="button btn btn-primary">
+                          <option value="today">{Today}</option>
+                          <option selected value="all">{"All time"}</option>
                         </select>
                       </div>
                     </div>

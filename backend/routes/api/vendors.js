@@ -269,12 +269,15 @@ router.get('/new', (req, res) => {
               [Op.lt]: NOW
             },
           },
-          limit:2,
+          limit:5,
+          order: [
+            ['createdAt', 'DESC'],
+            ]
         }
 
       }else{
         var conditions = {
-          limit:2,
+          limit:5,
           order: [
             ['createdAt', 'DESC'],
             ]
