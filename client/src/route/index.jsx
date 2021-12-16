@@ -263,7 +263,7 @@ export const routes = [
         { path:"/dashboard/admin/pages", Component:pagesList},
         { path:"/dashboard/default/", Component:Default},
         { path:"/dashboard/vendor/", Component:VendorEcommerce},
-        { path:"/dashboard/ecommerce/", Component:Ecommerce},
+        { path:"/dashboard/", Component:Ecommerce},
 
     { path:"/pages/roles", Component:Roles},
 

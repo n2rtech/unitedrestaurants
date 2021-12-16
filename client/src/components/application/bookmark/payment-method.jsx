@@ -28,6 +28,7 @@ const PaymentMethod = props => {
 
   const params = useParams();
   const token = localStorage.getItem("token");
+  const user_id = localStorage.getItem("id");
   const history = useHistory()
   useEffect(() => {
   
@@ -72,8 +73,11 @@ const PaymentMethod = props => {
       const bodyParameters = {
         card_number: cardnumber,
         name_on_card: namecard,
-        expiry: expiry
+        expiry: expiry,
+        cvv: '0',
+        user_id: user_id
       };
+      console.log('Body parameters' , bodyParameters);
       axios.put(`/api/payment-methods/`+`${params.id}`,
         bodyParameters,
         config

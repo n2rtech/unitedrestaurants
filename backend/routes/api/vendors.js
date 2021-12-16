@@ -656,6 +656,7 @@ router.put('/:id', (req, res) => {
     .findByPk(req.params.id)
     .then((user) => {
 
+      console.log('Data Coming' , req.body);
 
       Vendor.update({
         email: req.body.email || user.email,
@@ -682,7 +683,7 @@ router.put('/:id', (req, res) => {
             var country = country[0].code;
 
             if (code == 'ita') {
-              var table_name = 'VendorItas';
+              var table_name = 'VendorIta';
             }else{
               var codee = code.charAt(0).toUpperCase() + code.slice(1);
               var table_name = 'Vendor' + codee + 's';
@@ -697,19 +698,19 @@ router.put('/:id', (req, res) => {
                 var name = req.body.name;
                 var banner = vendor_pro[0].banner;
 
-                DB.query("DELETE  FROM hotdeals where user_id="+user_id);
-                DB.query("DELETE  FROM businessadvertises where user_id="+user_id);
-                DB.query("DELETE  FROM featuredbusinesses where user_id="+user_id);
+                DB.query("DELETE  FROM Hotdeals where user_id="+user_id);
+                DB.query("DELETE  FROM Businessadvertises where user_id="+user_id);
+                DB.query("DELETE  FROM Featuredbusinesses where user_id="+user_id);
                 if (req.body.hot_deals) {
-                  DB.query("INSERT INTO hotdeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                  DB.query("INSERT INTO Hotdeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
                 }
 
                 if (req.body.featured_business){
-                  DB.query("INSERT INTO featuredbusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                  DB.query("INSERT INTO Featuredbusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
                 }
 
                 if (req.body.hot_deals || req.body.featured_business) {
-                  DB.query("INSERT INTO businessadvertises (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                  DB.query("INSERT INTO Businessadvertises (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
                 }
 
                 res.status(200).send({
@@ -754,7 +755,7 @@ router.get('/profile/:id', (req, res) => {
 
           if (code == 'ita') {
             var table_name = 'VendorIta';
-          }else{
+          } else {
             var codee = code.charAt(0).toUpperCase() + code.slice(1);
             var table_name = 'Vendor' + codee + 's';
           }
@@ -764,7 +765,7 @@ router.get('/profile/:id', (req, res) => {
             if (profile[0]) {
 
               res.status(201).send(profile[0])
-            }else{
+            } else {
               var user_id = vendor.id;
               var email = vendor.email;
               var name = vendor.name;
@@ -923,7 +924,6 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
 });
 
 
-
 // Get Profile by ID
 /*router.get('/:id', (req, res) => {
   Vendor
@@ -937,14 +937,12 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
   });
 });*/
 
-
 const getPagination = (page=1, size) => {
   const limit = size ? +size : 3;
   const offset =  (page-1) * limit;
 
   return { limit, offset };
 };
-
 
 const getPagingData = (data, page, limit) => {
   const { count: totalItems, rows: tutorials } = data;
@@ -954,13 +952,10 @@ const getPagingData = (data, page, limit) => {
   return { totalItems, tutorials, totalPages, currentPage };
 };
 
-
 function generatePassword(pwd) {
     let hash = bcrypt.hashSync(pwd, 10);
     return hash;
 };
-
-
 
 module.exports = router;
   

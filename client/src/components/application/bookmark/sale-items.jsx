@@ -67,7 +67,7 @@ const SaleItems =  () =>  {
 
     return (
             <Fragment>
-                <Breadcrumb parent="Editors" title="Menu Items"/>
+                <Breadcrumb parent="Editors" title="Sale Items"/>
                 <Container fluid={true}>
                     <Row>
                         <Col sm="12">
