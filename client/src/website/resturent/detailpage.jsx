@@ -242,7 +242,7 @@ const Detailpage = (props) => {
       			<Col sm="4" xs="6">
       				<div className="videodiv">
       					<div className="embed-responsive embed-responsive-16by9">
-					    <iframe src={videoGallery.youtube_link} 
+					    <iframe src={videoGallery.youtube_link.replace('watch?v=' , 'embed/')} 
 					        allowFullScreen="allowfullscreen"
 					        mozallowfullscreen="mozallowfullscreen" 
 					        msallowfullscreen="msallowfullscreen" 
