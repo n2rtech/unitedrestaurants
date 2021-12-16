@@ -77,8 +77,7 @@ const PaymentMethod = props => {
         cvv: '0',
         user_id: user_id
       };
-      console.log('Body parameters' , bodyParameters);
-      axios.put(`/api/payment-methods/`+`${params.id}`,
+      axios.put(`/api/payment-methods/`+`${id}`,
         bodyParameters,
         config
       ) .then(response => {
