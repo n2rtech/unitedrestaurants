@@ -9,7 +9,7 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
-
+const Op = require('sequelize').Op
 // Create a new Coupon
 router.post('/', passport.authenticate('jwt', {
     session: false
@@ -43,13 +43,30 @@ router.post('/', passport.authenticate('jwt', {
     });
 });
 
+
+// Get List of deleted Coupons
+router.get('/deleted', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+    Coupon
+    .findAll({
+        where:{deletedAt: {
+            [Op.ne]: null
+        }}})
+    .then((roles) => res.status(200).send(roles))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+
 // Get List of Coupons
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_get_all').then((rolePerm) => {
         Coupon
             .findAll({
+                where:{deletedAt:null},
                 include: [{
                     model: User,
                     as: 'user',
@@ -63,9 +80,6 @@ router.get('/', passport.authenticate('jwt', {
             .catch((error) => {
                 res.status(400).send(error);
             });
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
 });
 
 // Get Coupon by ID
@@ -135,8 +149,7 @@ router.put('/:id', passport.authenticate('jwt', {
 router.delete('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'role_delete').then((rolePerm) => {
-        if (!req.params.id) {
+    if (!req.params.id) {
             res.status(400).send({
                 msg: 'Please pass role ID.'
             })
@@ -144,8 +157,8 @@ router.delete('/:id', passport.authenticate('jwt', {
             Coupon
                 .findByPk(req.params.id)
                 .then((coupon) => {
-                    if (role) {
-                        Coupon.destroy({
+                    if (coupon) {
+                        Coupon.update({deletedAt:new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')},{
                             where: {
                                 id: req.params.id
                             }
@@ -161,13 +174,27 @@ router.delete('/:id', passport.authenticate('jwt', {
                     }
                 })
                 .catch((error) => {
-                    res.status(400).send(error);
+                    console.log(error);
+                    res.status(400).send('error');
                 });
         }
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
 });
+
+
+
+
+// Restore a Coupon
+router.post('/restore', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+    Coupon.update( { deletedAt: null }, { where: {deletedAt: {[Op.ne]: null} }})
+    .then(_ => {
+        res.status(200).send({
+            'message': 'Coupon restored'
+        });
+    }).catch(err => res.status(400).send(err));
+});
+
 
 // Add Permissions to Coupon
 router.post('/permissions/:id', passport.authenticate('jwt', {

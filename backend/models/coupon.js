@@ -30,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     total: DataTypes.DECIMAL,
     date_start: DataTypes.STRING,
     date_end: DataTypes.STRING,
+    deletedAt: DataTypes.DATE,
     uses_total: DataTypes.INTEGER,
     status: DataTypes.TINYINT
   }, {

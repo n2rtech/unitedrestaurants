@@ -384,7 +384,6 @@ router.put('/:id', passport.authenticate('jwt', {
 router.delete('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Categories').then((rolePerm) => {
         if (!req.params.id) {
             res.status(400).send({
                 msg: 'Please pass ID.'
@@ -413,9 +412,6 @@ router.delete('/:id', passport.authenticate('jwt', {
                     res.status(400).send(error);
                 });
         }
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
 });
 
 // Add Permissions to Category
@@ -509,5 +505,14 @@ router.get('/get/:id', (req, res) => {
         })
 });
 
+// Restore a Country
+router.post('/restore', (req, res) => {
+    Category.restore()
+    .then(_ => {
+        res.status(200).send({
+            'message': 'Country restored'
+        });
+    }).catch(err => res.status(400).send(err));
+});
 
 module.exports = router;

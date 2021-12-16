@@ -8,6 +8,7 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
+const Op = require('sequelize').Op
 
 // Create a new HotDeal
 router.post('/', (req, res) => {
@@ -42,10 +43,18 @@ router.get('/list', (req, res) => {
             });
 });
 
-
+/*{where:{country:req.query.country}}*/
 router.get('/', (req, res) => { 
     HotDeal
-    .findAll({where:{country:req.query.country}})
+    .findAll(
+    {
+      where: {
+        [Op.or]:[
+            {country: { [Op.eq]: req.query.country }},
+            {business_name: { [Op.like]: req.query.business_name }},
+            {categories: { [Op.like]: '%"' + req.query.category + '"%' }}
+        ]}
+    })
     .then((menuitem) => res.status(200).send(menuitem))
     .catch((error) => {
         res.status(400).send(error);

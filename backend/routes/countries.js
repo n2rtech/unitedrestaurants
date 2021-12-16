@@ -8,6 +8,7 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
+const Op = require('sequelize').Op
 
 // Create a new Country
 router.post('/', passport.authenticate('jwt', {
@@ -22,10 +23,10 @@ router.post('/', passport.authenticate('jwt', {
             Country
                 .create({
                     name: req.body.name,
+                    code: req.body.code,
                 })
                 .then((country) => res.status(201).send(country))
                 .catch((error) => {
-                    console.log(error);
                     res.status(400).send(error);
                 });
         }
@@ -133,7 +134,6 @@ router.put('/:id', passport.authenticate('jwt', {
 router.delete('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Countries').then((rolePerm) => {
         if (!req.params.id) {
             res.status(400).send({
                 msg: 'Please pass Country ID.'
@@ -162,9 +162,18 @@ router.delete('/:id', passport.authenticate('jwt', {
                     res.status(400).send(error);
                 });
         }
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
+});
+
+
+
+// Restore a Country
+router.post('/restore', (req, res) => {
+    Country.restore()
+    .then(_ => {
+        res.status(200).send({
+            'message': 'Country restored'
+        });
+    }).catch(err => res.status(400).send(err));
 });
 
 module.exports = router;

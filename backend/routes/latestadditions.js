@@ -57,6 +57,10 @@ router.get('/', (req, res) => {
         var table_name = 'Vendor' + codee;
     }
 
+    if (table_name == 'VendorNull') {
+        var table_name = 'VendorIta';
+    }
+
     app.db(table_name)
     .findAll(
     {
