@@ -251,6 +251,53 @@ router.get('/by-role/:id', passport.authenticate('jwt', {
 });
 
 
+// Get new Vendors
+router.get('/new', (req, res) => {
+
+  Vendor.findAll({
+    limit:2
+  })
+  .then((vendors) => {          
+    if (vendors) {
+      if (req.query.search == 'today') {
+        const TODAY_START = new Date().setHours(0, 0, 0, 0);
+        const NOW = new Date();
+        var conditions = {
+          where: {
+            createdAt: {
+              [Op.gt]: TODAY_START,
+              [Op.lt]: NOW
+            },
+          },
+          limit:2,
+        }
+
+      }else{
+        var conditions = {
+          limit:2,
+          order: [
+            ['createdAt', 'DESC'],
+            ]
+        };
+      }
+
+      Vendor.findAll(conditions)
+      .then(users => {
+       res.status(200).send(users)
+     })
+      .catch(err => res.status(400).send(err));
+    } else {
+      res.status(404).send({
+        'message': 'Vendors not found'
+      });
+    }
+  })
+  .catch((error) => {
+    res.status(400).send(error);
+  });
+});
+
+
 // Get Vendors
 router.get('/', (req, res) => {
 
@@ -298,6 +345,204 @@ router.get('/', (req, res) => {
     } else {
       res.status(404).send({
         'message': 'Vendors not found'
+      });
+    }
+  })
+  .catch((error) => {
+    res.status(400).send(error);
+  });
+});
+
+
+
+// Get Vendors
+router.get('/:key', (req, res) => {
+
+  if (req.params.key == "membership") {
+    var conditions = {
+      where: {
+        membership_id: {
+          [Op.ne]: null
+        }
+      }
+    };
+  }
+
+
+  else if (req.params.key == "no-membership") {
+    var conditions = {
+      where: {
+        membership_id: {
+          [Op.eq]: null
+        }
+      }
+    };
+  }
+
+
+  else if (req.params.key == "suspended") {
+    var conditions = {
+      where: {
+        is_suspended: {
+          [Op.eq]: 1
+        }
+      }
+    };
+  }
+
+
+  else if (req.params.key == "featured") {
+    var conditions = {  include: {
+      model: FeaturedBusiness,
+      as: 'featured',
+      required: true
+    }};
+  }
+
+
+  else if (req.params.key == "hot-deals") {
+    var conditions = {  include: {
+      model: HotDeal,
+      as: 'hot_deals',
+      required: true
+    }};
+  }
+
+
+  else if (req.params.key == "add-space") {
+    var conditions = {
+      where: {
+        adds_membership_id: {
+          [Op.ne]: null
+        }
+      }
+    };
+  }
+
+  else if (req.params.key == "video-membership") {
+    var conditions = {
+      where: {
+        video_membership_id: {
+          [Op.ne]: null
+        }
+      }
+    };
+  }
+  else{
+
+    var conditions = { 
+      where:{
+        id: req.params.key
+      }
+    };
+  }
+
+  Vendor.findAll(conditions)
+  .then((vendors) => {          
+    if (vendors) {
+      res.status(200).send(vendors)
+    } else {
+      res.status(404).send({
+        'message': 'Vendors not found',
+        'data' : []
+      });
+    }
+  })
+  .catch((error) => {
+    res.status(400).send(error);
+  });
+});
+
+
+
+// Get Vendors
+router.get('/count/:key', (req, res) => {
+
+  if (req.params.key == "membership") {
+    var conditions = {
+      where: {
+        membership_id: {
+          [Op.ne]: null
+        }
+      }
+    };
+  }
+
+
+  else if (req.params.key == "no-membership") {
+    var conditions = {
+      where: {
+        membership_id: {
+          [Op.eq]: null
+        }
+      }
+    };
+  }
+
+
+  else if (req.params.key == "suspended") {
+    var conditions = {
+      where: {
+        is_suspended: {
+          [Op.eq]: 1
+        }
+      }
+    };
+  }
+
+
+  else if (req.params.key == "featured") {
+    var conditions = {  include: {
+      model: FeaturedBusiness,
+      as: 'featured',
+      required: true
+    }};
+  }
+
+
+  else if (req.params.key == "hot-deals") {
+    var conditions = {  include: {
+      model: HotDeal,
+      as: 'hot_deals',
+      required: true
+    }};
+  }
+
+
+  else if (req.params.key == "add-space") {
+    var conditions = {
+      where: {
+        adds_membership_id: {
+          [Op.ne]: null
+        }
+      }
+    };
+  }
+
+  else if (req.params.key == "video-membership") {
+    var conditions = {
+      where: {
+        video_membership_id: {
+          [Op.ne]: null
+        }
+      }
+    };
+  }
+  else{
+
+    var conditions = {
+    };
+  }
+
+  Vendor.count(conditions)
+  .then((vendors) => {          
+    if (vendors) {
+      console.log(vendors);
+      res.status(200).send({count:vendors})
+    } else {
+      res.status(404).send({
+        'message': 'Vendors not found',
+        'data' : []
       });
     }
   })
@@ -387,14 +632,14 @@ router.get('/country/:id', (req, res) => {
 });
 
 // Get User by ID
-/*router.get('/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   User
   .findByPk(req.params.id)
   .then((user) => res.status(200).send(user))
   .catch((error) => {
     res.status(400).send(error);
   });
-});*/
+});
 
 
 
@@ -624,11 +869,11 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
               banner:image,
               country_id : profile.country_id,
               country : code,
-              }, {
-            where: {
-              user_id: profile.id
-            }
-          }).then((dddd) => {
+            }, {
+              where: {
+                user_id: profile.id
+              }
+            }).then((dddd) => {
              FeaturedBusiness.update({
               business_name : req.body.business_name || profile.business_name,
               about_business : req.body.about_business || profile.about_business,
@@ -636,28 +881,28 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
               banner:image,
               country_id : profile.country_id,
               country : code,
+            }, {
+              where: {
+                user_id: profile.id
+              }
+            }).then((dddd) => {
+              BusinessAdvertise.update({
+                business_name : req.body.business_name || profile.business_name,
+                about_business : req.body.about_business || profile.about_business,
+                categories: categories,
+                banner:image,
+                country_id : profile.country_id,
+                country : code,
               }, {
-            where: {
-              user_id: profile.id
-            }
-          }).then((dddd) => {
-            BusinessAdvertise.update({
-              business_name : req.body.business_name || profile.business_name,
-              about_business : req.body.about_business || profile.about_business,
-              categories: categories,
-              banner:image,
-              country_id : profile.country_id,
-              country : code,
-              }, {
-            where: {
-              user_id: profile.id
-            }
-          }).then((dddd) => {
-            res.status(200).send({
-              'message': 'Profile updated'
-            });
-          }); 
-          }); 
+                where: {
+                  user_id: profile.id
+                }
+              }).then((dddd) => {
+                res.status(200).send({
+                  'message': 'Profile updated'
+                });
+              }); 
+            }); 
           }); 
 
           }).catch(err => res.status(400).send('err'));
@@ -680,7 +925,7 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
 
 
 // Get Profile by ID
-router.get('/:id', (req, res) => {
+/*router.get('/:id', (req, res) => {
   Vendor
   .findOne({ where:{
     id: req.params.id
@@ -690,7 +935,7 @@ router.get('/:id', (req, res) => {
   .catch((error) => {
     res.status(400).send(error);
   });
-});
+});*/
 
 
 const getPagination = (page=1, size) => {
