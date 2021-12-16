@@ -14,8 +14,6 @@ import ShowMoreText from "react-show-more-text";
 
 const Detailpage = (props) => {
 
-
-
     const params = useParams();
 
     const id = `${params.id}`;
@@ -206,7 +204,7 @@ const Detailpage = (props) => {
                             { galleryData.length > 0 ? galleryData.map((gallery , i ) => (
                                     <figure className="col-xl-3 col-sm-6">
                                         <Media
-                                            src={`${process.env.PUBLIC_URL}/gallery/${gallery.image}`}
+                                            src={`${process.env.PUBLIC_URL}/api/uploads/gallery/${gallery.image}`}
                                             alt="Gallery"
                                             className="img-thumbnail"
                                             onClick={() =>
@@ -223,9 +221,9 @@ const Detailpage = (props) => {
                 </Container>
                 {photoIndex.isOpen && (
                     <Lightbox
-                        mainSrc={`${process.env.PUBLIC_URL}/gallery/${images[photoIndex.index]}`}
-                        nextSrc={`${process.env.PUBLIC_URL}/gallery//${images[(photoIndex.index + 1) % images.length]}`}
-                        prevSrc={`${process.env.PUBLIC_URL}/gallery//${images[(photoIndex.index + images.length - 1) % images.length]}`}
+                        mainSrc={`${process.env.PUBLIC_URL}/api/uploads/gallery/${images[photoIndex.index]}`}
+                        nextSrc={`${process.env.PUBLIC_URL}/api/uploads/gallery/${images[(photoIndex.index + 1) % images.length]}`}
+                        prevSrc={`${process.env.PUBLIC_URL}/api/uploads/gallery/${images[(photoIndex.index + images.length - 1) % images.length]}`}
                         imageTitle={photoIndex.index + 1 + "/" + images.length}
                         onCloseRequest={() => setPhotoIndex({ ...photoIndex,isOpen:false})}
                         onMovePrevRequest={onMovePrev}
@@ -295,11 +293,11 @@ const Detailpage = (props) => {
 						  </li>
       					</List>
       					<div className="socialmenucontact">
-      						<a href="#" className="facebookD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/facebookD.png`} 
+      						<a href={vendorProfileData.facebook == 'null' ? '#' : vendorProfileData.facebook} className="facebookD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/facebookD.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
-	                 <a href="#" className="twitterD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/twitterD.png`} 
+	                 <a href={vendorProfileData.youtube == 'null' ? '#' : vendorProfileData.youtube} className="twitterD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/twitterD.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
-	                 <a href="#" className="envelopeD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/envelopeD.png`} 
+	                 <a href={vendorProfileData.instagram == 'null' ? '#' : vendorProfileData.instagram} className="envelopeD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/envelopeD.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
       					</div>
       				</div>
