@@ -124,7 +124,7 @@ const VendorPhotogallery = () => {
                                 
                                     <Col sm="3">
                                         <div className="imgGallery">
-                                            <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/gallery/${item.image}`} />
+                                            <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/api/uploads/gallery/${item.image}`} />
                                             <a className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</a> 
                                         </div>
                                     </Col>                               

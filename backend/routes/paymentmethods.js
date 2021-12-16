@@ -102,7 +102,7 @@ router.put('/:id', function (req, res) {
             PaymentMethod
                 .findByPk(req.params.id)
                 .then((paymentmethod) => {
-                    console.log('payment Method Data Coming', paymentmethod);
+                    console.log('payment Method Data Coming', req.body);
                     PaymentMethod.update({
                         user_id: req.body.user_id || paymentmethod.user_id,
                         card_number: req.body.card_number || paymentmethod.card_number,
