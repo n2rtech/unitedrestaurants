@@ -846,7 +846,7 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
             business_name: req.body.business_name || profile.business_name,
             business_email: req.body.business_email || profile.business_email,
             manager_name: req.body.manager_name || profile.manager_name,
-            about_business: req.body.about_business || profile.about_business,
+            about_business: req.body.about_business,
             manager_email: req.body.manager_email || profile.manager_email,
             phone: req.body.phone || profile.phone,
             // mobile: req.body.mobile || profile.mobile,
