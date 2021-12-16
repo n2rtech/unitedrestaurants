@@ -64,13 +64,14 @@ router.get('/:id', (req, res) => {
            user_id : req.params.id
         }})
         .then((paymentmethod) => {
+           
             if (paymentmethod == null) {
                 PaymentMethod
                 .create({
                     card_number: '',
                     name_on_card: '',
                     expiry_date: '',
-                    cvv: '',
+                    cvv: '0',
                     user_id: req.params.id
                 })
                 .then((paymentmethod) => {
@@ -101,11 +102,12 @@ router.put('/:id', function (req, res) {
             PaymentMethod
                 .findByPk(req.params.id)
                 .then((paymentmethod) => {
+                    console.log('payment Method Data Coming', paymentmethod);
                     PaymentMethod.update({
                         user_id: req.body.user_id || paymentmethod.user_id,
                         card_number: req.body.card_number || paymentmethod.card_number,
                         name_on_card: req.body.name_on_card || paymentmethod.name_on_card,
-                        expiry_date: req.body.expiry_date || paymentmethod.expiry_date,
+                        expiry_date: req.body.expiry || paymentmethod.expiry_date,
                         cvv: req.body.cvv || paymentmethod.cvv
                     }, {
                         where: {
@@ -117,9 +119,8 @@ router.put('/:id', function (req, res) {
                         });
                     }).catch(err => res.status(400).send(err));
                 })
-                .catch((error) => {
-                    res.status(400).send(error);
-                });
+                .catch(error => 
+                    res.status(400).send(console.log(error)));
         }
 });
 
