@@ -18,6 +18,8 @@ const handleCountryClick = (code) => {
   localStorage.setItem('country_code' , code);
 }
 
+console.log("Country" , countryData);
+
   return (
       <div className="countryflag">
         <Container fluid={true} className="p-0">
