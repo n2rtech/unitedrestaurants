@@ -115,6 +115,17 @@ const [catData, setCatData] = useState([]);
               </Input>
             </FormGroup>
             <FormGroup>
+              <Label>Display in Top Menu</Label>
+              <div className="radio radio-primary m-l-20">
+                <Input id="no-top" type="radio" value="0" name="radio2" defaultChecked/>
+                <Label className="mb-10" for="no-top">No</Label>
+              </div>
+              <div className="radio radio-primary m-l-20">
+                <Input id="yes-menu" type="radio" value="1" name="radio2" />
+                <Label className="mb-10" for="yes-menu">Yes</Label>
+              </div>
+            </FormGroup>
+            <FormGroup>
               <ImageUploader
                   withIcon={false}
                   withPreview={true}
