@@ -16,9 +16,9 @@ const [Email , setEmail] = useState();
 const [Mobile , setMobile] = useState();
 const [Address , setAddress] = useState();
 const [Country , setCountry] = useState();
-const [Featured , setFeatured] = useState('');
-const [Hotdeals , setHotdeals] = useState('');
-const [category_id , setCategory] = useState();
+const [Featured , setFeatured] = useState();
+const [Hotdeals , setHotdeals] = useState('0');
+const [category_id , setCategory] = useState('0');
 
   useEffect(() => {
   const config = {
