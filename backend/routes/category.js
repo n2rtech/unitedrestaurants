@@ -208,7 +208,6 @@ router.get('/get', passport.authenticate('jwt', {
 });
 
 
-
 // Get List of Categories
 router.get("/list", (req, res) => {
     Category
@@ -231,6 +230,23 @@ router.get("/list", (req, res) => {
 }*/
 
 
+        res.status(200).send(category)
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+
+// Get List of Categories
+router.get("/top-menu", (req, res) => {
+    Category
+    .findAll({
+        where: {
+          top_menu: 1
+      }
+  })
+    .then((category) => {
         res.status(200).send(category)
     })
     .catch((error) => {
@@ -340,7 +356,6 @@ router.get('/:id', passport.authenticate('jwt', {
 router.put('/:id', passport.authenticate('jwt', {
     session: false
 }), imageUpload.single('image'), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Categories').then((rolePerm) => {
         if (!req.params.id || !req.body.name || !req.body.description) {
             res.status(400).send({
                 msg: 'Please pass Category ID, name or description.'
@@ -360,6 +375,8 @@ router.put('/:id', passport.authenticate('jwt', {
                         name: req.body.name || role.name,
                         description: req.body.description || role.description,
                         parent_id: req.body.parent_id,
+                        status: req.body.status,
+                        top_menu: req.body.top_menu,
                         image: image
                     }, {
                         where: {
@@ -375,9 +392,6 @@ router.put('/:id', passport.authenticate('jwt', {
                     res.status(400).send(error);
                 });
         }
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
 });
 
 // Delete a Category

@@ -115,6 +115,7 @@ router.put('/', imageUpload.single('logo'), (req, res) => {
             }).catch(err => res.status(400).send('err'));
         })
         .catch((error) => {
+            console.log(error)
             res.status(400).send('error');
         });
     }

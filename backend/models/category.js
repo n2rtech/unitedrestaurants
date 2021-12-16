@@ -42,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     parent_id: DataTypes.INTEGER,
     image: DataTypes.TEXT,
     sort_order: DataTypes.INTEGER,
+    top_menu: DataTypes.INTEGER,
     status: {
          type: DataTypes.BOOLEAN,
           allowNull: false,

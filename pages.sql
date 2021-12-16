@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 03, 2021 at 07:18 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Host: localhost:3306
+-- Generation Time: Dec 16, 2021 at 08:20 AM
+-- Server version: 8.0.27-0ubuntu0.20.04.1
+-- PHP Version: 7.3.33-1+ubuntu20.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,17 +19,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mernunited`
+-- Database: `unitedrestaurants`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pages`
+-- Table structure for table `Pages`
 --
 
-CREATE TABLE `pages` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `Pages` (
+  `id` int NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `body` text,
@@ -38,10 +38,10 @@ CREATE TABLE `pages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pages`
+-- Dumping data for table `Pages`
 --
 
-INSERT INTO `pages` (`id`, `title`, `slug`, `body`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `Pages` (`id`, `title`, `slug`, `body`, `createdAt`, `updatedAt`) VALUES
 (1, 'ABOUT US', 'about-us', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\n\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\n\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\n\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\n\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\n\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\n\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\n\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\n\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\n\n<p>-Lunch Bux it is more of a message than a for profit businessqq.</p>\n\n<p>About Us</p>\n', '2021-11-18 12:59:06', '2021-12-03 06:04:54'),
 (2, 'Contact Us', 'contact-us', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\n\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\n\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\n\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\n\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\n\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\n\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\n\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\n\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\n\n<p>-Lunch Bux it is more of a message than a for profit business.</p>\n\n<p>Contact Us</p>\n', '2021-11-18 12:59:06', '2021-12-03 06:05:14'),
 (3, 'CUSTOMER SERVICES', 'customer-services', '<p>Lunch Bux is a site intended to bring restaurants and their customers back together again instead of using a third party platform. Statistics show that the rate that restaurants are going out of business is unprecedented thanks to rising payroll costs, rising ingredient costs, other overhead, and most of all: sharing the profit with delivery companies who get the majority of the pie, leaving restaurants with almost no profit.</p>\n\n<p>-On Lunch Bux, restaurants will be able to present a complete picture of what they are about, what they are selling, and what they are offering in an effort to get their customers to order directly from them which has many advantages:</p>\n\n<p>(a) Helping restaurants realize their profits so that they can continue. We all know that small businesses are the backbone of any economy.</p>\n\n<p>(b) When restaurants realize their profits, they will keep their prices within affordable ranges instead of constantly raising to meet their obligations.</p>\n\n<p>(c) When restaurants realize the profits, they will keep using high quality ingredients to compete with the competition since they will be able to afford it.</p>\n\n<p>(d)Restaurants will offer their deals and coupons here since it makes sense to save the money that they would originally pay to delivery companies. Customers will always have a coupon or a deal available to save, and the restaurant will realize its full profit from the sale minus the discount it offered. Instead of delivery companies being the sole beneficiaries, the customer and the restaurant both benefit.</p>\n\n<p>(e) Restaurants who choose to keep using delivery companies will have the option to advertise their business providing the link to their menus on the delivery company&#39;s site, so their customers are still able to order from there.</p>\n\n<p>-Lunch Bux is not only a coupon site, but rather, a very effective tool to advertise your business.</p>\n\n<p>-Lunch Bux will keep launching advertising campaigns until it is well known all over the world</p>\n\n<p>-Lunch Bux it is more of a message than a for profit business.</p>\n\n<p>CUSTOMER SERVICES</p>\n', '2021-11-18 12:59:06', '2021-12-03 06:05:31'),
@@ -57,20 +57,10 @@ INSERT INTO `pages` (`id`, `title`, `slug`, `body`, `createdAt`, `updatedAt`) VA
 --
 
 --
--- Indexes for table `pages`
+-- Indexes for table `Pages`
 --
-ALTER TABLE `pages`
+ALTER TABLE `Pages`
   ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `pages`
---
-ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

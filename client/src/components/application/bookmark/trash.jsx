@@ -4,9 +4,29 @@ import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, T
 import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
-
+import {toast} from 'react-toastify';
+import axios from 'axios'
 
 const Trash = (props) => {
+
+  const token = localStorage.getItem("token");
+
+  const handleClick = (id) => {
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+    };
+
+    axios.post(`/api/${id}/restore/`,config) 
+    .then(response => {
+      toast.success(response.data.message)
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    })
+    .catch(error => console.log('Form submit error', error));
+  };
+
 
   return (
     <Fragment>
@@ -36,7 +56,7 @@ const Trash = (props) => {
                     <td>{"Deleted Country Name"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="danger">Restore</Button>
+                      <Button color="danger" onClick={() => handleClick('countries')}>Restore</Button>
                     </ButtonGroup>
                       
                     </td>
@@ -54,6 +74,14 @@ const Trash = (props) => {
                     <td className="text-right">
                     <ButtonGroup>
                       <Button color="danger">Restore</Button>
+                    </ButtonGroup>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>{"Deleted Categories"}</td>
+                    <td className="text-right">
+                    <ButtonGroup>
+                      <Button color="danger" onClick={() => handleClick('categories')}>Restore</Button>
                     </ButtonGroup>
                     </td>
                   </tr>
