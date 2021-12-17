@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useRef ,useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { Typeahead } from 'react-bootstrap-typeahead';
@@ -7,7 +7,7 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 
 const EditVendor = (props) => {
-
+const ref = useRef();
 const params = useParams();	
 const token = localStorage.getItem("token");
 const [options,setOptions] = useState([])
@@ -78,20 +78,32 @@ const [category_id , setCategory] = useState('0');
 
   axios.get('/api/vendors/'+`${params.id}` , config).then((response) => {
       setDetails(response.data);
-      setName(response.data.name);
-      setEmail(response.data.email);
-      setMobile(response.data.mobile);
-      setAddress(response.data.address);
-      setCountry(response.data.country_id);
-      setCategory(response.data.category_id);
-      setFeatured(response.data.featured_business)
-      setHotdeals(response.data.hot_deal)
+      setName(response.data[0].name);
+      setEmail(response.data[0].email);
+      setMobile(response.data[0].mobile);
+      setAddress(response.data[0].address);
+      setCountry(response.data[0].country_id);
+      setCategory(response.data[0].category_id);
+      setFeatured(response.data[0].featured_business);
+      setHotdeals(response.data[0].hot_deal);
     });
 
   }, []);
 
-  console.log('Vendors' ,details);
-
+  const [singleSelections, setSingleSelections] = useState([]);
+  
+  const [cat , setCat] = useState();
+  useEffect(() => {
+    const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
+          };
+  
+    axios.get('/api/categories/1' , config).then((response) => {
+      setCat(response.data.name);
+      });
+  
+    }, []);
+  
   const handleSubmit = event => {
     event.preventDefault();
 
@@ -120,7 +132,7 @@ const [category_id , setCategory] = useState('0');
 
   };
 
-console.log('Category_id' , category_id);
+console.log('Mobile' , cat);
 
   return (
     <Fragment>
@@ -208,14 +220,16 @@ console.log('Category_id' , category_id);
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Business Listed"}</Label>
                 <Typeahead
-                  id="multiple-typeahead"
+                  id="public-typeahead"
                   clearButton
+                  defaultSelected={options.slice(0, 1)}
                   labelKey={"name"}
                   onChange={onChangeCategory}
+                  
                   // onInputChange={handleInputChange}
                   options={options}
-                  
-                  placeholder="Choose categories..."
+                  ref={ref}
+                  placeholder={cat}
                 />
               </FormGroup>
               <FormGroup>
