@@ -104,7 +104,7 @@ const VendorMembershipPackage = (props) => {
                           
                           if (cycle == 'Monthly') {
                             return (
-                              <PaypalStandardMonthly amount = {5.99} currency = {'USD'}/>
+                              <PaypalStandardMonthly amount = {5.99} membership_id = {1} interval = {'Monthly'} currency = {'USD'}/>
                             )}  else if (cycle == 'Quarterly') {
                               return (
                                 <PaypalStandardQuarterly amount = {16.00} currency = {'USD'}/>
