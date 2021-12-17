@@ -69,6 +69,10 @@ const [category_id , setCategory] = useState('0');
     }
   }
 
+  const handleParentChange = (evt) => {
+      setCategory(evt.target.value)
+    }
+
   const [details , setDetails] = useState();
   useEffect(() => {
     
@@ -217,21 +221,33 @@ console.log('Mobile' , cat);
                 <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
                 <Input className="form-control"  onChange = {onChangeAddress}  value={Address} type="name" placeholder="C6, Sector 7, Noida" />
               </FormGroup>
+
               <FormGroup>
+            <Label htmlFor="exampleFormControlSelect9">Parent category(if any?)</Label>
+            <Input type="select" name="select" onChange={handleParentChange}  className="form-control digits" value={category_id} defaultValue={category_id}>
+            <option value="">{"Select, if you want to make as a subcategory"}</option>
+            {options.map((country , i ) => (
+                <Fragment key={i}>
+                  <option selected={country.id == category_id} value={country.id}>{country.name}</option>
+                </Fragment>
+                ))}
+            </Input>
+            </FormGroup>
+
+              {/*<FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Business Listed"}</Label>
                 <Typeahead
                   id="public-typeahead"
                   clearButton
                   defaultSelected={options.slice(0, 1)}
                   labelKey={"name"}
-                  onChange={onChangeCategory}
-                  
-                  // onInputChange={handleInputChange}
+                  onChange={onChangeCategory}                  
+                  onInputChange={handleInputChange}
                   options={options}
                   ref={ref}
                   placeholder={cat}
                 />
-              </FormGroup>
+              </FormGroup>*/}
               <FormGroup>
                 <Button color="primary" onClick = {handleSubmit}>{"Save"}</Button>
               </FormGroup>
