@@ -17,8 +17,6 @@ const Detailpage = (props) => {
     const params = useParams();
 
         const id = `${params.id}`;
-        console.log('Id' , id);
-
 		    const [images,setImage] = useState([]) 
         const [smallImages,setsmallImages] = useState([])
         const initilindex = {index:0,isOpen:false}
@@ -100,6 +98,8 @@ const Detailpage = (props) => {
 
         },[])
 
+        console.log("vedprogile",vendorProfileData);
+
   return (
     <div className="detailpage">             
       <Container className="p-0">        
@@ -120,7 +120,7 @@ const Detailpage = (props) => {
 	          <div className="contact-group">
 	            <img src={`${process.env.PUBLIC_URL}/assets/images/icons/call.png`} 
 	                 alt="Call" className="addcall" />
-	            <div className="contactdetail"><a href="tel:3075473660">3075473660</a></div>
+	            <div className="contactdetail"><a href="tel:3075473660">{vendorProfileData.phone}</a></div>
 	          </div>
         	</div>
         </Col>
@@ -292,11 +292,11 @@ const Detailpage = (props) => {
 						  </li>
       					</List>
       					<div className="socialmenucontact">
-      						<a href={vendorProfileData.facebook == 'null' ? '#' : vendorProfileData.facebook} className="facebookD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/facebookD.png`} 
+      						<a href={vendorProfileData.facebook == 'null' ? '#' : vendorProfileData.facebook} target="_blank" className="facebookD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/facebookD.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
-	                 <a href={vendorProfileData.youtube == 'null' ? '#' : vendorProfileData.youtube} className="twitterD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/twitterD.png`} 
+	                 <a href={vendorProfileData.youtube == 'null' ? '#' : vendorProfileData.youtube} target="_blank" className="twitterD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/twitterD.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
-	                 <a href={vendorProfileData.instagram == 'null' ? '#' : vendorProfileData.instagram} className="envelopeD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/envelopeD.png`} 
+	                 <a href={vendorProfileData.instagram == 'null' ? '#' : vendorProfileData.instagram} target="_blank" className="envelopeD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/envelopeD.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
       					</div>
       				</div>
