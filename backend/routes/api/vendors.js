@@ -905,11 +905,11 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
                 res.status(200).send({
                   'message': 'Profile updated'
                 });
-              }); 
+              }).catch(err => res.status(400).send(console.log(err))); 
             }); 
           }); 
 
-          }).catch(err => res.status(400).send('err'));
+          }).catch(err => res.status(400).send(console.log(err)));
 
 
         } else {
