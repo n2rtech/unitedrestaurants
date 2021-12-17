@@ -16,14 +16,13 @@ const Detailpage = (props) => {
 
     const params = useParams();
 
-    const id = `${params.id}`;
-    console.log('Id' , id);
+        const id = `${params.id}`;
+        console.log('Id' , id);
 
-		const [images,setImage] = useState([]) 
+		    const [images,setImage] = useState([]) 
         const [smallImages,setsmallImages] = useState([])
         const initilindex = {index:0,isOpen:false}
         const[photoIndex,setPhotoIndex] = useState(initilindex)
-
         const[galleryData,setGalleryData] = useState([])
         const[videoGalleryData,setVideoGalleryData] = useState([])
         const[menuItemsData,setMenuItemsData] = useState({})
