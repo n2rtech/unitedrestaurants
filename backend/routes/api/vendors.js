@@ -741,6 +741,35 @@ router.put('/:id', (req, res) => {
   }
 });
 
+//suspended a vendor
+// Update a User
+router.get('/suspend/:id', (req, res) => {
+  if (!req.params.id) {
+    res.status(400).send({
+      msg: 'Please pass Id.'
+    })
+  } else {
+    Vendor
+    .findByPk(req.params.id)
+    .then((user) => {
+
+      Vendor.update({
+       is_suspended: 1,
+      }, {
+        where: {
+          id: req.params.id
+        }
+      }).then(_ => {
+        res.status(200).send({
+          'message': 'Vendor is suspended!'
+        });
+      }).catch(err => res.status(400).send('err'));
+    })
+    .catch((error) => {
+      res.status(400).send('error');
+    });
+  }
+});
 
 
 
