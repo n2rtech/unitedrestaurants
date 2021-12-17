@@ -87,7 +87,7 @@ const JobOpenings = (props) => {
             <Col sm="6"></Col>
             <Col sm="6">
               <div className="pull-right">
-                <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/add-job-openings`} className="btn btn-primary">Add New</a>
+                <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/add-job-openings/`} className="btn btn-primary">Add New</a>
               </div>
             </Col>
           </Row>
