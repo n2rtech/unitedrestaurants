@@ -120,7 +120,7 @@ const VendorProfile = (props) => {
       const result = await axios('/api/vendors/profile/'+`${id}`,config);
         if(result.data.categories == null){
           axios('/api/vendors/'+`${id}`).then(response => {
-            axios('/api/categories/get/'+response.data.category_id).then(response1 => {
+            axios('/api/categories/get/'+response.data[0].category_id).then(response1 => {
               setMultiSelections(response1.data)
             })
           })
