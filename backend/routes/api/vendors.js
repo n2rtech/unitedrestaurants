@@ -701,19 +701,19 @@ router.put('/:id', (req, res) => {
                 var name = req.body.name;
                 var banner = vendor_pro[0].banner;
 
-                DB.query("DELETE  FROM Hotdeals where user_id="+user_id);
-                DB.query("DELETE  FROM Businessadvertises where user_id="+user_id);
-                DB.query("DELETE  FROM Featuredbusinesses where user_id="+user_id);
+                DB.query("DELETE  FROM HotDeals where user_id="+user_id);
+                DB.query("DELETE  FROM BusinessAdvertises where user_id="+user_id);
+                DB.query("DELETE  FROM FeaturedBusinesses where user_id="+user_id);
                 if (req.body.hot_deals) {
-                  DB.query("INSERT INTO Hotdeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                  DB.query("INSERT INTO HotDeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
                 }
 
                 if (req.body.featured_business){
-                  DB.query("INSERT INTO Featuredbusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                  DB.query("INSERT INTO FeaturedBusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
                 }
 
                 if (req.body.hot_deals || req.body.featured_business) {
-                  DB.query("INSERT INTO Businessadvertises (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                  DB.query("INSERT INTO BusinessAdvertises (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
                 }
 
                 res.status(200).send({
@@ -741,35 +741,6 @@ router.put('/:id', (req, res) => {
   }
 });
 
-//suspended a vendor
-// Update a User
-router.get('/suspend/:id', (req, res) => {
-  if (!req.params.id) {
-    res.status(400).send({
-      msg: 'Please pass Id.'
-    })
-  } else {
-    Vendor
-    .findByPk(req.params.id)
-    .then((user) => {
-
-      Vendor.update({
-       is_suspended: 1,
-      }, {
-        where: {
-          id: req.params.id
-        }
-      }).then(_ => {
-        res.status(200).send({
-          'message': 'Vendor is suspended!'
-        });
-      }).catch(err => res.status(400).send('err'));
-    })
-    .catch((error) => {
-      res.status(400).send('error');
-    });
-  }
-});
 
 
 
