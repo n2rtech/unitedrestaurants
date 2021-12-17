@@ -445,7 +445,7 @@ export const routes = [
         { path:"/dashboard/vendor/menu-items/:id", Component:MenuItems},
         { path:"/dashboard/vendor/sale-items/:id", Component:SaleItems},
         { path:"/dashboard/admin/accounts-payable", Component:AccountsPayable},
-        { path:"/dashboard/admin/edit-payable", Component:EditAccountsPayable},
+        { path:"/dashboard/admin/edit-payable/:id", Component:EditAccountsPayable},
         { path:"/dashboard/admin/add-payable", Component:AddAccountsPayable},
         { path:"/dashboard/admin/countries", Component:Countries},
         { path:"/dashboard/admin/add-countries", Component:AddCountries},
