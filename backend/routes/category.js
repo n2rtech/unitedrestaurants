@@ -13,7 +13,7 @@ const Op = require('sequelize').Op
 var multer  = require('multer');
 
 const imageStorage = multer.diskStorage({
-    destination: 'images', 
+    destination: 'uploads/categories', 
       filename: (req, file, cb) => {
           cb(null, file.fieldname + '_' + Date.now() 
              + path.extname(file.originalname))

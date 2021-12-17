@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models').User;
 const Role = require('../models').Role;
 const Permission = require('../models').Permission;
+const RolePermission = require('../models').RolePermission;
 const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
@@ -173,7 +174,16 @@ router.post('/permissions/:id', passport.authenticate('jwt', {
             Role
                 .findByPk(req.params.id)
                 .then((role) => {
-                    req.body.permissions.forEach(function (item, index) {
+                    console.log(req.body.permissions);
+
+                    if (req.body.permissions) {
+
+                        RolePermission.destroy({
+                            where: {
+                                role_id: req.params.id
+                            }
+                        }).then(_ => {
+                            req.body.permissions.forEach(function (item, index) {
                         Permission
                             .findByPk(item)
                             .then(async (perm) => {
@@ -182,21 +192,26 @@ router.post('/permissions/:id', passport.authenticate('jwt', {
                                         selfGranted: false
                                     }
                                 });
+                            }).then(_ => {
+                                res.status(200).send({
+                                    'message': 'Permissions added'
+                                });
                             })
                             .catch((error) => {
                                 res.status(400).send(error);
                             });
                     });
-                    res.status(200).send({
-                        'message': 'Permissions added'
-                    });
+                        }).catch(err => res.status(400).send(err));
+                    }
                 })
                 .catch((error) => {
-                    res.status(400).send(error);
+                    console.log(error);
+                    res.status(400).send('error');
                 });
         }
-    }).catch((error) => {
-        res.status(403).send(error);
+    }).catch((err) => {
+        console.log(err);
+        res.status(403).send('err');
     });
 });
 

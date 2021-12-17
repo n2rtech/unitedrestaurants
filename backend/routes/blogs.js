@@ -45,10 +45,17 @@ router.post('/', imageUpload.single('image'), (req, res) => {
                 msg: 'Please pass Blog Content.'
             })
         } else {
+
+            if (req.file) {
+                image = req.file.filename;
+             }else{
+                image = '';
+             }
+             
             Blog
                 .create({
                     name: req.body.name,
-                    image: req.file.filename,
+                    image: image,
                     show_on_home: req.body.show_on_home,
                     content: req.body.content
                 })

@@ -110,7 +110,8 @@ router.put('/:id', passport.authenticate('jwt', {
                         });
                     }
                     Country.update({
-                        name: req.body.name || country.name
+                        name: req.body.name || country.name,
+                        code: req.body.code || country.code
                     }, {
                         where: {
                             id: req.params.id
