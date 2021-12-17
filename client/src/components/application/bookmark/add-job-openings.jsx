@@ -4,6 +4,7 @@ import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, T
 import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const AddJobOpenings = (props) => {
 
@@ -12,6 +13,7 @@ const AddJobOpenings = (props) => {
     const params = useParams();
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
+    const history = useHistory()
 
     const onChangeJobname = (event) => {
       setJobname(event.target.value);
@@ -27,7 +29,7 @@ const AddJobOpenings = (props) => {
     event.preventDefault();
 
     const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
       };
       const bodyParameters = {
         job_name: jobname,
@@ -37,7 +39,12 @@ const AddJobOpenings = (props) => {
       axios.post(`/api/jobs/`,
         bodyParameters,
         config
-      ) .then(response => toast.success("Jobs Added !")  )
+      ) .then(response => {
+        toast.success("Jobs Added !")
+        setTimeout(() => {
+          history.push('/dashboard/vendor/job-openings/');
+        }, 1000);
+      } )
          .catch(error => console.log('Form submit error', error))
 
   };
