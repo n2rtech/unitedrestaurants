@@ -16,7 +16,7 @@ const Register = (props) => {
   }, []);
 
   const getData = () => {
-    axios.get(`/api/categories/list`)
+    axios.get(`/api/categories/all`)
     .then((getData) => {
       setCategoryData(getData.data);
     });

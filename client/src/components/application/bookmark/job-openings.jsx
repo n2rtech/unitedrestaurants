@@ -104,7 +104,7 @@ const JobOpenings = (props) => {
                     <tr key={i}>
                     <td>{item.job_name}</td>
                     <td className="text-right">
-                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-job-openings/`+`${item.id}`} className="btn btn-success">Edit</a> &nbsp;
+                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-job-openings/`+`${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
                       <a href={"#"} className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</a> 
                     </td>
                   </tr>

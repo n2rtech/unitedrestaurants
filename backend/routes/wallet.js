@@ -18,8 +18,8 @@ router.post('/', (req, res) => {
         })
     } else {
         Vendor.update({
-            //wallet_balance: sequelize.literal('wallet_balance +' + req.body.amount)
-            wallet_balance:req.body.amount
+            wallet_balance: sequelize.literal('wallet_balance +' + req.body.amount)
+            //wallet_balance:req.body.amount
         }, { where: {
             id: req.body.user_id
         }

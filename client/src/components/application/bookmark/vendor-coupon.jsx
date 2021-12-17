@@ -99,7 +99,7 @@ const VendorCoupon = (props) => {
                    <tr>
                    <td>{item.deal_name}</td>
                    <td className="text-right">
-                     <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-vendor-coupon/${item.id}`} className="btn btn-success">Edit</a> &nbsp;
+                     <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-vendor-coupon/${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
                      <a onClick={() => handleDelete(item.id)}className="btn btn-danger">Delete</a> 
                    </td>
                  </tr>
