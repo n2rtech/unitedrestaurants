@@ -294,9 +294,9 @@ const Detailpage = (props) => {
       					<div className="socialmenucontact">
       						<a href={vendorProfileData.facebook == 'null' ? '#' : vendorProfileData.facebook} target="_blank" className="facebookD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/facebookD.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
-	                 <a href={vendorProfileData.youtube == 'null' ? '#' : vendorProfileData.youtube} target="_blank" className="twitterD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/twitterD.png`} 
+	                 <a href={vendorProfileData.youtube == 'null' ? '#' : vendorProfileData.youtube} target="_blank" className="twitterD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/instagram.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
-	                 <a href={vendorProfileData.instagram == 'null' ? '#' : vendorProfileData.instagram} target="_blank" className="envelopeD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/envelopeD.png`} 
+	                 <a href={vendorProfileData.instagram == 'null' ? '#' : vendorProfileData.instagram} target="_blank" className="envelopeD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/youtube.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
       					</div>
       				</div>
