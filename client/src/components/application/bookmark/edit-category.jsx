@@ -26,6 +26,8 @@ const [catData, setCatData] = useState([]);
 
     const [catname,setCatname] = useState('');
     const [parentCat,setParentCat] = useState('');
+    const [status,setStatus] = useState(0);
+    const [topMenu,setTopMenu] = useState('');
 
     const handleChange = (evt) => {
       setCatname(evt.target.value)
@@ -33,6 +35,14 @@ const [catData, setCatData] = useState([]);
 
      const handleParentChange = (evt) => {
       setParentCat(evt.target.value)
+    }
+
+    const handleStatusChange = (evt) => {
+      setStatus(evt.target.value)
+    }
+
+    const handleTopMenuChange = (evt) => {
+      setTopMenu(evt.target.value)
     }
 
     useEffect(() => {
@@ -46,14 +56,16 @@ const [catData, setCatData] = useState([]);
       .then((getData) => {
         setCatData(getData.data);
       });
-
-       
+     
         fetch("/api/categories/"+`${params.id}` , config)
           .then(res => res.json())
           .then(
-            (result) => {
-              
+            (result) => {              
                 setCatname(result.name);
+                if(result.status == 'true' || result.status === true || result.status == 1 || result.status == true){
+                  setStatus(1);
+                }
+                setTopMenu(result.top_menu);
                 setParentCat(result.parent_id);
             },
             (error) => {
@@ -71,9 +83,16 @@ const [catData, setCatData] = useState([]);
           
           const bodyParameters = new FormData();
           bodyParameters.set('name', catname);
-          bodyParameters.set('image', image.pictureFiles[0]);
+          bodyParameters.set('description', catname);
+          if(image.pictureFiles) {
+            bodyParameters.set('image', image.pictureFiles[0]);
+          } else {
+            bodyParameters.set('image', image.pictureFiles);
+          }
           bodyParameters.set('parent_id', parentCat);
           bodyParameters.set('description', catname);
+          bodyParameters.set('top_menu', topMenu);
+          bodyParameters.set('status', status);
 
           axios.put(`/api/categories/`+`${params.id}`,
             bodyParameters,
@@ -102,26 +121,26 @@ const [catData, setCatData] = useState([]);
             {parentCat}
             {catData.map((country , i ) => (
                 <Fragment key={i}>
-                  <option value={country.id}>{country.name}</option>
+                  <option selected={country.id == parentCat} value={country.id}>{country.name}</option>
                 </Fragment>
                 ))}
             </Input>
             </FormGroup>
             <FormGroup>
               <Label>Status</Label>
-              <Input type="select" name="select" className="form-control digits" placeholder="Please Select">
-                <option>{"Enabled"}</option>
-                <option>{"Disabled"}</option>
+              <Input type="select" onChange={handleStatusChange} name="select" className="form-control digits" placeholder="Please Select" value={status}>
+                <option value="1" data-val={status} selected={status === true}>{"Enabled"}</option>
+                <option value="0" data-val={status} selected={status === false}>{"Disabled"}</option>
               </Input>
             </FormGroup>
             <FormGroup>
               <Label>Display in Top Menu</Label>
               <div className="radio radio-primary m-l-20">
-                <Input id="no-top" type="radio" value="0" name="radio2" defaultChecked/>
+                <Input id="no-top" type="radio" value="0" name="radio2" onChange={handleTopMenuChange} checked={topMenu==0}/>
                 <Label className="mb-10" for="no-top">No</Label>
               </div>
               <div className="radio radio-primary m-l-20">
-                <Input id="yes-menu" type="radio" value="1" name="radio2" />
+                <Input id="yes-menu" type="radio" value="1" name="radio2" onChange={handleTopMenuChange} checked={topMenu==1}/>
                 <Label className="mb-10" for="yes-menu">Yes</Label>
               </div>
             </FormGroup>
