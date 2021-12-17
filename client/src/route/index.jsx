@@ -449,7 +449,7 @@ export const routes = [
         { path:"/dashboard/admin/add-payable", Component:AddAccountsPayable},
         { path:"/dashboard/admin/countries", Component:Countries},
         { path:"/dashboard/admin/add-countries", Component:AddCountries},
-        { path:"/dashboard/admin/edit-countries", Component:EditCountries},
+        { path:"/dashboard/admin/edit-countries/:id", Component:EditCountries},
         { path:"/dashboard/admin/blogs", Component:Blogs},
         { path:"/dashboard/admin/add-blog", Component:AddBlog},
         { path:"/dashboard/admin/edit-blog/:id", Component:EditBlog},
