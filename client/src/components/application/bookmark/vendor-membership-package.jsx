@@ -1,4 +1,4 @@
-import React, { Fragment , useState } from 'react';
+import React, { Fragment , useEffect, useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 
 import PaypalStandardMonthly from './paypalplans/paypalstandardmonthly.jsx'
@@ -68,6 +68,35 @@ const VendorMembershipPackage = (props) => {
     }
   }
 
+
+  const [activePlan, setActivePlan] = useState([]);
+  const [planname, setPlanName] = useState('Free');
+
+  const token = localStorage.getItem("token");
+  const user_id = localStorage.getItem("id");
+
+  useEffect(() => {
+  
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+   
+      fetch('/api/vendors/active-plan/'+`${user_id}` , config)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setActivePlan(result);
+            setPlanName(result.name);
+          },
+          (error) => {
+            
+          }
+        )
+    }, []);
+
+    console.log(activePlan);
+
+
   return (
     <Fragment>
       <Breadcrumb parent="Price" title="Membership Package" />
@@ -90,7 +119,16 @@ const VendorMembershipPackage = (props) => {
                           <li>{"Upload Business Images & Videos"}</li>
                           <li>{"Complete use of our platform"}</li>
                         </ul>
-                        <div className="pricingtable-signup"><Button color="primary" size="lg" disabled>{"Active"}</Button></div>
+                        
+                          { planname == 'Free' ? 
+                          
+                          <div className="pricingtable-signup"><Button color="primary" size="lg" disabled>{"Active"}</Button></div> 
+                          
+                          :
+                          
+                          <div className="pricingtable-signup"><Button color="primary" size="lg">Subscribe</Button></div>
+                          }
+                          
                       </div>
                     </Col>
                     <Col md="4" sm="6">
@@ -118,6 +156,16 @@ const VendorMembershipPackage = (props) => {
                         </FormGroup>
                         <div className="pricingtable-signup">
                         {cycle}
+
+                        { planname == 'Standard' ? 
+                          
+                          <div className="pricingtable-signup"><Button color="primary" size="lg" disabled>{"Active"}</Button></div> 
+                          
+                          :
+                          
+                          ''
+                          }
+
                         </div>
                       </div>
                     </Col>
@@ -145,6 +193,15 @@ const VendorMembershipPackage = (props) => {
                         </FormGroup>
                         <div className="pricingtable-signup">
                         {premiumcycle}
+                        { planname == 'Premium' ? 
+                          
+                          <div className="pricingtable-signup"><Button color="primary" size="lg" disabled>{"Active"}</Button></div> 
+                          
+                          :
+                          
+                          ''
+                          }
+
                         </div>
                       </div>
                     </Col>
