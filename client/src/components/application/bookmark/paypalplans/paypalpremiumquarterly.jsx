@@ -1,5 +1,7 @@
 import { PayPalButton } from "react-paypal-button-v2";
 import React from 'react';
+import axios from 'axios';
+import {toast} from 'react-toastify';
 
 const paypalpremiumquarterly = (props) => {
   const { amount, currency, createSubscription, onApprove, catchError,onError, onCancel} = props;
@@ -13,24 +15,32 @@ const paypalpremiumquarterly = (props) => {
       currency={currency}
       createSubscription={(data, details) => { 
         return details.subscription.create({
-        plan_id: 'P-3SH91639SS050050TMGW5UYQ'
+        plan_id: 'P-14Y17157AY5485331MG6XP4I'
       });
     }}
       onApprove={(data, details) => {
           // Capture the funds from the transaction
           return details.subscription.get().then(function(details) {
-            // Show a success message to your buyer
-            alert("Subscription completed");
-            console.log("Subscriptions" , details)
+            console.log('Data' , data);
+            console.log('Details' , details);
 
-            // OPTIONAL: Call your server to save the subscription
-            // return fetch("/paypal-subscription-complete", {
-            //   method: "post",
-            //   body: JSON.stringify({
-            //     orderID: data.orderID,
-            //     subscriptionID: data.subscriptionID
-            //   })
-            // });
+            const token = localStorage.getItem("token");
+            const user_id = localStorage.getItem("id");
+            const config = {
+              headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+              };
+
+              const bodyParameters = {
+                membership_id: props.membership_id,
+                membership_subscription_id: data.subscriptionID,
+                interval: props.interval,
+                price: props.amount,
+                comment: details.status +'-'+data.orderID
+              }
+
+            return axios.put('/api/vendor-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
+            .then(response => toast.success('Transaction completed by ' + details.payer.name.given_name))
+            .catch(error => console.log('Form submit error', error))
           });
         }
       }

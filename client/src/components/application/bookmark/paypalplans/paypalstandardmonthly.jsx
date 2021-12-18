@@ -8,22 +8,7 @@ const paypalstandardmonthly = (props) => {
   const paypalKey = "AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t"
 
   console.log(props);
-
-//   const [loadState, setLoadState] = useState({ loading: false, loaded: false });
-
-//   useEffect(() => {
-//     if (!loadState.loading && !loadState.loaded) {
-//       setLoadState({ loading: true, loaded: false });
-//       const script = document.createElement("script");
-//       script.src = `https://www.paypal.com/sdk/js?client-id=AXPEKGBNnTg-16vrrVO_KBxYrNr3x7GUl9zVlppx4OYPfRAxCIvMfKNewkiTXCnptPuIZDxJVkslkyIX&vault=true&intent=subscription&currency=USD`;
-//       script.addEventListener("load", () =>
-//         setLoadState({ loading: false, loaded: true })
-//       );
-//       document.body.appendChild(script);
-//       console.log("append script");
-//     }
-// // ...
-//   }, [loadState,...]);
+  console.log(paypalKey);
 
   return (
     <PayPalButton
@@ -49,23 +34,15 @@ const paypalstandardmonthly = (props) => {
 
               const bodyParameters = {
                 membership_id: props.membership_id,
-                membership_subscription_id: '',
+                membership_subscription_id: data.subscriptionID,
                 interval: props.interval,
                 price: props.amount,
-                comment: 'Subscription Added'
+                comment: details.status +'-'+data.orderID
               }
 
-            return axios.post('/api/vendor-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
+            return axios.put('/api/vendor-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
             .then(response => toast.success('Transaction completed by ' + details.payer.name.given_name))
             .catch(error => console.log('Form submit error', error))
-
-            // return fetch("/paypal-subscription-complete", {
-            //   method: "post",
-            //   body: JSON.stringify({
-            //     orderID: data.orderID,
-            //     subscriptionID: data.subscriptionID
-            //   })
-            // });
 
           });
         }

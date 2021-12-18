@@ -13,26 +13,60 @@ import PaypalPremiumYearly from './paypalplans/paypalpremiumyearly.jsx'
 
 
 import { Container, Row, Col, Card, CardHeader, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
-import { SimplePricingCard,BecomeMember, Standard, LorumIpsum, Purchase, Business,Premium,Extra,SignUp } from '../../../constant';
+import { Standard } from '../../../constant';
 const VendorMembershipPackage = (props) => {
 
-  const [cycle,setCycle] = useState('Monthly')
-  const [amount,setAmount] = useState('5.99')
+  const [cycle,setCycle] = useState();
+  const [cycleamount,setAmount] = useState('0');
 
   const onChangeCycle = (event) => {
-    setCycle(event.target.value);
-    setAmount(event.target.value);
+      if (event.target.value == 'Monthly') {
+        setAmount(5.99)
+        setCycle(<PaypalStandardMonthly amount = {5.99} membership_id = {2} interval = {'Monthly'} currency = {'USD'}/>)
+      }  
+      else if (event.target.value == 'Quarterly') {
+        setAmount(16.00)
+        setCycle(
+          <PaypalStandardQuarterly amount = {16.00} membership_id = {4} interval = {'Quarterly'} currency = {'USD'}/>
+        )
+      } else if (event.target.value == 'Yearly') {
+        setAmount(65.00)
+        setCycle (
+          <PaypalStandardYearly amount = {65.00} membership_id = {6} interval = {'Yearly'} currency = {'USD'}/>
+        )
+      } else {
+        setAmount(30.00)
+        setCycle (
+          <PaypalStandardHalfyearly amount = {30.00} membership_id = {5} interval = {'HalfYearly'} currency = {'USD'}/>
+        )
+      }
   }
 
-  const [premiumcycle,setPremiumCycle] = useState('Monthly')
-  const [premiumamount,setPremiumAmount] = useState('5.99')
+  const [premiumcycle,setPremiumCycle] = useState()
+  const [premiumamount,setPremiumAmount] = useState('0');
 
   const onChangePremiumCycle = (event) => {
-    setPremiumCycle(event.target.value);
-    setPremiumAmount(event.target.value);
+    if (event.target.value == 'Monthly') {
+      setPremiumAmount(7.99)
+      setPremiumCycle(<PaypalPremiumMonthly amount = {7.99} membership_id = {3} interval = {'Monthly'} currency = {'USD'}/>)
+    }  
+    else if (event.target.value == 'Quarterly') {
+      setPremiumAmount(29.00)
+      setPremiumCycle(
+        <PaypalPremiumQuatertly amount = {29.00} membership_id = {7} interval = {'Quarterly'} currency = {'USD'}/>
+      )
+    } else if (event.target.value == 'Yearly') {
+      setPremiumAmount(90.00)
+      setPremiumCycle (
+        <PaypalPremiumYearly amount = {90.00} membership_id = {9} interval = {'Yearly'} currency = {'USD'}/>
+      )
+    } else {
+      setPremiumAmount(43.00)
+      setPremiumCycle (
+        <PaypalPremiumHalfyearly amount = {43.00} membership_id = {8} interval = {'HalfYearly'} currency = {'USD'}/>
+      )
+    }
   }
-
-  console.log('Cycle' , cycle);
 
   return (
     <Fragment>
@@ -65,25 +99,7 @@ const VendorMembershipPackage = (props) => {
                           <h3 className="title">{Standard}</h3>
                         </div>
                         <div className="price-value"><span className="currency">{"$"}</span><span className="amount">
-                        {(() => {
-                          
-                          if (cycle == 'Monthly') {
-                            return (
-                              5.99
-                            )}  else if (cycle == 'Quarterly') {
-                              return (
-                                16.00
-                              )
-                            } else if (cycle == 'Yearly') {
-                              return (
-                                30.00
-                              )
-                            } else {
-                              return (
-                                65.00
-                              )
-                            }
-                          })()}                          
+                        {cycleamount}                          
                           </span><span className="duration">{"/mo"}</span></div>
                         <ul className="pricing-content">
                           <li>{"All what is included in Free Membership Package +"}</li>
@@ -93,6 +109,7 @@ const VendorMembershipPackage = (props) => {
                         <FormGroup className="text-left">
                           <Label htmlFor="exampleFormControlSelect9">{"Select your plan"}</Label>
                           <Input type="select" name="select" onChange = {onChangeCycle} className="form-control digits" defaultValue="1">
+                            <option>{"Select Cycle"}</option>
                             <option>{"Monthly"}</option>
                             <option>{"Quarterly"}</option>
                             <option>{"Half Yearly"}</option>
@@ -100,25 +117,7 @@ const VendorMembershipPackage = (props) => {
                           </Input>
                         </FormGroup>
                         <div className="pricingtable-signup">
-                        {(() => {
-                          
-                          if (cycle == 'Monthly') {
-                            return (
-                              <PaypalStandardMonthly amount = {5.99} membership_id = {1} interval = {'Monthly'} currency = {'USD'}/>
-                            )}  else if (cycle == 'Quarterly') {
-                              return (
-                                <PaypalStandardQuarterly amount = {16.00} currency = {'USD'}/>
-                              )
-                            } else if (cycle == 'Yearly') {
-                              return (
-                                <PaypalStandardYearly amount = {30.00} currency = {'USD'}/>
-                              )
-                            } else {
-                              return (
-                                <PaypalStandardHalfyearly amount = {65.00} currency = {'USD'}/>
-                              )
-                            }
-                          })()}
+                        {cycle}
                         </div>
                       </div>
                     </Col>
@@ -128,25 +127,7 @@ const VendorMembershipPackage = (props) => {
                           <h3 className="title">{"Premium"}</h3>
                         </div>
                         <div className="price-value"><span className="currency">{"$"}</span><span className="amount">
-                        {(() => {
-                          
-                          if (premiumcycle == 'Monthly') {
-                            return (
-                              7.99
-                            )}  else if (premiumcycle == 'Quarterly') {
-                              return (
-                                29.00
-                              )
-                            } else if (premiumcycle == 'Yearly') {
-                              return (
-                                43.00
-                              )
-                            } else {
-                              return (
-                                90.00
-                              )
-                            }
-                          })()}  
+                        {premiumamount}  
                           </span><span className="duration">{"/mo"}</span></div>
                         <ul className="pricing-content">
                           <li>{"All what is included in Free & Standard membership + "}</li>
@@ -155,6 +136,7 @@ const VendorMembershipPackage = (props) => {
                         <FormGroup className="text-left">
                           <Label htmlFor="exampleFormControlSelect9">{"Select your plan"}</Label>
                           <Input type="select" name="select" onChange = {onChangePremiumCycle}  className="form-control digits" defaultValue="1">
+                            <option>{"Select Cycle"}</option>
                             <option>{"Monthly"}</option>
                             <option>{"Quarterly"}</option>
                             <option>{"Half Yearly"}</option>
@@ -162,24 +144,7 @@ const VendorMembershipPackage = (props) => {
                           </Input>
                         </FormGroup>
                         <div className="pricingtable-signup">
-                        {(() => {
-                          if (premiumcycle == 'Monthly') {
-                            return (
-                              <PaypalPremiumMonthly/>
-                          )} else if (premiumcycle == 'Quarterly') {
-                              return (
-                                <PaypalPremiumQuatertly/>
-                              )
-                          } else if (premiumcycle == 'Yearly') {
-                              return (
-                                <PaypalPremiumYearly/>
-                              )
-                          } else {
-                              return (
-                                <PaypalPremiumHalfyearly/>
-                              )
-                          }
-                        })()}
+                        {premiumcycle}
                         </div>
                       </div>
                     </Col>
