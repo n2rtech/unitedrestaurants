@@ -9,6 +9,7 @@ const nodemailer = require("nodemailer");
 const User = require('../../models').User;
 const db = require('../../models');
 const Vendor = require('../../models').Vendor;
+const Membership = require('../../models').Membership;
 const HotDeal = require('../../models').HotDeal;
 const FeaturedBusiness = require('../../models').FeaturedBusiness;
 const BusinessAdvertise = require('../../models').BusinessAdvertise;
@@ -926,6 +927,31 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
   }
 });
 
+
+router.get('/active-plan/:id', (req, res) => {
+  Vendor
+  .findOne({ where:{
+    id: req.params.id
+  }
+})
+  .then((vendor) => {
+    Membership
+    .findOne({ where:{
+      id: vendor.membership_id
+    }
+  })
+    .then((membership) => {
+      res.status(200).send(membership)
+    })
+    .catch((error) => {
+      res.status(400).send('error');
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+    res.status(400).send('error1');
+  });
+});
 
 // Get Profile by ID
 /*router.get('/:id', (req, res) => {
