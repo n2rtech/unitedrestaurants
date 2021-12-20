@@ -66,7 +66,11 @@ const [showhome , setShowhome]  = useState('0');
           bodyParameters.set('name', titleData);
           bodyParameters.set('content' , content);
           bodyParameters.set('show_on_home',showhome);
-          bodyParameters.set('image', image.pictureFiles[0]);
+          if(image.pictureFiles) {
+            bodyParameters.set('image', image.pictureFiles[0]);
+          } else {
+            bodyParameters.set('image', image.pictureFiles);
+          }
 
         axios.put(`/api/blogs/`+`${params.id}`,
           bodyParameters,
