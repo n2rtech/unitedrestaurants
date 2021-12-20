@@ -10,6 +10,7 @@ const User = require('../../models').User;
 const db = require('../../models');
 const Vendor = require('../../models').Vendor;
 const Membership = require('../../models').Membership;
+const MembershipTransaction = require('../../models').MembershipTransaction;
 const HotDeal = require('../../models').HotDeal;
 const FeaturedBusiness = require('../../models').FeaturedBusiness;
 const BusinessAdvertise = require('../../models').BusinessAdvertise;
@@ -941,7 +942,21 @@ router.get('/active-plan/:id', (req, res) => {
     }
   })
     .then((membership) => {
-      res.status(200).send(membership)
+    MembershipTransaction
+    .findOne({ where:{
+      user_id: vendor.id
+    },
+    order: [ [ 'createdAt', 'DESC' ]],
+  })
+    .then((transaction) => {
+      res.status(200).send({
+        'membership': membership,
+        'transaction' : transaction
+      })
+    })
+    .catch((error) => {
+      res.status(400).send('error');
+    });
     })
     .catch((error) => {
       res.status(400).send('error');
