@@ -18,24 +18,29 @@ const VendorMembershipPackage = (props) => {
 
   const [cycle,setCycle] = useState();
   const [cycleamount,setAmount] = useState('0');
+  const [interval,setInterval] = useState('');
 
   const onChangeCycle = (event) => {
       if (event.target.value == 'Monthly') {
         setAmount(5.99)
+        setInterval('/monthly')
         setCycle(<PaypalStandardMonthly amount = {5.99} membership_id = {2} interval = {'Monthly'} currency = {'USD'}/>)
       }  
       else if (event.target.value == 'Quarterly') {
         setAmount(16.00)
+        setInterval('/quaterly')
         setCycle(
           <PaypalStandardQuarterly amount = {16.00} membership_id = {4} interval = {'Quarterly'} currency = {'USD'}/>
         )
       } else if (event.target.value == 'Yearly') {
         setAmount(65.00)
+        setInterval('/yearly')
         setCycle (
           <PaypalStandardYearly amount = {65.00} membership_id = {6} interval = {'Yearly'} currency = {'USD'}/>
         )
       } else {
         setAmount(30.00)
+        setInterval('/half-yearly')
         setCycle (
           <PaypalStandardHalfyearly amount = {30.00} membership_id = {5} interval = {'HalfYearly'} currency = {'USD'}/>
         )
@@ -44,24 +49,29 @@ const VendorMembershipPackage = (props) => {
 
   const [premiumcycle,setPremiumCycle] = useState()
   const [premiumamount,setPremiumAmount] = useState('0');
+  const [preinterval,setPreinterval] = useState('');
 
   const onChangePremiumCycle = (event) => {
     if (event.target.value == 'Monthly') {
       setPremiumAmount(7.99)
+      setPreinterval('/monthly')
       setPremiumCycle(<PaypalPremiumMonthly amount = {7.99} membership_id = {3} interval = {'Monthly'} currency = {'USD'}/>)
     }  
     else if (event.target.value == 'Quarterly') {
       setPremiumAmount(29.00)
+      setPreinterval('/quarterly')
       setPremiumCycle(
         <PaypalPremiumQuatertly amount = {29.00} membership_id = {7} interval = {'Quarterly'} currency = {'USD'}/>
       )
     } else if (event.target.value == 'Yearly') {
       setPremiumAmount(90.00)
+      setPreinterval('/yearly')
       setPremiumCycle (
         <PaypalPremiumYearly amount = {90.00} membership_id = {9} interval = {'Yearly'} currency = {'USD'}/>
       )
     } else {
       setPremiumAmount(43.00)
+      setPreinterval('/half-yearly')
       setPremiumCycle (
         <PaypalPremiumHalfyearly amount = {43.00} membership_id = {8} interval = {'HalfYearly'} currency = {'USD'}/>
       )
@@ -138,7 +148,7 @@ const VendorMembershipPackage = (props) => {
                         </div>
                         <div className="price-value"><span className="currency">{"$"}</span><span className="amount">
                         {cycleamount}                          
-                          </span><span className="duration">{"/mo"}</span></div>
+                          </span><span className="duration">{interval}</span></div>
                         <ul className="pricing-content">
                           <li>{"All what is included in Free Membership Package +"}</li>
                           <li>{"Business featured on appropriate departments"}</li>
@@ -176,7 +186,7 @@ const VendorMembershipPackage = (props) => {
                         </div>
                         <div className="price-value"><span className="currency">{"$"}</span><span className="amount">
                         {premiumamount}  
-                          </span><span className="duration">{"/mo"}</span></div>
+                          </span><span className="duration">{preinterval}</span></div>
                         <ul className="pricing-content">
                           <li>{"All what is included in Free & Standard membership + "}</li>
                           <li>{"Get Featured on Homepage in the country your business is located"}</li>
