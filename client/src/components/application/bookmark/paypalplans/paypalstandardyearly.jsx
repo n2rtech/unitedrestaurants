@@ -42,7 +42,9 @@ const paypalstandardyearly = (props) => {
             .then(response => toast.success('Transaction completed by ' + details.payer.name.given_name))
             .catch(error => console.log('Form submit error', error))
 
-          });
+          }).catch(function (error) {
+            console.log(error);
+        });
         }
       }
       onError={(err) => {

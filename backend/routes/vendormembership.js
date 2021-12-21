@@ -119,6 +119,8 @@ router.put('/asign-to-user/:id', (req, res) => {
                 case 'Yearly':
                 day = 12;
                 break;
+                default:
+                day = 12;
             }
 
             const date = new Date()

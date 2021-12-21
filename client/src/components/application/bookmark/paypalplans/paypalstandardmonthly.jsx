@@ -23,8 +23,9 @@ const paypalstandardmonthly = (props) => {
           // Capture the funds from the transaction
           return details.subscription.get().then(function(details) {
             // Show a success message to your buyer
-            console.log('Data' , data);
-            console.log('Details' , details);
+            
+            // console.log('Data' , data);
+            // console.log('Details' , details);
 
             const token = localStorage.getItem("token");
             const user_id = localStorage.getItem("id");
@@ -44,7 +45,9 @@ const paypalstandardmonthly = (props) => {
             .then(response => toast.success('Transaction completed by ' + details.payer.name.given_name))
             .catch(error => console.log('Form submit error', error))
 
-          });
+          }).catch(function (error) {
+            console.log(error);
+        });
         }
       }
       onError={(err) => {

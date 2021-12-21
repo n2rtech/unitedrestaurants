@@ -14,73 +14,15 @@ import PaypalPremiumYearly from './paypalplans/paypalpremiumyearly.jsx'
 
 import { Container, Row, Col, Card, CardHeader, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
 import { Standard } from '../../../constant';
+import SweetAlert from 'sweetalert2'
+import {toast} from 'react-toastify';
+import axios from 'axios'
+
 const VendorMembershipPackage = (props) => {
-
-  const [cycle,setCycle] = useState();
-  const [cycleamount,setAmount] = useState('0');
-  const [interval,setInterval] = useState('');
-
-  const onChangeCycle = (event) => {
-      if (event.target.value == 'Monthly') {
-        setAmount(5.99)
-        setInterval('/monthly')
-        setCycle(<PaypalStandardMonthly amount = {5.99} membership_id = {2} interval = {'Monthly'} currency = {'USD'}/>)
-      }  
-      else if (event.target.value == 'Quarterly') {
-        setAmount(16.00)
-        setInterval('/quaterly')
-        setCycle(
-          <PaypalStandardQuarterly amount = {16.00} membership_id = {4} interval = {'Quarterly'} currency = {'USD'}/>
-        )
-      } else if (event.target.value == 'Yearly') {
-        setAmount(65.00)
-        setInterval('/yearly')
-        setCycle (
-          <PaypalStandardYearly amount = {65.00} membership_id = {6} interval = {'Yearly'} currency = {'USD'}/>
-        )
-      } else {
-        setAmount(30.00)
-        setInterval('/half-yearly')
-        setCycle (
-          <PaypalStandardHalfyearly amount = {30.00} membership_id = {5} interval = {'HalfYearly'} currency = {'USD'}/>
-        )
-      }
-  }
-
-  const [premiumcycle,setPremiumCycle] = useState()
-  const [premiumamount,setPremiumAmount] = useState('0');
-  const [preinterval,setPreinterval] = useState('');
-
-  const onChangePremiumCycle = (event) => {
-    if (event.target.value == 'Monthly') {
-      setPremiumAmount(7.99)
-      setPreinterval('/monthly')
-      setPremiumCycle(<PaypalPremiumMonthly amount = {7.99} membership_id = {3} interval = {'Monthly'} currency = {'USD'}/>)
-    }  
-    else if (event.target.value == 'Quarterly') {
-      setPremiumAmount(29.00)
-      setPreinterval('/quarterly')
-      setPremiumCycle(
-        <PaypalPremiumQuatertly amount = {29.00} membership_id = {7} interval = {'Quarterly'} currency = {'USD'}/>
-      )
-    } else if (event.target.value == 'Yearly') {
-      setPremiumAmount(90.00)
-      setPreinterval('/yearly')
-      setPremiumCycle (
-        <PaypalPremiumYearly amount = {90.00} membership_id = {9} interval = {'Yearly'} currency = {'USD'}/>
-      )
-    } else {
-      setPremiumAmount(43.00)
-      setPreinterval('/half-yearly')
-      setPremiumCycle (
-        <PaypalPremiumHalfyearly amount = {43.00} membership_id = {8} interval = {'HalfYearly'} currency = {'USD'}/>
-      )
-    }
-  }
-
 
   const [activePlan, setActivePlan] = useState([]);
   const [planname, setPlanName] = useState('Free');
+  const [subscriptionid, setSubscriptionId] = useState('');
 
   const token = localStorage.getItem("token");
   const user_id = localStorage.getItem("id");
@@ -96,7 +38,8 @@ const VendorMembershipPackage = (props) => {
         .then(
           (result) => {
             setActivePlan(result);
-            setPlanName(result.name);
+            setPlanName(result.membership.name);
+            setSubscriptionId(result.transaction.membership_subscription_id)
           },
           (error) => {
             
@@ -104,7 +47,190 @@ const VendorMembershipPackage = (props) => {
         )
     }, []);
 
-    console.log(activePlan);
+  const [cycle,setCycle] = useState();
+  const [cycleamount,setAmount] = useState('0');
+  const [interval,setInterval] = useState('');
+
+  const onChangeCycle = (event) => {
+
+   if(planname == 'Free') {
+    if (event.target.value == 'Monthly') {
+      setAmount(5.99)
+      setInterval('/monthly')
+      setCycle(<PaypalStandardMonthly amount = {5.99} membership_id = {2} interval = {'Monthly'} currency = {'USD'}/>)
+    }  
+    else if (event.target.value == 'Quarterly') {
+      setAmount(16.00)
+      setInterval('/quaterly')
+      setCycle(
+        <PaypalStandardQuarterly amount = {16.00} membership_id = {4} interval = {'Quarterly'} currency = {'USD'}/>
+      )
+    } else if (event.target.value == 'Yearly') {
+      setAmount(65.00)
+      setInterval('/yearly')
+      setCycle (
+        <PaypalStandardYearly amount = {65.00} membership_id = {6} interval = {'Yearly'} currency = {'USD'}/>
+      )
+    } else {
+      setAmount(30.00)
+      setInterval('/half-yearly')
+      setCycle (
+        <PaypalStandardHalfyearly amount = {30.00} membership_id = {5} interval = {'HalfYearly'} currency = {'USD'}/>
+      )
+    }
+   } else {
+      SweetAlert.fire(
+          'Alert!',
+          'First Cancel Current Subscription Plan.',
+          'warning'
+      )
+   }
+
+     
+  }
+
+  const [premiumcycle,setPremiumCycle] = useState()
+  const [premiumamount,setPremiumAmount] = useState('0');
+  const [preinterval,setPreinterval] = useState('');
+
+  const onChangePremiumCycle = (event) => {
+    if(planname == 'Free') {
+      if (event.target.value == 'Monthly') {
+        setPremiumAmount(7.99)
+        setPreinterval('/monthly')
+        setPremiumCycle(<PaypalPremiumMonthly amount = {7.99} membership_id = {3} interval = {'Monthly'} currency = {'USD'}/>)
+      }  
+      else if (event.target.value == 'Quarterly') {
+        setPremiumAmount(29.00)
+        setPreinterval('/quarterly')
+        setPremiumCycle(
+          <PaypalPremiumQuatertly amount = {29.00} membership_id = {7} interval = {'Quarterly'} currency = {'USD'}/>
+        )
+      } else if (event.target.value == 'Yearly') {
+        setPremiumAmount(90.00)
+        setPreinterval('/yearly')
+        setPremiumCycle (
+          <PaypalPremiumYearly amount = {90.00} membership_id = {9} interval = {'Yearly'} currency = {'USD'}/>
+        )
+      } else {
+        setPremiumAmount(43.00)
+        setPreinterval('/half-yearly')
+        setPremiumCycle (
+          <PaypalPremiumHalfyearly amount = {43.00} membership_id = {8} interval = {'HalfYearly'} currency = {'USD'}/>
+        )
+      }
+    } else {
+      SweetAlert.fire(
+        'Alert!',
+        'First Cancel Current Subscription Plan.',
+        'warning'
+      )
+    }
+    
+  }
+
+    const HandleMembership = (event) => {
+
+      if(planname == 'Free') {
+        SweetAlert.fire({
+          title: 'Are you sure?',
+          text: "Once activated, your current subscriptions plan has been de-activated!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Ok',
+          cancelButtonText: 'cancel',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.value) {
+            const token = localStorage.getItem("token");
+            const user_id = localStorage.getItem("id");
+            const config = {
+              headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+              };
+      
+              const bodyParameters = {
+                membership_id: '1',
+                membership_subscription_id: 'free',
+                interval: 'free',
+                price: 'free',
+                comment: 'Free package'
+              }
+      
+            axios.put('/api/vendor-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
+            .then(response => toast.success('Transaction Completed'))
+            .catch(error => console.log('Form submit error', error))
+            SweetAlert.fire(
+              'Acivate!',
+              'Free package Membeship has been activated.',
+              'success'
+            )
+          }
+        })
+      } else {
+        SweetAlert.fire(
+          'Alert!',
+          'First Cancel Current Subscription Plan.',
+          'warning'
+        )
+      }
+      
+    }
+
+    const CancelSubscription = (id) => {
+      
+      SweetAlert.fire({
+        title: 'Are you sure?',
+        text: "Once cacncel, your current subscriptions plan has been de-activated!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ok',
+        cancelButtonText: 'cancel',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          var client_id = 'AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t';
+          var secret = 'EMLe2XvwWWpke2ZYX9uW-SibKne2GR9x8N6e-xD8bZd6W8C8YdiuQIHxaTKh3rfOmiOxrUrwCbNevI9C';
+          var basictoken = 'QWRIYjBBRE1IVUFXeWtXUUQtdzhNQlIza3VwU3ZZN0FYRFZ6YVJPcnJNQlpnQVQwSDRiZmhubFhyeXd2cGxOYjJjaEc0TEMxekFiRDd4N3Q6RU1MZTJYdndXV3BrZTJaWVg5dVctU2liS25lMkdSOXg4TjZlLXhEOGJaZDZXOEM4WWRpdVFJSHhhVEtoM3JmT21pT3hyVXJ3Q2JOZXZJOUM=';
+          axios({
+            url: `https://api-m.sandbox.paypal.com/v1/billing/subscriptions/`+`${id}`+`/cancel`,
+            method: 'post',
+            headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*' , 'Authorization': 'Basic '+basictoken },
+            data: { "reason": "test -- Not satisfied with the service" }
+          })
+            .then(res => {
+               if(res.status == '204') {
+                            
+                    const token = localStorage.getItem("token");
+                    const user_id = localStorage.getItem("id");
+                    const config = {
+                      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+                      };
+              
+                      const bodyParameters = {
+                        membership_id: '1',
+                        membership_subscription_id: 'free',
+                        interval: 'free',
+                        price: 0,
+                        comment: 'Free package'
+                      }
+              
+                    axios.put('/api/vendor-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
+                    .then(response => toast.success('Subscriptions is successfully canceled.'))
+                    .catch(error => console.log('Form submit error', error))
+               } else {
+                SweetAlert.fire(
+                  'Error'
+                )
+               }  
+            });
+        }
+        else {
+          SweetAlert.fire(
+            'Not canceled'
+          )
+        }
+      })
+    }
 
 
   return (
@@ -132,11 +258,12 @@ const VendorMembershipPackage = (props) => {
                         
                           { planname == 'Free' ? 
                           
-                          <div className="pricingtable-signup"><Button color="primary" size="lg" disabled>{"Active"}</Button></div> 
+                            <div className="pricingtable-signup"><Button color="primary" size="lg" disabled>{"Active"}</Button></div> 
                           
-                          :
+                            :
                           
-                          <div className="pricingtable-signup"><Button color="primary" size="lg">Subscribe</Button></div>
+                            <div className="pricingtable-signup"><Button color="primary" size="lg" onClick = {HandleMembership}>Subscribe</Button></div>
+                          
                           }
                           
                       </div>
@@ -154,6 +281,8 @@ const VendorMembershipPackage = (props) => {
                           <li>{"Business featured on appropriate departments"}</li>
                           <li>{"Get priority in search results"}</li>
                         </ul>
+
+
                         <FormGroup className="text-left">
                           <Label htmlFor="exampleFormControlSelect9">{"Select your plan"}</Label>
                           <Input type="select" name="select" onChange = {onChangeCycle} className="form-control digits" defaultValue="1">
@@ -164,12 +293,16 @@ const VendorMembershipPackage = (props) => {
                             <option>{"Yearly"}</option>
                           </Input>
                         </FormGroup>
+                        
                         <div className="pricingtable-signup">
                         {cycle}
 
                         { planname == 'Standard' ? 
                           
-                          <div className="pricingtable-signup"><Button color="primary" size="lg" disabled>{"Active"}</Button></div> 
+                          <div className="pricingtable-signup">
+                             <Button color="primary" size="lg" disabled>{"Active"}</Button><br/><br/>
+                             <Button color="danger" size="lg" onClick={() => CancelSubscription(subscriptionid)}>{"cancel"}</Button>
+                          </div> 
                           
                           :
                           
@@ -205,7 +338,10 @@ const VendorMembershipPackage = (props) => {
                         {premiumcycle}
                         { planname == 'Premium' ? 
                           
-                          <div className="pricingtable-signup"><Button color="primary" size="lg" disabled>{"Active"}</Button></div> 
+                          <div className="pricingtable-signup">
+                              <Button color="primary" size="lg" disabled>{"Active"}</Button><br/><br/>
+                              <Button color="danger" size="lg" onClick={() => CancelSubscription(subscriptionid)}>{"cancel"}</Button>
+                          </div> 
                           
                           :
                           

@@ -17,20 +17,30 @@ const paypalpremiumyearly = (props) => {
       });
     }}
       onApprove={(data, details) => {
-          // Capture the funds from the transaction
-          return details.subscription.get().then(function(details) {
-            // Show a success message to your buyer
-            alert("Subscription completed");
-            console.log("Subscriptions" , details)
-
-            // OPTIONAL: Call your server to save the subscription
-            // return fetch("/paypal-subscription-complete", {
-            //   method: "post",
-            //   body: JSON.stringify({
-            //     orderID: data.orderID,
-            //     subscriptionID: data.subscriptionID
-            //   })
-            // });
+            // Capture the funds from the transaction
+            return details.subscription.get().then(function(details) {
+              console.log('Data' , data);
+              console.log('Details' , details);
+  
+              const token = localStorage.getItem("token");
+              const user_id = localStorage.getItem("id");
+              const config = {
+                headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+                };
+  
+                const bodyParameters = {
+                  membership_id: props.membership_id,
+                  membership_subscription_id: data.subscriptionID,
+                  interval: props.interval,
+                  price: props.amount,
+                  comment: details.status +'-'+data.orderID
+                }
+  
+              return axios.put('/api/vendor-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
+              .then(response => toast.success('Transaction completed by ' + details.payer.name.given_name))
+              .catch(error => console.log('Form submit error', error))
+            }).catch(function (error) {
+              console.log(error);
           });
         }
       }

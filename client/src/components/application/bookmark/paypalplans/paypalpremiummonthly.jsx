@@ -14,6 +14,7 @@ const paypalpremiummonthly = (props) => {
       amount={amount}
       currency={currency}
       createSubscription={(data, details) => { 
+         console.log("Actions ", details);
         return details.subscription.create({
         plan_id: 'P-5RB0992026423390BMG6XPOI'
       });
@@ -41,7 +42,9 @@ const paypalpremiummonthly = (props) => {
             return axios.put('/api/vendor-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
             .then(response => toast.success('Transaction Completed'))
             .catch(error => console.log('Form submit error', error))
-          });
+          }).catch(function (error) {
+            console.log(error);
+        });
         }
       }
       onError={(err) => {
