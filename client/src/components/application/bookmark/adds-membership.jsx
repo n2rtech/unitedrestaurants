@@ -4,6 +4,7 @@ import { Container, Row, Col, Card, CardHeader, CardBody, Button, FormGroup, Lab
 import { SimplePricingCard,BecomeMember, Standard, LorumIpsum, Purchase, Business,Premium,Extra,SignUp } from '../../../constant';
 import {toast} from 'react-toastify';
 import axios from 'axios'
+import SweetAlert from 'sweetalert2'
 import { useHistory } from 'react-router-dom'
 import Paypalbuttonbronze from './advertisementpaypal/bronzepaypal.jsx'
 import Paypalbuttonsilver from './advertisementpaypal/silverpaypal.jsx'
@@ -52,6 +53,7 @@ const AddsMembership = (props) => {
     
    
    const onChangeBronze = (event) => {
+    if(planname == '') {
      if(event.target.value == 'Monthly') {
         getIdfromData('Monthly','bronze');
      } else if(event.target.value == 'Quarterly') {
@@ -61,29 +63,52 @@ const AddsMembership = (props) => {
      } else {
         getIdfromData('HalfYearly','bronze');
      }
+    } else {
+      SweetAlert.fire(
+        'Alert!',
+        'First Cancel Current Subscription Plan.',
+        'warning'
+    )
+    }
    }
 
    const onChangeSilver = (event) => {
-    if(event.target.value == 'Monthly') {
-       getIdfromData('Monthly','silver');
-    } else if(event.target.value == 'Quarterly') {
-       getIdfromData('Quarterly','silver');
-    } else if(event.target.value == 'Yearly') {
-       getIdfromData('Yearly','silver');
-    } else {
-       getIdfromData('HalfYearly','silver');
+     if(planname == '') {
+        if(event.target.value == 'Monthly') {
+            getIdfromData('Monthly','silver');
+        } else if(event.target.value == 'Quarterly') {
+            getIdfromData('Quarterly','silver');
+        } else if(event.target.value == 'Yearly') {
+            getIdfromData('Yearly','silver');
+        } else {
+            getIdfromData('HalfYearly','silver');
+        }
+     } else {
+      SweetAlert.fire(
+        'Alert!',
+        'First Cancel Current Subscription Plan.',
+        'warning'
+    )
     }
   }
 
   const onChangeGold = (event) => {
-    if(event.target.value == 'Monthly') {
-       getIdfromData('Monthly','gold');
-    } else if(event.target.value == 'Quarterly') {
-       getIdfromData('Quarterly','bronze');
-    } else if(event.target.value == 'gold') {
-       getIdfromData('Yearly','gold');
+    if(planname == '') {
+        if(event.target.value == 'Monthly') {
+            getIdfromData('Monthly','gold');
+        } else if(event.target.value == 'Quarterly') {
+            getIdfromData('Quarterly','bronze');
+        } else if(event.target.value == 'gold') {
+            getIdfromData('Yearly','gold');
+        } else {
+            getIdfromData('HalfYearly','gold');
+        }
     } else {
-       getIdfromData('HalfYearly','gold');
+        SweetAlert.fire(
+          'Alert!',
+          'First Cancel Current Subscription Plan.',
+          'warning'
+        )
     }
   }
 
@@ -120,7 +145,7 @@ const AddsMembership = (props) => {
    // ACTIVE PLAN 
 
    const [activePlan, setActivePlan] = useState([]);
-   const [planname, setPlanName] = useState('Free');
+   const [planname, setPlanName] = useState('');
    const [subscriptionid, setSubscriptionId] = useState('');
  
    useEffect(() => {
@@ -143,7 +168,63 @@ const AddsMembership = (props) => {
          )
      }, []);
 
-     console.log(activePlan);
+     console.log(planname);
+
+     const CancelSubscription = (id) => {
+      
+      SweetAlert.fire({
+        title: 'Are you sure?',
+        text: "Once cacncel, your current subscriptions plan has been de-activated!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ok',
+        cancelButtonText: 'cancel',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          var client_id = 'AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t';
+          var secret = 'EMLe2XvwWWpke2ZYX9uW-SibKne2GR9x8N6e-xD8bZd6W8C8YdiuQIHxaTKh3rfOmiOxrUrwCbNevI9C';
+          var basictoken = 'QWRIYjBBRE1IVUFXeWtXUUQtdzhNQlIza3VwU3ZZN0FYRFZ6YVJPcnJNQlpnQVQwSDRiZmhubFhyeXd2cGxOYjJjaEc0TEMxekFiRDd4N3Q6RU1MZTJYdndXV3BrZTJaWVg5dVctU2liS25lMkdSOXg4TjZlLXhEOGJaZDZXOEM4WWRpdVFJSHhhVEtoM3JmT21pT3hyVXJ3Q2JOZXZJOUM=';
+          axios({
+            url: `https://api-m.sandbox.paypal.com/v1/billing/subscriptions/`+`${id}`+`/cancel`,
+            method: 'post',
+            headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*' , 'Authorization': 'Basic '+basictoken },
+            data: { "reason": "test -- Not satisfied with the service" }
+          })
+            .then(res => {
+               if(res.status == '204') {
+                            
+                    const token = localStorage.getItem("token");
+                    const user_id = localStorage.getItem("id");
+                    const config = {
+                      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+                      };
+              
+                      const bodyParameters = {
+                        membership_id: '',
+                        membership_subscription_id: '',
+                        interval: '',
+                        price: 0,
+                        comment: ''
+                      }
+              
+                    axios.put('/api/vendor-adds-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
+                    .then(response => toast.success('Subscriptions is successfully canceled.'))
+                    .catch(error => console.log('Form submit error', error))
+               } else {
+                SweetAlert.fire(
+                  'Error'
+                )
+               }  
+            });
+        }
+        else {
+          SweetAlert.fire(
+            'Not canceled'
+          )
+        }
+      })
+    }
 
   return (
     <Fragment>
@@ -172,6 +253,19 @@ const AddsMembership = (props) => {
                           </FormGroup>
                         </CardBody>
                           {bronzecycle}
+
+                          { planname == 'Bronze' ? 
+                          
+                          <div className="pricingtable-signup">
+                             <Button color="primary" size="lg" disabled>{"Active"}</Button><br/><br/>
+                             <Button color="danger" size="lg" onClick={() => CancelSubscription(subscriptionid)}>{"cancel"}</Button>
+                          </div> 
+                          
+                          :              
+                          ''
+                          }
+
+
                       </Card>
                     </Col>
 

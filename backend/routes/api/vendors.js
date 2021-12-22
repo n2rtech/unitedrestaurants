@@ -10,6 +10,7 @@ const User = require('../../models').User;
 const db = require('../../models');
 const Vendor = require('../../models').Vendor;
 const Membership = require('../../models').Membership;
+const AddMembership = require('../../models').AddsMembership;
 const MembershipTransaction = require('../../models').MembershipTransaction;
 const HotDeal = require('../../models').HotDeal;
 const FeaturedBusiness = require('../../models').FeaturedBusiness;
@@ -979,7 +980,7 @@ router.get('/active-adds-plan/:id', (req, res) => {
   }
 })
   .then((vendor) => {
-    Membership
+    AddMembership
     .findOne({ where:{
       id: vendor.adds_membership_id
     }
