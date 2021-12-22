@@ -43,6 +43,30 @@ const AddSpaces = () => {
 
     console.log(addspacesData);
 
+    // ACTIVE PLAN 
+
+  const [planname, setPlanName] = useState('');
+ 
+   useEffect(() => {
+   
+       const config = {
+           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+       };
+    
+       fetch('/api/vendors/active-adds-plan/'+`${user_id}` , config)
+         .then(res => res.json())
+         .then(
+           (result) => {
+             setPlanName(result.membership);
+           },
+           (error) => {
+             
+           }
+         )
+     }, []);
+
+     console.log('Plan Name : ' ,planname);
+
 
     // Delete functionality
     const handleDelete = (id) => {
@@ -118,6 +142,8 @@ const AddSpaces = () => {
                         <Card>
                             <CardHeader>
                                 <h5>{"Ad Running on website"}</h5>
+
+                                { planname != '' ? 'You don'+"'"+'t have any active membership to use this feature' : '' }
                             </CardHeader>
                             <CardBody>
                                 <Row>
@@ -147,7 +173,12 @@ const AddSpaces = () => {
                                 <h5>{"Upload Image"}</h5>
                             </CardHeader>
                             <CardBody>
-                            <ImageUploader
+
+                              {planname == null ? 
+                              
+                             ''
+                              
+                              : <ImageUploader
                                             withIcon={false}
                                             withPreview={true}
                                             label=""
@@ -156,10 +187,19 @@ const AddSpaces = () => {
                                             imgExtension={[".jpg", ".gif", ".png", ".gif", ".svg"]}
                                             maxFileSize={1048576}
                                             fileSizeError=" file size is too big"
-                                        />
-                                <FormGroup>
+                                        />}
+                            
+                            {planname == null ? <FormGroup>
+                                    <Button  color="primary" onClick = {handleSubmit} disabled>{"Save"}</Button>
+                                </FormGroup>
+                              :
+                              
+                              <FormGroup>
                                     <Button  color="primary" onClick = {handleSubmit}>{"Save"}</Button>
                                 </FormGroup>
+                              
+                              }
+                                
                             </CardBody>
                         </Card>
                     </Col>

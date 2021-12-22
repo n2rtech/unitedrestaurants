@@ -10,6 +10,7 @@ const User = require('../../models').User;
 const db = require('../../models');
 const Vendor = require('../../models').Vendor;
 const Membership = require('../../models').Membership;
+const AddMembership = require('../../models').AddsMembership;
 const MembershipTransaction = require('../../models').MembershipTransaction;
 const HotDeal = require('../../models').HotDeal;
 const FeaturedBusiness = require('../../models').FeaturedBusiness;
@@ -944,7 +945,51 @@ router.get('/active-plan/:id', (req, res) => {
     .then((membership) => {
     MembershipTransaction
     .findOne({ where:{
-      user_id: vendor.id
+      user_id: vendor.id,
+      type: 'membership'
+    },
+    order: [ [ 'createdAt', 'DESC' ]],
+  })
+    .then((transaction) => {
+      res.status(200).send({
+        'membership': membership,
+        'transaction' : transaction
+      })
+    })
+    .catch((error) => {
+      res.status(400).send('error');
+    });
+    })
+    .catch((error) => {
+      res.status(400).send('error');
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+    res.status(400).send('error1');
+  });
+});
+
+
+
+
+router.get('/active-adds-plan/:id', (req, res) => {
+  Vendor
+  .findOne({ where:{
+    id: req.params.id
+  }
+})
+  .then((vendor) => {
+    AddMembership
+    .findOne({ where:{
+      id: vendor.adds_membership_id
+    }
+  })
+    .then((membership) => {
+    MembershipTransaction
+    .findOne({ where:{
+      user_id: vendor.id,
+      type: 'adds_membership'
     },
     order: [ [ 'createdAt', 'DESC' ]],
   })

@@ -61,6 +61,19 @@ router.get('/', passport.authenticate('vendor', {
 });
 
 
+// Get Membership by ID
+router.get('/:id', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+    
+    AddsMembership
+        .findByPk(req.params.id)
+        .then((memberships) => res.status(200).send(memberships))
+        .catch((error) => {
+            res.status(400).send(error);
+        });
+});
+
 // Delete a AddsMembership
 router.delete('/:id', (req, res) => {
     if (!req.params.id) {

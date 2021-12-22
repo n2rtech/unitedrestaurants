@@ -3,11 +3,13 @@ import React from 'react';
 import axios from 'axios';
 import {toast} from 'react-toastify';
 
-const paypalpremiumquarterly = (props) => {
-  const { amount, currency, createSubscription, onApprove, catchError,onError, onCancel} = props;
-  const paypalKey = "AXPEKGBNnTg-16vrrVO_KBxYrNr3x7GUl9zVlppx4OYPfRAxCIvMfKNewkiTXCnptPuIZDxJVkslkyIX"
 
-  console.log(props);
+const bronzepaypal = (props) => {
+  const { amount, currency , planid , interval , membership_id} = props;
+  const paypalKey = "AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t"
+
+  console.log(props.planid);
+  
 
   return (
     <PayPalButton
@@ -15,7 +17,7 @@ const paypalpremiumquarterly = (props) => {
       currency={currency}
       createSubscription={(data, details) => { 
         return details.subscription.create({
-        plan_id: 'P-14Y17157AY5485331MG6XP4I'
+        plan_id: planid
       });
     }}
       onApprove={(data, details) => {
@@ -31,15 +33,15 @@ const paypalpremiumquarterly = (props) => {
               };
 
               const bodyParameters = {
-                membership_id: props.membership_id,
+                adds_membership_id: props.membership_id,
                 membership_subscription_id: data.subscriptionID,
                 interval: props.interval,
                 price: props.amount,
                 comment: details.status +'-'+data.orderID
               }
 
-            return axios.put('/api/vendor-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
-            .then(response => toast.success('Transaction completed'))
+            return axios.put('/api/adds-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
+            .then(response => toast.success('Transaction Completed'))
             .catch(error => console.log('Form submit error', error))
           }).catch(function (error) {
             console.log(error);
@@ -57,16 +59,17 @@ const paypalpremiumquarterly = (props) => {
       }}
       options={{
         clientId: paypalKey,
-        vault:true
+        vault:true,
+        intent: 'subscription'
       }}
       style={{
-        shape: 'rect',
+        shape: 'pill',
         color: 'blue',
         layout: 'vertical',
-        label: 'subscribe',
+        label: 'subscribe'
       }}
     />
   );
 }
 
-export default paypalpremiumquarterly;
+export default bronzepaypal;
