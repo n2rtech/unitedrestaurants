@@ -143,7 +143,7 @@ const AddSpaces = () => {
                             <CardHeader>
                                 <h5>{"Ad Running on website"}</h5>
 
-                                { planname != '' ? 'You don'+"'"+'t have any active membership to use this feature' : '' }
+                                { planname == null ? 'You don'+"'"+'t have any active membership to use this feature' : '' }
                             </CardHeader>
                             <CardBody>
                                 <Row>

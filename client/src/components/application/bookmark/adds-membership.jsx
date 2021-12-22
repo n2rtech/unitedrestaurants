@@ -159,8 +159,11 @@ const AddsMembership = (props) => {
          .then(
            (result) => {
              setActivePlan(result);
-             setPlanName(result.membership.name);
-             setSubscriptionId(result.transaction.membership_subscription_id)
+             if(result.membership != null) {
+              setPlanName(result.membership.name);
+              setSubscriptionId(result.transaction.membership_subscription_id)
+             }
+             
            },
            (error) => {
              
@@ -168,13 +171,13 @@ const AddsMembership = (props) => {
          )
      }, []);
 
-     console.log(planname);
+     console.log(activePlan);
 
      const CancelSubscription = (id) => {
       
       SweetAlert.fire({
         title: 'Are you sure?',
-        text: "Once cacncel, your current subscriptions plan has been de-activated!",
+        text: "Once cancel, your current subscriptions plan has been de-activated!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Ok',
