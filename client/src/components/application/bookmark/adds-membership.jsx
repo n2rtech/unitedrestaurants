@@ -208,7 +208,7 @@ const AddsMembership = (props) => {
                         comment: ''
                       }
               
-                    axios.put('/api/vendor-adds-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
+                    axios.put('/api/adds-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
                     .then(response => toast.success('Subscriptions is successfully canceled.'))
                     .catch(error => console.log('Form submit error', error))
                } else {
