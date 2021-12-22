@@ -5,6 +5,9 @@ import { SimplePricingCard,BecomeMember, Standard, LorumIpsum, Purchase, Busines
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import Paypalbuttonbronze from './advertisementpaypal/bronzepaypal.jsx'
+import Paypalbuttonsilver from './advertisementpaypal/silverpaypal.jsx'
+import Paypalbuttongold from './advertisementpaypal/goldpaypal.jsx'
 
 const AddsMembership = (props) => {
 
@@ -31,7 +34,116 @@ const AddsMembership = (props) => {
         )
     }, []);
 
-    console.log(membershipsData);
+  console.log(membershipsData);
+
+  const [bronzecycle,setBronzeCycle] = useState('');
+  const [silvercycle,setSilverCycle] = useState('');
+  const [goldcycle,setGoldCycle] = useState('');
+  
+  const [cycleamount,setAmount] = useState('0');
+  const [interval,setInterval] = useState('');
+
+  const [bronzeinterval,setBronzeInterval]  = useState('/mo');
+  const [bronzeprice,setBronzePrice]        = useState('4.99');
+  const [silverinterval,setSilverInterval]  = useState('/mo');
+  const [silverprice,setSilverPrice]        = useState('6.99');
+  const [goldinterval,setGoldInterval]  = useState('/mo');
+  const [goldprice,setGoldPrice]        = useState('9.99');
+    
+   
+   const onChangeBronze = (event) => {
+     if(event.target.value == 'Monthly') {
+        getIdfromData('Monthly','bronze');
+     } else if(event.target.value == 'Quarterly') {
+        getIdfromData('Quarterly','bronze');
+     } else if(event.target.value == 'Yearly') {
+        getIdfromData('Yearly','bronze');
+     } else {
+        getIdfromData('HalfYearly','bronze');
+     }
+   }
+
+   const onChangeSilver = (event) => {
+    if(event.target.value == 'Monthly') {
+       getIdfromData('Monthly','silver');
+    } else if(event.target.value == 'Quarterly') {
+       getIdfromData('Quarterly','silver');
+    } else if(event.target.value == 'Yearly') {
+       getIdfromData('Yearly','silver');
+    } else {
+       getIdfromData('HalfYearly','silver');
+    }
+  }
+
+  const onChangeGold = (event) => {
+    if(event.target.value == 'Monthly') {
+       getIdfromData('Monthly','gold');
+    } else if(event.target.value == 'Quarterly') {
+       getIdfromData('Quarterly','bronze');
+    } else if(event.target.value == 'gold') {
+       getIdfromData('Yearly','gold');
+    } else {
+       getIdfromData('HalfYearly','gold');
+    }
+  }
+
+   const getIdfromData = (interval,type) => {
+    membershipsData.map(
+      item => {
+        if(item.interval == interval && item.slug == type) {
+          if(type == 'bronze') {
+            setBronzeInterval('/'+item.interval)
+            setBronzePrice(item.price)
+            setBronzeCycle (
+              <Paypalbuttonbronze planid = {item.plan_id} amount = {item.price} membership_id = {item.id} user_id = {user_id} interval = {item.interval} currency = {'USD'}/>
+            )
+          } else if(type == 'silver') {
+            setSilverInterval('/'+item.interval)
+            setSilverPrice(item.price)
+            setSilverCycle (
+              <Paypalbuttonsilver planid = {item.plan_id} amount = {item.price} membership_id = {item.id} user_id = {user_id} interval = {item.interval} currency = {'USD'}/>
+            )
+          } else {
+            setGoldInterval('/'+item.interval)
+            setGoldPrice(item.price)
+            setGoldCycle (
+              <Paypalbuttongold planid = {item.plan_id} amount = {item.price} membership_id = {item.id} user_id = {user_id} interval = {item.interval} currency = {'USD'}/>
+            )
+          }
+         
+        }
+      }
+    )
+   }
+
+
+   // ACTIVE PLAN 
+
+   const [activePlan, setActivePlan] = useState([]);
+   const [planname, setPlanName] = useState('Free');
+   const [subscriptionid, setSubscriptionId] = useState('');
+ 
+   useEffect(() => {
+   
+       const config = {
+           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+       };
+    
+       fetch('/api/vendors/active-adds-plan/'+`${user_id}` , config)
+         .then(res => res.json())
+         .then(
+           (result) => {
+             setActivePlan(result);
+             setPlanName(result.membership.name);
+             setSubscriptionId(result.transaction.membership_subscription_id)
+           },
+           (error) => {
+             
+           }
+         )
+     }, []);
+
+     console.log(activePlan);
 
   return (
     <Fragment>
@@ -41,27 +153,73 @@ const AddsMembership = (props) => {
               <Col sm="12">
                 <Card>
                   <Row className="card-body pricing-content AddsMembership">
-                  {membershipsData.map((item , i) => (
-                    <Col  key={i}  xl="4" sm="4" className="box-col-6">
+                  
+                    <Col xl="4" sm="4" className="box-col-6">
                       <Card className="text-center pricing-simple">
                         <CardBody>
-                          <h3>{item.name}</h3>
-                          <h1>{item.price}<span className="duration">{"/mo"}</span></h1>
-                          <h6 className="mb-0">{"Your ad will appear in all sections you are listed in in the country your business resides."}</h6>
+                          <h3>Bronze</h3>
+                          <h1>{bronzeprice}<span className="duration">{bronzeinterval}</span></h1>
+                          <h6 className="mb-0">Your ad will appear in all sections you are listed in in the country your business resides.</h6>
                           <FormGroup className="text-left m-t-20">
                             <Label htmlFor="exampleFormControlSelect9">{"Select your plan"}</Label>
-                            <Input type="select" name="select" className="form-control digits" defaultValue="1">
+                            <Input type="select" name="select" onChange = {onChangeBronze} className="form-control digits" defaultValue="1">
+                              <option>{"Select Cycle"}</option>
                               <option>{"Monthly"}</option>
                               <option>{"Quarterly"}</option>
                               <option>{"Half Yearly"}</option>
                               <option>{"Yearly"}</option>
                             </Input>
                           </FormGroup>
-                        </CardBody><Button className="btn-block" size="lg" color="primary">
-                          <h5 className="mb-0">{Purchase}</h5></Button>
+                        </CardBody>
+                          {bronzecycle}
                       </Card>
                     </Col>
-                  ))}
+
+
+                    <Col xl="4" sm="4" className="box-col-6">
+                      <Card className="text-center pricing-simple">
+                        <CardBody>
+                          <h3>Silver</h3>
+                          <h1>{silverprice}<span className="duration">{silverinterval}</span></h1>
+                          <h6 className="mb-0">All what is included in Bronze package + Your ad will appear on homepage</h6>
+                          <FormGroup className="text-left m-t-20">
+                            <Label htmlFor="exampleFormControlSelect9">{"Select your plan"}</Label>
+                            <Input type="select" name="select" onChange = {onChangeSilver} className="form-control digits" defaultValue="1">
+                              <option>{"Select Cycle"}</option>
+                              <option>{"Monthly"}</option>
+                              <option>{"Quarterly"}</option>
+                              <option>{"Half Yearly"}</option>
+                              <option>{"Yearly"}</option>
+                            </Input>
+                          </FormGroup>
+                        </CardBody>
+                        {silvercycle}
+                      </Card>
+                    </Col>
+
+
+                    <Col xl="4" sm="4" className="box-col-6">
+                      <Card className="text-center pricing-simple">
+                        <CardBody>
+                          <h3>Gold</h3>
+                          <h1>{goldprice}<span className="duration">{goldinterval}</span></h1>
+                          <h6 className="mb-0">All what is included in Bronze and Silver package + Your ad will appear on homepage, every departments all over worldwide</h6>
+                          <FormGroup className="text-left m-t-20">
+                            <Label htmlFor="exampleFormControlSelect9">{"Select your plan"}</Label>
+                            <Input type="select" name="select" onChange = {onChangeGold} className="form-control digits" defaultValue="1">
+                              <option>{"Select Cycle"}</option>
+                              <option>{"Monthly"}</option>
+                              <option>{"Quarterly"}</option>
+                              <option>{"Half Yearly"}</option>
+                              <option>{"Yearly"}</option>
+                            </Input>
+                          </FormGroup>
+                        </CardBody>
+                        {goldcycle}
+                      </Card>
+                    </Col>
+
+                  
                   </Row>
                 </Card>
               </Col>
