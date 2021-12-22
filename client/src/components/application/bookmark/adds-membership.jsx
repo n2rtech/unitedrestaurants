@@ -201,7 +201,7 @@ const AddsMembership = (props) => {
                       };
               
                       const bodyParameters = {
-                        membership_id: '',
+                        adds_membership_id: '',
                         membership_subscription_id: '',
                         interval: '',
                         price: 0,
