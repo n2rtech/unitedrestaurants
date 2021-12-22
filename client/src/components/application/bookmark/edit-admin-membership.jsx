@@ -25,6 +25,10 @@ const EditAdminMembership =  () =>  {
                                 <Label htmlFor="exampleFormControlInput">{"Membership Name"}</Label>
                                 <Input className="form-control"  type="name" />
                               </FormGroup>
+                              <FormGroup>
+                                <Label htmlFor="exampleFormControlInput">{"Price"}</Label>
+                                <Input className="form-control"  type="number" />
+                              </FormGroup>
                               <CKEditors
                                   activeclassName="p10"
                                   content={content}
