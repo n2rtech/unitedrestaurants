@@ -26,6 +26,8 @@ const VendorMembershipPackage = (props) => {
 
   const token = localStorage.getItem("token");
   const user_id = localStorage.getItem("id");
+  const [interval,setInterval] = useState('');
+  const [intervalq,setIntervalq] = useState('');
 
   useEffect(() => {
   
@@ -40,6 +42,8 @@ const VendorMembershipPackage = (props) => {
             setActivePlan(result);
             setPlanName(result.membership.name);
             setSubscriptionId(result.transaction.membership_subscription_id)
+            setIntervalq(result.membership.interval)
+            setAmountq(result.membership.price);
           },
           (error) => {
             
@@ -49,7 +53,8 @@ const VendorMembershipPackage = (props) => {
 
   const [cycle,setCycle] = useState();
   const [cycleamount,setAmount] = useState('0');
-  const [interval,setInterval] = useState('');
+  const [cycleamountq,setAmountq] = useState('0');
+
 
   const onChangeCycle = (event) => {
 
@@ -262,7 +267,7 @@ const VendorMembershipPackage = (props) => {
                           
                             :
                           
-                            <div className="pricingtable-signup"><Button color="primary" size="lg" onClick = {HandleMembership}>Subscribe</Button></div>
+                            <div className="pricingtable-signup"><Button color="primary" size="lg" onClick = {HandleMembership}>Included with paid plans</Button></div>
                           
                           }
                           
@@ -300,7 +305,11 @@ const VendorMembershipPackage = (props) => {
                         { planname == 'Standard' ? 
                           
                           <div className="pricingtable-signup">
-                             <Button color="primary" size="lg" disabled>{"Active"}</Button><br/><br/>
+                              {"Selected Cycle"} : {intervalq}<br/>
+                              {"Amount"} : {cycleamountq} <br/>
+                             <Button color="primary" size="lg" disabled>{"Active"}</Button><br/>
+                              
+                             <br/>
                              <Button color="danger" size="lg" onClick={() => CancelSubscription(subscriptionid)}>{"cancel"}</Button>
                           </div> 
                           
@@ -339,10 +348,13 @@ const VendorMembershipPackage = (props) => {
                         { planname == 'Premium' ? 
                           
                           <div className="pricingtable-signup">
-                              <Button color="primary" size="lg" disabled>{"Active"}</Button><br/><br/>
-                              <Button color="danger" size="lg" onClick={() => CancelSubscription(subscriptionid)}>{"cancel"}</Button>
+                              {"Selected Cycle"} : {intervalq}<br/>
+                              {"Amount"} : {cycleamountq} <br/>
+                             <Button color="primary" size="lg" disabled>{"Active"}</Button><br/>
+                              
+                             <br/>
+                             <Button color="danger" size="lg" onClick={() => CancelSubscription(subscriptionid)}>{"cancel"}</Button>
                           </div> 
-                          
                           :
                           
                           ''

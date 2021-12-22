@@ -39,7 +39,7 @@ const paypalpremiumquarterly = (props) => {
               }
 
             return axios.put('/api/vendor-membership/asign-to-user/'+`${user_id}`, bodyParameters ,config )
-            .then(response => toast.success('Transaction completed by ' + details.payer.name.given_name))
+            .then(response => toast.success('Transaction completed'))
             .catch(error => console.log('Form submit error', error))
           }).catch(function (error) {
             console.log(error);
