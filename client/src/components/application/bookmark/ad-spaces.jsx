@@ -150,7 +150,7 @@ const AddSpaces = () => {
                                 {addspacesData.map((item , i) => (
                                     <Col sm="4">
                                         <div className="imgGallery">
-                                            <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/adspaces/${item.image}`} />
+                                            <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/${item.image}`} />
                                         </div>
                                         
                                         <div className="text-center">
