@@ -11,6 +11,10 @@ const [isOpen, setIsOpen] = React.useState(false);
 const [categoryData, setCategoryData] = useState([]);
 const params = useParams();
 
+const addDefaultSrc = (ev) => {
+  ev.target.src = `${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`;
+}
+
 useEffect(() => {
   //    axios.get(`/api/categories/list`)
   // .then((result_data) => {
@@ -85,7 +89,7 @@ console.log('Menu' , categoryData);
 
                     {categoryData.map((item , i) => (
                       <NavItem key={i}>
-                            <img src={`${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`} alt="Menu-Icon"/>
+                            <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.image}`} alt="Menu-Icon"/>
                       <Dropdown title={item.name} key={i}>
                       {item.parent &&
                         <Fragment>
