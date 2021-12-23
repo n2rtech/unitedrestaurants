@@ -143,14 +143,14 @@ const AddSpaces = () => {
                             <CardHeader>
                                 <h5>{"Ad Running on website"}</h5>
 
-                                { planname != '' ? 'You don'+"'"+'t have any active membership to use this feature' : '' }
+                                { planname == null ? 'You don'+"'"+'t have any active membership to use this feature' : '' }
                             </CardHeader>
                             <CardBody>
                                 <Row>
                                 {addspacesData.map((item , i) => (
                                     <Col sm="4">
                                         <div className="imgGallery">
-                                            <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/adspaces/${item.image}`} />
+                                            <img className="img-thumbnail" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/${item.image}`} />
                                         </div>
                                         
                                         <div className="text-center">
