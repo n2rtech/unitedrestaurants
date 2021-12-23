@@ -144,7 +144,9 @@ router.post("/login", (req, res) => {
       return res.status(404).json({ error: "Error in sql!" });   
     }else if (!user[0]) {
       return res.status(404).json({ error: "Email or Password not found" });
-    }else {
+    }else if(user[0].is_suspended == 1){
+      return res.status(404).json({ error: "Your account is suspended Please contact site owner!" });
+    }else{
       bcrypt.compare(password, user[0].password).then(isMatch => {
         if (isMatch) {
           const payload = {
@@ -649,8 +651,6 @@ router.get('/:id', (req, res) => {
 
 
 
-
-
 // Update a User
 router.put('/:id', (req, res) => {
   if (!req.body.name || !req.body.email || !req.body.mobile) {
@@ -744,8 +744,34 @@ router.put('/:id', (req, res) => {
   }
 });
 
+// suspend a vendor
+router.get('/suspend/:id', (req, res) => {
+  if (!req.params.id) {
+    res.status(400).send({
+      msg: 'Please pass ID.'
+    })
+  } else {
+    Vendor
+    .findByPk(req.params.id)
+    .then((user) => {
 
-
+      Vendor.update({
+        is_suspended: 1
+      }, {
+        where: {
+          id: req.params.id
+        }
+      }).then(_ => {
+        res.status(200).send({
+              'message': 'Vendor suspended'
+            });
+      }).catch(err => res.status(400).send(err));
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
+  }
+});
 
 // Get Profile by ID
 router.get('/profile/:id', (req, res) => {
