@@ -56,9 +56,9 @@ const [catData, setCatData] = useState([]);
           const bodyParameters = new FormData();
           bodyParameters.set('name', catname);
           if(image.pictureFiles.length != 0) {
-            bodyParameters.set('banner', image.pictureFiles[0]);
+            bodyParameters.set('image', image.pictureFiles[0]);
           } else {
-            bodyParameters.set('banner', image.pictureFiles);
+            bodyParameters.set('image', image.pictureFiles);
           } 
           bodyParameters.set('parent_id', parentCat);
           bodyParameters.set('description', catname);
