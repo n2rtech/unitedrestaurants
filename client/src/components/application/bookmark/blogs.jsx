@@ -51,7 +51,7 @@ const Blogs = (props) => {
           <Col sm="6"></Col>
           <Col sm="6">
             <div className="pull-right">
-              <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/admin/add-blog`}>Add New</a>
+              <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/admin/add-blog/`}>Add New</a>
             </div>
           </Col>
         </Row>
@@ -68,7 +68,7 @@ const Blogs = (props) => {
                    <tr key={i}>
                      <td>{item.name}</td>
                      <td className="text-right">
-                       <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-blog/${item.id}`}>Edit</a> &nbsp;
+                       <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-blog/${item.id}/`}>Edit</a> &nbsp;
                        <Button color="danger" onClick={() => handleDelete(item.id)}>Delete</Button>
                      </td>
                     </tr>

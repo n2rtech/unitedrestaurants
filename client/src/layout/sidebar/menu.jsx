@@ -61,7 +61,7 @@ export const MENUITEMS = [
                     { path: `${process.env.PUBLIC_URL}/dashboard/admin/suspended-vendors`, title: 'Suspended vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/dashboard/admin/featured-vendors`, title: 'Featured Vendors', type: 'link' },  
                     { path: `${process.env.PUBLIC_URL}/dashboard/admin/hot-deals-vendors`, title: 'Hot deals vendors', type: 'link' },  
-                    { path: `${process.env.PUBLIC_URL}/add-space-vendors`, title: 'Ad space vendors', type: 'link' },
+                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/add-space-vendors`, title: 'Ad space vendors', type: 'link' },
                    
         
             ]
