@@ -5,6 +5,7 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const path = require('path');
 var fs = require('fs');
+const Sequelize = require('sequelize');
 
 var multer  = require('multer');
 
@@ -101,6 +102,22 @@ router.delete('/:id', (req, res) => {
             res.status(400).send(error);
         });
     }
+});
+
+
+
+router.get('/list', (req, res) => {
+    var code = req.query.country;    
+    AdSpace
+    .findAll(
+    {
+        limit: 10,
+        order: Sequelize.literal('rand()'), limit: 25
+    })
+    .then((menuitem) => res.status(200).send(menuitem))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
 });
 
 
