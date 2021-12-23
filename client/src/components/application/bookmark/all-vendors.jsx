@@ -5,8 +5,9 @@ import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } fr
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap"
-
-import axios from 'axios';
+import SweetAlert from 'sweetalert2'
+import {toast} from 'react-toastify';
+import axios from 'axios'
 
 const AllVendors = (props) => {
   const token = localStorage.getItem("token");
@@ -202,6 +203,34 @@ const handleNameChange = e => {
     });
   }
 
+  const handleSuspend = (id) => {
+    SweetAlert.fire({
+      title: 'Are you sure?',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ok',
+      cancelButtonText: 'cancel',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        const token   = localStorage.getItem("token");
+        const user_id = localStorage.getItem("id");
+        const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+          };
+        axios.get('/api/vendors/suspend/'+`${id}` ,config )
+        .then(response => toast.success('Vendor is successfully suspended.'))
+        .catch(error => console.log('Form submit error', error))
+      }
+      else {
+        SweetAlert.fire(
+          'Not Suspended'
+        )
+      }
+    })
+  }
+
   return (
     <Fragment>
       <Breadcrumb parent="Apps" title="All Vendors" />
@@ -252,7 +281,7 @@ const handleNameChange = e => {
                   <Col sm="6">&nbsp;</Col>
                   <Col sm="6">
                     <div className="pull-right">
-                      <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/admin/add-vendor`}>Add New</a>
+                      <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/admin/add-vendor/`}>Add New</a>
                     </div>
                   </Col>
                 </Row>
@@ -269,8 +298,8 @@ const handleNameChange = e => {
                         <tr key={i}>
                           <td>{vendor.name}</td>
                           <td className="text-right">
-                            <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-vendor/${vendor.id}`}>Edit</a> &nbsp; 
-                            <a className="btn btn-danger" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-vendor/${vendor.id}`}>Suspend</a>
+                            <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-vendor/${vendor.id}/`}>Edit</a> &nbsp; 
+                            <a className="btn btn-danger" onClick={() => handleSuspend(vendor.id)}>Suspend</a>
                           </td>
                         </tr>
                        ))}
