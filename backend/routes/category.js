@@ -243,7 +243,8 @@ router.get("/top-menu", (req, res) => {
     Category
     .findAll({
         where: {
-          top_menu: 1
+          top_menu: 1,
+          status: 1
       }
   })
     .then((category) => {
