@@ -147,60 +147,33 @@ console.log('Mobile' , cat);
             <Form className="form theme-form">
               <h5>Show in Hot deals</h5>
               <FormGroup className="m-checkbox-inline custom-radio-ml">
-              { (Hotdeals == 0) ?
-              <div>
+             
+              
                 <div className="radio radio-primary">
-                  <Input id="no-deals" type="radio"  onChange={onChangehotdeals} value="0" name="radio1" defaultChecked />
+                  <Input id="no-deals" type="radio"  onChange={onChangehotdeals} value="0" name="radio1" checked={Hotdeals==0} />
                   <Label className="mb-0" for="no-deals">No</Label>
                 </div>
                 <div className="radio radio-primary">
-                  <Input id="yes-deals" type="radio" onChange={onChangehotdeals} value="1"  name="radio1" />
+                  <Input id="yes-deals" type="radio" onChange={onChangehotdeals} value="1"  name="radio1" checked={Hotdeals==1} />
                   <Label className="mb-0" for="yes-deals">Yes</Label>
                 </div>
-              </div>
-                : 
-                <div>
-                <div className="radio radio-primary">
-                  <Input id="no-deals" type="radio"  onChange={onChangehotdeals} value="0" name="radio1" />
-                  <Label className="mb-0" for="no-deals">No</Label>
-                </div>
-                <div className="radio radio-primary">
-                  <Input id="yes-deals" type="radio" onChange={onChangehotdeals} value="1"  name="radio1" defaultChecked/>
-                  <Label className="mb-0" for="yes-deals">Yes</Label>
-                </div>
-                </div>
+              
                 
-                }
               </FormGroup>
               <h5 className="m-t-30">Show in Featured Business</h5>
               <FormGroup className="m-checkbox-inline custom-radio-ml">
-              { (Featured == 0) ? 
-              
-              <div>
+
                 <div className="radio radio-primary">
-                  <Input id="no-featured" type="radio" onChange={onChangefeatured} value="0" name="radio2" defaultChecked/>
+                  <Input id="no-featured" type="radio" onChange={onChangefeatured} value="0" name="radio2" checked={Featured==0} />
                   <Label className="mb-0" for="no-featured">No</Label>
                 </div>
 
                 <div className="radio radio-primary">
-                <Input id="yes-featured" type="radio" onChange={onChangefeatured} value="1" name="radio2" />
+                <Input id="yes-featured" type="radio" onChange={onChangefeatured} value="1" name="radio2" checked={Featured==1}  />
                 <Label className="mb-0" for="yes-featured">Yes</Label>
                 </div>
-                </div>
               
-              :  
               
-              <div>
-                <div className="radio radio-primary">
-                  <Input id="no-featured" type="radio" onChange={onChangefeatured} value="0" name="radio2" />
-                  <Label className="mb-0" for="no-featured">No</Label>
-                </div>
-                  <div className="radio radio-primary">
-                  <Input id="yes-featured" type="radio" onChange={onChangefeatured} value="1" name="radio2" defaultChecked/>
-                  <Label className="mb-0" for="yes-featured">Yes</Label>
-                  </div>
-                 </div> 
-              }
                 
                
               </FormGroup>
