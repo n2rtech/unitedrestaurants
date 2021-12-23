@@ -99,7 +99,24 @@ const [catData, setCatData] = useState([]);
                 ))}
             </Input>
             </FormGroup>
-
+            <FormGroup>
+              <Label>Status</Label>
+              <Input type="select" name="select" className="form-control digits" placeholder="Please Select">
+                <option value="1">{"Enabled"}</option>
+                <option value="0">{"Disabled"}</option>
+              </Input>
+            </FormGroup>
+            <FormGroup>
+              <Label>Display in Top Menu</Label>
+              <div className="radio radio-primary m-l-20">
+                <Input id="no-top" type="radio" value="0" name="radio2"/>
+                <Label className="mb-10" for="no-top">No</Label>
+              </div>
+              <div className="radio radio-primary m-l-20">
+                <Input id="yes-menu" type="radio" value="1" name="radio2"/>
+                <Label className="mb-10" for="yes-menu">Yes</Label>
+              </div>
+            </FormGroup>
             <FormGroup>
               <ImageUploader
                   withIcon={false}

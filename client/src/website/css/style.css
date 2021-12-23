@@ -999,8 +999,8 @@ table th, table td{
     color: #fff;
     margin-bottom: 20px;
 }
-.wehave ul li {
-    color: #fff;
+.wehave ul li, .wehave p, .wehave h1, .wehave h2, .wehave h3, .wehave h4, .wehave h5, .wehave h6, .wehave label, .wehave span, .wehave strong, .wehave a, .wehave b{
+    color: #fff !important;
 }
 .wehave ul li a img {
     margin-right: 10px;
