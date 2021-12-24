@@ -3,6 +3,7 @@ import Carousel from "react-multi-carousel";
 import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
 import "react-multi-carousel/lib/styles.css";
 import './css/style.css'
+import axios from 'axios'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en.json'
 import ReactTimeAgo from 'react-time-ago'
@@ -41,10 +42,15 @@ const Homeblog = () => {
     }
     });
 
+
+
+  
+
   return (
       <div className="homeblog">
        <Container className="p-0"> 
       <h1>for you to read</h1>
+      <div id="google_translate_element"></div>
       <div className="seeall">
         <a href="/blog">SEE ALL</a>
       </div>

@@ -22,6 +22,16 @@
 a {
     text-decoration: none !important;
 }
+
+body > div > .skiptranslate {
+    display: none;
+}
+
+body {
+    min-height:0px !important;
+    top: 0px !important;
+}
+
 .mainheader{
     background-image: linear-gradient(to bottom, #800020e6 0%,#800020e6 100%), url("/assets/images/headerbg.jpg");
     width: 100%;

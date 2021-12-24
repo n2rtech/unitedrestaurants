@@ -5,6 +5,7 @@ import './css/style.css'
 import Menu from './menu.jsx'
 import Mobilemenu from './mobilemenu.jsx'
 import Countryflag from './countryflag.jsx'
+import GoogleTranslate from './googletranslate';
 import axios from 'axios';
 
 const Header = (props) => {
@@ -178,11 +179,7 @@ const title = <div className="searchbar">
               <Col sm="4">
                 <div className="language-country">
                 <div className="language">
-                <select aria-label="Default select example" className="form-control">
-                  <option>Language</option>
-                  <option value="1">English</option>
-                  <option value="2">Hindi</option>
-                </select>
+                <GoogleTranslate />
               </div>
               
               <div className="country">
