@@ -21,7 +21,7 @@ const Blogs = (props) => {
 	  });
 
   }, []);
-  console.log(blogDetails);
+  console.log('BloG Details',blogDetails);
 
    // Delete functionality
 
@@ -40,6 +40,7 @@ const Blogs = (props) => {
          .catch(error => console.log('Form submit error', error))
     
   }
+
 
   return (
     <Fragment>
