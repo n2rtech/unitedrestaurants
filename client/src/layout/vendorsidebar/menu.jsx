@@ -47,15 +47,15 @@ export const MENUITEMS = [
             }
         ]
     },
-    {
-        menutitle:"Payment Method",
-        menucontent:"Payment Method",
-        Items:[
-            {
-                title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/payment-method/${localStorage.getItem("id")}`, icon: Send, type: 'link', active: false,
-            }
-        ]
-    },
+    // {
+    //     menutitle:"Payment Method",
+    //     menucontent:"Payment Method",
+    //     Items:[
+    //         {
+    //             title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/payment-method/${localStorage.getItem("id")}`, icon: Send, type: 'link', active: false,
+    //         }
+    //     ]
+    // },
     {
         menutitle:"Membership Package",
         menucontent:"Membership Package",
