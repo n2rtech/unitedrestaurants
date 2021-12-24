@@ -6,11 +6,17 @@ import 'react-tabs/style/react-tabs.css';
 import '../css/style.css'
 import { useParams } from "react-router-dom";
 import axios from 'axios'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en.json'
+import ReactTimeAgo from 'react-time-ago'
+TimeAgo.addLocale(en)
+
 
 const Detailpage = (props) => {
 
   const params = useParams();	
   const [blogDetails, setBlogDetails] = useState([]);
+  const [vendor_id , setVendorId] = useState(0); 	
 
   useEffect(() => {
   
@@ -20,13 +26,37 @@ const Detailpage = (props) => {
 
 	axios.get('/api/blogs/'+`${params.id}` , config).then((response) => {
 		setBlogDetails(response.data);
+		setVendorId(response.data.user_id)
 	  });
 
   }, []);
 
-  console.log(blogDetails);
-  console.log(blogDetails.name);
+  const renderHTML = (rawHTML: string) => React.createElement("div", {
+	dangerouslySetInnerHTML: {
+	   __html: rawHTML
+	}
+ });
 
+
+//   const [vendorname, setVendorName] = useState([]);
+
+//   useEffect(() => {
+  
+//     const config = {
+//         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
+//         };
+
+// 	axios.get('/api/vendors/4' , config).then((response) => {
+// 		setVendorName(response.data[0].name);
+// 	  });
+
+//   }, []);
+
+//   console.log('BloG Details1',vendorname);
+
+  const addDefaultSrc = (ev) => {
+	ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/blog-single.jpg`;
+  }
 
   return (
 	
@@ -39,16 +69,19 @@ const Detailpage = (props) => {
         <Col sm="12" xs="12">
 		
         <div className="blogmedia">
-        	<img src={`${process.env.PUBLIC_URL}/assets/images/blog/blog-single.jpg`} 
+        	<img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${blogDetails.image}`} 
                      alt="blog-single" className="img-fluid" />
           </div>  
           <div className="blog-social">
           <List type="inline">
 			  <ListInlineItem>
-			    <span>23 Nov 2021</span>
+			    <span>
+					{ blogDetails != '' ? <ReactTimeAgo date={blogDetails.createdAt} locale="en-US"/>  : '' }
+					
+					</span>
 			  </ListInlineItem>
 			  <ListInlineItem>
-			    <span><i className="icofont icofont-user"></i>Mark Jecno</span>
+			    <span><i className="icofont icofont-user"></i>United</span>
 			  </ListInlineItem>
 			  <ListInlineItem>
 			    <span><i className="icofont icofont-thumbs-up"></i>02Hits</span>
@@ -61,9 +94,10 @@ const Detailpage = (props) => {
 			<h2>{blogDetails.name}</h2> 
 			<hr/> 
 			<div className="Comments">
-				<p>{blogDetails.content}</p>	
+					
+				{renderHTML(`<p>${blogDetails.content}</p>`)}
 			</div> 
-			<div className="comment-box">
+			{/* <div className="comment-box">
 				<h2>Comment</h2>
 				<hr/>
 				<List type="inline">
@@ -101,7 +135,7 @@ const Detailpage = (props) => {
 				  </ListInlineItem>
 				  
 				</List>  
-			</div>
+			</div> */}
 			
         </Col>
         </Row>
