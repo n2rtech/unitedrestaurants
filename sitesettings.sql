@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 16, 2021 at 10:54 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Host: localhost:3306
+-- Generation Time: Dec 24, 2021 at 01:22 PM
+-- Server version: 8.0.27-0ubuntu0.20.04.1
+-- PHP Version: 7.3.33-1+ubuntu20.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,17 +19,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mernunited_old`
+-- Database: `unitedrestaurants`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sitesettings`
+-- Table structure for table `SiteSettings`
 --
 
-CREATE TABLE `sitesettings` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `SiteSettings` (
+  `id` int NOT NULL,
   `maintenance_mode` varchar(255) DEFAULT NULL,
   `site_name` varchar(255) DEFAULT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
@@ -45,20 +45,20 @@ CREATE TABLE `sitesettings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sitesettings`
+-- Dumping data for table `SiteSettings`
 --
 
-INSERT INTO `sitesettings` (`id`, `maintenance_mode`, `site_name`, `phone_number`, `address`, `facebook_links`, `twitter_links`, `google_plus_links`, `linkedin_links`, `instagram_links`, `logo`, `createdAt`, `updatedAt`) VALUES
-(1, ' no', ' United Restaurants', ' 9026574061', ' sss', ' ', ' ', ' ff', ' ss', ' kk', 'logo_1638348925122.jpg', '2021-11-29 13:37:30', '2021-12-01 08:55:25');
+INSERT INTO `SiteSettings` (`id`, `maintenance_mode`, `site_name`, `phone_number`, `address`, `facebook_links`, `twitter_links`, `google_plus_links`, `linkedin_links`, `instagram_links`, `logo`, `createdAt`, `updatedAt`) VALUES
+(1, 'no', ' United Restaurants1', ' 9026574061', ' sss', ' 1', ' 2', ' ff', ' ss', ' kk', 'logo_1639717490126.png', '2021-11-29 13:37:30', '2021-12-24 13:22:32');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `sitesettings`
+-- Indexes for table `SiteSettings`
 --
-ALTER TABLE `sitesettings`
+ALTER TABLE `SiteSettings`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -66,10 +66,10 @@ ALTER TABLE `sitesettings`
 --
 
 --
--- AUTO_INCREMENT for table `sitesettings`
+-- AUTO_INCREMENT for table `SiteSettings`
 --
-ALTER TABLE `sitesettings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `SiteSettings`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
