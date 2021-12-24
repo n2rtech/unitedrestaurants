@@ -1225,6 +1225,9 @@ input::placeholder, textarea::placeholder{
     font-size: 11px;
     font-weight: normal;
 }
+.homeblog h5 a{
+    color: #70081C !important;
+}
 /**********detailpage-end*********/
 @media (max-width: 767px){
 .togglebtn h1 {

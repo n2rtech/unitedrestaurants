@@ -68,12 +68,14 @@ const Homeblog = () => {
                 <CardBody>
                   <Row>
                     <Col sm="3" xs="12">
-                    <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/blogs/${blog.image}`} 
+                    <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`}>
+                      <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/blogs/${blog.image}`} 
                      alt="Menu-Icon" className="img-fluid" />
+                    </a>
                    </Col>
                    <Col sm="9" xs="12">
                   <CardTitle tag="h5">
-                    {blog.name}
+                  <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`}>{blog.name}</a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
