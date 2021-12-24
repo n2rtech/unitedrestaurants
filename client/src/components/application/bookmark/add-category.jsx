@@ -17,6 +17,8 @@ const params = useParams();
 const history = useHistory();
 const [image, setimage] = useState({ pictures: [] , pictureFiles: [] })
 const [catData, setCatData] = useState([]);
+const [status,setStatus] = useState(0);
+const [topMenu,setTopMenu] = useState(0);
 
     const onDrop = (pictureFiles) => {
         setimage({
@@ -32,6 +34,14 @@ const [catData, setCatData] = useState([]);
 
     const handleParentChange = (evt) => {
       setParentCat(evt.target.value)
+    }
+
+    const handleStatusChange = (evt) => {
+      setStatus(evt.target.value)
+    }
+
+    const handleTopMenuChange = (evt) => {
+      setTopMenu(evt.target.value)
     }
 
     useEffect(() => {
@@ -62,6 +72,8 @@ const [catData, setCatData] = useState([]);
           } 
           bodyParameters.set('parent_id', parentCat);
           bodyParameters.set('description', catname);
+          bodyParameters.set('top_menu', topMenu);
+          bodyParameters.set('status', status);
 
           axios.post(`/api/categories/add`,
             bodyParameters,
@@ -76,6 +88,9 @@ const [catData, setCatData] = useState([]);
              .catch(error => console.log('Form submit error', error))
 
       };
+
+      console.log('Top Menu' , topMenu);
+      console.log('Status' ,status);
 
   return (
     <Fragment>
@@ -101,19 +116,19 @@ const [catData, setCatData] = useState([]);
             </FormGroup>
             <FormGroup>
               <Label>Status</Label>
-              <Input type="select" name="select" className="form-control digits" placeholder="Please Select">
-                <option value="1">{"Enabled"}</option>
-                <option value="0">{"Disabled"}</option>
+              <Input type="select" name="select" className="form-control digits" onChange = {handleStatusChange} placeholder="Please Select">
+                <option value="0" checked = {status == 0}>{"Disabled"}</option>
+                <option value="1" checked = {status == 1} >{"Enabled"}</option>
               </Input>
             </FormGroup>
             <FormGroup>
               <Label>Display in Top Menu</Label>
               <div className="radio radio-primary m-l-20">
-                <Input id="no-top" type="radio" value="0" name="radio2"/>
+                <Input id="no-top" type="radio" value="0" name="radio2" checked = {topMenu == 0} onChange= {handleTopMenuChange}/>
                 <Label className="mb-10" for="no-top">No</Label>
               </div>
               <div className="radio radio-primary m-l-20">
-                <Input id="yes-menu" type="radio" value="1" name="radio2"/>
+                <Input id="yes-menu" type="radio" value="1" name="radio2" checked = {topMenu == 1} onChange = {handleTopMenuChange}/>
                 <Label className="mb-10" for="yes-menu">Yes</Label>
               </div>
             </FormGroup>
