@@ -87,7 +87,9 @@ router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {   
     Blog
-    .findAll()
+    .findAll({
+        order: [ [ 'createdAt', 'DESC' ]]
+    })
     .then((blog) => res.status(200).send(blog))
     .catch((error) => {
         res.status(400).send(error);
@@ -97,7 +99,10 @@ router.get('/', passport.authenticate('jwt', {
 
 router.get('/get', (req, res) => { 
     Blog
-    .findAll({where:{show_on_home:1}})
+    .findAll({
+        where:{show_on_home:1},
+        order: [ [ 'createdAt', 'DESC' ]]
+    })
     .then((blog) => res.status(200).send(blog))
     .catch((error) => {
         res.status(400).send(error);
