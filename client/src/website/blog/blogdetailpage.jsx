@@ -35,7 +35,7 @@ const Detailpage = (props) => {
 	dangerouslySetInnerHTML: {
 	   __html: rawHTML
 	}
- });
+  });
 
 
 //   const [vendorname, setVendorName] = useState([]);
@@ -80,21 +80,11 @@ const Detailpage = (props) => {
 					
 					</span>
 			  </ListInlineItem>
-			  <ListInlineItem>
-			    <span><i className="icofont icofont-user"></i>United</span>
-			  </ListInlineItem>
-			  <ListInlineItem>
-			    <span><i className="icofont icofont-thumbs-up"></i>02Hits</span>
-			  </ListInlineItem>
-			  <ListInlineItem>
-			    <span><i className="icofont icofont-ui-chat"></i>598 Comments</span>
-			  </ListInlineItem>
 			</List>   
 			</div>   
 			<h2>{blogDetails.name}</h2> 
 			<hr/> 
 			<div className="Comments">
-					
 				{renderHTML(`<p>${blogDetails.content}</p>`)}
 			</div> 
 			{/* <div className="comment-box">
