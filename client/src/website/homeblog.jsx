@@ -35,6 +35,12 @@ const Homeblog = () => {
     ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/user.png`;
   }
 
+  const renderHTML = (rawHTML: string) => React.createElement("div", {
+    dangerouslySetInnerHTML: {
+       __html: rawHTML
+    }
+    });
+
   return (
       <div className="homeblog">
        <Container className="p-0"> 
@@ -46,10 +52,13 @@ const Homeblog = () => {
         <Carousel responsive={responsive}>
 
         {blogData.map((blog , i ) => (
+
+          
           <Col key={i} sm="12">
             <div className="customcard">
-              <Card
-              >
+              { blog.show_on_home  == 1 ? 
+
+              <Card>
                 <CardBody>
                   <Row>
                     <Col sm="3" xs="12">
@@ -67,13 +76,21 @@ const Homeblog = () => {
                   <ReactTimeAgo date={blog.createdAt} locale="en-US"/>
                   </CardSubtitle>
                   <CardText>
-                   {`${(blog.content).substring(0, 270)}...`}<a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`} className="readmore">READ MORE</a>
+                  {renderHTML(`<p>${(blog.content).substring(0, 270)}...</p>`)}
+                  <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`} className="readmore">READ MORE</a>
                   </CardText>
                   
                   </Col>
                   </Row>
                 </CardBody>
               </Card>
+              
+                :
+              
+                ''
+              
+              }
+              
             </div>
           </Col>
           ))}

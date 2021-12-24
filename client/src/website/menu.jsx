@@ -22,7 +22,7 @@ useEffect(() => {
   //   setCategoryData(result);
   // }); 
 
-  axios.get(`/api/categories/list`)
+  axios.get(`/api/categories/top-menu`)
     .then((result_data) => {
       const result = result_data.data;
       setCategoryData(result);

@@ -30,48 +30,57 @@ const Bloglist = (props) => {
 
   console.log(blogs);
 
+  const renderHTML = (rawHTML: string) => React.createElement("div", {
+    dangerouslySetInnerHTML: {
+       __html: rawHTML
+    }
+    });
+
+
+ const addDefaultSrc = (ev) => {
+	ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/user.png`;
+  }
+
   return (
-    <div className="homeblog">
+    <div className="homeblog blog-listing">
       <h1>Blogs</h1>              
       <Container className="p-0">
         <div className="hr">
-      <img src={`${process.env.PUBLIC_URL}/assets/images/hr.png`} 
-                     alt="Menu-Icon"/>
+      <img src={`${process.env.PUBLIC_URL}/assets/images/hr.png`} alt="Menu-Icon"/>
        </div>
-      <Row className="m-0">
-        <Col sm="6" xs="12">
             <div className="customcard">
-              <Card
-              >
+              <Card>
                 <CardBody>
-                {blogs.map((item , i ) => ( 
-                  <Row key={i}>
-                   
-                    <Col sm="3">
-                    <img src={`${process.env.PUBLIC_URL}/blogs/${item.image}`} 
-                     alt="Menu-Icon"/>
-                   </Col>
-                   <Col sm="9">
-                  <CardTitle tag="h5">
-                    {item.name}
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  >
-                  <ReactTimeAgo date={item.createdAt} locale="en-US"/>
-                  </CardSubtitle>
-                  <CardText>
-                    {item.content}<a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${item.id}`} className="readmore">READ MORE</a>
-                  </CardText>
-                  
+                <Row>
+                 {blogs.map((item , i ) => ( 
+                  <Col sm="6">
+                    <Row key={i}>
+                      <Col sm="3">
+                      <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${item.image}`} 
+                       alt="Menu-Icon"/>
+                     </Col>
+                     <Col sm="9">
+                      <CardTitle tag="h5">
+                        {item.name}
+                      </CardTitle>
+                      <CardSubtitle
+                        className="mb-2 text-muted"
+                        tag="h6"
+                      >
+                      <ReactTimeAgo date={item.createdAt} locale="en-US"/>
+                      </CardSubtitle>
+                      <CardText>
+                      {renderHTML(`<p>${item.content}</p>`)}<a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${item.id}`} className="readmore">READ MORE</a>
+                      </CardText>
+                    </Col>
+                    </Row>
                   </Col>
-                  </Row>
-                ))}
+                  ))}
+                </Row>  
                 </CardBody>
               </Card>
             </div>
-          </Col>
+
         
 
         <Col sm="12" xs="12">
@@ -122,7 +131,6 @@ const Bloglist = (props) => {
             </PaginationItem>
           </Pagination>
         </Col>
-        </Row>
       </Container>
     </div>
   );
