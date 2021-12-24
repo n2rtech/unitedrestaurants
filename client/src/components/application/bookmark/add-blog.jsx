@@ -45,7 +45,12 @@ const [image, setimage] = useState({ pictures: [] })
         bodyParameters.set('name', titleData);
         bodyParameters.set('content' , content);
         bodyParameters.set('show_on_home',showhome);
-        bodyParameters.set('image', image.pictureFiles[0]);
+
+        if(image.pictureFiles) {
+          bodyParameters.set('image', image.pictureFiles[0]);
+        } else {
+          bodyParameters.set('image', image.pictureFiles);
+        }
 
         axios.post(`/api/blogs/`,
           bodyParameters,
