@@ -30,6 +30,11 @@ const Bloglist = (props) => {
 
   console.log(blogs);
 
+
+ const addDefaultSrc = (ev) => {
+	ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/user.png`;
+  }
+
   return (
     <div className="homeblog">
       <h1>Blogs</h1>              
@@ -49,7 +54,7 @@ const Bloglist = (props) => {
                   <Row key={i}>
                    
                     <Col sm="3">
-                    <img src={`${process.env.PUBLIC_URL}/blogs/${item.image}`} 
+                    <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${item.image}`} 
                      alt="Menu-Icon"/>
                    </Col>
                    <Col sm="9">
