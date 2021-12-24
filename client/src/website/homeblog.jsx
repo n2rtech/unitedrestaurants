@@ -46,10 +46,13 @@ const Homeblog = () => {
         <Carousel responsive={responsive}>
 
         {blogData.map((blog , i ) => (
+
+          
           <Col key={i} sm="12">
             <div className="customcard">
-              <Card
-              >
+              { blog.show_on_home  == 1 ? 
+
+              <Card>
                 <CardBody>
                   <Row>
                     <Col sm="3" xs="12">
@@ -74,6 +77,13 @@ const Homeblog = () => {
                   </Row>
                 </CardBody>
               </Card>
+              
+                :
+              
+                ''
+              
+              }
+              
             </div>
           </Col>
           ))}

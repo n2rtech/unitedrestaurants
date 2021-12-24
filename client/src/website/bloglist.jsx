@@ -45,6 +45,7 @@ const Bloglist = (props) => {
               >
                 <CardBody>
                 {blogs.map((item , i ) => ( 
+
                   <Row key={i}>
                    
                     <Col sm="3">
