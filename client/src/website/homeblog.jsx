@@ -32,7 +32,7 @@ const Homeblog = () => {
   }, []);
 
   const addDefaultSrc = (ev) => {
-    ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/user.png`;
+    ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/blog-single.jpg`;
   }
 
   const renderHTML = (rawHTML: string) => React.createElement("div", {

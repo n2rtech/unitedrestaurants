@@ -38,8 +38,8 @@ const Bloglist = (props) => {
 
 
  const addDefaultSrc = (ev) => {
-	ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/user.png`;
-  }
+	ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/blog-single.jpg`;
+ }
 
   return (
     <div className="homeblog blog-listing">
