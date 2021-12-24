@@ -29,25 +29,83 @@ const Advertise = (props) => {
         <Container fluid={true} className="p-0">
           <h2>advertise your business here</h2>
           
-            <Row className="m-0">
+            
             { addSpaces && addSpaces.length > 0 ? addSpaces.map((item , i ) => (
-            <Col sm="4" className="p-0">
-              <div className="advertise-gridlarg">
-                <img onError = {addDefaultSrc} className="img-fluid" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/${item.image}`} 
-                       alt="Menu-Icon"/>
-                  <div className="clickevent">     
-                <div className="addname">
-                  Your AD Here
-                </div>
-                <Button>
-                  click to rent
-                </Button>
-                </div>
-              </div>
-            </Col>
+             <Row className="m-0">
+              
+                <Col sm="4" className="p-0">
+                  <div className="advertise-gridlarg">
+                    <img onError = {addDefaultSrc} className="img-fluid" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/${item.image}`} 
+                          alt="Menu-Icon"/>
+                  </div>
+                </Col>
+
+
+                <Col sm="4" className="p-0">
+                    <div className="advertise-gridlarg">
+                      <img onError = {addDefaultSrc} className="img-fluid" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/`} 
+                            alt="Menu-Icon"/>
+                          <div className="clickevent">     
+                            <div className="addname">Your AD Here</div>
+                                <Button>click to rent</Button>
+                          </div>
+                    </div>
+                  </Col>
+
+                  <Col sm="4" className="p-0">
+                    <div className="advertise-gridlarg">
+                      <img onError = {addDefaultSrc} className="img-fluid" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/`} 
+                            alt="Menu-Icon"/>
+                          <div className="clickevent">     
+                            <div className="addname">Your AD Here</div>
+                                <Button>click to rent</Button>
+                          </div>
+                    </div>
+                  </Col>
+
+              </Row>
                     
-          )) : '' }
-           </Row> 
+          )) :
+          
+          <Row className="m-0">
+                  <Col sm="4" className="p-0">
+                    <div className="advertise-gridlarg">
+                      <img onError = {addDefaultSrc} className="img-fluid" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/`} 
+                            alt="Menu-Icon"/>
+                          <div className="clickevent">     
+                            <div className="addname">Your AD Here</div>
+                                <Button>click to rent</Button>
+                          </div>
+                    </div>
+                  </Col>
+
+                  <Col sm="4" className="p-0">
+                    <div className="advertise-gridlarg">
+                      <img onError = {addDefaultSrc} className="img-fluid" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/`} 
+                            alt="Menu-Icon"/>
+                          <div className="clickevent">     
+                            <div className="addname">Your AD Here</div>
+                                <Button>click to rent</Button>
+                          </div>
+                    </div>
+                  </Col>  
+
+                  <Col sm="4" className="p-0">
+                    <div className="advertise-gridlarg">
+                      <img onError = {addDefaultSrc} className="img-fluid" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/`} 
+                            alt="Menu-Icon"/>
+                          <div className="clickevent">     
+                            <div className="addname">Your AD Here</div>
+                                <Button>click to rent</Button>
+                          </div>
+                    </div>
+                  </Col>    
+              </Row>
+          
+          
+          }
+
+
         
 
         </Container>
