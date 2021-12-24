@@ -72,7 +72,8 @@ router.post('/add', passport.authenticate('jwt', {
                     image: image,
                     parent_id: parent_id,
                     sort_order: req.body.sort_order,
-                    status: req.body.status
+                    status: req.body.status,
+                    top_menu: req.body.top_menu
                 })
                 .then((category) => res.status(201).send(category))
                 .catch((error) => {
