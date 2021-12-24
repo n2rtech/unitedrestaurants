@@ -78,16 +78,16 @@ export const MENUITEMS = [
 
         ]
     },
-    {
-        menutitle:"Notifications & messaging",
-        menucontent:"Notifications & messaging",
-        Items:[
-            {
-                title: 'Notifications & messaging', path: `${process.env.PUBLIC_URL}/ui-kits/helperclass`, icon: MessageSquare, type: 'link', active: false, 
-            },
+    // {
+    //     menutitle:"Notifications & messaging",
+    //     menucontent:"Notifications & messaging",
+    //     Items:[
+    //         {
+    //             title: 'Notifications & messaging', path: `${process.env.PUBLIC_URL}/ui-kits/helperclass`, icon: MessageSquare, type: 'link', active: false, 
+    //         },
 
-        ]
-    },
+    //     ]
+    // },
     {
         menutitle:"Promotions/discounts",
         menucontent:"Promotions/discounts",
