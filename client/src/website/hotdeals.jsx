@@ -71,7 +71,8 @@ const addDefaultSrc = (ev) => {
                   </Col>
                   </Row>
                   <CardText>
-                  {item.about_business}
+                  
+                  {(item.about_business).substring(0, 100)}...
                   </CardText>
                   <Button>
                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}> SEE SALE</a>
