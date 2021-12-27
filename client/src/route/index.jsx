@@ -226,6 +226,7 @@ import Backup from "../components/application/bookmark/backup"
 import AddUser from "../components/application/bookmark/add-user"
 import Userslist from "../components/application/bookmark/users-list"
 import Edituser from "../components/application/bookmark/edit-user"
+import Adsense from "../components/application/bookmark/adsense"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -411,6 +412,7 @@ export const routes = [
         { path:"/dashboard/admin/add-user/", Component:AddUser},
         { path:"/dashboard/admin/users-list", Component:Userslist},
         { path:"/dashboard/admin/edit-user", Component:Edituser},
+        { path:"/dashboard/admin/adsense", Component:Adsense},
         { path:"/dashboard/admin/manage-pages", Component:ManagePages},
         { path:"/dashboard/admin/add-category", Component:AddCategory},
         { path:"/dashboard/admin/edit-page/:id", Component:EditPage},

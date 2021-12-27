@@ -131,7 +131,7 @@ export const MENUITEMS = [
         menucontent:"Google Adsense",
         Items:[
             {
-                title: 'Google Adsense', path: `${process.env.PUBLIC_URL}/bonus-ui/scrollable`, icon: DollarSign, type: 'link', active: false, 
+                title: 'Google Adsense', path: `${process.env.PUBLIC_URL}/dashboard/admin/adsense`, icon: DollarSign, type: 'link', active: false, 
             },
 
         ]
