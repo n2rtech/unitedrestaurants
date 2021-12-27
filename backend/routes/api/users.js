@@ -27,8 +27,8 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  var table_name = 'users'.charAt(0).toUpperCase()+ 'users'.slice(1);;
-  DB.query('SELECT email FROM '+table_name+' WHERE email ="' + req.body.email +'"', function (err, user) {
+
+  DB.query('SELECT email FROM users WHERE email ="' + req.body.email +'"', function (err, user) {
     if (err) throw err;
     if (user[0]) {
       return res.status(400).json({ error: "Email already exists" });
