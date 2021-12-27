@@ -45,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.TEXT
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'User',
   });
   return User;
