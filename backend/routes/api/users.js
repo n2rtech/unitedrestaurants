@@ -41,7 +41,7 @@ router.post("/register", (req, res) => {
 
           Role.findOne({
             where: {
-                role_name: req.body.role? req.body.role : 'vendor'
+                role_name: req.body.role? req.body.role : 'sub user'
             }
         }).then((role) => {
             User
@@ -59,7 +59,9 @@ router.post("/register", (req, res) => {
             .then((user) => res.status(201).send({
               succeed: true,
               message: "user inserted successfully!"
-            }));               
+            })).catch(err => {
+              res.status(400).send('err')
+            });               
         })
       });     
     });
@@ -355,12 +357,12 @@ router.get('/:id', (req, res) => {
 
 
 
+
+
+
 // Update a User
-router.put('/:id', passport.authenticate('jwt', {
-  session: false
-}), function (req, res) {
-  helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
-    if (!req.body.role_id || !req.body.email || !req.body.password || !req.body.fullname || !req.body.phone) {
+router.put('/:id', (req, res) => {
+    if (!req.body.role_id || !req.body.email || !req.body.password || !req.body.name || !req.body.phone) {
       res.status(400).send({
         msg: 'Please pass Role ID, email, password, phone or fullname.'
       })
@@ -398,9 +400,6 @@ router.put('/:id', passport.authenticate('jwt', {
           res.status(400).send(error);
         });
     }
-  }).catch((error) => {
-    res.status(403).send(error);
-  });
 });
 
 const getPagination = (page=1, size) => {
@@ -425,6 +424,59 @@ function generatePassword(pwd) {
     return hash;
 };
 
+
+// Get List of Users
+router.get('/', (req, res) => {
+  User
+  .findAll({
+    include: [
+    {
+      model: Role,
+      as: 'role',
+    }
+    ]
+  })
+  .then((users) => {
+    res.status(200).send(users)
+  })
+  .catch((error) => {
+    res.status(400).send(error);
+  });
+});
+
+
+
+// Delete a User
+router.delete('/:id', (req, res) => {
+    if (!req.params.id) {
+      res.status(400).send({
+        msg: 'Please pass user ID.'
+      })
+    } else {
+      User
+        .findByPk(req.params.id)
+        .then((user) => {
+          if (user) {
+            User.destroy({
+              where: {
+                id: req.params.id
+              }
+            }).then(_ => {
+              res.status(200).send({
+                'message': 'User deleted'
+              });
+            }).catch(err => res.status(400).send(err));
+          } else {
+            res.status(404).send({
+              'message': 'User not found'
+            });
+          }
+        })
+        .catch((error) => {
+          res.status(400).send(error);
+        });
+    }
+});
 
 
 module.exports = router;
