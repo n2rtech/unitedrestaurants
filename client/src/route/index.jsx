@@ -223,6 +223,9 @@ import EditCountries from "../components/application/bookmark/edit-countries"
 import Countries from "../components/application/bookmark/countries"
 import Trash from "../components/application/bookmark/trash"
 import Backup from "../components/application/bookmark/backup"
+import AddUser from "../components/application/bookmark/add-user"
+import Userslist from "../components/application/bookmark/users-list"
+import Edituser from "../components/application/bookmark/edit-user"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -405,6 +408,9 @@ export const routes = [
         { path:"/dashboard/admin/roleslist/:id", Component:RolesList},
         { path:"/dashboard/admin/trash/:id", Component:Trash},
         { path:"/dashboard/admin/backup/:id", Component:Backup},
+        { path:"/dashboard/admin/add-user/", Component:AddUser},
+        { path:"/dashboard/admin/users-list", Component:Userslist},
+        { path:"/dashboard/admin/edit-user", Component:Edituser},
         { path:"/dashboard/admin/manage-pages", Component:ManagePages},
         { path:"/dashboard/admin/add-category", Component:AddCategory},
         { path:"/dashboard/admin/edit-page/:id", Component:EditPage},

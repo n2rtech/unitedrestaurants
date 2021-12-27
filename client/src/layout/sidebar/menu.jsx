@@ -1,4 +1,4 @@
-import { Home, Airplay, Box, Gift, Send, HardDrive, Flag, DollarSign, Settings, FolderPlus, Command, Cloud, Grid, FileText, Server, BarChart, Users, Layers, ShoppingBag, List, Mail, MessageCircle, MessageSquare, GitPullRequest, Monitor, Heart, Clock, Zap, CheckSquare, Calendar, Image, Film, HelpCircle, Radio, Map, Edit, Sunrise, Package } from 'react-feather'
+import { Home, Airplay, Box, Gift, Send, HardDrive, Flag, DollarSign, Settings, UserCheck, FolderPlus, Command, Cloud, Grid, FileText, Server, BarChart, Users, Layers, ShoppingBag, List, Mail, MessageCircle, MessageSquare, GitPullRequest, Monitor, Heart, Clock, Zap, CheckSquare, Calendar, Image, Film, HelpCircle, Radio, Map, Edit, Sunrise, Package } from 'react-feather'
 
 
 export const MENUITEMS = [
@@ -11,7 +11,15 @@ export const MENUITEMS = [
             }
         ]
     },
-
+    {
+        menutitle:"Manage Users",
+        menucontent:"Manage Users",
+        Items:[
+            {
+                title: 'Manage Users', path: `${process.env.PUBLIC_URL}/dashboard/admin/users-list`, icon: UserCheck, type: 'link', active: false,
+            }
+        ]
+    },
     {
         menutitle:"Roles & Permission",
         menucontent:"Roles & Permission",

@@ -69,6 +69,18 @@ const handleSubmit = event => {
                 <Input type="textarea" value = {description} onChange = {onChangeDescription}  className="form-control"  rows="3"/>
               </FormGroup>
               <FormGroup>
+                <Label htmlFor="exampleFormControlInput1">{"Discount Percentage"}</Label>
+                <Input type="text" className="form-control" />
+              </FormGroup>
+              <FormGroup>
+                <Label>{"Start Date"}</Label>
+                <Input className="form-control digits" type="date" defaultValue="2022-01-01" />
+              </FormGroup>
+              <FormGroup>
+                <Label>{"End Date"}</Label>
+                <Input className="form-control digits" type="date" defaultValue="2022-02-01" />
+              </FormGroup>
+              <FormGroup>
                 <Button  color="primary" onClick = {handleSubmit} >{"Save"}</Button>
               </FormGroup>
             </Form>
