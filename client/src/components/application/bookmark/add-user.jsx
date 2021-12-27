@@ -35,7 +35,7 @@ const AddUser = (props) => {
       const bodyParameters = {
         name: username,
         first_name: username,
-        lastname: '',
+        last_name: '',
         email: useremail,
         password: userpassword
       };
