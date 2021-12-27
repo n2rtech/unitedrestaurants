@@ -478,6 +478,33 @@ router.delete('/:id', (req, res) => {
     }
 });
 
+// Get List of Categories
+router.get("/deleted/get", (req, res) => {
+    User
+    .findAll( { where: {deletedAt: {[Op.ne]: null} 
+},
+    paranoid:false
+     })
+    .then((category) => {
+        res.status(200).send(category)
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(400).send('error');
+    });
+});
+
+
+// Restore a Country
+router.post('/restore/', (req, res) => {
+    User.restore()
+    .then(_ => {
+        res.status(200).send({
+            'message': 'User restored'
+        });
+    }).catch(err => res.status(400).send(err));
+});
+
 
 module.exports = router;
   
