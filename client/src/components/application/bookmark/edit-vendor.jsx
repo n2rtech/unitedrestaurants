@@ -102,7 +102,7 @@ const [category_id , setCategory] = useState('0');
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
           };
   
-    axios.get('/api/categories/1' , config).then((response) => {
+    axios.get('/api/categories/'+`${category_id}` , config).then((response) => {
       setCat(response.data.name);
       });
   
@@ -120,7 +120,7 @@ const [category_id , setCategory] = useState('0');
         email: Email,
         mobile: Mobile,
         address: Address,
-        country_id: 5,
+        country_id: Country,
         category_id: category_id,
         featured_business: Featured,
         hot_deals: Hotdeals,

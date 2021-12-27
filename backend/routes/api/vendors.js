@@ -671,7 +671,7 @@ router.put('/:id', (req, res) => {
         mobile: req.body.mobile || user.mobile,
         country_id: req.body.country_id || user.country_id,
         category_id: req.body.category_id || user.category_id,
-        address: req.body.address || user.address,
+        address: req.body.address || user.address,  
         featured_business: req.body.featured_business || user.featured_business,
         hot_deal: req.body.hot_deals || user.hot_deal,
         business_dvertise: req.body.business_dvertise || user.business_dvertise,
@@ -703,20 +703,21 @@ router.put('/:id', (req, res) => {
                 var country_id = user.country_id;
                 var name = req.body.name;
                 var banner = vendor_pro[0].banner;
+                var about_business = vendor_pro[0].about_business;
 
                 DB.query("DELETE  FROM HotDeals where user_id="+user_id);
                 DB.query("DELETE  FROM BusinessAdvertises where user_id="+user_id);
                 DB.query("DELETE  FROM FeaturedBusinesses where user_id="+user_id);
                 if (req.body.hot_deals) {
-                  DB.query("INSERT INTO HotDeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                  DB.query("INSERT INTO HotDeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', NOW(), '')");
                 }
 
                 if (req.body.featured_business){
-                  DB.query("INSERT INTO FeaturedBusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                  DB.query("INSERT INTO FeaturedBusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', NOW(), '')");
                 }
 
                 if (req.body.hot_deals || req.body.featured_business) {
-                  DB.query("INSERT INTO BusinessAdvertises (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '', '"+banner+"', NOW(), '')");
+                  DB.query("INSERT INTO BusinessAdvertises (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', NOW(), '')");
                 }
 
                 res.status(200).send({
