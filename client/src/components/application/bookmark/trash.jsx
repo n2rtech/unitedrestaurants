@@ -47,7 +47,8 @@ const Trash = (props) => {
                     <td>{"Deleted Vendor name"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="danger">Restore</Button>
+                      <Button color="success">Restore</Button> &nbsp; 
+                      <a className="btn btn-danger">Delete Permanently</a>
                     </ButtonGroup>
                       
                     </td>
@@ -56,7 +57,8 @@ const Trash = (props) => {
                     <td>{"Deleted Country Name"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="danger" onClick={() => handleClick('countries')}>Restore</Button>
+                      <Button color="success" onClick={() => handleClick('countries')}>Restore</Button> &nbsp; 
+                      <a className="btn btn-danger">Delete Permanently</a>
                     </ButtonGroup>
                       
                     </td>
@@ -65,7 +67,8 @@ const Trash = (props) => {
                     <td>{"Deleted Pages"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="danger">Restore</Button>
+                      <Button color="success">Restore</Button> &nbsp; 
+                      <a className="btn btn-danger">Delete Permanently</a>
                     </ButtonGroup>
                     </td>
                   </tr>
@@ -73,7 +76,8 @@ const Trash = (props) => {
                     <td>{"Deleted User"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="danger">Restore</Button>
+                      <Button color="success">Restore</Button> &nbsp; 
+                      <a className="btn btn-danger">Delete Permanently</a>
                     </ButtonGroup>
                     </td>
                   </tr>
@@ -81,7 +85,8 @@ const Trash = (props) => {
                     <td>{"Deleted Categories"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="danger" onClick={() => handleClick('categories')}>Restore</Button>
+                      <Button color="success" onClick={() => handleClick('categories')}>Restore</Button> &nbsp; 
+                      <a className="btn btn-danger">Delete Permanently</a>
                     </ButtonGroup>
                     </td>
                   </tr>
@@ -89,7 +94,8 @@ const Trash = (props) => {
                     <td>{"Deleted Promotions"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="danger">Restore</Button>
+                      <Button color="success">Restore</Button> &nbsp; 
+                      <a className="btn btn-danger">Delete Permanently</a>
                     </ButtonGroup>
                     </td>
                   </tr>
@@ -97,7 +103,8 @@ const Trash = (props) => {
                     <td>{"Deleted item name"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="danger">Restore</Button>
+                      <Button color="success">Restore</Button> &nbsp; 
+                      <a className="btn btn-danger">Delete Permanently</a>
                     </ButtonGroup>
                     </td>
                   </tr>
