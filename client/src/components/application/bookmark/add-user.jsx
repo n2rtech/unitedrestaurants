@@ -8,6 +8,43 @@ import { useHistory } from 'react-router-dom'
 
 const AddUser = (props) => {
 
+  const [username, setUserName] = useState()
+  const [useremail, setUserEmail] = useState()
+  const [userpassword, setUserPassword] = useState()
+  const token = localStorage.getItem("token");
+
+  const onChangeusername = (event) => {
+    setUserName(event.target.value);
+  }
+
+  const onChangeuseremail = (event) => {
+    setUserEmail(event.target.value);
+  }
+
+  const onChangeuserpassword = (event) => {
+    setUserPassword(event.target.value);
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+
+      const bodyParameters = {
+        name: username,
+        first_name: username,
+        lastname: '',
+        email: useremail,
+        password: userpassword
+      };
+      axios.post(`/api/users/register/`,
+        bodyParameters,
+        config
+      ) .then(response => toast.success("User has been added !")  )
+         .catch(error => console.log('Form submit error', error))
+  };
 
   return (
     <Fragment>
@@ -18,15 +55,15 @@ const AddUser = (props) => {
             <Form className="form theme-form">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"User name"}</Label>
-                <Input className="form-control" type="text" />
+                <Input className="form-control" type="text"  onChange = {onChangeusername}  />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Email"}</Label>
-                <Input type="email" className="form-control" />
+                <Input type="email" className="form-control" onChange = {onChangeuseremail} />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Password"}</Label>
-                <Input type="text" className="form-control" />
+                <Input type="text" className="form-control" onChange = {onChangeuserpassword}/>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlSelect9">{"Select Roles"}</Label>
@@ -37,7 +74,7 @@ const AddUser = (props) => {
                 </Input>
               </FormGroup>
               <FormGroup>
-                <Button  color="primary">{"Save"}</Button>
+                <Button  color="primary" onClick = {handleSubmit} >{"Save"}</Button>
               </FormGroup>
             </Form>
           </CardBody>
