@@ -411,7 +411,7 @@ export const routes = [
         { path:"/dashboard/admin/backup/:id", Component:Backup},
         { path:"/dashboard/admin/add-user/", Component:AddUser},
         { path:"/dashboard/admin/users-list", Component:Userslist},
-        { path:"/dashboard/admin/edit-user", Component:Edituser},
+        { path:"/dashboard/admin/edit-user/:id", Component:Edituser},
         { path:"/dashboard/admin/adsense", Component:Adsense},
         { path:"/dashboard/admin/manage-pages", Component:ManagePages},
         { path:"/dashboard/admin/add-category", Component:AddCategory},
