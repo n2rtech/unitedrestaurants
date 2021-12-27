@@ -36,16 +36,6 @@ const Homeblog = () => {
     ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/blog-single.jpg`;
   }
 
-  const renderHTML = (rawHTML: string) => React.createElement("div", {
-    dangerouslySetInnerHTML: {
-       __html: rawHTML
-    }
-    });
-
-
-
-  
-
   return (
       <div className="homeblog">
        <Container className="p-0"> 
@@ -84,7 +74,10 @@ const Homeblog = () => {
                   <ReactTimeAgo date={blog.createdAt} locale="en-US"/>
                   </CardSubtitle>
                   <CardText>
-                  {renderHTML(`<p>${(blog.content).substring(0, 270)}...</p>`)}
+                 
+                  <div dangerouslySetInnerHTML={{__html: `<p>${(blog.content).substring(0, 270)}...</p>`}} />
+
+
                   <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`} className="readmore">READ MORE</a>
                   </CardText>
                   

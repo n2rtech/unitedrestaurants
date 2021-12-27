@@ -30,12 +30,6 @@ const Bloglist = (props) => {
 
   console.log(blogs);
 
-  const renderHTML = (rawHTML: string) => React.createElement("div", {
-    dangerouslySetInnerHTML: {
-       __html: rawHTML
-    }
-    });
-
 
  const addDefaultSrc = (ev) => {
 	ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/blog-single.jpg`;
@@ -70,7 +64,9 @@ const Bloglist = (props) => {
                       <ReactTimeAgo date={item.createdAt} locale="en-US"/>
                       </CardSubtitle>
                       <CardText>
-                      {renderHTML(`<p>${item.content}</p>`)}<a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${item.id}`} className="readmore">READ MORE</a>
+
+
+                      <div dangerouslySetInnerHTML={{__html: `<p>${item.content}</p>`}} /><a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${item.id}`} className="readmore">READ MORE</a>
                       </CardText>
                     </Col>
                     </Row>

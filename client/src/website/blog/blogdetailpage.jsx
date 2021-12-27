@@ -31,13 +31,6 @@ const Detailpage = (props) => {
 
   }, []);
 
-  const renderHTML = (rawHTML: string) => React.createElement("div", {
-	dangerouslySetInnerHTML: {
-	   __html: rawHTML
-	}
-  });
-
-
 //   const [vendorname, setVendorName] = useState([]);
 
 //   useEffect(() => {
@@ -85,7 +78,10 @@ const Detailpage = (props) => {
 			<h2>{blogDetails.name}</h2> 
 			<hr/> 
 			<div className="Comments">
-				{renderHTML(`<p>${blogDetails.content}</p>`)}
+			
+				<div dangerouslySetInnerHTML={{__html: `<p>${blogDetails.content}</p>`}} />
+
+
 			</div> 
 			{/* <div className="comment-box">
 				<h2>Comment</h2>
