@@ -39,8 +39,6 @@ router.post('/', passport.authenticate('jwt', {
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
-        console.log(rolePerm);
         Role
             .findAll({
                 include: [
@@ -59,20 +57,12 @@ router.get('/', passport.authenticate('jwt', {
             .catch((error) => {
                 res.status(400).send(error);
             });
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
 });
 
 // Get Role by ID
 router.get('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
-
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
     Role
         .findByPk(
             req.params.id, {
