@@ -71,7 +71,7 @@ const RolesList = (props) => {
         <CardBody>
           <div className="rolling">
             <h1>Role Name</h1>
-            <span>{roleData.role_name}</span>
+            <h6>{roleData.role_name}</h6>
             <h2>Permissions</h2>
             <Typeahead
               id="multiple-typeahead"
