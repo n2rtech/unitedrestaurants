@@ -41,7 +41,7 @@ router.post("/register", (req, res) => {
 
           Role.findOne({
             where: {
-                role_name: req.body.role? req.body.role : 'sub user'
+                id: req.body.role? req.body.role : 1
             }
         }).then((role) => {
             User
@@ -62,7 +62,9 @@ router.post("/register", (req, res) => {
             })).catch(err => {
               res.status(400).send('err')
             });               
-        })
+        }).catch(err => {
+              res.status(400).send('err1')
+            }); 
       });     
     });
   }
