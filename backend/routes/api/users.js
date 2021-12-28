@@ -362,9 +362,9 @@ router.get('/:id', (req, res) => {
 
 // Update a User
 router.put('/:id', (req, res) => {
-    if (!req.body.role_id || !req.body.email || !req.body.password || !req.body.name || !req.body.phone) {
+    if (!req.body.role_id || !req.body.email || !req.body.name || !req.body.phone) {
       res.status(400).send({
-        msg: 'Please pass Role ID, email, password, phone or fullname.'
+        msg: 'Please pass Role ID, email, phone or fullname.'
       })
     } else {
       User
