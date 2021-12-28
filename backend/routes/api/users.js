@@ -37,11 +37,9 @@ router.post("/register", (req, res) => {
         bcrypt.hash(req.body.password, salt, (err, hash) => {
           if (err) throw err;         
           var name = req.body.first_name+' '+req.body.last_name;
-
-
           Role.findOne({
             where: {
-                id: req.body.role? req.body.role : 1
+                id: req.body.role_id? req.body.role_id : 1
             }
         }).then((role) => {
             User
