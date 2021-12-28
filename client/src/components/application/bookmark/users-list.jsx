@@ -10,7 +10,8 @@ const Userslist = (props) => {
 
   const [users, setUsers] = useState([]);
   const token = localStorage.getItem("token");
-
+  const history = useHistory()
+  
     useEffect(() => {
     
       const config = {
@@ -38,24 +39,24 @@ const Userslist = (props) => {
     reverseButtons: true
   }).then((result) => {
     if (result.value) {
-      // const config = {
-      //   headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
-      //   };
+      const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+        };
   
-      //   axios.delete(`/api/video-gallery/`+`${id}`,config
-      //   ) .then(response => {
-      //     toast.success("Video Deleted !")
-      //     setTimeout(() => {
-      //       history.push('/dashboard/vendor/vendor-videogallery/');
-      //     }, 1000);
-      //   })
-      //      .catch(error => console.log('Form submit error', error))
+        axios.delete(`/api/users/`+`${id}`,config
+        ) .then(response => {
+          toast.success("User Deleted !")
+          setTimeout(() => {
+            history.push('/dashboard/admin/users-list/');
+          }, 1000);
+        })
+           .catch(error => console.log('Form submit error', error))
       
-      // SweetAlert.fire(
-      //   'Deleted!',
-      //   'Your file has been deleted.',
-      //   'success'
-      // )
+      SweetAlert.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
     }
     else {
       SweetAlert.fire(
