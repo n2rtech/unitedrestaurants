@@ -81,7 +81,7 @@ const RolesList = (props) => {
               onChange={setMultiSelections}
               options={permissionsData}
               selected={multiSelections}
-              placeholder="Choose a state..."
+              placeholder="Choose permissions..."
             />
             <div>&nbsp;</div>
             <Button color="primary" onClick = {handleSubmit}>Submit</Button>
