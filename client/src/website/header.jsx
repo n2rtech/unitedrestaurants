@@ -13,6 +13,15 @@ const [showNav, setShowNav] = useState();
 const [countryData, setCountryData] = useState([]);
 const [categoryData, setCategoryData] = useState([]);
 
+console.log('Before Country Code' , localStorage.getItem('country_code'));
+
+const OnChangeCountry = (event) => {
+  localStorage.setItem('country_code' , event.target.value);
+  window.location.reload(false);
+}
+
+console.log('After Country Code' , localStorage.getItem('country_code'));
+
 useEffect(() => {
     axios.get(`/api/Countries/list`)
     .then((getData) => {
@@ -183,10 +192,10 @@ const title = <div className="searchbar">
               </div>
               
               <div className="country">
-                <select aria-label="Default select example" className="form-control">
+                <select aria-label="Default select example" onChange = {OnChangeCountry} className="form-control">
                 {countryData.map((country , i ) => (
                   <Fragment key={i}>
-                  <option value={country.id}>{country.name}</option>
+                  <option value={country.code} selected = { localStorage.getItem('country_code') == country.code }>{country.name}</option>
                   </Fragment>
                   ))}
                 </select>
