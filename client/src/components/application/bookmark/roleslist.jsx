@@ -15,10 +15,12 @@ const RolesList = (props) => {
 
   const [permissionsData, setPermissionsData] = useState({});
   const [roleData, setRoleData] = useState({});
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const GetData = async () => {
       const config = {
-        headers: {'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ' }
+        headers: {'Authorization': 'JWT '+token }
       };
       const result = await axios('/api/permissions/list',config);
       setPermissionsData(result.data);
@@ -45,7 +47,7 @@ const RolesList = (props) => {
     });
 
     const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
     };
     const bodyParameters = {
       permissions: array
@@ -54,7 +56,7 @@ const RolesList = (props) => {
       bodyParameters,
       config
       ) .then(response => {
-        console.log('Submiited Successfully');
+        console.log('Submited Successfully');
         toast.success("Permissions Assigned to role!")
       })
     .catch(error => console.log('Form submit error', error))
