@@ -59,7 +59,7 @@ const Homeblog = () => {
                   <Row>
                     <Col sm="3" xs="12">
                     <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`}>
-                      <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/blogs/${blog.image}`} 
+                      <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${blog.image}`} 
                      alt="Menu-Icon" className="img-fluid" />
                     </a>
                    </Col>
