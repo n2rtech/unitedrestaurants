@@ -39,7 +39,6 @@ router.post('/', passport.authenticate('jwt', {
 router.get('/list', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
         Permission
             .findAll()
             .then(perms => {
@@ -48,9 +47,6 @@ router.get('/list', passport.authenticate('jwt', {
             .catch((error) => {
                 res.status(400).send(error);
             });
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
 });
 
 
