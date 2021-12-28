@@ -23,6 +23,10 @@ import Signin from './auth/signin'
 // Vendor Signin page
 import Vendorsignin from './auth/vendorsignin'
 
+// User Login Page
+
+import Usersignin from './auth/usersignin'
+
 // Home Page
 import Home from './website/home'
 import Restaurants from './website/restaurants'
@@ -121,6 +125,7 @@ const Root = (props) =>  {
           <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
           <Route  path={`${process.env.PUBLIC_URL}/vendor/login`} component={Vendorsignin} />
+          <Route  path={`${process.env.PUBLIC_URL}/user/login`} component={Usersignin} />
           <Route  path={`${process.env.PUBLIC_URL}/home`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/resturent/details/:id`} component={Details} />
           <Route  path={`${process.env.PUBLIC_URL}/blog/blogdetails/:id`} component={Blogdetails} />

@@ -129,12 +129,10 @@ const Logins = (props) => {
         console.log("result", user.data,decoded);
         setName(decoded.name);
         localStorage.setItem('token', user.data.token);
-        localStorage.setItem('role', decoded.role);
-        if(decoded.role == 'admin'){
-          window.location.href = `${process.env.PUBLIC_URL}/dashboard/admin/`
-        } else {
-          window.location.href = `${process.env.PUBLIC_URL}/dashboard/user/`
-        }
+        localStorage.setItem('id', decoded.id);
+        localStorage.setItem('name', decoded.name);
+        localStorage.setItem('role', 'user');
+        window.location.href = `${process.env.PUBLIC_URL}/dashboard/user/`
         return user.data;
       }).catch((error) => {
         if (error.response) {

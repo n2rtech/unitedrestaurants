@@ -4,6 +4,7 @@ import Default from '../components/dashboard/admin/default'
 import AdminDefault from '../components/dashboard/admin/default'
 import Ecommerce from '../components/dashboard/vendor/ecommerce'
 import VendorEcommerce from '../components/dashboard/vendor/ecommerce'
+import User from '../components/dashboard/user/ecommerce'
 
 // widgets
 import GeneralWidget from '../components/widgets/general'
@@ -267,9 +268,10 @@ export const routes = [
         { path:"/dashboard/admin/pages", Component:pagesList},
         { path:"/dashboard/default/", Component:Default},
         { path:"/dashboard/vendor/", Component:VendorEcommerce},
+        { path:"/dashboard/user/", Component:User},
         { path:"/dashboard/", Component:Ecommerce},
 
-    { path:"/pages/roles", Component:Roles},
+        { path:"/pages/roles", Component:Roles},
 
         { path:"/widgets/general", Component:GeneralWidget},
         { path:"/widgets/chart", Component:ChartsWidget},
