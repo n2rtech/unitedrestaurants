@@ -61,6 +61,8 @@ router.get('/', (req, res) => {
         var table_name = 'VendorIta';
     }
 
+    console.log('Table Name is : ' ,code);
+
     app.db(table_name)
     .findAll(
     {

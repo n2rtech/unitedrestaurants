@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState , useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button , ExampleSelect} from 'reactstrap'
 import { useParams } from "react-router-dom";
@@ -25,6 +25,27 @@ const AddUser = (props) => {
     setUserPassword(event.target.value);
   }
 
+  // Roles
+  const [rolesData, setRolesData] = useState({});
+  const [roleassign, setRoleDataAssign] = useState();
+
+  useEffect(() => {
+    const GetData = async () => {
+      const config = {
+        headers: {'Authorization': 'JWT '+token }
+      };
+      const result = await axios('/api/roles',config);
+      setRolesData(result.data);
+
+    };
+    GetData();
+  }, []);
+
+  const roleChange = (event) => {
+    setRoleDataAssign(event.target.value);
+  }
+
+
   const handleSubmit = event => {
     event.preventDefault();
 
@@ -37,7 +58,8 @@ const AddUser = (props) => {
         first_name: username,
         last_name: '',
         email: useremail,
-        password: userpassword
+        password: userpassword,
+        role_id: roleassign
       };
       axios.post(`/api/users/register/`,
         bodyParameters,
@@ -67,10 +89,10 @@ const AddUser = (props) => {
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlSelect9">{"Select Roles"}</Label>
-                <Input type="select" name="select" className="form-control digits" placeholder="Please select">
-                  <option>{"Full access"}</option>
-                  <option>{"Accounts access"}</option>
-                  <option>{"Content Management"}</option>
+                <Input type="select" name="select"  onChange = {roleChange} className="form-control digits" placeholder="Please select">
+                {rolesData.length > 0 && rolesData.map((item , i ) => (
+                  <option value = {item.id} selected = {roleassign == item.id} >{item.role_name}</option>
+                ))}
                 </Input>
               </FormGroup>
               <FormGroup>
