@@ -155,7 +155,6 @@ router.delete('/:id', passport.authenticate('jwt', {
 router.post('/permissions/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
         if (!req.body.permissions) {
             res.status(400).send({
                 msg: 'Please pass permissions.'
@@ -199,10 +198,6 @@ router.post('/permissions/:id', passport.authenticate('jwt', {
                     res.status(400).send('error');
                 });
         }
-    }).catch((err) => {
-        console.log(err);
-        res.status(403).send('err');
-    });
 });
 
 module.exports = router;
