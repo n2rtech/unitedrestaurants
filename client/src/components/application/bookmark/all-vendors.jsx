@@ -281,7 +281,7 @@ const handleNameChange = e => {
                   <Col sm="6">&nbsp;</Col>
                   <Col sm="6">
                     <div className="pull-right">
-                      <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/admin/add-vendor/`}>Add New</a>
+                      <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-vendor/`}>Add New</a>
                     </div>
                   </Col>
                 </Row>
@@ -298,7 +298,7 @@ const handleNameChange = e => {
                         <tr key={i}>
                           <td>{vendor.name}</td>
                           <td className="text-right">
-                            <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-vendor/${vendor.id}/`}>Edit</a> &nbsp; 
+                            <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-vendor/${vendor.id}/`}>Edit</a> &nbsp; 
                             <a className="btn btn-danger" onClick={() => handleSuspend(vendor.id)}>Suspend</a>
                           </td>
                         </tr>

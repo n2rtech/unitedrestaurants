@@ -82,7 +82,7 @@ const VendorCoupon = (props) => {
             <Col sm="6"></Col>
             <Col sm="6">
               <div className="pull-right">
-                <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/add-vendor-coupon`} className="btn btn-primary">Add New</a>
+                <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-vendor-coupon`} className="btn btn-primary">Add New</a>
               </div>
             </Col>
           </Row>
@@ -99,7 +99,7 @@ const VendorCoupon = (props) => {
                    <tr>
                    <td>{item.deal_name}</td>
                    <td className="text-right">
-                     <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-vendor-coupon/${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
+                     <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-vendor-coupon/${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
                      <a onClick={() => handleDelete(item.id)}className="btn btn-danger">Delete</a> 
                    </td>
                  </tr>

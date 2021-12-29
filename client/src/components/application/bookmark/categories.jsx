@@ -15,11 +15,11 @@ const Categories = (props) => {
   const [level1Data, setLevel1Data] = useState('');
   const [level2Data, setLevel2Data] = useState('');
   const [level3Data, setlevel3Data] = useState('');
-
+  const token = localStorage.getItem("token");
   useEffect(() => {
   
       const config = {
-          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
           };
   
           
@@ -84,7 +84,7 @@ const Categories = (props) => {
       }).then((result) => {
         if (result.value) {
           const config = {
-            headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+            headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
             };
     
             axios.delete('/api/categories/'+`${id}`,
@@ -114,7 +114,7 @@ const Categories = (props) => {
           <Row>
             <Col sm="6">&nbsp;</Col>
             <Col sm="6">
-              <a href={`${process.env.PUBLIC_URL}/dashboard/admin/add-category`} className="btn btn-primary pull-right">{"Add New"}</a>
+              <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-category`} className="btn btn-primary pull-right">{"Add New"}</a>
             </Col>
           </Row>
           <div className="table-responsive m-t-20">
@@ -138,7 +138,7 @@ const Categories = (props) => {
 
                   </td>
                   <td className="text-right">
-                    <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category/${item.id}`}>Edit</a> &nbsp;
+                    <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-category/${item.id}`}>Edit</a> &nbsp;
                     <Button color="danger" onClick={() => handleRemoveCategory(item.id)}>{"Delete"}</Button>
                   </td>
                 </tr>

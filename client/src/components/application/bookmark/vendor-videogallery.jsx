@@ -83,7 +83,7 @@ const VendorVideoGallery = (props) => {
             <Col sm="6"></Col>
             <Col sm="6">
               <div className="pull-right">
-                <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/add-video-gallery`} className="btn btn-primary">Add New</a>
+                <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-video-gallery`} className="btn btn-primary">Add New</a>
               </div>
             </Col>
           </Row>
@@ -100,7 +100,7 @@ const VendorVideoGallery = (props) => {
                   <tr key = {i}>
                     <td>{item.video_name}</td>
                     <td className="text-right">
-                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-video-gallery/${item.id}`} className="btn btn-success">Edit</a> &nbsp;
+                      <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-video-gallery/${item.id}`} className="btn btn-success">Edit</a> &nbsp;
                       <a className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</a> 
                     </td>
                   </tr>

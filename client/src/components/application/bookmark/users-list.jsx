@@ -76,7 +76,7 @@ const Userslist = (props) => {
             <Col sm="6"></Col>
             <Col sm="6">
               <div className="pull-right">
-                <a href={`${process.env.PUBLIC_URL}/dashboard/admin/add-user/`} className="btn btn-primary">Add New</a>
+                <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-user/`} className="btn btn-primary">Add New</a>
               </div>
             </Col>
           </Row>
@@ -93,7 +93,7 @@ const Userslist = (props) => {
                     <tr>
                     <td>{item.name}</td>
                     <td className="text-right">
-                     <a href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-user/`+`${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
+                     <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-user/`+`${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
                      <a className="btn btn-danger" onClick = {() => handleDelete(item.id)} >Delete</a> 
                    </td>
                   </tr>

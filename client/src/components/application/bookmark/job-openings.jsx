@@ -87,7 +87,7 @@ const JobOpenings = (props) => {
             <Col sm="6"></Col>
             <Col sm="6">
               <div className="pull-right">
-                <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/add-job-openings/`} className="btn btn-primary">Add New</a>
+                <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-job-openings/`} className="btn btn-primary">Add New</a>
               </div>
             </Col>
           </Row>
@@ -104,7 +104,7 @@ const JobOpenings = (props) => {
                     <tr key={i}>
                     <td>{item.job_name}</td>
                     <td className="text-right">
-                      <a href={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-job-openings/`+`${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
+                      <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-job-openings/`+`${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
                       <a href={"#"} className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</a> 
                     </td>
                   </tr>
