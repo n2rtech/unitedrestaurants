@@ -231,6 +231,35 @@ const handleNameChange = e => {
     })
   }
 
+
+   const handleUnsubscribe = (id) => {
+    SweetAlert.fire({
+      title: 'Are you sure?',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ok',
+      cancelButtonText: 'cancel',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        const token   = localStorage.getItem("token");
+        const user_id = localStorage.getItem("id");
+        const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+          };
+        axios.get('/api/vendors/unsubscribe/'+`${id}` ,config )
+        .then(response => toast.success('Vendor is successfully Unsubscribe.'))
+        .catch(error => console.log('Form submit error', error))
+      }
+      else {
+        SweetAlert.fire(
+          'Not Unsubscribe'
+        )
+      }
+    })
+  }
+
   return (
     <Fragment>
       <Breadcrumb parent="Apps" title="All Vendors" />
@@ -299,7 +328,8 @@ const handleNameChange = e => {
                           <td>{vendor.name}</td>
                           <td className="text-right">
                             <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-vendor/${vendor.id}/`}>Edit</a> &nbsp; 
-                            <a className="btn btn-danger" onClick={() => handleSuspend(vendor.id)}>Suspend</a>
+                            <a className="btn btn-primary" onClick={() => handleSuspend(vendor.id)}>Suspend</a> &nbsp; 
+                            <a className="btn btn-danger" onClick={() => handleUnsubscribe(vendor.id)}>Unsubscribe</a>
                           </td>
                         </tr>
                        ))}
