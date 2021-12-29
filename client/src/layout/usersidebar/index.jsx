@@ -17,16 +17,13 @@ const Sidebar = (props) => {
   const token = localStorage.getItem("token");
   const user_id = localStorage.getItem("id");
 
-  useEffect(() => {
+    useEffect(() => {
       const GetData = async () => {
           const config = {
-      headers: {'Authorization': 'JWT '+token }
-    };
-          
-      const roleresult = await axios('/api/users/role'+`${user_id}`,config);
-      setUser(roleresult.data.id);
-
-      const result = await axios('/api/roles/5',config);
+            headers: {'Authorization': 'JWT '+token }
+          };
+      console.log("Role Id After Get :" , user);
+      const result = await axios('/api/roles/'+`${localStorage.getItem("role_id")}` ,config);
       setPerm(result.data.permissions);
   };
       GetData();
@@ -35,12 +32,17 @@ const Sidebar = (props) => {
     // var parray = [  'Dashboard' , 'Categories' , 'Deals (Coupons)' ];
     
     var parray = [];
-
-    const finalpername = perm.map((user) => {
-      parray.indexOf(user.id) === -1 ? parray.push(user.perm_name) : console.log("This item already exists");
+    console.log('Permissions = ' ,perm);
+    if(perm) {
+        const finalpername = perm.map((user) => {
+        parray.indexOf(user.id) === -1 ? parray.push(user.perm_name) : console.log("This item already exists");
     });
 
     console.log('Array = ' ,parray);
+    }
+
+    console.log('ROLE_ID',localStorage.getItem("role_id"));
+  
 
   const id = window.location.pathname.split('/').pop()
   const defaultLayout= Object.keys(DefaultLayout);

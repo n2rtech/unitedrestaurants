@@ -132,6 +132,7 @@ const Logins = (props) => {
         localStorage.setItem('id', decoded.id);
         localStorage.setItem('name', decoded.name);
         localStorage.setItem('role', 'user');
+	localStorage.setItem('role_id', decoded.role_id);
         window.location.href = `${process.env.PUBLIC_URL}/dashboard/user/`
         return user.data;
       }).catch((error) => {
