@@ -49,7 +49,6 @@ router.get('/list', passport.authenticate('jwt', {
             });
 });
 
-
 router.get('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
@@ -62,7 +61,6 @@ router.get('/:id', passport.authenticate('jwt', {
             res.status(400).send(error);
         });
 });
-
 
 // Get List of permissions
 router.get('/', passport.authenticate('jwt', {

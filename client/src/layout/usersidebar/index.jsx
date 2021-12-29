@@ -6,9 +6,42 @@ import { Link } from 'react-router-dom'
 import { translate } from 'react-switch-lang';
 import configDB from '../../data/customizer/config';
 import { DefaultLayout } from '../theme-customizer';
+import axios from 'axios';
+//import Permissions from './permissions';
 
 
 const Sidebar = (props) => {
+
+  const [perm,setPerm] = useState([])
+  const [user,setUser] = useState()
+  const token = localStorage.getItem("token");
+  const user_id = localStorage.getItem("id");
+
+  useEffect(() => {
+      const GetData = async () => {
+          const config = {
+      headers: {'Authorization': 'JWT '+token }
+    };
+          
+      const roleresult = await axios('/api/users/role'+`${user_id}`,config);
+      setUser(roleresult.data.id);
+
+      const result = await axios('/api/roles/5',config);
+      setPerm(result.data.permissions);
+  };
+      GetData();
+    }, []);
+    
+    // var parray = [  'Dashboard' , 'Categories' , 'Deals (Coupons)' ];
+    
+    var parray = [];
+
+    const finalpername = perm.map((user) => {
+      parray.indexOf(user.id) === -1 ? parray.push(user.perm_name) : console.log("This item already exists");
+    });
+
+    console.log('Array = ' ,parray);
+
   const id = window.location.pathname.split('/').pop()
   const defaultLayout= Object.keys(DefaultLayout);
   const layout= id ? id : defaultLayout
@@ -194,6 +227,7 @@ const Sidebar = (props) => {
   
   return (
     <Fragment>
+      
        <div className={`bg-overlay1`} onClick={() => {closeOverlay()}} ></div>
       <div className="sidebar-wrapper" id="sidebar-wrapper">
         <div className="logo-wrapper">
@@ -214,20 +248,16 @@ const Sidebar = (props) => {
                 <li className="back-btn">
                   <div className="mobile-back text-right"><span>{"Back"}</span><i className="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
                 </li>
-                {
+                
+                { 
                   MENUITEMS.map((Item, i) =>
                     <Fragment key={i}>
-                      {/*<li className="sidebar-main-title">
-                        <div>
-                          <h6 className="lan-1">{props.t(Item.menutitle)}</h6>
-                          <p className="lan-2">{props.t(Item.menucontent)}</p>
-                        </div>
-                      </li>*/}
                       {Item.Items.map((menuItem, i) =>
                         <li className="sidebar-list" key={i}>
-                          {(menuItem.type === 'sub') ?
+                          {(menuItem.type === 'sub'  && parray.indexOf(menuItem.title) > -1) ?
                             <a href="javascript" className={`sidebar-link sidebar-title ${menuItem.active ? activeClass() : ''}`} onClick={(event) => {event.preventDefault(); setNavActive(menuItem)}}>
                               <menuItem.icon />
+                              
                               <span>{props.t(menuItem.title)}</span>
                               {menuItem.badge ? <label className={menuItem.badge}>{menuItem.badgetxt}</label> : ""}
                               <div className="according-menu">
@@ -239,7 +269,8 @@ const Sidebar = (props) => {
                             </a>
                             : ''}
 
-                          {(menuItem.type === 'link') ?
+                          {(menuItem.type === 'link' && parray.indexOf(menuItem.title) > -1) ?
+                          
                             <Link  to={menuItem.path+'/'+layout} className={`sidebar-link sidebar-title link-nav  ${menuItem.active ? 'active' : ''}`} onClick={() => toggletNavActive(menuItem)}>
                               <menuItem.icon />
                               <span>{props.t(menuItem.title)}</span>
