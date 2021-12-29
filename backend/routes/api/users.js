@@ -96,7 +96,8 @@ router.post("/login", (req, res) => {
             id: user[0].id,
             name: user[0].name,
             email: user[0].email,
-            role:user[0].role
+            role:user[0].role,
+            role_id:user[0].role_id
           };
 
           jwt.sign(
