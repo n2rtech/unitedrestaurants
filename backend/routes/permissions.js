@@ -53,11 +53,6 @@ router.get('/list', passport.authenticate('jwt', {
 router.get('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Roles & Permission').then((rolePerm) => {
-
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
     Permission
         .findByPk(
             req.params.id
