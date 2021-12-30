@@ -10,7 +10,7 @@ const Edituser = (props) => {
 
   const [useremail, setUserEmail] = useState()
   const [username, setUserName] = useState()
-  const [usermobile, setUserMobile] = useState()
+  const [userpassword, setUserPassword] = useState()
   const params = useParams();
   const token = localStorage.getItem("token");
 
@@ -22,8 +22,8 @@ const Edituser = (props) => {
     setUserName(event.target.value);
   };
 
-  const onChangeUsermobile = (event) => {
-    setUserMobile(event.target.value);
+  const onChangeUserpassword = (event) => {
+    setUserPassword(event.target.value);
   };
 
   useEffect(() => {
@@ -34,7 +34,6 @@ const Edituser = (props) => {
       const result = await axios('/api/users/'+`${params.id}`,config);
       setUserEmail(result.data.email)
       setUserName(result.data.name)
-      setUserMobile(result.data.phone)
     };
     GetData();
   }, []);
@@ -75,10 +74,9 @@ const Edituser = (props) => {
       };
       const bodyParameters = {
         email: useremail,
-        password: '',
+        password: userpassword,
         name: username,
-        role_id: roleassign,
-        phone: usermobile
+        role_id: roleassign
       };
       axios.put(`/api/users/`+`${params.id}`,
         bodyParameters,
@@ -113,8 +111,10 @@ const Edituser = (props) => {
                 <Input type="email" className="form-control" value = {useremail} onChange = {onChangeUseremail} />
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="exampleFormControlInput1">{"Mobile"}</Label>
-                <Input type="text" className="form-control" value = {usermobile} onChange = {onChangeUsermobile} />
+                <Label htmlFor="exampleFormControlInput1">{"Password"} 
+                  {"* (Leave blank password field if do not want to change password )"}
+                </Label>
+                <Input type="text" className="form-control" value = {userpassword} onChange = {onChangeUserpassword} />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlSelect9">{"Select Roles"}</Label>
