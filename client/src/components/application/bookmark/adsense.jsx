@@ -9,24 +9,22 @@ import { useHistory } from 'react-router-dom'
 const Adsense = (props) => {
 
   const [details, setDetails] = useState([]);
+  const [publisher_id, setPublisherID] = useState();
   const token = localStorage.getItem("token");
   const user_id = localStorage.getItem("id");
   const history = useHistory()
   useEffect(() => {
 
-    console.log('USER ID : ', user_id);
-
-      const items = { ...localStorage };
-  
       const config = {
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
       };
    
-      fetch("/api/google-adsense/"+`${items.id}`, config)
+      fetch("/api/google-adsense/"+`${user_id}`, config)
         .then(res => res.json())
         .then(
           (result) => {
             setDetails(result);
+            setPublisherID(result.publisher_id);
           },
           (error) => {
             
@@ -35,6 +33,31 @@ const Adsense = (props) => {
     }, []);
 
     console.log(details);
+
+    const OnChangePublisher = (event) => {
+      setPublisherID(event.target.value);
+    }
+
+    const handleSubmit = event => {
+      event.preventDefault();
+
+      const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+        };
+        const bodyParameters = {
+          publisher_id: publisher_id,
+        };
+        axios.put("/api/google-adsense/"+`${user_id}`,
+          bodyParameters,
+          config
+        ) .then(response => {
+          toast.success("Google adsesnse Id updated !")
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+        })
+           .catch(error => console.log('Form submit error', error))
+    }
 
   return (
     <Fragment>
@@ -45,10 +68,10 @@ const Adsense = (props) => {
             <Form className="form theme-form">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Publisher ID"}</Label>
-                <Input className="form-control" type="text" />
+                <Input className="form-control" type="text"  value = {publisher_id} onChange = {OnChangePublisher} />
               </FormGroup>
               <FormGroup>
-                <Button  color="primary">{"Save"}</Button>
+                <Button  color="primary" onClick = {handleSubmit}>{"Save"}</Button>
               </FormGroup>
             </Form>
           </CardBody>

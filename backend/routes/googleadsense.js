@@ -105,10 +105,10 @@ router.put('/:id', function (req, res) {
                 .findByPk(req.params.id)
                 .then((googleadsense) => {
                     GoogleAdsense.update({
-                        publisher_id: req.body.publisher_id || googleadsense.publisher_id
+                        publisher_id: req.body.publisher_id
                     }, {
                         where: {
-                            id: req.params.id
+                            user_id: req.params.id
                         }
                     }).then(_ => {
                         res.status(200).send({
