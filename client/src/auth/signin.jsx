@@ -129,7 +129,9 @@ const Logins = (props) => {
         console.log("result", user.data,decoded);
         setName(decoded.name);
         localStorage.setItem('token', user.data.token);
-        localStorage.setItem('role', decoded.role);
+        localStorage.setItem('id', decoded.id);
+        localStorage.setItem('name', decoded.name);
+        localStorage.setItem('role', 'admin');
         if(decoded.role == 'admin'){
           window.location.href = `${process.env.PUBLIC_URL}/dashboard/admin/`
         } else {
