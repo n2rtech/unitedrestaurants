@@ -153,7 +153,8 @@ router.post("/login", (req, res) => {
             id: user[0].id,
             name: user[0].name,
             email: user[0].email,
-            role:'vendor'
+            role:'vendor',
+            country_id: user[0].country_id
           };
 
           jwt.sign(

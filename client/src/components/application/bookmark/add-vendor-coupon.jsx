@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState , useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { useParams } from "react-router-dom";
@@ -10,9 +10,13 @@ const AddVendorCoupon = (props) => {
 
   const [dealname, setDealname] = useState()
   const [description, setDescription] = useState()
+  const [discount, setDiscount] = useState(0)
+  const [startdate, setStartDate] = useState()
+  const [enddate, setEndDate] = useState()
   const params = useParams();
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
+  const vendor_country_id = localStorage.getItem("vendor_country_id");
 
   const onChangeDealname = (event) => {
     setDealname(event.target.value);
@@ -22,7 +26,31 @@ const AddVendorCoupon = (props) => {
     setDescription(event.target.value);
   };
 
-  console.log(token);
+  const onChangeDiscount = (event) => {
+    setDiscount(event.target.value);
+  };
+
+  const onChangeStartDate = (event) => {
+    setStartDate(event.target.value);
+  }
+
+  const onChangeEndDate = (event) => {
+    setEndDate(event.target.value);
+  }
+
+  const [userdetails, setUserDetails] = useState()
+  useEffect(() => {
+    const GetData = async () => {
+        const config = {
+    headers: {'Authorization': 'JWT '+token }
+  };
+      const result = axios.get('/api/vendors/'+`${id}`,config);
+      setUserDetails(result.data)
+    };
+    GetData();
+  }, []);
+
+  console.log('User Details', userdetails);
 // Add Video Api
 const history = useHistory()
 
@@ -35,8 +63,16 @@ const handleSubmit = event => {
     const bodyParameters = {
       deal_name: dealname,
       deal_description: description,
-      user_id : id
+      user_id : id,
+      discount: discount,
+      start_date: startdate,
+      end_date: enddate,
+      country_id: vendor_country_id
     };
+
+    console.log('BODY PARAMETERS' , bodyParameters);
+
+
     axios.post(`/api/vendor-coupons/`,
       bodyParameters,
       config
@@ -52,6 +88,9 @@ const handleSubmit = event => {
 
 
 };
+
+console.log('User Details', userdetails);
+console.log('Vendor Country Id' , vendor_country_id);
 
   return (
     <Fragment>
@@ -70,15 +109,15 @@ const handleSubmit = event => {
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Discount Percentage"}</Label>
-                <Input type="text" className="form-control" />
+                <Input type="text" className="form-control" value = {discount} onChange = {onChangeDiscount}   />
               </FormGroup>
               <FormGroup>
                 <Label>{"Start Date"}</Label>
-                <Input className="form-control digits" type="date" defaultValue="2022-01-01" />
+                <Input className="form-control digits" type="date" value = {startdate} onChange = {onChangeStartDate} />
               </FormGroup>
               <FormGroup>
                 <Label>{"End Date"}</Label>
-                <Input className="form-control digits" type="date" defaultValue="2022-02-01" />
+                <Input className="form-control digits" type="date" value = {enddate}  onChange = {onChangeEndDate}  />
               </FormGroup>
               <FormGroup>
                 <Button  color="primary" onClick = {handleSubmit} >{"Save"}</Button>
