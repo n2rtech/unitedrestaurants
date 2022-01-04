@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState , useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { useParams } from "react-router-dom";
@@ -16,6 +16,7 @@ const AddVendorCoupon = (props) => {
   const params = useParams();
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
+  const vendor_country_id = localStorage.getItem("vendor_country_id");
 
   const onChangeDealname = (event) => {
     setDealname(event.target.value);
@@ -37,7 +38,19 @@ const AddVendorCoupon = (props) => {
     setEndDate(event.target.value);
   }
 
-  console.log(token);
+  const [userdetails, setUserDetails] = useState()
+  useEffect(() => {
+    const GetData = async () => {
+        const config = {
+    headers: {'Authorization': 'JWT '+token }
+  };
+      const result = axios.get('/api/vendors/'+`${id}`,config);
+      setUserDetails(result.data)
+    };
+    GetData();
+  }, []);
+
+  console.log('User Details', userdetails);
 // Add Video Api
 const history = useHistory()
 
@@ -53,7 +66,8 @@ const handleSubmit = event => {
       user_id : id,
       discount: discount,
       start_date: startdate,
-      end_date: enddate
+      end_date: enddate,
+      country_id: vendor_country_id
     };
 
     console.log('BODY PARAMETERS' , bodyParameters);
@@ -74,6 +88,9 @@ const handleSubmit = event => {
 
 
 };
+
+console.log('User Details', userdetails);
+console.log('Vendor Country Id' , vendor_country_id);
 
   return (
     <Fragment>

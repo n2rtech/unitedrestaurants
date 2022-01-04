@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models').User;
+const {DB} = require('../config/database');
 const Role = require('../models').Role;
 const Permission = require('../models').Permission;
 const VendorCoupon = require('../models').VendorCoupon;
@@ -28,15 +29,63 @@ router.post('/', (req, res) => {
                     start_date: req.body.start_date,
                     end_date: req.body.end_date
                 })
-                .then((vendorcoupon) => res.status(201).send(vendorcoupon))
+                .then((vendorcoupon) => 
+                
+                {
+                    if (req.body.discount > 19) {
+                        var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
+                        DB.query('SELECT code,name FROM '+table_name+' WHERE id ="' + req.body.country_id +'"', function (err, country) {
+                          if (err) throw err;
+                          if (country[0]) {
+                            var code = country[0].code;
+                            var country = country[0].code;
+                
+                            if (code == 'ita') {
+                              var table_name = 'VendorIta';
+                            }else{
+                              var codee = code.charAt(0).toUpperCase() + code.slice(1);
+                              var table_name = 'Vendor' + codee + 's';
+                            }
+                
+                            DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + req.body.user_id +'"', function (err, vendor_pro) {
+                              if (err) throw err;
+                              if (vendor_pro[0]) {
+                
+                                var user_id = req.body.user_id;
+                                var country_id = req.body.country_id;
+                                var banner = vendor_pro[0].banner;
+                                var business_name = vendor_pro[0].business_name;
+                                var about_business = vendor_pro[0].about_business;
+                             
+                                DB.query("INSERT INTO HotDeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+business_name+"', '"+about_business+"', '"+banner+"', NOW(), '')");
+                                
+                                res.status(200).send(vendorcoupon);
+                              }else{
+                                res.status(200).send(vendorcoupon);
+                              }
+                            })
+                          }else{
+                            res.status(200).send(vendorcoupon);
+                          }
+                        })
+                    } else {
+                        res.status(200).send(vendorcoupon);
+                    }
+                }
+                
+                )
                 .catch((error) => {
                     console.log(error);
                     res.status(400).send(error);
                 });
+
+                
         }
 });
 
 // Get List of VendorCoupons
+
+// res.status(201).send(vendorcoupon)
 
 
 router.get('/list', (req, res) => {
