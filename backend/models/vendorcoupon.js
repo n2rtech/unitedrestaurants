@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     deal_name: DataTypes.STRING,
     deal_description: DataTypes.STRING,
+    discount: DataTypes.DECIMAL(10,2),
+    start_date: DataTypes.DATE,
+    end_date: DataTypes.DATE,
     status: DataTypes.INTEGER
   }, {
     sequelize,

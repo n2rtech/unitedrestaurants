@@ -10,6 +10,9 @@ const AddVendorCoupon = (props) => {
 
   const [dealname, setDealname] = useState()
   const [description, setDescription] = useState()
+  const [discount, setDiscount] = useState(0)
+  const [startdate, setStartDate] = useState()
+  const [enddate, setEndDate] = useState()
   const params = useParams();
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
@@ -21,6 +24,18 @@ const AddVendorCoupon = (props) => {
   const onChangeDescription = (event) => {
     setDescription(event.target.value);
   };
+
+  const onChangeDiscount = (event) => {
+    setDiscount(event.target.value);
+  };
+
+  const onChangeStartDate = (event) => {
+    setStartDate(event.target.value);
+  }
+
+  const onChangeEndDate = (event) => {
+    setEndDate(event.target.value);
+  }
 
   console.log(token);
 // Add Video Api
@@ -35,8 +50,15 @@ const handleSubmit = event => {
     const bodyParameters = {
       deal_name: dealname,
       deal_description: description,
-      user_id : id
+      user_id : id,
+      discount: discount,
+      start_date: startdate,
+      end_date: enddate
     };
+
+    console.log('BODY PARAMETERS' , bodyParameters);
+
+
     axios.post(`/api/vendor-coupons/`,
       bodyParameters,
       config
@@ -70,15 +92,15 @@ const handleSubmit = event => {
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Discount Percentage"}</Label>
-                <Input type="text" className="form-control" />
+                <Input type="text" className="form-control" value = {discount} onChange = {onChangeDiscount}   />
               </FormGroup>
               <FormGroup>
                 <Label>{"Start Date"}</Label>
-                <Input className="form-control digits" type="date" defaultValue="2022-01-01" />
+                <Input className="form-control digits" type="date" value = {startdate} onChange = {onChangeStartDate} />
               </FormGroup>
               <FormGroup>
                 <Label>{"End Date"}</Label>
-                <Input className="form-control digits" type="date" defaultValue="2022-02-01" />
+                <Input className="form-control digits" type="date" value = {enddate}  onChange = {onChangeEndDate}  />
               </FormGroup>
               <FormGroup>
                 <Button  color="primary" onClick = {handleSubmit} >{"Save"}</Button>

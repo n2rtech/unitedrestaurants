@@ -16,11 +16,17 @@ router.post('/', (req, res) => {
                 msg: 'Please pass Job name or description.'
             })
         } else {
+
+            console.log('Coupons Data' , req.body);
+            
             VendorCoupon
                 .create({
                     deal_name: req.body.deal_name,
                     user_id: req.body.user_id,
-                    deal_description: req.body.deal_description
+                    deal_description: req.body.deal_description,
+                    discount: req.body.discount,
+                    start_date: req.body.start_date,
+                    end_date: req.body.end_date
                 })
                 .then((vendorcoupon) => res.status(201).send(vendorcoupon))
                 .catch((error) => {
@@ -91,7 +97,10 @@ router.put('/:id', function (req, res) {
                     VendorCoupon.update({
                         deal_name: req.body.deal_name || vendorcoupon.deal_name,
                         user_id: req.body.user_id || vendorcoupon.user_id,
-                        deal_description: req.body.deal_description || vendorcoupon.deal_description
+                        deal_description: req.body.deal_description || vendorcoupon.deal_description,
+                        discount: req.body.discount || vendorcoupon.discount,
+                        start_date: req.body.start_date || vendorcoupon.start_date,
+                        end_date: req.body.end_date || vendorcoupon.end_date
                     }, {
                         where: {
                             id: req.params.id
