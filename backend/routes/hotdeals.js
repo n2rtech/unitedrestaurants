@@ -45,21 +45,30 @@ router.get('/list', (req, res) => {
 
 /*{where:{country:req.query.country}}*/
 router.get('/', (req, res) => { 
-    const TODAY_START = new Date().setHours(0, 0, 0, 0);
-    const NOW = new Date();
+    const startDate = new Date().toJSON().slice(0, 10);
+    const endDate   = new Date().toJSON().slice(0, 10);
     HotDeal
     .findAll(
     {
+
+        where: {
+            [Op.and]:[
+                {country: { [Op.eq]: req.query.country }},
+                // {business_name: { [Op.like]: req.query.business_name }},
+                // {categories: { [Op.like]: '%"' + req.query.category + '"%' }},
+                
+            ],
+            [Op.or]: [{
+                start_date: {
+                    [Op.between]: [startDate, endDate]
+                }
+            }, {
+                end_date: {
+                    [Op.between]: [startDate, endDate]
+                }
+            }]
         
-      where: {
-        [Op.and]:[
-            {country: { [Op.eq]: req.query.country }},
-            // {business_name: { [Op.like]: req.query.business_name }},
-            // {categories: { [Op.like]: '%"' + req.query.category + '"%' }},
-            {start_date: { 
-                [Op.gt]: TODAY_START
-              }}
-        ]}
+        }
     })
     .then((menuitem) => res.status(200).send(menuitem))
     .catch((error) => {
