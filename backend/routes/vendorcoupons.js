@@ -182,8 +182,11 @@ router.put('/:id', function (req, res) {
                                 var business_name = vendor_pro[0].business_name;
                                 var about_business = vendor_pro[0].about_business;
                                 DB.query("DELETE  FROM HotDeals where coupon_id="+coupon_id);
-                                DB.query("INSERT INTO HotDeals (user_id, `coupon_id` , `country_id`, `country`, `business_name`, `about_business`, `banner`, `discount` , `start_date` , `end_date`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+coupon_id+"', '"+country_id+"', '"+country+"', '"+business_name+"', '"+about_business+"', '"+banner+"', '"+req.body.discount+"' , '"+req.body.start_date+"' , '"+req.body.end_date+"' , NOW(), '')");
                                 
+                                if(req.body.discount > 19) {
+                                    DB.query("INSERT INTO HotDeals (user_id, `coupon_id` , `country_id`, `country`, `business_name`, `about_business`, `banner`, `discount` , `start_date` , `end_date`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+coupon_id+"', '"+country_id+"', '"+country+"', '"+business_name+"', '"+about_business+"', '"+banner+"', '"+req.body.discount+"' , '"+req.body.start_date+"' , '"+req.body.end_date+"' , NOW(), '')");
+                                }
+                               
                                 res.status(200).send(vendorcoupon);
                               }else{
                                 res.status(200).send(vendorcoupon);
