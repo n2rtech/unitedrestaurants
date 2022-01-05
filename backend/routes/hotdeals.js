@@ -50,7 +50,6 @@ router.get('/', (req, res) => {
     HotDeal
     .findAll(
     {
-
         where: {
             [Op.and]:[
                 {country: { [Op.eq]: req.query.country }},
@@ -60,14 +59,14 @@ router.get('/', (req, res) => {
             ],
             [Op.or]: [{
                 start_date: {
-                    [Op.gte]: [startDate]
+                    [Op.gte]: [startDate],
+                    [Op.lte]: [startDate]
                 }
             }, {
                 end_date: {
                     [Op.gte]: [endDate]
                 }
             }]
-        
         }
     })
     .then((menuitem) => res.status(200).send(menuitem))
