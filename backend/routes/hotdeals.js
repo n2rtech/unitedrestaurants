@@ -57,6 +57,7 @@ router.get('/', (req, res) => {
                 // {categories: { [Op.like]: '%"' + req.query.category + '"%' }},
                 
             ],
+            
             [Op.or]: [{
                 start_date: {
                     [Op.gte]: [startDate],
