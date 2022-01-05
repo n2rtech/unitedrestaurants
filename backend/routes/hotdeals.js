@@ -60,11 +60,11 @@ router.get('/', (req, res) => {
             ],
             [Op.or]: [{
                 start_date: {
-                    [Op.between]: [startDate, endDate]
+                    [Op.gte]: [startDate]
                 }
             }, {
                 end_date: {
-                    [Op.between]: [startDate, endDate]
+                    [Op.gte]: [endDate]
                 }
             }]
         
