@@ -14,8 +14,11 @@ const EditVendorCoupon = (props) => {
   const [discount, setDiscount] = useState(0)
   const [startdate, setStartDate] = useState()
   const [enddate, setEndDate] = useState()
+  const [coupon_id , setCouponid] = useState();
   const params = useParams();
   const token = localStorage.getItem("token");
+  const user_id = localStorage.getItem("id");
+  const vendor_country_id = localStorage.getItem("vendor_country_id");
 
   const onChangeDealname = (event) => {
     setDealname(event.target.value);
@@ -44,6 +47,7 @@ const EditVendorCoupon = (props) => {
   };
       const result = await axios('/api/vendor-coupons/'+`${params.id}`,config);
       setDealname(result.data.deal_name)
+      setCouponid(result.data.id)
       setDescription(result.data.deal_description)
       setDiscount(result.data.discount)
       setStartDate(result.data.start_date.replace(' 00:00:00',''))
@@ -68,7 +72,11 @@ const handleSubmit = event => {
       deal_description: description,
       discount: discount,
       start_date: startdate,
-      end_date: enddate
+      end_date: enddate,
+      coupon_id: coupon_id,
+      user_id: user_id,
+      country_id: vendor_country_id
+
     };
     axios.put(`/api/vendor-coupons/`+`${params.id}`,
       bodyParameters,

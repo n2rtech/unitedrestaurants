@@ -15,12 +15,16 @@ module.exports = (sequelize, DataTypes) => {
   };
   HotDeal.init({
     user_id: DataTypes.INTEGER,
+    coupon_id: DataTypes.INTEGER,
     country: DataTypes.INTEGER,
     country_id: DataTypes.INTEGER,
     business_name: DataTypes.STRING,
     about_business: DataTypes.STRING,
     categories: DataTypes.TEXT,
     banner: DataTypes.STRING,
+    discount: DataTypes.DECIMAL(10,2),
+    start_date: DataTypes.DATE,
+    end_date: DataTypes.DATE,
     deletedAt: DataTypes.STRING
   }, {
     sequelize,

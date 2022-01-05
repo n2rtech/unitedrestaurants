@@ -30,8 +30,9 @@ router.post('/', (req, res) => {
                     end_date: req.body.end_date
                 })
                 .then((vendorcoupon) => 
-                
+                   
                 {
+
                     if (req.body.discount > 19) {
                         var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
                         DB.query('SELECT code,name FROM '+table_name+' WHERE id ="' + req.body.country_id +'"', function (err, country) {
@@ -57,7 +58,7 @@ router.post('/', (req, res) => {
                                 var business_name = vendor_pro[0].business_name;
                                 var about_business = vendor_pro[0].about_business;
                              
-                                DB.query("INSERT INTO HotDeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+business_name+"', '"+about_business+"', '"+banner+"', NOW(), '')");
+                                DB.query("INSERT INTO HotDeals (user_id, `coupon_id` , `country_id`, `country`, `business_name`, `about_business`, `banner`, `discount` , `start_date` , `end_date`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+vendorcoupon.id+"', '"+country_id+"', '"+country+"', '"+business_name+"', '"+about_business+"', '"+banner+"', '"+req.body.discount+"' , '"+req.body.start_date+"' , '"+req.body.end_date+"' , NOW(), '')");
                                 
                                 res.status(200).send(vendorcoupon);
                               }else{
@@ -155,9 +156,44 @@ router.put('/:id', function (req, res) {
                             id: req.params.id
                         }
                     }).then(_ => {
-                        res.status(200).send({
-                            'message': 'Vendor Coupon updated'
-                        });
+                        console.log('UPDATING VENDOR COUPON WITH HOT DEALS');
+                        var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
+                        DB.query('SELECT code,name FROM '+table_name+' WHERE id ="' + req.body.country_id +'"', function (err, country) {
+                          if (err) throw err;
+                          if (country[0]) {
+                            var code = country[0].code;
+                            var country = country[0].code;
+                        
+                            if (code == 'ita') {
+                              var table_name = 'VendorIta';
+                            }else{
+                              var codee = code.charAt(0).toUpperCase() + code.slice(1);
+                              var table_name = 'Vendor' + codee + 's';
+                            }
+                        
+                            DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + req.body.user_id +'"', function (err, vendor_pro) {
+                              if (err) throw err;
+                              if (vendor_pro[0]) {
+                        
+                                var user_id = req.body.user_id;
+                                var coupon_id = req.body.coupon_id;
+                                var country_id = req.body.country_id;
+                                var banner = vendor_pro[0].banner;
+                                var business_name = vendor_pro[0].business_name;
+                                var about_business = vendor_pro[0].about_business;
+                                DB.query("DELETE  FROM HotDeals where coupon_id="+coupon_id);
+                                DB.query("INSERT INTO HotDeals (user_id, `coupon_id` , `country_id`, `country`, `business_name`, `about_business`, `banner`, `discount` , `start_date` , `end_date`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+coupon_id+"', '"+country_id+"', '"+country+"', '"+business_name+"', '"+about_business+"', '"+banner+"', '"+req.body.discount+"' , '"+req.body.start_date+"' , '"+req.body.end_date+"' , NOW(), '')");
+                                
+                                res.status(200).send(vendorcoupon);
+                              }else{
+                                res.status(200).send(vendorcoupon);
+                              }
+                            })
+                          }else{
+                            res.status(200).send(vendorcoupon);
+                          }
+                        })
+                        
                     }).catch(err => res.status(400).send(err));
                 })
                 .catch((error) => {
@@ -165,6 +201,10 @@ router.put('/:id', function (req, res) {
                 });
         }
 });
+
+// res.status(200).send({
+    //'message': 'Vendor Coupon updated'
+// });
 
 // Delete a VendorCoupon
 router.delete('/:id', (req, res) => {
