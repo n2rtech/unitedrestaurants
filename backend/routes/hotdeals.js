@@ -56,9 +56,8 @@ router.get('/', (req, res) => {
             {country: { [Op.eq]: req.query.country }},
             // {business_name: { [Op.like]: req.query.business_name }},
             // {categories: { [Op.like]: '%"' + req.query.category + '"%' }},
-            {createdAt: { 
-                [Op.gt]: TODAY_START,
-                [Op.lt]: NOW
+            {start_date: { 
+                [Op.gt]: TODAY_START
               }}
         ]}
     })
