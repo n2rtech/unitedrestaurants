@@ -8,6 +8,10 @@ const Advertise = (props) => {
   const addDefaultSrc = (ev) => {
     ev.target.src = `${process.env.PUBLIC_URL}/assets/images/adlargbg.png`;
   }
+
+  const country_code = localStorage.getItem('country_code');
+
+
   const [addSpaces, setAddSpaces] = useState([]);
 
     useEffect(() => {
@@ -16,7 +20,7 @@ const Advertise = (props) => {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
   
-    axios.get('/api/ad-spaces/list' , config).then((response) => {
+    axios.get('/api/ad-spaces/list?country='+`${country_code}` , config).then((response) => {
         setAddSpaces(response.data);
       });
   

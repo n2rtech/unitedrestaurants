@@ -21,6 +21,7 @@ const AddSpaces = () => {
   const [addspacesData, setAddspaces] = useState([]);
   const user_id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
+  const country_id = localStorage.getItem("vendor_country_id");
   const history = useHistory()
   useEffect(() => {
   
@@ -115,7 +116,7 @@ const AddSpaces = () => {
         const bodyParameters = new FormData();
         bodyParameters.append('user_id', user_id);
         bodyParameters.append('link', '');
-
+        bodyParameters.append('country_id', country_id);
         for (let i = 0; i < (image.pictureFiles).length; i++) {
            bodyParameters.append('image', image.pictureFiles[i])
         }
