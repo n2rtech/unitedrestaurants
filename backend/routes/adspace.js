@@ -6,6 +6,7 @@ require('../config/passport')(passport);
 const path = require('path');
 var fs = require('fs');
 const Sequelize = require('sequelize');
+const Op = require('sequelize').Op
 
 var multer  = require('multer');
 
@@ -111,6 +112,11 @@ router.get('/list', (req, res) => {
     AdSpace
     .findAll(
     {
+        where: {
+            [Op.and]:[
+                {country_code: { [Op.eq]: req.query.country }},
+            ]
+        },
         limit: 10,
         order: Sequelize.literal('rand()'), limit: 25
     })
