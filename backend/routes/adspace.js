@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const AdSpace = require('../models').AdSpace;
+const {DB} = require('../config/database');
 const passport = require('passport');
 require('../config/passport')(passport);
 const path = require('path');
@@ -42,10 +43,24 @@ router.post('/', passport.authenticate('vendor', {
                 msg: 'Please pass Image.'
             })
         } else {
-            AdSpace.create({image:req.file.filename,link:req.body.link,user_id:req.user.id});
-            res.status(200).send({
-                msg: 'Ad Space added.'
-            })
+
+
+                        var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
+                        DB.query('SELECT code,name FROM '+table_name+' WHERE id ="' + req.body.country_id +'"', function (err, country) {
+                        
+                            if (err) throw err;
+                            if (country[0]) {
+                              var code = country[0].code;
+                              var country = country[0].code;
+                              AdSpace.create({image:req.file.filename,link:req.body.link,country_code: code, user_id:req.user.id});
+                              res.status(200).send({
+                                  msg: 'Ad Space added.'
+                              })
+                            }else{
+                              res.status(400).send(err);
+                            }
+                        });
+            
         }
 });
 

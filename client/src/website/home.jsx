@@ -15,6 +15,7 @@ const Home = (props) => {
 
   const params = useParams();
 
+
   console.log('params' , params.id);
 
   return (
