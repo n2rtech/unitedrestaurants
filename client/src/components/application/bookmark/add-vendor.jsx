@@ -42,13 +42,25 @@ const multiple = false
                 <Label htmlFor="exampleFormControlInput1">{"Phone Number"}</Label>
                 <Input className="form-control"  type="tel" />
               </FormGroup>
-              <FormGroup>
+              {/*<FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
                 <Input className="form-control"  type="name" />
+              </FormGroup>*/}
+              <FormGroup>
+                <Label>{"Address"}</Label>
+                <textarea className="form-control" rows="3" cols="3"></textarea>
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Country"}</Label>
-                <Input className="form-control"  type="name" />
+                <Typeahead
+                  id="multiple-typeahead"
+                  clearButton
+                  defaultSelected={options.slice(0, 5)}
+                  labelKey={"name"}
+                  multiple
+                  options={options}
+                  placeholder="Please select.."
+                />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Business Listed"}</Label>

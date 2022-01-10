@@ -23,6 +23,10 @@ import Signin from './auth/signin'
 // Vendor Signin page
 import Vendorsignin from './auth/vendorsignin'
 
+// User Login Page
+
+import Usersignin from './auth/usersignin'
+
 // Home Page
 import Home from './website/home'
 import Restaurants from './website/restaurants'
@@ -36,9 +40,11 @@ import Customerservices from './website/customerservices'
 import Technicalsupport from './website/technicalsupport'
 import Sales from './website/sales'
 import Privacypolicy from './website/privacypolicy'
+import Howitwork from './website/howitwork'
 import Returnpolicy from './website/returnpolicy'
 import Termsofservice from './website/termsofservice'
 import Contactus from './website/contactus'
+import Visitors from './website/visitors'
 
 
 
@@ -119,9 +125,10 @@ const Root = (props) =>  {
           <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
           <Route  path={`${process.env.PUBLIC_URL}/vendor/login`} component={Vendorsignin} />
+          <Route  path={`${process.env.PUBLIC_URL}/user/login`} component={Usersignin} />
           <Route  path={`${process.env.PUBLIC_URL}/home`} component={Home} />
-          <Route  path={`${process.env.PUBLIC_URL}/resturent/details`} component={Details} />
-          <Route  path={`${process.env.PUBLIC_URL}/blog/blogdetails`} component={Blogdetails} />
+          <Route  path={`${process.env.PUBLIC_URL}/resturent/details/:id`} component={Details} />
+          <Route  path={`${process.env.PUBLIC_URL}/blog/blogdetails/:id`} component={Blogdetails} />
            <Route  path={`${process.env.PUBLIC_URL}/restaurants`} component={Restaurants} />
            <Route  path={`${process.env.PUBLIC_URL}/blog`} component={Blog} />
            <Route  path={`${process.env.PUBLIC_URL}/searchresturent`} component={Searchresturent} />
@@ -131,9 +138,11 @@ const Root = (props) =>  {
            <Route  path={`${process.env.PUBLIC_URL}/technicalsupport`} component={Technicalsupport} />
            <Route  path={`${process.env.PUBLIC_URL}/sales`} component={Sales} />
            <Route  path={`${process.env.PUBLIC_URL}/privacypolicy`} component={Privacypolicy} />
+           <Route  path={`${process.env.PUBLIC_URL}/howitwork`} component={Howitwork} />
            <Route  path={`${process.env.PUBLIC_URL}/returnpolicy`} component={Returnpolicy} />
            <Route  path={`${process.env.PUBLIC_URL}/termsofservice`} component={Termsofservice} />
            <Route  path={`${process.env.PUBLIC_URL}/contactus`} component={Contactus} />
+           <Route  path={`${process.env.PUBLIC_URL}/visitors`} component={Visitors} />
            
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/login`} component={Login}>
           </Route>
@@ -194,7 +203,7 @@ const Root = (props) =>  {
           
           </App>
           :
-          <Redirect to={`${process.env.PUBLIC_URL}/home`} />
+          <Redirect to={`${process.env.PUBLIC_URL}/home/usa`} />
 
 
           }      

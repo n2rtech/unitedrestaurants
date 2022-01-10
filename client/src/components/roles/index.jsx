@@ -56,7 +56,7 @@ const Roles = (props) => {
                               <th scope="row">{item.role_description}</th>
                               <th scope="row">{item.createdAt}</th>
                               <th scope="row">{item.updatedAt}</th>
-                              <th scope="row"><a href={`${process.env.PUBLIC_URL}/dashboard/admin/Dubai/roleslist/${item.id}`}><i className  ="fa fa-edit"></i></a></th>
+                              <th scope="row"><a href={`${process.env.PUBLIC_URL}/dashboard/admin/roleslist/${item.id}/`}><i className  ="fa fa-edit"></i></a></th>
                          </tr>
                         ))}
                     </tbody>

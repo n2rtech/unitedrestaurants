@@ -12,12 +12,10 @@ const Helper = require('../utils/helper');
 const helper = new Helper();
 const path = require('path');
 var multer  = require('multer');
-
-
-
+var fs = require('fs');
 
 const imageStorage = multer.diskStorage({
-    destination: 'banner', 
+    destination: 'uploads/banner', 
     filename: (req, file, cb) => {
       cb(null, file.fieldname + '_' + Date.now() 
        + path.extname(file.originalname))
@@ -77,47 +75,86 @@ router.post('/', passport.authenticate('jwt', {
 
 
 // Get Profile by ID
-router.get('/:id', passport.authenticate('jwt', {
+router.get('/:id', passport.authenticate('vendor', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Business Profile').then((rolePerm) => {
-
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
-
     Profile
-            .findOne({ where:{
-                user_id: req.params.id
+    .findOne({ where:{
+        user_id: req.params.id|req.user.id
+    }
+})
+    .then((profile2) => {
+        if (profile2) {
+
+            Profile
+            .findByPk(profile2.id,
+            {
+                include: [{
+                    model: Category,
+                    as: 'category',
+                }]
             }
-            })
-            .then((profile2) => {
-                if (profile2) {
+            )
+            .then((profile1) => res.status(200).send(profile1))
+            .catch((error) => {
+                res.status(400).send(error);
+            });
 
-                    Profile
-                    .findByPk(profile2.id,
-                    {
-                        include: [{
-                            model: Category,
-                            as: 'category',
-                        }]
-                    }
-                    )
-                    .then((profile1) => res.status(200).send(profile1))
-                    .catch((error) => {
-                        res.status(400).send(error);
-                    });
+        }else{
 
-                }else{
-                    res.status(400).send({
-                        msg: 'profile not found.'
-                    })
-                }            
-            })
-        .catch((error) => {
-            res.status(400).send(error);
-        });
+            Profile
+            .create({
+                    user_id: req.user.id,
+                    business_name: req.user.name,
+                    business_email: req.user.email,
+                    manager_name: req.user.name,
+                    manager_email: req.user.email,
+                    phone_number: req.user.mobile
+                })
+                .then((profile) => res.status(201).send(profile))
+        }            
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
 });
+
+
+
+
+// Get Profile by ID
+router.get('/get/:id', (req, res) => {
+    Profile
+    .findOne({ where:{
+        user_id: req.params.id
+    }
+})
+    .then((profile2) => {
+        if (profile2) {
+
+            Profile
+            .findByPk(profile2.id,
+            {
+                include: [{
+                    model: Category,
+                    as: 'category',
+                }]
+            }
+            )
+            .then((profile1) => res.status(200).send(profile1))
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+
+        }else{
+            res.status(200).send({'message' : 'profile not found'});
+        }            
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
 
 // Update a Profile
 router.put('/:id', imageUpload.single('banner'), (req, res) => {
@@ -127,13 +164,14 @@ router.put('/:id', imageUpload.single('banner'), (req, res) => {
                 msg: 'Please pass Profile ID, name or email.'
             })
         } else {
-            Profile
-                .findOne({
-                            user_id: req.params.id
-                        })
+            // Note for krishna
+            Profile  // Need to set dynamic table please look here now we updated profile data in vendor_countrycode name table not profiles table
+                .findByPk(req.params.id)
                 .then((profile) => {
 
                     if (req.file) {
+                        var filePath = path.resolve('./')+'/uploads/banner/'+profile.banner; 
+                        fs.unlinkSync(filePath);
                         var image = req.file.filename;
                     }else{
                         var image = profile.banner;
@@ -185,8 +223,8 @@ router.put('/:id', imageUpload.single('banner'), (req, res) => {
                         });
                     }).catch(err => res.status(400).send('err'));
                 })
-                .catch((error) => {
-                    res.status(400).send('error');
+                .catch((err) => {
+                    res.status(400).send('err');
                 });
         }
 });
@@ -229,44 +267,5 @@ router.delete('/:id', passport.authenticate('jwt', {
     });
 });
 
-// Add Permissions to Profile
-router.post('/permissions/:id', passport.authenticate('jwt', {
-    session: false
-}), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Business Profile').then((rolePerm) => {
-        if (!req.body.permissions) {
-            res.status(400).send({
-                msg: 'Please pass permissions.'
-            })
-        } else {
-            Profile
-                .findByPk(req.params.id)
-                .then((role) => {
-                    req.body.permissions.forEach(function (item, index) {
-                        Permission
-                            .findByPk(item)
-                            .then(async (perm) => {
-                                await role.addPermissions(perm, {
-                                    through: {
-                                        selfGranted: false
-                                    }
-                                });
-                            })
-                            .catch((error) => {
-                                res.status(400).send(error);
-                            });
-                    });
-                    res.status(200).send({
-                        'message': 'Permissions added'
-                    });
-                })
-                .catch((error) => {
-                    res.status(400).send(error);
-                });
-        }
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
-});
 
 module.exports = router;

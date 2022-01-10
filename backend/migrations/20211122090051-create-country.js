@@ -11,11 +11,18 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
+      code: {
+        type: Sequelize.STRING
+      },
       image: {
         type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
+        type: Sequelize.DATE
+      },
+      deletedAt: {
+        allowNull: true,
         type: Sequelize.DATE
       },
       updatedAt: {

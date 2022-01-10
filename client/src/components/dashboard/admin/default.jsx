@@ -29,7 +29,91 @@ const AdminDefault = (props) => {
     setDate(date)
   };
 
+  const token = localStorage.getItem("token");
+  const [totalVendors, setTotalVendors] = useState(0);
+  const [totalVendorData, setTotalVendorData] = useState([]);
+  const [totalMembershipVendors, setTotalMembershipVendors] = useState(0);
+  const [totalSuspendedVendors, setTotalSuspendedVendors] = useState(0);
+  const [totalFeaturedVendors, setTotalFeaturedVendors] = useState(0);
+  const [totalAddspaceVendors, setTotalAddspaceVendors] = useState(0);
+  const [totalMessages, setTotalMessages] = useState(0);
+
+   const [selectedClient,setSelectedClient] = useState([]);
+
+
   useEffect(() => {
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+    };
+
+    fetch("/api/vendors/new?search=all" , config)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setTotalVendorData(result);
+      },
+      (error) => {
+      });
+
+    fetch("/api/vendors/count/all" , config)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setTotalVendors(result.count);
+      },
+      (error) => {
+      });
+
+
+    fetch("/api/vendors/count/membership" , config)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setTotalMembershipVendors(result.count);
+      },
+      (error) => {
+      });
+
+
+    fetch("/api/vendors/count/suspended" , config)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setTotalSuspendedVendors(result.count);
+      },
+      (error) => {
+      });
+
+
+    fetch("/api/vendors/count/featured" , config)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setTotalFeaturedVendors(result.count);
+      },
+      (error) => {
+      });
+
+
+    fetch("/api/vendors/count/add-space" , config)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setTotalAddspaceVendors(result.count);
+      },
+      (error) => {
+      });
+
+
+    fetch("/api/vendors/count/messages" , config)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setTotalMessages(result.count);
+      },
+      (error) => {
+      });
  
     if (curHr < 12) {
       setDayTimes('Good Morning')
@@ -76,6 +160,23 @@ const AdminDefault = (props) => {
     // eslint-disable-next-line
   }, [])
 
+
+  const handleSelectChange = e => {
+    var type = e.target.value;
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+    };
+
+    fetch(`/api/vendors/new?search=${type}` , config)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setTotalVendorData(result);
+      },
+      (error) => {
+      });
+  }
+
   return (
     <Fragment>
       <Breadcrumb parent="Dashboard" title="Default" />
@@ -87,7 +188,7 @@ const AdminDefault = (props) => {
                 <div className="media static-top-widget">
                   <div className="align-self-center text-center"><Database /></div>
                   <div className="media-body"><span className="m-0">{TotalVendors}</span>
-                    <h4 className="mb-0 counter"><CountUp end={325} /></h4><Database className="icon-bg" />
+                    <h4 className="mb-0 counter"><CountUp end={totalVendors} /></h4><Database className="icon-bg" />
                   </div>
                 </div>
               </CardBody>
@@ -99,7 +200,7 @@ const AdminDefault = (props) => {
                 <div className="media static-top-widget">
                   <div className="align-self-center text-center"><MessageCircle /></div>
                   <div className="media-body"><span className="m-0">{MembershipsVendor}</span>
-                    <h4 className="mb-0 counter"><CountUp end={120} /></h4><MessageCircle className="icon-bg" />
+                    <h4 className="mb-0 counter"><CountUp end={totalMembershipVendors} /></h4><MessageCircle className="icon-bg" />
                   </div>
                 </div>
               </CardBody>
@@ -111,7 +212,7 @@ const AdminDefault = (props) => {
                 <div className="media static-top-widget">
                   <div className="align-self-center text-center"><UserPlus /></div>
                   <div className="media-body"><span className="m-0">{SupendedVendors}</span>
-                    <h4 className="mb-0 counter"><CountUp end={205} />{"1"}</h4><UserPlus className="icon-bg" />
+                    <h4 className="mb-0 counter"><CountUp end={totalSuspendedVendors} /></h4><UserPlus className="icon-bg" />
                   </div>
                 </div>
               </CardBody>
@@ -123,7 +224,7 @@ const AdminDefault = (props) => {
                 <div className="media static-top-widget">
                   <div className="align-self-center text-center"><ShoppingBag /></div>
                   <div className="media-body"><span className="m-0">{"Featured Vendors"}</span>
-                    <h4 className="mb-0 counter"><CountUp end={25} /></h4><ShoppingBag className="icon-bg" />
+                    <h4 className="mb-0 counter"><CountUp end={totalFeaturedVendors} /></h4><ShoppingBag className="icon-bg" />
                   </div>
                 </div>
               </div>
@@ -135,7 +236,7 @@ const AdminDefault = (props) => {
                 <div className="media static-top-widget">
                   <div className="align-self-center text-center"><UserPlus /></div>
                   <div className="media-body"><span className="m-0">{"Ad space vendors"}</span>
-                    <h4 className="mb-0 counter"><CountUp end={45} />{"1"}</h4><UserPlus className="icon-bg" />
+                    <h4 className="mb-0 counter"><CountUp end={totalAddspaceVendors} /></h4><UserPlus className="icon-bg" />
                   </div>
                 </div>
               </CardBody>
@@ -148,7 +249,7 @@ const AdminDefault = (props) => {
                 <div className="media static-top-widget">
                   <div className="align-self-center text-center"><UserPlus /></div>
                   <div className="media-body"><span className="m-0">Messages</span>
-                    <h4 className="mb-0 counter"><CountUp end={10} />{"1"}</h4><UserPlus className="icon-bg" />
+                    <h4 className="mb-0 counter"><CountUp end={totalMessages} /></h4><UserPlus className="icon-bg" />
                   </div>
                 </div>
               </CardBody>
@@ -162,9 +263,9 @@ const AdminDefault = (props) => {
                     <div className="header-top">
                           <h5 className="m-0">{VendorAdded}</h5>
                       <div className="card-header-right-icon">
-                        <select className="button btn btn-primary">
-                          <option>{Today}</option>
-                          <option>{"All time"}</option>
+                        <select onChange={handleSelectChange} className="button btn btn-primary">
+                          <option value="today">{Today}</option>
+                          <option selected value="all">{"All time"}</option>
                         </select>
                       </div>
                     </div>
@@ -173,24 +274,18 @@ const AdminDefault = (props) => {
                     <div className="appointment-table table-responsive">
                       <table className="table table-bordernone">
                         <tbody>
+                        {totalVendorData.map((vendor , i ) => (
                           <tr>
                             <td><img className="img-fluid img-40 rounded-circle mb-3" src={require("../../../assets/images/appointment/app-ent.jpg")} alt="" />
                               <div className="status-circle bg-primary"></div>
                             </td>
-                            <td className="img-content-box"><span className="d-block">{VenterLoren}</span><span className="font-roboto">Now</span></td>
+                            <td className="img-content-box"><span className="d-block">{vendor.name}</span><span className="font-roboto">{vendor.createdAt}</span></td>
                             <td>
-                              <p className="m-0 font-primary">{"28 Sept"}</p>
+                              <p className="m-0 font-primary">{vendor.createdAt}</p>
                             </td>
                           </tr>
-                          <tr>
-                            <td><img className="img-fluid img-40 rounded-circle" src={require("../../../assets/images/appointment/app-ent.jpg")} alt="" />
-                              <div className="status-circle bg-primary"></div>
-                            </td>
-                            <td className="img-content-box"><span className="d-block">{JohnLoren}</span><span className="font-roboto">{"11:00"}</span></td>
-                            <td>
-                              <p className="m-0 font-primary">{"22 Sept"}</p>
-                            </td>
-                          </tr>
+                          ))}
+                          
                         </tbody>
                       </table>
                     </div>

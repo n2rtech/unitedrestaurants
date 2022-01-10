@@ -4,65 +4,64 @@ import { Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabConte
 import { Typeahead } from 'react-bootstrap-typeahead';
 import axios from 'axios'
 import { useParams } from "react-router-dom";
+import {toast} from 'react-toastify';
 
 const RolesList = (props) => {
-const multiple = false
+  const multiple = false
 
-const params = useParams();
+  const params = useParams();
 
-const [multiSelections, setMultiSelections] = useState([]);
+  const [multiSelections, setMultiSelections] = useState([]);
 
-    const [bookingData, setBookingData] = useState({});
-   useEffect(() => {
+  const [permissionsData, setPermissionsData] = useState({});
+  const [roleData, setRoleData] = useState({});
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
     const GetData = async () => {
-        const config = {
-    headers: {'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ' }
-  };
+      const config = {
+        headers: {'Authorization': 'JWT '+token }
+      };
       const result = await axios('/api/permissions/list',config);
-      setBookingData(result.data);
+      setPermissionsData(result.data);
+
+      const resultRole = await axios(`/api/roles/`+`${params.id}`,config);
+      setRoleData(resultRole.data);
+      setMultiSelections(resultRole.data.permissions);
+
+
     };
     GetData();
   }, []);
-console.log(bookingData);
 
-const [pername, setPername] = useState('')
-const [selectedData, setSelectedData] = useState([])
-
-const handleChange = (selectedOptions)  => {
-  //console.log(selectedOptions);
-  setPername(selectedOptions);
-} 
-
-const handleSubmit = event => {
-  event.preventDefault();
+  const [pername, setPername] = useState('')
 
 
+  const handleSubmit = event => {
+    event.preventDefault();
 
-// console.log(multiSelections);
-var array = [];
+    var array = [];
 
+    const finalpername = multiSelections.map((user) => {
+      array.indexOf(user.id) === -1 ? array.push(user.id) : console.log("This item already exists");
+    });
 
-console.log(array)
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+    };
+    const bodyParameters = {
+      permissions: array
+    };
+    axios.post(`/api/roles/permissions/`+`${params.id}`,
+      bodyParameters,
+      config
+      ) .then(response => {
+        console.log('Submited Successfully');
+        toast.success("Permissions Assigned to role!")
+      })
+    .catch(error => console.log('Form submit error', error))
 
-const finalpername = multiSelections.map((user) => {
-  // console.log(user.id);
-  array.indexOf(user.id) === -1 ? array.push(user.id) : console.log("This item already exists");
-});
-console.log(array);
-
-  // const config = {
-  //   headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
-  //   };
-  //   const bodyParameters = {
-  //     permissions: pername
-  //   };
-  //   axios.post(`/api/roles/permissions/`+`${params.id}`,
-  //     bodyParameters,
-  //     config
-  //   ) .then(response => console.log('Submiited Successfully'))
-  //      .catch(error => console.log('Form submit error', error))
-
-};
+  };
 
   return (
     <Fragment>
@@ -72,7 +71,7 @@ console.log(array);
         <CardBody>
           <div className="rolling">
             <h1>Role Name</h1>
-            <span>Accounts Manager</span>
+            <h6>{roleData.role_name}</h6>
             <h2>Permissions</h2>
             <Typeahead
               id="multiple-typeahead"
@@ -80,9 +79,9 @@ console.log(array);
               labelKey={"perm_name"}
               multiple
               onChange={setMultiSelections}
-              options={bookingData}
+              options={permissionsData}
               selected={multiSelections}
-              placeholder="Choose a state..."
+              placeholder="Choose permissions..."
             />
             <div>&nbsp;</div>
             <Button color="primary" onClick = {handleSubmit}>Submit</Button>

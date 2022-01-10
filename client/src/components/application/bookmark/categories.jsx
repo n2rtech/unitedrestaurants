@@ -7,15 +7,19 @@ import defaultImg from '../../../assets/images/lightgallry/01.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import {toast} from 'react-toastify';
+import SweetAlert from 'sweetalert2'
 
 const Categories = (props) => {
 
   const [generalData, setGeneralData] = useState([]);
-
+  const [level1Data, setLevel1Data] = useState('');
+  const [level2Data, setLevel2Data] = useState('');
+  const [level3Data, setlevel3Data] = useState('');
+  const token = localStorage.getItem("token");
   useEffect(() => {
   
       const config = {
-          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
           };
   
           
@@ -23,6 +27,41 @@ const Categories = (props) => {
         .then(res => res.json())
         .then(
           (result) => {
+
+
+
+              for (const [i, element] of result.entries()) {
+
+                result[i].parent_1 = '';
+                result[i].parent_2 = '';
+                result[i].parent_3 = '';
+                result[i].parent_4 = '';
+
+              var parent = element.parent_category;
+
+              if(parent){
+                result[i].parent_1 = parent.name;
+                if(parent.parent_category){
+                  var nextparent = parent.parent_category; 
+
+                  result[i].parent_2 = nextparent.name;
+
+                  if(nextparent.parent_category){
+                    var nextnextparent = nextparent.parent_category;
+
+                     result[i].parent_3 = nextnextparent.name;
+
+                    if(nextnextparent.parent_category){
+                      var nectnextnextparent = nextnextparent.parent_category;
+                       result[i].parent_4 = nectnextnextparent.name;
+                    }
+
+                  }
+
+                }
+              }
+
+            }
             
               setGeneralData(result);
           },
@@ -32,18 +71,38 @@ const Categories = (props) => {
         )
     }, []);
 
-    const handleRemoveCategory = (todoId) => {
-      
-      const config = {
-        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
-        };
 
-        axios.delete('/api/categories/'+`${todoId}`,
-          config
-        ) .then(response => console.log('Deleted Successfully'))
-           .catch(error => console.log('Delete error', error))
-
-      toast.success("Deleted Category !");
+    const handleRemoveCategory = (id) => {
+      SweetAlert.fire({
+        title: 'Are you sure?',
+        text: "Once deleted, you will not be able to recover this category id!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ok',
+        cancelButtonText: 'cancel',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          const config = {
+            headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+            };
+    
+            axios.delete('/api/categories/'+`${id}`,
+              config
+            ) .then(response => console.log('Deleted Successfully'))
+               .catch(error => console.log('Delete error', error))
+          SweetAlert.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+        else {
+          SweetAlert.fire(
+            'Category is safe!'
+          )
+        }
+      })
     }
 
   return (
@@ -55,7 +114,7 @@ const Categories = (props) => {
           <Row>
             <Col sm="6">&nbsp;</Col>
             <Col sm="6">
-              <a href='#' className="btn btn-primary pull-right">{"Add New"}</a>
+              <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-category`} className="btn btn-primary pull-right">{"Add New"}</a>
             </Col>
           </Row>
           <div className="table-responsive m-t-20">
@@ -69,9 +128,17 @@ const Categories = (props) => {
               <tbody>
               {generalData.map((item , i ) => (
                 <tr key={i}>
-                  <td>{item.name}</td>
+                  <td>{item.name}   
+
+                   { (item.parent_1) ? ' > '+item.parent_1 :''}
+                   { (item.parent_2) ? ' > '+item.parent_2 :''}
+                   { (item.parent_3) ? ' > '+item.parent_3 :''}
+                   { (item.parent_4) ? ' > '+item.parent_4 :''}
+           
+
+                  </td>
                   <td className="text-right">
-                    <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-category/${item.id}`}>Edit</a> &nbsp;
+                    <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-category/${item.id}`}>Edit</a> &nbsp;
                     <Button color="danger" onClick={() => handleRemoveCategory(item.id)}>{"Delete"}</Button>
                   </td>
                 </tr>

@@ -4,6 +4,7 @@ import Default from '../components/dashboard/admin/default'
 import AdminDefault from '../components/dashboard/admin/default'
 import Ecommerce from '../components/dashboard/vendor/ecommerce'
 import VendorEcommerce from '../components/dashboard/vendor/ecommerce'
+import User from '../components/dashboard/user/ecommerce'
 
 // widgets
 import GeneralWidget from '../components/widgets/general'
@@ -129,8 +130,6 @@ import JobApply from "../components/jobSearch/job-apply"
 import Learninglist from "../components/learning/learning-list"
 import LearningDeatil from "../components/learning/learning-deatil"
 
-
-
 // Calendar
 import BasicCalender from "../components/calendar/basicCalendar"
 import DraggableCalendar from "../components/calendar/draggableCalendar"
@@ -165,9 +164,13 @@ import Sample from "../components/sample"
 // Search page 
 import Search from "../components/search"
 
-
 // E-commerce-app 
 import AddVendor from "../components/application/bookmark/add-vendor"
+import Blogs from "../components/application/bookmark/blogs"
+import EditBlog from "../components/application/bookmark/edit-blog"
+import AddBlog from "../components/application/bookmark/add-blog"
+import EditAccountsPayable from "../components/application/bookmark/edit-payable"
+import AddAccountsPayable from "../components/application/bookmark/add-payable"
 import EditAdminMembership from "../components/application/bookmark/edit-admin-membership"
 import PromotionsDiscount from "../components/application/bookmark/promotions-discount"
 import EditPromotionsDiscount from "../components/application/bookmark/edit-promotions-discount"
@@ -200,9 +203,11 @@ import VendorProfile from "../components/application/bookmark/vendor-profile"
 import MyWallet from "../components/application/bookmark/my-wallet"
 import VendorMembershipPackage from "../components/application/bookmark/vendor-membership-package"
 import VendorCoupon from "../components/application/bookmark/vendor-coupon"
+import AddVendorCoupon from "../components/application/bookmark/add-vendor-coupon"
 import EditVendorCoupon from "../components/application/bookmark/edit-vendor-coupon"
 import VendorPhotogallery from "../components/application/bookmark/vendor-photogallery"
 import VendorVideoGallery from "../components/application/bookmark/vendor-videogallery"
+import AddVendorVideoGallery from "../components/application/bookmark/add-video-gallery"
 import EditVideoGallery from "../components/application/bookmark/edit-video-gallery"
 import JobOpenings from "../components/application/bookmark/job-openings"
 import AddJobOpenings from "../components/application/bookmark/add-job-openings"
@@ -211,6 +216,18 @@ import PaymentMethod from "../components/application/bookmark/payment-method"
 import AddsMembership from "../components/application/bookmark/adds-membership"
 import AddSpaces from "../components/application/bookmark/ad-spaces"
 import MenuItems from "../components/application/bookmark/menu-items"
+import AddCategory from "../components/application/bookmark/add-category"
+import SaleItems from "../components/application/bookmark/sale-items"
+import AccountsPayable from "../components/application/bookmark/accounts-payable"
+import AddCountries from "../components/application/bookmark/add-countries"
+import EditCountries from "../components/application/bookmark/edit-countries"
+import Countries from "../components/application/bookmark/countries"
+import Trash from "../components/application/bookmark/trash"
+import Backup from "../components/application/bookmark/backup"
+import AddUser from "../components/application/bookmark/add-user"
+import Userslist from "../components/application/bookmark/users-list"
+import Edituser from "../components/application/bookmark/edit-user"
+import Adsense from "../components/application/bookmark/adsense"
 
 // Email
 import Email from "../components/application/email-app/emailDefault"
@@ -251,9 +268,10 @@ export const routes = [
         { path:"/dashboard/admin/pages", Component:pagesList},
         { path:"/dashboard/default/", Component:Default},
         { path:"/dashboard/vendor/", Component:VendorEcommerce},
-        { path:"/dashboard/ecommerce/", Component:Ecommerce},
+        { path:"/dashboard/user/", Component:User},
+        { path:"/dashboard/", Component:Ecommerce},
 
-    { path:"/pages/roles", Component:Roles},
+        { path:"/pages/roles", Component:Roles},
 
         { path:"/widgets/general", Component:GeneralWidget},
         { path:"/widgets/chart", Component:ChartsWidget},
@@ -391,12 +409,19 @@ export const routes = [
         { path:"/app/email-app", Component:Email},
         { path:"/app/chat-app", Component:Chat},
         { path:"/dashboard/admin/roleslist/:id", Component:RolesList},
+        { path:"/dashboard/admin/trash/:id", Component:Trash},
+        { path:"/dashboard/admin/backup/:id", Component:Backup},
+        { path:"/dashboard/admin/add-user/", Component:AddUser},
+        { path:"/dashboard/admin/users-list", Component:Userslist},
+        { path:"/dashboard/admin/edit-user/:id", Component:Edituser},
+        { path:"/dashboard/admin/adsense", Component:Adsense},
         { path:"/dashboard/admin/manage-pages", Component:ManagePages},
+        { path:"/dashboard/admin/add-category", Component:AddCategory},
         { path:"/dashboard/admin/edit-page/:id", Component:EditPage},
         { path:"/dashboard/admin/categories", Component:Categories},
         { path:"/dashboard/admin/edit-category/:id", Component:EditCategory},
         { path:"/dashboard/admin/all-vendors", Component:AllVendors},
-        { path:"/dashboard/admin/edit-vendor", Component:EditVendor},
+        { path:"/dashboard/admin/edit-vendor/:id", Component:EditVendor},
         { path:"/dashboard/admin/all-membership", Component:AllMembership},
         { path:"/dashboard/admin/no-membership", Component:NoMembership},
         { path:"/dashboard/admin/suspended-vendors", Component:SuspendedVendors},
@@ -415,17 +440,86 @@ export const routes = [
         { path:"/dashboard/vendor/my-wallet", Component:MyWallet},
         { path:"/dashboard/vendor/vendor-membership-package", Component:VendorMembershipPackage},
         { path:"/dashboard/vendor/vendor-coupon", Component:VendorCoupon},
-        { path:"/dashboard/vendor/edit-vendor-coupon", Component:EditVendorCoupon},
+        { path:"/dashboard/vendor/add-vendor-coupon", Component:AddVendorCoupon},
+        { path:"/dashboard/vendor/edit-vendor-coupon/:id", Component:EditVendorCoupon},
         { path:"/dashboard/vendor/vendor-photogallery", Component:VendorPhotogallery},
         { path:"/dashboard/vendor/vendor-videogallery", Component:VendorVideoGallery},
-        { path:"/dashboard/vendor/edit-video-gallery", Component:EditVideoGallery},
+        { path:"/dashboard/vendor/add-video-gallery/", Component:AddVendorVideoGallery},
+        { path:"/dashboard/vendor/edit-video-gallery/:id", Component:EditVideoGallery},
         { path:"/dashboard/vendor/job-openings", Component:JobOpenings},
         { path:"/dashboard/vendor/add-job-openings", Component:AddJobOpenings},
         { path:"/dashboard/vendor/edit-job-openings/:id", Component:EditJobOpenings},
-        { path:"/dashboard/vendor/payment-method", Component:PaymentMethod},
+        { path:"/dashboard/vendor/payment-method/:id", Component:PaymentMethod},
         { path:"/dashboard/vendor/adds-membership", Component:AddsMembership},
         { path:"/dashboard/vendor/ad-spaces", Component:AddSpaces},
-        { path:"/dashboard/vendor/menu-items", Component:MenuItems},
+        { path:"/dashboard/vendor/menu-items/:id", Component:MenuItems},
+        { path:"/dashboard/vendor/sale-items/:id", Component:SaleItems},
+        { path:"/dashboard/admin/accounts-payable", Component:AccountsPayable},
+        { path:"/dashboard/admin/edit-payable/:id", Component:EditAccountsPayable},
+        { path:"/dashboard/admin/add-payable", Component:AddAccountsPayable},
+        { path:"/dashboard/admin/countries", Component:Countries},
+        { path:"/dashboard/admin/add-countries", Component:AddCountries},
+        { path:"/dashboard/admin/edit-countries/:id", Component:EditCountries},
+        { path:"/dashboard/admin/blogs", Component:Blogs},
+        { path:"/dashboard/admin/add-blog", Component:AddBlog},
+        { path:"/dashboard/admin/edit-blog/:id", Component:EditBlog},
+
+        // User Url's
+
+        { path:"/dashboard/user/roleslist/:id", Component:RolesList},
+        { path:"/dashboard/user/trash/:id", Component:Trash},
+        { path:"/dashboard/user/backup/:id", Component:Backup},
+        { path:"/dashboard/user/add-user/", Component:AddUser},
+        { path:"/dashboard/user/users-list", Component:Userslist},
+        { path:"/dashboard/user/edit-user/:id", Component:Edituser},
+        { path:"/dashboard/user/adsense", Component:Adsense},
+        { path:"/dashboard/user/manage-pages", Component:ManagePages},
+        { path:"/dashboard/user/add-category", Component:AddCategory},
+        { path:"/dashboard/user/edit-page/:id", Component:EditPage},
+        { path:"/dashboard/user/categories", Component:Categories},
+        { path:"/dashboard/user/edit-category/:id", Component:EditCategory},
+        { path:"/dashboard/user/all-vendors", Component:AllVendors},
+        { path:"/dashboard/user/edit-vendor/:id", Component:EditVendor},
+        { path:"/dashboard/user/all-membership", Component:AllMembership},
+        { path:"/dashboard/user/no-membership", Component:NoMembership},
+        { path:"/dashboard/user/suspended-vendors", Component:SuspendedVendors},
+        { path:"/dashboard/user/featured-vendors", Component:FeaturedVendors},
+        { path:"/dashboard/user/hot-deals-vendors", Component:HotDealsVendors},
+        { path:"/dashboard/user/add-space-vendors", Component:AddSpaceVendors},
+        { path:"/dashboard/user/video-membership-vendors", Component:VideoMembershipVendors},
+        { path:"/dashboard/user/add-vendor", Component:AddVendor},
+        { path:"/dashboard/user/admin-membership-package", Component:AdminMembershipPackage},
+        { path:"/dashboard/user/edit-admin-membership", Component:EditAdminMembership},
+        { path:"/dashboard/user/promotions-discount", Component:PromotionsDiscount},
+        { path:"/dashboard/user/edit-promotions-discount", Component:EditPromotionsDiscount},
+        { path:"/dashboard/user/vendor-profile", Component:VendorProfile},
+        { path:"/dashboard/user/my-wallet", Component:MyWallet},
+        { path:"/dashboard/user/vendor-membership-package", Component:VendorMembershipPackage},
+        { path:"/dashboard/user/vendor-coupon", Component:VendorCoupon},
+        { path:"/dashboard/user/add-vendor-coupon", Component:AddVendorCoupon},
+        { path:"/dashboard/user/edit-vendor-coupon/:id", Component:EditVendorCoupon},
+        { path:"/dashboard/user/vendor-photogallery", Component:VendorPhotogallery},
+        { path:"/dashboard/user/vendor-videogallery", Component:VendorVideoGallery},
+        { path:"/dashboard/user/add-video-gallery/", Component:AddVendorVideoGallery},
+        { path:"/dashboard/user/edit-video-gallery/:id", Component:EditVideoGallery},
+        { path:"/dashboard/user/job-openings", Component:JobOpenings},
+        { path:"/dashboard/user/add-job-openings", Component:AddJobOpenings},
+        { path:"/dashboard/user/edit-job-openings/:id", Component:EditJobOpenings},
+        { path:"/dashboard/user/payment-method/:id", Component:PaymentMethod},
+        { path:"/dashboard/user/adds-membership", Component:AddsMembership},
+        { path:"/dashboard/user/ad-spaces", Component:AddSpaces},
+        { path:"/dashboard/user/menu-items/:id", Component:MenuItems},
+        { path:"/dashboard/user/sale-items/:id", Component:SaleItems},
+        { path:"/dashboard/user/accounts-payable", Component:AccountsPayable},
+        { path:"/dashboard/user/edit-payable/:id", Component:EditAccountsPayable},
+        { path:"/dashboard/user/add-payable", Component:AddAccountsPayable},
+        { path:"/dashboard/user/countries", Component:Countries},
+        { path:"/dashboard/user/add-countries", Component:AddCountries},
+        { path:"/dashboard/user/edit-countries/:id", Component:EditCountries},
+        { path:"/dashboard/user/blogs", Component:Blogs},
+        { path:"/dashboard/user/add-blog", Component:AddBlog},
+        { path:"/dashboard/user/edit-blog/:id", Component:EditBlog},
+        
 
         {path:"/app/project/project-list", Component:ProjectList},
         {path:"/app/project/new-project", Component:NewProject},

@@ -12,9 +12,9 @@ const ManagePages = (props) => {
   const [generalData, setGeneralData] = useState([]);
 
   useEffect(() => {
-  
+    const token = localStorage.getItem("token");
       const config = {
-          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
           };
   
           
@@ -50,7 +50,7 @@ const ManagePages = (props) => {
                        <tr>
                        <td>{item.title}</td>
                        <td className="text-right">
-                         <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-page/${item.id}`}>Edit</a>
+                         <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-page/${item.id}/`}>Edit</a>
                        </td>
                    </tr>
                   ))}

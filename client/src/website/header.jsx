@@ -1,12 +1,124 @@
-import React,{useState} from 'react';
-import { Container, Row, Col, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavbarToggler, NavItem, NavLink, Nav,TabContent,TabPane,Collapse,Offcanvas,NavDropdown } from 'reactstrap'
+import React,{useState,useEffect,Fragment} from 'react';
+import SideNav, { MenuIcon } from 'react-simple-sidenav';
+import { Container, Row, Col, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavbarToggler, NavItem, NavLink,List,ListInlineItem, Nav,TabContent,TabPane,Collapse,Offcanvas,NavDropdown } from 'reactstrap'
 import './css/style.css'
 import Menu from './menu.jsx'
 import Mobilemenu from './mobilemenu.jsx'
 import Countryflag from './countryflag.jsx'
-
+import GoogleTranslate from './googletranslate';
+import axios from 'axios';
 
 const Header = (props) => {
+const [showNav, setShowNav] = useState();
+const [countryData, setCountryData] = useState([]);
+const [categoryData, setCategoryData] = useState([]);
+
+console.log('Before Country Code' , localStorage.getItem('country_code'));
+
+const OnChangeCountry = (event) => {
+  localStorage.setItem('country_code' , event.target.value);
+  window.location.reload(false);
+}
+
+console.log('After Country Code' , localStorage.getItem('country_code'));
+
+useEffect(() => {
+    axios.get(`/api/Countries/list`)
+    .then((getData) => {
+      setCountryData(getData.data);
+    });
+
+
+    axios.get(`/api/categories/list`)
+    .then((result_data) => {
+      const result = result_data.data;
+      setCategoryData(result);
+    }); 
+
+  }, []);
+
+
+const navItems = [
+    
+    <a href="/restaurants">
+      Restaurants
+    </a>,
+    <a href="#">
+      Food Markets
+    </a>,
+    <a href="#">
+      Beer & Alcohol
+    </a>,
+    <a href="#">
+      Services
+    </a>,
+    <a href="#">
+      Suppliers
+    </a>,
+    <a href="#">
+      Buy & Sell
+    </a>,
+    <a href="#">
+      Jobs
+    </a>,
+    <a href="#">
+      Videos
+    </a>,
+    <a href="#">
+      Others
+    </a>,
+  ];
+
+const title = <div className="searchbar">
+                <FormGroup>
+                    <div className="InputGroup">
+                      <Input className="form-control" placeholder="Search in the department..." type="search"/>
+                    </div>
+                </FormGroup>
+                <div className="mbcountry">
+                          <div className="filtercountry">Filter by Country</div>
+                          <List type="inline">
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/USA.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/CANADA.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/UNITED-KINGDOM.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/ITALY.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/AUSTRALIA.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                            <ListInlineItem>
+                              <a href="#">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/flag/SPAIN.png`} 
+                             alt="Menu-Icon"/>
+                              </a>
+                            </ListInlineItem>
+                          </List>
+                        </div>
+              </div>;
+                      
+  
 
   return (
       <div className="mainheader">
@@ -38,17 +150,17 @@ const Header = (props) => {
               <Col sm="4">
             <div className="topright">
               <div className="topmenu">
+                <div className="clickable opacity0">
+                  <p>visitors</p>
+                  <a href={`${process.env.PUBLIC_URL}/visitors`}>click here</a>
+                </div>
                 <div className="clickable">
-                <p>visitors</p>
-                <a href="#">click here</a>
-              </div>
+                  <p>visitors</p>
+                  <a href={`${process.env.PUBLIC_URL}/visitors`}>click here</a>
+                </div>
               <div className="clickable">
-                <p>restaurants</p>
-                <a target = "_blank" href={`${process.env.PUBLIC_URL}/login`} >Login</a>
-              </div>
-              <div className="clickable">
-                <p>how it works</p>
-                <a href="#">click here</a>
+                <p>Vendors</p>
+                <a target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >login here</a>
               </div>
               </div>
               <div className="socialmenu">
@@ -76,19 +188,16 @@ const Header = (props) => {
               <Col sm="4">
                 <div className="language-country">
                 <div className="language">
-                <select aria-label="Default select example" className="form-control">
-                  <option>Language</option>
-                  <option value="1">English</option>
-                  <option value="2">Hindi</option>
-                </select>
+                <GoogleTranslate />
               </div>
               
               <div className="country">
-                <select aria-label="Default select example" className="form-control">
-                  <option>Country</option>
-                  <option value="1">India</option>
-                  <option value="2">One</option>
-                  <option value="2">Two</option>
+                <select aria-label="Default select example" onChange = {OnChangeCountry} className="form-control">
+                {countryData.map((country , i ) => (
+                  <Fragment key={i}>
+                  <option value={country.code} selected = { localStorage.getItem('country_code') == country.code }>{country.name}</option>
+                  </Fragment>
+                  ))}
                 </select>
               </div>
               </div>
@@ -118,7 +227,8 @@ const Header = (props) => {
         <Row className="m-0">
           <Col xs="2" className="p-0">
             <div className="togglebtn">
-              <Mobilemenu />
+              <MenuIcon onClick={() => setShowNav(true)} />
+              <SideNav showNav={showNav} onHideNav={() => setShowNav(false)} title={title} items={navItems} />
             </div>
           </Col>
           <Col xs="5" className="pr-0">
@@ -156,17 +266,17 @@ const Header = (props) => {
           <Col xs="12" className="p-0">
             <div className="topright">
               <div className="topmenu">
+                <div className="clickable opacity0">
+                  <p>visitors</p>
+                  <a href="#">click here</a>
+                </div>
                 <div className="clickable">
                 <p>visitors</p>
                 <a href="#">click here</a>
               </div>
               <div className="clickable">
-                <p>restaurants</p>
-                <a target = "_blank" href={`${process.env.PUBLIC_URL}/login`} >Login</a>
-              </div>
-              <div className="clickable">
-                <p>how it works</p>
-                <a href="#">click here</a>
+                <p>Vendors</p>
+                <a target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >login here</a>
               </div>
               </div>
               <div className="socialmenu">

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment , useEffect , useState } from "react";
 import Breadcrumb from '../../../layout/breadcrumb'
 import {
   Container,
@@ -14,8 +14,82 @@ import {
   Button
 } from "reactstrap";
 import { CreditCard, DebitCard, ExpirationDate, SelectMonth, SelectYear, Submit, COD, EMI, BankName, SelectCard, SelectDuration,NetBanking } from "../../../constant";
+import {toast} from 'react-toastify';
+import axios from 'axios'
+import { useParams } from "react-router-dom";
+import { useHistory } from 'react-router-dom'
 
 const PaymentMethod = props => {
+
+  const [cardnumber,setCardnumber] = useState('')
+  const [namecard,setNamecard] = useState('')
+  const [expiry,setExpiry] = useState('')
+  const [id,setId] = useState('') 
+
+  const params = useParams();
+  const token = localStorage.getItem("token");
+  const user_id = localStorage.getItem("id");
+  const history = useHistory()
+  useEffect(() => {
+  
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+   
+      fetch("/api/payment-methods/"+`${params.id}` , config)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setCardnumber(result.card_number);
+            setNamecard(result.name_on_card);
+            setExpiry(result.expiry_date);
+            setId(result.id);
+          },
+          (error) => {
+            
+          }
+        )
+    }, []);
+
+    const onChangeCardnumber = (event) => {
+      setCardnumber(event.target.value)
+    }
+
+    const onChangeNamecard = (event) => {
+      setNamecard(event.target.value)
+    }
+
+    const onChangeExpiry = (event) => {
+      setExpiry(event.target.value)
+    }
+
+    // Edit Api
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+      const bodyParameters = {
+        card_number: cardnumber,
+        name_on_card: namecard,
+        expiry: expiry,
+        cvv: '0',
+        user_id: user_id
+      };
+      axios.put(`/api/payment-methods/`+`${id}`,
+        bodyParameters,
+        config
+      ) .then(response => {
+        toast.success("Payment Methods updated !")
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+      })
+         .catch(error => console.log('Form submit error', error))
+
+  };
+
   return (
     <Fragment>
       <Breadcrumb parent="Ecommerce" title="Payment Details" />
@@ -34,29 +108,29 @@ const PaymentMethod = props => {
                        <Label>{"Card Number"}</Label>
                         <Input
                           className="form-control"
-                          type="text"
+                          type="text" onChange  = {onChangeCardnumber} value= {cardnumber}
                         />
                       </FormGroup>
                       <FormGroup>
                       <Label>{"Name on Card"}</Label>
                         <Input
                           className="form-control"
-                          type="text"
+                          type="text" onChange  = {onChangeNamecard} value= {namecard}
                         />
                       </FormGroup>
                       <FormGroup>
                         <Label>{"Expiry Date"}</Label>
-                        <Input className="form-control" type="date" />
+                        <Input className="form-control"  onChange = {onChangeExpiry} type="date"  value= {expiry}/>
                       </FormGroup>
-                      <FormGroup>
+                      {/*<FormGroup>
                         <Label>{"CVV"}</Label>
                         <Input
                           className="form-control"
                           type="number"
                         />
-                      </FormGroup>
+                      </FormGroup>*/}
                       <FormGroup>
-                        <Button  color="primary">{"Save"}</Button>
+                        <Button  color="primary" onClick = {handleSubmit}>{"Save"}</Button>
                       </FormGroup>
                     </Form>
                   </Col>

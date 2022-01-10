@@ -1,6 +1,6 @@
 import React,{useState,useEffect,Fragment} from 'react';
 import {Container,Row,Col,Form,FormGroup,Input,Label,Button} from 'reactstrap'
-import {Password,SignIn, EmailAddress ,CreateAccount, BusinessName, PrivacyPolicy} from '../../constant';
+import {Password,SignIn, BusinessEmailAddress ,CreateAccount, BusinessName, PrivacyPolicy} from '../../constant';
 import { Twitter, Facebook,GitHub } from 'react-feather';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -16,7 +16,7 @@ const Register = (props) => {
   }, []);
 
   const getData = () => {
-    axios.get(`/api/categories/list`)
+    axios.get(`/api/categories/all`)
     .then((getData) => {
       setCategoryData(getData.data);
     });
@@ -58,11 +58,6 @@ const Register = (props) => {
       errors["first_name"] = "field is Required!";
     }
 
-    if (!last_name) {
-      formIsValid = false;
-      errors["last_name"] = "field is Required!";
-    }
-
     if (!mobile) {
       formIsValid = false;
       errors["mobile"] = "field is Required!";
@@ -77,9 +72,29 @@ const Register = (props) => {
       formIsValid = false;
       errors["password"] = "field is Required!";
     }
+
+    if (!category_id) {
+      formIsValid = false;
+      errors["category_id"] = "Category is Required!";
+    }
+
+    if (!country_id) {
+      formIsValid = false;
+      errors["country_id"] = "Country is Required!";
+    }
     setErrors(errors);
     return formIsValid;
   }
+
+  console.log(errors);
+
+  const categorychange = (event) => {
+    setCategoryId(event.target.value);
+  };
+
+  const countrychange = (event) => {
+    setCountryId(event.target.value);
+  };
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -93,14 +108,6 @@ const Register = (props) => {
       ? 'field is Required!'
       : '';
       setFirstName(value);
-      break;
-
-      case 'last_name': 
-      errors.last_name = 
-      value.length < 1
-      ? 'field is Required!'
-      : '';
-      setLastName(value);
       break;
 
       case 'mobile': 
@@ -127,23 +134,6 @@ const Register = (props) => {
       setEmail(value);
       break;
 
-      case 'category_id': 
-      errors.category_id = 
-      value.length < 1
-      ? 'field is Required!'
-      : '';
-      setCategoryId(value);
-      break;
-
-
-      case 'country_id': 
-      errors.country_id = 
-      value.length < 1
-      ? 'field is Required!'
-      : '';
-      setCountryId(value);
-      break;
-
       case 'password': 
       errors.password = 
       value.length < 1
@@ -166,7 +156,8 @@ const Register = (props) => {
     if(validateForm(errors)) {
       const query = {
         first_name:first_name,
-        last_name:last_name,
+        name:first_name,
+        last_name:'.',
         mobile:mobile,
         address:address,
         email:email,
@@ -174,17 +165,18 @@ const Register = (props) => {
         country_id:country_id,
         password:password
       }
-      axios.post('/api/users/register',query).then(res=>
+
+      console.log(query);
+      axios.post('/api/vendors/register',query).then(res=>
       { 
         if (res.data.succeed === true) {
           setTimeout(() => {
-            toast.error(res.data.message);
+            toast.success(res.data.message);
           }, 200);
           setTimeout(() => {
-            history.push('/login');
+            history.push('/vendor/login');
           }, 1000);
           setFirstName('');
-          setLastName('');
           setMobile('');
           setPassword('');
           setEmail('');
@@ -220,35 +212,36 @@ const Register = (props) => {
                   <FormGroup>
                     <Label className="col-form-label pt-0">{BusinessName}</Label>
                     <div className="form-row">
-                      <Col xs="6">
-                        <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="First name"/>
+                      <Col xs="12">
+                        <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="Tumble Weed Bar"/>
                         <div style={{color:'red'}}>{errors.first_name}</div>
                       </Col>                      
-                      <Col xs="6">
-                        <Input className="form-control" name="last_name" value={last_name} onChange={handleChange} type="text" required="" placeholder="Last name"/>
-                        <div style={{color:'red'}}>{errors.last_name}</div>
-                      </Col>
                     </div>
                   </FormGroup>
                   <FormGroup>
+                  <div style={{color:'red'}}>{errors.category_id}</div>
                     <Label>{"Please Select Business Type"}</Label>
-                    <Input type="select" onChange={handleChange} name="category_id" className="form-control digits" id="exampleFormControlSelect7">
+                    <Input type="select" onChange={categorychange} name="category_id" className="form-control digits" id="exampleFormControlSelect7">
+                    
+                    <option>Select Category</option>
                     {categoryData.map((category , i ) => (
                       <Fragment>
                       <option value={category.id}>{category.name}</option>
                     </Fragment>
                       ))}
                     </Input>
+                    
                   </FormGroup>
+                  
                     <FormGroup>
-                    <Label className="col-form-label">{EmailAddress}</Label>
-                    <Input className="form-control" name="email" value={email} onChange={handleChange} type="email" required="" placeholder="Test@gmail.com"/>
+                    <Label className="col-form-label">{BusinessEmailAddress}</Label>
+                    <Input className="form-control" name="email" value={email} onChange={handleChange} type="email" required="" placeholder="johndoe@gmail.com"/>
                     <div style={{color:'red'}}>{errors.email}</div>
                   </FormGroup>
 
                   <FormGroup>
-                    <Label className="col-form-label">Mobile Number</Label>
-                    <Input className="form-control" name="mobile" value={mobile} onChange={handleChange} type="number" required="" placeholder="0123 456"/>
+                    <Label className="col-form-label">Business Mobile Number</Label>
+                    <Input className="form-control" name="mobile" value={mobile} onChange={handleChange} type="number" required="" placeholder="987 889 779"/>
                     <div style={{color:'red'}}>{errors.mobile}</div>
                   </FormGroup>
 
@@ -257,8 +250,11 @@ const Register = (props) => {
                     <textarea className="form-control" placeholder="Address" defaultValue={address} name="address" onChange={handleChange} ></textarea>
                   </FormGroup>
                   <FormGroup>
-                    <Label>{"Please Select Business Type"}</Label>
-                    <Input type="select" onChange={handleChange} name="country_id" className="form-control digits" id="exampleFormControlSelect7">
+                  <div style={{color:'red'}}>{errors.country_id}</div>
+                    <Label>{"Please Select Country"}</Label>
+                    <Input type="select" onChange={countrychange} name="country_id" className="form-control digits" id="exampleFormControlSelect8">
+                    
+                     <option>Select Country</option>
                     {countryData.map((country , i ) => (
                       <Fragment>
                       <option value={country.id}>{country.name}</option>
@@ -275,7 +271,7 @@ const Register = (props) => {
                   <div className="form-group mb-0">
                     <Button color="primary" onClick={handleSubmit} className="btn-block" type="submit">{CreateAccount}</Button>
                   </div>
-                  <p className="mt-4 mb-0">{"Already have an account?"}<a className="ml-2" href="/login">{SignIn}</a></p>
+                  <p className="mt-4 mb-0">{"Already have an account?"}<a className="ml-2" href="/vendor/login">{SignIn}</a></p>
                 </Form>
               </div>
             </div>

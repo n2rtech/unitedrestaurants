@@ -1,16 +1,72 @@
-import React, { Fragment , useState } from 'react';
+import React, { Fragment , useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import CKEditors from "react-ckeditor-component";
 import {Container,Row,Col,Card,CardHeader,CardBody, Button} from 'reactstrap'
-import { CKEditorExample } from "../../../constant";
+import {toast} from 'react-toastify';
+import axios from 'axios'
+import { useParams } from "react-router-dom";
+import { useHistory } from 'react-router-dom'
 
 const MenuItems =  () =>  {
     
-    const [content,setContent] = useState('content') 
-    const onChange = (evt) => {
+    const [content,setContent] = useState('')
+    const [id,setId] = useState('') 
+
+    const params = useParams();
+    const token = localStorage.getItem("token");
+    const history = useHistory()
+    useEffect(() => {
+    
+    const userId = localStorage.getItem("id");
+
+    console.log('userid',userId);
+
+        const config = {
+            headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+        };
+     
+        fetch("/api/menu-items/"+`${userId}` , config)
+          .then(res => res.json())
+          .then(
+            (result) => {
+                setContent(result.content);
+                setId(result.id);
+            },
+            (error) => {
+              
+            }
+          )
+      }, []);
+  
+      console.log('content',content);
+
+      const onChange = (evt) => {
         const newContent = evt.editor.getData();
         setContent(newContent)
     }
+
+  // Edit Api
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+      const bodyParameters = {
+        content: content,
+      };
+      axios.put(`/api/menu-items/`+`${id}`,
+        bodyParameters,
+        config
+      ) .then(response => {
+        toast.success("Menu Items updated !")
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+      })
+         .catch(error => console.log('Form submit error', error))
+
+  };
 
     return (
             <Fragment>
@@ -31,7 +87,7 @@ const MenuItems =  () =>  {
                                         }}
                                     />
                                     <div className="m-t-20">
-                                    <Button color="primary">{"Save"}</Button>
+                                    <Button color="primary" onClick = {handleSubmit} >{"Save"}</Button>
                                     </div>
                                 </CardBody>
                             </Card>

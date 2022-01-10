@@ -35,6 +35,9 @@ module.exports = {
       department: {
         type: Sequelize.STRING
       },
+      wallet_balance: {
+        type: Sequelize.DOUBLE
+      },
       subscription_plan: {
         type: Sequelize.STRING
       },

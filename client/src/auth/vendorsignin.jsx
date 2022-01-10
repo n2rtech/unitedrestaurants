@@ -129,7 +129,10 @@ const Logins = (props) => {
         console.log("result", user.data,decoded);
         setName(decoded.name);
         localStorage.setItem('token', user.data.token);
-        localStorage.setItem('role', decoded.role);
+        localStorage.setItem('id', decoded.id);
+        localStorage.setItem('name', decoded.name);
+        localStorage.setItem('role', 'vendor');
+	localStorage.setItem('vendor_country_id', decoded.country_id);
         window.location.href = `${process.env.PUBLIC_URL}/dashboard/vendor/`
         return user.data;
       }).catch((error) => {

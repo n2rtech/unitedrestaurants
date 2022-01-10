@@ -27,8 +27,8 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-
-  DB.query('SELECT email FROM users WHERE email ="' + req.body.email +'"', function (err, user) {
+  var table_name = 'users'.charAt(0).toUpperCase()+ 'users'.slice(1);;
+  DB.query('SELECT email FROM '+table_name+' WHERE email ="' + req.body.email +'"', function (err, user) {
     if (err) throw err;
     if (user[0]) {
       return res.status(400).json({ error: "Email already exists" });
@@ -37,11 +37,9 @@ router.post("/register", (req, res) => {
         bcrypt.hash(req.body.password, salt, (err, hash) => {
           if (err) throw err;         
           var name = req.body.first_name+' '+req.body.last_name;
-
-
           Role.findOne({
             where: {
-                role_name: req.body.role? req.body.role : 'vendor'
+                id: req.body.role_id? req.body.role_id : 1
             }
         }).then((role) => {
             User
@@ -59,8 +57,12 @@ router.post("/register", (req, res) => {
             .then((user) => res.status(201).send({
               succeed: true,
               message: "user inserted successfully!"
-            }));               
-        })
+            })).catch(err => {
+              res.status(400).send('err')
+            });               
+        }).catch(err => {
+              res.status(400).send('err1')
+            }); 
       });     
     });
   }
@@ -78,10 +80,12 @@ router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  let sql = "SELECT * FROM users where email = '"+email+"'";
+
+
+  let sql = "SELECT * FROM Users where email = '"+email+"'";
   DB.query(sql,(err,user)=>{
     if(err){
-      return res.status(404).json({ error: "Error in sql!" });   
+      return res.status(404).json({ error: "Error in sql1!"+err });   
     }else if (!user[0]) {
       return res.status(404).json({ error: "Email or Password not found" });
     }else {
@@ -92,7 +96,8 @@ router.post("/login", (req, res) => {
             id: user[0].id,
             name: user[0].name,
             email: user[0].email,
-            role:user[0].role
+            role:user[0].role,
+            role_id:user[0].role_id
           };
 
           jwt.sign(
@@ -198,7 +203,7 @@ router.get('/by-role/:id', passport.authenticate('jwt', {
 router.get('/vendors', passport.authenticate('jwt', {
   session: false
 }), function (req, res) {
-  helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
+  helper.checkPermission(req.user.role_id, 'Vendors').then((rolePerm) => {
 
   }).catch((error) => {
     res.status(403).send(error);
@@ -353,14 +358,14 @@ router.get('/:id', (req, res) => {
 
 
 
+
+
+
 // Update a User
-router.put('/:id', passport.authenticate('jwt', {
-  session: false
-}), function (req, res) {
-  helper.checkPermission(req.user.role_id, 'role_add').then((rolePerm) => {
-    if (!req.body.role_id || !req.body.email || !req.body.password || !req.body.fullname || !req.body.phone) {
+router.put('/:id', (req, res) => {
+    if (!req.body.role_id || !req.body.email || !req.body.name) {
       res.status(400).send({
-        msg: 'Please pass Role ID, email, password, phone or fullname.'
+        msg: 'Please pass Role ID, email, phone or fullname.'
       })
     } else {
       User
@@ -396,9 +401,6 @@ router.put('/:id', passport.authenticate('jwt', {
           res.status(400).send(error);
         });
     }
-  }).catch((error) => {
-    res.status(403).send(error);
-  });
 });
 
 const getPagination = (page=1, size) => {
@@ -423,6 +425,86 @@ function generatePassword(pwd) {
     return hash;
 };
 
+
+// Get List of Users
+router.get('/', (req, res) => {
+  User
+  .findAll({
+    include: [
+    {
+      model: Role,
+      as: 'role',
+    }
+    ]
+  })
+  .then((users) => {
+    res.status(200).send(users)
+  })
+  .catch((error) => {
+    res.status(400).send(error);
+  });
+});
+
+
+
+// Delete a User
+router.delete('/:id', (req, res) => {
+    if (!req.params.id) {
+      res.status(400).send({
+        msg: 'Please pass user ID.'
+      })
+    } else {
+      User
+        .findByPk(req.params.id)
+        .then((user) => {
+          if (user) {
+            User.destroy({
+              where: {
+                id: req.params.id
+              }
+            }).then(_ => {
+              res.status(200).send({
+                'message': 'User deleted'
+              });
+            }).catch(err => res.status(400).send(err));
+          } else {
+            res.status(404).send({
+              'message': 'User not found'
+            });
+          }
+        })
+        .catch((error) => {
+          res.status(400).send(error);
+        });
+    }
+});
+
+// Get List of Categories
+router.get("/deleted/get", (req, res) => {
+    User
+    .findAll( { where: {deletedAt: {[Op.ne]: null} 
+},
+    paranoid:false
+     })
+    .then((category) => {
+        res.status(200).send(category)
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(400).send('error');
+    });
+});
+
+
+// Restore a Country
+router.post('/restore/', (req, res) => {
+    User.restore()
+    .then(_ => {
+        res.status(200).send({
+            'message': 'User restored'
+        });
+    }).catch(err => res.status(400).send(err));
+});
 
 
 module.exports = router;

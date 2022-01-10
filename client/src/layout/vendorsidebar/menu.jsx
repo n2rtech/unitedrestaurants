@@ -1,4 +1,5 @@
 import { Home, Airplay, Box, Gift, Send, HardDrive, DollarSign, FolderPlus, Command, Cloud, FileText, Server, BarChart, Users, Layers, ShoppingBag, List, Mail, MessageCircle, GitPullRequest, Monitor, Heart, Clock, Zap, CheckSquare, Calendar, Image, Film, HelpCircle, Radio, Map, Edit, Sunrise, Package } from 'react-feather'
+
 export const MENUITEMS = [
 
     {
@@ -6,7 +7,7 @@ export const MENUITEMS = [
         menucontent:"Dashboard",
         Items:[
             {
-                title: 'Dashboard', path: `${process.env.PUBLIC_URL}/dashboard/ecommerce`, icon: Layers, type: 'link', active: false,
+                title: 'Dashboard', path: `${process.env.PUBLIC_URL}/dashboard`, icon: Layers, type: 'link', active: false,
             }
         ]
     },
@@ -24,7 +25,16 @@ export const MENUITEMS = [
         menucontent:"Menu items",
         Items:[
             {
-                title: 'Menu items', path: `${process.env.PUBLIC_URL}/dashboard/vendor/menu-items`, icon: Box, type: 'link', active: false,
+                title: 'Menu items', path: `${process.env.PUBLIC_URL}/dashboard/vendor/menu-items/${localStorage.getItem("id")}`, icon: Box, type: 'link', active: false,
+            }
+        ]
+    },
+    {
+        menutitle:"Items for sale",
+        menucontent:"Items for sale",
+        Items:[
+            {
+                title: 'Items for sale', path: `${process.env.PUBLIC_URL}/dashboard/vendor/sale-items/${localStorage.getItem("id")}`, icon: BarChart, type: 'link', active: false,
             }
         ]
     },
@@ -37,15 +47,15 @@ export const MENUITEMS = [
             }
         ]
     },
-    {
-        menutitle:"Payment Method",
-        menucontent:"Payment Method",
-        Items:[
-            {
-                title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/payment-method`, icon: Send, type: 'link', active: false,
-            }
-        ]
-    },
+    // {
+    //     menutitle:"Payment Method",
+    //     menucontent:"Payment Method",
+    //     Items:[
+    //         {
+    //             title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/payment-method/${localStorage.getItem("id")}`, icon: Send, type: 'link', active: false,
+    //         }
+    //     ]
+    // },
     {
         menutitle:"Membership Package",
         menucontent:"Membership Package",

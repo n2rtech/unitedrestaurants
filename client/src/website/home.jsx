@@ -9,13 +9,20 @@ import Latestadditions from './latestadditions.jsx'
 import Homeblog from './homeblog.jsx'
 import ScrollButton from './ScrollButton.jsx';
 import './css/style.css'
+import {useParams} from 'react-router-dom'
+
 const Home = (props) => {
+
+  const params = useParams();
+
+
+  console.log('params' , params.id);
 
   return (
       <Container fluid={true} className="p-0">
       <Row className="m-0">
         <Col xs="12" className="p-0">     
-           <Header />
+           <Header countrycode = {params.id}/>
 
            <Hotdeals></Hotdeals>
 

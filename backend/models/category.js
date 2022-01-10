@@ -42,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     parent_id: DataTypes.INTEGER,
     image: DataTypes.TEXT,
     sort_order: DataTypes.INTEGER,
+    top_menu: DataTypes.INTEGER,
     status: {
          type: DataTypes.BOOLEAN,
           allowNull: false,
@@ -49,6 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       }
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Category',
   });
   return Category;
