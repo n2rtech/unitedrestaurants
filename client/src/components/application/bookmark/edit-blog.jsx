@@ -6,11 +6,10 @@ import {useParams} from 'react-router-dom'
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import ImageUploader from 'react-images-upload';
-import {SelectSingleImageUpload,MultipleImageUpload} from '../../../constant'
-
+import { useHistory } from 'react-router-dom'
 
 const EditBlog = () => {
-
+const history = useHistory()
 const token = localStorage.getItem("token");
 const [image, setimage] = useState({ pictures: [] })
 const onDrop = (pictureFiles, pictureDataURLs) => {
@@ -53,7 +52,7 @@ const [showhome , setShowhome]  = useState('0');
   
     }, []);
   
-    console.log(blogDetails);
+    console.log('Blog Details',blogDetails);
 
     const handleSubmit = event => {
       event.preventDefault();
@@ -75,7 +74,12 @@ const [showhome , setShowhome]  = useState('0');
         axios.put(`/api/blogs/`+`${params.id}`,
           bodyParameters,
           config
-        ) .then(response => toast.success("Page content updated !")  )
+        ) .then(response => {
+          toast.success("Blogs Updated !")
+          setTimeout(() => {
+            history.push('/dashboard/admin/blogs/');
+          }, 1000);
+        } )
            .catch(error => console.log('Form submit error', error))
 
     };
@@ -111,6 +115,13 @@ const [showhome , setShowhome]  = useState('0');
               }}
             />
           </FormGroup>
+              {(blogDetails.image != 0) ?
+                <div>
+                   <img className="img-thumbnail" src={`/api/uploads/blogs/${blogDetails.image}`} />
+                </div>
+                  : ''  
+              }
+
           <FormGroup className="m-t-20">
             <Label htmlFor="exampleFormControlInput1">{"Blog Banner"}</Label>
             <ImageUploader
