@@ -14,6 +14,10 @@ const profile = require("./routes/profile");
 const permissions = require("./routes/permissions");
 const jobopenings = require("./routes/jobopenings");
 const videogallery = require("./routes/videogallery");
+
+const youtubevideo = require("./routes/youtubevideo");
+
+
 const vendorcoupons = require("./routes/vendorcoupons");
 const addsmembership = require("./routes/addsmembership");
 const menuitems = require("./routes/menuitems");
@@ -83,6 +87,9 @@ app.use("/api/profile", profile);
 app.use("/api/permissions", permissions);
 app.use("/api/jobs", jobopenings);
 app.use("/api/video-gallery", videogallery);
+
+app.use("/api/youtubevideo", youtubevideo);
+
 app.use("/api/vendor-coupons", vendorcoupons);
 app.use("/api/adds-membership", addsmembership);
 app.use("/api/vendor-membership", vendormembership);

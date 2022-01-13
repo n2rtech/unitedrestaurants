@@ -93,6 +93,15 @@ export const MENUITEMS = [
         ]
     },
     {
+        menutitle:"Youtube Videos",
+        menucontent:"Youtube Videos",
+        Items:[
+            {
+                title: 'Youtube Videos', path: `${process.env.PUBLIC_URL}/dashboard/vendor/vendor-youtube`, icon: Film, type: 'link', active: false,
+            }
+        ]
+    },
+    {
         menutitle:"Job Openings",
         menucontent:"Job Openings",
         Items:[

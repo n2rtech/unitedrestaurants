@@ -165,6 +165,8 @@ import Sample from "../components/sample"
 import Search from "../components/search"
 
 // E-commerce-app 
+import YoutubeCallback from "../components/application/bookmark/youtube-callback"
+
 import AddVendor from "../components/application/bookmark/add-vendor"
 import Blogs from "../components/application/bookmark/blogs"
 import EditBlog from "../components/application/bookmark/edit-blog"
@@ -209,6 +211,11 @@ import VendorPhotogallery from "../components/application/bookmark/vendor-photog
 import VendorVideoGallery from "../components/application/bookmark/vendor-videogallery"
 import AddVendorVideoGallery from "../components/application/bookmark/add-video-gallery"
 import EditVideoGallery from "../components/application/bookmark/edit-video-gallery"
+
+import VendorYoutube from "../components/application/bookmark/vendor-youtube"
+import AddYoutube from "../components/application/bookmark/add-youtube-video"
+
+
 import JobOpenings from "../components/application/bookmark/job-openings"
 import AddJobOpenings from "../components/application/bookmark/add-job-openings"
 import EditJobOpenings from "../components/application/bookmark/edit-job-openings"
@@ -264,6 +271,11 @@ import TodoFirebase from "../components/application/todo-firebase-app"
 
 
 export const routes = [
+
+
+        { path:"/oauth2callback", Component:YoutubeCallback },
+
+
         { path:"/dashboard/admin/", Component:AdminDefault},
         { path:"/dashboard/admin/pages", Component:pagesList},
         { path:"/dashboard/default/", Component:Default},
@@ -446,6 +458,10 @@ export const routes = [
         { path:"/dashboard/vendor/vendor-videogallery", Component:VendorVideoGallery},
         { path:"/dashboard/vendor/add-video-gallery/", Component:AddVendorVideoGallery},
         { path:"/dashboard/vendor/edit-video-gallery/:id", Component:EditVideoGallery},
+
+        { path:"/dashboard/vendor/vendor-youtube", Component:VendorYoutube},
+        { path:"/dashboard/vendor/add-youtube-video", Component:AddYoutube},
+
         { path:"/dashboard/vendor/job-openings", Component:JobOpenings},
         { path:"/dashboard/vendor/add-job-openings", Component:AddJobOpenings},
         { path:"/dashboard/vendor/edit-job-openings/:id", Component:EditJobOpenings},
