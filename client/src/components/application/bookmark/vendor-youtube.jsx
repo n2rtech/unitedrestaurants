@@ -12,6 +12,7 @@ const VendorVideoGallery = (props) => {
 
   const [videoData, setVideoData] = useState([]);
   const token = localStorage.getItem("token");
+  const user_id = localStorage.getItem("id");
   const history = useHistory()
   useEffect(() => {
   
@@ -19,7 +20,7 @@ const VendorVideoGallery = (props) => {
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
           };
    
-      fetch("/api/youtubevideo/13" , config)
+      fetch("/api/youtubevideo/"+`${user_id}`, config)
         .then(res => res.json())
         .then(
           (result) => {
