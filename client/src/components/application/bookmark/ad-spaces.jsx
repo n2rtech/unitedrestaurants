@@ -47,6 +47,7 @@ const AddSpaces = () => {
     // ACTIVE PLAN 
 
   const [planname, setPlanName] = useState('');
+  const [membership_id, setMembershipid] = useState('');
  
    useEffect(() => {
    
@@ -59,6 +60,7 @@ const AddSpaces = () => {
          .then(
            (result) => {
              setPlanName(result.membership);
+             setMembershipid(result.membership.id)
            },
            (error) => {
              
@@ -116,10 +118,14 @@ const AddSpaces = () => {
         const bodyParameters = new FormData();
         bodyParameters.append('user_id', user_id);
         bodyParameters.append('link', '');
+        bodyParameters.append('add_membership_id', membership_id);
         bodyParameters.append('country_id', country_id);
         for (let i = 0; i < (image.pictureFiles).length; i++) {
            bodyParameters.append('image', image.pictureFiles[i])
         }
+
+        // console.log("Body Parameters" , bodyParameters);
+        // return;
 
       axios.post('/api/ad-spaces/',
         bodyParameters,

@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
   };
   AdSpace.init({
     user_id: DataTypes.INTEGER,
+    add_membership_id: DataTypes.INTEGER,
+    categories: DataTypes.STRING,
+    country_code: DataTypes.STRING,
     link: DataTypes.STRING,
     image: DataTypes.STRING
   }, {

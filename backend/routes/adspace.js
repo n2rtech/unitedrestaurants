@@ -44,7 +44,6 @@ router.post('/', passport.authenticate('vendor', {
             })
         } else {
 
-
                         var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
                         DB.query('SELECT code,name FROM '+table_name+' WHERE id ="' + req.body.country_id +'"', function (err, country) {
                         
@@ -52,10 +51,30 @@ router.post('/', passport.authenticate('vendor', {
                             if (country[0]) {
                               var code = country[0].code;
                               var country = country[0].code;
-                              AdSpace.create({image:req.file.filename,link:req.body.link,country_code: code, user_id:req.user.id});
-                              res.status(200).send({
-                                  msg: 'Ad Space added.'
+
+                              if (code == 'ita') {
+                                var table_name = 'VendorIta';
+                              }else{
+                                var codee = code.charAt(0).toUpperCase() + code.slice(1);
+                                var table_name = 'Vendor' + codee + 's';
+                              }
+
+                              DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + req.body.user_id+'"', function (err, vendor_pro) {
+                                if (err) throw err;
+                                if (vendor_pro[0]) {
+                                    
+                                    var categ = vendor_pro[0].categories;                   
+                                    AdSpace.create({image:req.file.filename,categories: categ , add_membership_id:req.body.add_membership_id,link:req.body.link,country_code: code, user_id:req.body.user_id});
+                                    res.status(200).send({
+                                        msg: 'Ad Space added.'
+                                    })
+                                }else{
+                                  res.status(200).send({
+                                    'message': 'User updated2'
+                                  });
+                                }
                               })
+                            
                             }else{
                               res.status(400).send(err);
                             }
