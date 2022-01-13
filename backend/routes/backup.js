@@ -30,6 +30,11 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/sqlfile', (req, res) => {
+    var sql = fs.readFileSync(__dirname + '/../uploads/sqlbackup/unitedrestaurants.sql').toString();
+    res.status(200).send(sql)
+    });
+
 router.get('/sqlfilepath', (req, res) => {
 res.status(200).send({success:true,message:__dirname + '/../uploads/sqlbackup/unitedrestaurants.sql'})
 });
