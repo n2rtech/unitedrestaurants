@@ -40,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     adds_membership_end_date: DataTypes.DATE
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Vendor',
   });
   return Vendor;

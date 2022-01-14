@@ -1,32 +1,101 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button, ButtonGroup } from 'reactstrap'
-import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
-import { useForm } from 'react-hook-form'
-import { useSelector, useDispatch } from 'react-redux'
 import {toast} from 'react-toastify';
 import axios from 'axios'
+import SweetAlert from 'sweetalert2'
 
 const Trash = (props) => {
 
   const token = localStorage.getItem("token");
 
-  const handleClick = (id) => {
+  const [trashVendorData, setTrashVendorData] = useState([]);
+  const [trashUserData, setTrashUserData]= useState([]);
+  const [trashBlogData, setTrashBlogData] = useState([]);
+
+  useEffect(() => {
 
     const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
     };
 
-    axios.post(`/api/${id}/restore/`,config) 
-    .then(response => {
-      toast.success(response.data.message)
-      setTimeout(() => {
+    fetch("/api/trash" , config)
+    .then(res => res.json())
+    .then(
+      (result) => { 
+        setTrashVendorData(result.vendors);
+        setTrashUserData(result.users);
+        setTrashBlogData(result.blogs);
+      },
+      (error) => { 
+      });
+  }, []);
+
+  const handleClick = (page,id) => {
+
+    SweetAlert.fire({
+      title: 'Are you sure?',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ok',
+      cancelButtonText: 'cancel',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        const token   = localStorage.getItem("token");
+        const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+          };
+        axios.get(`/api/trash/restore/${page}/${id}`,config) 
+        .then(response => {
+          toast.success(page+' is successfully Restored.');
+          setTimeout(() => {
         window.location.reload();
       }, 1000);
-    })
-    .catch(error => console.log('Form submit error', error));
+        })
+        .catch(error => console.log('Form submit error', error))
+      }
+      else {
+        SweetAlert.fire(
+          'Not Restored'
+        )
+      }
+    });
   };
 
+  const handleDelete = (page,id) => {
+
+    SweetAlert.fire({
+      title: 'Are you sure?',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ok',
+      cancelButtonText: 'cancel',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        const token   = localStorage.getItem("token");
+        const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+          };
+        axios.get(`/api/trash/delete/${page}/${id}`,config) 
+        .then(response => {
+          toast.success(page + 'is successfully deleted.');
+          setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+        })
+        .catch(error => console.log('Form submit error', error))
+      }
+      else {
+        SweetAlert.fire(
+          'Not deleted'
+        )
+      }
+    });
+  }
 
   return (
     <Fragment>
@@ -43,71 +112,49 @@ const Trash = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>{"Deleted Vendor name"}</td>
+                {trashVendorData.map((vendor , i ) => (
+                  <tr key={i}>
+                    <td>{"Deleted Vendor"} <b>{ vendor.name }</b></td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="success">Restore</Button> &nbsp; 
-                      <a className="btn btn-danger">Delete Permanently</a>
+                      <Button color="success" onClick={() => handleClick('vendor',vendor.id)}>Restore</Button> &nbsp; 
+                      <a className="btn btn-danger" onClick={() => handleDelete('vendor',vendor.id)}>Delete Permanently</a>
                     </ButtonGroup>
                       
                     </td>
                   </tr>
-                  <tr>
-                    <td>{"Deleted Country Name"}</td>
+                  ))}
+                  {trashUserData.map((user , i ) => (
+                  <tr key={i}>
+                    <td>{"Deleted User"} <b>{user.name}</b></td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="success" onClick={() => handleClick('countries')}>Restore</Button> &nbsp; 
-                      <a className="btn btn-danger">Delete Permanently</a>
-                    </ButtonGroup>
-                      
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>{"Deleted Pages"}</td>
-                    <td className="text-right">
-                    <ButtonGroup>
-                      <Button color="success">Restore</Button> &nbsp; 
-                      <a className="btn btn-danger">Delete Permanently</a>
+                      <Button color="success" onClick={() => handleClick('user',user.id)}>Restore</Button> &nbsp; 
+                      <a className="btn btn-danger" onClick={() => handleDelete('user',user.id)}>Delete Permanently</a>
                     </ButtonGroup>
                     </td>
                   </tr>
-                  <tr>
-                    <td>{"Deleted User"}</td>
+                  ))}
+                  {trashBlogData.map((blog , i ) => (
+                  <tr key={i}>
+                    <td>{"Deleted Blogs"} <b>{blog.name}</b></td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="success">Restore</Button> &nbsp; 
-                      <a className="btn btn-danger">Delete Permanently</a>
+                      <Button color="success" onClick={() => handleClick('blog',blog.id)}>Restore</Button> &nbsp; 
+                      <a className="btn btn-danger" onClick={() => handleDelete('blog',blog.id)}>Delete Permanently</a>
                     </ButtonGroup>
                     </td>
                   </tr>
-                  <tr>
-                    <td>{"Deleted Categories"}</td>
-                    <td className="text-right">
-                    <ButtonGroup>
-                      <Button color="success" onClick={() => handleClick('categories')}>Restore</Button> &nbsp; 
-                      <a className="btn btn-danger">Delete Permanently</a>
-                    </ButtonGroup>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>{"Deleted Promotions"}</td>
+                  ))}
+                  {/*<tr>
+                    <td>{"Deleted Promotions Name"}</td>
                     <td className="text-right">
                     <ButtonGroup>
                       <Button color="success">Restore</Button> &nbsp; 
                       <a className="btn btn-danger">Delete Permanently</a>
                     </ButtonGroup>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>{"Deleted item name"}</td>
-                    <td className="text-right">
-                    <ButtonGroup>
-                      <Button color="success">Restore</Button> &nbsp; 
-                      <a className="btn btn-danger">Delete Permanently</a>
-                    </ButtonGroup>
-                    </td>
-                  </tr>
+                  </tr>*/}
                 </tbody>
               </Table>
             </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2021 at 01:25 PM
+-- Generation Time: Dec 29, 2021 at 03:58 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `googleadsenses` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
   `publisher_id` text,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
@@ -40,8 +39,8 @@ CREATE TABLE `googleadsenses` (
 -- Dumping data for table `googleadsenses`
 --
 
-INSERT INTO `googleadsenses` (`id`, `user_id`, `publisher_id`, `createdAt`, `updatedAt`) VALUES
-(1, 27, 'ddlllll', '2021-12-27 12:17:26', '2021-12-27 12:22:02');
+INSERT INTO `googleadsenses` (`id`, `publisher_id`, `createdAt`, `updatedAt`) VALUES
+(1, 'ddlllxddddll', '2021-12-27 12:17:26', '2021-12-29 14:54:15');
 
 --
 -- Indexes for dumped tables
@@ -61,7 +60,7 @@ ALTER TABLE `googleadsenses`
 -- AUTO_INCREMENT for table `googleadsenses`
 --
 ALTER TABLE `googleadsenses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

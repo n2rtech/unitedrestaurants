@@ -36,7 +36,7 @@ const businessadvertises = require("./routes/businessadvertises");
 const featuredbusinesses = require("./routes/featuredbusinesses");
 const wallet = require("./routes/wallet");
 const backup = require("./routes/backup");
-// const trash = require("./routes/trash");
+const trash = require("./routes/trash");
 const googleadsense = require("./routes/googleadsense");
 const accountspayables = require("./routes/accountspayables");
 const path = require('path')
@@ -109,7 +109,7 @@ app.use("/api/featured-businesses", featuredbusinesses);
 app.use("/api/accounts-payable", accountspayables);
 app.use("/api/wallet", wallet);
 app.use("/api/backup", backup);
-// app.use("/api/trash", trash);
+app.use("/api/trash", trash);
 app.use("/api/google-adsense", googleadsense);
 const port = process.env.PORT || 5000;
 

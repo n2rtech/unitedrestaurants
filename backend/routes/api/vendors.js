@@ -998,6 +998,31 @@ router.get('/active-plan/:id', (req, res) => {
   });
 });
 
+router.get('/unsubscribe/:id', (req, res) => {
+  if (!req.params.id) {
+    res.status(400).send({
+      msg: 'Please pass ID.'
+    })
+  } else {
+    Vendor
+    .findByPk(req.params.id)
+    .then((user) => {
+
+      Vendor.destroy({
+        where: {
+          id: req.params.id
+        }
+      }).then(_ => {
+        res.status(200).send({
+          'message': 'Vendor unsubscribed'
+        });
+      }).catch(err => res.status(400).send(err));
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
+  }
+});
 
 
 
@@ -1069,10 +1094,22 @@ const getPagingData = (data, page, limit) => {
   return { totalItems, tutorials, totalPages, currentPage };
 };
 
+
+const getVendorPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: vendors } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, vendors, totalPages, currentPage };
+};
+
 function generatePassword(pwd) {
     let hash = bcrypt.hashSync(pwd, 10);
     return hash;
 };
+
+
+
 
 module.exports = router;
   

@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   GoogleAdsense.init({
-    user_id: DataTypes.INTEGER,
     publisher_id: DataTypes.TEXT
   }, {
     sequelize,

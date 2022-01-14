@@ -34,12 +34,12 @@ router.post('/', (req, res) => {
 
 
 router.get('/list', (req, res) => {
-        AccountsPayable
-            .findAll()
-            .then((accountspayables) => res.status(200).send(accountspayables))
-            .catch((error) => {
-                res.status(400).send(error);
-            });
+    AccountsPayable
+    .findAll()
+    .then((accountspayables) => res.status(200).send(accountspayables))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
 });
 
 
@@ -137,6 +137,33 @@ router.delete('/:id', (req, res) => {
                     res.status(400).send(error);
                 });
         }
+});
+
+// Restore a Country
+router.post('/restore/', (req, res) => {
+    User.restore()
+    .then(_ => {
+        res.status(200).send({
+            'message': 'User restored'
+        });
+    }).catch(err => res.status(400).send(err));
+});
+
+
+// Get List of Categories
+router.get("/deleted", (req, res) => {
+    AccountsPayable
+    .findAll( { where: {deletedAt: {[Op.ne]: null} 
+},
+    paranoid:false
+     })
+    .then((category) => {
+        res.status(200).send(category)
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(400).send('error');
+    });
 });
 
 module.exports = router;
