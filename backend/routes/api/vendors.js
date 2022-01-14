@@ -706,12 +706,12 @@ router.put('/:id', (req, res) => {
                 var banner = vendor_pro[0].banner;
                 var about_business = vendor_pro[0].about_business;
 
-                DB.query("DELETE  FROM HotDeals where user_id="+user_id);
+                //DB.query("DELETE  FROM HotDeals where user_id="+user_id);
                 DB.query("DELETE  FROM BusinessAdvertises where user_id="+user_id);
                 DB.query("DELETE  FROM FeaturedBusinesses where user_id="+user_id);
-                if (req.body.hot_deals) {
-                  DB.query("INSERT INTO HotDeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', NOW(), '')");
-                }
+                // if (req.body.hot_deals) {
+                //   DB.query("INSERT INTO HotDeals (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', NOW(), '')");
+                // }
 
                 if (req.body.featured_business){
                   DB.query("INSERT INTO FeaturedBusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', NOW(), '')");

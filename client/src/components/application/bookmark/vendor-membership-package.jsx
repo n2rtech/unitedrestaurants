@@ -26,6 +26,7 @@ const VendorMembershipPackage = (props) => {
 
   const token = localStorage.getItem("token");
   const user_id = localStorage.getItem("id");
+  const country_id = localStorage.getItem("vendor_country_id");
   const [interval,setInterval] = useState('');
   const [intervalq,setIntervalq] = useState('');
 
@@ -50,6 +51,8 @@ const VendorMembershipPackage = (props) => {
           }
         )
     }, []);
+
+    console.log("Subscription_id" ,subscriptionid);
 
   const [cycle,setCycle] = useState();
   const [cycleamount,setAmount] = useState('0');
@@ -158,6 +161,7 @@ const VendorMembershipPackage = (props) => {
                 membership_subscription_id: 'free',
                 interval: 'free',
                 price: 'free',
+                country_id : country_id,
                 comment: 'Free package'
               }
       
@@ -216,6 +220,7 @@ const VendorMembershipPackage = (props) => {
                         membership_subscription_id: 'free',
                         interval: 'free',
                         price: 0,
+                        country_id: country_id,
                         comment: 'Free package'
                       }
               

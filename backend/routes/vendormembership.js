@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const {DB} = require('../config/database');
 const VendorMembership = require('../models').VendorMembership;
 const MembershipTransaction = require('../models').MembershipTransaction;
+const FeaturedBusiness = require('../models').FeaturedBusiness;
 const Vendor = require('../models').Vendor;
 const passport = require('passport');
 require('../config/passport')(passport);
@@ -129,37 +131,91 @@ router.put('/asign-to-user/:id', (req, res) => {
             Vendor
             .findByPk(req.params.id)
             .then((vendor) => {
-                Vendor.update({
-                    membership_id: req.body.membership_id || membership.membership_id,
-                    membership_start_date:new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
-                    membership_end_date:date.toISOString().replace(/T/, ' ').replace(/\..+/, '')
-                }, {
-                    where: {
-                        id: req.params.id
-                    }
-                }).then(_ => {
-                    MembershipTransaction
-                    .create({
-                        price: req.body.price,
-                        type: 'membership',
-                        user_id: req.params.id,
-                        membership_subscription_id: req.body.membership_subscription_id,
-                        membership_id: req.body.membership_id,
-                        comment: req.body.comment,
-                        start_date: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
-                        end_date: date.toISOString().replace(/T/, ' ').replace(/\..+/, ''),
-                        interval: req.body.interval
-                    })
-                    .then((wallet) => {
-                        res.status(201).send(wallet)
-                    })
-                    .catch((error) => {
-                        res.status(400).send('error4');
-                    });
 
-                }).catch(err => {
-                    console.log(err);   
-                    res.status(400).send('err1')
+                var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
+                DB.query('SELECT code,name FROM '+table_name+' WHERE id ="' + req.body.country_id +'"', function (err, country) {
+                
+                    if (err) throw err;
+                    if (country[0]) {
+                      var code = country[0].code;
+                      var country = country[0].code;
+
+                      if (code == 'ita') {
+                        var table_name = 'VendorIta';
+                      } else {
+                        var codee = code.charAt(0).toUpperCase() + code.slice(1);
+                        var table_name = 'Vendor' + codee + 's';
+                      }
+
+                      DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + req.params.id+'"', function (err, vendor_pro) {
+                        if (err) throw err;
+                        if (vendor_pro[0]) {
+                            
+                            var categ = vendor_pro[0].categories;  
+                            var name = vendor_pro[0].business_name;
+                            var banner = vendor_pro[0].banner;
+                            var about_business = vendor_pro[0].about_business;
+                          
+                       
+                            FeaturedBusiness.update({
+                                user_id: req.params.id ,
+                                country_id: req.body.country_id ,
+                                country: country ,
+                                business_name: name ,
+                                about_business: about_business ,
+                                membership_id: req.body.membership_id ,
+                                categories: categ ,
+                                banner: banner
+                            }, {
+                                where: {
+                                    user_id: req.params.id
+                                }
+                            })
+
+                            Vendor.update({
+                                membership_id: req.body.membership_id || membership.membership_id,
+                                membership_start_date:new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+                                membership_end_date:date.toISOString().replace(/T/, ' ').replace(/\..+/, '')
+                            }, {
+                                where: {
+                                    id: req.params.id
+                                }
+                            }).then(_ => {
+                                MembershipTransaction
+                                .create({
+                                    price: req.body.price,
+                                    type: 'membership',
+                                    user_id: req.params.id,
+                                    membership_subscription_id: req.body.membership_subscription_id,
+                                    membership_id: req.body.membership_id,
+                                    comment: req.body.comment,
+                                    start_date: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+                                    end_date: date.toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+                                    interval: req.body.interval
+                                })
+                                .then((wallet) => {
+                                    res.status(201).send(wallet)
+                                })
+                                .catch((error) => {
+                                    res.status(400).send('error4');
+                                });
+            
+                            }).catch(err => {
+                                console.log(err);   
+                                res.status(400).send('err1')
+                            });
+
+
+                        }else{
+                          res.status(200).send({
+                            'message': 'User updated2'
+                          });
+                        }
+                      })
+                    
+                    }else{
+                      res.status(400).send(err);
+                    }
                 });
             })
             .catch((error) => {
