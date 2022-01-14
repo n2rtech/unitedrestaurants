@@ -26,6 +26,7 @@ const paypalpremiumhalfyearly = (props) => {
 
             const token = localStorage.getItem("token");
             const user_id = localStorage.getItem("id");
+            const country_id = localStorage.getItem("vendor_country_id");
             const config = {
               headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
               };
@@ -35,6 +36,7 @@ const paypalpremiumhalfyearly = (props) => {
                 membership_subscription_id: data.subscriptionID,
                 interval: props.interval,
                 price: props.amount,
+                country_id: country_id,
                 comment: details.status +'-'+data.orderID
               }
 
