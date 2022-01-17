@@ -271,7 +271,7 @@ body {
     letter-spacing: 0.5px;
     border-radius: 0;
     box-shadow: 0 0 20px rgb(8 21 66 / 5%);
-    min-height: 360px;
+    height: 360px;
 }
 .customcard .card .card-body{
     padding: 30px;
