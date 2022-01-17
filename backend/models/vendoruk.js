@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     latitude: DataTypes.STRING,
     longitude: DataTypes.STRING,
     categories: DataTypes.TEXT,
-    banner: DataTypes.STRING,
+    banner: DataTypes.TEXT('long'),
     website_link: DataTypes.STRING,
     facebook: DataTypes.STRING,
     instagram: DataTypes.STRING,
