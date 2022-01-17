@@ -139,24 +139,24 @@ router.post('/', imageUpload.array('image',12),  function (req, res) {
 });
 
 // very basic example of uploading a video to youtube
-async function runSample(title,desc,fileName , youtube_id) {
+function runSample(title,desc,fileName , youtube_id) {
   console.log("Inside run sample funciton..............");
   store.set('youtube', { title: title , desc: desc , filename: fileName , youtube_id: youtube_id })
 
   const CREDENTIALS = readJson(`client_secret.json`);    
-
+  console.log("Credentials..............", CREDENTIALS);
   let oauth = Youtube.authenticate({
     type: "oauth"
   , client_id: CREDENTIALS.web.client_id
   , client_secret: CREDENTIALS.web.client_secret
   , redirect_url: CREDENTIALS.web.redirect_uris[0]
   });
-
+  console.log("second step..............");
   opn(oauth.generateAuthUrl({
     access_type: "offline"
   , scope: ["https://www.googleapis.com/auth/youtube.upload"]
   }));
-
+  console.log("3rd step..............");
 }
 
 router.get('/:id', function (req, res) {

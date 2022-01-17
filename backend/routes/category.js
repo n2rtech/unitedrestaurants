@@ -532,6 +532,17 @@ router.get('/get/:id', (req, res) => {
         })
 });
 
+router.get('/getrestaurants/:id', (req, res) => {
+    Vendor.findAll({ where: { category_id: req.params.id } })
+    .then((err,result)=>{
+        if(result){
+            res.status(200).send(result);
+        }else{
+            res.status(400).send(err);
+        }
+    });
+});
+
 // Restore a Country
 router.post('/restore', (req, res) => {
     Category.restore()
