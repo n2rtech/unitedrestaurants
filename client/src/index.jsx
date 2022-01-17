@@ -114,6 +114,10 @@ const Root = (props) =>  {
       // eslint-disable-next-line 
     }, []);
 
+    if(localStorage.getItem('country_code') == null) {
+      localStorage.setItem('country_code' , 'usa');
+    }
+
  
 
     return(
