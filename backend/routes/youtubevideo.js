@@ -11,8 +11,6 @@ const Youtube = require("youtube-api")
     , readJson = require("r-json")
     , opn = require("opn")
     ;
-//const path = require('path');
-
 // Handle oauth2 callback
 const path = require('path');
 var multer  = require('multer');
@@ -30,7 +28,9 @@ const imageStorage = multer.diskStorage({
           
           const video_path = path.dirname(require.main.filename || process.mainModule.filename)+'/uploads/youtubevideo/'+image_na;
           console.log('video_path' , video_path);
+          console.log("Before run sample funciton..............");
           if(runSample(req.body.video_name,req.body.desc,video_path,result.id)) {
+            console.log("After run sample funciton..............");
             return true;
           } 
         });
@@ -140,7 +140,7 @@ router.post('/', imageUpload.array('image',12),  function (req, res) {
 
 // very basic example of uploading a video to youtube
 async function runSample(title,desc,fileName , youtube_id) {
-
+  console.log("Inside run sample funciton..............");
   store.set('youtube', { title: title , desc: desc , filename: fileName , youtube_id: youtube_id })
 
   const CREDENTIALS = readJson(`client_secret.json`);    
