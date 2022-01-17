@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT
   }, {
     sequelize,
+    paranoid:true,
     modelName: 'AccountsPayable',
   });
   return AccountsPayable;

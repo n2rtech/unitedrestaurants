@@ -11,6 +11,9 @@ const Trash = (props) => {
 
   const [trashVendorData, setTrashVendorData] = useState([]);
   const [trashUserData, setTrashUserData]= useState([]);
+  const [trashCountryData, setTrashCountryData] = useState([]);
+  const [trashCategoryData, setTrashCategoryData] = useState([]);
+  const [trashAccountsPaybleData, setTrashAccountsPaybleData] = useState([]);
   const [trashBlogData, setTrashBlogData] = useState([]);
 
   useEffect(() => {
@@ -25,6 +28,9 @@ const Trash = (props) => {
       (result) => { 
         setTrashVendorData(result.vendors);
         setTrashUserData(result.users);
+        setTrashCategoryData(result.categories);
+        setTrashCountryData(result.country);
+        setTrashAccountsPaybleData(result.accountpayables);
         setTrashBlogData(result.blogs);
       },
       (error) => { 
@@ -124,6 +130,28 @@ const Trash = (props) => {
                     </td>
                   </tr>
                   ))}
+                  {trashCountryData.map((country , i ) => (
+                  <tr key={i}>
+                    <td>{"Deleted Country "} <b>{ country.name }</b></td>
+                    <td className="text-right">
+                    <ButtonGroup>
+                      <Button color="success" onClick={() => handleClick('country',country.id)}>Restore</Button> &nbsp; 
+                      <a className="btn btn-danger" onClick={() => handleDelete('country',country.id)}>Delete Permanently</a>
+                    </ButtonGroup>                      
+                    </td>
+                  </tr>
+                  ))}
+                  {trashCategoryData.map((category , i ) => (
+                  <tr key={i}>
+                    <td>{"Deleted Category"} <b>{ category.name }</b></td>
+                    <td className="text-right">
+                    <ButtonGroup>
+                      <Button color="success" onClick={() => handleClick('category',category.id)}>Restore</Button> &nbsp; 
+                      <a className="btn btn-danger" onClick={() => handleDelete('category',category.id)}>Delete Permanently</a>
+                    </ButtonGroup>
+                    </td>
+                  </tr>
+                  ))}
                   {trashUserData.map((user , i ) => (
                   <tr key={i}>
                     <td>{"Deleted User"} <b>{user.name}</b></td>
@@ -131,6 +159,17 @@ const Trash = (props) => {
                     <ButtonGroup>
                       <Button color="success" onClick={() => handleClick('user',user.id)}>Restore</Button> &nbsp; 
                       <a className="btn btn-danger" onClick={() => handleDelete('user',user.id)}>Delete Permanently</a>
+                    </ButtonGroup>
+                    </td>
+                  </tr>
+                  ))}
+                  {trashAccountsPaybleData.map((accpay , i ) => (
+                  <tr key={i}>
+                    <td>{"Deleted Accounts Payable "} <b>{accpay.name}</b></td>
+                    <td className="text-right">
+                    <ButtonGroup>
+                      <Button color="success" onClick={() => handleClick('accountsPayable',accpay.id)}>Restore</Button> &nbsp; 
+                      <a className="btn btn-danger" onClick={() => handleDelete('accountsPayable',accpay.id)}>Delete Permanently</a>
                     </ButtonGroup>
                     </td>
                   </tr>

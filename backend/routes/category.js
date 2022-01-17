@@ -89,7 +89,6 @@ router.post('/add', passport.authenticate('jwt', {
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Categories').then((rolePerm) => {
         Category
         .findAll({
             include: [
@@ -152,9 +151,6 @@ router.get('/', passport.authenticate('jwt', {
             .catch((error) => {
                 res.status(400).send(error);
             });
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
 });
 
 
@@ -208,7 +204,6 @@ router.get('/get', passport.authenticate('jwt', {
     });
 });
 
-
 // Get List of Categories
 router.get("/list", (req, res) => {
     Category
@@ -235,6 +230,22 @@ router.get("/list", (req, res) => {
     })
     .catch((error) => {
         res.status(400).send(error);
+    });
+});
+
+// Get List of Categories
+router.get("/deleted", (req, res) => {
+    Category
+    .findAll( { where: {deletedAt: {[Op.ne]: null} 
+},
+    paranoid:false
+     })
+    .then((category) => {
+        res.status(200).send(category)
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(400).send('error');
     });
 });
 
@@ -530,5 +541,8 @@ router.post('/restore', (req, res) => {
         });
     }).catch(err => res.status(400).send(err));
 });
+
+
+
 
 module.exports = router;

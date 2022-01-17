@@ -134,8 +134,16 @@ router.get('/delete/:type/:id', (req, res) => {
         DB.query("DELETE  FROM "+ table_name +" where user_id="+req.params.id);
         DB.query("DELETE  FROM BusinessAdvertises where user_id="+req.params.id);
         DB.query("DELETE  FROM FeaturedBusinesses where user_id="+req.params.id);
+        DB.query("DELETE  FROM HotDeals where user_id="+req.params.id);
         DB.query("DELETE  FROM AdSpaces where user_id="+req.params.id);
-        
+        DB.query("DELETE  FROM Galleries where user_id="+req.params.id);
+        DB.query("DELETE  FROM JobOpenings where user_id="+req.params.id);
+        DB.query("DELETE  FROM MenuItems where user_id="+req.params.id);
+        DB.query("DELETE  FROM SaleItems where user_id="+req.params.id);
+        DB.query("DELETE  FROM PaymentMethods where user_id="+req.params.id);
+        DB.query("DELETE  FROM VideoGalleries where user_id="+req.params.id);
+        DB.query("DELETE  FROM VendorCoupons where user_id="+req.params.id);
+
         var code = req.params.type;
         var table_name = code.charAt(0).toUpperCase() + code.slice(1);
         app.db(table_name)
