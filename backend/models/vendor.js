@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.INTEGER,
     membership_id: DataTypes.INTEGER,
     is_suspended: DataTypes.INTEGER,
+    banner: DataTypes.TEXT('long'),
     membership_start_date: DataTypes.DATE,
     membership_end_date: DataTypes.DATE,
     adds_membership_id: DataTypes.INTEGER,
