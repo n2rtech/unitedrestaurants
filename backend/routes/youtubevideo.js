@@ -30,10 +30,7 @@ const imageStorage = multer.diskStorage({
           
           const video_path = path.dirname(require.main.filename || process.mainModule.filename)+'/uploads/youtubevideo/'+image_na;
           console.log('video_path' , video_path);
-          //return;
-          const result_query = runSample(req.body.video_name,req.body.desc,video_path,result.id)
-
-          if(result_query) {
+          if(runSample(req.body.video_name,req.body.desc,video_path,result.id)) {
             return true;
           } 
         });
