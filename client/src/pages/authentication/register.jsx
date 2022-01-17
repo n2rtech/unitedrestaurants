@@ -29,6 +29,7 @@ const Register = (props) => {
   const [first_name, setFirstName ] = useState('');
   const [last_name, setLastName ] = useState('');
   const [mobile, setMobile ] = useState('');
+  const [ownermobile, setOwnerMobile ] = useState('');
   const [address, setAddress ] = useState('');
   const [email, setEmail ] = useState('');
   const [category_id, setCategoryId ] = useState('');
@@ -61,6 +62,11 @@ const Register = (props) => {
     if (!mobile) {
       formIsValid = false;
       errors["mobile"] = "field is Required!";
+    }
+
+    if (!ownermobile) {
+      formIsValid = false;
+      errors["ownermobile"] = "field is Required!";
     }
 
     if (!email) {
@@ -118,6 +124,14 @@ const Register = (props) => {
       setMobile(value);
       break;
 
+      case 'ownermobile': 
+      errors.mobile = 
+      value.length < 1
+      ? 'field is Required!'
+      : '';
+      setOwnerMobile(value);
+      break;
+
       case 'address': 
       errors.address = 
       value.length < 1
@@ -159,6 +173,7 @@ const Register = (props) => {
         name:first_name,
         last_name:'.',
         mobile:mobile,
+        ownermobile: ownermobile,
         address:address,
         email:email,
         category_id:category_id,
@@ -178,6 +193,7 @@ const Register = (props) => {
           }, 1000);
           setFirstName('');
           setMobile('');
+          setOwnerMobile('');
           setPassword('');
           setEmail('');
           setCategoryId('');
@@ -240,9 +256,15 @@ const Register = (props) => {
                   </FormGroup>
 
                   <FormGroup>
-                    <Label className="col-form-label">Business Mobile Number</Label>
+                    <Label className="col-form-label">Business Phone Number</Label>
                     <Input className="form-control" name="mobile" value={mobile} onChange={handleChange} type="number" required="" placeholder="987 889 779"/>
                     <div style={{color:'red'}}>{errors.mobile}</div>
+                  </FormGroup>
+
+                  <FormGroup>
+                    <Label className="col-form-label">Owner Phone Number</Label>
+                    <Input className="form-control" name="ownermobile" value={ownermobile} onChange={handleChange} type="number" required="" placeholder="987 889 779"/>
+                    <div style={{color:'red'}}>{errors.ownermobile}</div>
                   </FormGroup>
 
                   <FormGroup>

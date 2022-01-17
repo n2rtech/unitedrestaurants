@@ -79,6 +79,7 @@ router.post("/register", (req, res) => {
             password: hash,
             name: name,
             mobile: req.body.mobile,
+            ownermobile: req.body.ownermobile,
             address: req.body.address,
             category_id: req.body.category_id,
             country_id: req.body.country_id
@@ -103,8 +104,9 @@ router.post("/register", (req, res) => {
                 var name = req.body.name;
                 var address = req.body.address;
                 var mobile = req.body.mobile;
+                var ownermobile = req.body.ownermobile;
 
-                DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `fax`, `address`, `city`, `state`, `post_code`, `latitude`, `longitude`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+name+"', NULL, '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', NULL, '"+address+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NOW(), '')");
+                DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `ownermobile`,  `fax`, `address`, `city`, `state`, `post_code`, `latitude`, `longitude`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+name+"', NULL, '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', '"+ownermobile+"', NULL, '"+address+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NOW(), '')");
                 res.status(201).send({
                   succeed: true,
                   message: "vendor created successfully!"
