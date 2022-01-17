@@ -52,11 +52,11 @@ const Featured = (props) => {
               >
                 <CardBody>
                   <Row>
-                    <Col sm="4" xs="4">
+                    <Col sm="12" xs="12">
                     <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
                      alt="Menu-Icon"/>
                    </Col>
-                   <Col sm="8" xs="8">
+                   <Col sm="12" xs="12">
                   <CardTitle tag="h5">
                     <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
                     {item.business_name}

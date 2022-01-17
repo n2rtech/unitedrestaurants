@@ -271,6 +271,7 @@ body {
     letter-spacing: 0.5px;
     border-radius: 0;
     box-shadow: 0 0 20px rgb(8 21 66 / 5%);
+    min-height: 360px;
 }
 .customcard .card .card-body{
     padding: 30px;
@@ -280,14 +281,15 @@ body {
     font-weight: 400;
     font-family: 'Poppins';
     color: #FF0000;
-    margin-bottom: 7px;
-    margin-top: 20px;
+    margin-bottom: 0px;
+    margin-top: 15px;
+    display: inline-block;
 }
 .customcard p.card-text {
     font-size: 13px;
     color: #000;
     font-family: 'Poppins';
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 .btn-secondary {
