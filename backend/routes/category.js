@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models').User;
 const Role = require('../models').Role;
+const Vendor = require('../models').Vendor;
 const Permission = require('../models').Permission;
 const Category = require('../models').Category;
 const passport = require('passport');
