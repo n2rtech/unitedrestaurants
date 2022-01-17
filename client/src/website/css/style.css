@@ -1220,8 +1220,8 @@ input::placeholder, textarea::placeholder{
     padding-right: 18px;
 }
 .homeblog .customcard .img-fluid{
-    max-width: 100px;
-    height: 100px;
+    max-width: 100%;
+    height: unset;
 }
 .hotdeals h6{
     font-size: 11px;
