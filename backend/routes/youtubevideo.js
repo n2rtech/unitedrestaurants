@@ -26,7 +26,14 @@ const imageStorage = multer.diskStorage({
         cb(null, image_na);
         Youtubevideo.create({video_link:image_na,user_id:req.body.user_id,title:req.body.video_name,description:req.body.desc})
         .then(result => {
-          const video_path = process.env.INIT_CWD+'/uploads/youtubevideo/'+image_na;
+          
+          const video_path = '';
+          if(process.env.INIT_CWD) {
+            video_path = process.env.INIT_CWD+'/uploads/youtubevideo/'+image_na;
+          } else {
+            video_path = '/var/www/unitedrestaurants/backend/uploads/youtubevideo/'+image_na;
+          }
+
           console.log('video_path' , video_path);
           //return;
           const result_query = runSample(req.body.video_name,req.body.desc,video_path,result.id)
