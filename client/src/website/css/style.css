@@ -31,6 +31,12 @@ body {
     min-height:0px !important;
     top: 0px !important;
 }
+.sigle-title{
+    background: none;
+    color: #fff;
+    font-weight: 400;
+    margin-top: 21px;
+    }
 
 .mainheader{
     background-image: linear-gradient(to bottom, #800020e6 0%,#800020e6 100%), url("/assets/images/headerbg.jpg");

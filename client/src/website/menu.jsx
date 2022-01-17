@@ -76,39 +76,40 @@ console.log('Menu' , categoryData);
                 <Nav
                   className="me-auto"
                   navbar>
-                    {categoryData.map((item , i) => (
-                      <NavItem key={i}>
-                          <a href={`${process.env.PUBLIC_URL}/restaurants/${item.id}`}>  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.image}`} alt="Menu-Icon"/> </a>
-                      <Dropdown title={item.name} key={i}>
-                            {item.parent && (item.parent).map((item1 , i) => (<Fragment>
-                                  <Dropdown.Item>{item1.name}
-                                  {item1.parent_2 &&
-                                        <Fragment>
-                                          {(item1.parent_2).map((item2 , i) => (
-                                            <Dropdown.Submenu>
-                                              <Dropdown.Item>{item2.name}
-                                                  {item2.parent_3 &&
-                                                        <Fragment>
-                                                          {(item2.parent_3).map((item3 , i) => (
-                                                        <Dropdown.Submenu>
-                                                          <Dropdown.Item><NavLink href="#">{item3.name}</NavLink></Dropdown.Item>
-                                                        </Dropdown.Submenu>
-                                                        ))}
-                                                          </Fragment>
-                                                  }
+                  {categoryData.map((item , i) => (
+                    <NavItem key={i}>
+                    <a href={`${process.env.PUBLIC_URL}/restaurants/${item.id}`}>  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.image}`} alt="Menu-Icon"/> </a>
+                    {item.parent && (item.parent.length > 0) && <Dropdown title={item.name} key={i}>
+                    {item.parent && (item.parent).map((item1 , i) => (<Fragment>
+                      <Dropdown.Item>{item1.name}
+                      {item1.parent_2 &&
+                        <Fragment>
+                        {(item1.parent_2).map((item2 , i) => (
+                          <Dropdown.Submenu>
+                          <Dropdown.Item>{item2.name}
+                          {item2.parent_3 &&
+                            <Fragment>
+                            {(item2.parent_3).map((item3 , i) => (
+                              <Dropdown.Submenu>
+                              <Dropdown.Item><NavLink href="#">{item3.name}</NavLink></Dropdown.Item>
+                              </Dropdown.Submenu>
+                              ))}
+                            </Fragment>
+                          }
 
-                                                </Dropdown.Item>   
-                                              </Dropdown.Submenu>
-                                            ))}
-                                          </Fragment>
-                                    }
-                                  </Dropdown.Item>
-                                  </Fragment>
-                                  ))}
-                      </Dropdown>
-                    </NavItem>
-))}
-                  
+                          </Dropdown.Item>   
+                          </Dropdown.Submenu>
+                          ))}
+                        </Fragment>
+                      }
+                      </Dropdown.Item>
+                      </Fragment>
+                      ))}
+                    </Dropdown>
+                  }
+                  {item.parent && (item.parent.length == 0) && <div className="sigle-title">{item.name}</div> }
+                  </NavItem>
+                  ))}                  
                 </Nav>
               </Collapse>
             </Navbar>
