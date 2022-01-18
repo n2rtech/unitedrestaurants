@@ -1246,8 +1246,8 @@ input::placeholder, textarea::placeholder{
     height: auto;
 }  
 .hotdeals .customcard .card .card-body img {
-    max-width: 288px !important;
-    min-height: 155px !important;
+    width: 100% !important;
+    height: 155px !important;
 }
 /**********detailpage-end*********/
 @media (max-width: 767px){ 
