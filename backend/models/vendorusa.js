@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     manager_email: DataTypes.STRING,
     owner_name: DataTypes.STRING,
     owner_email: DataTypes.STRING,
+    ownermobile: DataTypes.STRING,
     phone: DataTypes.STRING,
     mobile: DataTypes.STRING,
     fax: DataTypes.STRING,

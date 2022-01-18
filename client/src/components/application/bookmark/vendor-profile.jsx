@@ -38,6 +38,7 @@ const VendorProfile = (props) => {
     const [managername, setManagerName] = useState()
     const [manageremail, setManagerEmail] = useState()
     const [phone, setPhone] = useState()
+    const [ownerphone, setOwnerPhone] = useState()
     const [fax, setFax] = useState()
     const [address, setAddress] = useState()
     const [websitelink, setWebsitelink] = useState()
@@ -64,6 +65,9 @@ const VendorProfile = (props) => {
     const onChangePhone = (event) => {
       setPhone(event.target.value);
     };
+    const onChangeOwnerPhone = (event) => {
+      setOwnerPhone(event.target.value);
+    }
     const onChangefax = (event) => {
       setFax(event.target.value);
     };
@@ -133,6 +137,7 @@ const VendorProfile = (props) => {
         setName(result.data.business_name)
         setEmail(result.data.business_email)
         setPhone(result.data.mobile)
+        setOwnerPhone(result.data.ownermobile)
         setAddress(result.data.address)
         setManagerName(result.data.manager_name)
         setManagerEmail(result.data.manager_email)
@@ -148,6 +153,7 @@ const VendorProfile = (props) => {
         setName(result.data.name)
         setEmail(result.data.email)
         setPhone(result.data.mobile)
+        setOwnerPhone(result.data.ownermobile)
         setAddress(result.data.address)
     }
         
@@ -179,6 +185,7 @@ const categorys = multiSelections.map((user) => {
           bodyParameters.set('manager_name',managername);
           bodyParameters.set('manager_email' , manageremail);
           bodyParameters.set('phone', phone);
+          bodyParameters.set('ownerphone', ownerphone);
           bodyParameters.set('fax', fax);
           console.log('Image', image);
           console.log('Image Length', image.pictureFiles.length);
@@ -249,6 +256,14 @@ const categorys = multiSelections.map((user) => {
                <Input className="form-control"  value={phone}  onChange={onChangePhone} type="tel" placeholder="" />
               </FormGroup>
             </Col>
+
+            <Col xl="6" sm="12">
+              <FormGroup>
+               <Label htmlFor="exampleFormControlInput1">{"Owner Phone Number"}</Label>
+               <Input className="form-control"  value={ownerphone}  onChange={onChangeOwnerPhone} type="tel" placeholder="" />
+              </FormGroup>
+            </Col>
+
             <Col xl="6" sm="12">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Fax"}</Label>

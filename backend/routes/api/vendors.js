@@ -843,7 +843,7 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
     Vendor
     .findByPk(req.params.id)
     .then((profile) => {
-
+      //console.log("Profile" , req.body);
       if (req.file) {
         /*var filePath = path.resolve('./')+'/uploads/banner/'+profile.banner; 
         fs.unlinkSync(filePath);*/
@@ -865,7 +865,7 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
             var table_name = 'Vendor' + codee ;
           }
 
-          console.log(req.body.categories);
+          // console.log(table_name);
           // return false;
 
           if (req.body.categories) {
@@ -882,7 +882,7 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
             about_business: req.body.about_business,
             manager_email: req.body.manager_email || profile.manager_email,
             phone: req.body.phone || profile.phone,
-            // mobile: req.body.mobile || profile.mobile,
+            ownermobile: req.body.ownerphone,
             fax: req.body.fax || profile.fax,
             banner: image,
             address: req.body.address || profile.address,
