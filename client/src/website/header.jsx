@@ -37,6 +37,33 @@ useEffect(() => {
 
   }, []);
 
+  const [logo, setLogo] = useState([]);
+  const code = localStorage.getItem('country_code');
+
+  useEffect(() => {
+  
+    const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
+        };
+ 
+    fetch('/api/site-settings/getsettings' , config)
+      .then(res => res.json())
+      .then(
+        (result) => {  
+          setLogo(result.logo);
+        },
+        (error) => {
+          
+        }
+        )
+  }, []);
+
+  console.log("Logo" , logo);
+
+  const addDefaultSrc = (ev) => {
+  ev.target.src = `${process.env.PUBLIC_URL}/assets/images/mainlogo.png`;
+}
+
 
 const navItems = [
     
@@ -128,8 +155,8 @@ const title = <div className="searchbar">
           <Col sm="2">
             <div className="mainlogo">
               <a href="/home">
-              <img className="img-fluid" 
-               src={`${process.env.PUBLIC_URL}/assets/images/mainlogo.png`} 
+              <img className="img-fluid" onError = {addDefaultSrc}
+               src={`${process.env.PUBLIC_URL}/api/uploads/site/${logo}`} 
                alt="logo"/>
                </a>
             </div>
