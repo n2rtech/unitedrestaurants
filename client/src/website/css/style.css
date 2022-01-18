@@ -1249,6 +1249,11 @@ input::placeholder, textarea::placeholder{
     width: 100% !important;
     height: 155px !important;
 }
+.theme-form img {
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+}
 /**********detailpage-end*********/
 @media (max-width: 767px){ 
 .togglebtn h1 {
