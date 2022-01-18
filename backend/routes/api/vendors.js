@@ -848,8 +848,6 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
         /*var filePath = path.resolve('./')+'/uploads/banner/'+profile.banner; 
         fs.unlinkSync(filePath);*/
         var image = req.file.filename;
-      }else{
-        var image = profile.banner;
       }
 
       var tables_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
@@ -874,6 +872,16 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
             var categories = profile.categories;
           }
 
+          if (req.file) {
+            app.db(table_name).update({
+              banner:image
+            }, {
+              where: {
+                user_id: profile.id
+              }
+            })
+          }
+
           app.db(table_name)
           .update({
             business_name: req.body.business_name || profile.business_name,
@@ -884,7 +892,6 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
             phone: req.body.phone || profile.phone,
             ownermobile: req.body.ownerphone,
             fax: req.body.fax || profile.fax,
-            banner: image,
             address: req.body.address || profile.address,
             categories: categories,
             website_link: req.body.website_link || profile.website_link,
