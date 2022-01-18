@@ -42,21 +42,36 @@ const Restaurantlist = (props) => {
       <Row className="m-0">
       {result && (result).map((item , i) => (
            <Col sm="4" xs="12">     
-           <div className="customcardlist">
-               <Card>
-                 <CardBody>
-                  <img className="img-fluid"  onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.banner}`} 
-                      alt="Menu-Icon"/>
- 
-                   <CardTitle tag="h5">
-                     {item.name}
-                   </CardTitle>
-                   
-                   <Button>
-                     <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.id}`}>Get Deals</a>
-                   </Button>
-                 </CardBody>
-               </Card>
+           <div className="customcard">
+           <Card>
+             <CardBody>
+               <Row>    
+                 <Col sm="12" xs="12">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.id}`}>
+                    <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} alt="Menu-Icon"/></a>
+                 </Col>
+                  
+                 <Col sm="12" xs="12">
+                  <CardTitle tag="h5">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.id}`}></a>
+                  </CardTitle>
+                  <CardSubtitle
+                    className="mb-2 text-muted"
+                    tag="h6"
+                  > {item.name}
+                  </CardSubtitle>
+                  </Col>
+                  </Row>
+                  <CardText>
+                      {/* {(item.about_business).substring(0, 140)}... */}
+                  </CardText>
+                  <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.id}`}>
+                    SEE SALE
+                  </a>
+                  </Button>
+                </CardBody>
+              </Card>
              </div>
          </Col>
       ))}

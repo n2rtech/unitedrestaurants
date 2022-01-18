@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models').User;
 const Role = require('../models').Role;
 const Vendor = require('../models').Vendor;
+const VendorUks = require('../models').VendorUks;
 const Permission = require('../models').Permission;
 const Category = require('../models').Category;
 const passport = require('passport');
@@ -534,10 +535,10 @@ router.get('/get/:id', (req, res) => {
 });
 
 router.get('/getrestaurants/:id', (req, res) => {
-    Vendor.findAll({ where: { category_id: req.params.id } })
-    .then((err,result)=>{
+   Vendor.findAll({ where: { category_id: req.params.id }})
+    .then((result,err)=>{
         if(result){
-            res.status(200).send(result);
+            res.status(201).send(result);
         }else{
             res.status(400).send(err);
         }
