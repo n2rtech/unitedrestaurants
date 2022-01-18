@@ -3,7 +3,7 @@ import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button, ButtonGroup } from 'reactstrap'
 import DownloadLink from "react-download-link";
 import {toast} from 'react-toastify';
-
+import moment from 'moment';
 const Backup = (props) => {
 
   const [msg, setMessagefile] = useState([]);
@@ -18,7 +18,6 @@ const Backup = (props) => {
         .then(res => res.json())
         .then(
           (result) => {
-            
             setMessagefile(result.message);
           },
           (error) => {
@@ -50,13 +49,36 @@ const Backup = (props) => {
         .then(res => res.json())
         .then(
           (result) => {
-            toast.success("Downloaded Database backup Successfully!")
+            toast.success("Downloaded Database backup Successfully!");
+            window.location.reload(false);
           },
           (error) => {
             
           }
         )
     }   
+
+
+  const [records, setRecords] = useState([]);
+  useEffect(() => {
+  
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+          };
+   
+      fetch("/api/backup/sqlrecords", config)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setRecords(result[0].createdAt);
+          },
+          (error) => {
+            
+          }
+        )
+    }, []);
+
+    console.log("Records" , records);
 
 
   return (
@@ -85,11 +107,11 @@ const Backup = (props) => {
                 <tbody>
                   <tr>
                     <td>{"united-restaurants.sql"}</td>
-                    <td>{"01-12-2021"}</td>
+                    <td>{moment(records).format("DD-MM-YYYY")}</td>
                     <td className="text-right">
                       <DownloadLink
                           label="Download"
-                          filename="backupfile.sql"
+                          filename="united-restaurants.sql"
                           exportFile={() => Promise.resolve(getDataFromURL ('/api/backup/sqlfile/'))}
                       />
                     </td>
