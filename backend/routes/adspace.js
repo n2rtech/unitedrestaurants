@@ -142,24 +142,38 @@ router.delete('/:id', (req, res) => {
 
 
 router.get('/list', (req, res) => {
-    var code = req.query.country;    
+
+    var code = req.query.country;   
+
+    var category = req.query.category;
+
+    if (category) {
+        var conditions = {
+            where:{
+                country_code: { [Op.eq]: req.query.country },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            limit: 3,
+            order: Sequelize.literal('rand()')
+        }
+    }else{
+        var conditions = {
+            where:{
+                country_code: { [Op.eq]: req.query.country }
+            },
+            limit: 3,
+            order: Sequelize.literal('rand()')
+        }
+    } 
+
     AdSpace
-    .findAll(
-    {
-        where: {
-            [Op.and]:[
-                {country_code: { [Op.eq]: req.query.country }},
-            ]
-        },
-        limit: 10,
-        order: Sequelize.literal('rand()'), limit: 25
-    })
+    .findAll(conditions)
     .then((menuitem) => res.status(200).send(menuitem))
     .catch((error) => {
         res.status(400).send(error);
     });
 });
-
-
 
 module.exports = router;

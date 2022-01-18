@@ -43,33 +43,83 @@ router.get('/list', (req, res) => {
             });
 });
 
-/*{where:{country:req.query.country}}*/
+
 router.get('/', (req, res) => { 
+
     const startDate = new Date().toJSON().slice(0, 10);
     const endDate   = new Date().toJSON().slice(0, 10);
+
+    var category = req.query.category;
+
+    var filter = req.query.filter;
+
+    if (category && filter) {
+
+        var conditions =  {
+            where: {
+                [Op.and]:
+                [
+                {
+                    country: { 
+                        [Op.eq]: req.query.country 
+                    }
+                },
+                {
+                    categories: { 
+                        [Op.like]: '%' + req.query.category + '%' 
+                    }
+                },
+                {
+                    business_name: { 
+                        [Op.like]: '%' + req.query.filter + '%' 
+                    }
+                }
+                ],            
+                [Op.or]: 
+                [
+                {
+                    start_date: {
+                        [Op.gte]: [startDate],
+                        [Op.lte]: [startDate]
+                    }
+                }, {
+                    end_date: {
+                        [Op.gte]: [endDate]
+                    }
+                }
+                ]
+            }
+        };
+
+    }else{
+        var conditions = {
+            where: {
+                [Op.and]:
+                [
+                {
+                    country: { [Op.eq]: req.query.country 
+                    }
+                },
+                ],            
+                [Op.or]: 
+                [
+                {
+                    start_date: {
+                        [Op.gte]: [startDate],
+                        [Op.lte]: [startDate]
+                    }
+                }, {
+                    end_date: {
+                        [Op.gte]: [endDate]
+                    }
+                }
+                ]
+            }
+        };
+    }
+
     HotDeal
-    .findAll(
-    {
-        where: {
-            [Op.and]:[
-                {country: { [Op.eq]: req.query.country }},
-                // {business_name: { [Op.like]: req.query.business_name }},
-                // {categories: { [Op.like]: '%"' + req.query.category + '"%' }},
-                
-            ],
-            
-            [Op.or]: [{
-                start_date: {
-                    [Op.gte]: [startDate],
-                    [Op.lte]: [startDate]
-                }
-            }, {
-                end_date: {
-                    [Op.gte]: [endDate]
-                }
-            }]
-        }
-    })
+    .findAll(conditions)
     .then((menuitem) => res.status(200).send(menuitem))
     .catch((error) => {
         res.status(400).send(error);

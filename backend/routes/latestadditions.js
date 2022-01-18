@@ -9,7 +9,7 @@ require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
 const db = require('../models');
-
+const Op = require('sequelize').Op
 const app = express();
 app.db = (model) => db[model];
 
@@ -61,14 +61,33 @@ router.get('/', (req, res) => {
         var table_name = 'VendorIta';
     }
 
-    console.log('Table Name is : ' ,code);
+
+    var category = req.query.category;
+    var filter = req.query.filter;
+
+    if (category && filter) {
+        var conditions = {
+
+            where:{
+                business_name: {
+                    [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+                },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            limit: 10,
+            order: [ [ 'createdAt', 'DESC' ]]
+        }
+    }else{
+        var conditions = {
+            limit: 10,
+            order: [ [ 'createdAt', 'DESC' ]]
+        }
+    }
 
     app.db(table_name)
-    .findAll(
-    {
-        limit: 10,
-        order: [ [ 'createdAt', 'DESC' ]]
-    })
+    .findAll(conditions)
     .then((menuitem) => res.status(200).send(menuitem))
     .catch((error) => {
         res.status(400).send(error);

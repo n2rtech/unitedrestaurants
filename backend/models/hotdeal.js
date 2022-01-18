@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     categories: DataTypes.TEXT,
     banner: DataTypes.STRING,
     discount: DataTypes.DECIMAL(10,2),
-    start_date: DataTypes.DATE,
-    end_date: DataTypes.DATE,
+    start_date: DataTypes.STRING,
+    end_date: DataTypes.STRING,
     deletedAt: DataTypes.STRING
   }, {
     sequelize,

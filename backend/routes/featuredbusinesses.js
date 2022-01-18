@@ -8,6 +8,8 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
+const Sequelize = require('sequelize');
+const Op = require('sequelize').Op
 
 // Create a new HotDeal
 router.post('/', (req, res) => {
@@ -43,10 +45,221 @@ router.get('/list', (req, res) => {
 });
 
 
-router.get('/', (req, res) => {
+router.get('/get-home-fb', (req, res) => {
+
     FeaturedBusiness
-    .findAll({where:{country:req.query.country}})
-    .then((menuitem) => res.status(200).send(menuitem))
+    .findAll({
+        where: {
+            is_seen: 0,
+            country: req.query.country||'usa',
+            membership_id: {
+              [Sequelize.Op.in]: [3]
+          },
+      },
+      limit: 5,
+      order: [['id', 'DESC']]
+  })
+    .then((menuitem) => {
+        if (menuitem.length <= 0) {
+            FeaturedBusiness.update({is_seen : 0},{where:{is_seen : 1}})
+            .then((menuitem) => {
+                FeaturedBusiness
+                .findAll({
+                    where: {
+                        is_seen: 0,
+                        country: req.query.country||'usa',
+                        membership_id: {
+                          [Sequelize.Op.in]: [3]
+                      },
+                  },
+                  limit: 5,
+                  order: [['id', 'DESC']]
+              })
+                .then((menuitem) => {
+
+                    Object.entries(menuitem).forEach(([key, value]) => {
+                        menuitem[key].set({is_seen: 1});
+                        menuitem[key].save();
+                    })
+
+                    res.status(200).send(menuitem)
+                })
+            }).catch((error) => {
+                res.status(400).send('error1');
+            });
+        }else{
+            Object.entries(menuitem).forEach(([key, value]) => {
+                menuitem[key].set({is_seen: 1});
+                menuitem[key].save();
+            })
+            res.status(200).send(menuitem)
+        }
+
+    }).catch((error) => {
+        console.log(error);
+        res.status(400).send('error2');
+    });
+
+});
+
+
+
+router.get('/get-dep-home-fb', (req, res) => {
+    FeaturedBusiness
+    .findAll({
+        where: {
+            is_seen: 0,
+            country: req.query.country||'usa',
+            membership_id: {
+              [Sequelize.Op.in]: [3]
+          },
+          categories: {
+              [Sequelize.Op.like]: '%' + req.query.category + '%'
+          },
+      },
+      limit: 5,
+      order: [['id', 'DESC']]
+  })
+    .then((menuitem) => {
+        if (menuitem.length <= 0) {
+            FeaturedBusiness.update({is_seen : 0},{where:{is_seen : 1}})
+            .then((menuitem) => {
+                FeaturedBusiness
+                .findAll({
+                    where: {
+                        is_seen: 0,
+                        country: req.query.country||'usa',
+                        membership_id: {
+                          [Sequelize.Op.in]: [3]
+                      },
+                      categories: {
+                          [Sequelize.Op.like]: '%' + req.query.category + '%'
+                      },
+                  },
+                  limit: 5,
+                  order: [['id', 'DESC']]
+              })
+                .then((menuitem) => {
+
+                    Object.entries(menuitem).forEach(([key, value]) => {
+                        menuitem[key].set({is_seen: 1});
+                        menuitem[key].save();
+                    })
+
+                    res.status(200).send(menuitem)
+                })
+            }).catch((error) => {
+                res.status(400).send('error');
+            });
+        }else{
+            Object.entries(menuitem).forEach(([key, value]) => {
+                menuitem[key].set({is_seen: 1});
+                menuitem[key].save();
+            })
+            res.status(200).send(menuitem)
+        }
+
+    }).catch((error) => {
+        res.status(400).send('error');
+    });
+})
+
+
+
+router.get('/get-dep-fb', (req, res) => {
+    FeaturedBusiness
+    .findAll({
+        where: {
+            is_seen: 0,
+            country: req.query.country||'usa',
+            membership_id: {
+              [Sequelize.Op.in]: [2,3]
+          },
+          categories: {
+              [Sequelize.Op.like]: '%' + req.query.category + '%'
+          },
+      },
+      limit: 5,
+      order: [['id', 'DESC']]
+  })
+    .then((menuitem) => {
+        if (menuitem.length <= 0) {
+            FeaturedBusiness.update({is_seen : 0},{where:{is_seen : 1}})
+            .then((menuitem) => {
+                FeaturedBusiness
+                .findAll({
+                    where: {
+                        is_seen: 0,
+                        country: req.query.country||'usa',
+                        membership_id: {
+                          [Sequelize.Op.in]: [2,3]
+                      },
+                      categories: {
+                          [Sequelize.Op.like]: '%' + req.query.category + '%'
+                      },
+                  },
+                  limit: 5,
+                  order: [['id', 'DESC']]
+              })
+                .then((menuitem) => {
+
+                    Object.entries(menuitem).forEach(([key, value]) => {
+                        menuitem[key].set({is_seen: 1});
+                        menuitem[key].save();
+                    })
+
+                    res.status(200).send(menuitem)
+                })
+            }).catch((error) => {
+                res.status(400).send('error');
+            });
+        }else{
+            Object.entries(menuitem).forEach(([key, value]) => {
+                menuitem[key].set({is_seen: 1});
+                menuitem[key].save();
+            })
+            res.status(200).send(menuitem)
+        }
+
+    }).catch((error) => {
+        res.status(400).send('error');
+    });
+})
+
+
+router.get('/', (req, res) => {
+
+    var category = req.query.category;
+
+    var filter = req.query.filter;
+
+    if (category && filter) {
+
+        var conditions =  {
+            where: {
+                [Op.and]:
+                [
+                    {country: { [Op.eq]: req.query.country }},
+                    {categories: { [Op.like]: '%' + req.query.category + '%' }},
+                    {business_name: { [Op.like]: '%' + req.query.filter + '%' }}
+                ]
+            }
+        };
+
+    }else{
+        var conditions = {
+            where: {
+                [Op.and]:
+                [
+                    {country: { [Op.eq]: req.query.country }},
+                ]
+            }
+        };
+    }
+
+    FeaturedBusiness
+    .findAll(conditions)
+    .then((featured_business) => res.status(200).send(featured_business))
     .catch((error) => {
         res.status(400).send(error);
     });
