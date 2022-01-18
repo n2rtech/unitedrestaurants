@@ -51,7 +51,7 @@ const addDefaultSrc = (ev) => {
           <Col sm="12">
             <div className="customcard">
               <Card>
-                <div className="ribbon"><p>{item.discount}% off</p></div>
+                <div className="ribbon"><p> { item.discount.indexOf(".00") == '-1' ? item.discount : item.discount.substring(0,item.discount.indexOf(".")) }% off</p></div>
                 <CardBody>
                   <Row>
                     <Col sm="12" xs="12">
