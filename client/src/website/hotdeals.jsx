@@ -51,11 +51,11 @@ const addDefaultSrc = (ev) => {
           <Col sm="12">
             <div className="customcard">
               <Card>
-                <div className="ribbon"><p>20% off</p></div>
+                <div className="ribbon"><p>{item.discount}% off</p></div>
                 <CardBody>
                   <Row>
                     <Col sm="12" xs="12">
-                    <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
+                    <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
                      alt="Menu-Icon"/>
                    </Col>
                    <Col sm="12" xs="12">

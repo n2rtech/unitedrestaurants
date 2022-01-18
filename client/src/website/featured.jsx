@@ -53,7 +53,7 @@ const Featured = (props) => {
                 <CardBody>
                   <Row>
                     <Col sm="12" xs="12">
-                    <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
+                    <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
                      alt="Menu-Icon"/>
                    </Col>
                    <Col sm="12" xs="12">
