@@ -75,14 +75,14 @@ const Countries = (props) => {
       <Container fluid={true}>
         <Card>
           <CardBody>
-            {/*<Row>
+            <Row>
               <Col sm="6"></Col>
               <Col sm="6">
                 <div className="pull-right">
                   <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-countries`}>Add New</a>
                 </div>
               </Col>
-            </Row>*/}
+            </Row>
             <div className="table-responsive m-t-20">
               <Table>
                 <thead>
