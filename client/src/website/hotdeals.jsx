@@ -55,8 +55,10 @@ const addDefaultSrc = (ev) => {
                 <CardBody>
                   <Row>
                     <Col sm="12" xs="12">
+                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
                     <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
                      alt="Menu-Icon"/>
+                   </a>
                    </Col>
                    <Col sm="12" xs="12">
                   <CardTitle tag="h5">

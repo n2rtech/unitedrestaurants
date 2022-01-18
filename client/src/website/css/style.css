@@ -1351,7 +1351,7 @@ input::placeholder, textarea::placeholder{
     font-family: 'Poppins';
     color: #FF0000;
     margin-bottom: 0px;
-    margin-top: 0px;
+    margin-top: 10px;
     text-decoration: none;
 }
 .customcard .card .card-body {
@@ -1826,5 +1826,14 @@ input::placeholder, textarea::placeholder{
     line-height: 22px;
     font-family: 'Poppins';
     color: #1E1E1E;
+}
+.react-multiple-carousel__arrow--left {
+    left: calc(0% + 0px) !important;
+}
+.react-multiple-carousel__arrow--right {
+    right: calc(0% + 1px) !important;
+}
+.hotdeals .customcard .card {
+    height: auto;
 }
 }
