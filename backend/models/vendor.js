@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Vendor.init({
     name: DataTypes.STRING,
+    about_business: DataTypes.TEXT('long'),
     email: DataTypes.STRING,
     mobile: DataTypes.STRING,
     ownermobile: DataTypes.STRING,

@@ -880,7 +880,23 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
                 user_id: profile.id
               }
             })
+
+            Vendor.update({
+              banner: image
+            }, {
+                where: {
+                    id: profile.id
+                }
+            })
           }
+
+          Vendor.update({
+            about_business: req.body.about_business
+          }, {
+              where: {
+                  id: profile.id
+              }
+          })
 
           app.db(table_name)
           .update({
