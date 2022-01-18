@@ -85,7 +85,7 @@ router.put('/', imageUpload.single('logo'), (req, res) => {
             if (req.file) {
                 if (sitesetting.logo && sitesetting.logo != null || sitesetting.logo =="") {
                     var filePath = path.resolve('./')+'/uploads/site/'+sitesetting.logo; 
-                    fs.unlinkSync(filePath);
+                    //fs.unlinkSync(filePath);
                 }
                 var image = req.file.filename;
             }else{
@@ -112,7 +112,7 @@ router.put('/', imageUpload.single('logo'), (req, res) => {
                 res.status(200).send({
                     'message': 'Site Setting updated'
                 });
-            }).catch(err => res.status(400).send('err'));
+            }).catch(err => res.status(400).send(console.log(err)));
         })
         .catch((error) => {
             console.log(error)
@@ -156,6 +156,26 @@ router.get('/get', (req, res) => {
         res.status(400).send(error);
     });
 });
+
+router.get('/getsettings', (req, res) => {
+    SiteSetting
+    .findByPk(1)
+    .then((sitesetting2) => {
+        if (sitesetting2) {
+            SiteSetting
+            .findByPk(sitesetting2.id)
+            .then((sitesetting1) => res.status(200).send(sitesetting1))
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+
+        }            
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
 
 
 module.exports = router;
