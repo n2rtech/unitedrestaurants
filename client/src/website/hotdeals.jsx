@@ -72,7 +72,7 @@ const addDefaultSrc = (ev) => {
                   </Col>
                   </Row>
                   <CardText>
-                  {(item.about_business).substring(0, 270)}...
+                  {(item.about_business).substring(0, 140)}...
                  
                   </CardText>
                   <Button>

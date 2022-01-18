@@ -264,6 +264,9 @@ body {
 .react-multiple-carousel__arrow{
     background: rgb(0 0 0 / 0%) !important;
 }
+.hotdeals .customcard .card {
+    height: 410px;
+}
 .customcard .card {
     margin-bottom: 30px;
     border: 1px solid #dbdbdb;
@@ -271,7 +274,6 @@ body {
     letter-spacing: 0.5px;
     border-radius: 0;
     box-shadow: 0 0 20px rgb(8 21 66 / 5%);
-    height: 360px;
 }
 .customcard .card .card-body{
     padding: 30px;
@@ -316,7 +318,7 @@ body {
     left: auto;
     right: 0;
     top: 0;
-    z-index: 0;
+    z-index: 5;
 }
 .ribbon p {
   width: 150px;
@@ -328,7 +330,7 @@ body {
   background: #FF0000;
   color: #333;
   font-family: arial;
-  font-size: 18px;
+  font-size: 14px;
   color:white;
   text-align: center;
   line-height: 34px;
@@ -1228,7 +1230,7 @@ input::placeholder, textarea::placeholder{
     padding-right: 18px;
 }
 .homeblog .customcard .img-fluid{
-    max-width: 100%;
+    max-width: 125px;
     height: unset;
 }
 .hotdeals h6{
@@ -1237,6 +1239,10 @@ input::placeholder, textarea::placeholder{
 }
 .homeblog h5 a{
     color: #70081C !important;
+}
+.customcard .card .card-body img {
+    max-width: 100%;
+    height: auto;
 }
 /**********detailpage-end*********/
 @media (max-width: 767px){
