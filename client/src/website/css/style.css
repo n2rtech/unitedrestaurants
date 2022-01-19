@@ -1309,6 +1309,30 @@ input::placeholder, textarea::placeholder{
     font-family: 'Poppins', sans-serif;
     letter-spacing: .5px;
 }
+.verification{
+    background: #f6f6f6;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.verification h1{
+    background: #781820;
+    color: #fff;
+    padding: 15px;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 22px;
+}
+.verification p{
+    font-size: 15px;
+    margin-bottom: 5px;
+    padding-left: 25px;
+}
+.verification button{
+    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-left: 25px;
+}
 /**********detailpage-end*********/
 @media (max-width: 767px){ 
 .contactform {
