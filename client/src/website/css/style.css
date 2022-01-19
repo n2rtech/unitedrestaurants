@@ -1284,8 +1284,44 @@ input::placeholder, textarea::placeholder{
     right: -24px;
     top: 2px;
 }
+.contactform {
+    box-shadow: 0px 3px 9px #00000047;
+    border-radius: 12px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    max-width: 60%;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 40px;
+}
+.contactform input {
+    border-color: #70081C !important;
+}
+.contactform textarea {
+    border-color: #70081C !important;
+}
+.contactform label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #70081C;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: .5px;
+}
 /**********detailpage-end*********/
 @media (max-width: 767px){ 
+.contactform {
+    box-shadow: 0px 3px 9px #00000047;
+    border-radius: 12px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 20px;
+}    
 .togglebtn h1 {
     padding-left: 8px !important;
     padding-right: 8px !important;
