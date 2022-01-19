@@ -228,7 +228,9 @@ import SaleItems from "../components/application/bookmark/sale-items"
 import AccountsPayable from "../components/application/bookmark/accounts-payable"
 import AddCountries from "../components/application/bookmark/add-countries"
 import EditCountries from "../components/application/bookmark/edit-countries"
+import ViewContactInquiry from "../components/application/bookmark/view-contact-inquiry"
 import Countries from "../components/application/bookmark/countries"
+import ContactEnquiries from "../components/application/bookmark/contact-enquiries"
 import Trash from "../components/application/bookmark/trash"
 import Backup from "../components/application/bookmark/backup"
 import AddUser from "../components/application/bookmark/add-user"
@@ -474,8 +476,10 @@ export const routes = [
         { path:"/dashboard/admin/edit-payable/:id", Component:EditAccountsPayable},
         { path:"/dashboard/admin/add-payable", Component:AddAccountsPayable},
         { path:"/dashboard/admin/countries", Component:Countries},
+        { path:"/dashboard/admin/contact-enquiries", Component:ContactEnquiries},
         { path:"/dashboard/admin/add-countries", Component:AddCountries},
         { path:"/dashboard/admin/edit-countries/:id", Component:EditCountries},
+        { path:"/dashboard/admin/view-contact-inquiry/:id", Component:ViewContactInquiry},
         { path:"/dashboard/admin/blogs", Component:Blogs},
         { path:"/dashboard/admin/add-blog", Component:AddBlog},
         { path:"/dashboard/admin/edit-blog/:id", Component:EditBlog},

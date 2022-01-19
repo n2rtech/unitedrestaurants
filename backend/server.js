@@ -38,6 +38,7 @@ const wallet = require("./routes/wallet");
 const backup = require("./routes/backup");
 const trash = require("./routes/trash");
 const googleadsense = require("./routes/googleadsense");
+const contactinquiry = require("./routes/contactinquiry");
 const accountspayables = require("./routes/accountspayables");
 const path = require('path')
 // app.use('/static', express.static(path.join(__dirname, 'public')))
@@ -111,6 +112,7 @@ app.use("/api/wallet", wallet);
 app.use("/api/backup", backup);
 app.use("/api/trash", trash);
 app.use("/api/google-adsense", googleadsense);
+app.use("/api/contact-inquiry", contactinquiry);
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));

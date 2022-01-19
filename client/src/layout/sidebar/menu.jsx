@@ -136,6 +136,18 @@ export const MENUITEMS = [
 
         ]
     },
+
+    {
+        menutitle:"Contact Enquiries",
+        menucontent:"Contact Enquiries",
+        Items:[
+            {
+                title: 'Contact Enquiries', path: `${process.env.PUBLIC_URL}/dashboard/admin/contact-enquiries`, icon: Airplay, type: 'link', active: false, 
+            },
+
+        ]
+    },
+
     {
         menutitle:"Site settings",
         menucontent:"Site settings",
