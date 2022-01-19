@@ -535,14 +535,65 @@ router.get('/get/:id', (req, res) => {
 });
 
 router.get('/getrestaurants/:id', (req, res) => {
-   Vendor.findAll({ where: { category_id: req.params.id }})
-    .then((result,err)=>{
-        if(result){
-            res.status(201).send(result);
-        }else{
-            res.status(400).send(err);
+
+    var filter = req.query.filter;
+    const { page, size } = req.query;
+    
+    const { limit, offset } = getPagination(page, size);
+
+    if (filter) {
+        var conditions = {
+            limit,
+            offset,
+            where:{
+                category_id: req.params.id,
+                name: {
+                    [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+                }
+            },
+            order: [ [ 'createdAt', 'DESC' ]]
         }
-    });
+    }else{
+        var conditions = {
+            limit,
+            offset,
+            where:{
+                category_id: req.params.id
+            },
+            order: [ [ 'createdAt', 'DESC' ]]
+        }
+    }
+
+    if (!page && !size) {
+
+        var conditions = {
+            where:{
+                category_id: req.params.id
+            },
+            order: [ [ 'createdAt', 'DESC' ]]
+        }
+        Vendor.findAll(conditions)
+        .then((result,err)=>{
+            if(result){
+                res.status(201).send(result);
+            }else{
+                res.status(400).send(err);
+            }
+        });
+    }else{
+
+        Vendor.findAndCountAll(conditions)
+        .then((result,err)=>{
+            if(result){
+
+                const response = getPagingData(result, page, limit);
+
+                res.status(201).send(response);
+            }else{
+                res.status(400).send(err);
+            }
+        });
+    }
 });
 
 // Restore a Country
@@ -556,6 +607,19 @@ router.post('/restore', (req, res) => {
 });
 
 
+const getPagination = (page=1, size) => {
+  const limit = size ? +size : 3;
+  const offset =  (page-1) * limit;
 
+  return { limit, offset };
+};
+
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: vendors } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, vendors, totalPages, currentPage };
+};
 
 module.exports = router;
