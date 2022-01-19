@@ -1284,6 +1284,7 @@ input::placeholder, textarea::placeholder{
     right: -24px;
     top: 2px;
 }
+
 .contactform {
     box-shadow: 0px 3px 9px #00000047;
     border-radius: 12px;
