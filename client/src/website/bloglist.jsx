@@ -13,10 +13,10 @@ const Bloglist = (props) => {
   useEffect(() => {
   
     const config = {
-        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
+        headers: { 'Content-Type': 'application/json'}
         };
  
-    fetch("/api/blogs" , config)
+    fetch("/api/blogs/list" , config)
       .then(res => res.json())
       .then(
         (result) => {
@@ -27,8 +27,6 @@ const Bloglist = (props) => {
         }
       )
   }, []);
-
-  console.log(blogs);
 
 
  const addDefaultSrc = (ev) => {
@@ -47,8 +45,8 @@ const Bloglist = (props) => {
                 <CardBody>
                 <Row>
                  {blogs.map((item , i ) => ( 
-                  <Col sm="6">
-                    <Row key={i}>
+                  <Col sm="6" key={i}>
+                    <Row>
                       <Col sm="3">
                       <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${item.image}`} 
                        alt="Menu-Icon"/>

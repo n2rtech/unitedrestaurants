@@ -67,19 +67,35 @@ router.post('/', imageUpload.single('image'), (req, res) => {
         }
 });
 
-// Get List of Sale Items
+// Get List of Blogs with pagination
 router.get('/list', (req, res) => {
+
     const { page, size } = req.query;
     const { limit, offset } = getPagination(page, size);
-    Blog
-    .findAndCountAll({offset, limit })
-    .then(perms => {
-        const response = getPagingData(perms, page, limit);
-        res.status(200).send(response)
-    })
-    .catch((error) => {
-        res.status(400).send(error);
-    });
+
+    if (page && size) {
+
+        Blog
+        .findAndCountAll({offset, limit, order: [ [ 'createdAt', 'DESC' ]] })
+        .then(result => {
+            const response = getPagingData(result, page, limit);
+            res.status(200).send(response)
+        })
+        .catch((error) => {
+            res.status(400).send(error);
+        });
+
+    }else{
+
+        Blog
+        .findAll({order: [ [ 'createdAt', 'DESC' ]]})
+        .then(blogs => {
+            res.status(200).send(blogs)
+        })
+        .catch((error) => {
+            res.status(400).send(error);
+        });
+    }
 });
 
 
@@ -219,7 +235,6 @@ router.delete('/:id', (req, res) => {
 const getPagination = (page=1, size) => {
   const limit = size ? +size : 3;
   const offset =  (page-1) * limit;
-
   return { limit, offset };
 };
 
@@ -227,9 +242,8 @@ const getPagination = (page=1, size) => {
 const getPagingData = (data, page, limit) => {
   const { count: totalItems, rows: blogs } = data;
   const currentPage = page ? +page : 0;
-  const totalPages = Math.ceil(totalItems / limit);
-
-  return { totalItems, tutorials, totalPages, currentPage };
+  const totalPages = Math.ceil(totalItems / limit)
+  return { totalItems, blogs, totalPages, currentPage };
 };
 
 
