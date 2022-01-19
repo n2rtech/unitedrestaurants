@@ -1,6 +1,7 @@
 import React,{useState,useEffect,Fragment} from 'react';
 import SideNav, { MenuIcon } from 'react-simple-sidenav';
-import { Container, Row, Col, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavbarToggler, NavItem, NavLink,List,ListInlineItem, Nav,TabContent,TabPane,Collapse,Offcanvas,NavDropdown } from 'reactstrap'
+import Dropdown from 'react-multilevel-dropdown';
+import { Container, Row, Col, Form, FormGroup, Input, InputGroup, DropdownToggle, DropdownMenu, DropdownItem, select, option, Label, Button, NavbarToggler, NavItem, NavLink,List,ListInlineItem, Nav,TabContent,TabPane,Collapse,Offcanvas,NavDropdown } from 'reactstrap'
 import './css/style.css'
 import Menu from './menu.jsx'
 import Mobilemenu from './mobilemenu.jsx'
@@ -205,7 +206,22 @@ const title = <div className="searchbar">
               <Col sm="8">
                 <div className="searchbar">
                  <FormGroup>
-                        <div className="InputGroup">
+                <div className="InputGroup">
+                  <Dropdown
+                      title='Select Category'
+                    >
+                      <Dropdown.Item
+                        //onClick={() => doSomething()}
+                      >
+                        Item 1
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        Item 2
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        Item 3
+                      </Dropdown.Item>
+                    </Dropdown>
                 <Input className="form-control" type="search"/>
                 <button id="search" className="btn btn-primary">Search</button>
                 </div>

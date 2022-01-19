@@ -1254,6 +1254,36 @@ input::placeholder, textarea::placeholder{
     margin: 0 auto;
     display: block;
 }
+.searchbar .form-group .InputGroup .Dropdown_dropdown__j8D7v {
+    position: absolute;
+    z-index: 99999;
+    padding: 11px 35px 11px 20px;
+    top: 7px;
+    left: 10px;
+    border-radius: 50px;
+    background-color: #70081C !important;
+    border-color: #70081C !important;
+}
+.searchbar .form-group .InputGroup .Dropdown_dropdown__j8D7v .Dropdown_button__3qNZJ {
+    color: #fff;
+    font-size: 14px !important;
+    position: relative;
+    top: -1px;
+}
+.searchbar .form-group .InputGroup .Dropdown_dropdown__j8D7v .Dropdown_menu__VtiFu {
+    top: 44px !important;
+}
+.searchbar .form-group .InputGroup .Dropdown_dropdown__j8D7v .Dropdown_button__3qNZJ:after{
+    font-family: "Font Awesome 5 Free";
+    content: "▼";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+    position: absolute;
+    right: -24px;
+    top: 2px;
+}
 /**********detailpage-end*********/
 @media (max-width: 767px){ 
 .togglebtn h1 {
