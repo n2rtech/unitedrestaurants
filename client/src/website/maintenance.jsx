@@ -7,7 +7,7 @@ const Maintenance = (props) => {
       <Container fluid={true} className="p-0">
       <Row className="m-0">
         <Col xs="12" className="p-0">     
-         <center><h3>Sorry, we are down for scheduled mainetenance right now.</h3></center>
+         <center><h3>Sorry, we are down for scheduled maintenance right now.</h3></center>
         </Col>
         </Row>
       </Container>

@@ -44,23 +44,24 @@ const Home = (props) => {
         <Col xs="12" className="p-0">     
            <Header countrycode = {params.id}/>
 
-          { maintenance &&  maintenance == 'no' ?
-          
+          { maintenance == 'yes' ?
+            <Maintenance></Maintenance>
+         
+          : 
+
           <div>
-                <Hotdeals></Hotdeals>
+          <Hotdeals></Hotdeals>
 
-                <Featured></Featured>
+          <Featured></Featured>
 
-                <Advertise></Advertise>
+          <Advertise></Advertise>
 
-                <Latestadditions></Latestadditions>
+          <Latestadditions></Latestadditions>
 
-                <Homeblog></Homeblog>
+          <Homeblog></Homeblog>
 
-                
-            </div>
-          : <Maintenance></Maintenance>
-
+          
+      </div>
           
           }
         <Footer />
