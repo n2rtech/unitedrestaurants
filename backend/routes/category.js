@@ -4,6 +4,7 @@ const User = require('../models').User;
 const Role = require('../models').Role;
 const Vendor = require('../models').Vendor;
 const VendorUks = require('../models').VendorUks;
+const Country = require('../models').Country;
 const Permission = require('../models').Permission;
 const Category = require('../models').Category;
 const passport = require('passport');
@@ -534,7 +535,97 @@ router.get('/get/:id', (req, res) => {
         })
 });
 
+
 router.get('/getrestaurants/:id', (req, res) => {
+
+    var filter = req.query.filter;
+    var country_code = req.query.country;
+    const { page, size } = req.query;
+    
+    const { limit, offset } = getPagination(page, size);
+
+console.log('country',country_code);
+
+    Country.findOne({where:{
+        code : country_code||'usa'
+    }})
+    .then((country,err)=>{
+        if(country){
+
+
+            if (filter && country_code) {
+                var conditions = {
+                    limit,
+                    offset,
+                    where:{
+                        category_id: req.params.id,
+                        country_id: country.id,
+                        name: {
+                            [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+                        }
+                    },
+                    order: [ [ 'createdAt', 'DESC' ]]
+                }
+            }else if (filter && !country_code) {
+                var conditions = {
+                    limit,
+                    offset,
+                    where:{
+                        category_id: req.params.id,
+                        name: {
+                            [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+                        }
+                    },
+                    order: [ [ 'createdAt', 'DESC' ]]
+                }
+            }else if (country_code && !filter) {
+                var conditions = {
+                    limit,
+                    offset,
+                    where:{
+                        category_id: req.params.id,
+                        country_id: country.id,
+                    },
+                    order: [ [ 'createdAt', 'DESC' ]]
+                }
+            }
+            else{
+                var conditions = {
+                    limit,
+                    offset,
+                    where:{
+                        category_id: req.params.id,
+                    },
+                    order: [ [ 'createdAt', 'DESC' ]]
+                }
+            }
+            console.log('country',country);
+            console.log('country code',country_code);
+            console.log(conditions);
+
+            Vendor.findAndCountAll(conditions)
+            .then((result,err)=>{
+                if(result){                
+
+                    const response = getPagingData(result, page, limit);
+
+                    res.status(201).send(response);
+                }else{
+                    res.status(400).send(err);
+                }
+            });
+
+            const response = getPagingData(result, page, limit);
+
+            res.status(201).send(response);
+        }else{
+            res.status(400).send(err);
+        }
+    });
+});
+
+
+/*router.get('/getrestaurants/:id', (req, res) => {
 
     var filter = req.query.filter;
     const { page, size } = req.query;
@@ -594,7 +685,7 @@ router.get('/getrestaurants/:id', (req, res) => {
             }
         });
     }
-});
+});*/
 
 // Restore a Country
 router.post('/restore', (req, res) => {

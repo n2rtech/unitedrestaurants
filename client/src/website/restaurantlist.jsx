@@ -1,35 +1,200 @@
 import React,{useState,useEffect} from 'react';
-import { Container, Row, Col, Pagination, PaginationItem, PaginationLink, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
+import { Container, Row, Col, Pagination, PaginationItem, PaginationLink, Card, CardBody, CardTitle, CardSubtitle, CardText, List, Button } from 'reactstrap'
 import './css/style.css'
 import { useParams } from "react-router-dom";
+import axios from 'axios';
 
 const Restaurantlist = (props) => {
   const params = useParams();
-  const [result, setResult] = useState([]);
+
+  const [vendorData, setVendorData] = useState([]);
+  const [activePage, setActivePage] = useState(0);
+  const [totalItemsCount, setTotalItemsCount] = useState(0);  
+  const [pagesCount, setPagesCount] = useState(0);
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(9);
+  const [filter, setFilter] = useState('');
+  const [country, setCountry] = useState(localStorage.getItem('country_code'));
+  const [showPagination, setShowPagination] = useState(false);
 
   useEffect(() => {
-  
-    const config = {
-        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
-        };
- 
-    fetch("/api/categories/getrestaurants/"+`${params.id}` , config)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setResult(result);
-        },
-        (error) => {
-          
-        }
-      )
-  }, []);
 
-  console.log("RESULT" , result);
+    var config = {
+      method: 'get',
+      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      params : {
+        'filter': filter,
+        'country': country,
+        'page': page,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(function (result) {
+      setVendorData(result.data.vendors);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+      setShowPagination(((result.data.totalItems > 0 ) ?? true));
+    })
+    .catch(function (error) {
+    });
+
+  }, []);
 
   const addDefaultSrc = (ev) => {
     ev.target.src = `${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`;
   }
+
+  const handlePreviousClick = (e) => {
+    e.preventDefault();
+    var config = {
+      method: 'get',
+      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params : {
+        'page': activePage-1,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(function (result) {
+      setVendorData(result.data.vendors);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+      setShowPagination(((result.data.totalItems > 0 ) ?? true));
+    })
+    .catch(function (error) {
+    });
+
+  };
+
+
+  const handleNextClick = (e) => {
+    e.preventDefault();
+    var config = {
+      method: 'get',
+      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params : {
+        'filter': filter,
+        'country': country,
+        'page': activePage+1,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(function (result) {
+      setVendorData(result.data.vendors);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+      setShowPagination(((result.data.totalItems > 0 ) ?? true));
+    })
+    .catch(function (error) {
+    });
+
+  };
+
+  const handlePageClick = (e, pageNumber) => {
+    e.preventDefault();
+    var config = {
+      method: 'get',
+      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params : {
+        'filter': filter,
+        'country': country,
+        'page': pageNumber+1,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(function (result) {
+      setVendorData(result.data.vendors);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+      setShowPagination(((result.data.totalItems > 0 ) ?? true));
+    })
+    .catch(function (error) {
+
+    });
+
+  };
+
+  const handleFirstClick = (e) => {
+    e.preventDefault();
+    var config = {
+      method: 'get',
+      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params : {
+        'filter': filter,
+        'country': country,
+        'page': page,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(function (result) {
+      setVendorData(result.data.vendors);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+      setShowPagination(((result.data.totalItems > 0 ) ?? true));
+    })
+    .catch(function (error) {
+    }); 
+
+  };
+
+  const handleLastClick = (e) => {
+
+    e.preventDefault();
+    var config = {
+      method: 'get',
+      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params : {
+        'filter': filter,
+        'country': country,
+        'page': pagesCount,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(function (result) {
+      setVendorData(result.data.vendors);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+      setShowPagination(((result.data.totalItems > 0 ) ?? true));
+    })
+    .catch(function (error) {
+    }); 
+
+  };
 
   return (
     <div className="resturentlist">
@@ -40,8 +205,8 @@ const Restaurantlist = (props) => {
                      alt="Menu-Icon"/>
        </div>
       <Row className="m-0">
-      {result && (result).map((item , i) => (
-           <Col sm="4" xs="12">     
+      {vendorData && (vendorData).map((item , i) => (
+           <Col sm="4" xs="12" key={i}>     
            <div className="customcard">
            <Card>
              <CardBody>
@@ -77,52 +242,29 @@ const Restaurantlist = (props) => {
       ))}
        
         <Col sm="12" xs="12">
-          <Pagination aria-label="Page navigation example">
-            <PaginationItem disabled>
-              <PaginationLink
-                first
-                href="#"
-              />
-            </PaginationItem>
-            <PaginationItem disabled>
-              <PaginationLink
-                href="#"
-                previous
-              />
-            </PaginationItem>
-            <PaginationItem active>
-              <PaginationLink href="#">
-                1
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">
-                2
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">
-                3
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">
-                4
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                href="#"
-                next
-              />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                href="#"
-                last
-              />
-            </PaginationItem>
-          </Pagination>
+          {showPagination &&
+        <Pagination aria-label="Page navigation example">
+          <PaginationItem disabled={activePage <= 1}>
+            <PaginationLink onClick={handleFirstClick} first/>
+          </PaginationItem>
+          <PaginationItem disabled={activePage <= 1}>
+            <PaginationLink onClick={handlePreviousClick} previous/>
+          </PaginationItem>
+            {[...Array(pagesCount)].map((page, i) => (                                    
+              <PaginationItem page={activePage} key={i} cc={(i+1)} active={(i+1) === activePage} key={i}>
+                <PaginationLink disabled={(i+1) === activePage} onClick={e => handlePageClick(e, i)}>
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+          <PaginationItem disabled={activePage === pagesCount}>
+            <PaginationLink onClick={handleNextClick} next />
+          </PaginationItem>
+          <PaginationItem disabled={activePage === pagesCount}>
+            <PaginationLink onClick={handleLastClick} last />
+          </PaginationItem>
+        </Pagination>
+        }
         </Col>
         </Row>
       </Container>
