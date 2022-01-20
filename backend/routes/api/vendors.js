@@ -218,9 +218,11 @@ router.post("/login", (req, res) => {
   let sql = "SELECT * FROM "+table_name+" where email = '"+email+"'";
   DB.query(sql,(err,user)=>{
     if(err){
-      return res.status(404).json({ error: "Error in sql!" });   
+      return res.status(404).json({ error: "Error in sql" });   
     }else if (!user[0]) {
       return res.status(404).json({ error: "Email or Password not found" });
+    }else if(user[0].is_verified == 0){
+      return res.status(404).json({ error: "Please verify your email to login" });
     }else if(user[0].is_suspended == 1){
       return res.status(404).json({ error: "Your account is suspended Please contact site owner!" });
     }else{

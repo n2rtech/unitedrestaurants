@@ -67,7 +67,7 @@ const Restaurantlist = (props) => {
                   </CardText>
                   <Button>
                     <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.id}`}>
-                    SEE SALE
+                      VIEW
                   </a>
                   </Button>
                 </CardBody>
