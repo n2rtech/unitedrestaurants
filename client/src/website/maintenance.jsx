@@ -1,17 +1,27 @@
-import React,{useState} from 'react';
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
-import './css/style.css'
+import React, { Fragment } from 'react';
+import {Container,Button} from 'reactstrap'
+import { Link } from 'react-router-dom';
+import {MAINTENANCE,BACK_TO_HOME_PAGE} from "../constant";
 const Maintenance = (props) => {
-
-  return (
-      <Container fluid={true} className="p-0">
-      <Row className="m-0">
-        <Col xs="12" className="p-0">     
-         <center><h3>Sorry, we are down for scheduled maintenance right now.</h3></center>
-        </Col>
-        </Row>
-      </Container>
-  );
+    return (
+        <Fragment>
+        <div className="page-wrapper">
+        <div className="error-wrapper maintenance-bg">
+          <Container>
+            <ul className="maintenance-icons">
+              <li><i className="fa fa-cog"></i></li>
+              <li><i className="fa fa-cog"></i></li>
+              <li><i className="fa fa-cog"></i></li>
+            </ul>
+            <div className="maintenance-heading">
+              <h2 className="headline">{MAINTENANCE}</h2>
+            </div>
+            <h4 className="sub-content">{"Our Site is Currently under maintenance We will be back Shortly"}<br/>{"Thank You For Patience"}</h4>
+          </Container>
+        </div>
+      </div>
+      </Fragment>
+    );
 }
 
 export default Maintenance;

@@ -48,7 +48,9 @@ import verifyEmail from './website/verifyEmail'
 import Visitors from './website/visitors'
 
 
+import Signupmsg from './pages/authentication/signupmessage'
 
+import Emailvalidation from './pages/authentication/emailvalidation'
 
 // Authentication
 import Login from "./pages/authentication/login"
@@ -129,6 +131,8 @@ const Root = (props) =>  {
         <Switch>
           <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
+          <Route  path={`${process.env.PUBLIC_URL}/message`} component={Signupmsg} />
+          <Route  path={`${process.env.PUBLIC_URL}/verifiedemail/:id`} component={Emailvalidation} />
           <Route  path={`${process.env.PUBLIC_URL}/vendor/login`} component={Vendorsignin} />
           <Route  path={`${process.env.PUBLIC_URL}/user/login`} component={Usersignin} />
           <Route  path={`${process.env.PUBLIC_URL}/home`} component={Home} />

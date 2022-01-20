@@ -189,7 +189,7 @@ const Register = (props) => {
             toast.success(res.data.message);
           }, 200);
           setTimeout(() => {
-            history.push('/vendor/login');
+            history.push('/message');
           }, 1000);
           setFirstName('');
           setMobile('');
@@ -217,6 +217,7 @@ const Register = (props) => {
     return (
       <Container fluid={true} className="p-0">
       <Row>
+       
         <Col xs="12">     
           <div className="login-card">
             <div>

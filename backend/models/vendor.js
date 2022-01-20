@@ -40,7 +40,9 @@ module.exports = (sequelize, DataTypes) => {
     membership_end_date: DataTypes.DATE,
     adds_membership_id: DataTypes.INTEGER,
     adds_membership_start_date: DataTypes.DATE,
-    adds_membership_end_date: DataTypes.DATE
+    adds_membership_end_date: DataTypes.DATE,
+    code: DataTypes.TEXT('long'),
+    is_verified: DataTypes.INTEGER
   }, {
     sequelize,
     paranoid: true,
