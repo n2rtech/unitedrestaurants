@@ -8,11 +8,16 @@ import Mobilemenu from './mobilemenu.jsx'
 import Countryflag from './countryflag.jsx'
 import GoogleTranslate from './googletranslate';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 const Header = (props) => {
+
+const history = useHistory()
 const [showNav, setShowNav] = useState();
 const [countryData, setCountryData] = useState([]);
 const [categoryData, setCategoryData] = useState([]);
+
 
 console.log('Before Country Code' , localStorage.getItem('country_code'));
 
@@ -68,6 +73,28 @@ useEffect(() => {
   ev.target.src = `${process.env.PUBLIC_URL}/assets/images/mainlogo.png`;
 }
 
+const search = useLocation().search;
+const [searchinput, setSearchInput] = useState(new URLSearchParams(search).get("filter"));
+const [catid, setCatid] = useState(new URLSearchParams(search).get("category"));
+
+const OnChangeSearch = (event) => {
+    setSearchInput(event.target.value);
+}
+
+const OnChangecatid = (event) => {
+  setCatid(event.target.value);
+}
+
+
+const HandleSearch = (searchvalue , catid) => {
+
+    const country_code = localStorage.getItem('country_code');
+
+    history.push(`/search?country=${country_code}&category=${catid}&filter=${searchvalue}`);
+
+    window.location.reload(false);
+
+}
 
 const navItems = [
     
@@ -210,15 +237,14 @@ const title = <div className="searchbar">
                 <div className="searchbar">
                  <FormGroup>
                 <div className="InputGroup">
-                    <Input type="select" id="selectcategory">
+                    <Input type="select" id="selectcategory" onChange = {OnChangecatid}>
                       <option>Select Category</option>
-                      <option>Item 1</option>
-                      <option>Item 2</option>
-                      <option>Item 3</option>
-                      <option>Item 4</option>
+                      {categoryData && categoryData.map((item,i) => (
+                        <option value={item.id} selected = { catid == item.id }>{item.name}</option>
+                      ))}
                     </Input>
-                <Input className="form-control" type="search"/>
-                <button id="search" className="btn btn-primary">Search</button>
+                <Input className="form-control" type="search" value = {searchinput} onChange = {OnChangeSearch}/>
+                <button id="search" className="btn btn-primary" onClick={() => HandleSearch(searchinput,catid)}>Search</button>
                 </div>
               </FormGroup>
                </div>
