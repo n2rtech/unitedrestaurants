@@ -1319,6 +1319,26 @@ input::placeholder, textarea::placeholder{
     right: -24px;
     top: 2px;
 }
+.searchbar input{
+    padding-left: 180px;
+}
+.searchbar .form-group .InputGroup #selectcategory {
+    position: absolute;
+    width: 160px;
+    top: 7px;
+    left: 10px;
+    border-radius: 25px;
+    background: #70081c;
+    color: #fff;
+    padding: 0px 10px 0px 10px;
+    font-size: 15px !important;
+    font-weight: 400;
+}
+.searchbar .form-group .InputGroup #selectcategory .form-control:focus{
+    border-color: none;
+    outline: 0;
+    box-shadow: none;
+}
 .contactform {
     box-shadow: 0px 3px 9px #00000047;
     border-radius: 12px;

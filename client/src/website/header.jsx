@@ -210,15 +210,13 @@ const title = <div className="searchbar">
                 <div className="searchbar">
                  <FormGroup>
                 <div className="InputGroup">
-                  <Dropdown
-                      title='Select Category'
-                    >
-                      {categoryData && categoryData.map((item , i ) => (
-                       
-                            <Dropdown.Item>{item.name}</Dropdown.Item>                               
-
-                      ))}
-                    </Dropdown>
+                    <Input type="select" id="selectcategory">
+                      <option>Select Category</option>
+                      <option>Item 1</option>
+                      <option>Item 2</option>
+                      <option>Item 3</option>
+                      <option>Item 4</option>
+                    </Input>
                 <Input className="form-control" type="search"/>
                 <button id="search" className="btn btn-primary">Search</button>
                 </div>
