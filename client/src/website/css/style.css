@@ -1284,7 +1284,41 @@ input::placeholder, textarea::placeholder{
     right: -24px;
     top: 2px;
 }
-
+.searchbar .form-group .InputGroup .Dropdown_dropdown__oZ5Tz {
+    position: absolute;
+    z-index: 99999;
+    padding: 11px 35px 11px 20px;
+    top: 7px;
+    left: 10px;
+    border-radius: 50px;
+    background-color: #70081C !important;
+    border-color: #70081C !important;
+}
+.searchbar .form-group .InputGroup .Dropdown_dropdown__oZ5Tz .Dropdown_button__13TpT {
+    padding: 0;
+    color: #fff;
+    font-size: 14px !important;
+    position: relative;
+    top: 0px;
+    background-color: #0000;
+    height: auto;
+    font-weight: 400;
+}
+.searchbar .form-group .InputGroup .Dropdown_dropdown__oZ5Tz .Dropdown_menu__1xIbZ {
+    top: 44px !important;
+    left: 0 !important;
+}
+.searchbar .form-group .InputGroup .Dropdown_dropdown__oZ5Tz .Dropdown_button__13TpT:after {
+    font-family: "Font Awesome 5 Free";
+    content: "▼";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+    position: absolute;
+    right: -24px;
+    top: 2px;
+}
 .contactform {
     box-shadow: 0px 3px 9px #00000047;
     border-radius: 12px;
