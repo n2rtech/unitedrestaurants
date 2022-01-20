@@ -158,7 +158,7 @@ router.post("/register", (req, res) => {
                  // send mail with defined transport object
                   let info = transporter.sendMail({
                     from: 'United Restaurant <hello@najimfit.com>', // sender address
-                    to: "ganeshnegi004@gmail.com", // list of receivers
+                    to: email, // list of receivers
                     subject: "Vendor Verification mail", // Subject line
                     text: "kjhksdhfkjdshf?", // plain text body
                     html: '<div className="verification" style="background: #f6f6f6;max-width: 600px;margin: 0 auto; margin-top: 30px;"><h1 style="background: #781820;color: #fff;padding: 15px;font-size: 28px;text-align: center;margin-bottom: 22px;">United Restaurants</h1><p style="font-size: 15px;margin-bottom: 5px;padding-left: 25px;">Hello,</p><p style="font-size: 15px;margin-bottom: 5px;padding-left: 25px;">Please verify your email from here</p><button class="btn btn-primary" style="margin-bottom: 40px;margin-top: 20px;margin-left: 25px;background-color: #7366ff !important;border-color: #7366ff !important;"><a href="'+pathemail+'/verifiedemail/'+iscode+'">Verify Email Address</a></button></div>'
