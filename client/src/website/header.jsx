@@ -38,6 +38,9 @@ useEffect(() => {
 
   }, []);
 
+  console.log('CATGERIES LIST' , categoryData);
+  
+
   const [logo, setLogo] = useState([]);
   const code = localStorage.getItem('country_code');
 
@@ -210,17 +213,11 @@ const title = <div className="searchbar">
                   <Dropdown
                       title='Select Category'
                     >
-                      <Dropdown.Item
-                        //onClick={() => doSomething()}
-                      >
-                        Item 1
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        Item 2
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        Item 3
-                      </Dropdown.Item>
+                      {categoryData && categoryData.map((item , i ) => (
+                       
+                            <Dropdown.Item>{item.name}</Dropdown.Item>                               
+
+                      ))}
                     </Dropdown>
                 <Input className="form-control" type="search"/>
                 <button id="search" className="btn btn-primary">Search</button>
