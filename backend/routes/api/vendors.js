@@ -977,21 +977,21 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
 
           app.db(table_name)
           .update({
-            business_name: req.body.business_name || profile.business_name,
-            business_email: req.body.business_email || profile.business_email,
-            manager_name: req.body.manager_name || profile.manager_name,
+            business_name: req.body.business_name ,
+            business_email: req.body.business_email ,
+            manager_name: req.body.manager_name ,
             about_business: req.body.about_business,
-            manager_email: req.body.manager_email || profile.manager_email,
-            phone: req.body.phone || profile.phone,
+            manager_email: req.body.manager_email ,
+            phone: req.body.phone,
             ownermobile: req.body.ownerphone,
-            fax: req.body.fax || profile.fax,
-            address: req.body.address || profile.address,
+            fax: req.body.fax,
+            address: req.body.address,
             categories: categories,
-            website_link: req.body.website_link || profile.website_link,
+            website_link: req.body.website_link ,
             //media_links: req.body.media_links || profile.media_links,
-            facebook: req.body.facebook || profile.facebook,
-            instagram: req.body.instagram || profile.instagram,
-            youtube: req.body.youtube || profile.youtube,
+            facebook: req.body.facebook ,
+            instagram: req.body.instagram ,
+            youtube: req.body.youtube ,
             // status: req.body.status || profile.status
           }, {
             where: {
