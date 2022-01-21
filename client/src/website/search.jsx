@@ -41,11 +41,15 @@ const Home = (props) => {
   const [hotData, setHotData] = useState([]);
   const [latestData, setLatestData] = useState([]);
 
-  const search = useLocation().search;
-  const country_code = new URLSearchParams(search).get("country");
-  const catidsearch = new URLSearchParams(search).get("category");
-  const searchvalue = new URLSearchParams(search).get("filter");
-  const country_codesearch = new URLSearchParams(search).get("country");
+  var base64 = require('base-64');
+  var decodedData = base64.decode(`${params.id}`);
+
+  console.log("Countryde",decodedData);
+
+  const country_code = decodedData.split("&country=").pop()
+  const catidsearch = decodedData.split("&category=").pop()
+  const searchvalue = decodedData.split("&filter=").pop()
+  const country_codesearch = decodedData.split("&country=").pop()
 
   useEffect(() => {
   
@@ -53,17 +57,17 @@ const Home = (props) => {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
 
-        axios.get(`/api/hot-deals?country=${country_code}&category=${catidsearch}&filter=${searchvalue}`)
+        axios.get(`/api/hot-deals?${decodedData}`)
         .then((getData) => {
           setHotData(getData.data);
         });
 
-        axios.get(`/api/featured-businesses?country=${country_code}&category=${catidsearch}&filter=${searchvalue}`)
+        axios.get(`/api/featured-businesses?${decodedData}`)
           .then((getData) => {
             setFeaturedData(getData.data);
         });
 
-        axios.get(`/api/ad-spaces/list?country=${country_codesearch}&category=${catidsearch}&filter=${searchvalue}`)
+        axios.get(`/api/ad-spaces/list?${decodedData}`)
         .then((getData) => {
           setAddSpaces(getData.data);
         });

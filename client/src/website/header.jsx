@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 import SweetAlert from 'sweetalert2'
+var base64 = require('base-64');
 
 const Header = (props) => {
 
@@ -65,8 +66,8 @@ useEffect(() => {
 }
 
 const search = useLocation().search;
-const [searchinput, setSearchInput] = useState(new URLSearchParams(search).get("filter"));
-const [catid, setCatid] = useState(new URLSearchParams(search).get("category"));
+const [searchinput, setSearchInput] = useState(localStorage.getItem('filter'));
+const [catid, setCatid] = useState(localStorage.getItem('catid'));
 
 const OnChangeSearch = (event) => {
     setSearchInput(event.target.value);
@@ -76,6 +77,8 @@ const OnChangecatid = (event) => {
   setCatid(event.target.value);
 }
 
+
+console.log("sdsd",catid);
 
 const HandleSearch = (searchvalue , catid) => {
 
@@ -89,7 +92,10 @@ const HandleSearch = (searchvalue , catid) => {
         'danger '
       )
     } else {
-      history.push(`/search?country=${country_code}&category=${catid}&filter=${searchvalue}`);
+      localStorage.setItem('catid' , catid);
+      localStorage.setItem('filter' , searchvalue);
+      const url = base64.encode(`&country=${country_code}&category=${catid}&filter=${searchvalue}`)
+      history.push(`/search/${url}`);
 
       window.location.reload(false);
     }

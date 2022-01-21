@@ -13,7 +13,8 @@ import './css/style.css'
 import {useParams} from 'react-router-dom'
 
 const Home = (props) => {
-
+  localStorage.setItem('filter','');
+  localStorage.setItem('catid','');
   const params = useParams();
   const [maintenance, setMaintenance] = useState([]);
   const code = localStorage.getItem('country_code');

@@ -133,7 +133,7 @@ const Root = (props) =>  {
         <Switch>
           <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
           <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
-          <Route exact path={`${process.env.PUBLIC_URL}/search`} component={Search} />
+          <Route exact path={`${process.env.PUBLIC_URL}/search/:id`} component={Search} />
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
           <Route  path={`${process.env.PUBLIC_URL}/message`} component={Signupmsg} />
           <Route  path={`${process.env.PUBLIC_URL}/verifiedemail/:id`} component={Emailvalidation} />
