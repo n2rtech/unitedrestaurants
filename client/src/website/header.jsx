@@ -41,6 +41,7 @@ useEffect(() => {
   }, []);
 
   const [logo, setLogo] = useState([]);
+  const [socialdata, setSocialData] = useState([]);
   const code = localStorage.getItem('country_code');
 
   useEffect(() => {
@@ -54,6 +55,7 @@ useEffect(() => {
       .then(
         (result) => {  
           setLogo(result.logo);
+          setSocialData(result);
         },
         (error) => {
           
@@ -223,12 +225,12 @@ const title = <div className="searchbar">
                 <a target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >login here</a>
               </div>
               </div>
-              <div className="socialmenu">
-                  <a href="#"><i className="fa fa-facebook"></i></a>
-                  <a href="#"><i className="fa fa-twitter"></i></a>
-                  <a href="#"><i className="fa fa-google-plus"></i></a>
-                  <a href="#"><i className="fa fa-linkedin"></i></a>
-                  <a href="#"><i className="fa fa-instagram"></i></a>
+                <div className="socialmenu">
+                  <a href={`//${socialdata.facebook_links}`} target="_blank"><i className="fa fa-facebook"></i></a>
+                  <a href={`//${socialdata.twitter_links}`} target="_blank"><i className="fa fa-twitter"></i></a>
+                  <a href={`//${socialdata.google_plus_links}`} target="_blank"><i className="fa fa-google-plus"></i></a>
+                  <a href={`//${socialdata.linkedin_links}`} target="_blank"><i className="fa fa-linkedin"></i></a>
+                  <a href={`//${socialdata.instagram_links}`} target="_blank"><i className="fa fa-instagram"></i></a>
               </div>
               
             </div>
