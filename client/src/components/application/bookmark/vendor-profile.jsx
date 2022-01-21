@@ -33,19 +33,19 @@ const VendorProfile = (props) => {
         });
     }
 
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [managername, setManagerName] = useState()
-    const [manageremail, setManagerEmail] = useState()
-    const [phone, setPhone] = useState()
-    const [ownerphone, setOwnerPhone] = useState()
-    const [fax, setFax] = useState()
-    const [address, setAddress] = useState()
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [managername, setManagerName] = useState('')
+    const [manageremail, setManagerEmail] = useState('')
+    const [phone, setPhone] = useState('')
+    const [ownerphone, setOwnerPhone] = useState('')
+    const [fax, setFax] = useState('')
+    const [address, setAddress] = useState('')
     const [websitelink, setWebsitelink] = useState()
-    const [fblink, setFblink] =  useState()
-    const [instalink, setInstalink] = useState()
-    const [youtubelink, setYoutubelink] = useState()
-    const [aboutbusiness, setAboutBusiness] = useState()
+    const [fblink, setFblink] =  useState('')
+    const [instalink, setInstalink] = useState('')
+    const [youtubelink, setYoutubelink] = useState('')
+    const [aboutbusiness, setAboutBusiness] = useState('')
     const [categories, setCategory] = useState()
 
     const onChangeName = (event) => {

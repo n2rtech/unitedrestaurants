@@ -79,9 +79,10 @@ const OnChangecatid = (event) => {
 
 const HandleSearch = (searchvalue , catid) => {
 
+    const cat = parseInt(catid);
     const country_code = localStorage.getItem('country_code');
-
-    if(catid == 'Select Category') {
+    console.log('catid=',catid);
+    if(isNaN(cat)) {
       SweetAlert.fire(
         'Alert!',
         'Choose category first.',
@@ -236,7 +237,7 @@ const title = <div className="searchbar">
                  <FormGroup>
                 <div className="InputGroup">
                     <Input type="select" id="selectcategory" onChange = {OnChangecatid}>
-                      <option>Select Category</option>
+                      <option value="0">Select Category</option>
                       {categoryData && categoryData.map((item,i) => (
                         <option value={item.id} selected = { catid == item.id }>{item.name}</option>
                       ))}
