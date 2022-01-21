@@ -14,6 +14,11 @@ const helper = new Helper();
 const path = require('path');
 const Op = require('sequelize').Op
 var multer  = require('multer');
+const {DB} = require('../config/database');
+const db = require('../models');
+
+const app = express();
+app.db = (model) => db[model];
 
 const imageStorage = multer.diskStorage({
     destination: 'uploads/categories', 
@@ -625,67 +630,80 @@ console.log('country',country_code);
 });
 
 
-/*router.get('/getrestaurants/:id', (req, res) => {
+router.get('/getrest/:category', (req, res) => {
+    if (!req.params.category) {
+      res.status(400).send({
+        msg: 'Please pass Category.'
+      })
+    } else {
+      code = req.query.country||'usa';
+      const { page, size } = req.query;
+      const { limit, offset } = getPagination(page, size);
+      if (code == 'ita') {
+        var table_name = 'VendorIta';
+      }else{
+        var codee = code.charAt(0).toUpperCase() + code.slice(1);
+        var table_name = 'Vendor' + codee + 's';
+      }
+      Category
+      .findOne({
+        where :{ id : req.params.category}
+      })
+      .then((category) => {
+          
+        if (category == null) {
+          res.status(200).send('category not found')
+        }else{
+          var code = req.query.country||'usa';
+          if (code == 'ita') {
+            var table_name = 'VendorIta';
+          }else{
+            var codee = code.charAt(0).toUpperCase() + code.slice(1);
+            var table_name = 'Vendor' + codee;
+          }
 
-    var filter = req.query.filter;
-    const { page, size } = req.query;
-    
-    const { limit, offset } = getPagination(page, size);
-
-    if (filter) {
-        var conditions = {
-            limit,
-            offset,
-            where:{
-                category_id: req.params.id,
-                name: {
-                    [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
-                }
-            },
-            order: [ [ 'createdAt', 'DESC' ]]
-        }
-    }else{
-        var conditions = {
-            limit,
-            offset,
-            where:{
-                category_id: req.params.id
-            },
-            order: [ [ 'createdAt', 'DESC' ]]
-        }
-    }
-
-    if (!page && !size) {
-
-        var conditions = {
-            where:{
-                category_id: req.params.id
-            },
-            order: [ [ 'createdAt', 'DESC' ]]
-        }
-        Vendor.findAll(conditions)
-        .then((result,err)=>{
-            if(result){
-                res.status(201).send(result);
-            }else{
-                res.status(400).send(err);
+        
+          if (table_name == 'Null') {
+            var table_name = 'VendorIta';
+          }
+          if (req.query.filter) {
+            condition = {
+              where:{
+                categories: { [Op.like]: '%' + category.id + '%' },
+                business_name: { [Op.like]: '%' + req.query.filter + '%' }
+              },
+              offset,
+              limit
             }
-        });
-    }else{
-
-        Vendor.findAndCountAll(conditions)
-        .then((result,err)=>{
-            if(result){
-
-                const response = getPagingData(result, page, limit);
-
-                res.status(201).send(response);
-            }else{
-                res.status(400).send(err);
+          }else{
+            condition = {
+              where:{
+                categories: { [Op.like]: '%' + category.id + '%' }
+              },
+              offset,
+              limit
             }
-        });
+          }
+
+         
+          app.db(table_name)
+          .findAndCountAll(condition)
+          .then(vendors => {
+           const response = getPagingData(vendors, page, limit);
+           res.status(200).send(response)
+         })
+          .catch((error) => {
+            console.log(error);
+            res.status(400).send('error2');
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(400).send(error);
+      });
     }
-});*/
+  });
 
 // Restore a Country
 router.post('/restore', (req, res) => {

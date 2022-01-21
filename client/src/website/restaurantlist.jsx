@@ -21,7 +21,7 @@ const Restaurantlist = (props) => {
 
     var config = {
       method: 'get',
-      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      url: '/api/categories/getrest/'+`${params.id}`,
       headers: { 
         'Content-Type': 'application/json'
       },
