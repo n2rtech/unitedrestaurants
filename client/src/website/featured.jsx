@@ -5,7 +5,6 @@ import ReactStars from "react-rating-stars-component";
 import "react-multi-carousel/lib/styles.css";
 import './css/style.css'
 import {useParams} from 'react-router-dom'
-import { useLocation } from "react-router-dom";
 import axios from 'axios';
 
 const Featured = (props) => {
@@ -14,28 +13,17 @@ const Featured = (props) => {
   const [featuredData, setFeaturedData] = useState([]);
   const code = localStorage.getItem('country_code');
 
-  const search = useLocation().search;
-  const country_code = new URLSearchParams(search).get("country");
-  const catidsearch = new URLSearchParams(search).get("category");
-  const searchvalue = new URLSearchParams(search).get("filter");
-
   useEffect(() => {
   
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
 
-        if(country_code != '' && catidsearch  != '' && searchvalue) {
-          axios.get(`/api/featured-businesses?country=${country_code}&category=${catidsearch}&filter=${searchvalue}`)
-          .then((getData) => {
-            setFeaturedData(getData.data);
-          });
-        } else {
           axios.get('/api/featured-businesses?country='+`${code}` , config)
           .then((getData) => {
             setFeaturedData(getData.data);
           });
-        }
+  
   }, []);
 
   const addDefaultSrc = (ev) => {

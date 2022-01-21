@@ -11,13 +11,6 @@ const Advertise = (props) => {
   }
 
   const country_code = localStorage.getItem('country_code');
-
-  const search = useLocation().search;
-  const country_codesearch = new URLSearchParams(search).get("country");
-  const catidsearch = new URLSearchParams(search).get("category");
-  const searchvalue = new URLSearchParams(search).get("filter");
-
-
   const [addSpaces, setAddSpaces] = useState([]);
 
     useEffect(() => {
@@ -25,20 +18,12 @@ const Advertise = (props) => {
       const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
-  
-      if(country_codesearch != '' && catidsearch  != '' && searchvalue) {
-        axios.get(`/api/ad-spaces/list?country=${country_codesearch}&category=${catidsearch}&filter=${searchvalue}`)
-        .then((getData) => {
-          setAddSpaces(getData.data);
-        });
-      } else {
+
         axios.get('/api/ad-spaces/list?country='+`${country_code}` , config)
         .then((getData) => {
           setAddSpaces(getData.data);
         });
-      }
 
-  
     }, []);
 
   return (

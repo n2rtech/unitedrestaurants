@@ -10,6 +10,7 @@ import GoogleTranslate from './googletranslate';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
+import SweetAlert from 'sweetalert2'
 
 const Header = (props) => {
 
@@ -18,15 +19,10 @@ const [showNav, setShowNav] = useState();
 const [countryData, setCountryData] = useState([]);
 const [categoryData, setCategoryData] = useState([]);
 
-
-console.log('Before Country Code' , localStorage.getItem('country_code'));
-
 const OnChangeCountry = (event) => {
   localStorage.setItem('country_code' , event.target.value);
   window.location.reload(false);
 }
-
-console.log('After Country Code' , localStorage.getItem('country_code'));
 
 useEffect(() => {
     axios.get(`/api/Countries/list`)
@@ -42,9 +38,6 @@ useEffect(() => {
     }); 
 
   }, []);
-
-  console.log('CATGERIES LIST' , categoryData);
-  
 
   const [logo, setLogo] = useState([]);
   const code = localStorage.getItem('country_code');
@@ -67,8 +60,6 @@ useEffect(() => {
         )
   }, []);
 
-  console.log("Logo" , logo);
-
   const addDefaultSrc = (ev) => {
   ev.target.src = `${process.env.PUBLIC_URL}/assets/images/mainlogo.png`;
 }
@@ -90,10 +81,17 @@ const HandleSearch = (searchvalue , catid) => {
 
     const country_code = localStorage.getItem('country_code');
 
-    history.push(`/search?country=${country_code}&category=${catid}&filter=${searchvalue}`);
+    if(catid == 'Select Category') {
+      SweetAlert.fire(
+        'Alert!',
+        'Choose category first.',
+        'danger '
+      )
+    } else {
+      history.push(`/search?country=${country_code}&category=${catid}&filter=${searchvalue}`);
 
-    window.location.reload(false);
-
+      window.location.reload(false);
+    }
 }
 
 const navItems = [
