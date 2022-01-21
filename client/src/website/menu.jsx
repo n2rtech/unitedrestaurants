@@ -1,6 +1,6 @@
 import React,{useState,useEffect,Fragment} from 'react';
 import Dropdown from 'react-multilevel-dropdown';
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
+import { Container, Row, Col, Navbar, NavbarToggler, Collapse, NavItem, NavLink, Nav } from 'reactstrap'
 import './css/style.css'
 import {useParams} from 'react-router-dom'
 import axios from 'axios'
@@ -63,8 +63,6 @@ useEffect(() => {
 
 }, []);
 
-console.log('Menu' , categoryData);
-
   return (
       <div className="headermenu">
         <Container fluid={true} className="p-0">
@@ -81,12 +79,12 @@ console.log('Menu' , categoryData);
                     <a href={`${process.env.PUBLIC_URL}/restaurants/${item.id}`}>  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.image}`} alt="Menu-Icon"/> </a>
                     {item.parent && (item.parent.length > 0) && <Dropdown title={item.name} key={i}>
                     {item.parent && (item.parent).map((item1 , i) => (<Fragment>
-                      <Dropdown.Item><a href={`${process.env.PUBLIC_URL}/restaurants/${item1.id}`}>{item1.name}</a>
+                      <Dropdown.Item> <a href={`${process.env.PUBLIC_URL}/restaurants/${item1.id}`}>{item1.name}</a>
                       {item1.parent_2 &&
                         <Fragment>
                         {(item1.parent_2).map((item2 , i) => (
                           <Dropdown.Submenu>
-                          <Dropdown.Item><NavLink href={`${process.env.PUBLIC_URL}/restaurants/${item2.id}`}>{item2.name}</NavLink>
+                          <Dropdown.Item><NavLink href={`${process.env.PUBLIC_URL}/restaurants/${item2.id}`} >{item2.name} </NavLink>
                           {item2.parent_3 &&
                             <Fragment>
                             {(item2.parent_3).map((item3 , i) => (

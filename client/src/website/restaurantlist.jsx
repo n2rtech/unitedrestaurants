@@ -195,8 +195,6 @@ const Restaurantlist = (props) => {
     }); 
 
   };
-  
-  console.log(vendorData);
 
   return (
     <div className="resturentlist">
@@ -207,7 +205,7 @@ const Restaurantlist = (props) => {
                      alt="Menu-Icon"/>
        </div>
       <Row className="m-0">
-      {vendorData && (vendorData).map((item , i) => (
+      {vendorData.length > 0 ? (vendorData).map((item , i) => (
            <Col sm="4" xs="12" key={i}>     
            <div className="customcard">
            <Card>
@@ -241,7 +239,7 @@ const Restaurantlist = (props) => {
               </Card>
              </div>
          </Col>
-      ))}
+      )) : <Col><center>There are no business listing available</center></Col> }
        
         <Col sm="12" xs="12">
           {showPagination &&

@@ -47,22 +47,18 @@ const Home = (props) => {
 
           { maintenance == 'yes' ?
             <Maintenance></Maintenance>
-         
           : 
+            <>
+              <Hotdeals></Hotdeals>
 
-          <div>
-          <Hotdeals></Hotdeals>
+              <Featured></Featured>
 
-          <Featured></Featured>
+              <Advertise></Advertise>
 
-          <Advertise></Advertise>
+              <Latestadditions></Latestadditions>
 
-          <Latestadditions></Latestadditions>
-
-          <Homeblog></Homeblog>
-
-          
-      </div>
+              <Homeblog></Homeblog>
+            </>
           
           }
         <Footer />

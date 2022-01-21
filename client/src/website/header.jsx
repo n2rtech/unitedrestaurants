@@ -77,14 +77,11 @@ const OnChangecatid = (event) => {
   setCatid(event.target.value);
 }
 
-
-console.log("sdsd",catid);
-
 const HandleSearch = (searchvalue , catid) => {
 
     const cat = parseInt(catid);
     const country_code = localStorage.getItem('country_code');
-    console.log('catid=',catid);
+
     if(isNaN(cat)) {
       SweetAlert.fire(
         'Alert!',
