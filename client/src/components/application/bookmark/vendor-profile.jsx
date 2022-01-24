@@ -17,7 +17,7 @@ const VendorProfile = (props) => {
         const config = {
     headers: {'Authorization': 'JWT '+token }
   };
-      const result = await axios('/api/categories/list',config);
+      const result = await axios('/api/categories/catlist',config);
       setOptions(result.data);
     };
     GetData();

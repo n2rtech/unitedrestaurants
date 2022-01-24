@@ -241,6 +241,87 @@ router.get("/list", (req, res) => {
     });
 });
 
+router.get('/catlist', function (req, res) {
+        Category
+        .findAll({
+            include: [
+            {
+                model: Category,
+                as: 'parent_category',
+                include: [
+                {
+                    model: Category,
+                    as: 'parent_category',
+                    include: [
+                    {
+                        model: Category,
+                        as: 'parent_category',
+                        include: [
+                        {
+                            model: Category,
+                            as: 'parent_category',
+
+                        }
+                        ]
+
+                    }
+                    ]
+
+                }
+                ]
+            },
+
+            ]
+
+        })
+            .then((category) => {
+
+                var newdata = [];
+             
+                newdata = category.forEach((element,i) => {
+                    
+                    category[i].parent_1  = category[i].parent_2 = category[i].parent_3 = category[i].parent_4 = '';
+                    category[i].parentid_1 = '';
+                  
+                      category[i].id = element.id;
+                      var parent = element.parent_category; 
+                      if(parent){
+                        category[i].parent_1 = element.name+' > '+parent.name;
+                        category[i].parentid_1 = parent.id;
+                        if(parent.parent_category){
+                          var nextparent = parent.parent_category; 
+                           
+                          category[i].parentid_1 = element.name+' > '+parent.name+' > '+nextparent.name;
+                          category[i].parentid_1 = nextparent.id;
+                          if(nextparent.parent_category){
+                            var nextnextparent = nextparent.parent_category;
+                            
+                            category[i].parentid_1 = element.name+' > '+parent.name+' > '+nextparent.name+' > '+nextnextparent.name;
+                            category[i].parentid_1 = nextnextparent.id;
+                            if(nextnextparent.parent_category){
+                              var nectnextnextparent = nextnextparent.parent_category;
+                              
+                              category[i].parentid_1 = element.name+' > '+parent.name+' > '+nextparent.name+' > '+nextnextparent.name+' > '+nectnextnextparent.name;
+                              category[i].parentid_1 = nectnextnextparent.id;  
+                            }
+          
+                          }
+          
+                        }
+
+                        category[i].name = category[i].parent_1 +' '+category[i].parent_2+' '+category[i].parent_3+''+category[i].parent_4;
+                        category[i].id = category[i].parentid_1;
+                      }     
+                })
+
+                   
+                res.status(200).send(category)
+            })
+            .catch((error) => {
+                res.status(400).send(console.log(error));
+            });
+});
+
 // Get List of Categories
 router.get("/deleted", (req, res) => {
     Category
