@@ -163,7 +163,7 @@ function runSample(title,desc,fileName , youtube_id) {
     access_type: "offline"
   , scope: ["https://www.googleapis.com/auth/youtube.upload"]
   }), {
-  app: 'Chrome',
+  app: {name: 'google chrome', arguments: ['--incognito']},
   wait: true
 }).then(cp => console.log('child process:', cp)).catch(console.error);
 
