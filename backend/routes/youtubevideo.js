@@ -152,7 +152,7 @@ function runSample(title,desc,fileName , youtube_id) {
   , redirect_url: CREDENTIALS.web.redirect_uris[0]
   });
   console.log("second step..............");
-  await opn(oauth.generateAuthUrl({
+  opn(oauth.generateAuthUrl({
     access_type: "offline"
   , scope: ["https://www.googleapis.com/auth/youtube.upload"]
   }) , {wait: true});
