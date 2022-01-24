@@ -152,11 +152,16 @@ function runSample(title,desc,fileName , youtube_id) {
   , redirect_url: CREDENTIALS.web.redirect_uris[0]
   });
   console.log("second step..............");
-  opn(oauth.generateAuthUrl({
+
+  const check = opn(oauth.generateAuthUrl({
     access_type: "offline"
   , scope: ["https://www.googleapis.com/auth/youtube.upload"]
-  }) , {wait: true});
-  console.log("3rd step..............");
+  }));
+
+  if(check) {
+    console.log("3rd step..............");
+  }
+
 }
 
 router.get('/:id', function (req, res) {
