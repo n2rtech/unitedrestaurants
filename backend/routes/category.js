@@ -583,18 +583,27 @@ const getSubCat = (value) => {
     });
 }
 
+const subcat_name = (value) => {
+        Category.findOne({ where: { id: value } })
+        .then((result,err)=>{
+            if(result){
+                console.log(result.name);
+                return result.name;
+            }else{
+                return err;
+            }
+        });
+}
 
 router.post("/getByIds", (req, res) => {
-    console.log(req.body.categories);
-    console.log({
-      where: {
-        id: {
-          [Op.in]: req.body.categories
-      }
-  }
-});
     Category
     .findAll({
+        include: [
+            {
+                model: Category,
+                as: 'parent_category',
+            }
+        ], 
       where: {
         id: {
           [Op.in]: req.body.categories
@@ -602,7 +611,17 @@ router.post("/getByIds", (req, res) => {
   }
 })
     .then((category) => {
-        res.status(200).send(category)
+
+        category.forEach((element,i) => {
+            category[i].parentid_1 = ''
+            var parent = element.parent_category; 
+            if(parent) {
+             
+                category[i].name = element.name + ' > ' + parent.name;
+                
+            }
+        });
+        res.status(201).send(category)
     })
     .catch((error) => {
         res.status(400).send('error');
