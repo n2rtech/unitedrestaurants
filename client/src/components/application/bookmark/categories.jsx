@@ -128,13 +128,19 @@ const Categories = (props) => {
               <tbody>
               {generalData.map((item , i ) => (
                 <tr key={i}>
-                  <td>{item.name}   
+                  <td>   
 
-                   { (item.parent_1) ? ' > '+item.parent_1 :''}
-                   { (item.parent_2) ? ' > '+item.parent_2 :''}
-                   { (item.parent_3) ? ' > '+item.parent_3 :''}
-                   { (item.parent_4) ? ' > '+item.parent_4 :''}
-           
+                    { 
+                      (item.parent_1) ? ((item.parent_2) ? ((item.parent_3) ? ((item.parent_4) ? 
+                      item.parent_4+' > '+item.parent_3+' > '+item.parent_2+' > '+item.parent_1+' > '+item.name : 
+                      item.parent_3+' > '+item.parent_2+' > '+item.parent_1+' > '+item.name
+                      ) :
+                       item.parent_2+' > '+item.parent_1+' > '+item.name ) : 
+                       item.parent_1+' > '+item.name) :
+                      item.name
+                    }
+
+               
 
                   </td>
                   <td className="text-right">

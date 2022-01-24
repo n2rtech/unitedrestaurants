@@ -286,17 +286,17 @@ router.get('/catlist', function (req, res) {
                       category[i].id = element.id;
                       var parent = element.parent_category; 
                       if(parent){
-                        category[i].parent_1 = element.name+' > '+parent.name;
+                        category[i].parent_1 = parent.name+' > '+element.name;
                         category[i].parentid_1 = parent.id;
                         if(parent.parent_category){
                           var nextparent = parent.parent_category; 
                            
-                          category[i].parentid_1 = element.name+' > '+parent.name+' > '+nextparent.name;
+                          category[i].parentid_1 = parent.name+' > '+nextparent.name+' > '+element.name;
                           category[i].parentid_1 = nextparent.id;
                           if(nextparent.parent_category){
                             var nextnextparent = nextparent.parent_category;
                             
-                            category[i].parentid_1 = element.name+' > '+parent.name+' > '+nextparent.name+' > '+nextnextparent.name;
+                            category[i].parentid_1 = parent.name+' > '+nextparent.name+' > '+nextnextparent.name+' > '+element.name;
                             category[i].parentid_1 = nextnextparent.id;
                             if(nextnextparent.parent_category){
                               var nectnextnextparent = nextnextparent.parent_category;
@@ -617,7 +617,7 @@ router.post("/getByIds", (req, res) => {
             var parent = element.parent_category; 
             if(parent) {
              
-                category[i].name = element.name + ' > ' + parent.name;
+                category[i].name = parent.name +'>'+element.name ;
                 
             }
         });
