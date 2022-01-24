@@ -158,6 +158,15 @@ function runSample(title,desc,fileName , youtube_id) {
   , scope: ["https://www.googleapis.com/auth/youtube.upload"]
   }));
 
+
+  opn(oauth.generateAuthUrl({
+    access_type: "offline"
+  , scope: ["https://www.googleapis.com/auth/youtube.upload"]
+  }), {
+  app: 'Chrome',
+  wait: true
+}).then(cp => console.log('child process:', cp)).catch(console.error);
+
   if(check) {
     console.log("3rd step..............");
   }
