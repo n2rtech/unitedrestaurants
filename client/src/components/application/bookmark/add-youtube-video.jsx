@@ -54,7 +54,7 @@ const AddVideoGallery = (props) => {
         bodyParameters.append('desc', desc);
         bodyParameters.append('image', youtubelink)
       
-
+      toast.success('Please wait for confirmation.......');
       axios.post(`/api/youtubevideo/`, 
         bodyParameters,
         config
@@ -92,7 +92,7 @@ const AddVideoGallery = (props) => {
           </CardBody>
 
           <CardBody>
-            { url == '' ? '' : <a href={`//${url}`} target='_blank'>Please click here to verify youtube channel</a>}
+            { url == '' ? '' : <Button color="primary" href={`//${url}`} target='_blank'>Please click here to verify youtube channel</Button>}
           </CardBody>
         </Card>  
       </Container>
