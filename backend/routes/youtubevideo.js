@@ -87,7 +87,7 @@ router.post('/oauth2callback', (req, res) => {
             }
             // I don't want to spam my subscribers
           , status: {
-                privacyStatus: "private"
+                privacyStatus: "public"
             }
         }
         // This is for the callback function

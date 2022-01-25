@@ -55,6 +55,7 @@ const VendorVideoGallery = (props) => {
                     <tr>
                         <th scope="col">{"Video Name"}</th>
                         <th scope="col">{"Description"}</th>
+                        <th scope="col">{"Video"}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,10 +63,12 @@ const VendorVideoGallery = (props) => {
                   <tr key = {i}>
                     <td>{item.title}</td>
                     <td>{item.description}</td>
-                    {/* <td className="text-right">
-                      <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-video-gallery/${item.id}`} className="btn btn-success">Edit</a> &nbsp;
-                      <a className="btn btn-danger">Delete</a> 
-                    </td> */}
+                    <td className="text-right">
+                    <iframe width="300" height="200" src={`https://www.youtube.com/embed/${item.youtube_video_id}`}>
+                      </iframe>
+                      {/* <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-video-gallery/${item.id}`} className="btn btn-success">Edit</a> &nbsp;
+                      <a className="btn btn-danger">Delete</a>  */}
+                    </td>
                   </tr>
                 ))}
                 </tbody>
