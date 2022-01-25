@@ -5,11 +5,14 @@ import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import { $CombinedState } from 'redux';
 
 const AddVideoGallery = (props) => {
     const [videoname, setVideoname] = useState('')
     const [youtubelink, setYoutubelink] = useState('')
     const [desc, setDesc] = useState('')
+
+    const [url, seturl] = useState('')
 
     const params = useParams();
     const token = localStorage.getItem("token");
@@ -56,12 +59,8 @@ const AddVideoGallery = (props) => {
         bodyParameters,
         config
       ) .then(response => {
-        //toast.success("Video Added !")
         console.log(response.data);
-          
-            window.open(response.data, '_blank');
-         
-
+        seturl(response.data);
       }).catch(error => { toast.error('Please upload files or fill title and description') })
 
 
@@ -90,6 +89,10 @@ const AddVideoGallery = (props) => {
                 <Button  color="primary" onClick = {handleSubmit}>{"Save"}</Button>
               </FormGroup>
             </Form>
+          </CardBody>
+
+          <CardBody>
+            { url == '' ? '' : <a href={`//${url}`} target='_blank'>Please click here to verify youtube channel</a>}
           </CardBody>
         </Card>  
       </Container>
