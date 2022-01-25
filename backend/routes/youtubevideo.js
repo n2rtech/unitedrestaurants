@@ -145,7 +145,7 @@ router.post('/', imageUpload.array('image',12),  function (req, res) {
       access_type: "offline"
     , scope: ["https://www.googleapis.com/auth/youtube.upload"]
     }), {wait: true
-    }).then(cp => res.status(200).send(cp.spawnargs[1]));
+    }).then(cp => res.status(200).send( cp.spawnargs[1].replace('https://','')));
 
   }
 });
