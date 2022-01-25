@@ -56,10 +56,12 @@ const AddVideoGallery = (props) => {
         bodyParameters,
         config
       ) .then(response => {
-        toast.success("Video Added !")
+        //toast.success("Video Added !")
+        console.log(response.data);
           setTimeout(() => {
-            history.push('/dashboard/vendor/add-youtube-video/');
+            window.open(response.data, '_blank')
           }, 1000);
+
       }).catch(error => { toast.error('Please upload files or fill title and description') })
 
 

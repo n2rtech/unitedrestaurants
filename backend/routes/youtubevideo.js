@@ -29,7 +29,7 @@ const imageStorage = multer.diskStorage({
           const video_path = path.dirname(require.main.filename || process.mainModule.filename)+'/uploads/youtubevideo/'+image_na;
           console.log('video_path' , video_path);
           console.log("Before run sample function..............");
-          if(runSample(req.body.video_name,req.body.desc,video_path,result.id)) {
+          if(setValues(req.body.video_name,req.body.desc,video_path,result.id)) {
             console.log("After run sample function..............");
             return true;
           } 
@@ -132,46 +132,30 @@ router.post('/', imageUpload.array('image',12),  function (req, res) {
           msg: 'Please upload files or fill title and description.'
       })
   } else {
-    res.status(200).send({
-      msg: 'Successfully Added.'
-  })
+    const CREDENTIALS = readJson(`client_secret.json`);    
+    console.log("Credentials..............", CREDENTIALS);
+    let oauth = Youtube.authenticate({
+      type: "oauth"
+    , client_id: CREDENTIALS.web.client_id
+    , client_secret: CREDENTIALS.web.client_secret
+    , redirect_url: CREDENTIALS.web.redirect_uris[0]
+    });
+
+    opn(oauth.generateAuthUrl({
+      access_type: "offline"
+    , scope: ["https://www.googleapis.com/auth/youtube.upload"]
+    }), {wait: true
+    }).then(cp => res.status(200).send(cp.spawnargs[1]));
+
   }
 });
 
 // very basic example of uploading a video to youtube
-function runSample(title,desc,fileName , youtube_id) {
+function setValues(title,desc,fileName , youtube_id) {
   console.log("Inside run sample funciton..............");
   store.set('youtube', { title: title , desc: desc , filename: fileName , youtube_id: youtube_id })
-
-  const CREDENTIALS = readJson(`client_secret.json`);    
-  console.log("Credentials..............", CREDENTIALS);
-  let oauth = Youtube.authenticate({
-    type: "oauth"
-  , client_id: CREDENTIALS.web.client_id
-  , client_secret: CREDENTIALS.web.client_secret
-  , redirect_url: CREDENTIALS.web.redirect_uris[0]
-  });
-  console.log("second step..............");
-
-  const check = opn(oauth.generateAuthUrl({
-    access_type: "offline"
-  , scope: ["https://www.googleapis.com/auth/youtube.upload"]
-  }));
-
-
-  opn(oauth.generateAuthUrl({
-    access_type: "offline"
-  , scope: ["https://www.googleapis.com/auth/youtube.upload"]
-  }), {
-  app: {name: 'google chrome', arguments: ['--incognito']},
-  wait: true
-}).then(cp => console.log('child process:', cp)).catch(console.error);
-
-  if(check) {
-    console.log("3rd step..............");
-  }
-
 }
+
 
 router.get('/:id', function (req, res) {
   Youtubevideo
