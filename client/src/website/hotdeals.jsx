@@ -41,7 +41,7 @@ const addDefaultSrc = (ev) => {
       <div style={{ position: "relative" }}>
         <Carousel responsive={responsive}>
         {hotData.map((item , i ) => (
-          <Col sm="12">
+          <Col sm="12" key={i}>
             <div className="customcard">
               <Card>
                 <div className="ribbon"><p> { item.discount.indexOf(".00") == '-1' ? item.discount : item.discount.substring(0,item.discount.indexOf(".")) }% off</p></div>

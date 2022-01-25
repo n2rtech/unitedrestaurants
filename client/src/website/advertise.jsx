@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react';
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
+import { Container, Row, Col,Button } from 'reactstrap'
 import './css/style.css'
-import { useLocation } from "react-router-dom";
 import axios from 'axios'
 
 const Advertise = (props) => {
@@ -35,7 +34,7 @@ const Advertise = (props) => {
             {addSpaces.length > 0 ? addSpaces.map((item , i  ) => (
             
               
-                <Col sm="4" className="p-0">
+                <Col sm="4" className="p-0"  key={i}>
                   <div className="advertise-gridlarg">
                     <img onError = {addDefaultSrc} className="img-fluid" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/${item.image}`} 
                           alt="Menu-Icon"/>

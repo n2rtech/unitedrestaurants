@@ -45,7 +45,7 @@ const addDefaultSrc = (ev) => {
       <div style={{ position: "relative" }}>
         <Carousel responsive={responsive}>
         {latestData.map((item , i ) => (
-          <Col sm="12">
+          <Col sm="12" key={i}>
             <div className="customcard">
               <Card>
                  <CardBody>
