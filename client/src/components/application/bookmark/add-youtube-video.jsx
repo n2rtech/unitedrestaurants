@@ -58,9 +58,9 @@ const AddVideoGallery = (props) => {
       ) .then(response => {
         //toast.success("Video Added !")
         console.log(response.data);
-          setTimeout(() => {
-            window.open(response.data, '_blank')
-          }, 1000);
+          
+            window.open(response.data, '_blank');
+         
 
       }).catch(error => { toast.error('Please upload files or fill title and description') })
 
