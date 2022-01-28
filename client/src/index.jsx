@@ -29,6 +29,8 @@ import Usersignin from './auth/usersignin'
 
 import Search from './website/search'
 
+import Sitemap from './website/sitemap'
+
 // Home Page
 import Home from './website/home'
 import Restaurants from './website/restaurants'
@@ -136,6 +138,7 @@ const Root = (props) =>  {
           <Route exact path={`${process.env.PUBLIC_URL}/search/:id`} component={Search} />
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
           <Route  path={`${process.env.PUBLIC_URL}/message`} component={Signupmsg} />
+          <Route  path={`${process.env.PUBLIC_URL}/sitemap`} component={Sitemap} />
           <Route  path={`${process.env.PUBLIC_URL}/verifiedemail/:id`} component={Emailvalidation} />
           <Route  path={`${process.env.PUBLIC_URL}/vendor/login`} component={Vendorsignin} />
           <Route  path={`${process.env.PUBLIC_URL}/user/login`} component={Usersignin} />
