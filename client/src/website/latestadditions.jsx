@@ -64,8 +64,7 @@ const addDefaultSrc = (ev) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    Joined <ReactTimeAgo date={item.createdAt} locale="en-US"/>
-                  </CardSubtitle>
+                    Joined <ReactTimeAgo date={Date.parse(item.createdAt)} locale="en-US"/>
                   </Col>
                   </Row>
                   
