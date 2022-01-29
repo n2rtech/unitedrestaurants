@@ -31,7 +31,7 @@ const Advertise = (props) => {
           <h2>advertise your business here</h2>
           
           <Row className="m-0">
-            {addSpaces.length > 0 ? addSpaces.map((item , i  ) => (
+            {addSpaces && addSpaces.length > 0 ? addSpaces.map((item , i  ) => (
             
               
                 <Col sm="4" className="p-0"  key={i}>
@@ -84,7 +84,7 @@ const Advertise = (props) => {
           
           }
 
-                { addSpaces.length != 0 && addSpaces.length <= 3 ?  <Col sm="4" className="p-0">
+                { addSpaces && addSpaces.length != 0 && addSpaces.length <= 3 ?  <Col sm="4" className="p-0">
                     <div className="advertise-gridlarg">
                       <img onError = {addDefaultSrc} className="img-fluid" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/`} 
                             alt="Menu-Icon"/>

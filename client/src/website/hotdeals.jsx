@@ -33,8 +33,8 @@ const addDefaultSrc = (ev) => {
   return (
       <div className="hotdeals">
        <Container className="p-0"> 
-       {hotData.length ? <h1>hot deals you can't miss</h1> : '' }
-       {hotData.length  > 6 ? <div className="seeall">
+       {hotData && hotData.length ? <h1>hot deals you can't miss</h1> : '' }
+       {hotData && hotData.length  > 6 ? <div className="seeall">
         <a href="/restaurants">SEE ALL</a>
       </div> : '' }
        

@@ -38,8 +38,8 @@ const addDefaultSrc = (ev) => {
   return (
       <div className="latestadditions">
        <Container className="p-0"> 
-       {latestData.length ?  <h3>latest additions</h3> : '' }
-       {latestData.length > 2 ?  <div className="seeall">
+       {latestData && latestData.length ?  <h3>latest additions</h3> : '' }
+       {latestData && latestData.length > 2 ?  <div className="seeall">
         <a href="/restaurants">SEE ALL</a>
       </div> : '' }
       <div style={{ position: "relative" }}>

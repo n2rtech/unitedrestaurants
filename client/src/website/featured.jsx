@@ -32,8 +32,8 @@ const Featured = (props) => {
   return (
       <div className="hotdeals">
        <Container className="p-0"> 
-       {featuredData.length ? <h1>Featured businesses</h1> : '' }
-       {featuredData.length > 6 ? <div className="seeall">
+       {featuredData && featuredData.length ? <h1>Featured businesses</h1> : '' }
+       {featuredData && featuredData.length > 6 ? <div className="seeall">
         <a href="/restaurants">SEE ALL</a>
       </div> : '' }
       <div style={{ position: "relative" }}>
