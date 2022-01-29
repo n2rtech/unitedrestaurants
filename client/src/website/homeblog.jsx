@@ -70,7 +70,7 @@ const Homeblog = () => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                  <ReactTimeAgo date={Date.parse(blog.createdAt)} locale="en-US"/>
+                  {blog.createdAt}
                   </CardSubtitle>
                   <CardText>
                  
