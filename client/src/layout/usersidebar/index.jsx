@@ -13,36 +13,26 @@ import axios from 'axios';
 const Sidebar = (props) => {
 
   const [perm,setPerm] = useState([])
-  const [user,setUser] = useState()
   const token = localStorage.getItem("token");
-  const user_id = localStorage.getItem("id");
 
     useEffect(() => {
       const GetData = async () => {
           const config = {
             headers: {'Authorization': 'JWT '+token }
           };
-      console.log("Role Id After Get :" , user);
       const result = await axios('/api/roles/'+`${localStorage.getItem("role_id")}` ,config);
       setPerm(result.data.permissions);
   };
       GetData();
     }, []);
-    
-    // var parray = [  'Dashboard' , 'Categories' , 'Deals (Coupons)' ];
-    
+
     var parray = [];
-    console.log('Permissions = ' ,perm);
     if(perm) {
         const finalpername = perm.map((user) => {
         parray.indexOf(user.id) === -1 ? parray.push(user.perm_name) : console.log("This item already exists");
     });
-
-    console.log('Array = ' ,parray);
     }
 
-    console.log('ROLE_ID',localStorage.getItem("role_id"));
-  
 
   const id = window.location.pathname.split('/').pop()
   const defaultLayout= Object.keys(DefaultLayout);

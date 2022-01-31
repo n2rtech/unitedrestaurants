@@ -88,7 +88,7 @@ import { classes } from './data/layouts';
 import {useAuth0} from '@auth0/auth0-react'
 
 // setup fake backend
-configureFakeBackend();
+// configureFakeBackend();
 
 const Root = (props) =>  {
   const [anim, setAnim] = useState("");
@@ -105,21 +105,18 @@ const Root = (props) =>  {
   // console.log(localStorage.getItem("role"))
   
 
-  useEffect(() => {
-
-      const requestOptions = { method: 'GET', headers: authHeader() };
-      fetch('/users', requestOptions).then(handleResponse)
-      setAnim(animation)
-      firebase_app.auth().onAuthStateChanged(setCurrentUser);
-      setAuthenticated(JSON.parse(localStorage.getItem("authenticated")))
-      console.ignoredYellowBox = ["Warning: Each", "Warning: Failed"];
-      console.disableYellowBox = true;
-      return function cleanup() {
-          abortController.abort();
-      }
-      
-      // eslint-disable-next-line 
-    }, []);
+  // useEffect(() => {
+  //     const requestOptions = { method: 'GET', headers: authHeader() };
+  //     fetch('/users', requestOptions).then(handleResponse)
+  //     setAnim(animation)
+  //     firebase_app.auth().onAuthStateChanged(setCurrentUser);
+  //     setAuthenticated(JSON.parse(localStorage.getItem("authenticated")))
+  //     console.ignoredYellowBox = ["Warning: Each", "Warning: Failed"];
+  //     console.disableYellowBox = true;
+  //     return function cleanup() {
+  //         abortController.abort();
+  //     }
+  //   }, []);
 
     if(localStorage.getItem('country_code') == null) {
       localStorage.setItem('country_code' , 'usa');

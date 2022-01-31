@@ -13,7 +13,7 @@ import {
   Input,
   Button
 } from "reactstrap";
-import { CreditCard, DebitCard, ExpirationDate, SelectMonth, SelectYear, Submit, COD, EMI, BankName, SelectCard, SelectDuration,NetBanking } from "../../../constant";
+import { CreditCard } from "../../../constant";
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useParams } from "react-router-dom";
