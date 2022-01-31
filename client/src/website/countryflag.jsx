@@ -18,6 +18,10 @@ const handleCountryClick = (code) => {
   localStorage.setItem('country_code' , code);
 }
 
+  const addDefaultSrc = (ev) => {
+	  ev.target.src = `${process.env.PUBLIC_URL}/assets/images/flag/noimage.png`;
+  }
+
   return (
       <div className="countryflag">
         <Container fluid={true} className="p-0">
@@ -28,7 +32,7 @@ const handleCountryClick = (code) => {
             {countryData.map((item , i) => (
               <ListInlineItem key={i}>
                 <a href={`${process.env.PUBLIC_URL}/home`} onClick = {() => handleCountryClick(item.code)} >
-                  <img src={`${process.env.PUBLIC_URL}/assets/images/flag/${item.code.toUpperCase()}.png`} 
+                  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/assets/images/flag/${item.code.toUpperCase()}.png`} 
                alt="Menu-Icon"/>
                       {item.code.toUpperCase()}
                 </a>
