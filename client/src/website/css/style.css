@@ -1996,7 +1996,7 @@ input::placeholder, textarea::placeholder{
 /* Macbook */
 @media (min-width: 1371px) and (max-width: 1440px){
 .navbar-nav li.nav-item {
-  padding-right: 32px !important;
+  padding-right: 15px !important;
 }
 }
 /* Desktop 1600px */
