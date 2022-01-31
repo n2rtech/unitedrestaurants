@@ -4,6 +4,7 @@ const User = require('../models').User;
 const Role = require('../models').Role;
 const Permission = require('../models').Permission;
 const FeaturedBusiness = require('../models').FeaturedBusiness;
+const {DB} = require('../config/database');
 const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
@@ -256,12 +257,31 @@ router.get('/', (req, res) => {
             }
         };
     }
-
     FeaturedBusiness
     .findAll(conditions)
-    .then((featured_business) => res.status(200).send(featured_business))
+    .then((featured_business) => {
+       if(featured_business.length == 0) {
+        if (req.query.country == 'ita') {
+            var table_name = 'VendorIta';
+          } else {
+            var codee = code.charAt(0).toUpperCase() + code.slice(1);
+            var table_name = 'Vendor' + codee + 's';
+          }
+         
+           DB.query("SELECT * FROM " + table_name +"", function (err, profile) {
+                    if (err) throw err;
+                    if (profile[0]) {
+                        
+                      res.status(201).send(profile)
+                    } else {
+                      res.status(401).send(console.log(err))
+                    }
+                  });
+       }
+    }
+    )
     .catch((error) => {
-        res.status(400).send(error);
+        res.status(401).send(error);
     });
 });
 

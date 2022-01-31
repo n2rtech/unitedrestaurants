@@ -36,6 +36,7 @@ import Home from './website/home'
 import Restaurants from './website/restaurants'
 import Blog from './website/blog'
 import Details from './website/resturent/details'
+import NewDetails from './website/resturent/newdetails'
 import Blogdetails from './website/blog/blogdetails'
 import Searchresturent from './website/searchresturent'
 import Gallery from './website/gallery'
@@ -142,6 +143,7 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/home`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/restaurants/:id`} component={Restaurants} />
           <Route  path={`${process.env.PUBLIC_URL}/resturent/details/:id`} component={Details} />
+          <Route  path={`${process.env.PUBLIC_URL}/resturent/newdetails/:id`} component={NewDetails} />
           <Route  path={`${process.env.PUBLIC_URL}/blog/blogdetails/:id`} component={Blogdetails} />
            <Route  path={`${process.env.PUBLIC_URL}/restaurants`} component={Restaurants} />
            <Route  path={`${process.env.PUBLIC_URL}/blog`} component={Blog} />

@@ -70,9 +70,17 @@ const addDefaultSrc = (ev) => {
                   </Row>
                   
                   <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
-                    VIEW
-                  </a>
+                    { item.user_id == 0 ?  
+                    
+                      <a href={`${process.env.PUBLIC_URL}/resturent/newdetails/${item.id}_${localStorage.getItem('country_code')}`}>
+                      VIEW
+                    </a> : 
+                  
+                        <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                        VIEW
+                      </a>
+                    }
+                   
                   </Button>
                 </CardBody>
               </Card>
