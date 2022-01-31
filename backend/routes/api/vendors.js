@@ -1127,6 +1127,28 @@ router.get('/unsubscribe/:id', (req, res) => {
 });
 
 
+// Old data inserted by profile
+
+// Get Profile by ID
+router.get('/newprofile/:id', (req, res) => {
+   const string = req.params.id.split('_');
+   if (string[1] == 'ita') {
+    var table_name = 'VendorIta';
+  } else {
+    var codee = code.charAt(0).toUpperCase() + code.slice(1);
+    var table_name = 'Vendor' + codee + 's';
+  }
+   DB.query("SELECT * FROM " + table_name +" WHERE id =" + string[0], function (err, profile) {
+            if (err) throw err;
+            if (profile[0]) {
+              res.status(201).send(profile[0])
+            } else {
+              res.status(401).send('error')
+            }
+          });
+        
+});
+
 
 router.get('/active-adds-plan/:id', (req, res) => {
   Vendor
