@@ -272,7 +272,7 @@ router.get('/', (req, res) => {
                     if (err) throw err;
                     if (profile[0]) {
                         
-                      res.status(201).send(profile)
+                      res.status(201).send('')
                     } else {
                       res.status(401).send(console.log(err))
                     }
