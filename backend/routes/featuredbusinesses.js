@@ -268,11 +268,11 @@ router.get('/', (req, res) => {
             var table_name = 'Vendor' + codee + 's';
           }
          
-           DB.query("SELECT * FROM " + table_name +"", function (err, profile) {
+           DB.query("SELECT * FROM " + table_name +" LIMIT 10", function (err, profile) {
                     if (err) throw err;
                     if (profile[0]) {
                         
-                      res.status(201).send('')
+                      res.status(201).send(profile)
                     } else {
                       res.status(401).send(console.log(err))
                     }
