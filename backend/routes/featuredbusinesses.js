@@ -257,6 +257,7 @@ router.get('/', (req, res) => {
             }
         };
     }
+
     FeaturedBusiness
     .findAll(conditions)
     .then((featured_business) => {
@@ -276,11 +277,13 @@ router.get('/', (req, res) => {
                       res.status(401).send(console.log(err))
                     }
            });
+       } else {
+        res.status(201).send(featured_business)
        }
     }
     )
     .catch((error) => {
-        res.status(401).send(error);
+        res.status(400).send(error);
     });
 });
 
