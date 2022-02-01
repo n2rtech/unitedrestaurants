@@ -1,18 +1,21 @@
 import React,{useState,useEffect} from 'react';
-import { Container, Row, Col, Pagination, PaginationItem, PaginationLink, Card, CardBody, CardTitle, CardSubtitle, CardText, List, Button } from 'reactstrap'
+import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText, List, Button } from 'reactstrap'
 import './css/style.css'
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+
+import Pagination from "react-js-pagination";
 
 const Restaurantlist = (props) => {
   const params = useParams();
 
   const [vendorData, setVendorData] = useState([]);
   const [activePage, setActivePage] = useState(0);
-  const [totalItemsCount, setTotalItemsCount] = useState(0);  
+  const [totalItemsCount, setTotalItemsCount] = useState(0); 
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(30);  
   const [pagesCount, setPagesCount] = useState(0);
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(9);
+  const [size, setSize] = useState(100);
   const [filter, setFilter] = useState('');
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [showPagination, setShowPagination] = useState(false);
@@ -54,7 +57,7 @@ const Restaurantlist = (props) => {
     e.preventDefault();
     var config = {
       method: 'get',
-      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      url: '/api/categories/getrest/'+`${params.id}`,
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -82,7 +85,7 @@ const Restaurantlist = (props) => {
     e.preventDefault();
     var config = {
       method: 'get',
-      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      url: '/api/categories/getrest/'+`${params.id}`,
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -111,7 +114,7 @@ const Restaurantlist = (props) => {
     e.preventDefault();
     var config = {
       method: 'get',
-      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      url: '/api/categories/getrest/'+`${params.id}`,
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -141,7 +144,7 @@ const Restaurantlist = (props) => {
     e.preventDefault();
     var config = {
       method: 'get',
-      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      url: '/api/categories/getrest/'+`${params.id}`,
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -171,7 +174,7 @@ const Restaurantlist = (props) => {
     e.preventDefault();
     var config = {
       method: 'get',
-      url: '/api/categories/getrestaurants/'+`${params.id}`+'?filter='+filter+'&country='+country+'&page='+pagesCount+'&size='+size,
+      url: '/api/categories/getrest/'+`${params.id}`+'?filter='+filter+'&country='+country+'&page='+pagesCount+'&size='+size,
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -195,6 +198,33 @@ const Restaurantlist = (props) => {
     }); 
 
   };
+
+
+    const handlePageChange = (pageNumber) => {
+
+    var config = {
+      method: 'get',
+      url: '/api/categories/getrest/'+`${params.id}`,
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params : {
+        'filter': filter,
+        'country': country,
+        'page': pageNumber,
+        'size': size
+      }
+    };
+
+    axios(config)
+  .then(result=>{
+      setVendorData(result.data.vendors);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+      setShowPagination(((result.data.totalItems > 0 ) ?? true));
+  });
+}
 
   return (
     <div className="resturentlist">
@@ -242,29 +272,22 @@ const Restaurantlist = (props) => {
       )) : <Col><center>There are no business listing available</center></Col> }
        
         <Col sm="12" xs="12">
-          {showPagination &&
-        <Pagination aria-label="Page navigation example">
-          <PaginationItem disabled={activePage <= 1}>
-            <PaginationLink onClick={handleFirstClick} first/>
-          </PaginationItem>
-          <PaginationItem disabled={activePage <= 1}>
-            <PaginationLink onClick={handlePreviousClick} previous/>
-          </PaginationItem>
-            {[...Array(pagesCount)].map((page, i) => (                                    
-              <PaginationItem page={activePage} key={i} cc={(i+1)} active={(i+1) === activePage} key={i}>
-                <PaginationLink disabled={(i+1) === activePage} onClick={e => handlePageClick(e, i)}>
-                  {i + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
-          <PaginationItem disabled={activePage === pagesCount}>
-            <PaginationLink onClick={handleNextClick} next />
-          </PaginationItem>
-          <PaginationItem disabled={activePage === pagesCount}>
-            <PaginationLink onClick={handleLastClick} last />
-          </PaginationItem>
-        </Pagination>
-        }
+          <div className="d-flex justify-content-center">
+                        <Pagination
+                        activePage={activePage}
+                        itemsCountPerPage={size}
+                        totalItemsCount={totalItemsCount}
+                        pageRangeDisplayed={pageRangeDisplayed}
+                        onChange={handlePageChange}
+                        itemClass="page-item"
+                        linkClass="page-link"
+                        prevPageText="Prev"
+                        nextPageText="Next"
+                        lastPageText="Last"
+                        firstPageText="First"
+
+                        />
+                    </div> 
         </Col>
         </Row>
       </Container>
