@@ -67,7 +67,11 @@ app.use(express.static(__dirname + '/banner'));
 // app.use('/site', express.static(__dirname + '/uploads/site'));
 // app.use('/images', express.static(__dirname + '/images'));
 
-app.use("/api/uploads/",express.static('uploads'));
+// app.use("/api/uploads/",express.static('uploads'));
+
+var oneWeek = 86400000*7;
+app.use("/api/uploads/",express.static(path.join(__dirname, "uploads"), { maxAge: oneWeek, lastModified: true }));
+
 
 const keys = require("./config/keys");
 //Cookie
