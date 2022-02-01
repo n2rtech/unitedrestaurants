@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'reactstrap'
 import Header from './header.jsx'
 import Footer from './footer.jsx'
 import Searchresturentlist from './searchresturentlist.jsx';
-import './css/style.css'
+
 const Searchresturent = (props) => {
 
   return (

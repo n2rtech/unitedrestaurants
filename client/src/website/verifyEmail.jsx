@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap'
 import Header from './header.jsx'
 import Footer from './footer.jsx'
-import './css/style.css'
+
 const verifyEmail = (props) => {
 
   return (
