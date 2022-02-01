@@ -1,3 +1,4 @@
+var compression = require('compression');
 const express = require("express");
 const db = require('./models');
 const app = express();
@@ -43,6 +44,9 @@ const accountspayables = require("./routes/accountspayables");
 const path = require('path')
 // app.use('/static', express.static(path.join(__dirname, 'public')))
 // Bodyparser middleware
+
+app.use(compression());
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
