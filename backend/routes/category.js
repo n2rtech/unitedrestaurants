@@ -361,7 +361,8 @@ router.get("/subcat/:id", (req, res) => {
     .findAll({
         where: {
           parent_id: req.params.id
-      }
+      },
+      attributes: ['id','name', 'parent_id', 'image']
   })
     .then((category) => {
 
