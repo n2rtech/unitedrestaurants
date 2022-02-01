@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
+import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios'
@@ -39,7 +39,7 @@ const EditJobOpenings = (props) => {
     event.preventDefault();
 
     const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
       };
       const bodyParameters = {
         job_name: jobname,
