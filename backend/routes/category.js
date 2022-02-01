@@ -646,10 +646,7 @@ router.get('/getrestaurants/:id', (req, res) => {
     var filter = req.query.filter;
     var country_code = req.query.country;
     const { page, size } = req.query;
-    
     const { limit, offset } = getPagination(page, size);
-
-console.log('country',country_code);
 
     Country.findOne({where:{
         code : country_code||'usa'
@@ -711,18 +708,43 @@ console.log('country',country_code);
             Vendor.findAndCountAll(conditions)
             .then((result,err)=>{
                 if(result){                
-
                     const response = getPagingData(result, page, limit);
-
+                    // if(response.totalItems == 0) {
+                    //     if (country.code == 'ita') {
+                    //         var table_name = 'VendorIta';
+                    //       } else {
+                    //         var codee = code.charAt(0).toUpperCase() + code.slice(1);
+                    //         var table_name = 'Vendor' + codee + 's';
+                    //     }
+                    //     const rese = [];
+                    //     const limit1 = 100;
+                    //     console.log('Limit',limit);
+                    //     console.log('Offset', offset);
+                    //     DB.query("SELECT * FROM " + table_name +" limit "+limit+","+offset+"", function (err, profile) {
+                    //         if (err) throw err;
+                    //         if (profile[0]) {
+                    //             rese.totalItems = profile.length;
+                    //             rese.vendors = profile;
+                                
+                    //             const response1 = getPagingData1(rese, page, limit);
+                               
+                    //             res.status(201).send(response1)
+                    //         } else {
+                    //             res.status(401).send(console.log(err))
+                    //         }
+                    //     });
+                    // } else {
+                    //     res.status(201).send(response);
+                    // }
                     res.status(201).send(response);
                 }else{
                     res.status(400).send(err);
                 }
             });
 
-            const response = getPagingData(result, page, limit);
+            // const response = getPagingData(result, page, limit);
 
-            res.status(201).send(response);
+            // res.status(201).send(response);
         }else{
             res.status(400).send(err);
         }
@@ -830,5 +852,14 @@ const getPagingData = (data, page, limit) => {
 
   return { totalItems, vendors, totalPages, currentPage };
 };
+
+const getPagingData1 = (data, page, limit) => {
+    const totalItems = data.totalItems;
+    const vendors = data.vendors;
+    const currentPage = page ? +page : 0;
+    const totalPages = Math.ceil(totalItems / limit);
+  
+    return { totalItems, vendors, totalPages, currentPage };
+  };
 
 module.exports = router;

@@ -12,7 +12,7 @@ import PaypalPremiumHalfyearly from './paypalplans/paypalpremiumhalfyearly.jsx'
 import PaypalPremiumYearly from './paypalplans/paypalpremiumyearly.jsx'
 
 
-import { Container, Row, Col, Card, CardHeader, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
+import { Container, Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
 import { Standard } from '../../../constant';
 import SweetAlert from 'sweetalert2'
 import {toast} from 'react-toastify';

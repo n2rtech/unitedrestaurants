@@ -171,7 +171,7 @@ const Restaurantlist = (props) => {
     e.preventDefault();
     var config = {
       method: 'get',
-      url: '/api/categories/getrestaurants/'+`${params.id}`,
+      url: '/api/categories/getrestaurants/'+`${params.id}`+'?filter='+filter+'&country='+country+'&page='+pagesCount+'&size='+size,
       headers: { 
         'Content-Type': 'application/x-www-form-urlencoded'
       },

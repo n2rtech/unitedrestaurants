@@ -1,11 +1,8 @@
 import React,{useState} from 'react';
 import Carousel from "react-multi-carousel";
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
-import ReactStars from "react-rating-stars-component";
+import { Container, Col,Card, CardBody } from 'reactstrap'
 import "react-multi-carousel/lib/styles.css";
 import './css/style.css'
-
-
 
 const Gallery = (props) => {
 

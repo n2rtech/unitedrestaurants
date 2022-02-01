@@ -1,4 +1,4 @@
-import { Home, Airplay, Box, Gift, Send, HardDrive, DollarSign, FolderPlus, Command, Cloud, FileText, Server, BarChart, Users, Layers, ShoppingBag, List, Mail, MessageCircle, GitPullRequest, Monitor, Heart, Clock, Zap, CheckSquare, Calendar, Image, Film, HelpCircle, Radio, Map, Edit, Sunrise, Package } from 'react-feather'
+import { Box, Gift, DollarSign,  BarChart,  Layers, ShoppingBag, Calendar, Image, Film } from 'react-feather'
 
 export const MENUITEMS = [
 

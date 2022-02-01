@@ -261,7 +261,7 @@ router.get('/', (req, res) => {
     .findAll(conditions)
     .then((featured_business) => {
        if(featured_business.length == 0) {
-        if (req.query.country == 'ita') {
+          if (req.query.country == 'ita') {
             var table_name = 'VendorIta';
           } else {
             var codee = code.charAt(0).toUpperCase() + code.slice(1);
@@ -275,7 +275,7 @@ router.get('/', (req, res) => {
                     } else {
                       res.status(401).send(console.log(err))
                     }
-                  });
+           });
        }
     }
     )
