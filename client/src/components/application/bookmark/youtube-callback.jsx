@@ -1,15 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
+import { Container, Card, CardBody } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios';
-import ReactDOM from "react-dom";
-import { Link, useLocation, BrowserRouter as Router } from "react-router-dom";
+import { useLocation, BrowserRouter as Router } from "react-router-dom";
 import { useHistory } from 'react-router-dom'
 const YoutubeCallback = (props) => {
 
   const token = localStorage.getItem("token");
-  const [vendorData, setVendorData] = useState([]);
   let query = new URLSearchParams(useLocation().search);
   const code = query.get("code")
   const history = useHistory()

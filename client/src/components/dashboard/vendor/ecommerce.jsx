@@ -1,12 +1,7 @@
 import React, { Fragment,useState ,useEffect} from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import ApexCharts from 'react-apexcharts'
-import Slider from "react-slick";
-import {Container,Row,Col,Card,CardBody,CardHeader,Table} from 'reactstrap' 
-import CountUp from 'react-countup';
-import {Monthlysales,columnCharts,totalearning,Riskfactorchart} from '../chartsData/apex-charts-data'
+import {Container,Row,Col,Card,CardBody } from 'reactstrap' 
 import { withGoogleMap, GoogleMap, withScriptjs } from "react-google-maps";
-import {NewProduct,NewsUpdate,RiskFactor,BestSeller,Location,TodayTotalSale,TodayTotalVisits,OurSaleValue,New,Hot,TotalProfit,HikeShoes,CouponCode,TreePot,Watch,TShirt,TotalGoal,GoalArchive,Duration,DownloadDetails,Johnketer,HerryVenter,Done,Pending,LoainDeo,TodayStockValue,Bag,HorenHors,InProcess,FenterJessy,Success} from '../../../constant'
 import axios from 'axios'
 
 const VendorEcommerce = (props) => {

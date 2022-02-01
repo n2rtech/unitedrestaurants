@@ -1,14 +1,12 @@
-import React,{useState,useEffect} from 'react';
+import React,{useEffect} from 'react';
 import {Container,Row,Col} from 'reactstrap' ;
-import { useParams } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
+import { useParams , useHistory } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios';
 
 const Emailvalidation = (props) => {
-  const params = useParams();
-  const [result, setResult] = useState([]);
   const history = useHistory()
+  const params = useParams()
   useEffect(() => {
   
     const config = {

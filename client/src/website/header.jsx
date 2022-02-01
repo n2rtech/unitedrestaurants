@@ -1,10 +1,8 @@
 import React,{useState,useEffect,Fragment} from 'react';
 import SideNav, { MenuIcon } from 'react-simple-sidenav';
-import Dropdown from 'react-multilevel-dropdown';
-import { Container, Row, Col, Form, FormGroup, Input, InputGroup, DropdownToggle, DropdownMenu, DropdownItem, select, option, Label, Button, NavbarToggler, NavItem, NavLink,List,ListInlineItem, Nav,TabContent,TabPane,Collapse,Offcanvas,NavDropdown } from 'reactstrap'
+import { Container, Row, Col, Form, FormGroup, Input,List,ListInlineItem } from 'reactstrap'
 import './css/style.css'
 import Menu from './menu.jsx'
-import Mobilemenu from './mobilemenu.jsx'
 import Countryflag from './countryflag.jsx'
 import GoogleTranslate from './googletranslate';
 import axios from 'axios';
@@ -231,7 +229,7 @@ const title = <div className="searchbar">
                   <a href={`//${socialdata.google_plus_links}`} target="_blank"><i className="fa fa-google-plus"></i></a>
                   <a href={`//${socialdata.linkedin_links}`} target="_blank"><i className="fa fa-linkedin"></i></a>
                   <a href={`//${socialdata.instagram_links}`} target="_blank"><i className="fa fa-instagram"></i></a>
-              </div>
+                </div>
               
             </div>
           </Col>
@@ -244,7 +242,7 @@ const title = <div className="searchbar">
                     <Input type="select" id="selectcategory" onChange = {OnChangecatid}>
                       <option value="0">Select Category</option>
                       {categoryData && categoryData.map((item,i) => (
-                        <option value={item.id} selected = { catid == item.id }>{item.name}</option>
+                        <option  key={i} value={item.id} selected = { catid == item.id }>{item.name}</option>
                       ))}
                     </Input>
                 <Input className="form-control" type="search" value = {searchinput} onChange = {OnChangeSearch}/>
@@ -313,11 +311,12 @@ const title = <div className="searchbar">
           <Col xs="5" className="pl-0">
           <div className="language-country">
             <div className="country">
-                <select aria-label="Default select example" className="form-control">
-                  <option>Country</option>
-                  <option value="1">India</option>
-                  <option value="2">One</option>
-                  <option value="2">Two</option>
+               <select aria-label="Default select example" onChange = {OnChangeCountry} className="form-control">
+                {countryData.map((country , i ) => (
+                  <Fragment key={i}>
+                  <option value={country.code} selected = { localStorage.getItem('country_code') == country.code }>{country.name}</option>
+                  </Fragment>
+                  ))}
                 </select>
               </div>
             </div>
@@ -348,11 +347,11 @@ const title = <div className="searchbar">
               </div>
               </div>
               <div className="socialmenu">
-                  <a href="#"><i className="fa fa-facebook"></i></a>
-                  <a href="#"><i className="fa fa-twitter"></i></a>
-                  <a href="#"><i className="fa fa-google-plus"></i></a>
-                  <a href="#"><i className="fa fa-linkedin"></i></a>
-                  <a href="#"><i className="fa fa-instagram"></i></a>
+                  <a href={`//${socialdata.facebook_links}`} target="_blank"><i className="fa fa-facebook"></i></a>
+                  <a href={`//${socialdata.twitter_links}`} target="_blank"><i className="fa fa-twitter"></i></a>
+                  <a href={`//${socialdata.google_plus_links}`} target="_blank"><i className="fa fa-google-plus"></i></a>
+                  <a href={`//${socialdata.linkedin_links}`} target="_blank"><i className="fa fa-linkedin"></i></a>
+                  <a href={`//${socialdata.instagram_links}`} target="_blank"><i className="fa fa-instagram"></i></a>
               </div>
               
             </div>

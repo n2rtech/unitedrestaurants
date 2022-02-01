@@ -1,10 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import { Container, Row, Col, Pagination, PaginationItem, PaginationLink, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap'
-import './css/style.css'
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en.json'
-import ReactTimeAgo from 'react-time-ago'
-TimeAgo.addLocale(en)
 
 const Bloglist = (props) => {
 
@@ -59,7 +54,7 @@ const Bloglist = (props) => {
                         className="mb-2 text-muted"
                         tag="h6"
                       >
-                      <ReactTimeAgo date={item.createdAt} locale="en-US"/>
+                      {item.createdAt}
                       </CardSubtitle>
                       <CardText>
 

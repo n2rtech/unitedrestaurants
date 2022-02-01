@@ -1,18 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
-import { Database, ShoppingBag, MessageCircle, UserPlus, Layers, ShoppingCart, DollarSign, ArrowDown, ArrowUp, CloudDrizzle } from 'react-feather';
-import DatePicker from "react-datepicker";
-import ApexCharts from 'react-apexcharts'
+import { Database, ShoppingBag, MessageCircle, UserPlus } from 'react-feather';
 import CountUp from 'react-countup';
-import { TotalVisitors,TotalVendors,MembershipsVendor,VendorAdded,SupendedVendors,AdminNotifications,CancelledMembers } from '../../../constant'
-import ChartistChart from 'react-chartist';
+import { TotalVendors,MembershipsVendor,VendorAdded,SupendedVendors } from '../../../constant'
 import Knob from "knob";
-import { Currentlysale, Marketvalue } from '../chartsData/apex-charts-data'
-import { smallchart1data, smallchart1option, smallchart2data, smallchart2option, smallchart3data, smallchart3option, smallchart4data, smallchart4option } from '../chartsData/chartist-charts-data'
-import { Send, Clock } from 'react-feather';
-import {Dashboard,Summary,NewsUpdate,Appointment,Notification,MarketValue,Chat,New,Tomorrow,Yesterday,Daily,Weekly,Monthly,Store,Online,ReferralEarning,CashBalance,SalesForcasting,Purchase,Sales,SalesReturn,PurchaseRet,PurchaseOrderValue,ProductOrderValue,Pending,Yearly,Hot,Today,VenterLoren,Done,JohnLoren,Year,Month,Day,RightNow} from '../../../constant'
-
+import { Today } from '../../../constant'
 
 const AdminDefault = (props) => {
 
