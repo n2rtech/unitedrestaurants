@@ -9,7 +9,6 @@ const EditVideoGallery = (props) => {
 
     const [videoname, setVideoname] = useState()
     const [youtubelink, setYoutubelink] = useState()
-    const [video, setVideo] = useState()
     const params = useParams();
     const token = localStorage.getItem("token");
 
@@ -27,7 +26,6 @@ const EditVideoGallery = (props) => {
       headers: {'Authorization': 'JWT '+token }
     };
         const result = await axios('/api/video-gallery/'+`${params.id}`,config);
-        setVideo(result.data)
         setVideoname(result.data.video_name)
         setYoutubelink(result.data.youtube_link)
       };

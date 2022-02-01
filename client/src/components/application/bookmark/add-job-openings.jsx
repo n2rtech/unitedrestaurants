@@ -1,7 +1,6 @@
 import React, { Fragment , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
@@ -10,7 +9,6 @@ const AddJobOpenings = (props) => {
 
     const [jobname, setJobname] = useState()
     const [description, setDescription] = useState()
-    const params = useParams();
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
     const history = useHistory()

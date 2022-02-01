@@ -10,8 +10,6 @@ import {useParams} from 'react-router-dom'
 const Home = (props) => {
 
   const params = useParams();
-  const [maintenance, setMaintenance] = useState([]);
-  const code = localStorage.getItem('country_code');
 
   useEffect(() => {
   
@@ -23,7 +21,7 @@ const Home = (props) => {
       .then(res => res.json())
       .then(
         (result) => {  
-          setMaintenance(result.maintenance_mode);
+          
         },
         (error) => {
           

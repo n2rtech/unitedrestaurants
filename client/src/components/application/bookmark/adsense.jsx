@@ -3,7 +3,6 @@ import Breadcrumb from '../../../layout/breadcrumb'
 import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button} from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
 
 const Adsense = (props) => {
 
@@ -11,7 +10,7 @@ const Adsense = (props) => {
   const [publisher_id, setPublisherID] = useState();
   const token = localStorage.getItem("token");
   const user_id = localStorage.getItem("id");
-  const history = useHistory()
+
   useEffect(() => {
 
       const config = {

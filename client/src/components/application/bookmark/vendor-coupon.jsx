@@ -3,14 +3,12 @@ import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
 import SweetAlert from 'sweetalert2'
 
 const VendorCoupon = (props) => {
 
   const [couponData, setCouponData] = useState([]);
   const token = localStorage.getItem("token");
-  const history = useHistory()
   useEffect(() => {
   
       const config = {
