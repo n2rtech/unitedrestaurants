@@ -794,7 +794,8 @@ router.get('/getrest/:category', (req, res) => {
               where:{
                 categories: { [Op.like]: '%' + category.id + '%' },
                 business_name: { [Op.like]: '%' + req.query.filter + '%' }
-              },
+              },              
+              attributes: ['id','about_business', 'banner', 'business_name','user_id'],
               offset,
               limit
             }
@@ -803,6 +804,7 @@ router.get('/getrest/:category', (req, res) => {
               where:{
                 categories: { [Op.like]: '%' + category.id + '%' }
               },
+              attributes: ['id','about_business', 'banner', 'business_name','user_id'],
               offset,
               limit
             }
