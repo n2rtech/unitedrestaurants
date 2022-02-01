@@ -1,8 +1,7 @@
 import React, { Fragment , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import CKEditors from "react-ckeditor-component";
-import {Container,Row,Col,Card,CardHeader,CardBody, Form, FormGroup, Input, Label, Button} from 'reactstrap'
-import { CKEditorExample } from "../../../constant";
+import {Container,Row,Col,Card,CardBody, Form, FormGroup, Input, Label, Button} from 'reactstrap'
 
 const EditAdminMembership =  () =>  {
     

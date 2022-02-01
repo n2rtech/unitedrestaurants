@@ -1,19 +1,14 @@
 import React, { Fragment, useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
-import { useForm } from 'react-hook-form'
-import { useSelector, useDispatch } from 'react-redux'
+import { Container, Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import ImageUploader from 'react-images-upload';
-import {SelectSingleImageUpload,MultipleImageUpload,ExampleSelect} from '../../../constant'
-import { useParams } from "react-router-dom";
+import {ExampleSelect} from '../../../constant'
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
 const AddCategory = (props) => {
 
-const params = useParams();
 const history = useHistory();
 const [image, setimage] = useState({ pictures: [] , pictureFiles: [] })
 const [catData, setCatData] = useState([]);
@@ -88,9 +83,6 @@ const [topMenu,setTopMenu] = useState(0);
              .catch(error => console.log('Form submit error', error))
 
       };
-
-      console.log('Top Menu' , topMenu);
-      console.log('Status' ,status);
 
   return (
     <Fragment>

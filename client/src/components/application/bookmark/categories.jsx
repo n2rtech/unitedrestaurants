@@ -1,20 +1,12 @@
 import React, { Fragment, useEffect ,useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
-import { useForm } from 'react-hook-form'
-import defaultImg from '../../../assets/images/lightgallry/01.jpg'
-import { useSelector, useDispatch } from 'react-redux'
+import { Table, Container, Row, Col, Card, CardBody, Button } from 'reactstrap'
 import axios from 'axios'
-import {toast} from 'react-toastify';
 import SweetAlert from 'sweetalert2'
 
 const Categories = (props) => {
 
   const [generalData, setGeneralData] = useState([]);
-  const [level1Data, setLevel1Data] = useState('');
-  const [level2Data, setLevel2Data] = useState('');
-  const [level3Data, setlevel3Data] = useState('');
   const token = localStorage.getItem("token");
   useEffect(() => {
   
@@ -27,8 +19,6 @@ const Categories = (props) => {
         .then(res => res.json())
         .then(
           (result) => {
-
-
 
               for (const [i, element] of result.entries()) {
 

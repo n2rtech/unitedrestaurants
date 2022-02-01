@@ -1,10 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, ButtonGroup, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
-import { useForm } from 'react-hook-form'
-import { useSelector, useDispatch } from 'react-redux'
-import { Pagination, PaginationItem, PaginationLink } from "reactstrap"
+import { Table, Container, Row, Col, Card, ButtonGroup, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import SweetAlert from 'sweetalert2'
 import {toast} from 'react-toastify';
 import axios from 'axios'
@@ -13,18 +9,13 @@ const AllVendors = (props) => {
   const token = localStorage.getItem("token");
   const [vendorData, setVendorData] = useState([]);
   const [countryData, setCountryData] = useState([]);
-
   const [filterName, setFilterName] = useState('');  
   const [filterEmail, setFilterEmail] = useState('');  
   const [filterMobile, setFilterMobile] = useState('');  
   const [filterCountry, setFilterCountry] = useState(''); 
-
-  const [currentPage, setCurrentPage] = useState(1); 
-
   const [activePage, setActivePage] = useState(0);
   const [itemsCountPerPage, setItemsCountPerPage] = useState(1);  
   const [totalItemsCount, setTotalItemsCount] = useState(1);  
-  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(3);
   const [pagesCount, setPagesCount] = useState(4);
 
   useEffect(() => {

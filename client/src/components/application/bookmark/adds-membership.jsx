@@ -1,11 +1,9 @@
 import React, { Fragment ,useEffect , useState} from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Container, Row, Col, Card, CardHeader, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
-import { SimplePricingCard,BecomeMember, Standard, LorumIpsum, Purchase, Business,Premium,Extra,SignUp } from '../../../constant';
+import { Container, Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import SweetAlert from 'sweetalert2'
-import { useHistory } from 'react-router-dom'
 import Paypalbuttonbronze from './advertisementpaypal/bronzepaypal.jsx'
 import Paypalbuttonsilver from './advertisementpaypal/silverpaypal.jsx'
 import Paypalbuttongold from './advertisementpaypal/goldpaypal.jsx'
@@ -15,7 +13,6 @@ const AddsMembership = (props) => {
   const [membershipsData, setAddmemberships] = useState([]);
   const user_id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
-  const history = useHistory()
   useEffect(() => {
   
       const config = {
@@ -26,7 +23,6 @@ const AddsMembership = (props) => {
         .then(res => res.json())
         .then(
           (result) => {
-            
             setAddmemberships(result);
           },
           (error) => {
@@ -35,15 +31,10 @@ const AddsMembership = (props) => {
         )
     }, []);
 
-  console.log(membershipsData);
-
   const [bronzecycle,setBronzeCycle] = useState('');
   const [silvercycle,setSilverCycle] = useState('');
   const [goldcycle,setGoldCycle] = useState('');
   
-  const [cycleamount,setAmount] = useState('0');
-  const [interval,setInterval] = useState('');
-
   const [bronzeinterval,setBronzeInterval]  = useState('/mo');
   const [bronzeprice,setBronzePrice]        = useState('4.99');
   const [silverinterval,setSilverInterval]  = useState('/mo');
@@ -53,12 +44,12 @@ const AddsMembership = (props) => {
     
    
    const onChangeBronze = (event) => {
-    if(planname == '') {
-     if(event.target.value == 'Monthly') {
+    if(planname === '') {
+     if(event.target.value === 'Monthly') {
         getIdfromData('Monthly','bronze');
-     } else if(event.target.value == 'Quarterly') {
+     } else if(event.target.value === 'Quarterly') {
         getIdfromData('Quarterly','bronze');
-     } else if(event.target.value == 'Yearly') {
+     } else if(event.target.value === 'Yearly') {
         getIdfromData('Yearly','bronze');
      } else {
         getIdfromData('HalfYearly','bronze');
@@ -73,12 +64,12 @@ const AddsMembership = (props) => {
    }
 
    const onChangeSilver = (event) => {
-     if(planname == '') {
-        if(event.target.value == 'Monthly') {
+     if(planname === '') {
+        if(event.target.value === 'Monthly') {
             getIdfromData('Monthly','silver');
-        } else if(event.target.value == 'Quarterly') {
+        } else if(event.target.value === 'Quarterly') {
             getIdfromData('Quarterly','silver');
-        } else if(event.target.value == 'Yearly') {
+        } else if(event.target.value === 'Yearly') {
             getIdfromData('Yearly','silver');
         } else {
             getIdfromData('HalfYearly','silver');
@@ -93,12 +84,12 @@ const AddsMembership = (props) => {
   }
 
   const onChangeGold = (event) => {
-    if(planname == '') {
-        if(event.target.value == 'Monthly') {
+    if(planname === '') {
+        if(event.target.value === 'Monthly') {
             getIdfromData('Monthly','gold');
-        } else if(event.target.value == 'Quarterly') {
+        } else if(event.target.value === 'Quarterly') {
             getIdfromData('Quarterly','bronze');
-        } else if(event.target.value == 'gold') {
+        } else if(event.target.value === 'gold') {
             getIdfromData('Yearly','gold');
         } else {
             getIdfromData('HalfYearly','gold');
