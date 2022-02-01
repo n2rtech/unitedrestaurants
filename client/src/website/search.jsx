@@ -1,16 +1,11 @@
 import React,{useState,useEffect} from 'react';
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
+import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText,Button } from 'reactstrap'
 import Header from './header.jsx'
 import Carousel from "react-multi-carousel";
 import Footer from './footer.jsx'
-import { useLocation } from "react-router-dom";
 import axios from 'axios';
-import './css/style.css'
 import "react-multi-carousel/lib/styles.css";
 import {useParams} from 'react-router-dom'
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en.json'
-import ReactTimeAgo from 'react-time-ago'
 
 const Home = (props) => {
 
@@ -255,7 +250,7 @@ const addDefaultSrc = (ev) => {
                     className="mb-2 text-muted"
                     tag="h6"
                   >
-                    Joined <ReactTimeAgo date={item.createdAt} locale="en-US"/>
+                    Joined {item.createdAt}
                   </CardSubtitle>
                   </Col>
                   </Row>
