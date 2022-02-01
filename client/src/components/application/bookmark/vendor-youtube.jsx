@@ -1,11 +1,6 @@
 import React, { Fragment, useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import {toast} from 'react-toastify';
-import axios from 'axios'
-import { useHistory } from 'react-router-dom'
-import SweetAlert from 'sweetalert2'
-import { Player } from 'video-react';
+import { Table, Container, Row, Col, Card, CardBody } from 'reactstrap'
 import 'video-react/dist/video-react.css';
 
 const VendorVideoGallery = (props) => {
@@ -13,7 +8,6 @@ const VendorVideoGallery = (props) => {
   const [videoData, setVideoData] = useState([]);
   const token = localStorage.getItem("token");
   const user_id = localStorage.getItem("id");
-  const history = useHistory()
   useEffect(() => {
   
       const config = {
@@ -24,7 +18,6 @@ const VendorVideoGallery = (props) => {
         .then(res => res.json())
         .then(
           (result) => {
-            
             setVideoData(result);
           },
           (error) => {
@@ -32,8 +25,6 @@ const VendorVideoGallery = (props) => {
           }
         )
     }, []);
-
-    console.log(videoData);
 
   return (
     <Fragment>

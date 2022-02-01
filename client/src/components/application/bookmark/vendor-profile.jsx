@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
+import { Container, Row, Col, Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { Typeahead } from 'react-bootstrap-typeahead';
 import axios from 'axios'
 import ImageUploader from 'react-images-upload';
@@ -8,10 +8,8 @@ import {toast} from 'react-toastify';
 
 const VendorProfile = (props) => {
   const [multiSelections, setMultiSelections] = useState([]);
-  const multiple = false
   const [options,setOptions] = useState([])
   const token = localStorage.getItem("token");
-  const vendor_id  = localStorage.getItem("id");
   useEffect(() => {
     const GetData = async () => {
         const config = {

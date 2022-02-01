@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
+import { Container, Card, CardBody,Button } from 'reactstrap'
 import { Typeahead } from 'react-bootstrap-typeahead';
 import axios from 'axios'
 import { useParams } from "react-router-dom";
