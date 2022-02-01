@@ -1,14 +1,11 @@
-import React, { useEffect , useState } from 'react';
+import React from 'react';
 import { PayPalButton } from "react-paypal-button-v2";
 import axios from 'axios';
 import {toast} from 'react-toastify';
 
 const paypalstandardmonthly = (props) => {
-  const { amount, currency, createSubscription, onApprove, catchError,onError, onCancel} = props;
+  const { amount, currency } = props;
   const paypalKey = "AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t"
-
-  console.log(props);
-  console.log(paypalKey);
 
   return (
     <PayPalButton
@@ -20,13 +17,9 @@ const paypalstandardmonthly = (props) => {
       });
     }}
       onApprove={(data, details) => {
-          // Capture the funds from the transaction
+          
           return details.subscription.get().then(function(details) {
-            // Show a success message to your buyer
-            
-            // console.log('Data' , data);
-            // console.log('Details' , details);
-
+          
             const token = localStorage.getItem("token");
             const user_id = localStorage.getItem("id");
             const country_id = localStorage.getItem("vendor_country_id");

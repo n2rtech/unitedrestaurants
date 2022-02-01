@@ -1,19 +1,16 @@
-import React,{useState,useEffect} from 'react';
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, FormText, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
+import React,{useState} from 'react';
+import { Container, Row, Col, Form, FormGroup, Input,Label, Button } from 'reactstrap'
 import Header from './header.jsx'
 import Footer from './footer.jsx'
-import contactus from './contactus.jsx'
-import ScrollButton from './ScrollButton.jsx';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import './css/style.css'
+
 const Contact = (props) => {
 
   const [name, setName ] = useState('');
   const [email, setEmail ] = useState('');
   const [phone_number, setPhoneNumber ] = useState('');
   const [message, setMessage ] = useState('');
-
   const [errors, setErrors] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');

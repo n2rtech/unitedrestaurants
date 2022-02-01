@@ -1,5 +1,4 @@
-import { Home, Airplay, Box, Gift, Send, HardDrive, Flag, DollarSign, Settings, UserCheck, FolderPlus, Command, Cloud, Grid, FileText, Server, BarChart, Users, Layers, ShoppingBag, List, Mail, MessageCircle, MessageSquare, GitPullRequest, Monitor, Heart, Clock, Zap, CheckSquare, Calendar, Image, Film, HelpCircle, Radio, Map, Edit, Sunrise, Package } from 'react-feather'
-
+import { Home, Airplay, Gift, Flag, DollarSign, Settings, UserCheck, FolderPlus,Grid, FileText, Users,Package } from 'react-feather'
 
 export const MENUITEMS = [
     {

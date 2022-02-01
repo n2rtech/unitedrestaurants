@@ -4,24 +4,16 @@ import CKEditors from "react-ckeditor-component";
 import {Container,Row,Col,Card,CardHeader,CardBody, Button} from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
-import { useParams } from "react-router-dom";
-import { useHistory } from 'react-router-dom'
 
 const MenuItems =  () =>  {
     
     const [content,setContent] = useState('')
     const [id,setId] = useState('') 
-
-    const params = useParams();
     const token = localStorage.getItem("token");
-    const history = useHistory()
     useEffect(() => {
     
     const userId = localStorage.getItem("id");
-
-    console.log('userid',userId);
-
-        const config = {
+    const config = {
             headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
         };
      

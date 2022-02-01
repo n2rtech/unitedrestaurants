@@ -1,21 +1,16 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
 import { Container, Row, Col } from 'reactstrap'
 import Header from './header.jsx'
 import Footer from './footer.jsx'
 import Bloglist from './bloglist.jsx';
-import './css/style.css'
-import axios from 'axios';
 
 const Blog = (props) => {
-
   return (
       <Container fluid={true} className="p-0">
       <Row className="m-0">
         <Col xs="12" className="p-0">     
            <Header />
-
            <Bloglist />
-           
            <Footer />
         </Col>
         </Row>

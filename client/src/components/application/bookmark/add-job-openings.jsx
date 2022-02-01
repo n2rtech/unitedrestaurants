@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect , useState } from 'react';
+import React, { Fragment , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
+import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios'

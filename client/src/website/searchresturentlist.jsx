@@ -1,6 +1,5 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { Container, Row, Col, Pagination, PaginationItem, PaginationLink, Card, CardBody, CardTitle, Button} from 'reactstrap'
-import './css/style.css'
 
 const Searchresturentlist = (props) => {
 
@@ -15,18 +14,13 @@ const Searchresturentlist = (props) => {
       <Row className="m-0">
         <Col sm="4" xs="12">     
           <div className="customcardlist">
-              <Card
-              >
-              
+              <Card>
                 <CardBody>
-                  
-                  <img className="img-fluid" src={`${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`} 
+                 <img className="img-fluid" src={`${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`} 
                      alt="Menu-Icon"/>
-
                   <CardTitle tag="h5">
                     Tumbleweed Bar
                   </CardTitle>
-                  
                   <Button>
                     <a href={`${process.env.PUBLIC_URL}/resturent/details`}>Get Deals</a>
                   </Button>
@@ -36,8 +30,7 @@ const Searchresturentlist = (props) => {
         </Col>
         <Col sm="4" xs="12">     
           <div className="customcardlist">
-              <Card
-              >
+              <Card>
               
                 <CardBody>
                   

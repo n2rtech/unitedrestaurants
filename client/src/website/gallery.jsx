@@ -1,8 +1,7 @@
-import React,{useState} from 'react';
+import React from 'react';
 import Carousel from "react-multi-carousel";
 import { Container, Col,Card, CardBody } from 'reactstrap'
 import "react-multi-carousel/lib/styles.css";
-import './css/style.css'
 
 const Gallery = (props) => {
 
