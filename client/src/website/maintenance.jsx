@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
-import {Container,Button} from 'reactstrap'
-import { Link } from 'react-router-dom';
-import {MAINTENANCE,BACK_TO_HOME_PAGE} from "../constant";
+import {Container} from 'reactstrap'
+import {MAINTENANCE} from "../constant";
 const Maintenance = (props) => {
     return (
         <Fragment>

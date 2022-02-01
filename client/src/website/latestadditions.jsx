@@ -1,20 +1,11 @@
 import React,{useState,useEffect} from 'react';
 import Carousel from "react-multi-carousel";
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
-import ReactStars from "react-rating-stars-component";
+import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap'
 import "react-multi-carousel/lib/styles.css";
-import './css/style.css'
-import {useParams} from 'react-router-dom'
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en.json'
-import ReactTimeAgo from 'react-time-ago'
 import axios from 'axios';
-
-TimeAgo.addLocale(en)
 
 const Latestadditions = (props) => {
 
-  const params = useParams();
   const [latestData, setLatestData] = useState([]);
   const code = localStorage.getItem('country_code');
   useEffect(() => {

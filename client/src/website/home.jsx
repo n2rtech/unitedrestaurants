@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import Header from './header.jsx'
 import Footer from './footer.jsx'
 import Hotdeals from './hotdeals.jsx'
@@ -8,8 +8,6 @@ import Advertise from './advertise.jsx'
 import Latestadditions from './latestadditions.jsx'
 import Homeblog from './homeblog.jsx'
 import Maintenance from './maintenance.jsx'
-import ScrollButton from './ScrollButton.jsx';
-import './css/style.css'
 import {useParams} from 'react-router-dom'
 
 const Home = (props) => {
@@ -17,7 +15,6 @@ const Home = (props) => {
   localStorage.setItem('catid','');
   const params = useParams();
   const [maintenance, setMaintenance] = useState([]);
-  const code = localStorage.getItem('country_code');
 
   useEffect(() => {
   
