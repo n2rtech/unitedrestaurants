@@ -1,15 +1,11 @@
 import React,{useState,useEffect,Fragment} from 'react';
 import Dropdown from 'react-multilevel-dropdown';
 import { Container, Row, Col, Navbar, NavbarToggler, Collapse, NavItem, NavLink, Nav } from 'reactstrap'
-import './css/style.css'
-import {useParams} from 'react-router-dom'
 import axios from 'axios'
 
 const Menu = (props) => {
 const [isOpen, setIsOpen] = React.useState(false);
-
 const [categoryData, setCategoryData] = useState([]);
-const params = useParams();
 
 const addDefaultSrc = (ev) => {
   ev.target.src = `${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`;

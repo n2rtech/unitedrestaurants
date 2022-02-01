@@ -1,10 +1,8 @@
 import React, { Fragment, useState , useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button , ExampleSelect} from 'reactstrap'
-import { useParams } from "react-router-dom";
+import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
 
 const AddUser = (props) => {
 

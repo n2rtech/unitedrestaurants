@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
-import './css/style.css'
+import { Container, Row, Col,List, ListInlineItem } from 'reactstrap'
 import axios from 'axios'
 
 const Countryflag = (props) => {

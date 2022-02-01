@@ -1,7 +1,4 @@
 import React,{useState} from 'react';
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane,ListInlineItem,List } from 'reactstrap'
-import './css/style.css'
-
 
 const Sidebar = (props) => {
   const id = window.location.pathname.split('/').pop()

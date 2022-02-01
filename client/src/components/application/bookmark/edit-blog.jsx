@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button, Table } from 'reactstrap'
+import { Container, Card, CardBody, FormGroup, Input, Label, Button } from 'reactstrap'
 import CKEditors from "react-ckeditor-component";
 import {useParams} from 'react-router-dom'
 import {toast} from 'react-toastify';

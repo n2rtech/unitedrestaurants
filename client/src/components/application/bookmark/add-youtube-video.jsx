@@ -1,20 +1,14 @@
-import React, { Fragment, useEffect , useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { useParams } from "react-router-dom";
+import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
-import { $CombinedState } from 'redux';
 
 const AddVideoGallery = (props) => {
     const [videoname, setVideoname] = useState('')
     const [youtubelink, setYoutubelink] = useState('')
     const [desc, setDesc] = useState('')
-
     const [url, seturl] = useState('')
-
-    const params = useParams();
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
 
@@ -22,26 +16,15 @@ const AddVideoGallery = (props) => {
       setVideoname(event.target.value);
     };
 
-    // const OnFileChange = (event) => {
-    //   setYoutubelink(event.target.files[0].name);
-    // };
-
     const onChangeDesc = (event) => {
       setDesc(event.target.value);
     };
 
     const OnFileChange = (event) => {
-      //console.log(URL.createObjectURL(event.target.files[0]));
       setYoutubelink(event.target.files[0])
-
     }
 
-
-    console.log(youtubelink);
-  // Add Video Api
-  const history = useHistory()
-
-  const handleSubmit = event => {
+    const handleSubmit = event => {
     event.preventDefault();
 
     const config = {

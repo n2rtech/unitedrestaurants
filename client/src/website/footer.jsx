@@ -1,7 +1,6 @@
-import React,{useState,useEffect,Fragment} from 'react';
-import { Container, Row, Col, List, Form, FormGroup, Input, Label, Button,NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
+import React,{useState,useEffect } from 'react';
+import { Container, Row, Col, List } from 'reactstrap'
 import ScrollButton from './ScrollButton.jsx';
-import './css/style.css'
 
 const Footer = (props) => {
 

@@ -1,13 +1,11 @@
 import React, { Fragment, useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button, Table } from 'reactstrap'
-import { useParams } from "react-router-dom";
+import { Container, Row, Col, Card, CardBody, Button, Table } from 'reactstrap'
 import axios from 'axios';
 import {toast} from 'react-toastify';
 
 const Blogs = (props) => {
   const token = localStorage.getItem("token");
-  const params = useParams();	
   const [blogDetails, setBlogDetails] = useState([]);
 
   useEffect(() => {
@@ -21,7 +19,6 @@ const Blogs = (props) => {
 	  });
 
   }, []);
-  console.log('BloG Details',blogDetails);
 
    // Delete functionality
 

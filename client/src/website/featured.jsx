@@ -1,15 +1,11 @@
 import React,{useState,useEffect} from 'react';
 import Carousel from "react-multi-carousel";
-import { Container, Row, Col, Navbar, NavbarBrand, NavbarToggler, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
-import ReactStars from "react-rating-stars-component";
+import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText , Button } from 'reactstrap'
 import "react-multi-carousel/lib/styles.css";
-import './css/style.css'
-import {useParams} from 'react-router-dom'
 import axios from 'axios';
 
 const Featured = (props) => {
 
-  const params = useParams();
   const [featuredData, setFeaturedData] = useState([]);
   const code = localStorage.getItem('country_code');
 

@@ -12,9 +12,7 @@ const Contact = (props) => {
   const [phone_number, setPhoneNumber ] = useState('');
   const [message, setMessage ] = useState('');
   const [errors, setErrors] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-
+  
    const validateForm = () => {
 
     let errors = {};
@@ -91,9 +89,10 @@ const Contact = (props) => {
     setErrors(errors);
   }
 
-
+  const [error, setError] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
+    
     if(validateForm(errors)) {
       const query = {
         name:name,

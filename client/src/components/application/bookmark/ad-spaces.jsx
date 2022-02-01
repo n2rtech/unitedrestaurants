@@ -7,7 +7,6 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import SweetAlert from 'sweetalert2'
 
-
 const AddSpaces = () => {
 
     const [image, setimage] = useState({ pictures: [] })

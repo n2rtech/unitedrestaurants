@@ -1,6 +1,6 @@
 import React, { Fragment, useState , useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button , ExampleSelect} from 'reactstrap'
+import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button} from 'reactstrap'
 import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios'
@@ -61,8 +61,6 @@ const Edituser = (props) => {
     setRoleDataAssign(event.target.value);
   }
 
-  console.log('Roles' , roleassign);
-
   // Edit Api
   const history = useHistory()
 
@@ -90,7 +88,6 @@ const Edituser = (props) => {
       
       )
          .catch(error => console.log('Form submit error', error))
-
 
   };
   

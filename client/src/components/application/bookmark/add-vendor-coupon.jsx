@@ -1,7 +1,6 @@
 import React, { Fragment, useState , useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
-import { useParams } from "react-router-dom";
+import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
@@ -13,7 +12,6 @@ const AddVendorCoupon = (props) => {
   const [discount, setDiscount] = useState(0)
   const [startdate, setStartDate] = useState()
   const [enddate, setEndDate] = useState()
-  const params = useParams();
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
   const vendor_country_id = localStorage.getItem("vendor_country_id");
@@ -50,8 +48,6 @@ const AddVendorCoupon = (props) => {
     GetData();
   }, []);
 
-  console.log('User Details', userdetails);
-// Add Video Api
 const history = useHistory()
 
 const handleSubmit = event => {
@@ -70,9 +66,6 @@ const handleSubmit = event => {
       country_id: vendor_country_id
     };
 
-    console.log('BODY PARAMETERS' , bodyParameters);
-
-
     axios.post(`/api/vendor-coupons/`,
       bodyParameters,
       config
@@ -85,12 +78,7 @@ const handleSubmit = event => {
     
     )
        .catch(error => console.log('Form submit error', error))
-
-
 };
-
-console.log('User Details', userdetails);
-console.log('Vendor Country Id' , vendor_country_id);
 
   return (
     <Fragment>

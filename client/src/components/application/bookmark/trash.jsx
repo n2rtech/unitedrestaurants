@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button, ButtonGroup } from 'reactstrap'
+import { Table, Container, Card, CardBody,Button, ButtonGroup } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import SweetAlert from 'sweetalert2'

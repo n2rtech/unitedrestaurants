@@ -1,15 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button, ButtonGroup } from 'reactstrap'
-import { Grid, List, Link, Share2, Trash2, Tag, Edit2, Bookmark, PlusCircle } from 'react-feather';
-import { useForm } from 'react-hook-form'
-import { useSelector, useDispatch } from 'react-redux'
+import { Table, Container, Card, CardBody,Button, ButtonGroup } from 'reactstrap'
 import SweetAlert from 'sweetalert2'
 import {toast} from 'react-toastify';
 import axios from 'axios'
 
 const ContactEnquiries = (props) => {
-
 
   const token = localStorage.getItem("token");
   const [InquiryData, setInquiryData] = useState([]);

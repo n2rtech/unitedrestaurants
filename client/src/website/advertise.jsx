@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import { Container, Row, Col,Button } from 'reactstrap'
-import './css/style.css'
 import axios from 'axios'
 
 const Advertise = (props) => {

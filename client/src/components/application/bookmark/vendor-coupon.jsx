@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody, CardHeader, Nav, NavItem, TabContent, TabPane, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
+import { Table, Container, Row, Col, Card, CardBody } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
