@@ -12,7 +12,7 @@ const Restaurantlist = (props) => {
   const [vendorData, setVendorData] = useState([]);
   const [activePage, setActivePage] = useState(0);
   const [totalItemsCount, setTotalItemsCount] = useState(0); 
-  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(30);  
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);  
   const [pagesCount, setPagesCount] = useState(0);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(100);
