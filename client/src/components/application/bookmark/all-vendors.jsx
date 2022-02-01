@@ -13,10 +13,6 @@ const AllVendors = (props) => {
   const [filterEmail, setFilterEmail] = useState('');  
   const [filterMobile, setFilterMobile] = useState('');  
   const [filterCountry, setFilterCountry] = useState(''); 
-  const [activePage, setActivePage] = useState(0);
-  const [itemsCountPerPage, setItemsCountPerPage] = useState(1);  
-  const [totalItemsCount, setTotalItemsCount] = useState(1);  
-  const [pagesCount, setPagesCount] = useState(4);
 
   useEffect(() => {
 
@@ -33,11 +29,7 @@ const AllVendors = (props) => {
     .then(
       (result) => { 
         console.log()
-        setVendorData(result); 
-        // setVendorData(result.tutorials); 
-        setTotalItemsCount(result.totalItems);  
-        setActivePage(result.currentPage);
-        setPagesCount(result.totalPages);
+        setVendorData(result);  
       },
       (error) => { 
       });
@@ -79,11 +71,7 @@ const handleNameChange = e => {
     };
    axios.get('/api/vendors',config)
    .then(result=>{
-     setVendorData(result.data); 
-     // setVendorData(result.data.tutorials); 
-     setTotalItemsCount(result.data.totalItems);  
-     setActivePage(result.data.currentPage);
-     setPagesCount(result.data.totalPages);  
+     setVendorData(result.data);  
    }); 
  }
 
@@ -95,104 +83,12 @@ const handleNameChange = e => {
 
     axios(`/api/vendors?name=${filterName}&email=${filterEmail}&mobile=${filterMobile}&country=${filterCountry}`,config)
     .then(result => {
-      // setVendorData(result.data.tutorials); 
       setVendorData(result.data); 
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage+1);
-      setPagesCount(result.data.totalPages);
     })
     .catch(e => {
       console.log(e);
     });
   };
-
-
-
-  const handlePreviousClick = (e) => {
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/users/by-role/2',
-      headers: { 
-        'Authorization': 'JWT '+token, 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'page': activePage-1,
-        'size': 4 
-      }
-    };
-
-    axios(config)
-    .then(function (response) {
-      setVendorData(response.data.tutorials);
-      setItemsCountPerPage(4);  
-      setTotalItemsCount(response.data.totalItems);  
-      setActivePage(response.data.currentPage);
-      setPagesCount(response.data.totalPages);
-    })
-    .catch(function (error) {
-
-    });
-  }
-
-
-  const handleNextClick = (e) => {
-
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/users/by-role/2',
-      headers: { 
-        'Authorization': 'JWT '+token, 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'page': activePage+1,
-        'size': 4 
-      }
-    };
-
-    axios(config)
-    .then(function (response) {
-      setVendorData(response.data.tutorials);
-      setItemsCountPerPage(4);  
-      setTotalItemsCount(response.data.totalItems);  
-      setActivePage(response.data.currentPage);
-      setPagesCount(response.data.totalPages);
-    })
-    .catch(function (error) {
-
-    });
-  }
-
-  const handlePageClick = (e, pageNumber) => {
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/users/by-role/2',
-      headers: { 
-        'Authorization': 'JWT '+token, 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'page': pageNumber+1,
-        'size': 4 
-      }
-    };
-
-    axios(config)
-    .then(function (response) {
-      setVendorData(response.data.tutorials);
-      setItemsCountPerPage(4);  
-      setTotalItemsCount(response.data.totalItems);  
-      setActivePage(response.data.currentPage);
-      setPagesCount(response.data.totalPages);
-    })
-    .catch(function (error) {
-
-    });
-  }
 
   const handleSuspend = (id) => {
     SweetAlert.fire({
@@ -326,19 +222,6 @@ const handleNameChange = e => {
                        ))}
                       </tbody>
                     </Table>
-                    {/*<Pagination>
-                    <PaginationItem disabled={activePage <= 1}>
-                    <PaginationLink onClick={handlePreviousClick} previous/></PaginationItem>
-                    {[...Array(pagesCount)].map((page, i) => (                                    
-                      <PaginationItem page={activePage} cc={(i+1)} active={(i+1) === activePage} key={i}>
-                      <PaginationLink disabled={(i+1) === activePage} onClick={e => handlePageClick(e, i)}>
-                      {i + 1}
-                      </PaginationLink>
-                      </PaginationItem>
-                      ))}
-                    <PaginationItem disabled={activePage === pagesCount}>
-                    <PaginationLink onClick={handleNextClick} next /></PaginationItem>
-                    </Pagination>*/}
                   </div>
                 </CardBody>
               </Card>

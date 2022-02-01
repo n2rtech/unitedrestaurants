@@ -9,18 +9,8 @@ import { Today } from '../../../constant'
 
 const AdminDefault = (props) => {
 
-  const [daytimes,setDayTimes] = useState()
   const today = new Date()
   const curHr = today.getHours()
-  const curMi = today.getMinutes()
-  const [meridiem,setMeridiem] = useState("AM")
-  // eslint-disable-next-line
-  const [date, setDate] = useState({ date: new Date() });
-  // eslint-disable-next-line
-  const [startDate, setStartDate] = useState(new Date());
-  const handleChange = date => {
-    setDate(date)
-  };
 
   const token = localStorage.getItem("token");
   const [totalVendors, setTotalVendors] = useState(0);
@@ -30,9 +20,6 @@ const AdminDefault = (props) => {
   const [totalFeaturedVendors, setTotalFeaturedVendors] = useState(0);
   const [totalAddspaceVendors, setTotalAddspaceVendors] = useState(0);
   const [totalMessages, setTotalMessages] = useState(0);
-
-   const [selectedClient,setSelectedClient] = useState([]);
-
 
   useEffect(() => {
 
@@ -107,50 +94,7 @@ const AdminDefault = (props) => {
       },
       (error) => {
       });
- 
-    if (curHr < 12) {
-      setDayTimes('Good Morning')
-    }else if (curHr < 18) {
-      setDayTimes('Good Afternoon')
-    }else {
-      setDayTimes('Good Evening')
-    }
 
-    if(curHr >= 12){
-     setMeridiem('PM')
-    }else{
-      setMeridiem('AM')
-    }
-    
-    var ordervalue1 = Knob({
-      value: 60,
-      angleOffset: 0,
-      thickness: 0.3,
-      width: 65,
-      fgColor: "#7366ff",
-      readOnly: false,
-      dynamicDraw: true,
-      tickColorizeValues: true,
-      bgColor: '#eef5fb',
-      lineCap: 'round',
-      displayPrevious: false
-    })
-    //document.getElementById('ordervalue1').appendChild(ordervalue1);
-
-    var ordervalue2 = Knob({
-      value: 60,
-      angleOffset: 0,
-      thickness: 0.3,
-      fgColor: "#7366ff",
-      readOnly: false,
-      width: 65,
-      dynamicDraw: true,
-      lineCap: 'round',
-      displayPrevious: false
-    })
-    //document.getElementById('ordervalue2').appendChild(ordervalue2);
-
-    // eslint-disable-next-line
   }, [])
 
 

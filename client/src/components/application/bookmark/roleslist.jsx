@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 
 const RolesList = (props) => {
-  const multiple = false
 
   const params = useParams();
 
@@ -34,15 +33,12 @@ const RolesList = (props) => {
     GetData();
   }, []);
 
-  const [pername, setPername] = useState('')
-
-
   const handleSubmit = event => {
     event.preventDefault();
 
     var array = [];
 
-    const finalpername = multiSelections.map((user) => {
+    multiSelections.map((user) => {
       array.indexOf(user.id) === -1 ? array.push(user.id) : console.log("This item already exists");
     });
 
