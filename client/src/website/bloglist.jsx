@@ -1,32 +1,76 @@
 import React,{useState,useEffect} from 'react';
-import { Container, Row, Col, Pagination, PaginationItem, PaginationLink, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap'
+import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap'
+import Pagination from "react-js-pagination";
+import axios from 'axios';
+
 
 const Bloglist = (props) => {
 
   const [blogs, setBlogs] = useState([]);
+
+  const [activePage, setActivePage] = useState(0);
+  const [totalItemsCount, setTotalItemsCount] = useState(0); 
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);  
+  const [pagesCount, setPagesCount] = useState(0);
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(9);
+
   
   useEffect(() => {
-  
-    const config = {
-        headers: { 'Content-Type': 'application/json'}
-        };
- 
-    fetch("/api/blogs/list" , config)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setBlogs(result);
-        },
-        (error) => {
-          
-        }
-      )
+
+
+    var config = {
+      method: 'get',
+      url: '/api/blogs/list/',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      params : {
+        'page': page,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(function (result) {
+      setBlogs(result.data.blogs);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+    })
+    .catch(function (error) {
+    });
+
   }, []);
 
 
  const addDefaultSrc = (ev) => {
 	ev.target.src = `${process.env.PUBLIC_URL}/assets/images/blog/blog-single.jpg`;
  }
+
+
+     const handlePageChange = (pageNumber) => {
+
+    var config = {
+      method: 'get',
+      url: '/api/blogs/list/',
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params : {
+        'page': pageNumber,
+        'size': size
+      }
+    };
+
+    axios(config)
+  .then(result=>{
+      setBlogs(result.data.blogs);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+  });
+}
 
   return (
     <div className="homeblog blog-listing">
@@ -68,58 +112,25 @@ const Bloglist = (props) => {
                 </Row>  
                 </CardBody>
               </Card>
-            </div>
+            </div>      
+            <Col sm="12" xs="12">
+            <div className="d-flex justify-content-center">
+            <Pagination
+            activePage={activePage}
+            itemsCountPerPage={size}
+            totalItemsCount={totalItemsCount}
+            pageRangeDisplayed={pageRangeDisplayed}
+            onChange={handlePageChange}
+            itemClass="page-item"
+            linkClass="page-link"
+            prevPageText="Prev"
+            nextPageText="Next"
+            lastPageText="Last"
+            firstPageText="First"
 
-        
-
-        <Col sm="12" xs="12">
-          <Pagination aria-label="Page navigation example">
-            <PaginationItem disabled>
-              <PaginationLink
-                first
-                href="#"
-              />
-            </PaginationItem>
-            <PaginationItem disabled>
-              <PaginationLink
-                href="#"
-                previous
-              />
-            </PaginationItem>
-            <PaginationItem active>
-              <PaginationLink href="#">
-                1
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">
-                2
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">
-                3
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">
-                4
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                href="#"
-                next
-              />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                href="#"
-                last
-              />
-            </PaginationItem>
-          </Pagination>
-        </Col>
+            />
+            </div> 
+            </Col>
       </Container>
     </div>
   );
