@@ -4,10 +4,8 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 
 const paypalpremiumhalfyearly = (props) => {
-  const { amount, currency, createSubscription, onApprove, catchError,onError, onCancel} = props;
+  const { amount, currency } = props;
   const paypalKey = "AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t"
-
-  console.log(props);
 
   return (
     <PayPalButton
@@ -21,9 +19,7 @@ const paypalpremiumhalfyearly = (props) => {
       onApprove={(data, details) => {
           // Capture the funds from the transaction
           return details.subscription.get().then(function(details) {
-            console.log('Data' , data);
-            console.log('Details' , details);
-
+        
             const token = localStorage.getItem("token");
             const user_id = localStorage.getItem("id");
             const country_id = localStorage.getItem("vendor_country_id");

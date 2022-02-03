@@ -4,7 +4,7 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 
 const paypalpremiumquarterly = (props) => {
-  const { amount, currency, createSubscription, onApprove, catchError,onError, onCancel} = props;
+  const { amount, currency } = props;
   const paypalKey = "AXPEKGBNnTg-16vrrVO_KBxYrNr3x7GUl9zVlppx4OYPfRAxCIvMfKNewkiTXCnptPuIZDxJVkslkyIX"
 
   console.log(props);
