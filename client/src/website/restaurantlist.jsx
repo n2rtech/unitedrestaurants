@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useMemo} from 'react';
 import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText, List, Button } from 'reactstrap'
 import { useParams } from "react-router-dom";
 import axios from 'axios';
@@ -19,7 +19,7 @@ const Restaurantlist = (props) => {
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [showPagination, setShowPagination] = useState(false);
 
-  useEffect(() => {
+  useMemo(() => {
 
     var config = {
       method: 'get',

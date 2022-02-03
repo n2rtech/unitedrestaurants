@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useMemo} from 'react';
 import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap'
 import Pagination from "react-js-pagination";
 import axios from 'axios';
@@ -15,7 +15,7 @@ const Bloglist = (props) => {
   const size = 9;
 
   
-  useEffect(() => {
+  useMemo(() => {
 
 
     var config = {

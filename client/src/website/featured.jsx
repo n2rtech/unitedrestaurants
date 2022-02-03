@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useMemo} from 'react';
 import Carousel from "react-multi-carousel";
 import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText , Button } from 'reactstrap'
 import "react-multi-carousel/lib/styles.css";
@@ -9,7 +9,7 @@ const Featured = (props) => {
   const [featuredData, setFeaturedData] = useState([]);
   const code = localStorage.getItem('country_code');
 
-  useEffect(() => {
+  useMemo(() => {
   
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}

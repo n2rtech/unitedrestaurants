@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useMemo} from 'react';
 import { Container, Row, Col,Button } from 'reactstrap'
 import axios from 'axios'
 
@@ -11,7 +11,7 @@ const Advertise = (props) => {
   const country_code = localStorage.getItem('country_code');
   const [addSpaces, setAddSpaces] = useState([]);
 
-    useEffect(() => {
+    useMemo(() => {
    
       const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}

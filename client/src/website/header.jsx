@@ -1,4 +1,4 @@
-import React,{useState,useEffect,Fragment} from 'react';
+import React,{useState,useMemo,Fragment} from 'react';
 import SideNav, { MenuIcon } from 'react-simple-sidenav';
 import { Container, Row, Col, FormGroup, Input,List,ListInlineItem } from 'reactstrap'
 import './css/style.css'
@@ -22,12 +22,11 @@ const OnChangeCountry = (event) => {
   window.location.reload(false);
 }
 
-useEffect(() => {
+useMemo(() => {
     axios.get(`/api/Countries/list`)
     .then((getData) => {
       setCountryData(getData.data);
     });
-
 
     axios.get(`/api/categories/list`)
     .then((result_data) => {
@@ -40,7 +39,7 @@ useEffect(() => {
   const [logo, setLogo] = useState([]);
   const [socialdata, setSocialData] = useState([]);
 
-  useEffect(() => {
+  useMemo(() => {
   
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}

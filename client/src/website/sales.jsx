@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useMemo} from 'react';
 import { Container, Row, Col } from 'reactstrap'
 import Header from './header.jsx'
 import Footer from './footer.jsx'
@@ -8,7 +8,7 @@ const Sale = (props) => {
 
   const [salesData, setSalesData] = useState('');
 
-useEffect(() => {
+useMemo(() => {
     axios.get(`/api/pages/slug/sales`)
     .then((getData) => {
       setSalesData(getData.data);

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useMemo} from 'react';
 import { Container, Row, Col,List, ListInlineItem } from 'reactstrap'
 import axios from 'axios'
 
@@ -6,7 +6,7 @@ const Countryflag = (props) => {
 
 const [countryData, setCountryData] = useState([]);
 
-useEffect(() => {
+useMemo(() => {
     axios.get(`/api/Countries/list`)
     .then((getData) => {
       setCountryData(getData.data);
