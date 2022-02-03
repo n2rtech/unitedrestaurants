@@ -22,21 +22,18 @@ const Home = () => {
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
-        const interval = setInterval(
-          () => 
-              fetch('/api/site-settings/getsettings' , config)
-                .then(res => res.json())
-                .then(
-                  (result) => {  
-                    setMaintenance(result.maintenance_mode);
-                  },
-                  (error) => {
-                    
-                  }
-                  ),
-                1000);
-                return () => clearInterval(interval);  
-            }, []);
+ 
+    fetch('/api/site-settings/getsettings' , config)
+      .then(res => res.json())
+      .then(
+        (result) => {  
+          setMaintenance(result.maintenance_mode);
+        },
+        (error) => {
+          
+        }
+        )
+  }, []);
 
   return (
       <Container fluid={true} className="p-0">
