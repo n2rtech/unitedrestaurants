@@ -1,16 +1,10 @@
-import React, { useState, Fragment,useEffect } from 'react'
+import React, { useState, Fragment } from 'react'
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container, Row, Col, Card, CardBody, CardHeader, Button, Input, Label, Form, FormGroup } from 'reactstrap'
 import {PermissionForm ,PermissionName,PermissionDesc, SEND_IT} from "../../../constant";
 import axios from 'axios'
 
 const General = () => {
-
-  const [generalData, setGeneralData] = useState([]);
-
-  useEffect(() => {
-    axios.get(`${process.env.PUBLIC_URL}/api/general.json`).then(res => setGeneralData(res.data.result))
-  },[])
 
   const [pername, setPername] = useState('')
   const [perdesc, setPerdesc] = useState('')

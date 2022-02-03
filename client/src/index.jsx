@@ -50,15 +50,11 @@ import Error400 from "./pages/errors/error400"
 // Maintenance
 import Maintenance from "./pages/maintenance"
 import Callback from './auth/callback'
-import { classes } from './data/layouts';
-
-// setup fake backend
-// configureFakeBackend();
 
 const Root = (props) =>  {
-  const [anim, setAnim] = useState("");
-  const [currentUser, setCurrentUser] = useState(false);
-  const [authenticated,setAuthenticated] = useState(false)
+  const anim = '';
+  const currentUser = false;
+  const authenticated = false;
   const jwt_token = localStorage.getItem('token'); 
     if(localStorage.getItem('country_code') == null) {
       localStorage.setItem('country_code' , 'usa');

@@ -61,7 +61,7 @@ const addDefaultSrc = (ev) => {
                   </Row>
                   
                   <Button>
-                    { item.user_id == 0 ?  
+                    { item.user_id === 0 ?  
                     
                       <a href={`${process.env.PUBLIC_URL}/resturent/newdetails/${item.id}_${localStorage.getItem('country_code')}`}>
                       VIEW

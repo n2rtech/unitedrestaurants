@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useMemo } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Card, CardBody,Button, ButtonGroup } from 'reactstrap'
 import {toast} from 'react-toastify';
@@ -8,7 +8,6 @@ import SweetAlert from 'sweetalert2'
 const Trash = (props) => {
 
   const token = localStorage.getItem("token");
-
   const [trashVendorData, setTrashVendorData] = useState([]);
   const [trashUserData, setTrashUserData]= useState([]);
   const [trashCountryData, setTrashCountryData] = useState([]);
@@ -16,10 +15,10 @@ const Trash = (props) => {
   const [trashAccountsPaybleData, setTrashAccountsPaybleData] = useState([]);
   const [trashBlogData, setTrashBlogData] = useState([]);
 
-  useEffect(() => {
+  useMemo(() => {
 
     const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
     };
 
     fetch("/api/trash" , config)

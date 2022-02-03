@@ -1,14 +1,12 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useMemo, Fragment } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { useSelector, useDispatch } from 'react-redux';
-import { Container, Row, Col, Table ,Card, CardHeader, CardBody, Button, ListGroup, Form, FormGroup, Input, Media, Modal, ModalHeader, ModalBody, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap'
+import { Container, Row, Col, Table } from 'reactstrap'
 
 const Product = (props) => {
 
-
 const [categoryData, setCategoryData] = useState([]);
 
-useEffect(() => {
+useMemo(() => {
 
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
@@ -27,8 +25,6 @@ useEffect(() => {
         }
       )
   }, []);
-
-console.log(categoryData);
 
   return (
     <Fragment>

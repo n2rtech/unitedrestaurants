@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useMemo } from 'react';
 import man from '../../assets/images/dashboard/profile.jpg'
 import { LogIn } from 'react-feather';
 import { useHistory } from 'react-router-dom'
@@ -8,7 +8,6 @@ import {
   setTranslations,
   setDefaultLanguage,
   setLanguageCookie,
-  setLanguage,
   translate,
 } from 'react-switch-lang';
 
@@ -38,7 +37,7 @@ const Rightbar = (props) => {
   const authenticated = JSON.parse(localStorage.getItem("authenticated"));
   const auth0_profile = JSON.parse(localStorage.getItem("auth0_profile"))
 
-  useEffect(() => {
+  useMemo(() => {
     setProfile(localStorage.getItem('profileURL') || man);
     setName(localStorage.getItem('Name'))
     if(localStorage.getItem("layout_version") === "dark-only"){

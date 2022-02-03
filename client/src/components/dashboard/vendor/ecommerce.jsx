@@ -1,43 +1,9 @@
 import React, { Fragment,useState ,useEffect} from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import {Container,Row,Col,Card,CardBody } from 'reactstrap' 
-import { withGoogleMap, GoogleMap, withScriptjs } from "react-google-maps";
 import axios from 'axios'
 
 const VendorEcommerce = (props) => {
-    // eslint-disable-next-line
-    const[location,setlocation] = useState({ address: false,
-      mapPosition: {
-        lat: 18.5204, lng: 73.8567
-        },
-        markerPosition: {
-        lat: 18.5204, lng: 73.8567
-        }
-    })
-
-    const BasicMap = withScriptjs(
-      withGoogleMap(
-      props => (
-        <GoogleMap google={props.google}
-        defaultZoom={15}
-        defaultCenter={{ lat: location.mapPosition.lat, lng: location.mapPosition.lng }}
-        >
-      </GoogleMap>
-      )
-      )
-    );
-
-    const settings = {
-        className: "center",
-        centerMode: true,
-        dots: false,
-        arrows: false,
-        infinite: true,
-        speed: 500,
-        centerPadding: "5px",
-        slidesToShow: 1,
-        slidesToScroll: 1
-    };
 
     const[walletbalance,setWalletBallance] = useState()
     const token = localStorage.getItem("token");
@@ -52,8 +18,6 @@ const VendorEcommerce = (props) => {
   };
   GetData();
 }, []);
-
-console.log('walletbalance', walletbalance);
 
     return (
         <Fragment>

@@ -1,4 +1,4 @@
-import React,{useState,useEffect,Fragment} from 'react';
+import React,{useState,useMemo,Fragment} from 'react';
 import Dropdown from 'react-multilevel-dropdown';
 import { Container, Row, Col, Navbar, NavbarToggler, Collapse, NavItem, NavLink, Nav } from 'reactstrap'
 import axios from 'axios'
@@ -11,7 +11,7 @@ const addDefaultSrc = (ev) => {
   ev.target.src = `${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`;
 }
 
-useEffect(() => {
+useMemo(() => {
   axios.get(`/api/categories/top-menu`)
     .then((result_data) => {
       const result = result_data.data;
@@ -101,7 +101,7 @@ useEffect(() => {
                       ))}
                     </Dropdown>
                   }
-                  {item.parent && (item.parent.length == 0) && <div className="sigle-title">{item.name}</div> }
+                  {item.parent && (item.parent.length === 0) && <div className="sigle-title">{item.name}</div> }
                   </NavItem>
                   ))}                  
                 </Nav>

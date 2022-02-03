@@ -101,13 +101,13 @@ const GeneralSettings = (props) => {
                 <Row className="m-l-10">
                   <Col sm="1">
                     <div className="radio radio-primary">
-                      <Input id="radio1" type="radio" onChange={onChangeMode} data-test={maintenanceMode} name="radio1" value="no" checked ={maintenanceMode == 'no'} />
+                      <Input id="radio1" type="radio" onChange={onChangeMode} data-test={maintenanceMode} name="radio1" value="no" checked ={maintenanceMode === 'no'} />
                       <Label for="radio1">{Option}<span className="digits"> {"No"}</span></Label>
                     </div>
                   </Col>
                   <Col sm="1">
                     <div className="radio radio-primary">
-                      <Input id="radio2" type="radio" onChange={onChangeMode} name="radio1" value="yes" data-test={maintenanceMode} checked ={maintenanceMode == 'yes'} />
+                      <Input id="radio2" type="radio" onChange={onChangeMode} name="radio1" value="yes" data-test={maintenanceMode} checked ={maintenanceMode === 'yes'} />
                       <Label for="radio2">{Option}<span className="digits"> {"Yes"}</span></Label>
                     </div>
                   </Col>
@@ -135,7 +135,7 @@ const GeneralSettings = (props) => {
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">Logo</Label>
-                {(siteSettingData.logo != 0) ? 
+                {(siteSettingData.logo !== 0) ? 
                   <img className="img-thumbnail" src={`/api/uploads/site/${siteSettingData.logo}`} />
                   : ''  
                 }

@@ -1,9 +1,9 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container, Card, CardBody } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios';
-import { useLocation, BrowserRouter as Router } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useHistory } from 'react-router-dom'
 const YoutubeCallback = (props) => {
 
@@ -11,7 +11,7 @@ const YoutubeCallback = (props) => {
   let query = new URLSearchParams(useLocation().search);
   const code = query.get("code")
   const history = useHistory()
-  useEffect(() => {
+  useMemo(() => {
     const config = {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
     };
@@ -25,8 +25,7 @@ const YoutubeCallback = (props) => {
         console.log('Submited Successfully');
         toast.success("video Uploaded Successfully!")
         history.push('/dashboard/vendor/vendor-youtube/');
-      })
-    .catch(error => console.log('Form submit error', error))
+      }).catch(error => console.log('Form submit error', error))
 
   }, []);
 

@@ -66,11 +66,11 @@ const [image, setimage] = useState({ pictures: [] })
         <h5>Show on Home page</h5>
         <FormGroup className="m-checkbox-inline custom-radio-ml">
           <div className="radio radio-primary">
-            <Input id="no-home" type="radio" name="radio1" value="0" onChange = {onChangehome} checked={showhome==0}  />
+            <Input id="no-home" type="radio" name="radio1" value="0" onChange = {onChangehome} checked={showhome===0}  />
             <Label className="mb-0" for="no-home">No</Label>
           </div>
           <div className="radio radio-primary">
-            <Input id="yes-home" type="radio" name="radio1" value="1" onChange = {onChangehome}  checked={showhome==1}/>
+            <Input id="yes-home" type="radio" name="radio1" value="1" onChange = {onChangehome}  checked={showhome===1}/>
             <Label className="mb-0" for="yes-home">Yes</Label>
           </div>
         </FormGroup>

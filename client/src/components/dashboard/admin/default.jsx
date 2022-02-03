@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useMemo, useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
 import { Database, ShoppingBag, MessageCircle, UserPlus } from 'react-feather';
@@ -8,7 +8,6 @@ import { Today } from '../../../constant'
 
 const AdminDefault = (props) => {
 
-  const today = new Date()
   const token = localStorage.getItem("token");
   const [totalVendors, setTotalVendors] = useState(0);
   const [totalVendorData, setTotalVendorData] = useState([]);
@@ -18,7 +17,7 @@ const AdminDefault = (props) => {
   const [totalAddspaceVendors, setTotalAddspaceVendors] = useState(0);
   const [totalMessages, setTotalMessages] = useState(0);
 
-  useEffect(() => {
+  useMemo(() => {
 
     const config = {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },

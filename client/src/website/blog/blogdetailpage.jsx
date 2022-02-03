@@ -1,7 +1,6 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useMemo} from 'react';
 import { Container, Row, Col,  List, ListInlineItem } from 'reactstrap'
 import 'react-tabs/style/react-tabs.css';
-import '../css/style.css'
 import { useParams } from "react-router-dom";
 import axios from 'axios'
 
@@ -9,9 +8,8 @@ const Detailpage = (props) => {
 
   const params = useParams();	
   const [blogDetails, setBlogDetails] = useState([]);
-  const [vendor_id , setVendorId] = useState(0); 	
 
-  useEffect(() => {
+  useMemo(() => {
   
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
@@ -19,7 +17,6 @@ const Detailpage = (props) => {
 
 	axios.get('/api/blogs/'+`${params.id}` , config).then((response) => {
 		setBlogDetails(response.data);
-		setVendorId(response.data.user_id)
 	  });
 
   }, []);
@@ -47,7 +44,7 @@ const Detailpage = (props) => {
           <List type="inline">
 			  <ListInlineItem>
 			    <span>
-					{ blogDetails != '' ? blogDetails.createdAt : '' }
+					{ blogDetails !== '' ? blogDetails.createdAt : '' }
 					
 					</span>
 			  </ListInlineItem>

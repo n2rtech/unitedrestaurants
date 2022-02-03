@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect , useState } from 'react';
+import React, { Fragment, useMemo , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container, Card, CardBody, FormGroup, Input, Label, Button } from 'reactstrap'
 import CKEditors from "react-ckeditor-component";
@@ -37,7 +37,7 @@ const [showhome , setShowhome]  = useState('0');
 
     const [blogDetails, setBlogDetails] = useState([]);
 
-    useEffect(() => {
+    useMemo(() => {
     
       const config = {
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
@@ -93,11 +93,11 @@ const [showhome , setShowhome]  = useState('0');
           <h5>Show on Home page</h5>
           <FormGroup className="m-checkbox-inline custom-radio-ml">
             <div className="radio radio-primary">
-              <Input id="no-home" type="radio" name = "radio1" value = "0" onChange = {onChangehome} checked={showhome==0} />
+              <Input id="no-home" type="radio" name = "radio1" value = "0" onChange = {onChangehome} checked={showhome===0} />
               <Label className="mb-0" for="no-home">No</Label>
             </div>
             <div className="radio radio-primary">
-              <Input id="yes-home" type="radio" name = "radio1" value = "1"  onChange = {onChangehome} checked={showhome==1}/>
+              <Input id="yes-home" type="radio" name = "radio1" value = "1"  onChange = {onChangehome} checked={showhome===1}/>
               <Label className="mb-0" for="yes-home">Yes</Label>
             </div>
           </FormGroup>
@@ -115,7 +115,7 @@ const [showhome , setShowhome]  = useState('0');
               }}
             />
           </FormGroup>
-              {(blogDetails.image != 0) ?
+              {(blogDetails.image !== 0) ?
                 <div>
                    <img className="img-thumbnail" src={`/api/uploads/blogs/${blogDetails.image}`} />
                 </div>

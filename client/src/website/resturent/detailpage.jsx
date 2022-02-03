@@ -1,4 +1,4 @@
-import React,{Fragment,useState,useEffect} from 'react';
+import React,{Fragment,useState,useMemo} from 'react';
 import Lightbox from "react-image-lightbox";
 import 'video-react/dist/video-react.css';
 import { Container, Row, Col, Media, List } from 'reactstrap'
@@ -35,7 +35,7 @@ const Detailpage = (props) => {
           console.log(isExpanded);
       }
 
-        useEffect(() => {
+        useMemo(() => {
 
             axios.get(`/api/gallery/list/${id}`)
             .then((getData) => {
@@ -119,12 +119,8 @@ const Detailpage = (props) => {
       			<Col sm="12" xs="12">
       				<div className="historyabout">
       					<h2>Our History</h2>
-      				
-      					{/* <a href={void(0)} className="showmorebtn">Show more</a> */}
-
                 { vendorProfileData.about_business != '' ?
                 <ShowMoreText
-                /* Default options */
                 lines={3}
                 more="Show more"
                 less="Show less"
@@ -152,27 +148,6 @@ const Detailpage = (props) => {
       				<div className="wehave">
       					<h3>What Do We Have</h3>
                         <div dangerouslySetInnerHTML={{ __html: menuItemsData.content }} />
-                        {/*<List type="unstyled">
-                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-                        alt="Hand Symbol" className="handsymbol" /> Salad With Vagitable</a>
-                        </li>
-                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-                        alt="Hand Symbol" className="handsymbol" /> Teriyaki salmon</a></li>
-                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-                        alt="Hand Symbol" className="handsymbol" /> Roasted prawns coriander</a></li>
-                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-                        alt="Hand Symbol" className="handsymbol" /> Pumpkin and goat cheese</a></li>
-                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-                        alt="Hand Symbol" className="handsymbol" /> Mince & steak pie</a></li>
-                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-                        alt="Hand Symbol" className="handsymbol" /> Veal mini escalopes</a></li>
-                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-                        alt="Hand Symbol" className="handsymbol" /> Ravioli filled with baked</a></li>
-                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-                        alt="Hand Symbol" className="handsymbol" /> Teriyaki salmon</a></li>
-                        <li><a href={void(0)}><img src={`${process.env.PUBLIC_URL}/assets/images/icons/handsymbol.png`} 
-                        alt="Hand Symbol" className="handsymbol" /> Roasted prawns coriander</a></li>
-                        </List>*/}
       				</div>
       			</Col>
       		</Row>
@@ -224,7 +199,7 @@ const Detailpage = (props) => {
       		<h5>Videos</h5>
       		<Row>
 
-            { videoGalleryData != '' ? videoGalleryData.map((videoGallery , i ) => (
+            { videoGalleryData !== '' ? videoGalleryData.map((videoGallery , i ) => (
       			<Col sm="4" xs="6">
       				<div className="videodiv">
       					<div className="embed-responsive embed-responsive-16by9">
@@ -279,11 +254,11 @@ const Detailpage = (props) => {
 						  </li>
       					</List>
       					<div className="socialmenucontact">
-      						<a href={`//${vendorProfileData.facebook}`} target="_blank" className="facebookD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/facebookD.png`} 
+      						<a href={`//${vendorProfileData.facebook}`} target="_blank"  rel="noopener noreferrer" className="facebookD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/facebookD.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
-	                 <a href={`//${vendorProfileData.instagram}`} target="_blank" className="twitterD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/instagram.png`} 
+	                 <a href={`//${vendorProfileData.instagram}`} target="_blank"  rel="noopener noreferrer" className="twitterD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/instagram.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
-	                 <a href={`//${vendorProfileData.youtube}`} target="_blank" className="envelopeD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/youtube.png`} 
+	                 <a href={`//${vendorProfileData.youtube}`} target="_blank"  rel="noopener noreferrer" className="envelopeD"><img src={`${process.env.PUBLIC_URL}/assets/images/icons/youtube.png`} 
 	                 alt="Hand Symbol" className="handsymbol" /></a>
       					</div>
       				</div>
@@ -303,13 +278,6 @@ const Detailpage = (props) => {
       				<div className="saleinfo">
       					<h6>Items for Sale</h6>
                         <div dangerouslySetInnerHTML={{ __html: saleItemsData.content }} />
-      					{/*<List type="unstyled">
-      						<li>
-						    Roasted prawns coriander
-						  </li>
-						  <li>Pumpkin and goat cheese</li>
-						  <li>Ravioli filled with baked</li>
-      					</List>*/}
       				</div>
       			</Col>
       		</Row>

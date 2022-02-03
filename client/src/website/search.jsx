@@ -37,13 +37,6 @@ const Home = (props) => {
   var base64 = require('base-64');
   var decodedData = base64.decode(`${params.id}`);
 
-  console.log("Countryde",decodedData);
-
-  const country_code = decodedData.split("&country=").pop()
-  const catidsearch = decodedData.split("&category=").pop()
-  const searchvalue = decodedData.split("&filter=").pop()
-  const country_codesearch = decodedData.split("&country=").pop()
-
   useMemo(() => {
   
     const config = {
@@ -65,9 +58,12 @@ const Home = (props) => {
           setAddSpaces(getData.data);
         });
 
-  }, []);
+        axios.get(`/api/latest-additions?${decodedData}`)
+        .then((getData) => {
+          setLatestData(getData.data);
+        });
 
-  console.log("HOT DEALS" , hotData);
+  }, []);
 
 const addDefaultSrc = (ev) => {
   ev.target.src = `${process.env.PUBLIC_URL}/assets/images/foodimg1.png`;

@@ -1,4 +1,4 @@
-import React, { Fragment, useRef ,useState, useEffect } from 'react';
+import React, { Fragment, useState, useMemo } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { useParams } from "react-router-dom";
@@ -18,7 +18,7 @@ const [Featured , setFeatured] = useState();
 const [Hotdeals , setHotdeals] = useState('0');
 const [category_id , setCategory] = useState('0');
 
-  useEffect(() => {
+useMemo(() => {
   const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
         };
@@ -28,8 +28,6 @@ const [category_id , setCategory] = useState('0');
 	  });
 
   }, []);
-  console.log(options);
-
 
   const onChangeName = (event) => {
     setName(event.target.value);
@@ -59,15 +57,13 @@ const [category_id , setCategory] = useState('0');
       setCategory(evt.target.value)
     }
 
-  const [details , setDetails] = useState();
-  useEffect(() => {
+  useMemo(() => {
     
   const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
         };
 
   axios.get('/api/vendors/'+`${params.id}` , config).then((response) => {
-      setDetails(response.data);
       setName(response.data[0].name);
       setEmail(response.data[0].email);
       setMobile(response.data[0].mobile);
@@ -80,14 +76,13 @@ const [category_id , setCategory] = useState('0');
 
   }, []);
 
-  const [cat , setCat] = useState();
-  useEffect(() => {
+  useMemo(() => {
     const config = {
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
           };
   
     axios.get('/api/categories/'+`${category_id}` , config).then((response) => {
-      setCat(response.data.name);
+      
       });
   
     }, []);
