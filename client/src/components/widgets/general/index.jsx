@@ -1,49 +1,16 @@
 import React, { useState, Fragment,useEffect } from 'react'
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Container, Row, Col, Card, CardBody, CardHeader, Button, CardFooter, Table, Input, Label, Form, FormGroup } from 'reactstrap'
-import { Database, ShoppingBag, MessageCircle, UserPlus, Layers, ShoppingCart, DollarSign, ArrowDown, ArrowUp, CloudDrizzle } from 'react-feather';
-import DatePicker from "react-datepicker";
-import Clock from 'react-clock';
-import Slider from "react-slick";
-import CountUp from 'react-countup';
-import { Earnings,Messages,NewUser,Products,New,Pending,Done,Cancel } from '../../../constant'
+import { Container, Row, Col, Card, CardBody, CardHeader, Button, Input, Label, Form, FormGroup } from 'reactstrap'
 import {PermissionForm ,PermissionName,PermissionDesc, SEND_IT} from "../../../constant";
 import axios from 'axios'
-// import alert from 'alert'
 
 const General = () => {
 
-  const [date, setDate] = useState({ date: new Date() });
   const [generalData, setGeneralData] = useState([]);
-  const {clients,cartProducts, employeeStatus} = generalData
-  const handleChange = date => {
-    setDate(date)
-  };
 
   useEffect(() => {
     axios.get(`${process.env.PUBLIC_URL}/api/general.json`).then(res => setGeneralData(res.data.result))
   },[])
-
-
-  // eslint-disable-next-line
-  const [startDate, setStartDate] = useState(new Date());
-
-
-  const month = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
-  var d = new Date();
-  let dateshow = month[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-
-  // eslint-disable-next-line 
-  const [settings, setSettings] = useState({
-    className: "center",
-    centerMode: true,
-    speed: 500,
-    arrows: false,
-    centerPadding: "5px",
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    infinite: true
-  });
 
   const [pername, setPername] = useState('')
   const [perdesc, setPerdesc] = useState('')

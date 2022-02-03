@@ -4,14 +4,11 @@ import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
 import { Database, ShoppingBag, MessageCircle, UserPlus } from 'react-feather';
 import CountUp from 'react-countup';
 import { TotalVendors,MembershipsVendor,VendorAdded,SupendedVendors } from '../../../constant'
-import Knob from "knob";
 import { Today } from '../../../constant'
 
 const AdminDefault = (props) => {
 
   const today = new Date()
-  const curHr = today.getHours()
-
   const token = localStorage.getItem("token");
   const [totalVendors, setTotalVendors] = useState(0);
   const [totalVendorData, setTotalVendorData] = useState([]);

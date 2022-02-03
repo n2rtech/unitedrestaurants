@@ -1,10 +1,8 @@
 import React, { Fragment , useState , useEffect } from 'react';
 import Breadcrumb from '../../layout/breadcrumb'
 import {Container,Row,Col,Card,CardHeader,Table,Button } from "reactstrap";
-import { BasicTable,InverseTable,InverseTablePrimaryBackground,HoverableRows,ContextualClasses,TextBackgroundUtilities,TableHeadOptions,StripedRow,StripedRowInverseTable,Caption,ResponsiveTables,BreckpointSpecific } from "../../constant";
+import { BasicTable } from "../../constant";
 import axios from 'axios';  
-import { useHistory, useLocation } from 'react-router-dom'
-
 
 const PagesList = () => {
 

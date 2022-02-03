@@ -1,10 +1,7 @@
 import React, { useState, Fragment,useEffect } from 'react';
 import Breadcrumb from '../../layout/breadcrumb'
-import axios from 'axios'
-import Lightbox from "react-image-lightbox";
-import { Container, Row, Col, Card, Table ,CardHeader, CardBody, Form,  Input, Media, TabContent, TabPane, Nav, NavItem, NavLink, Pagination, PaginationItem, PaginationLink, InputGroup, InputGroupAddon } from 'reactstrap';
-import {All,Images,Videos,Settings,Tools,Previous,Next,PortfolioTitle,Audios} from '../../constant'
-import { Home, Users, Layers } from 'react-feather'
+import { Container, Row, Col, Card, Table } from 'reactstrap';
+
 const Search = (props) => {
   const [rolesData, setRolesData] = useState([]);
 
@@ -27,8 +24,6 @@ const Search = (props) => {
           }
         )
     }, []);
-  
-  console.log(rolesData);
 
   return (
     <Fragment>

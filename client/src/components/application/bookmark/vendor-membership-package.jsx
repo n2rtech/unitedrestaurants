@@ -61,19 +61,19 @@ const VendorMembershipPackage = (props) => {
 
   const onChangeCycle = (event) => {
 
-   if(planname == 'Free') {
+   if(planname === 'Free') {
     if (event.target.value == 'Monthly') {
       setAmount(5.99)
       setInterval('/monthly')
       setCycle(<PaypalStandardMonthly amount = {5.99} membership_id = {2} interval = {'Monthly'} currency = {'USD'}/>)
     }  
-    else if (event.target.value == 'Quarterly') {
+    else if (event.target.value === 'Quarterly') {
       setAmount(16.00)
       setInterval('/quaterly')
       setCycle(
         <PaypalStandardQuarterly amount = {16.00} membership_id = {4} interval = {'Quarterly'} currency = {'USD'}/>
       )
-    } else if (event.target.value == 'Yearly') {
+    } else if (event.target.value === 'Yearly') {
       setAmount(65.00)
       setInterval('/yearly')
       setCycle (
@@ -102,19 +102,19 @@ const VendorMembershipPackage = (props) => {
   const [preinterval,setPreinterval] = useState('');
 
   const onChangePremiumCycle = (event) => {
-    if(planname == 'Free') {
-      if (event.target.value == 'Monthly') {
+    if(planname === 'Free') {
+      if (event.target.value === 'Monthly') {
         setPremiumAmount(7.99)
         setPreinterval('/monthly')
         setPremiumCycle(<PaypalPremiumMonthly amount = {7.99} membership_id = {3} interval = {'Monthly'} currency = {'USD'}/>)
       }  
-      else if (event.target.value == 'Quarterly') {
+      else if (event.target.value === 'Quarterly') {
         setPremiumAmount(29.00)
         setPreinterval('/quarterly')
         setPremiumCycle(
           <PaypalPremiumQuatertly amount = {29.00} membership_id = {7} interval = {'Quarterly'} currency = {'USD'}/>
         )
-      } else if (event.target.value == 'Yearly') {
+      } else if (event.target.value === 'Yearly') {
         setPremiumAmount(90.00)
         setPreinterval('/yearly')
         setPremiumCycle (
@@ -266,14 +266,10 @@ const VendorMembershipPackage = (props) => {
                           <li>{"Complete use of our platform"}</li>
                         </ul>
                         
-                          { planname == 'Free' ? 
-                          
+                          { planname === 'Free' ? 
                             <div className="pricingtable-signup"><Button color="primary" size="lg" disabled>{"Active"}</Button></div> 
-                          
                             :
-                          
                             <div className="pricingtable-signup"><Button color="primary" size="lg" onClick = {HandleMembership}>Included with paid plans</Button></div>
-                          
                           }
                           
                       </div>
@@ -307,21 +303,17 @@ const VendorMembershipPackage = (props) => {
                         <div className="pricingtable-signup">
                         {cycle}
 
-                        { planname == 'Standard' ? 
-                          
+                        { planname === 'Standard' ? 
                           <div className="pricingtable-signup">
                               {"Selected Cycle"} : {intervalq}<br/>
                               {"Amount"} : {cycleamountq} <br/>
-                             <Button color="primary" size="lg" disabled>{"Active"}</Button><br/>
-                              
+                             <Button color="primary" size="lg" disabled>{"Active"}</Button><br/> 
                              <br/>
                              <Button color="danger" size="lg" onClick={() => CancelSubscription(subscriptionid)}>{"cancel"}</Button>
                           </div> 
-                          
                           :
-                          
                           ''
-                          }
+                        }
 
                         </div>
                       </div>
@@ -350,7 +342,7 @@ const VendorMembershipPackage = (props) => {
                         </FormGroup>
                         <div className="pricingtable-signup">
                         {premiumcycle}
-                        { planname == 'Premium' ? 
+                        { planname === 'Premium' ? 
                           
                           <div className="pricingtable-signup">
                               {"Selected Cycle"} : {intervalq}<br/>

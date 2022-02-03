@@ -4,19 +4,12 @@ import {Container,Row,Col,Card,Button,CardBody,Table} from 'reactstrap'
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap"
   
  var axios = require('axios');
-    var qs = require('qs');
 
-const Productlist = () => {
+    const Productlist = () => {
 
-const [generalData, setGeneralData] = useState([]);
-
-const [currentPage, setCurrentPage] = useState(1);
-
-  const [activePage, setActivePage] = useState(0);
-  const [itemsCountPerPage, setItemsCountPerPage] = useState(1);  
-  const [totalItemsCount, setTotalItemsCount] = useState(1);  
-  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(3);
-  const [pagesCount, setPagesCount] = useState(4);
+    const [generalData, setGeneralData] = useState([]);
+    const [activePage, setActivePage] = useState(0);
+    const [pagesCount, setPagesCount] = useState(4);
 
 
 useEffect(() => {
@@ -37,8 +30,6 @@ useEffect(() => {
     axios(config)
     .then(function (response) {
         setGeneralData(response.data.tutorials);
-        setItemsCountPerPage(4);  
-        setTotalItemsCount(response.data.totalItems);  
         setActivePage(response.data.currentPage);
         setPagesCount(response.data.totalPages);
     })
@@ -67,8 +58,6 @@ e.preventDefault();
     axios(config)
     .then(function (response) {
         setGeneralData(response.data.tutorials);
-        setItemsCountPerPage(4);  
-        setTotalItemsCount(response.data.totalItems);  
         setActivePage(response.data.currentPage);
         setPagesCount(response.data.totalPages);
     })
@@ -97,8 +86,6 @@ const handleNextClick = (e) => {
     axios(config)
     .then(function (response) {
         setGeneralData(response.data.tutorials);
-        setItemsCountPerPage(4);  
-        setTotalItemsCount(response.data.totalItems);  
         setActivePage(response.data.currentPage);
         setPagesCount(response.data.totalPages);
     })
@@ -125,8 +112,6 @@ const handlePageClick = (e, pageNumber) => {
     axios(config)
     .then(function (response) {
         setGeneralData(response.data.tutorials);
-        setItemsCountPerPage(4);  
-        setTotalItemsCount(response.data.totalItems);  
         setActivePage(response.data.currentPage);
         setPagesCount(response.data.totalPages);
     })
