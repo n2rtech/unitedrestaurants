@@ -262,6 +262,7 @@ router.get('/', (req, res) => {
     .findAll(conditions)
     .then((featured_business) => {
        if(featured_business.length == 0) {
+           console.log('country',req.query.country);
           if (req.query.country == 'ita') {
             var table_name = 'VendorIta';
           } else {

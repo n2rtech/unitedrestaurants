@@ -3,13 +3,11 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import man from '../assets/images/dashboard/profile.jpg';
 import {Container,Row,Col,Form,FormGroup,Input,Label,Button,NavItem, NavLink, Nav,TabContent,TabPane} from 'reactstrap'
-import {firebase_app,googleProvider,facebookProvider,githubProvider, Jwt_token } from '../data/config'
-import { handleResponse } from '../services/fack.backend'
+import {firebase_app,Jwt_token } from '../data/config'
 import { useAuth0 } from '@auth0/auth0-react'
 import { toast } from 'react-toastify';
 import {withRouter} from 'react-router-dom'
-import { Facebook, GitHub} from 'react-feather'
-import {Password,SignIn, EmailAddress,RememberPassword,ForgotPassword ,CreateAccount,FIREBASE,AUTH0,JWT,LoginWithJWT } from '../constant';
+import {Password,SignIn, EmailAddress,CreateAccount,FIREBASE,AUTH0,JWT } from '../constant';
 
 const Logins = (props) => {
   
@@ -51,61 +49,6 @@ const Logins = (props) => {
                   props.history.push(`${process.env.PUBLIC_URL}/dashboard/default/`);
                 }, 200);
                 })
-      } catch (error) {
-          setTimeout(() => {
-              toast.error("Oppss.. The password is invalid or the user does not have a password.");
-          }, 200);
-      }
-    }
-
-    const googleAuth = async () => {
-      
-      try {
-              firebase_app.auth().signInWithPopup(googleProvider).then(function (result) {
-              setName(result.user.displayName);
-              setValue(result.user.photoURL)
-              localStorage.setItem('token', Jwt_token);
-              setTimeout(() => {
-                props.history.push(`${process.env.PUBLIC_URL}/dashboard/default/`);
-              }, 200);
-            
-          });
-      } catch (error) {
-          setTimeout(() => {
-              toast.error("Oppss.. The password is invalid or the user does not have a password.");
-          }, 200);
-      }
-    };
-
-    const facebookAuth = async () => {
-      
-      try {
-              firebase_app.auth().signInWithPopup(facebookProvider).then(function (result) {
-              setValue(result.user.photoURL);
-              setName(result.user.displayName)
-              localStorage.setItem('token', Jwt_token);
-              setTimeout(() => {
-                props.history.push(`${process.env.PUBLIC_URL}/dashboard/default/`);
-              }, 200);
-          });
-      } catch (error) {
-          setTimeout(() => {
-              toast.error("Oppss.. The password is invalid or the user does not have a password.");
-          }, 200);
-      }
-    }
-
-    const githubAuth = async () => {
-      
-      try {
-              firebase_app.auth().signInWithPopup(githubProvider).then(function (result) {
-              setValue(result.user.photoURL);
-              setName(result.additionalUserInfo.username)
-              localStorage.setItem('token', Jwt_token);
-              setTimeout(() => {
-                props.history.push(`${process.env.PUBLIC_URL}/dashboard/default/`);
-              }, 200);
-          });
       } catch (error) {
           setTimeout(() => {
               toast.error("Oppss.. The password is invalid or the user does not have a password.");

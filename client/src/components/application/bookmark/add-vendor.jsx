@@ -6,7 +6,6 @@ import axios from 'axios'
 
 const AddVendor = (props) => {
 
-const multiple = false
     const [options,setOptions] = useState([])
 
     useEffect(() => {

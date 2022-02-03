@@ -5,18 +5,14 @@ import {toast} from 'react-toastify';
 
 
 const goldpaypal = (props) => {
-  const { amount, currency , planid , interval , membership_id} = props;
+  const { amount, currency , planid } = props;
   const paypalKey = "AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t"
-
-  console.log(props);
-  
 
   return (
     <PayPalButton
       amount={amount}
       currency={currency}
       createSubscription={(data, details) => { 
-         console.log("Actions ", details);
         return details.subscription.create({
         plan_id: planid
       });
@@ -24,9 +20,6 @@ const goldpaypal = (props) => {
       onApprove={(data, details) => {
           // Capture the funds from the transaction
           return details.subscription.get().then(function(details) {
-            console.log('Data' , data);
-            console.log('Details' , details);
-
             const token = localStorage.getItem("token");
             const user_id = localStorage.getItem("id");
             const config = {

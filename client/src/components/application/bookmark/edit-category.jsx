@@ -6,40 +6,38 @@ import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios'
 
-
 const EditCategory = (props) => {
 
 const params = useParams();
-
 const [image, setimage] = useState({ pictures: [] })
 const [catData, setCatData] = useState([]);
 
- const onDrop = (pictureFiles) => {
+const onDrop = (pictureFiles) => {
         setimage({
             ...image, pictureFiles
         });
-    }
+}
 
-    const [catname,setCatname] = useState('');
-    const [parentCat,setParentCat] = useState('');
-    const [status,setStatus] = useState(0);
-    const [topMenu,setTopMenu] = useState('');
+const [catname,setCatname] = useState('');
+const [parentCat,setParentCat] = useState('');
+const [status,setStatus] = useState(0);
+const [topMenu,setTopMenu] = useState('');
 
-    const handleChange = (evt) => {
-      setCatname(evt.target.value)
-    }
+const handleChange = (evt) => {
+    setCatname(evt.target.value)
+}
 
-     const handleParentChange = (evt) => {
-      setParentCat(evt.target.value)
-    }
+const handleParentChange = (evt) => {
+    setParentCat(evt.target.value)
+}
 
-    const handleStatusChange = (evt) => {
-      setStatus(evt.target.value)
-    }
+const handleStatusChange = (evt) => {
+    setStatus(evt.target.value)
+}
 
-    const handleTopMenuChange = (evt) => {
-      setTopMenu(evt.target.value)
-    }
+const handleTopMenuChange = (evt) => {
+    setTopMenu(evt.target.value)
+}
 
     useEffect(() => {
     
@@ -58,7 +56,7 @@ const [catData, setCatData] = useState([]);
           .then(
             (result) => {              
                 setCatname(result.name);
-                if(result.status == 'true' || result.status === true || result.status == 1 || result.status == true){
+                if(result.status === 'true' || result.status === true || result.status === 1 || result.status === true){
                   setStatus(1);
                 }
                 setTopMenu(result.top_menu);
@@ -93,8 +91,7 @@ const [catData, setCatData] = useState([]);
           axios.put(`/api/categories/`+`${params.id}`,
             bodyParameters,
             config
-          ) .then(response => toast.success("Category updated !")  )
-             .catch(error => console.log('Form submit error', error))
+          ).then(response => toast.success("Category updated !")).catch(error => console.log('Form submit error', error))
 
       };
 
@@ -117,7 +114,7 @@ const [catData, setCatData] = useState([]);
             {parentCat}
             {catData.map((country , i ) => (
                 <Fragment key={i}>
-                  <option selected={country.id == parentCat} value={country.id}>{country.name}</option>
+                  <option selected={country.id === parentCat} value={country.id}>{country.name}</option>
                 </Fragment>
                 ))}
             </Input>
@@ -132,11 +129,11 @@ const [catData, setCatData] = useState([]);
             <FormGroup>
               <Label>Display in Top Menu</Label>
               <div className="radio radio-primary m-l-20">
-                <Input id="no-top" type="radio" value="0" name="radio2" onChange={handleTopMenuChange} checked={topMenu==0}/>
+                <Input id="no-top" type="radio" value="0" name="radio2" onChange={handleTopMenuChange} checked={topMenu===0}/>
                 <Label className="mb-10" for="no-top">No</Label>
               </div>
               <div className="radio radio-primary m-l-20">
-                <Input id="yes-menu" type="radio" value="1" name="radio2" onChange={handleTopMenuChange} checked={topMenu==1}/>
+                <Input id="yes-menu" type="radio" value="1" name="radio2" onChange={handleTopMenuChange} checked={topMenu===1}/>
                 <Label className="mb-10" for="yes-menu">Yes</Label>
               </div>
             </FormGroup>

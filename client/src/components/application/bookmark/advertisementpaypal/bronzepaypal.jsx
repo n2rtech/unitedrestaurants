@@ -3,13 +3,9 @@ import React from 'react';
 import axios from 'axios';
 import {toast} from 'react-toastify';
 
-
 const bronzepaypal = (props) => {
-  const { amount, currency , planid , interval , membership_id} = props;
+  const { amount, currency , planid } = props;
   const paypalKey = "AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t"
-
-  console.log(props.planid);
-  
 
   return (
     <PayPalButton
@@ -23,9 +19,6 @@ const bronzepaypal = (props) => {
       onApprove={(data, details) => {
           // Capture the funds from the transaction
           return details.subscription.get().then(function(details) {
-            console.log('Data' , data);
-            console.log('Details' , details);
-
             const token = localStorage.getItem("token");
             const user_id = localStorage.getItem("id");
             const config = {

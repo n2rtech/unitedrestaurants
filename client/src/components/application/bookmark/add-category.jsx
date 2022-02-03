@@ -51,16 +51,13 @@ const [topMenu,setTopMenu] = useState(0);
       const handleSubmit = event => {
         event.preventDefault();
 
-        console.log(image.pictureFiles);
-        console.log(image.pictureFiles[0]);
-
         const config = {
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
           };
 
           const bodyParameters = new FormData();
           bodyParameters.set('name', catname);
-          if(image.pictureFiles.length != 0) {
+          if(image.pictureFiles.length !== 0) {
             bodyParameters.set('image', image.pictureFiles[0]);
           } else {
             bodyParameters.set('image', image.pictureFiles);
@@ -73,14 +70,12 @@ const [topMenu,setTopMenu] = useState(0);
           axios.post(`/api/categories/add`,
             bodyParameters,
             config
-          ) .then(response => {
+          ).then(response => {
             toast.success("Category updated !")  
             setTimeout(() => {
               history.push('/dashboard/admin/categories/');
             }, 1000);
-          })
- 
-             .catch(error => console.log('Form submit error', error))
+          }).catch(error => console.log('Form submit error', error))
 
       };
 
@@ -109,18 +104,18 @@ const [topMenu,setTopMenu] = useState(0);
             <FormGroup>
               <Label>Status</Label>
               <Input type="select" name="select" className="form-control digits" onChange = {handleStatusChange} placeholder="Please Select">
-                <option value="0" checked = {status == 0}>{"Disabled"}</option>
-                <option value="1" checked = {status == 1} >{"Enabled"}</option>
+                <option value="0" checked = {status === 0}>{"Disabled"}</option>
+                <option value="1" checked = {status === 1} >{"Enabled"}</option>
               </Input>
             </FormGroup>
             <FormGroup>
               <Label>Display in Top Menu</Label>
               <div className="radio radio-primary m-l-20">
-                <Input id="no-top" type="radio" value="0" name="radio2" checked = {topMenu == 0} onChange= {handleTopMenuChange}/>
+                <Input id="no-top" type="radio" value="0" name="radio2" checked = {topMenu === 0} onChange= {handleTopMenuChange}/>
                 <Label className="mb-10" for="no-top">No</Label>
               </div>
               <div className="radio radio-primary m-l-20">
-                <Input id="yes-menu" type="radio" value="1" name="radio2" checked = {topMenu == 1} onChange = {handleTopMenuChange}/>
+                <Input id="yes-menu" type="radio" value="1" name="radio2" checked = {topMenu === 1} onChange = {handleTopMenuChange}/>
                 <Label className="mb-10" for="yes-menu">Yes</Label>
               </div>
             </FormGroup>

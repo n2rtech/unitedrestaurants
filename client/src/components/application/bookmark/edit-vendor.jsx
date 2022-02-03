@@ -6,7 +6,6 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 
 const EditVendor = (props) => {
-const ref = useRef();
 const params = useParams();	
 const token = localStorage.getItem("token");
 const [options,setOptions] = useState([])
@@ -48,24 +47,12 @@ const [category_id , setCategory] = useState('0');
     setAddress(event.target.value);
   }
 
-  const onChangeCountry = (event) => {
-    setCountry(event.target.value);
-  }
-
   const onChangefeatured = (event) => {
     setFeatured(event.target.value);
   }
 
   const onChangehotdeals = (event) => {
     setHotdeals(event.target.value);
-  }
-
-  const onChangeCategory = (selectedOptions) => {
-    if(selectedOptions.length != 0) {
-      setCategory(selectedOptions[0].id);
-    } else {
-      setCategory('');
-    }
   }
 
   const handleParentChange = (evt) => {
@@ -93,8 +80,6 @@ const [category_id , setCategory] = useState('0');
 
   }, []);
 
-  const [singleSelections, setSingleSelections] = useState([]);
-  
   const [cat , setCat] = useState();
   useEffect(() => {
     const config = {
@@ -124,9 +109,7 @@ const [category_id , setCategory] = useState('0');
         featured_business: Featured,
         hot_deals: Hotdeals,
       };
-
-        console.log('BODY PARAMETERS',bodyParameters);
-
+      
       axios.put(`/api/vendors/`+`${params.id}`,
         bodyParameters,
         config
@@ -134,8 +117,6 @@ const [category_id , setCategory] = useState('0');
          .catch(error => console.log('Form submit error', error))
 
   };
-
-console.log('Mobile' , cat);
 
   return (
     <Fragment>

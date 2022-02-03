@@ -6,7 +6,6 @@ import {toast} from 'react-toastify';
 import moment from 'moment';
 const Backup = (props) => {
 
-  const [msg, setMessagefile] = useState([]);
   const token = localStorage.getItem("token");
   useEffect(() => {
   
@@ -17,9 +16,7 @@ const Backup = (props) => {
       fetch("/api/backup/sqlfilepath", config)
         .then(res => res.json())
         .then(
-          (result) => {
-            setMessagefile(result.message);
-          },
+          (result) => {},
           (error) => {
             
           }
