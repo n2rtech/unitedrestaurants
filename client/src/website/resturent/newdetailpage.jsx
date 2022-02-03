@@ -1,24 +1,17 @@
 import React,{Fragment,useState,useEffect} from 'react';
 import Lightbox from "react-image-lightbox";
-import { Player } from 'video-react';
 import 'video-react/dist/video-react.css';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { Container, Row, Col, CardHeader, Media, iframe, Pagination, PaginationItem, PaginationLink, Navbar, NavbarBrand, NavbarToggler, Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText, Carousel, CarouselIndicators, CarouselItem, CarouselCaption, CarouselControl, Card, CardBody, CardTitle, CardSubtitle, CardText, List, ListInlineItem, Form, FormGroup, Input, InputGroup, select, option, Label, Button, NavItem, NavLink, Nav,TabContent,TabPane } from 'reactstrap'
+import { Container, Row, Col,Media, List } from 'reactstrap'
 import 'react-tabs/style/react-tabs.css';
-import Gallery from '../gallery.jsx';
-import {IMAGE_GALLERY} from "../../constant";
 import axios from 'axios'
-import '../css/style.css'
 import {useParams} from 'react-router-dom'
 import ShowMoreText from "react-show-more-text";
 
 const Newdetailpage = (props) => {
 
         const params = useParams();
-
         const id = `${params.id}`;
 		    const [images,setImage] = useState([]) 
-        const [smallImages,setsmallImages] = useState([])
         const initilindex = {index:0,isOpen:false}
         const[photoIndex,setPhotoIndex] = useState(initilindex)
         const[galleryData,setGalleryData] = useState([])
@@ -53,11 +46,6 @@ const Newdetailpage = (props) => {
               {
                 setImage((images) => [
                     ...images,
-                    element.image,
-                    ]);
-
-                setsmallImages((smallImages) => [
-                    ...smallImages,
                     element.image,
                     ]);
             }                  

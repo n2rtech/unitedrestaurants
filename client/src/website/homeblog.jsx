@@ -2,11 +2,6 @@ import React,{useState,useEffect} from 'react';
 import Carousel from "react-multi-carousel";
 import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText} from 'reactstrap'
 import "react-multi-carousel/lib/styles.css";
-import './css/style.css'
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en.json'
-import ReactTimeAgo from 'react-time-ago'
-TimeAgo.addLocale(en)
 
 const Homeblog = () => {
 

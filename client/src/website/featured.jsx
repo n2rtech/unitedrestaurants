@@ -63,7 +63,7 @@ const Featured = (props) => {
                   </Col>
                   </Row>
                   <CardText>
-               		{(item.about_business).substring(0, 140)}...
+               		{item.about_business}
                   </CardText>
                   <Button>
                   { item.user_id == 0 ?  

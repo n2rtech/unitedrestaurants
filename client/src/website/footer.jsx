@@ -5,7 +5,6 @@ import ScrollButton from './ScrollButton.jsx';
 const Footer = (props) => {
 
   const [socialdata, setSocialData] = useState([]);
-  const code = localStorage.getItem('country_code');
 
   useEffect(() => {
   
@@ -31,11 +30,11 @@ return (
 		<Row className="m-0">
 			<Col sm="4" xs="12" className="fmenudesktop">     
 			<div className="socialmenu">
-                  <a href={`//${socialdata.facebook_links}`} target="_blank"><i className="fa fa-facebook"></i></a>
-                  <a href={`//${socialdata.twitter_links}`} target="_blank"><i className="fa fa-twitter"></i></a>
-                  <a href={`//${socialdata.google_plus_links}`} target="_blank"><i className="fa fa-google-plus"></i></a>
-                  <a href={`//${socialdata.linkedin_links}`} target="_blank"><i className="fa fa-linkedin"></i></a>
-                  <a href={`//${socialdata.instagram_links}`} target="_blank"><i className="fa fa-instagram"></i></a>
+                  <a href={`//${socialdata.facebook_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook"></i></a>
+                  <a href={`//${socialdata.twitter_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-twitter"></i></a>
+                  <a href={`//${socialdata.google_plus_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-google-plus"></i></a>
+                  <a href={`//${socialdata.linkedin_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-linkedin"></i></a>
+                  <a href={`//${socialdata.instagram_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-instagram"></i></a>
               </div>
 			<div className="copyright">
 				<p>© Copyright 2021 Gabal Global Group</p>
@@ -78,19 +77,19 @@ return (
 				<a href={`${process.env.PUBLIC_URL}/howitwork`}>How it Works</a>
 			</li>
 			<li>
-				<a target = "_blank" href={`${process.env.PUBLIC_URL}/signup`} >Merchant Signup</a>
+				<a target = "_blank" rel="noopener noreferrer" href={`${process.env.PUBLIC_URL}/signup`} >Merchant Signup</a>
 			</li>
 		</List>
 	</div>
 </Col>
 <Col sm="4" xs="12" className="fmenumobile">     
-			<div className="socialmenu">
-				<a href="#"><i className="fa fa-facebook"></i></a>
-				<a href="#"><i className="fa fa-twitter"></i></a>
-				<a href="#"><i className="fa fa-google-plus"></i></a>
-				<a href="#"><i className="fa fa-linkedin"></i></a>
-				<a href="#"><i className="fa fa-instagram"></i></a>
-			</div>
+     			<div className="socialmenu">
+                  <a href={`//${socialdata.facebook_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook"></i></a>
+                  <a href={`//${socialdata.twitter_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-twitter"></i></a>
+                  <a href={`//${socialdata.google_plus_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-google-plus"></i></a>
+                  <a href={`//${socialdata.linkedin_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-linkedin"></i></a>
+                  <a href={`//${socialdata.instagram_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-instagram"></i></a>
+              </div>
 			<div className="copyright">
 				<p>© Copyright 2021 Gabal Global Group</p>
 			</div>

@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText, List, Button } from 'reactstrap'
-import './css/style.css'
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 

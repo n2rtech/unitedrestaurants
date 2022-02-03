@@ -10,10 +10,9 @@ const Bloglist = (props) => {
 
   const [activePage, setActivePage] = useState(0);
   const [totalItemsCount, setTotalItemsCount] = useState(0); 
-  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);  
-  const [pagesCount, setPagesCount] = useState(0);
-  const [page, setPage] = useState(1);
-  const [size, setSize] = useState(9);
+  const pageRangeDisplayed = 20;
+  const page = 1;
+  const size = 9;
 
   
   useEffect(() => {
@@ -36,7 +35,6 @@ const Bloglist = (props) => {
       setBlogs(result.data.blogs);
       setTotalItemsCount(result.data.totalItems);  
       setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
     })
     .catch(function (error) {
     });
@@ -68,7 +66,6 @@ const Bloglist = (props) => {
       setBlogs(result.data.blogs);
       setTotalItemsCount(result.data.totalItems);  
       setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
   });
 }
 

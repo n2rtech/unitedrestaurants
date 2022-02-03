@@ -10,7 +10,7 @@ import Homeblog from './homeblog.jsx'
 import Maintenance from './maintenance.jsx'
 import {useParams} from 'react-router-dom'
 
-const Home = (props) => {
+const Home = () => {
   localStorage.setItem('filter','');
   localStorage.setItem('catid','');
   const params = useParams();
@@ -34,33 +34,23 @@ const Home = (props) => {
         )
   }, []);
 
-  console.log('Site Settings=',maintenance);
-
   return (
       <Container fluid={true} className="p-0">
-      <Row className="m-0">
-        <Col xs="12" className="p-0">     
-           <Header countrycode = {params.id}/>
-
-          { maintenance == 'yes' ?
-            <Maintenance></Maintenance>
-          : 
-            <>
-              <Hotdeals></Hotdeals>
-
-              <Featured></Featured>
-
-              <Advertise></Advertise>
-
-              <Latestadditions></Latestadditions>
-
-              <Homeblog></Homeblog>
-            </>
-          
-          }
-        <Footer />
-           
-        </Col>
+        <Row className="m-0">
+          <Col xs="12" className="p-0">     
+            <Header countrycode = {params.id}/>
+              { maintenance == 'yes' ?
+                <Maintenance></Maintenance> : 
+                <>
+                  <Hotdeals/>
+                  <Featured/>
+                  <Advertise/>
+                  <Latestadditions/>
+                  <Homeblog/>
+                </>
+              } 
+            <Footer />
+          </Col>
         </Row>
       </Container>
   );

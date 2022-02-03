@@ -89,7 +89,7 @@ const Contact = (props) => {
     setErrors(errors);
   }
 
-  const [error, setError] = useState('');
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     
@@ -113,7 +113,7 @@ const Contact = (props) => {
           setMessage('');
           window.scrollTo(0, 0);
         }else{
-          setError(res.data.message);
+          
         } 
       }).catch((error) => {
         if (error.response) {

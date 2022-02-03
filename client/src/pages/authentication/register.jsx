@@ -1,10 +1,9 @@
 import React,{useState,useEffect,Fragment} from 'react';
 import {Container,Row,Col,Form,FormGroup,Input,Label,Button} from 'reactstrap'
-import {Password,SignIn, BusinessEmailAddress ,CreateAccount, BusinessName, PrivacyPolicy} from '../../constant';
-import { Twitter, Facebook,GitHub } from 'react-feather';
+import {Password,SignIn, BusinessEmailAddress ,CreateAccount, BusinessName } from '../../constant';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const Register = (props) => {
 
@@ -27,7 +26,6 @@ const Register = (props) => {
   }
 
   const [first_name, setFirstName ] = useState('');
-  const [last_name, setLastName ] = useState('');
   const [mobile, setMobile ] = useState('');
   const [ownermobile, setOwnerMobile ] = useState('');
   const [address, setAddress ] = useState('');
@@ -37,10 +35,6 @@ const Register = (props) => {
   const [password, setPassword ] = useState('');
 
   const [errors, setErrors] = useState('');
-
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-
   const [togglePassword,setTogglePassword] = useState(false)
 
 
@@ -199,7 +193,7 @@ const Register = (props) => {
           setCategoryId('');
           window.scrollTo(0, 0);
         }else{
-          setError(res.data.message);
+         
         } 
       }).catch((error) => {
         if (error.response) {

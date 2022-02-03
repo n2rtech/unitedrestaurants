@@ -1,13 +1,12 @@
 import React,{useState,useEffect,Fragment} from 'react';
 import SideNav, { MenuIcon } from 'react-simple-sidenav';
-import { Container, Row, Col, Form, FormGroup, Input,List,ListInlineItem } from 'reactstrap'
+import { Container, Row, Col, FormGroup, Input,List,ListInlineItem } from 'reactstrap'
 import './css/style.css'
 import Menu from './menu.jsx'
 import Countryflag from './countryflag.jsx'
 import GoogleTranslate from './googletranslate';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { useLocation } from "react-router-dom";
 import SweetAlert from 'sweetalert2'
 var base64 = require('base-64');
 
@@ -40,7 +39,6 @@ useEffect(() => {
 
   const [logo, setLogo] = useState([]);
   const [socialdata, setSocialData] = useState([]);
-  const code = localStorage.getItem('country_code');
 
   useEffect(() => {
   
@@ -65,7 +63,6 @@ useEffect(() => {
   ev.target.src = `${process.env.PUBLIC_URL}/assets/images/mainlogo.png`;
 }
 
-const search = useLocation().search;
 const [searchinput, setSearchInput] = useState(localStorage.getItem('filter'));
 const [catid, setCatid] = useState(localStorage.getItem('catid'));
 
@@ -100,33 +97,33 @@ const HandleSearch = (searchvalue , catid) => {
 
 const navItems = [
     
-    <a href="/restaurants">
-      Restaurants
-    </a>,
-    <a href="#">
-      Food Markets
-    </a>,
-    <a href="#">
-      Beer & Alcohol
-    </a>,
-    <a href="#">
-      Services
-    </a>,
-    <a href="#">
-      Suppliers
-    </a>,
-    <a href="#">
-      Buy & Sell
-    </a>,
-    <a href="#">
-      Jobs
-    </a>,
-    <a href="#">
-      Videos
-    </a>,
-    <a href="#">
-      Others
-    </a>,
+    // <a href="/restaurants">
+    //   Restaurants
+    // </a>,
+    // <a href="#">
+    //   Food Markets
+    // </a>,
+    // <a href="#">
+    //   Beer & Alcohol
+    // </a>,
+    // <a href="#">
+    //   Services
+    // </a>,
+    // <a href="#">
+    //   Suppliers
+    // </a>,
+    // <a href="#">
+    //   Buy & Sell
+    // </a>,
+    // <a href="#">
+    //   Jobs
+    // </a>,
+    // <a href="#">
+    //   Videos
+    // </a>,
+    // <a href="#">
+    //   Others
+    // </a>,
   ];
 
 const title = <div className="searchbar">
@@ -139,37 +136,37 @@ const title = <div className="searchbar">
                           <div className="filtercountry">Filter by Country</div>
                           <List type="inline">
                             <ListInlineItem>
-                              <a href="#">
+                              <a href={`${process.env.PUBLIC_URL}`}>
                                 <img src={`${process.env.PUBLIC_URL}/assets/images/flag/USA.png`} 
                              alt="Menu-Icon"/>
                               </a>
                             </ListInlineItem>
                             <ListInlineItem>
-                              <a href="#">
+                              <a href={`${process.env.PUBLIC_URL}`}>
                                 <img src={`${process.env.PUBLIC_URL}/assets/images/flag/CANADA.png`} 
                              alt="Menu-Icon"/>
                               </a>
                             </ListInlineItem>
                             <ListInlineItem>
-                              <a href="#">
+                              <a href={`${process.env.PUBLIC_URL}`}>
                                 <img src={`${process.env.PUBLIC_URL}/assets/images/flag/UNITED-KINGDOM.png`} 
                              alt="Menu-Icon"/>
                               </a>
                             </ListInlineItem>
                             <ListInlineItem>
-                              <a href="#">
+                              <a href={`${process.env.PUBLIC_URL}`}>
                                 <img src={`${process.env.PUBLIC_URL}/assets/images/flag/ITALY.png`} 
                              alt="Menu-Icon"/>
                               </a>
                             </ListInlineItem>
                             <ListInlineItem>
-                              <a href="#">
+                              <a href={`${process.env.PUBLIC_URL}`}>
                                 <img src={`${process.env.PUBLIC_URL}/assets/images/flag/AUSTRALIA.png`} 
                              alt="Menu-Icon"/>
                               </a>
                             </ListInlineItem>
                             <ListInlineItem>
-                              <a href="#">
+                              <a href={`${process.env.PUBLIC_URL}`}>
                                 <img src={`${process.env.PUBLIC_URL}/assets/images/flag/SPAIN.png`} 
                              alt="Menu-Icon"/>
                               </a>
@@ -220,15 +217,15 @@ const title = <div className="searchbar">
                 </div>
               <div className="clickable">
                 <p>Vendors</p>
-                <a target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >login here</a>
+                <a target = "_blank"  rel="noopener noreferrer" href={`${process.env.PUBLIC_URL}/vendor/login`} >login here</a>
               </div>
               </div>
                 <div className="socialmenu">
-                  <a href={`//${socialdata.facebook_links}`} target="_blank"><i className="fa fa-facebook"></i></a>
-                  <a href={`//${socialdata.twitter_links}`} target="_blank"><i className="fa fa-twitter"></i></a>
-                  <a href={`//${socialdata.google_plus_links}`} target="_blank"><i className="fa fa-google-plus"></i></a>
-                  <a href={`//${socialdata.linkedin_links}`} target="_blank"><i className="fa fa-linkedin"></i></a>
-                  <a href={`//${socialdata.instagram_links}`} target="_blank"><i className="fa fa-instagram"></i></a>
+                  <a href={`//${socialdata.facebook_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook"></i></a>
+                  <a href={`//${socialdata.twitter_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-twitter"></i></a>
+                  <a href={`//${socialdata.google_plus_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-google-plus"></i></a>
+                  <a href={`//${socialdata.linkedin_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-linkedin"></i></a>
+                  <a href={`//${socialdata.instagram_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-instagram"></i></a>
                 </div>
               
             </div>
@@ -242,7 +239,7 @@ const title = <div className="searchbar">
                     <Input type="select" id="selectcategory" onChange = {OnChangecatid}>
                       <option value="0">Select Category</option>
                       {categoryData && categoryData.map((item,i) => (
-                        <option  key={i} value={item.id} selected = { catid == item.id }>{item.name}</option>
+                        <option  key={i} value={item.id} selected = { catid === item.id }>{item.name}</option>
                       ))}
                     </Input>
                 <Input className="form-control" type="search" value = {searchinput} onChange = {OnChangeSearch}/>
@@ -261,7 +258,7 @@ const title = <div className="searchbar">
                 <select aria-label="Default select example" onChange = {OnChangeCountry} className="form-control">
                 {countryData.map((country , i ) => (
                   <Fragment key={i}>
-                  <option value={country.code} selected = { localStorage.getItem('country_code') == country.code }>{country.name}</option>
+                  <option value={country.code} selected = { localStorage.getItem('country_code') === country.code }>{country.name}</option>
                   </Fragment>
                   ))}
                 </select>
@@ -314,7 +311,7 @@ const title = <div className="searchbar">
                <select aria-label="Default select example" onChange = {OnChangeCountry} className="form-control">
                 {countryData.map((country , i ) => (
                   <Fragment key={i}>
-                  <option value={country.code} selected = { localStorage.getItem('country_code') == country.code }>{country.name}</option>
+                  <option value={country.code} selected = { localStorage.getItem('country_code') === country.code }>{country.name}</option>
                   </Fragment>
                   ))}
                 </select>
@@ -335,11 +332,11 @@ const title = <div className="searchbar">
               <div className="topmenu">
                 <div className="clickable opacity0">
                   <p>visitors</p>
-                  <a href="#">click here</a>
+                  <a href={`${process.env.PUBLIC_URL}`}>click here</a>
                 </div>
                 <div className="clickable">
                 <p>visitors</p>
-                <a href="#">click here</a>
+                <a href={`${process.env.PUBLIC_URL}`}>click here</a>
               </div>
               <div className="clickable">
                 <p>Vendors</p>
@@ -347,11 +344,11 @@ const title = <div className="searchbar">
               </div>
               </div>
               <div className="socialmenu">
-                  <a href={`//${socialdata.facebook_links}`} target="_blank"><i className="fa fa-facebook"></i></a>
-                  <a href={`//${socialdata.twitter_links}`} target="_blank"><i className="fa fa-twitter"></i></a>
-                  <a href={`//${socialdata.google_plus_links}`} target="_blank"><i className="fa fa-google-plus"></i></a>
-                  <a href={`//${socialdata.linkedin_links}`} target="_blank"><i className="fa fa-linkedin"></i></a>
-                  <a href={`//${socialdata.instagram_links}`} target="_blank"><i className="fa fa-instagram"></i></a>
+                  <a href={`//${socialdata.facebook_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook"></i></a>
+                  <a href={`//${socialdata.twitter_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-twitter"></i></a>
+                  <a href={`//${socialdata.google_plus_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-google-plus"></i></a>
+                  <a href={`//${socialdata.linkedin_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-linkedin"></i></a>
+                  <a href={`//${socialdata.instagram_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-instagram"></i></a>
               </div>
               
             </div>
