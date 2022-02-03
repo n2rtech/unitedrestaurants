@@ -10,23 +10,11 @@ import store from './store'
 import App from './components/app'
 import { CSSTransition,TransitionGroup } from 'react-transition-group'
 import {routes} from './route';
-import ConfigDB  from './data/customizer/config'
-
-// Signin page
 import Signin from './auth/signin'
-
-// Vendor Signin page
 import Vendorsignin from './auth/vendorsignin'
-
-// User Login Page
-
 import Usersignin from './auth/usersignin'
-
 import Search from './website/search'
-
 import Sitemap from './website/sitemap'
-
-// Home Page
 import Home from './website/home'
 import Restaurants from './website/restaurants'
 import Blog from './website/blog'
@@ -46,13 +34,8 @@ import Termsofservice from './website/termsofservice'
 import Contactus from './website/contactus'
 import verifyEmail from './website/verifyEmail'
 import Visitors from './website/visitors'
-
-
 import Signupmsg from './pages/authentication/signupmessage'
-
 import Emailvalidation from './pages/authentication/emailvalidation'
-
-// Authentication
 import Login from "./pages/authentication/login"
 import LoginWithBgImage from "./pages/authentication/loginWithBgImage"
 import LoginWithBgVideo from "./pages/authentication/loginWithBgVideo"
@@ -63,20 +46,7 @@ import RegisterWithBgVideo from "./pages/authentication/registerWithBgVideo"
 import UnlockUser from "./pages/authentication/unlockUser"
 import Forgetpwd from "./pages/authentication/forgetpwd"
 import Resetpwd from "./pages/authentication/resetpwd"
-
-// Error page
 import Error400 from "./pages/errors/error400"
-import Error401 from "./pages/errors/error401"
-import Error403 from "./pages/errors/error403"
-import Error404 from "./pages/errors/error404"
-import Error500 from "./pages/errors/error500"
-import Error503 from "./pages/errors/error503"
-
-// Comming soo
-import Comingsoon from "./pages/comingSoon/comingsoon"
-import ComingsoonImg from "./pages/comingSoon/comingsoonImg"
-import ComingsoonVideo from "./pages/comingSoon/comingsoonVideo"
-
 // Maintenance
 import Maintenance from "./pages/maintenance"
 import Callback from './auth/callback'
@@ -90,8 +60,6 @@ const Root = (props) =>  {
   const [currentUser, setCurrentUser] = useState(false);
   const [authenticated,setAuthenticated] = useState(false)
   const jwt_token = localStorage.getItem('token'); 
-  const defaultLayoutObj = classes.find(item => Object.values(item).pop(1) === 'compact-wrapper');
-
     if(localStorage.getItem('country_code') == null) {
       localStorage.setItem('country_code' , 'usa');
     }
@@ -144,29 +112,16 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/forgetPwd`} component={Forgetpwd}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/unlockUser`} component={UnlockUser}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/resetPwd`} component={Resetpwd}></Route>
-
           <Route  path={`${process.env.PUBLIC_URL}/pages/errors/error400`} component={Error400}></Route>
-          <Route  path={`${process.env.PUBLIC_URL}/pages/errors/error401`} component={Error401}></Route>
-          <Route  path={`${process.env.PUBLIC_URL}/pages/errors/error403`} component={Error403}></Route>
-          <Route  path={`${process.env.PUBLIC_URL}/pages/errors/error404`} component={Error404}></Route>
-          <Route  path={`${process.env.PUBLIC_URL}/pages/errors/error500`} component={Error500}></Route>
-          <Route  path={`${process.env.PUBLIC_URL}/pages/errors/error503`} component={Error503}></Route>
-          
-          <Route  path={`${process.env.PUBLIC_URL}/pages/comingsoon/comingsoon`} component={Comingsoon}></Route>
-          <Route  path={`${process.env.PUBLIC_URL}/pages/comingsoon/comingsoonImg`} component={ComingsoonImg}></Route>
-          <Route  path={`${process.env.PUBLIC_URL}/pages/comingsoon/comingsoonVideo`} component={ComingsoonVideo}></Route>
-
-          <Route  path={`${process.env.PUBLIC_URL}/pages/maintenance`} component={Maintenance}></Route>
+           <Route  path={`${process.env.PUBLIC_URL}/pages/maintenance`} component={Maintenance}></Route>
           
           <Route  path={`${process.env.PUBLIC_URL}/callback`} render={() => <Callback/>} />
 
-          {/* <Route  path={`${process.env.PUBLIC_URL}/permissions/add`} component={Permissions} />
-           */}
           {currentUser !== null || authenticated || jwt_token  ?
           
           <App>
           <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
-            if(localStorage.getItem("role") == 'admin') {
+            if(localStorage.getItem("role") === 'admin') {
               return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/admin/`} />)
             } else {
               return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/vendor/`} />)
