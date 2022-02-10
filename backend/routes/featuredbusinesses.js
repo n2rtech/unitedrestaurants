@@ -247,6 +247,18 @@ router.get('/', (req, res) => {
             }
         };
 
+    }else if (category) {
+
+        var conditions =  {
+            where: {
+                [Op.and]:
+                [
+                    {country: { [Op.eq]: req.query.country }},
+                    {categories: { [Op.like]: '%' + req.query.category + '%' }},
+                ]
+            }
+        };
+
     }else{
         var conditions = {
             where: {
