@@ -79,6 +79,17 @@ router.get('/', (req, res) => {
             limit: 10,
             order: [ [ 'createdAt', 'DESC' ]]
         }
+    }else if (category) {
+        var conditions = {
+
+            where:{
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            limit: 10,
+            order: [ [ 'createdAt', 'DESC' ]]
+        }
     }else{
         var conditions = {
             limit: 10,
