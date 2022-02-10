@@ -91,6 +91,38 @@ router.get('/', (req, res) => {
             }
         };
 
+    }else if (category) {
+        var conditions =  {
+            where: {
+                [Op.and]:
+                [
+                {
+                    country: { 
+                        [Op.eq]: req.query.country 
+                    }
+                },
+                {
+                    categories: { 
+                        [Op.like]: '%' + req.query.category + '%' 
+                    }
+                }
+                ],            
+                [Op.or]: 
+                [
+                {
+                    start_date: {
+                        [Op.gte]: [startDate],
+                        [Op.lte]: [startDate]
+                    }
+                }, {
+                    end_date: {
+                        [Op.gte]: [endDate]
+                    }
+                }
+                ]
+            }
+        };
+
     }else{
         var conditions = {
             where: {
