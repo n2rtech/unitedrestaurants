@@ -8,10 +8,9 @@ import GoogleTranslate from './googletranslate';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import SweetAlert from 'sweetalert2'
-var base64 = require('base-64');
 
 const Header = (props) => {
-
+var base64 = require('base-64');
 const history = useHistory()
 const [showNav, setShowNav] = useState();
 const [countryData, setCountryData] = useState([]);
@@ -87,12 +86,14 @@ const HandleSearch = (searchvalue , catid) => {
     } else {
       localStorage.setItem('catid' , catid);
       localStorage.setItem('filter' , searchvalue);
-      const url = base64.encode(`&country=${country_code}&category=${catid}&filter=${searchvalue}`)
+      const url = base64.encode(`&country=${country_code}&filter=${searchvalue}&category=${catid}`)
       history.push(`/search/${url}`);
 
       window.location.reload(false);
     }
 }
+
+console.log('Catid' ,localStorage.getItem('catid'));
 
 const navItems = [
     
@@ -235,10 +236,10 @@ const title = <div className="searchbar">
                 <div className="searchbar">
                  <FormGroup>
                 <div className="InputGroup">
-                    <Input type="select" id="selectcategory" onChange = {OnChangecatid}>
+                    <Input type="select" id="selectcategory" value = {localStorage.getItem('catid')} onChange = {OnChangecatid}>
                       <option value="0">Select Category</option>
                       {categoryData && categoryData.map((item,i) => (
-                        <option  key={i} value={item.id} selected = { catid === item.id }>{item.name}</option>
+                        <option  key={i} value={item.id}>{item.name}</option>
                       ))}
                     </Input>
                 <Input className="form-control" type="search" value = {searchinput} onChange = {OnChangeSearch}/>
