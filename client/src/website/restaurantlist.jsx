@@ -148,10 +148,10 @@ const Restaurantlist = (props) => {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       params : {
-        'filter': filter,
-        'country': country,
-        'page': page,
-        'size': size
+        'filter'  : filter,
+        'country' : country,
+        'page'    : page,
+        'size'    : size
       }
     };
 
@@ -259,11 +259,18 @@ const Restaurantlist = (props) => {
                   <CardText>
                       {item.about_business}
                   </CardText>
-                  <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+
+                  { item.user_id == 0 ?  
+                     <Button>
+                    <a href={`${process.env.PUBLIC_URL}/resturent/newdetails/${item.id}_${localStorage.getItem('country_code')}`}>
                     VIEW
-                  </a>
-                  </Button>
+                  </a> </Button> : 
+                <Button><a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                VIEW
+              </a></Button>
+                      
+                }
+                
                 </CardBody>
               </Card>
              </div>
