@@ -45,6 +45,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'VendorUsa',
-  });
+  },
+  {
+      indexes:[
+       {
+         unique: false,
+         fields:['categories']
+       }
+      ]
+    });
   return VendorUsa;
 };
