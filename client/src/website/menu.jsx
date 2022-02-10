@@ -72,20 +72,20 @@ useMemo(() => {
                   navbar>
                   {categoryData.map((item , i) => (
                     <NavItem key={i}>
-                    <a href={`${process.env.PUBLIC_URL}/restaurants/${item.id}`}>  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.image}`} alt="Menu-Icon"/> </a>
+                    <a href={`${process.env.PUBLIC_URL}/category/${item.name}/${item.id}`}>  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.image}`} alt="Menu-Icon"/> </a>
                     {item.parent && (item.parent.length > 0) && <Dropdown title={item.name} key={i}>
                     {item.parent && (item.parent).map((item1 , i) => (<Fragment key={i}>
-                      <Dropdown.Item> <a href={`${process.env.PUBLIC_URL}/restaurants/${item1.id}`}>{item1.name}</a>
+                      <Dropdown.Item> <a href={`${process.env.PUBLIC_URL}/category/${item.name}/${item1.id}`}>{item1.name}</a>
                       {item1.parent_2 &&
                         <Fragment>
                         {(item1.parent_2).map((item2 , i) => (
                           <Dropdown.Submenu key={i}>
-                          <Dropdown.Item><NavLink href={`${process.env.PUBLIC_URL}/restaurants/${item2.id}`} >{item2.name} </NavLink>
+                          <Dropdown.Item><NavLink href={`${process.env.PUBLIC_URL}/category/${item.name}/${item2.id}`} >{item2.name} </NavLink>
                           {item2.parent_3 &&
                             <Fragment>
                             {(item2.parent_3).map((item3 , i) => (
                               <Dropdown.Submenu kay={i}>
-                              <Dropdown.Item><NavLink href={`${process.env.PUBLIC_URL}/restaurants/${item3.id}`}>{item3.name}</NavLink></Dropdown.Item>
+                              <Dropdown.Item><NavLink href={`${process.env.PUBLIC_URL}/category/${item.name}/${item3.id}`}>{item3.name}</NavLink></Dropdown.Item>
                               </Dropdown.Submenu>
                               ))}
                             </Fragment>

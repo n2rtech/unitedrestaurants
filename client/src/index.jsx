@@ -77,6 +77,7 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/user/login`} component={Usersignin} />
           <Route  path={`${process.env.PUBLIC_URL}/home`} component={Home} />
           <Route  path={`${process.env.PUBLIC_URL}/restaurants/:id`} component={Restaurants} />
+          <Route  path={`${process.env.PUBLIC_URL}/category/:cat/:id`} component={Restaurants} />
           <Route  path={`${process.env.PUBLIC_URL}/resturent/details/:id`} component={Details} />
           <Route  path={`${process.env.PUBLIC_URL}/resturent/newdetails/:id`} component={NewDetails} />
           <Route  path={`${process.env.PUBLIC_URL}/blog/blogdetails/:id`} component={Blogdetails} />

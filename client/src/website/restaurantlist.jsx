@@ -227,7 +227,7 @@ const Restaurantlist = (props) => {
 
   return (
     <div className="resturentlist">
-      <h1>Restaurants</h1>              
+      <h1>{params.cat}</h1>              
       <Container className="p-0">
         <div className="hr">
       <img src={`${process.env.PUBLIC_URL}/assets/images/hr.png`} 
