@@ -236,7 +236,7 @@ const title = <div className="searchbar">
                 <div className="searchbar">
                  <FormGroup>
                 <div className="InputGroup">
-                    <Input type="select" id="selectcategory" value = {localStorage.getItem('catid')} onChange = {OnChangecatid}>
+                    <Input type="select" id="selectcategory" onChange = {OnChangecatid}>
                       <option value="0">Select Category</option>
                       {categoryData && categoryData.map((item,i) => (
                         <option  key={i} value={item.id}>{item.name}</option>
