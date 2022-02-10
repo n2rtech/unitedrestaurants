@@ -48,7 +48,7 @@ useMemo(() => {
       .then(res => res.json())
       .then(
         (result) => {  
-          setLogo(result.logo);
+          setLogo('/api/uploads/site/'+result.logo);
           setSocialData(result);
         },
         (error) => {
@@ -186,7 +186,7 @@ const title = <div className="searchbar">
             <div className="mainlogo">
               <a href="/home">
               <img className="img-fluid" onError = {addDefaultSrc}
-               src={`${process.env.PUBLIC_URL}/api/uploads/site/${logo}`} 
+               src={logo}
                alt="logo"/>
                </a>
             </div>
