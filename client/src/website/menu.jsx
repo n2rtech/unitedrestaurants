@@ -102,7 +102,7 @@ useEffect(() => {
                       ))}
                     </Dropdown>
                   }
-                  {item.parent && (item.parent.length === 0) && <div className="sigle-title">{item.name}</div> }
+                  {<div className="sigle-title">{item.name}</div> }
                   </NavItem>
                   ))}                  
                 </Nav>
