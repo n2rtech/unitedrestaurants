@@ -49,7 +49,7 @@ const Restaurantlist = (props) => {
     })
     .catch(function (error) {
     });
-    }, 200)
+    }, 1000)
   }, []);
 
   const addDefaultSrc = (ev) => {
