@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useMemo} from 'react';
 import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText, List, Button } from 'reactstrap'
 import { useParams } from "react-router-dom";
 import axios from 'axios';
@@ -21,7 +21,7 @@ const Restaurantlist = (props) => {
   const [loader, setLoader] = useState(<BallTriangle color="#00BFFF" height={100} width={300} />);
 
 
-  useEffect(() => {
+  useMemo(() => {
 
     setTimeout(async () => {
     var config = {
