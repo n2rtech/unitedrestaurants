@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText, List, Button } from 'reactstrap'
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-
+import { BallTriangle } from  'react-loader-spinner'
 import Pagination from "react-js-pagination";
 
 const Restaurantlist = (props) => {
@@ -18,7 +18,7 @@ const Restaurantlist = (props) => {
   const [filter, setFilter] = useState('');
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [showPagination, setShowPagination] = useState(false);
-  const [loader, setLoader] = useState('');
+  const [loader, setLoader] = useState(<BallTriangle color="#00BFFF" height={100} width={300} />);
 
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Restaurantlist = (props) => {
     })
     .catch(function (error) {
     });
-    }, 1000)
+    }, 200)
   }, []);
 
   const addDefaultSrc = (ev) => {
@@ -279,7 +279,7 @@ const Restaurantlist = (props) => {
               </Card>
              </div>
          </Col>
-      )) : <Col><center>{ vendorData.length > 0 ? '' : loader }</center></Col> }
+      )) : <Col style={{padding: "16px",display: "flex", 'align-items': "center", 'flex-wrap': "wrap",'justify-content': "center"}}><center>{loader}</center></Col> }
        
         <Col sm="12" xs="12">
           <div className="d-flex justify-content-center">
