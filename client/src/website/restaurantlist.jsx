@@ -18,9 +18,12 @@ const Restaurantlist = (props) => {
   const [filter, setFilter] = useState('');
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [showPagination, setShowPagination] = useState(false);
+  const [loader, setLoader] = useState('');
+
 
   useEffect(() => {
 
+    setTimeout(async () => {
     var config = {
       method: 'get',
       url: '/api/categories/getrest/'+`${params.id}`,
@@ -37,6 +40,7 @@ const Restaurantlist = (props) => {
 
     axios(config)
     .then(function (result) {
+      setLoader('There are no business listing available');
       setVendorData(result.data.vendors);
       setTotalItemsCount(result.data.totalItems);  
       setActivePage(result.data.currentPage);
@@ -45,7 +49,7 @@ const Restaurantlist = (props) => {
     })
     .catch(function (error) {
     });
-
+    }, 2000)
   }, []);
 
   const addDefaultSrc = (ev) => {
@@ -234,7 +238,7 @@ const Restaurantlist = (props) => {
                      alt="Menu-Icon"/>
        </div>
       <Row className="m-0">
-      {vendorData.length > 0 ? (vendorData).map((item , i) => (
+      { vendorData.length > 0 ? (vendorData).map((item , i) => (
            <Col sm="4" xs="12" key={i}>     
            <div className="customcard">
            <Card>
@@ -262,20 +266,20 @@ const Restaurantlist = (props) => {
 
                   { item.user_id == 0 ?  
                      <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/newdetails/${item.id}_${localStorage.getItem('country_code')}`}>
-                    VIEW
-                  </a> </Button> : 
-                <Button><a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
-                VIEW
-              </a></Button>
-                      
-                }
+                      <a href={`${process.env.PUBLIC_URL}/resturent/newdetails/${item.id}_${localStorage.getItem('country_code')}`}>
+                          VIEW
+                      </a> </Button> 
+                    : 
+                       <Button><a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                       VIEW
+                        </a></Button>
+                   }
                 
                 </CardBody>
               </Card>
              </div>
          </Col>
-      )) : <Col><center>There are no business listing available</center></Col> }
+      )) : <Col><center>{ vendorData.length > 0 ? '' : loader }</center></Col> }
        
         <Col sm="12" xs="12">
           <div className="d-flex justify-content-center">
