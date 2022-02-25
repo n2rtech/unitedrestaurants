@@ -51,17 +51,20 @@ const resizeImages = async (req, res) => {
   await Promise.all(
     req.files.map(async file => {
         console.log(file);
-      const filename = file.originalname.replace(/\..+$/, "");
-      const newFilename = `gallery-${filename}-${Date.now()}.jpg`;
-      await sharp(file.path)
-        .resize(840, 420)
+        const filename = file.originalname.replace(/\..+$/, "");
+        const newFilename = `gallery-${filename}-${Date.now()}.jpg`;
+        await sharp(file.path)
+        .resize(840, 420, {
+            fit: sharp.fit.inside,
+            withoutEnlargement: true, 
+        })
         .toFormat("jpg")
-        .jpeg({ quality: 90 })
+        .jpeg({ quality: 95 })
         .toFile(
-                path.resolve(file.destination,newFilename)
-                )
+            path.resolve(file.destination,newFilename)
+            )
         Gallery.create({image:newFilename,user_id:req.user.id});
-            fs.unlinkSync(file.path)
+        fs.unlinkSync(file.path)
     })
   );
 };
