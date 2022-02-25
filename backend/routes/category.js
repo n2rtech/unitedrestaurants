@@ -241,6 +241,40 @@ router.get("/list", (req, res) => {
     });
 });
 
+
+// Get List of Categories
+router.get("/listAndSubCategory", async (req, res) => {
+    let getData = await Category.findAll({});
+    if (getData) {
+        let CatList = await catLists(getData);
+        res.status(200).send(CatList)
+    }
+});
+
+
+async function catLists(getData,parentId=false) {
+    let CategoryList = [];
+    let parentCategoryId;
+    if (parentId == false) {
+
+        parentCategoryId = getData.filter(result=>result.top_menu==1);
+    }else{
+        parentCategoryId = getData.filter(result=>result.parent_id==parentId);
+    }
+    for (let data of parentCategoryId) {
+        CategoryList.push({
+            id:data.id,
+            name:data.name,
+            description:data.description,
+            image:data.image,
+            children: await catLists(getData,data.id)
+        })
+    }
+    return CategoryList;
+}
+
+/*await CcateList(getData,data.id)*/
+
 router.get('/catlist', function (req, res) {
         Category
         .findAll({
@@ -635,9 +669,10 @@ router.get('/get/:id', (req, res) => {
         .findByPk(req.params.id)
         .then((category) => {
             if (category == null) {
-                res.status(200).send('not found')
-            }
+                res.status(200).send([])
+            }else{
             res.status(200).send([category])
+        }
         })
 });
 
