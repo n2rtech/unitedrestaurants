@@ -77,7 +77,7 @@ const VendorPhotogallery = () => {
       }
       else {
         SweetAlert.fire(
-          'Coupon is safe!'
+          'Image is safe!'
         )
       }
     })
@@ -101,8 +101,8 @@ const VendorPhotogallery = () => {
       ) .then(response => {
         toast.success("Gallery Images Added!")
         setTimeout(() => {
-          history.push('/dashboard/vendor/vendor-photogallery/');
-        }, 1000);
+          window.location.reload();
+      }, 1500);
       })
          .catch(error => console.log('Form submit error', error))
 
@@ -148,8 +148,8 @@ const VendorPhotogallery = () => {
                                     label=""
                                     buttonText="Upload"
                                     onChange={onDrop}
-                                    imgExtension={[".jpg", ".gif", ".png", ".gif", ".svg"]}
-                                    maxFileSize={1048576}
+                                    imgExtension={[".jpg", ".gif", ".jpeg", ".png", ".gif", ".svg"]}
+                                    maxFileSize={10485762222222222}
                                     fileSizeError=" file size is too big"
                                 />
                                 <FormGroup>
