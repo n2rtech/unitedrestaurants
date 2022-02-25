@@ -6,6 +6,7 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const path = require('path');
 var fs = require('fs');
+const sharp = require("sharp");
 const Sequelize = require('sequelize');
 const Op = require('sequelize').Op
 
@@ -24,7 +25,7 @@ const imageStorage = multer.diskStorage({
 const imageUpload = multer({
       storage: imageStorage,
       limits: {
-        fileSize: 100000000
+        fileSize: 1000000000000000000
       },
       fileFilter(req, file, cb) {
         if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) { 
@@ -37,48 +38,63 @@ const imageUpload = multer({
 // Create a new AdSpace
 router.post('/', passport.authenticate('vendor', {
     session: false
-}), imageUpload.single('image'),  function (req, res) {
+}), imageUpload.single('image'),  async (req, res) => {
         if (!req.file) {
             res.status(400).send({
                 msg: 'Please pass Image.'
             })
         } else {
 
-                        var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
-                        DB.query('SELECT code,name FROM '+table_name+' WHERE id ="' + req.body.country_id +'"', function (err, country) {
-                        
-                            if (err) throw err;
-                            if (country[0]) {
-                              var code = country[0].code;
-                              var country = country[0].code;
 
-                              if (code == 'ita') {
-                                var table_name = 'VendorIta';
-                              }else{
-                                var codee = code.charAt(0).toUpperCase() + code.slice(1);
-                                var table_name = 'Vendor' + codee + 's';
-                              }
+            const filename = req.file.originalname.replace(/\..+$/, "");
+        const newFilename = `adspace-${filename}-${Date.now()}.jpg`;
+        await sharp(req.file.path)
+        .resize(840, 420, {
+            fit: sharp.fit.inside,
+            withoutEnlargement: true, 
+        })
+        .toFormat("jpg")
+        .jpeg({ quality: 95 })
+        .toFile(
+            path.resolve(req.file.destination,newFilename)
+            )
+        fs.unlinkSync(req.file.path);
 
-                              DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + req.body.user_id+'"', function (err, vendor_pro) {
-                                if (err) throw err;
-                                if (vendor_pro[0]) {
-                                    
-                                    var categ = vendor_pro[0].categories;                   
-                                    AdSpace.create({image:req.file.filename,categories: categ , add_membership_id:req.body.add_membership_id,link:req.body.link,country_code: code, user_id:req.body.user_id});
-                                    res.status(200).send({
-                                        msg: 'Ad Space added.'
-                                    })
-                                }else{
-                                  res.status(200).send({
-                                    'message': 'User updated2'
-                                  });
-                                }
-                              })
-                            
-                            }else{
-                              res.status(400).send(err);
-                            }
-                        });
+            var table_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
+            DB.query('SELECT code,name FROM '+table_name+' WHERE id ="' + req.body.country_id +'"', function (err, country) {
+
+                if (err) throw err;
+                if (country[0]) {
+                  var code = country[0].code;
+                  var country = country[0].code;
+
+                  if (code == 'ita') {
+                    var table_name = 'VendorIta';
+                }else{
+                    var codee = code.charAt(0).toUpperCase() + code.slice(1);
+                    var table_name = 'Vendor' + codee + 's';
+                }
+
+                DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + req.body.user_id+'"', function (err, vendor_pro) {
+                    if (err) throw err;
+                    if (vendor_pro[0]) {
+
+                        var categ = vendor_pro[0].categories;                   
+                        AdSpace.create({image:newFilename,categories: categ , add_membership_id:req.body.add_membership_id,link:req.body.link,country_code: code, user_id:req.body.user_id});
+                        res.status(200).send({
+                            msg: 'Ad Space added.'
+                        })
+                    }else{
+                      res.status(200).send({
+                        'message': 'User updated2'
+                    });
+                  }
+              })
+
+            }else{
+              res.status(400).send(err);
+          }
+      });
             
         }
 });
@@ -115,8 +131,14 @@ router.delete('/:id', (req, res) => {
         .then((adspace) => {
             if (adspace) {
 
-                var filePath = path.resolve('./')+'/uploads/adspaces/'+adspace.image; 
-                fs.unlinkSync(filePath);
+                if(adspace.image){
+                    var filePath = path.resolve('./')+'/uploads/adspaces/'+adspace.image; 
+
+                    if (fs.existsSync(filePath)) {
+
+                        fs.unlinkSync(filePath);
+                    }
+                }               
 
                 AdSpace.destroy({
                     where: {
@@ -139,6 +161,43 @@ router.delete('/:id', (req, res) => {
     }
 });
 
+
+router.get('/list-with-frequency', (req, res) => {
+
+    var code = req.query.country;   
+
+    var category = req.query.category;
+
+    if (category) {
+        var conditions = {
+            where:{
+                country_code: { [Op.eq]: req.query.country },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            limit: 3,
+
+            order: Sequelize.literal('rand()')
+        }
+    }else{
+        var conditions = {
+            where:{
+                country_code: { [Op.eq]: req.query.country }
+            },
+            limit: 3,
+            
+            order: Sequelize.literal('rand()')
+        }
+    } 
+
+    AdSpace
+    .findAll(conditions)
+    .then((menuitem) => res.status(200).send(menuitem))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
 
 
 router.get('/list', (req, res) => {
