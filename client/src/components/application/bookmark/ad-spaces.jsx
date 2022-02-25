@@ -190,8 +190,8 @@ const AddSpaces = () => {
                                             label=""
                                             buttonText="Upload Image"
                                             onChange={onDrop}
-                                            imgExtension={[".jpg", ".gif", ".png", ".gif", ".svg"]}
-                                            maxFileSize={1048576}
+                                            imgExtension={[".jpg", ".jpeg", ".gif", ".png", ".gif", ".svg"]}
+                                            maxFileSize={1000000000000000000}
                                             fileSizeError=" file size is too big"
                                         />}
                             
