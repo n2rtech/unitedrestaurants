@@ -3,18 +3,19 @@ const router = express.Router();
 const Gallery = require('../models').Gallery;
 const passport = require('passport');
 require('../config/passport')(passport);
+const sharp = require("sharp");
 const path = require('path');
 var fs = require('fs');
 
 var multer  = require('multer');
 
 const imageStorage = multer.diskStorage({
-    destination: 'uploads/gallery', 
+    destination: 'uploads/gallery/', 
       filename: (req, file, cb) => {
         var image_na = file.fieldname + '_' + Date.now() 
              + path.extname(file.originalname);
           cb(null, image_na);
-          Gallery.create({image:image_na,user_id:req.user.id});
+          // Gallery.create({image:image_na,user_id:req.user.id});
     }
 });
 
@@ -31,21 +32,65 @@ const imageUpload = multer({
     }
 }) 
 
+
+/*code for single image upload
+const { filename: image } = req.file;
+
+            await sharp(req.file.path)
+            .resize(200, 200)
+            .jpeg({ quality: 90 })
+            .toFile(
+                path.resolve(req.file.destination,'resized',image)
+                )
+            fs.unlinkSync(req.file.path)*/
+
+
+const resizeImages = async (req, res) => {
+  if (!req.files) return next();
+  req.body.images = [];
+  await Promise.all(
+    req.files.map(async file => {
+        console.log(file);
+        const filename = file.originalname.replace(/\..+$/, "");
+        const newFilename = `gallery-${filename}-${Date.now()}.jpg`;
+        await sharp(file.path)
+        .resize(840, 420, {
+            fit: sharp.fit.inside,
+            withoutEnlargement: true, 
+        })
+        .toFormat("jpg")
+        .jpeg({ quality: 95 })
+        .toFile(
+            path.resolve(file.destination,newFilename)
+            )
+        Gallery.create({image:newFilename,user_id:req.user.id});
+        fs.unlinkSync(file.path)
+    })
+  );
+};
+
+
 // Create a new Gallery
 router.post('/', passport.authenticate('vendor', {
     session: false
-}), imageUpload.array('image',12),  function (req, res) {
+}), imageUpload.array('image',12),   function (req, res) {
         if (!req.files[0]) {
             res.status(400).send({
                 msg: 'Please pass Image.'
             })
         } else {
 
+            resizeImages(req,res);
+
             res.status(200).send({
                 msg: 'Gallery images uploaded.'
             })
         }
 });
+
+
+
+
 
 router.get('/', passport.authenticate('vendor', {
     session: false
