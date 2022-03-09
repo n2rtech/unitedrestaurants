@@ -1,0 +1,49 @@
+.newHeader{
+    background-image: url("/assets/images/mainbg2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.bottomHeader{
+    clear: both;
+}
+.bottomHeader .glanguage .goog-te-gadget-simple{
+    padding: 7px !important;
+    border-radius: 4px;
+}
+.list-inline{
+    display: inline-block;
+    padding-top: 8px;
+}
+.list-inline li {
+    float: left;
+    padding: 0 12px;
+}
+.bottomHeader ul li{
+    color: #fff;
+    font-size: 15px;
+}
+.bottomHeader ul li:first-child{
+    padding-top: 13px;
+    padding-left: 22px;
+}
+.bottomHeader ul li a{
+    font-size: 34px;
+    color: #fce391;
+}
+.header-right{
+    float: right;
+    padding-right: 30px;
+    padding-top: 40px;
+}
+.btn-primary{
+    background: #fce391 !important;
+    border: 1px solid #fce391 !important;
+    color: #333;
+}
+.btn-primary:hover{
+    background: #ffd754 !important;
+    border: 1px solid #ffd754 !important;
+    color: #333;
+}

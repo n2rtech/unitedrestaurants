@@ -251,8 +251,8 @@ const title = <div className="searchbar">
               <Col sm="4">
                 <div className="language-country">
                 <div className="language">
-                <GoogleTranslate />
-              </div>
+                  <GoogleTranslate />
+                </div>
               
               <div className="country">
                 <select aria-label="Default select example" onChange = {OnChangeCountry} className="form-control">

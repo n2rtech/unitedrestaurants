@@ -264,9 +264,6 @@ body {
 .react-multiple-carousel__arrow{
     background: rgb(0 0 0 / 0%) !important;
 }
-.hotdeals .customcard .card {
-    height: 410px;
-}
 .customcard .card {
     margin-bottom: 30px;
     border: 1px solid #dbdbdb;
@@ -275,25 +272,29 @@ body {
     border-radius: 0;
     box-shadow: 0 0 20px rgb(8 21 66 / 5%);
 }
+.customcard .card .btn-secondary{
+    margin-bottom: 20px;
+}
 .customcard .card .card-body{
     padding: 30px;
 }
-.customcard h5.card-title a{
+.customcard h5.card-title{
     font-size: 15px;
     font-weight: 400;
     font-family: 'Poppins';
-    color: #FF0000;
     margin-bottom: 0px;
     margin-top: 15px;
-    display: inline-block;
+    padding: 0 10px;
+}
+.customcard h5.card-title a{
+   color: #FF0000; 
 }
 .customcard p.card-text {
     font-size: 13px;
     color: #000;
     font-family: 'Poppins';
     margin-top: 10px;
-    margin-bottom: 20px;
-    min-height: 90px;
+    padding: 0 10px;
 }
 .btn-secondary {
     background-color: #70081C !important;
@@ -357,7 +358,7 @@ body {
     margin-bottom: 35px;
     font-weight: 400;
     line-height: 49px;
-    font-size: 37px;
+    font-size: 32px;
     color: #70081C;
     text-transform: uppercase;
     font-family: 'Poppins', sans-serif;
@@ -372,28 +373,17 @@ body {
 }
 .clickevent {
     position: absolute;
-    right: 0;
-    top: 30px;
+    left: 30px;
+    top: 55px;
 }
-.advertise-gridlarg .addname {
-    text-align: right;
-    font-size: 37px;
-    color: #70081C;
-    font-family: 'Poppins';
-}
-.advertise-gridlarg .addname {
-    text-align: left;
+.advertise-gridlarg .addname{
+    color: #fff;
     font-size: 26px;
-    color: #70081C;
-    font-family: 'Poppins';
-    max-width: 80%;
-    margin: 0 -15px 0px auto;
-    line-height: 36px;
-    margin-bottom: 50px;
 }
 .advertise-gridlarg .btn-secondary {
     text-transform: uppercase;
-    margin: 0 10px 0px auto;
+    margin: unset;
+    margin-top: 25px;
 }
 .advertise-gridlarg .btn-secondary{
     font-size: 15px;
@@ -429,9 +419,13 @@ body {
     font-family: 'Lato';
     color: #70081C !important;
     line-height: 17px;
+    font-weight: bold;
 }
-.latestadditions .btn-secondary {
-    margin-top: 20px;
+.latestadditions .btn-secondary{
+    font-size: 16px;
+}
+.latestadditions .customcard{
+    margin: 0 10px;
 }
 .homeblog{
     margin-top: 35px;
@@ -1543,14 +1537,7 @@ input::placeholder, textarea::placeholder{
     font-family: 'Poppins', sans-serif;
 }
 .advertise-gridlarg .addname {
-    text-align: left;
-    font-size: 17px;
-    color: #70081C;
-    font-family: 'Poppins';
-    max-width: 70%;
-    margin: 0 -10px 0px auto;
-    line-height: 26px;
-    margin-bottom: 50px;
+    
 }
 .advertise-gridlarg .btn-secondary {
     font-size: 13px;
@@ -2005,3 +1992,104 @@ input::placeholder, textarea::placeholder{
   padding-right: 33px !important;
 }
 }
+
+
+
+
+
+
+
+/* NEW CSS */
+
+.Homebanner{
+    background-image: url("/assets/images/mainbg2.jpg"); 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.mainCaption{
+    text-align: center;
+    padding: 10px 0;
+}
+.mainCaption h3{
+    color: #fff;
+    font-weight: normal;
+    font-size: 20px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.mainCaption h4{
+    color: #F3C33B;
+    font-weight: normal;
+}
+form.browse{
+    padding-bottom: 40px;
+}
+form.browse .form-control{
+    height: 40px;
+    border-radius: 0;
+} 
+form.browse input::placeholder{
+    color: #495057 !important;
+}
+form.browse span.input-group-text {
+    border-radius: 0;
+}
+form.browse .btn-primary{
+    height: 40px;
+}
+form.browse .btn-primary i{
+    font-size: 20px;
+}
+.hotdeals h4{
+    text-align: center;
+    font-size: 32px;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #70081C;
+    font-family: "Hurme Geometric Sans 1", sans-serif;
+    margin-top: 40px;
+}
+.hotdeals .hImage img{
+    width: 100%;
+}
+.hotdeals .customcard {
+    padding: 10px;
+}
+.seeAll a{
+    display: block;
+    font-size: 18px;
+    text-align: right;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.latestadditions .customcard h5.card-title{
+    padding-left: 0;
+    margin-bottom: 10px;
+}
+.blogs-section h5.card-title{
+    text-transform: uppercase;
+    font-size: 18px;
+    font-family: "Hurme Geometric Sans 1", sans-serif;
+}
+.blogs-section h5 a{
+    color: #70081C !important;
+}
+.blogs-section p{
+    padding-left: 10px;
+    margin-bottom: 0;
+    padding-top: 5px;
+}
+.blogs-section .card-text{
+    margin-bottom: 20px !important;
+}
+.blogs-section .react-multiple-carousel__arrow::before{
+    text-shadow: 2px 2px #71161d;
+    color: #fff !important;
+}
+
+
+
+
+
+
+

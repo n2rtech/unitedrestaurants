@@ -42,7 +42,9 @@ const VendorMembershipPackage = (props) => {
           (result) => {
             setActivePlan(result);
             setPlanName(result.membership.name);
+            if(result.transaction){
             setSubscriptionId(result.transaction.membership_subscription_id)
+          }
             setIntervalq(result.membership.interval)
             setAmountq(result.membership.price);
           },

@@ -754,7 +754,7 @@ router.put('/:id', (req, res) => {
         address: req.body.address || user.address,  
         featured_business: req.body.featured_business || user.featured_business,
         hot_deal: req.body.hot_deals || user.hot_deal,
-        business_dvertise: req.body.business_dvertise || user.business_dvertise,
+        business_dvertise: (req.body.business_dvertise || user.business_dvertise)
       }, {
         where: {
           id: req.params.id

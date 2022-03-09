@@ -16,6 +16,7 @@ import Usersignin from './auth/usersignin'
 import Search from './website/search'
 import Sitemap from './website/sitemap'
 import Home from './website/home'
+import Home2 from './website/home2'
 import Restaurants from './website/restaurants'
 import Blog from './website/blog'
 import Details from './website/resturent/details'
@@ -66,8 +67,8 @@ const Root = (props) =>  {
         <Provider store={store}>
         <BrowserRouter basename={`/`}>
         <Switch>
-          <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
-          <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
+          {/*<Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />*/}
+          <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home2} />
           <Route exact path={`${process.env.PUBLIC_URL}/search/:id`} component={Search} />
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
           <Route  path={`${process.env.PUBLIC_URL}/message`} component={Signupmsg} />
