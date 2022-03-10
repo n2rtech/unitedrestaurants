@@ -109,7 +109,7 @@ const Navbarmenu = () => {
               </svg>
                Videos </NavLink> </li>
               <li className="menu-item" ><NavLink onClick={toggleClass} activeClassName='is-active' to={`/`}>
-                <img src={`${process.env.PUBLIC_URL}/assets/images/menuicon/others_ic.png`}/>
+                <img alt="Others" src={`${process.env.PUBLIC_URL}/assets/images/menuicon/others_ic.png`}/>
                Others </NavLink> </li>
           </ul>
           </nav>     

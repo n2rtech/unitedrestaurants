@@ -2,7 +2,7 @@ import React,{useState,useMemo,Fragment} from 'react';
 import { Container, Row,Form, Input, InputGroup, InputGroupAddon, InputGroupText, Button } from 'reactstrap'
 import './css/style.css'
                       
-const SearchListing = () => {
+const SearchBar = () => {
 
   return (
       <div className="Homebanner">
@@ -29,7 +29,7 @@ const SearchListing = () => {
                   <Input className="form-control"  type="email" placeholder="Ex: food, restaurant" />
                 </InputGroup>
               </div>
-              <div className="col-sm-2 p-0">
+              <div className="col-sm-4 p-0">
                 <InputGroup>
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
                   <Input type="select" name="select" className="form-control digits" placeholder="Please Select">
@@ -42,19 +42,8 @@ const SearchListing = () => {
                   </Input>
                 </InputGroup>
               </div>
-              <div className="col-sm-2 p-0">
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-map-marker"></i></InputGroupText></InputGroupAddon>
-                  <Input type="select" name="select" className="form-control digits" defaultValue="Please Select">
-                    <option>{"California"}</option>
-                    <option>{"Los Angeles"}</option>
-                    <option>{"Las Vegas"}</option>
-                    <option>{"San Andreas"}</option>
-                  </Input>
-                </InputGroup>
-              </div>
               <div className="col-sm-1">
-                <Button color="primary"><i className="fa fa-search"></i></Button>
+                <Button color="primary"><a href={`${process.env.PUBLIC_URL}/BusinessListing`}><i className="fa fa-search"></i></a></Button>
               </div>
             </Row>
           </Form>
@@ -63,4 +52,4 @@ const SearchListing = () => {
   );
 
 }
-export default SearchListing;
+export default SearchBar;

@@ -2023,6 +2023,7 @@ input::placeholder, textarea::placeholder{
 }
 form.browse{
     padding-bottom: 40px;
+    padding-left: 125px;
 }
 form.browse .form-control{
     height: 40px;
@@ -2039,6 +2040,15 @@ form.browse .btn-primary{
 }
 form.browse .btn-primary i{
     font-size: 20px;
+}
+form.browse .btn-primary a{
+    color: #333;
+}
+.BusinessListing .customcard{
+    padding: 0 !important;
+}
+.BusinessListing h4{
+    margin-bottom: 20px;
 }
 .hotdeals h4{
     text-align: center;
@@ -2086,7 +2096,46 @@ form.browse .btn-primary i{
     text-shadow: 2px 2px #71161d;
     color: #fff !important;
 }
-
+.details-page{
+    margin-top: 30px;
+}
+.details-left{
+    box-shadow: 0 1px 4px 0 rgb(30 34 34 / 11%);
+    border: 1px solid rgba(223,225,229,0);
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+.details-left h1{
+    font-weight: normal;
+    font-size: 24px;
+    padding: 0 20px;
+    color: #000;
+    margin-top: 35px;
+}
+.details-left .Rdescription{
+    padding: 0 20px;
+}
+.details-left .menu-items h5{
+    font-weight: normal;
+    color: #000;
+    font-size: 18px;
+    background: #ffcc23;
+    padding: 10px 20px;
+}
+.details-left .menu-items ul{
+    padding: 10px 20px;
+}
+.details-left .menu-items ul li {
+    margin-bottom: 10px;
+    padding-left: 0;
+}
+.details-left .menu-items ul li i{
+    background: #40a416;
+    color: #fff;
+    padding: 4px;
+    border-radius: 50px;
+    margin-right: 5px;
+}
 
 
 
