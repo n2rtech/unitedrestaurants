@@ -2099,11 +2099,12 @@ form.browse .btn-primary a{
 .details-page{
     margin-top: 30px;
 }
-.details-left{
+.details-left, .details-right{
     box-shadow: 0 1px 4px 0 rgb(30 34 34 / 11%);
     border: 1px solid rgba(223,225,229,0);
     background: #f9f9f9;
     border-radius: 4px;
+    margin-bottom: 20px;
 }
 .details-left h1{
     font-weight: normal;
@@ -2135,6 +2136,27 @@ form.browse .btn-primary a{
     padding: 4px;
     border-radius: 50px;
     margin-right: 5px;
+}
+.details-right .contact li {
+    padding: 10px 8px;
+    border-bottom: 1px solid #ccc;
+}
+.details-right .contact li svg {
+    margin-right: 5px;
+    position: relative;
+    top: 5px;
+}
+.details-right .contact li ul li:first-child {
+    padding-left: 0;
+}
+.details-right .contact li ul li {
+    border-bottom: none;
+}
+.details-right .contact li ul{
+    padding-top: 0;
+}
+.details-right .contact li ul li svg{
+    top: 0;
 }
 
 
