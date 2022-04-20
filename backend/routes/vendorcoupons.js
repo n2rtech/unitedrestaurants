@@ -42,13 +42,13 @@ router.post('/', (req, res) => {
                             var country = country[0].code;
                 
                             if (code == 'ita') {
-                              var table_name = 'VendorIta';
+                              var table_namew = 'VendorIta';
                             }else{
                               var codee = code.charAt(0).toUpperCase() + code.slice(1);
-                              var table_name = 'Vendor' + codee + 's';
+                              var table_namew = 'Vendor' + codee + 's';
                             }
                 
-                            DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + req.body.user_id +'"', function (err, vendor_pro) {
+                            DB.query('SELECT * FROM '+table_namew+' WHERE user_id ="' + req.body.user_id +'"', function (err, vendor_pro) {
                               if (err) throw err;
                               if (vendor_pro[0]) {
                 
