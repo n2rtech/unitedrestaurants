@@ -21,8 +21,6 @@ const VendorProfile = (props) => {
     GetData();
   }, []);
 
-  console.log('Categories',options);
-
   const [image, setimage] = useState({ pictures: [] , pictureFiles: [] })
 
     const onDrop = (pictureFiles, pictureDataURLs) => {
@@ -39,6 +37,8 @@ const VendorProfile = (props) => {
     const [ownerphone, setOwnerPhone] = useState('')
     const [fax, setFax] = useState('')
     const [address, setAddress] = useState('')
+    const [latitude, setLatitude] = useState(0)
+    const [longitude, setLongitude] = useState(0)
     const [websitelink, setWebsitelink] = useState()
     const [fblink, setFblink] =  useState('')
     const [instalink, setInstalink] = useState('')
@@ -72,6 +72,14 @@ const VendorProfile = (props) => {
 
     const onChangeaddress = (event) => {
       setAddress(event.target.value);
+    };
+
+    const onChangLongitude = (event) => {
+      setLongitude(event.target.value);
+    };
+
+    const onChangeLatitude = (event) => {
+      setLatitude(event.target.value);
     };
 
     const onChangewebsitelink = (event) => {
@@ -116,8 +124,6 @@ const VendorProfile = (props) => {
       headers: {'Authorization': 'JWT '+token }
     };
 
-    console.log('flagdata' , flagData);
-
     if(flagData != '') {
       const result = await axios('/api/vendors/profile/'+`${id}`,config);
         if(result.data.categories == null){
@@ -137,6 +143,8 @@ const VendorProfile = (props) => {
         setPhone(result.data.mobile)
         setOwnerPhone(result.data.ownermobile)
         setAddress(result.data.address)
+        setLatitude(result.data.latitude)
+        setLongitude(result.data.longitude)
         setManagerName(result.data.manager_name)
         setManagerEmail(result.data.manager_email)
         setWebsitelink(result.data.website_link)
@@ -153,14 +161,13 @@ const VendorProfile = (props) => {
         setPhone(result.data.mobile)
         setOwnerPhone(result.data.ownermobile)
         setAddress(result.data.address)
+        setLatitude(result.data.latitude)
+        setLongitude(result.data.longitude)
     }
         
       };
       GetData();
     }, []);
-
-    console.log('profiledata',profileData);
-
 
     // Update details query
 
@@ -185,14 +192,14 @@ const categorys = multiSelections.map((user) => {
           bodyParameters.set('phone', phone);
           bodyParameters.set('ownerphone', ownerphone);
           bodyParameters.set('fax', fax);
-          console.log('Image', image);
-          console.log('Image Length', image.pictureFiles.length);
           if(image.pictureFiles.length != 0) {
             bodyParameters.set('banner', image.pictureFiles[0]);
           } else {
             bodyParameters.set('banner', image.pictureFiles);
           } 
           bodyParameters.set('address', address);
+          bodyParameters.set('latitude', latitude);
+          bodyParameters.set('longitude', longitude);
           bodyParameters.set('about_business', aboutbusiness);
           bodyParameters.set('categories', JSON.stringify(categories_arr));
           bodyParameters.set('website_link', websitelink);
@@ -281,13 +288,13 @@ const categorys = multiSelections.map((user) => {
               <Col sm="6" xs="12">
                 <FormGroup>
                   <Label htmlFor="exampleFormControlInput1">{"Latitude"}</Label>
-                  <Input className="form-control"  value="" type="name" placeholder="" />
+                  <Input className="form-control"  value={latitude} onChange={onChangeLatitude} type="text" placeholder="" />
                 </FormGroup>
               </Col>
               <Col sm="6" xs="12">
                 <FormGroup>
                   <Label htmlFor="exampleFormControlInput1">{"Longitude"}</Label>
-                  <Input className="form-control"  value="" type="name" placeholder="" />
+                  <Input className="form-control"  value={longitude} onChange={onChangLongitude} type="text" placeholder="" />
                 </FormGroup>
               </Col>
             </Row>

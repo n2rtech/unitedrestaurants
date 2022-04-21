@@ -986,6 +986,8 @@ router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
             ownermobile: req.body.ownerphone,
             fax: req.body.fax,
             address: req.body.address,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
             categories: categories,
             website_link: req.body.website_link ,
             //media_links: req.body.media_links || profile.media_links,

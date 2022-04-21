@@ -92,8 +92,8 @@ const Root = (props) =>  {
            <Route  path={`${process.env.PUBLIC_URL}/customerservices`} component={Customerservices} />
            <Route  path={`${process.env.PUBLIC_URL}/technicalsupport`} component={Technicalsupport} />
            <Route  path={`${process.env.PUBLIC_URL}/sales`} component={Sales} />
-           <Route  path={`${process.env.PUBLIC_URL}/BusinessListing`} component={BusinessListing} />
-           <Route  path={`${process.env.PUBLIC_URL}/BusinessDetails`} component={BusinessDetails} />
+           <Route  path={`${process.env.PUBLIC_URL}/BusinessListing/:id`} component={BusinessListing} />
+           <Route  path={`${process.env.PUBLIC_URL}/BusinessDetails/:id`} component={BusinessDetails} />
            <Route  path={`${process.env.PUBLIC_URL}/privacypolicy`} component={Privacypolicy} />
            <Route  path={`${process.env.PUBLIC_URL}/howitwork`} component={Howitwork} />
            <Route  path={`${process.env.PUBLIC_URL}/returnpolicy`} component={Returnpolicy} />
@@ -115,7 +115,7 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/unlockUser`} component={UnlockUser}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/resetPwd`} component={Resetpwd}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/errors/error400`} component={Error400}></Route>
-           <Route  path={`${process.env.PUBLIC_URL}/pages/maintenance`} component={Maintenance}></Route>
+          <Route  path={`${process.env.PUBLIC_URL}/pages/maintenance`} component={Maintenance}></Route>
           
           <Route  path={`${process.env.PUBLIC_URL}/callback`} render={() => <Callback/>} />
 
