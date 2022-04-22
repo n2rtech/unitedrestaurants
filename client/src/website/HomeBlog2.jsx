@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import Carousel from "react-multi-carousel";
 import { Container, Col, Card, CardTitle, CardText, Button} from 'reactstrap'
 import "react-multi-carousel/lib/styles.css";
-
+import moment from 'moment';
 const HomeBlog2 = () => {
 
   const [blogData, setBlogData] = useState([]);
@@ -51,7 +51,9 @@ const HomeBlog2 = () => {
                   <CardTitle tag="h5">
                   <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`}>{blog.name}</a>
                   </CardTitle>
-                  <p>{blog.createdAt}</p>
+                  <p>
+                    {moment(blog.createdAt).fromNow()}
+                  </p>
                   <CardText>
                      <div dangerouslySetInnerHTML={{__html: `<p>${(blog.content).substring(0, 270)}...</p>`}} />
                   </CardText>
