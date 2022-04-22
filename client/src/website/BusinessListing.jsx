@@ -25,6 +25,7 @@ const BusinessListing = (props) => {
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [showPagination, setShowPagination] = useState(false);
   const [loader, setLoader] = useState(<BallTriangle color="#00BFFF" height={100} width={300} />);
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
 
@@ -255,7 +256,7 @@ const BusinessListing = (props) => {
                       <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}`}>{item.business_name}</a>
                     </CardTitle>
                     <CardText>
-                      {item.about_business}
+                      {showMore ? item.about_business : `${item.about_business.substring(0, 400)}`+'...'}
                     </CardText>
                     <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}`}> SEE DETAILS</a></Button>
                   </Card>
