@@ -33,7 +33,6 @@ const BusinessDetails = () => {
       setLocation({lat:result_data.data.latitude,lng:result_data.data.longitude,address:result_data.data.address,name:result_data.data.address});
     });
 
-
   },[])
 
   return (

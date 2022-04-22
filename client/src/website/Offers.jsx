@@ -1,25 +1,39 @@
-import React from "react";
-
-
+import React,{useState,useMemo,Fragment} from 'react';
+import axios from 'axios'
+import {useParams} from 'react-router-dom'
 
 export default function Offers() {
 
   
+  const params = useParams();
+  const id = `${params.id}`;
+
+  const[couponsData,setCouponsData] = useState([])
+  
+  useMemo(() => {
+
+    axios.get(`/api/vendor-coupons/list/${id}`)
+    .then((result_data) => {
+      setCouponsData(result_data.data);
+    });
+
+
+  },[])
+
   return (
     <>
+    {(couponsData && couponsData.length) ?
       <div className="details-left">
         <div className="menu-items offers">
           <h5>Deals/Offer</h5>
           <ul className="list-unstyled">
-            <li><i className="fa fa-check"></i> 20% Off on 3 snack box</li>
-            <li><i className="fa fa-check"></i> 34% Off on Welcome drink</li>
-            <li><i className="fa fa-check"></i> Complimentary Free Parking</li>
-            <li><i className="fa fa-check"></i> Free Pizza Delivery </li>
-            <li><i className="fa fa-check"></i> 10% Cashback on Online Payment</li>
-            <li><i className="fa fa-check"></i> All Debit and Credit Cards Accepted</li>
+          {couponsData.map((coupons , i ) => (
+            <li key={i}><i className="fa fa-check"></i> {coupons.deal_name}</li>
+          ))}
           </ul>
         </div>
       </div>
+      : '' }
     </>
   );
 }

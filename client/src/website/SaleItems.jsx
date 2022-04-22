@@ -1,24 +1,35 @@
-import React from "react";
-
-
+import React,{useState,useMemo,Fragment} from 'react';
+import axios from 'axios'
+import {useParams} from 'react-router-dom'
 
 export default function SaleItems() {
 
-  
+  const params = useParams();
+  const id = `${params.id}`;
+
+  const[saleItemsData,setSaleItemsData] = useState({})
+
+  useMemo(() => {
+
+    axios.get(`/api/sale-items/${id}`)
+    .then((result_data) => {
+      setSaleItemsData(result_data.data);
+    });
+
+  },[])
+
   return (
     <>
+    {saleItemsData.content && saleItemsData.content.length ?
       <div className="details-left">
         <div className="menu-items offers">
           <h5>Items for Sale</h5>
           <ul className="list-unstyled">
-            <li><i className="fa fa-check"></i> Fast Food</li>
-            <li><i className="fa fa-check"></i> Indian Veg</li>
-            <li><i className="fa fa-check"></i> Chinese</li>
-            <li><i className="fa fa-check"></i> Pizza and Burgers</li>
-            <li><i className="fa fa-check"></i> Chicken Wings</li>
+          <div dangerouslySetInnerHTML={{ __html: saleItemsData.content }} />
           </ul>
         </div>
       </div>
+      : '' }
     </>
   );
 }
