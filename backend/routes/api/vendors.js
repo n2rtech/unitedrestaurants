@@ -57,6 +57,7 @@ fileFilter(req, file, cb) {
 
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const { exit } = require("process");
 
 
 router.post("/register", (req, res) => {
@@ -778,7 +779,8 @@ router.put('/:id', (req, res) => {
             DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + user.id +'"', function (err, vendor_pro) {
               if (err) throw err;
               if (vendor_pro[0]) {
-
+                console.log(vendor_pro[0]);
+                exit;
                 var user_id = user.id;
                 var country_id = user.country_id;
                 var name = req.body.name;

@@ -1,107 +1,75 @@
-import React,{useState,useMemo,Fragment} from 'react';
+import React,{useState,useEffect} from 'react';
 import Carousel from "react-multi-carousel";
 import { Container, Card, CardTitle, CardText, Button } from 'reactstrap'
 import "react-multi-carousel/lib/styles.css";
 import './css/header.css'
-                      
+import axios from 'axios';
+
 const Featured2 = () => {
+
+  const [featuredData, setFeaturedData] = useState([]);
+  const code = localStorage.getItem('country_code');
+
+  useEffect(() => {
+  
+    const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
+        };
+
+          axios.get('/api/featured-businesses?country='+`${code}` , config)
+          .then((getData) => {
+            setFeaturedData(getData.data);
+          });
+  
+  }, []);
+
+  const addDefaultSrc = (ev) => {
+    ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h4.jpeg`;
+  }
 
   return (
     <Container>
       <div className="hotdeals">
-        <h4>Featured Businesses</h4>
+      {featuredData && featuredData.length ? <h1>Featured businesses</h1> : '' }
+       {featuredData && featuredData.length > 6 ? <div className="seeall">
+        <a href="/restaurants">SEE ALL</a>
+      </div> : '' }
         <div style={{ position: "relative" }}>
           <Carousel responsive={responsive}>
+          {featuredData.map((item , i ) => (
             <div className="customcard">
+            
               <Card>
                 
                 <div className="hImage">
-                  <a href={`#`}>
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/h5.jpeg`}/>
-                  </a>
+                <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                    <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
+                     alt="Menu-Icon"/>
+                      </a>
                 </div>
                 <CardTitle tag="h5">
-                  <a href={`#`}>Restaurant name</a>
+                <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                    {item.business_name}
+                    </a>
                 </CardTitle>
                 
                 <CardText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+                  {item.about_business}
                 </CardText>
-                <Button><a href={`#`}> SEE DETAILS</a></Button>
+                <Button>{ item.user_id == 0 ?  
+                    
+                    <a href={`${process.env.PUBLIC_URL}/resturent/newdetails/${item.id}_${localStorage.getItem('country_code')}`}>
+                    SEE DETAILS
+                  </a> : 
+                
+                      <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                      SEE DETAILS
+                    </a>
+                }</Button>
               </Card>
+              
             </div> 
-            <div className="customcard">
-              <Card>
-                
-                <div className="hImage">
-                  <a href={`#`}>
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/h2.jpeg`}/>
-                  </a>
-                </div>
-                <CardTitle tag="h5">
-                  <a href={`#`}>Restaurant name</a>
-                </CardTitle>
-                
-                <CardText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                </CardText>
-                <Button><a href={`#`}> SEE DETAILS</a></Button>
-              </Card>
-            </div>
-            <div className="customcard">
-              <Card>
-                
-                <div className="hImage">
-                  <a href={`#`}>
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/h4.jpeg`}/>
-                  </a>
-                </div>
-                <CardTitle tag="h5">
-                  <a href={`#`}>Restaurant name</a>
-                </CardTitle>
-                
-                <CardText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                </CardText>
-                <Button><a href={`#`}> SEE DETAILS</a></Button>
-              </Card>
-            </div>
-            <div className="customcard">
-              <Card>
-                
-                <div className="hImage">
-                  <a href={`#`}>
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/h1.jpeg`}/>
-                  </a>
-                </div>
-                <CardTitle tag="h5">
-                  <a href={`#`}>Restaurant name</a>
-                </CardTitle>
-                
-                <CardText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                </CardText>
-                <Button><a href={`#`}> SEE DETAILS</a></Button>
-              </Card>
-            </div>
-            <div className="customcard">
-              <Card>
-                
-                <div className="hImage">
-                  <a href={`#`}>
-                    <img src={`${process.env.PUBLIC_URL}/assets/images/h3.jpeg`}/>
-                  </a>
-                </div>
-                <CardTitle tag="h5">
-                  <a href={`#`}>Restaurant name</a>
-                </CardTitle>
-                
-                <CardText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                </CardText>
-                <Button><a href={`#`}> SEE DETAILS</a></Button>
-              </Card>
-            </div>
+            ))}
           </Carousel>
         </div>
       </div>
