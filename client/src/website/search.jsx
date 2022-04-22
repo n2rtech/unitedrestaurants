@@ -1,8 +1,9 @@
 import React,{useState,useMemo} from 'react';
 import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText,Button } from 'reactstrap'
-import Header from './header.jsx'
+import Header from './header2.jsx'
+import SearchBar from './SearchBar.jsx'
 import Carousel from "react-multi-carousel";
-import Footer from './footer.jsx'
+import Footer from './footer2.jsx'
 import axios from 'axios';
 import "react-multi-carousel/lib/styles.css";
 import {useParams} from 'react-router-dom'
@@ -74,7 +75,7 @@ const addDefaultSrc = (ev) => {
       <Row className="m-0">
         <Col xs="12" className="p-0">     
            <Header countrycode = {params.id}/>
-
+           <SearchBar/>
     
       <div className="hotdeals">
        <Container className="p-0"> 
