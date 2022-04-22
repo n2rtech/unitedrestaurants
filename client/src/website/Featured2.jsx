@@ -37,7 +37,7 @@ const Featured2 = () => {
         <div style={{ position: "relative" }}>
           <Carousel responsive={responsive}>
           {featuredData.map((item , i ) => (
-            <div className="customcard">
+            <div className="customcard" key={i}>
             
               <Card>
                 
