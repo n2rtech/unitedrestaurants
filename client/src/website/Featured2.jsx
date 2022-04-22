@@ -38,9 +38,7 @@ const Featured2 = () => {
           <Carousel responsive={responsive}>
           {featuredData.map((item , i ) => (
             <div className="customcard" key={i}>
-            
-              <Card>
-                
+              <Card> 
                 <div className="hImage">
                 <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
                     <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
@@ -67,7 +65,6 @@ const Featured2 = () => {
                     </a>
                 }</Button>
               </Card>
-              
             </div> 
             ))}
           </Carousel>

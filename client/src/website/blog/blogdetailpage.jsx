@@ -3,7 +3,7 @@ import { Container, Row, Col,  List, ListInlineItem } from 'reactstrap'
 import 'react-tabs/style/react-tabs.css';
 import { useParams } from "react-router-dom";
 import axios from 'axios'
-
+import moment from 'moment';
 const Detailpage = (props) => {
 
   const params = useParams();	
@@ -44,7 +44,7 @@ const Detailpage = (props) => {
           <List type="inline">
 			  <ListInlineItem>
 			    <span>
-					{ blogDetails !== '' ? blogDetails.createdAt : '' }
+					{ blogDetails !== '' ? moment(blogDetails.createdAt).fromNow()  : '' }
 					
 					</span>
 			  </ListInlineItem>
