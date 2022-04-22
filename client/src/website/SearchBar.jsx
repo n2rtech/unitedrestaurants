@@ -101,8 +101,8 @@ const SearchBar = () => {
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
                   <Input type="select" name="select" className="form-control digits" placeholder="Please Select" onChange = {handleCountrychange}>
                     
-                  {countries.map(item => (
-                        <option value={item.code}  selected = {item.code === localStorage.getItem('country_code')}>{item.name}</option>
+                  {countries.map((item ,i)=> (
+                        <option key={i} value={item.code}  selected = {item.code === localStorage.getItem('country_code')}>{item.name}</option>
                     ))
                   }
                   </Input>

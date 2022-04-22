@@ -88,7 +88,7 @@ const addDefaultSrc = (ev) => {
         <Carousel responsive={responsive}>
         {hotData && hotData.map((item , i ) => (
           <Col sm="12">
-            <div className="customcard">
+            <div className="customcard" key={i}>
               <Card>
                 <div className="ribbon"><p> { item.discount.indexOf(".00") == '-1' ? item.discount : item.discount.substring(0,item.discount.indexOf(".")) }% off</p></div>
                 <CardBody>
@@ -143,7 +143,7 @@ const addDefaultSrc = (ev) => {
         <Carousel responsive={responsive}>
         {featuredData ? featuredData.map((item , i ) => (
           <Col sm="12">
-            <div className="customcard">
+            <div className="customcard" key={i}>
               <Card
               >
                 <CardBody>
@@ -199,7 +199,7 @@ const addDefaultSrc = (ev) => {
           <Row className="m-0">
             {addSpaces.length > 0 ? addSpaces.map((item , i  ) => (
 
-                <Col sm="4" className="p-0">
+                <Col sm="4" className="p-0" key={i}>
                   <div className="advertise-gridlarg">
                     <img onError = {addDefaultSrc} className="img-fluid" src={`${process.env.PUBLIC_URL}/api/uploads/adspaces/${item.image}`} 
                           alt="Menu-Icon"/>
@@ -227,7 +227,7 @@ const addDefaultSrc = (ev) => {
         <Carousel responsive={responsive}>
         {latestData.map((item , i ) => (
           <Col sm="12">
-            <div className="customcard">
+            <div className="customcard" key={i}> 
               <Card>
                  <CardBody>
                    <Row>
