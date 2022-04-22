@@ -1,9 +1,34 @@
-import React,{useState,useMemo} from 'react';
+import React,{useState,useEffect} from 'react';
 import Carousel from "react-multi-carousel";
 import { Container, Col, Card, CardTitle, CardText, Button} from 'reactstrap'
 import "react-multi-carousel/lib/styles.css";
 
 const HomeBlog2 = () => {
+
+  const [blogData, setBlogData] = useState([]);
+
+  useEffect(() => {
+  
+    const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
+        };
+ 
+    fetch("/api/blogs/get" , config)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          
+          setBlogData(result);
+        },
+        (error) => {
+          
+        }
+      )
+  }, []);
+
+  const addDefaultSrc = (ev) => {
+    ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h5.jpeg`;
+  }
 
 
   return (
@@ -12,74 +37,34 @@ const HomeBlog2 = () => {
           <h4>For you to read</h4>
           <div style={{ position: "relative" }}>
             <Carousel responsive={responsive}>
-              <div className="customcard">
+            {blogData.map((blog , i ) => (
+
+              <div className="customcard" key={i}>
+                { blog.show_on_home  == 1 ? 
                 <Card>
                   <div className="hImage">
-                    <a href={`#`}>
-                      <img src={`${process.env.PUBLIC_URL}/assets/images/h5.jpeg`}/>
+                  <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`}>
+                      <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${blog.image}`} 
+                     alt="Menu-Icon" className="img-fluid" />
                     </a>
                   </div>
                   <CardTitle tag="h5">
-                    <a href={`#`}>The Restaurant Expert</a>
+                  <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`}>{blog.name}</a>
                   </CardTitle>
-                  <p>Posted 7 Hours ago</p>
+                  <p>{blog.createdAt}</p>
                   <CardText>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+                     <div dangerouslySetInnerHTML={{__html: `<p>${(blog.content).substring(0, 270)}...</p>`}} />
                   </CardText>
-                  <Button><a href={`#`}> Read More</a></Button>
+                  <Button><a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`} className="readmore">READ MORE</a></Button>
                 </Card>
+                :
+              
+                ''
+              
+              }
+              
               </div> 
-              <div className="customcard">
-                <Card>
-                  <div className="hImage">
-                    <a href={`#`}>
-                      <img src={`${process.env.PUBLIC_URL}/assets/images/h3.jpeg`}/>
-                    </a>
-                  </div>
-                  <CardTitle tag="h5">
-                    <a href={`#`}>The Restaurant Expert</a>
-                  </CardTitle>
-                  <p>Posted 7 Hours ago</p>
-                  <CardText>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                  </CardText>
-                  <Button><a href={`#`}> Read More</a></Button>
-                </Card>
-              </div>
-              <div className="customcard">
-                <Card>
-                  <div className="hImage">
-                    <a href={`#`}>
-                      <img src={`${process.env.PUBLIC_URL}/assets/images/h4.jpeg`}/>
-                    </a>
-                  </div>
-                  <CardTitle tag="h5">
-                    <a href={`#`}>The Restaurant Expert</a>
-                  </CardTitle>
-                  <p>Posted 7 Hours ago</p>
-                  <CardText>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                  </CardText>
-                  <Button><a href={`#`}> Read More</a></Button>
-                </Card>
-              </div>
-              <div className="customcard">
-                <Card>
-                  <div className="hImage">
-                    <a href={`#`}>
-                      <img src={`${process.env.PUBLIC_URL}/assets/images/h2.jpeg`}/>
-                    </a>
-                  </div>
-                  <CardTitle tag="h5">
-                    <a href={`#`}>The Restaurant Expert</a>
-                  </CardTitle>
-                  <p>Posted 7 Hours ago</p>
-                  <CardText>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                  </CardText>
-                  <Button><a href={`#`}> Read More</a></Button>
-                </Card>
-              </div>
+               ))}
             </Carousel>
           </div>
         </div>
