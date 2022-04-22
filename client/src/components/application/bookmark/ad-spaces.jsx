@@ -59,7 +59,7 @@ const AddSpaces = () => {
          .then(
            (result) => {
              setPlanName(result.membership);
-             setMembershipid(result.membership.id)
+             setMembershipid(result.membership_id)
            },
            (error) => {
              
