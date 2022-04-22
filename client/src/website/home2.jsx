@@ -12,6 +12,8 @@ import HomeBlog2 from './HomeBlog2.jsx'
 
 const Home2 = () => {
 
+  localStorage.removeItem('catid');
+  localStorage.removeItem('filter');
 
   return (
       <Container fluid={true} className="p-0">
