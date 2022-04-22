@@ -5,6 +5,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import axios from 'axios'
 import ImageUploader from 'react-images-upload';
 import {toast} from 'react-toastify';
+import MyGoogleMapEdit from './MyGoogleMapEdit';
 
 const VendorProfile = (props) => {
   const [multiSelections, setMultiSelections] = useState([]);
@@ -45,10 +46,23 @@ const VendorProfile = (props) => {
     const [youtubelink, setYoutubelink] = useState('')
     const [aboutbusiness, setAboutBusiness] = useState('')
     const [categories, setCategory] = useState()
+    const [location, setLocation] = useState({})
 
     const onChangeName = (event) => {
       setName(event.target.value);
     };
+
+    const ChangeLongitude1 = (data) => {
+      setLongitude(data);
+    }
+
+    const ChangeLatitude1 = (data) => {
+      setLatitude(data);
+    }
+
+    const ChangeAddress1 = (data) => {
+      setAddress(data);
+    }
 
     const onChangeEmail = (event) => {
       setEmail(event.target.value);
@@ -145,6 +159,7 @@ const VendorProfile = (props) => {
         setAddress(result.data.address)
         setLatitude(result.data.latitude)
         setLongitude(result.data.longitude)
+        setLocation({address:result.data.address,latitude:result.data.latitude,longitude:result.data.longitude})
         setManagerName(result.data.manager_name)
         setManagerEmail(result.data.manager_email)
         setWebsitelink(result.data.website_link)
@@ -163,6 +178,7 @@ const VendorProfile = (props) => {
         setAddress(result.data.address)
         setLatitude(result.data.latitude)
         setLongitude(result.data.longitude)
+        setLocation({address:result.data.address,latitude:result.data.latitude,longitude:result.data.longitude})
     }
         
       };
@@ -284,6 +300,13 @@ const categorys = multiSelections.map((user) => {
                <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
                <Input type="textarea" className="form-control" value={address} onChange={onChangeaddress} rows="3"/>
             </FormGroup>
+
+            <Row>
+              <Col sm="12" xs="12">
+              {location.address ? <MyGoogleMapEdit location={location} onChangeLongitude={ChangeLongitude1} onChangeLatitude={ChangeLatitude1}  onChangeAddress={ChangeAddress1} latitude={parseFloat(latitude)} longitude={parseFloat(longitude)} address={address} /> : ''}
+              </Col>
+            </Row>
+
             <Row>
               <Col sm="6" xs="12">
                 <FormGroup>
