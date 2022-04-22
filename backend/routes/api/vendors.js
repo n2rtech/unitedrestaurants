@@ -1177,6 +1177,7 @@ router.get('/active-adds-plan/:id', (req, res) => {
     .then((transaction) => {
       res.status(200).send({
         'membership': membership,
+        'membership_id' : vendor.membership_id,
         'transaction' : transaction
       })
     })
