@@ -1,13 +1,14 @@
-import React,{useState,useMemo} from 'react';
+import React, { Suspense } from "react";
 import { Container } from 'reactstrap'
-import Header2 from './header2.jsx'
-import Footer2 from './footer2.jsx'
-import SearchBar from './SearchBar.jsx'
-import HotDeals2 from './HotDeals2.jsx'
-import Featured2 from './Featured2.jsx'
-import Advertise2 from './Advertise2.jsx'
-import Latestadditions2 from './Latestadditions2.jsx'
-import HomeBlog2 from './HomeBlog2.jsx'
+
+const Header2 = React.lazy(() => import("./header2.jsx"));
+const Footer2 = React.lazy(() => import("./footer2.jsx"));
+const SearchBar = React.lazy(() => import("./SearchBar.jsx"));
+const HotDeals2 = React.lazy(() => import("./HotDeals2.jsx"));
+const Featured2 = React.lazy(() => import("./Featured2.jsx"));
+const Advertise2 = React.lazy(() => import("./Advertise2.jsx"));
+const Latestadditions2 = React.lazy(() => import("./Latestadditions2.jsx"));
+const HomeBlog2 = React.lazy(() => import("./HomeBlog2.jsx"));
 
 const Home2 = () => {
 
@@ -15,7 +16,8 @@ const Home2 = () => {
   localStorage.removeItem('filter');
 
   return (
-      <Container fluid={true} className="p-0">
+    <Suspense fallback={<div>Loading</div>}>
+       <Container fluid={true} className="p-0">
         <Header2/>
         <SearchBar/>
         <HotDeals2/>
@@ -25,6 +27,8 @@ const Home2 = () => {
         <HomeBlog2/>
         <Footer2/>
       </Container>
+    </Suspense>
+     
   );
 }
 
