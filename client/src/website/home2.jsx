@@ -9,7 +9,6 @@ import Advertise2 from './Advertise2.jsx'
 import Latestadditions2 from './Latestadditions2.jsx'
 import HomeBlog2 from './HomeBlog2.jsx'
 
-
 const Home2 = () => {
 
   localStorage.removeItem('catid');

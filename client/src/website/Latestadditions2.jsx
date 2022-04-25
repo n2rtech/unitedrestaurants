@@ -44,7 +44,7 @@ const addDefaultSrc = (ev) => {
                    </Col>
                    <Col sm="8" xs="8">
                   <CardTitle tag="h5">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     {item.business_name}
                   </a>
                   </CardTitle>
@@ -64,7 +64,7 @@ const addDefaultSrc = (ev) => {
                       VIEW
                     </a> : 
                   
-                        <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                        <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                         VIEW
                       </a>
                     }
