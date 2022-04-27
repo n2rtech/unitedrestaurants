@@ -11,29 +11,27 @@ const SearchBar = () => {
   const [address , setAddress] = useState('');
   const [latitude , setLatitude] = useState(0);
   const [longitude , setLongitude] = useState(0);
-  useEffect(() => {
+  useEffect( async () => {
   
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
  
-    fetch('/api/countries' , config)
-      .then(res => res.json())
-      .then(
-        (result) => {  
-          console.log(result);
-            setCountries(result);
-        },
-        (error) => {
+    // fetch('/api/countries' , config)
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {  
+    //         setCountries(result);
+    //     },
+    //     (error) => {
           
-        }
-        );
+    //     }
+    //     );
 
-        fetch('/api/categories/top-menu' , config)
+        await fetch('/api/categories/top-menu' , config)
         .then(res => res.json())
         .then(
           (result) => {  
-            console.log(result);
             setCategories(result);
           },
           (error) => {
@@ -46,7 +44,8 @@ const SearchBar = () => {
      localStorage.setItem('country_code' , event.target.value);
   }
 
-  const [searchinput, setSearchInput] = useState(localStorage.getItem('filter'));
+
+  const [searchinput, setSearchInput] = useState(localStorage.getItem('filter') || '');
   const [catid, setCatid] = useState(localStorage.getItem('catid'));
 
   const OnChangeSearch = (event) => {
@@ -100,10 +99,10 @@ const SearchBar = () => {
               <div className="col-sm-3 p-0">
                 <InputGroup>
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-cube"></i></InputGroupText></InputGroupAddon>
-                  <Input type="select" name="select" className="form-control digits" placeholder="Please select categories" onChange = {OnChangecatid}>
+                  <Input type="select" name="select" className="form-control digits" value = {catid} placeholder="Please select categories" onChange = {OnChangecatid}>
                   <option value="0">Please Select Category</option>
                     {categories && categories.map((item,i) => (
-                        <option key={i} value={item.id} selected = { item.id === catid }>{item.name}</option>
+                        <option key={i} value={item.id}>{item.name}</option>
                       ))}
                   </Input>
                 </InputGroup>
