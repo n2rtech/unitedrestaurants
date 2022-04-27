@@ -9,10 +9,14 @@ import axios from 'axios';
 import { BallTriangle } from  'react-loader-spinner'
 import Pagination from "react-js-pagination";
 import "react-multi-carousel/lib/styles.css";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const BusinessListing = (props) => {
 
   const params = useParams();
+
+  const [items , setItems] = useState([]);
+  const [hasMore, sethasMore] = useState(true);
 
   const [vendorData, setVendorData] = useState([]);
   const [activePage, setActivePage] = useState(0);
@@ -20,16 +24,93 @@ const BusinessListing = (props) => {
   const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);  
   const [pagesCount, setPagesCount] = useState(0);
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(100);
+  const [size, setSize] = useState(2);
   const [filter, setFilter] = useState('');
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [showPagination, setShowPagination] = useState(false);
   const [loader, setLoader] = useState(<BallTriangle color="#00BFFF" height={100} width={300} />);
   const [showMore, setShowMore] = useState(false);
 
+  console.log("Parameter Id" , params.id);
+
+  useEffect(() => {
+    const getComments = async () => {
+  console.log('First Step');
+      var config1 = {
+        method: 'get',
+        url: '/api/categories/getrest/'+`${params.id}`,
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        params : {
+          'filter': filter,
+          'country': country,
+          'page': page,
+          'size': size
+        }
+      };
+
+      axios(config1)
+      .then(function (result) {
+        console.log("START WITH FINISH END");
+        setLoader('There are no business listing available');
+        setItems(result.data.vendors);
+        setVendorData(result.data.vendors);
+        setTotalItemsCount(result.data.totalItems);  
+        setActivePage(result.data.currentPage);
+        setPagesCount(result.data.totalPages);
+        setShowPagination(((result.data.totalItems > 0 ) ?? true));
+      })
+      .catch(function (error) {
+      });
+
+  
+    };
+  
+    getComments();
+   }, []);
+
+   const fetchComments = async () => {
+    console.log('Second Step');
+    // var config2 = {
+    //   method: 'get',
+    //   url: '/api/categories/getrest/11',
+    //   headers: { 
+    //     'Content-Type': 'application/json'
+    //   },
+    //   params : {
+    //     'filter': filter,
+    //     'country': country,
+    //     'page': page,
+    //     'size': size
+    //   }
+    // };
+
+    let url = `/api/categories/getrest/${params.id}?filter=${filter}&country=${country}&page=${page}&size=${size}`;
+
+    const res = await axios.get(url);
+    console.log("fetch Data" , res);
+    const data = await res.data.vendors;
+    console.log("fetch Data" , data);
+    return data;
+   } 
+
+   const fetchData =  async () => {
+    const commentsFromServer = await fetchComments();
+
+    setItems([...items, ...commentsFromServer]);
+
+    if(commentsFromServer.length === 0 || commentsFromServer.length < 2) {
+      sethasMore(false);
+    }
+  
+    setPage(page + 4);
+ }
+
+
   useEffect(() => {
 
-    setTimeout(async () => {
+
       var config = {
         method: 'get',
         url: '/api/categories/getrest/'+`${params.id}`,
@@ -55,7 +136,7 @@ const BusinessListing = (props) => {
       })
       .catch(function (error) {
       });
-    }, 1000)
+
   }, []);
 
   const addDefaultSrc = (ev) => {
@@ -243,32 +324,50 @@ const BusinessListing = (props) => {
           <div className="hotdeals BusinessListing">
             <h4>Restaurants</h4>
             <Row>
-              { (vendorData && vendorData.length) ? (vendorData).map((item , i) => (
-              <Col sm="4" key={i}>
-                <div className="customcard">
-                  <Card>
-                    <div className="hImage">
-                      <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}`}>
-                        <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} />
-                      </a>
-                    </div>
-                    <CardTitle tag="h5">
-                      <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}`}>{item.business_name}</a>
-                    </CardTitle>
-                    <CardText>
-                      {showMore ? item.about_business : `${item.about_business.substring(0, 400)}`+'...'}
-                    </CardText>
-                    <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}`}> SEE DETAILS</a></Button>
-                  </Card>
-                </div>
-              </Col>
-              )) : <Col style={{padding: "16px",display: "flex", 'alignItems': "center", 'flexWrap': "wrap",'justifyContent': "center"}}><center>{loader}</center></Col> 
-              }
+
+            <InfiniteScroll
+                    dataLength={items.length} 
+                    next={fetchData}
+                    hasMore={hasMore}
+                    loader={<h4></h4>}
+                    endMessage={
+                      <p style={{ textAlign: 'center' }}>
+                        <b>Yay! You have seen it all</b>
+                      </p>
+                    }>
+                      <Row>
+                              { (items).map((item , i) => (
+                                <Col sm="4" key={i}>
+                                    <div className="customcard">
+                                    <Card>
+                                      <div className="hImage">
+                                        <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}`}>
+                                          <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} />
+                                        </a>
+                                      </div>
+                                      <CardTitle tag="h5">
+                                        <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}`}>{item.business_name}</a>
+                                      </CardTitle>
+                                      <CardText>
+                                        {showMore ? item.about_business : `${item.about_business.substring(0, 400)}`+'...'}
+                                      </CardText>
+                                      <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}`}> SEE DETAILS</a></Button>
+                                    </Card>
+                                  </div>
+                                  </Col>
+                                  )) 
+                              }
+                      </Row>
+            
+
+                </InfiniteScroll>
+
+              
 
               
             </Row>  
 
-            <div className="d-flex justify-content-center">
+            {/* <div className="d-flex justify-content-center">
               <Pagination
               activePage={activePage}
               itemsCountPerPage={size}
@@ -283,7 +382,7 @@ const BusinessListing = (props) => {
               firstPageText="First"
 
               />
-          </div>   
+          </div>    */}
 
           </div>
         </Container>
