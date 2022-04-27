@@ -8,6 +8,9 @@ const SearchBar = () => {
   const history = useHistory()
   const [countries , setCountries] = useState([]);
   const [categories , setCategories] = useState([]);
+  const [address , setAddress] = useState('');
+  const [latitude , setLatitude] = useState(0);
+  const [longitude , setLongitude] = useState(0);
   useEffect(() => {
   
     const config = {
@@ -49,6 +52,21 @@ const SearchBar = () => {
   const OnChangeSearch = (event) => {
       setSearchInput(event.target.value);
   }
+
+  const handleAddressChange = (event) => {
+    alert(event.target.value);
+      setAddress(event.target.value);
+  }
+
+  const handleLatitudeChange = (event) => {
+      setLatitude(event.target.value);
+  }
+
+  const handleLongitudeChange = (event) => {
+      setLongitude(event.target.value);
+  }
+
+  
 
   const OnChangecatid = (event) => {
     setCatid(event.target.value);
@@ -96,7 +114,7 @@ const SearchBar = () => {
                   <Input className="form-control"  type="text" value = {searchinput} placeholder="Ex: food, restaurant" onChange = {OnChangeSearch}/>
                 </InputGroup>
               </div>
-              <div className="col-sm-4 p-0">
+              {/*<div className="col-sm-4 p-0">
                 <InputGroup>
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
                   <Input type="select" name="select" className="form-control digits" placeholder="Please Select" onChange = {handleCountrychange}>
@@ -106,6 +124,14 @@ const SearchBar = () => {
                   }
                   </Input>
                 </InputGroup>
+              </div>*/}
+              <div className="col-sm-4 p-0">
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
+                  <Input type="text" name="address" id="searchAddress" className="form-control digits" placeholder="Search Address" />                
+                  <Input type="hidden" name="latitude" id="search_address_lat" />                
+                  <Input type="hidden" name="longitude" id="search_address_lan" />                
+                  </InputGroup>
               </div>
               <div className="col-sm-1">
                 <Button color="primary" onClick={() => HandleSearch(searchinput,catid)}><i className="fa fa-search"></i></Button>

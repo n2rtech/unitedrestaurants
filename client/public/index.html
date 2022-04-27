@@ -28,7 +28,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>United Restaurants</title>
+    <title>United Restaurants11</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
@@ -50,11 +50,31 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVR2fXPoEVoCNLIqagX5GQzna3feez4lI&libraries=places"></script>
 
     <script type="text/javascript">
       function googleTranslateElementInit() {
         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
       }
+
+      function initialize() {
+        var inputAdreee = document.getElementById('searchAddress');
+        if (inputAdreee) {
+          var autocomplete = new google.maps.places.Autocomplete(inputAdreee);
+          autocomplete.addListener('place_changed', function () {
+            var place = autocomplete.getPlace();
+            document.getElementById('search_address_lat').value=(place.geometry['location'].lat());
+            document.getElementById('search_address_lan').value=(place.geometry['location'].lng());
+          });
+        }
+      }
+
+       function onLoad() {
+            initialize();
+        }        
+
+        google.maps.event.addDomListener(window, 'load', onLoad);
+
       </script>
 
   </body>
