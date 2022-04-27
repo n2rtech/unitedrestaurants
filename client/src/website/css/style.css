@@ -2005,6 +2005,7 @@ input::placeholder, textarea::placeholder{
     background-image: url("/assets/images/mainbg2.jpg"); 
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 .mainCaption{
     text-align: center;

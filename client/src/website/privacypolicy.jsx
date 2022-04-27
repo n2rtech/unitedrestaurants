@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import { Container, Row, Col } from 'reactstrap'
-import Header from './header.jsx'
-import Footer from './footer.jsx'
+import Header2 from './header2.jsx'
+import Footer2 from './footer2.jsx'
+import SearchBar from './SearchBar.jsx'
 import axios from 'axios';
 
 const Privacy = (props) => {
@@ -19,7 +20,8 @@ const Privacy = (props) => {
       <Container fluid={true} className="p-0">
       <Row className="m-0">
         <Col xs="12" className="p-0">  
-          <Header /> 
+          <Header2 /> 
+          <SearchBar /> 
           <div className="informationpage">  
           <Container>
             <h1>Privacy Policy</h1>
@@ -34,7 +36,7 @@ const Privacy = (props) => {
                </Row>
           </Container>
           </div>
-           <Footer />
+           <Footer2 />
         </Col>
         </Row>
       </Container>

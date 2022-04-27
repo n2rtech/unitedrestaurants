@@ -5,7 +5,9 @@ const Logo = () => {
 
   return (
       <div className="Logo">
-        <img src={`${process.env.PUBLIC_URL}/assets/images/united-logo.png`} alt="United Restaurants"/>
+        <a href="/">
+          <img src={`${process.env.PUBLIC_URL}/assets/images/united-logo.png`} alt="United Restaurants"/>
+        </a>
       </div>
   );
 

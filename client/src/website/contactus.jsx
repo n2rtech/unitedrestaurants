@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
 import { Container, Row, Col, Form, FormGroup, Input,Label, Button } from 'reactstrap'
-import Header from './header.jsx'
-import Footer from './footer.jsx'
+import Header2 from './header2.jsx'
+import Footer2 from './footer2.jsx'
+import SearchBar from './SearchBar.jsx'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -132,7 +133,8 @@ const Contact = (props) => {
       <Container fluid={true} className="p-0">
       <Row className="m-0">
         <Col xs="12" className="p-0">  
-          <Header /> 
+          <Header2 /> 
+          <SearchBar /> 
           <div className="informationpage">  
           <Container>
             <h1>Contact Us</h1>
@@ -171,7 +173,7 @@ const Contact = (props) => {
                </Row>
           </Container>
           </div>
-           <Footer />
+           <Footer2 />
         </Col>
         </Row>
       </Container>
