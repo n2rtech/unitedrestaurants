@@ -11,12 +11,10 @@ const Latestadditions2 = React.lazy(() => import("./Latestadditions2.jsx"));
 const HomeBlog2 = React.lazy(() => import("./HomeBlog2.jsx"));
 
 const Home2 = () => {
-
-  localStorage.removeItem('catid');
-  localStorage.removeItem('filter');
-
+  // localStorage.removeItem('catid');
+  // localStorage.removeItem('filter');
   return (
-    <Suspense fallback={<div>Loading</div>}>
+    <Suspense fallback={<div></div>}>
        <Container fluid={true} className="p-0">
         <Header2/>
         <SearchBar/>

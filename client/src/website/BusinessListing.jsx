@@ -24,7 +24,7 @@ const BusinessListing = (props) => {
   const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);  
   const [pagesCount, setPagesCount] = useState(0);
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(2);
+  const [size, setSize] = useState(6);
   const [filter, setFilter] = useState('');
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [showPagination, setShowPagination] = useState(false);
@@ -71,20 +71,6 @@ const BusinessListing = (props) => {
    }, []);
 
    const fetchComments = async () => {
-    console.log('Second Step');
-    // var config2 = {
-    //   method: 'get',
-    //   url: '/api/categories/getrest/11',
-    //   headers: { 
-    //     'Content-Type': 'application/json'
-    //   },
-    //   params : {
-    //     'filter': filter,
-    //     'country': country,
-    //     'page': page,
-    //     'size': size
-    //   }
-    // };
 
     let url = `/api/categories/getrest/${params.id}?filter=${filter}&country=${country}&page=${page}&size=${size}`;
 
@@ -100,7 +86,7 @@ const BusinessListing = (props) => {
 
     setItems([...items, ...commentsFromServer]);
 
-    if(commentsFromServer.length === 0 || commentsFromServer.length < 2) {
+    if(commentsFromServer.length === 0 || commentsFromServer.length < 6) {
       sethasMore(false);
     }
   

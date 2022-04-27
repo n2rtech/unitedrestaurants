@@ -23,19 +23,19 @@ const Footer2 = (props) => {
 				<Col sm="4" xs="6">     
 					<div className="footercategory">
 						<List type="unstyled">
-							<li>
+							<li key="1">
 								<a href={`${process.env.PUBLIC_URL}/aboutus`}>About us</a>
 							</li>
-							<li>
+							<li key="2">
 								<a href={`${process.env.PUBLIC_URL}/contactus`}>Contact us</a>
 							</li>
-							<li>
+							<li key="3">
 								<a href={`${process.env.PUBLIC_URL}/customerservices`}>Customer Service</a>
 							</li>
-							<li>
+							<li key="4">
 								<a href={`${process.env.PUBLIC_URL}/technicalsupport`}>Technical Support</a>
 							</li>
-							<li>
+							<li key="5">
 								<a href={`${process.env.PUBLIC_URL}/sales`}>Sales</a>
 							</li>
 						</List>
@@ -44,19 +44,19 @@ const Footer2 = (props) => {
 				<Col sm="4" xs="6">     
 					<div className="footercategory">
 						<List type="unstyled">
-							<li>
+							<li key="6">
 								<a href={`${process.env.PUBLIC_URL}/privacypolicy`}>Privacy Policy</a>
 							</li>
-							<li>
+							<li key="7">
 								<a href={`${process.env.PUBLIC_URL}/returnpolicy`}>Return Policy</a>
 							</li>
-							<li>
+							<li key="8">
 								<a href={`${process.env.PUBLIC_URL}/termsofservice`}>Terms of Service</a>
 							</li>
-							<li>
+							<li key="9">
 								<a href={`${process.env.PUBLIC_URL}/howitwork`}>How it Works</a>
 							</li>
-							<li>
+							<li key="10">
 								<a target = "_blank" rel="noopener noreferrer" href={`${process.env.PUBLIC_URL}/signup`} >Merchant Signup</a>
 							</li>
 						</List>

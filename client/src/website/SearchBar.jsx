@@ -21,7 +21,6 @@ const SearchBar = () => {
       .then(res => res.json())
       .then(
         (result) => {  
-          console.log(result);
             setCountries(result);
         },
         (error) => {
@@ -33,7 +32,6 @@ const SearchBar = () => {
         .then(res => res.json())
         .then(
           (result) => {  
-            console.log(result);
             setCategories(result);
           },
           (error) => {
@@ -42,11 +40,14 @@ const SearchBar = () => {
           )
   }, []);
 
+  console.log("Category Id ", localStorage.getItem('catid'));
+
   const handleCountrychange = (event) => {
      localStorage.setItem('country_code' , event.target.value);
   }
 
-  const [searchinput, setSearchInput] = useState(localStorage.getItem('filter'));
+
+  const [searchinput, setSearchInput] = useState(localStorage.getItem('filter') || '');
   const [catid, setCatid] = useState(localStorage.getItem('catid'));
 
   const OnChangeSearch = (event) => {
@@ -100,10 +101,10 @@ const SearchBar = () => {
               <div className="col-sm-3 p-0">
                 <InputGroup>
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-cube"></i></InputGroupText></InputGroupAddon>
-                  <Input type="select" name="select" className="form-control digits" placeholder="Please select categories" onChange = {OnChangecatid}>
+                  <Input type="select" name="select" className="form-control digits" value = {catid} placeholder="Please select categories" onChange = {OnChangecatid}>
                   <option value="0">Please Select Category</option>
                     {categories && categories.map((item,i) => (
-                        <option key={i} value={item.id} selected = { item.id === catid }>{item.name}</option>
+                        <option key={i} value={item.id}>{item.name}</option>
                       ))}
                   </Input>
                 </InputGroup>

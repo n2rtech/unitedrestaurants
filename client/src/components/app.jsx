@@ -11,8 +11,6 @@ import {withRouter} from 'react-router-dom'
 
 const { sidebar } = ({ role }) => getSidebar({role});
 
-
-
 const getSidebar = (role) => {
   if(role === 'admin') {
     return (<Sidebar />);

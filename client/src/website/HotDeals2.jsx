@@ -28,7 +28,6 @@ const addDefaultSrc = (ev) => {
   ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h4.jpeg`;
 }
 
-console.log("Hot Deals", hotData);
 
   return (
     <Container>
