@@ -9,6 +9,7 @@ require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
 const db = require('../models');
+const { Sequelize } = require('sequelize');
 const Op = require('sequelize').Op
 const app = express();
 app.db = (model) => db[model];
@@ -49,7 +50,24 @@ router.get('/list', (req, res) => {
 
 
 router.get('/', (req, res) => {
+
+    var address = req.query.address;
+    var latitude = req.query.latitude;
+    var longitude = req.query.longitude;
+
+    const haversine = `(
+        6371 * acos(
+            cos(radians(${latitude}))
+            * cos(radians(latitude))
+            * cos(radians(longitude) - radians(${longitude}))
+            + sin(radians(${latitude})) * sin(radians(latitude))
+        )
+    )`;
+
+    // return res.status(200).send(haversine);
+
     var code = req.query.country;
+    
     if (code == 'ita') {
         var table_name = 'VendorIta';
     }else{
@@ -65,7 +83,7 @@ router.get('/', (req, res) => {
     var category = req.query.category;
     var filter = req.query.filter;
 
-    if (category && filter) {
+    if (category && filter && !address) {
         var conditions = {
 
             where:{
@@ -79,7 +97,7 @@ router.get('/', (req, res) => {
             limit: 10,
             order: [ [ 'createdAt', 'DESC' ]]
         }
-    }else if (category) {
+    }else if (category && !address) {
         var conditions = {
 
             where:{
@@ -89,6 +107,23 @@ router.get('/', (req, res) => {
             },
             limit: 10,
             order: [ [ 'createdAt', 'DESC' ]]
+        }
+    }else if (address) {
+        var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','user_id',
+            [Sequelize.literal(haversine), 'distance'],
+            ],
+
+            where:{
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            limit: 10,
+            order: [ [ 'createdAt', 'DESC' ]],
+            having: Sequelize.literal(`distance <= 50`),
         }
     }else{
         var conditions = {

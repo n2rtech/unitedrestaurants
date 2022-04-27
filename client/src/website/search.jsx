@@ -37,6 +37,7 @@ const Home = (props) => {
 
   var base64 = require('base-64');
   var decodedData = base64.decode(`${params.id}`);
+  console.log('decodedData',decodedData);
 
   useMemo(() => {
   
