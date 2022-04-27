@@ -54,7 +54,6 @@ const SearchBar = () => {
   }
 
   const handleAddressChange = (event) => {
-    alert(event.target.value);
       setAddress(event.target.value);
   }
 
@@ -64,9 +63,7 @@ const SearchBar = () => {
 
   const handleLongitudeChange = (event) => {
       setLongitude(event.target.value);
-  }
-
-  
+  }  
 
   const OnChangecatid = (event) => {
     setCatid(event.target.value);
@@ -74,6 +71,9 @@ const SearchBar = () => {
 
   const HandleSearch = (searchvalue , catid) => {
     const cat = parseInt(catid);
+    const address = localStorage.getItem('address');
+    const latitude = parseFloat(localStorage.getItem('latitude'));
+    const longitude = parseFloat(localStorage.getItem('longitude'));
     const country_code = localStorage.getItem('country_code');
 
     if(isNaN(cat)) {
@@ -85,7 +85,7 @@ const SearchBar = () => {
     } else {
       localStorage.setItem('catid' , catid);
       localStorage.setItem('filter' , searchvalue);
-      const url = base64.encode(`&country=${country_code}&filter=${searchvalue}&category=${catid}`)
+      const url = base64.encode(`&country=${country_code}&filter=${searchvalue}&category=${catid}&address=${address}&latitude=${latitude}&longitude=${longitude}`)
       history.push(`/search/${url}`);
 
       window.location.reload(false);
