@@ -12,6 +12,15 @@
 .bottomHeader{
     clear: both;
 }
+.bottomHeader .glanguage {
+    margin-right: 5px;
+}
+.vendorIn{
+    white-space: nowrap;
+    height: 38px;
+    padding-top: 7px;
+    max-width: 150px;
+}
 .bottomHeader .glanguage .goog-te-gadget-simple{
     padding: 7px !important;
     border-radius: 4px;
@@ -38,8 +47,10 @@
 }
 .header-right{
     float: right;
-    padding-right: 30px;
+    width: 100%;
     padding-top: 40px;
+    margin: 0;
+    padding-right: 25px;
 }
 .btn-primary{
     background: #fce391 !important;

@@ -108,24 +108,7 @@ const SearchBar = () => {
                   </Input>
                 </InputGroup>
               </div>
-              <div className="col-sm-4 p-0">
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-institution"></i></InputGroupText></InputGroupAddon>
-                  <Input className="form-control"  type="text" value = {searchinput} placeholder="Ex: food, restaurant" onChange = {OnChangeSearch}/>
-                </InputGroup>
-              </div>
-              {/*<div className="col-sm-4 p-0">
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
-                  <Input type="select" name="select" className="form-control digits" placeholder="Please Select" onChange = {handleCountrychange}>
-                  { countries.map((item ,i)=> (
-                        <option key={i} value={item.code} selected = {item.code === localStorage.getItem('country_code')}>{item.name}</option>
-                    ))
-                  }
-                  </Input>
-                </InputGroup>
-              </div>*/}
-              <div className="col-sm-4 p-0">
+              <div className="col-sm-8 p-0">
                 <InputGroup>
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
                   <Input type="text" name="address" id="searchAddress" className="form-control digits" placeholder="Search Address" />                

@@ -23,27 +23,20 @@ const handleCountryClick = (code) => {
 
   return (
       <div className="countryflag">
-        <Container fluid={true} className="p-0">
-        <Row className="m-0">
-          <Col sm="12" className="p-0">
-          
-            <List type="inline">
-            {countryData.map((item , i) => (
-              <ListInlineItem key={i}>
-                { item.code == localStorage.getItem('country_code') ? 
-                  <a href={`${process.env.PUBLIC_URL}/home`} onClick = {() => handleCountryClick(item.code)} >
-                  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/assets/images/flag/${item.code.toUpperCase()}.png`} 
-               alt="Menu-Icon"/>
-                      {item.code.toUpperCase()}
-                </a>
-                : '' }
-                
-              </ListInlineItem>
-            ))}
-            </List>
-          </Col>
-          </Row>
-        </Container>
+        <List type="inline">
+          {countryData.map((item , i) => (
+            <ListInlineItem key={i}>
+              { item.code == localStorage.getItem('country_code') ? 
+                <a href={`${process.env.PUBLIC_URL}/home`} onClick = {() => handleCountryClick(item.code)} >
+                <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/assets/images/flag/${item.code.toUpperCase()}.png`} 
+             alt="Menu-Icon"/>
+                    {item.code.toUpperCase()}
+              </a>
+              : '' }
+              
+            </ListInlineItem>
+          ))}
+          </List>
       </div>
   );
 }

@@ -183,10 +183,12 @@ body {
     border-color: #0000 !important;
     font-size: 12px;
 }
+.countryflag ul{
+    padding-top: 0 !important;
+}
 .countryflag ul li {
-    display: inline-block;
-    margin: 0 auto;
     text-align: center;
+    padding: 0 !important;
 }
 .countryflag ul li a {
     display: grid;
@@ -199,8 +201,7 @@ body {
     margin-bottom: 5px;
 }
 .countryflag {
-    position: relative;
-    top: 17px;
+    margin-right: 40px;
 }
 .mainfooter{
     background-image: linear-gradient(to bottom, #800020e6 0%,#800020e6 100%), url("/assets/images/footerbg.jpg");
