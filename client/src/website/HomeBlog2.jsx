@@ -7,13 +7,13 @@ const HomeBlog2 = () => {
 
   const [blogData, setBlogData] = useState([]);
 
-  useEffect(() => {
+  useEffect( async () => {
   
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
  
-    fetch("/api/blogs/get" , config)
+    await fetch("/api/blogs/get" , config)
       .then(res => res.json())
       .then(
         (result) => {

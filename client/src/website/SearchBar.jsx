@@ -11,24 +11,24 @@ const SearchBar = () => {
   const [address , setAddress] = useState('');
   const [latitude , setLatitude] = useState(0);
   const [longitude , setLongitude] = useState(0);
-  useEffect(() => {
+  useEffect( async () => {
   
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
  
-    fetch('/api/countries' , config)
-      .then(res => res.json())
-      .then(
-        (result) => {  
-            setCountries(result);
-        },
-        (error) => {
+    // fetch('/api/countries' , config)
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {  
+    //         setCountries(result);
+    //     },
+    //     (error) => {
           
-        }
-        );
+    //     }
+    //     );
 
-        fetch('/api/categories/top-menu' , config)
+        await fetch('/api/categories/top-menu' , config)
         .then(res => res.json())
         .then(
           (result) => {  
@@ -39,8 +39,6 @@ const SearchBar = () => {
           }
           )
   }, []);
-
-  console.log("Category Id ", localStorage.getItem('catid'));
 
   const handleCountrychange = (event) => {
      localStorage.setItem('country_code' , event.target.value);
