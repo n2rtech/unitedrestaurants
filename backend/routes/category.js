@@ -810,7 +810,9 @@ router.get('/getrest/:category', (req, res) => {
       .then((category) => {
           
         if (category == null) {
-          res.status(200).send('category not found')
+            const response = getPagingData(category, page, limit);
+            res.status(200).send(response);
+            // res.status(200).send('category not found')
         }else{
           var code = req.query.country||'usa';
           if (code == 'ita') {
