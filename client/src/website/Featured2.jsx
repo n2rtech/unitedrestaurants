@@ -10,9 +10,11 @@ const Featured2 = () => {
   const [featuredData, setFeaturedData] = useState([]);
   const code = localStorage.getItem('country_code');
 
-  useEffect( async () => {
   
-    const config = {
+  useEffect( () => {
+  
+    async function getResult() {
+      const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
 
@@ -20,6 +22,9 @@ const Featured2 = () => {
           .then((getData) => {
             setFeaturedData(getData.data);
           });
+    }
+     getResult();
+    
   
   }, []);
 
@@ -34,9 +39,10 @@ const Featured2 = () => {
        {featuredData && featuredData.length > 6 ? <div className="seeall">
         <a href="/restaurants">SEE ALL</a>
       </div> : '' }
+      
         <div style={{ position: "relative" }}>
           <Carousel responsive={responsive}>
-          {featuredData.map((item , i ) => (
+          {featuredData && featuredData.map((item , i ) => (
             <div className="customcard" key={i}>
               <Card> 
                 <div className="hImage">
@@ -67,6 +73,8 @@ const Featured2 = () => {
               </Card>
             </div> 
             ))}
+
+            
           </Carousel>
         </div>
       </div>

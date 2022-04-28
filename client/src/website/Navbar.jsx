@@ -11,11 +11,14 @@ const Navbarmenu = () => {
 
     useEffect(() => {
 
-      axios.get(`/api/categories/listAndSubCategory`)
-      .then((result_data) => {
-        const result = result_data.data;
-        setMenusData(result);
-      }); 
+      (async () => {
+        axios.get(`/api/categories/listAndSubCategory`)
+        .then((result_data) => {
+          const result = result_data.data;
+          setMenusData(result);
+        }); 
+      })();
+      
 
     }, []);
 
