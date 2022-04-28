@@ -13,6 +13,9 @@ const HomeBlog2 = React.lazy(() => import("./HomeBlog2.jsx"));
 const Home2 = () => {
   localStorage.removeItem('catid');
   localStorage.removeItem('filter');
+  localStorage.removeItem('address');
+  localStorage.removeItem('latitude');
+  localStorage.removeItem('longitude');
   return (
     <Suspense fallback={<div></div>}>
        <Container fluid={true} className="p-0">

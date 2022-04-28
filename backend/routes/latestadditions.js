@@ -71,7 +71,12 @@ router.get('/', (req, res) => {
     if (code == 'ita') {
         var table_name = 'VendorIta';
     }else{
-        var codee = code.charAt(0).toUpperCase() + code.slice(1);
+        if(Array.isArray(code)) {
+            var codee = code[0].charAt(0).toUpperCase() + code[0].slice(1);
+        } else {
+            var codee = code.charAt(0).toUpperCase() + code.slice(1);
+        }
+        
         var table_name = 'Vendor' + codee;
     }
 
@@ -95,7 +100,7 @@ router.get('/', (req, res) => {
                 }
             },
             limit: 10,
-            order: [ [ 'createdAt', 'DESC' ]]
+            order: [ ['createdAt', 'DESC' ]]
         }
     }else if (category && !address) {
         var conditions = {
@@ -106,7 +111,7 @@ router.get('/', (req, res) => {
                 }
             },
             limit: 10,
-            order: [ [ 'createdAt', 'DESC' ]]
+            order: [ ['createdAt', 'DESC' ]]
         }
     }else if (address) {
         var conditions = {
@@ -122,13 +127,13 @@ router.get('/', (req, res) => {
                 }
             },
             limit: 10,
-            order: [ [ 'createdAt', 'DESC' ]],
+            order: [ 'createdAt', 'DESC' ],
             having: Sequelize.literal(`distance <= 50`),
         }
     }else{
         var conditions = {
             limit: 10,
-            order: [ [ 'createdAt', 'DESC' ]]
+            order: [ ['createdAt', 'DESC' ]]
         }
     }
 

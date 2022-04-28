@@ -26,7 +26,7 @@ const Restaurantlist = (props) => {
     setTimeout(async () => {
     var config = {
       method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`,
+      url: '/api/latest-additions?country='+`${country}`,
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -41,7 +41,7 @@ const Restaurantlist = (props) => {
     axios(config)
     .then(function (result) {
       setLoader('There are no business listing available');
-      setVendorData(result.data.vendors);
+      setVendorData(result.data);
       setTotalItemsCount(result.data.totalItems);  
       setActivePage(result.data.currentPage);
       setPagesCount(result.data.totalPages);
@@ -49,7 +49,7 @@ const Restaurantlist = (props) => {
     })
     .catch(function (error) {
     });
-    }, 1000)
+    }, 400)
   }, []);
 
   const addDefaultSrc = (ev) => {
@@ -245,13 +245,13 @@ const Restaurantlist = (props) => {
              <CardBody>
                <Row>    
                  <Col sm="12" xs="12">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} alt="Menu-Icon"/></a>
                  </Col>
                   
                  <Col sm="12" xs="12">
                   <CardTitle tag="h5">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}></a>
+                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}></a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
@@ -266,11 +266,11 @@ const Restaurantlist = (props) => {
 
                   { item.user_id == 0 ?  
                      <Button>
-                      <a href={`${process.env.PUBLIC_URL}/resturent/newdetails/${item.id}_${localStorage.getItem('country_code')}`}>
+                      <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}_${localStorage.getItem('country_code')}`}>
                           VIEW
                       </a> </Button> 
                     : 
-                       <Button><a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                       <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                        VIEW
                         </a></Button>
                    }

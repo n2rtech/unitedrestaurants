@@ -95,14 +95,14 @@ const addDefaultSrc = (ev) => {
                 <CardBody>
                   <Row>
                     <Col sm="12" xs="12">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
                      alt="Menu-Icon"/>
                    </a>
                    </Col>
                    <Col sm="12" xs="12">
                   <CardTitle tag="h5">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     {item.business_name}
                     </a>
                   </CardTitle>
@@ -114,11 +114,12 @@ const addDefaultSrc = (ev) => {
                   </Col>
                   </Row>
                   <CardText>
-                  {(item.about_business)}
+                  
+                  {(item.about_business.substring(0, 100) + "...")}
                  
                   </CardText>
                   <Button>
-                   <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}> SEE SALE</a>
+                   <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}> SEE SALE</a>
                   </Button>
                 </CardBody>
               </Card>
@@ -151,7 +152,7 @@ const addDefaultSrc = (ev) => {
                   <Row>
                     
                     <Col sm="12" xs="12">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
                      alt="Menu-Icon"/>
                       </a>
@@ -159,7 +160,7 @@ const addDefaultSrc = (ev) => {
                    
                    <Col sm="12" xs="12">
                   <CardTitle tag="h5">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     {item.business_name}
                     </a>
                   </CardTitle>
@@ -171,10 +172,10 @@ const addDefaultSrc = (ev) => {
                   </Col>
                   </Row>
                   <CardText>
-               		{(item.about_business)}
+                  {item.about_business ? item.about_business.substring(0, 100) + "..." : ''}
                   </CardText>
                   <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     SEE SALE
                   </a>
                   </Button>
@@ -238,7 +239,7 @@ const addDefaultSrc = (ev) => {
                    </Col>
                    <Col sm="8" xs="8">
                   <CardTitle tag="h5">
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     {item.business_name}
                   </a>
                   </CardTitle>
@@ -252,7 +253,7 @@ const addDefaultSrc = (ev) => {
                   </Row>
                   
                   <Button>
-                    <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     VIEW
                   </a>
                   </Button>
