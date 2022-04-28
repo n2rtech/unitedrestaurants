@@ -24,7 +24,7 @@ export default function RestaurantTitle() {
   return (
     <>
     <h1>{vendorProfileData.business_name}</h1>
-    <p className="Rdescription"> {showMore ? vendorAboutBusiness : `${ vendorAboutBusiness &&  vendorAboutBusiness.substring(0, 400)}`+'...'} <a onClick={() => setShowMore(!showMore)}>{showMore ? " Show Less" : ((vendorAboutBusiness && vendorAboutBusiness.length > 200) ? " Show More" : '')}</a></p>
+    <p className="Rdescription"> {showMore ? vendorAboutBusiness : `${vendorAboutBusiness.substring(0, 400)}`+'...'} <a onClick={() => setShowMore(!showMore)}>{showMore ? " Show Less" : ((vendorAboutBusiness && vendorAboutBusiness.length > 200) ? " Show More" : '')}</a></p>
       </>
   );
 }
