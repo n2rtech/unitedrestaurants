@@ -38,7 +38,7 @@ const Footer2 = (props) => {
 						<a href={`//${socialdata.instagram_links}`} target="_blank" rel="noopener noreferrer"><i className="fa fa-instagram"></i></a>
 					</div>
 					<div className="copyright">
-						<p>© Copyright 2021 Gabal Global Group</p>
+						<p>© Copyright 2022 Gabal Global Group</p>
 					</div>
 				</Col>
 				<Col sm="4" xs="6">     
