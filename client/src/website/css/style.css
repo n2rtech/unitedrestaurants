@@ -33,7 +33,7 @@ body {
 }
 .vRegistration select, .vRegistration textarea{
     background: #f6f7fa !important;
-    color: #ccc;
+    color: #ccc !important;
     height: 40px;
     border: 1px solid rgba(49,31,86,.1)!important;
 }

@@ -2,6 +2,9 @@ import React,{useState,useEffect} from 'react';
 import { Container, Row,Form, Input, InputGroup, InputGroupAddon, InputGroupText, Button } from 'reactstrap'
 import './css/style.css'
 import { useHistory } from 'react-router-dom';
+import { Typeahead } from 'react-bootstrap-typeahead';
+import TypeaheadOne from './typeahead-one';
+import axios from 'axios'
 import SweetAlert from 'sweetalert2'         
 const SearchBar = () => {
   var base64 = require('base-64');
@@ -74,6 +77,12 @@ const SearchBar = () => {
       window.location.reload(false);
     }
   }
+  const multiple = false
+    const [options,setOptions] = useState([])
+
+    useEffect(() => {
+        axios.get(`${process.env.PUBLIC_URL}/api/typeaheadData.json`).then(res => setOptions(res.data))
+    },[])
 
   return (
       <div className="Homebanner">
@@ -83,6 +92,13 @@ const SearchBar = () => {
               <div className="col-sm-3 p-0">
                 <InputGroup>
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-cube"></i></InputGroupText></InputGroupAddon>
+                    {/*<Typeahead
+                        id="basic-typeahead"
+                        labelKey="name"
+                        multiple={multiple}
+                        options={options}
+                        placeholder="Please Select Category"
+                    />*/}
                   <Input type="select" name="select" className="form-control digits" value = {catid} placeholder="Please select categories" onChange = {OnChangecatid}>
                   <option value="0">Please Select Category</option>
                     {categories && categories.map((item,i) => (
