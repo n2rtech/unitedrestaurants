@@ -31,11 +31,17 @@ body {
     min-height:0px !important;
     top: 0px !important;
 }
-.vRegistration select{
+.vRegistration select, .vRegistration textarea{
     background: #f6f7fa !important;
     color: #ccc;
     height: 40px;
     border: 1px solid rgba(49,31,86,.1)!important;
+}
+.vRegistration textarea::placeholder{
+    color: #ccc !important;
+}
+.vRegistration{
+    width: 510px !important;
 }
 .vRegistration .show-hide{
     top: 20px !important;

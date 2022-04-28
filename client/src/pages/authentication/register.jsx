@@ -216,27 +216,22 @@ const Register = (props) => {
        
         <Col xs="12">     
           <div className="login-card">
-            <div>
-              <div><a className="logo" href="#javascript"><img className="img-fluid for-light" src={require("../../assets/images/logo/login.png")} alt="looginpage"/><img className="img-fluid for-dark" src={require("../../assets/images/logo/logo_dark.png")} alt="looginpage"/></a></div>
-              <div className="login-main"> 
+              <div className="login-main vRegistration"> 
                 <Form className="theme-form" action="#" autoComplete="off">
+                  <div><a className="logo" href="#javascript"><img className="img-fluid for-light" src={require("../../assets/images/logo/login.png")} alt="looginpage"/></a></div>
                   <h4>{"Create your Vendor account"}</h4>
-                  <p>{"Enter your personal details to create account"}</p>
                   <FormGroup>
-                    <Label className="col-form-label pt-0">{BusinessName}</Label>
                     <div className="form-row">
                       <Col xs="12">
-                        <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="Tumble Weed Bar"/>
+                        <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="Business/Restaurant name"/>
                         <div style={{color:'red'}}>{errors.first_name}</div>
                       </Col>                      
                     </div>
                   </FormGroup>
                   <FormGroup>
                   <div style={{color:'red'}}>{errors.category_id}</div>
-                    <Label>{"Please Select Business Type"}</Label>
                     <Input type="select" onChange={categorychange} name="category_id" className="form-control digits" id="exampleFormControlSelect7">
-                    
-                    <option>Select Category</option>
+                    <option>Business Category</option>
                     {categoryData.map((category , i ) => (
                       <Fragment>
                       <option value={category.id}>{category.name}</option>
@@ -247,34 +242,22 @@ const Register = (props) => {
                   </FormGroup>
                   
                     <FormGroup>
-                    <Label className="col-form-label">{BusinessEmailAddress}</Label>
-                    <Input className="form-control" name="email" value={email} onChange={handleChange} type="email" required="" placeholder="johndoe@gmail.com"/>
+                    <Input className="form-control" name="email" value={email} onChange={handleChange} type="email" required="" placeholder="Business email"/>
                     <div style={{color:'red'}}>{errors.email}</div>
                   </FormGroup>
 
                   <FormGroup>
-                    <Label className="col-form-label">Business Phone Number</Label>
-                    <Input className="form-control" name="mobile" value={mobile} onChange={handleChange} type="number" required="" placeholder="987 889 779"/>
+                    <Input className="form-control" name="mobile" value={mobile} onChange={handleChange} type="number" required="" placeholder="Business phone number"/>
                     <div style={{color:'red'}}>{errors.mobile}</div>
                   </FormGroup>
 
                   <FormGroup>
-                    <Label className="col-form-label">Owner Phone Number</Label>
-                    <Input className="form-control" name="ownermobile" value={ownermobile} onChange={handleChange} type="number" required="" placeholder="987 889 779"/>
+                    <Input className="form-control" name="ownermobile" value={ownermobile} onChange={handleChange} type="number" required="" placeholder="Owner phone number"/>
                     <div style={{color:'red'}}>{errors.ownermobile}</div>
-                  </FormGroup>
-
-                  <FormGroup>
-                    <Label className="col-form-label">Address</Label>
-                    <textarea className="form-control" placeholder="Address" id="search_address" defaultValue={address} name="address" onChange={handleChange} ></textarea>
-                    <Input type="hidden" id="vendor_address_lan" name="latitude" ></Input>
-                    <Input type="hidden" id="vendor_address_lat" name="longitude" ></Input>
                   </FormGroup>
                   <FormGroup>
                   <div style={{color:'red'}}>{errors.country_id}</div>
-                    <Label>{"Please Select Country"}</Label>
                     <Input type="select" onChange={countrychange} name="country_id" className="form-control digits" id="exampleFormControlSelect8">
-                    
                      <option>Select Country</option>
                     {countryData.map((country , i ) => (
                       <Fragment>
@@ -284,18 +267,21 @@ const Register = (props) => {
                     </Input>
                   </FormGroup>
                   <FormGroup>
-                    <Label className="col-form-label">{Password}</Label>
-                    <Input className="form-control" name="password" value={password} onChange={handleChange} type={togglePassword ?  "text" : "password" }  required="" placeholder="*********"/>
+                    <textarea className="form-control" placeholder="Location" id="search_address" defaultValue={address} name="address" onChange={handleChange} ></textarea>
+                    <Input type="hidden" id="vendor_address_lan" name="latitude" ></Input>
+                    <Input type="hidden" id="vendor_address_lat" name="longitude" ></Input>
+                  </FormGroup>
+                  <FormGroup>
+                    <Input className="form-control" name="password" value={password} onChange={handleChange} type={togglePassword ?  "text" : "password" }  required="" placeholder="Password"/>
                     <div style={{color:'red'}}>{errors.password}</div>
                     <div className="show-hide" onClick={() => HideShowPassword(togglePassword)}><span className={togglePassword ? "" : "show"}></span></div>
                   </FormGroup>
-                  <div className="form-group mb-0">
-                    <Button color="primary" onClick={handleSubmit} className="btn-block" type="submit">{CreateAccount}</Button>
+                  <div className="form-group signButton">
+                    <Button color="danger" onClick={handleSubmit} className="btn-block" type="submit">{CreateAccount}</Button>
                   </div>
                   <p className="mt-4 mb-0">{"Already have an account?"}<a className="ml-2" href="/vendor/login">{SignIn}</a></p>
                 </Form>
               </div>
-            </div>
           </div>
         </Col>
       </Row>
