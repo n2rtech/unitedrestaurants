@@ -79,8 +79,11 @@ router.post('/', passport.authenticate('vendor', {
                     if (err) throw err;
                     if (vendor_pro[0]) {
 
-                        var categ = vendor_pro[0].categories;                   
-                        AdSpace.create({image:newFilename,categories: categ , add_membership_id:req.body.add_membership_id,link:req.body.link,country_code: code, user_id:req.body.user_id});
+                        var categ = vendor_pro[0].categories; 
+                        var address = vendor_pro[0].address;
+                        var latitude = vendor_pro[0].latitude;
+                        var longitude = vendor_pro[0].longitude;                  
+                        AdSpace.create({image:newFilename,categories: categ ,address: address ,latitude: latitude ,longitude: longitude , add_membership_id:req.body.add_membership_id,link:req.body.link,country_code: code, user_id:req.body.user_id});
                         res.status(200).send({
                             msg: 'Ad Space added.'
                         })
@@ -202,11 +205,25 @@ router.get('/list-with-frequency', (req, res) => {
 
 router.get('/list', (req, res) => {
 
+    var address = req.query.address;
+    var latitude = req.query.latitude;
+    var longitude = req.query.longitude;
+
+    const haversine = `(
+        6371 * acos(
+            cos(radians(${latitude}))
+            * cos(radians(latitude))
+            * cos(radians(longitude) - radians(${longitude}))
+            + sin(radians(${latitude})) * sin(radians(latitude))
+        )
+    )`;
+
+
     var code = req.query.country;   
 
     var category = req.query.category;
 
-    if (category) {
+    if (category && !address) {
         var conditions = {
             where:{
                 country_code: { [Op.eq]: req.query.country },
@@ -217,7 +234,25 @@ router.get('/list', (req, res) => {
             limit: 3,
             order: Sequelize.literal('rand()')
         }
-    }else{
+    }else if (address) {
+        var conditions = {
+
+            attributes: [
+            'id','image','user_id',
+            [Sequelize.literal(haversine), 'distance'],
+            ],
+
+            where:{
+                country_code: { [Op.eq]: req.query.country },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            limit: 3,
+            order: Sequelize.literal('rand()'),
+            having: Sequelize.literal(`distance <= 50`),
+        }
+    }else {
         var conditions = {
             where:{
                 country_code: { [Op.eq]: req.query.country }

@@ -230,11 +230,24 @@ router.get('/get-dep-fb', (req, res) => {
 
 router.get('/', (req, res) => {
 
+    var address = req.query.address;
+    var latitude = req.query.latitude;
+    var longitude = req.query.longitude;
+
+    const haversine = `(
+        6371 * acos(
+            cos(radians(${latitude}))
+            * cos(radians(latitude))
+            * cos(radians(longitude) - radians(${longitude}))
+            + sin(radians(${latitude})) * sin(radians(latitude))
+        )
+    )`;
+
     var category = req.query.category;
 
     var filter = req.query.filter;
 
-    if (category && filter) {
+    if (category && filter && !address) {
 
         var conditions =  {
             where: {
@@ -244,10 +257,11 @@ router.get('/', (req, res) => {
                     {categories: { [Op.like]: '%' + req.query.category + '%' }},
                     {business_name: { [Op.like]: '%' + req.query.filter + '%' }}
                 ]
-            }
+            },
+            order: [['id', 'DESC']]
         };
 
-    }else if (category) {
+    }else if (category && !address) {
 
         var conditions =  {
             where: {
@@ -256,17 +270,39 @@ router.get('/', (req, res) => {
                     {country: { [Op.eq]: req.query.country }},
                     {categories: { [Op.like]: '%' + req.query.category + '%' }},
                 ]
-            }
+            },
+            order: [['id', 'DESC']]
         };
 
-    }else{
+    } if (address) {
+
+        var conditions =  {
+
+            attributes: [
+            'id','business_name','about_business','user_id',
+            [Sequelize.literal(haversine), 'distance'],
+            ],
+
+            where: {
+                [Op.and]:
+                [
+                    {country: { [Op.eq]: req.query.country }},
+                    {categories: { [Op.like]: '%' + req.query.category + '%' }},
+                ]
+            },
+            order: [['id', 'DESC']],
+            having: Sequelize.literal(`distance <= 50`),
+        };
+
+    } else{
         var conditions = {
             where: {
                 [Op.and]:
                 [
                     {country: { [Op.eq]: req.query.country }},
                 ]
-            }
+            },
+            order: [['id', 'DESC']]
         };
     }
 

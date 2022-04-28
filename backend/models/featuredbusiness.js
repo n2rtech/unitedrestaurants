@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     country_id: DataTypes.INTEGER,
     membership_id: DataTypes.INTEGER,
     business_name: DataTypes.STRING,
+    is_seen: DataTypes.INTEGER,
     about_business: DataTypes.STRING,
     categories: DataTypes.TEXT,
     banner: DataTypes.STRING,
