@@ -31,6 +31,12 @@ body {
     min-height:0px !important;
     top: 0px !important;
 }
+.signButton{
+    margin-top: 20px;
+}
+.signButton button{
+    padding: 10px 12px;
+}
 .sigle-title{
     background: none;
     color: #fff;
@@ -1203,9 +1209,6 @@ table th, table td{
 }
 .opacity0{
     opacity: 0;
-}
-.login-card .login-main .theme-form input{
-    background: #fff !important;
 }
 input::placeholder, textarea::placeholder{
     color: #eee !important;
