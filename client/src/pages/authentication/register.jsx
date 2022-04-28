@@ -168,7 +168,9 @@ const Register = (props) => {
         last_name:'.',
         mobile:mobile,
         ownermobile: ownermobile,
-        address:address,
+        address:localStorage.getItem('vendor_address') || '',
+        longitude:localStorage.getItem('vendor_longitude') || 0,
+        latitude:localStorage.getItem('vendor_latitude') || 0,
         email:email,
         category_id:category_id,
         country_id:country_id,
@@ -264,7 +266,9 @@ const Register = (props) => {
 
                   <FormGroup>
                     <Label className="col-form-label">Address</Label>
-                    <textarea className="form-control" placeholder="Address" defaultValue={address} name="address" onChange={handleChange} ></textarea>
+                    <textarea className="form-control" placeholder="Address" id="search_address" defaultValue={address} name="address" onChange={handleChange} ></textarea>
+                    <Input type="hidden" id="vendor_address_lan" name="latitude" ></Input>
+                    <Input type="hidden" id="vendor_address_lat" name="longitude" ></Input>
                   </FormGroup>
                   <FormGroup>
                   <div style={{color:'red'}}>{errors.country_id}</div>

@@ -63,10 +63,28 @@
           var autocomplete = new google.maps.places.Autocomplete(inputAdreee);
           autocomplete.addListener('place_changed', function () {
             var place = autocomplete.getPlace();
+            localStorage.setItem('address' , place.formatted_address);
+            localStorage.setItem('longitude' , place.geometry['location'].lng());
+            localStorage.setItem('latitude' , place.geometry['location'].lat());
             document.getElementById('search_address_lat').value=(place.geometry['location'].lat());
             document.getElementById('search_address_lan').value=(place.geometry['location'].lng());
           });
         }
+
+
+        var input_adreee = document.getElementById('search_address');
+        if (input_adreee) {
+          var auto_complete = new google.maps.places.Autocomplete(input_adreee);
+          auto_complete.addListener('place_changed', function () {
+            var place = auto_complete.getPlace();
+            localStorage.setItem('vendor_address' , place.formatted_address);
+            localStorage.setItem('vendor_longitude' , place.geometry['location'].lng());
+            localStorage.setItem('vendor_latitude' , place.geometry['location'].lat());
+            document.getElementById('vendor_address_lat').value=(place.geometry['location'].lat());
+            document.getElementById('vendor_address_lan').value=(place.geometry['location'].lng());
+          });
+        }
+
       }
 
        function onLoad() {
