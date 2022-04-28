@@ -149,8 +149,6 @@ const Logins = (props) => {
                         <Button color="danger" className="btn-block" onClick={() => loginWithJwt(email,password)}>Login</Button>
                         }
                       </div>
-                      
-                      <p className="mt-4 mb-0">{"Don't have account?"}<a className="ml-2" href="/signup">{CreateAccount}</a></p>
                     </Form>
                   </TabPane>
                   <TabPane  className="fade show" tabId="auth0">
