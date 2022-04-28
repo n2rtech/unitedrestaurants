@@ -8,27 +8,16 @@ const SearchBar = () => {
   const history = useHistory()
   const [countries , setCountries] = useState([]);
   const [categories , setCategories] = useState([]);
-  const [address , setAddress] = useState(localStorage.getItem('address'));
-  const [latitude , setLatitude] = useState(localStorage.getItem('latitude'));
-  const [longitude , setLongitude] = useState(localStorage.getItem('longitude'));
+  const [address , setAddress] = useState('');
+  const [latitude , setLatitude] = useState(0);
+  const [longitude , setLongitude] = useState(0);
   useEffect( async () => {
   
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
  
-    // fetch('/api/countries' , config)
-    //   .then(res => res.json())
-    //   .then(
-    //     (result) => {  
-    //         setCountries(result);
-    //     },
-    //     (error) => {
-          
-    //     }
-    //     );
-
-        await fetch('/api/categories/top-menu' , config)
+       await fetch('/api/categories/top-menu' , config)
         .then(res => res.json())
         .then(
           (result) => {  
@@ -39,11 +28,6 @@ const SearchBar = () => {
           }
           )
   }, []);
-
-  const handleCountrychange = (event) => {
-     localStorage.setItem('country_code' , event.target.value);
-  }
-
 
   const [searchinput, setSearchInput] = useState(localStorage.getItem('filter') || '');
   const [catid, setCatid] = useState(localStorage.getItem('catid'));
@@ -69,10 +53,11 @@ const SearchBar = () => {
   }
 
   const HandleSearch = (searchvalue , catid) => {
+
     const cat = parseInt(catid);
-    const address = localStorage.getItem('address');
-    const latitude = parseFloat(localStorage.getItem('latitude'));
-    const longitude = parseFloat(localStorage.getItem('longitude'));
+    const address = localStorage.getItem('address') || '';
+    const latitude = parseFloat(localStorage.getItem('latitude') || '');
+    const longitude = parseFloat(localStorage.getItem('longitude') || '');
     const country_code = localStorage.getItem('country_code');
 
     if(isNaN(cat)) {
@@ -86,7 +71,6 @@ const SearchBar = () => {
       localStorage.setItem('filter' , searchvalue);
       const url = base64.encode(`&country=${country_code}&filter=${searchvalue}&category=${catid}&address=${address}&latitude=${latitude}&longitude=${longitude}`)
       history.push(`/search/${url}`);
-
       window.location.reload(false);
     }
   }
@@ -110,9 +94,9 @@ const SearchBar = () => {
               <div className="col-sm-8 p-0">
                 <InputGroup>
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
-                  <Input type="text" name="address" id="searchAddress" defaultValue={address} className="form-control digits" placeholder="Search Address" />                
-                  <Input type="hidden" name="latitude" defaultValue={latitude} id="search_address_lat" />                
-                  <Input type="hidden" name="longitude" defaultValue={longitude} id="search_address_lan" />                
+                  <Input type="text" name="address" id="searchAddress" className="form-control digits" onChange  = {OnChangeSearch} placeholder="Search Address" />                
+                  <Input type="hidden" name="latitude" id="search_address_lat" />                
+                  <Input type="hidden" name="longitude" id="search_address_lan" />                
                   </InputGroup>
               </div>
               <div className="col-sm-1">

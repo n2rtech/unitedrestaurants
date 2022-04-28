@@ -105,12 +105,6 @@ const Logins = (props) => {
         <Col xs="12">     
           <div className="login-card">
             <div>
-              <div>
-                <a className="logo" href="index.html">
-                  <img className="img-fluid for-light" src={require("../assets/images/logo/login.png")} alt=""/>
-                  <img className="img-fluid for-dark" src={require("../assets/images/logo/logo_dark.png")} alt=""/>
-                </a>
-              </div>
               <div className="login-main login-tab"> 
                 <Nav className="border-tab flex-column" tabs style={{display:'none'}}>
                   <NavItem>
@@ -135,8 +129,10 @@ const Logins = (props) => {
                 <TabContent activeTab={selected} className="content-login">
                   <TabPane  className="fade show" tabId={selected === "firebase" ? "firebase" : "jwt"}>
                     <Form className="theme-form">
-                      <h4>{selected === "firebase" ? "Sign In With Firebase" : "Sign In for Admin or Vendor"}</h4>
-                      <p>{"Enter your email & password to login"}</p>
+                      <a className="logo" href="index.html">
+                        <img className="img-fluid for-light" src={require("../assets/images/logo/login.png")} alt=""/>
+                      </a>
+                      <h4>{selected === "firebase" ? "Sign In With Firebase" : "Admin Login"}</h4>
                       <FormGroup>
                         <Label className="col-form-label">{EmailAddress}</Label>
                         <Input className="form-control" placeholder="Enter Email Address" type="email" required="" onChange={e => setEmail(e.target.value)} />
@@ -146,20 +142,13 @@ const Logins = (props) => {
                         <Input className="form-control" autoComplete="new-password" placeholder="Enter Password" type={togglePassword ?  "text" : "password"} onChange={e => setPassword(e.target.value)} required=""/>
                         <div className="show-hide" onClick={() => setTogglePassword(!togglePassword)}><span className={togglePassword ? "" : "show"}></span></div>
                       </FormGroup>
-                      <div className="form-group mb-0">
-                        {/*<div className="checkbox ml-3">
-                          <Input id="checkbox1" type="checkbox"/>
-                          <Label className="text-muted" for="checkbox1">{RememberPassword}</Label>
-                        </div><a className="link" href="#javascript">{ForgotPassword}</a>*/}
+                      <div className="form-group signButton">
                         {selected === "firebase" ?
-                        <Button color="primary" className="btn-block" disabled={loading ? loading : loading} onClick={(e) => loginAuth(e)}>{loading ? "LOADING..." : SignIn }</Button>
+                        <Button color="danger" className="btn-block" disabled={loading ? loading : loading} onClick={(e) => loginAuth(e)}>{loading ? "LOADING..." : SignIn }</Button>
                         :
-                        <Button color="primary" className="btn-block" onClick={() => loginWithJwt(email,password)}>Login</Button>
+                        <Button color="danger" className="btn-block" onClick={() => loginWithJwt(email,password)}>Login</Button>
                         }
                       </div>
-                      {/*<h6 className="text-muted mt-4 or">{"Or Sign in with"}</h6>*/}
-                      
-                      <p className="mt-4 mb-0">{"Don't have account?"}<a className="ml-2" href="/signup">{CreateAccount}</a></p>
                     </Form>
                   </TabPane>
                   <TabPane  className="fade show" tabId="auth0">
