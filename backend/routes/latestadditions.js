@@ -127,7 +127,7 @@ router.get('/', (req, res) => {
                 }
             },
             limit: 10,
-            order: [ 'createdAt', 'DESC' ],
+            order: [ ['createdAt', 'DESC'] ],
             having: Sequelize.literal(`distance <= 50`),
         }
     }else{

@@ -8,6 +8,7 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
+const { Sequelize } = require('sequelize');
 const Op = require('sequelize').Op
 
 // Create a new HotDeal
@@ -46,6 +47,19 @@ router.get('/list', (req, res) => {
 
 router.get('/', (req, res) => { 
 
+    var address = req.query.address;
+    var latitude = req.query.latitude;
+    var longitude = req.query.longitude;
+
+    const haversine = `(
+        6371 * acos(
+            cos(radians(${latitude}))
+            * cos(radians(latitude))
+            * cos(radians(longitude) - radians(${longitude}))
+            + sin(radians(${latitude})) * sin(radians(latitude))
+        )
+    )`;
+
     const startDate = new Date().toJSON().slice(0, 10);
     const endDate   = new Date().toJSON().slice(0, 10);
 
@@ -53,7 +67,7 @@ router.get('/', (req, res) => {
 
     var filter = req.query.filter;
 
-    if (category && filter) {
+    if (category && filter && !address) {
 
         var conditions =  {
             where: {
@@ -91,7 +105,7 @@ router.get('/', (req, res) => {
             }
         };
 
-    }else if (category) {
+    }else if (category && !address) {
         var conditions =  {
             where: {
                 [Op.and]:
@@ -123,7 +137,49 @@ router.get('/', (req, res) => {
             }
         };
 
-    }else{
+    }else if (address) {
+        var conditions =  {
+
+            attributes: [
+            'id', 'business_name', 'about_business', 'user_id', 'discount', 'start_date', 'end_date',
+            [Sequelize.literal(haversine), 'distance'],
+            ],
+
+            where: {
+                [Op.and]:
+                [
+                {
+                    country: { 
+                        [Op.eq]: req.query.country 
+                    }
+                },
+                {
+                    categories: { 
+                        [Op.like]: '%' + req.query.category + '%' 
+                    }
+                }
+                ],            
+                [Op.or]: 
+                [
+                {
+                    start_date: {
+                        [Op.gte]: [startDate],
+                        [Op.lte]: [startDate]
+                    }
+                }, {
+                    end_date: {
+                        [Op.gte]: [endDate]
+                    }
+                }
+                ]
+            },
+
+            order: [ [ 'createdAt', 'DESC' ]],
+            having: Sequelize.literal(`distance <= 50`),
+
+        };
+
+    }else {
         var conditions = {
             where: {
                 [Op.and]:

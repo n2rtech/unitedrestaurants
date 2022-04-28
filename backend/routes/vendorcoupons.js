@@ -17,8 +17,6 @@ router.post('/', (req, res) => {
                 msg: 'Please pass Job name or description.'
             })
         } else {
-
-            console.log('Coupons Data' , req.body);
             
             VendorCoupon
                 .create({
@@ -51,14 +49,18 @@ router.post('/', (req, res) => {
                             DB.query('SELECT * FROM '+table_namew+' WHERE user_id ="' + req.body.user_id +'"', function (err, vendor_pro) {
                               if (err) throw err;
                               if (vendor_pro[0]) {
-                
+                                              
                                 var user_id = req.body.user_id;
                                 var country_id = req.body.country_id;
                                 var banner = vendor_pro[0].banner;
                                 var business_name = vendor_pro[0].business_name;
                                 var about_business = vendor_pro[0].about_business;
+                                var categories = vendor_pro[0].categories;
+                                var address = vendor_pro[0].address;
+                                var latitude = vendor_pro[0].latitude;
+                                var longitude = vendor_pro[0].longitude;
                              
-                                DB.query("INSERT INTO HotDeals (user_id, `coupon_id` , `country_id`, `country`, `business_name`, `about_business`, `banner`, `discount` , `start_date` , `end_date`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+vendorcoupon.id+"', '"+country_id+"', '"+country+"', '"+business_name+"', '"+about_business+"', '"+banner+"', '"+req.body.discount+"' , '"+req.body.start_date+"' , '"+req.body.end_date+"' , NOW(), '')");
+                                DB.query("INSERT INTO HotDeals (user_id, `coupon_id` , `country_id`, `country`, `business_name`, `about_business`, `categories`, `banner`, `discount` , `start_date` , `end_date`, `address`, `latitude`, `longitude`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+vendorcoupon.id+"', '"+country_id+"', '"+country+"', '"+business_name+"', '"+about_business+"', '"+categories+"', '"+banner+"', '"+req.body.discount+"' , '"+req.body.start_date+"' , '"+req.body.end_date+"', '"+address+"', '"+latitude+"', '"+longitude+"' , NOW(), '')");
                                 
                                 res.status(200).send(vendorcoupon);
                               }else{

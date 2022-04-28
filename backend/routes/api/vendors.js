@@ -85,6 +85,8 @@ router.post("/register", (req, res) => {
             mobile: req.body.mobile,
             ownermobile: req.body.ownermobile,
             address: req.body.address,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
             category_id: req.body.category_id,
             country_id: req.body.country_id
           })
@@ -107,6 +109,8 @@ router.post("/register", (req, res) => {
                 var email = req.body.email;
                 var name = req.body.name;
                 var address = req.body.address;
+                var latitude = req.body.latitude;
+                var longitude = req.body.longitude;
                 var mobile = req.body.mobile;
                 var ownermobile = req.body.ownermobile;
                 var iscode = Math.random() * (9999999999 - 111111) + 111111;
@@ -129,7 +133,7 @@ router.post("/register", (req, res) => {
                   }
                 }));
 
-                DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `ownermobile`,  `fax`, `address`, `city`, `state`, `post_code`, `latitude`, `longitude`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt` ) VALUES ("+user_id+", '"+name+"', NULL, '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', '"+ownermobile+"', NULL, '"+address+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NOW(), '')");
+                DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `ownermobile`,  `fax`, `address`, `latitude`, `longitude`, `city`, `state`, `post_code`,  `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt` ) VALUES ("+user_id+", '"+name+"', NULL, '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', '"+ownermobile+"', NULL, '"+address+"', '"+latitude+"', '"+longitude+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NOW(), '')");
                 
                 let transporter = nodemailer.createTransport({
                   host: "email-smtp.ap-south-1.amazonaws.com",
@@ -786,6 +790,10 @@ router.put('/:id', (req, res) => {
                 var name = req.body.name;
                 var banner = vendor_pro[0].banner;
                 var about_business = vendor_pro[0].about_business;
+                var categories = vendor_pro[0].categories;
+                var address = vendor_pro[0].address;
+                var latitude = vendor_pro[0].latitude;
+                var longitude = vendor_pro[0].longitude;
 
                 //DB.query("DELETE  FROM HotDeals where user_id="+user_id);
                 DB.query("DELETE  FROM BusinessAdvertises where user_id="+user_id);
@@ -795,7 +803,7 @@ router.put('/:id', (req, res) => {
                 // }
 
                 if (req.body.featured_business){
-                  DB.query("INSERT INTO FeaturedBusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', NOW(), '')");
+                  DB.query("INSERT INTO FeaturedBusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`, `categories`, `address`, `latitude`, `longitude`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', '"+categories+"', '"+address+"', '"+latitude+"', '"+longitude+"' ,NOW(), '')");
                 }
 
                 if (req.body.hot_deals || req.body.featured_business) {
