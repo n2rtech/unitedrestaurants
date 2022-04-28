@@ -8,9 +8,9 @@ const SearchBar = () => {
   const history = useHistory()
   const [countries , setCountries] = useState([]);
   const [categories , setCategories] = useState([]);
-  const [address , setAddress] = useState('');
-  const [latitude , setLatitude] = useState(0);
-  const [longitude , setLongitude] = useState(0);
+  const [address , setAddress] = useState(localStorage.getItem('address'));
+  const [latitude , setLatitude] = useState(localStorage.getItem('latitude'));
+  const [longitude , setLongitude] = useState(localStorage.getItem('longitude'));
   useEffect( async () => {
   
     const config = {
@@ -94,9 +94,9 @@ const SearchBar = () => {
               <div className="col-sm-8 p-0">
                 <InputGroup>
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
-                  <Input type="text" name="address" id="searchAddress" className="form-control digits" onChange  = {OnChangeSearch} placeholder="Search Address" />                
-                  <Input type="hidden" name="latitude" id="search_address_lat" />                
-                  <Input type="hidden" name="longitude" id="search_address_lan" />                
+                  <Input type="text" defaultValue={address} name="address" id="searchAddress" className="form-control digits" onChange  = {OnChangeSearch} placeholder="Search Address" />                
+                  <Input type="hidden" defaultValue={latitude} name="latitude" id="search_address_lat" />                
+                  <Input type="hidden" defaultValue={longitude} name="longitude" id="search_address_lan" />                
                   </InputGroup>
               </div>
               <div className="col-sm-1">
