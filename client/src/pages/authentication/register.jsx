@@ -223,7 +223,7 @@ const Register = (props) => {
                 <FormGroup>
                   <div className="form-row">
                     <Col xs="12">
-                      <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="Business Name"/>
+                      <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="Business/Restaurant Name"/>
                       <div style={{color:'red'}}>{errors.first_name}</div>
                     </Col>                      
                   </div>
