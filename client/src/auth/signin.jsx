@@ -132,7 +132,7 @@ const Logins = (props) => {
                       <a className="logo" href="index.html">
                         <img className="img-fluid for-light" src={require("../assets/images/logo/login.png")} alt=""/>
                       </a>
-                      <h4>{selected === "firebase" ? "Sign In With Firebase" : "Login"}</h4>
+                      <h4>{selected === "firebase" ? "Sign In With Firebase" : "Admin Login"}</h4>
                       <FormGroup>
                         <Label className="col-form-label">{EmailAddress}</Label>
                         <Input className="form-control" placeholder="Enter Email Address" type="email" required="" onChange={e => setEmail(e.target.value)} />
