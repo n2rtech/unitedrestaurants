@@ -202,7 +202,8 @@ router.get('/', (req, res) => {
                     }
                 }
                 ]
-            }
+            },
+            order: [ [ 'createdAt', 'DESC' ]],
         };
     }
 
