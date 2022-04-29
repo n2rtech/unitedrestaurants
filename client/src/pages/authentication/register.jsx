@@ -223,7 +223,7 @@ const Register = (props) => {
                   <FormGroup>
                     <div className="form-row">
                       <Col xs="12">
-                        <Input className="form-control" name="first_name" value={first_name} onChange={handleChange} type="text" required="" placeholder="Business/Restaurant name"/>
+                        <Input className="form-control" name="first_name"  onChange={handleChange} type="text" required="" placeholder="Business/Restaurant name"/>
                         <div style={{color:'red'}}>{errors.first_name}</div>
                       </Col>                      
                     </div>
@@ -242,17 +242,17 @@ const Register = (props) => {
                   </FormGroup>
                   
                     <FormGroup>
-                    <Input className="form-control" name="email" value={email} onChange={handleChange} type="email" required="" placeholder="Business email"/>
+                    <Input className="form-control" name="email"  onChange={handleChange} type="email" required="" placeholder="Business email"/>
                     <div style={{color:'red'}}>{errors.email}</div>
                   </FormGroup>
 
                   <FormGroup>
-                    <Input className="form-control" name="mobile" value={mobile} onChange={handleChange} type="number" required="" placeholder="Business phone number"/>
+                    <Input className="form-control" name="mobile" onChange={handleChange} type="number" required="" placeholder="Business phone number"/>
                     <div style={{color:'red'}}>{errors.mobile}</div>
                   </FormGroup>
 
                   <FormGroup>
-                    <Input className="form-control" name="ownermobile" value={ownermobile} onChange={handleChange} type="number" required="" placeholder="Owner phone number"/>
+                    <Input className="form-control" name="ownermobile"  onChange={handleChange} type="number" required="" placeholder="Owner phone number"/>
                     <div style={{color:'red'}}>{errors.ownermobile}</div>
                   </FormGroup>
                   <FormGroup>
