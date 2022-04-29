@@ -119,6 +119,9 @@ const Root = (props) =>  {
           
           <Route  path={`${process.env.PUBLIC_URL}/callback`} render={() => <Callback/>} />
 
+        
+          <Route exact path={`${process.env.PUBLIC_URL}/:any`} render={() => <Error400/>} />
+
           {currentUser !== null || authenticated || jwt_token  ?
           
           <App>
@@ -153,6 +156,7 @@ const Root = (props) =>  {
 
           }      
         </Switch>
+       
         </BrowserRouter>
         </Provider>
         </Auth0Provider>
