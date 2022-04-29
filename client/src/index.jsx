@@ -50,6 +50,7 @@ import UnlockUser from "./pages/authentication/unlockUser"
 import Forgetpwd from "./pages/authentication/forgetpwd"
 import Resetpwd from "./pages/authentication/resetpwd"
 import Error400 from "./pages/errors/error400"
+import Error404 from "./pages/errors/error404"
 // Maintenance
 import Maintenance from "./pages/maintenance"
 import Callback from './auth/callback'
@@ -120,7 +121,7 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/callback`} render={() => <Callback/>} />
 
         
-          <Route exact path={`${process.env.PUBLIC_URL}/:any`} render={() => <Error400/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/:any`} render={() => <Error404/>} />
 
           {currentUser !== null || authenticated || jwt_token  ?
           
