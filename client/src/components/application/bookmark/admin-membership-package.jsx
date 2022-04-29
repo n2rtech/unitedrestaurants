@@ -23,7 +23,7 @@ const AdminMembershipPackage = (props) => {
                     <td>{"Free"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership`}>Edit</a> &nbsp;
+                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership/`}>Edit</a> &nbsp;
                       <Button color="danger">Delete</Button>
                     </ButtonGroup>
                       
@@ -33,7 +33,7 @@ const AdminMembershipPackage = (props) => {
                     <td>{"Standard"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership`}>Edit</a> &nbsp;
+                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership/`}>Edit</a> &nbsp;
                       <Button color="danger">Delete</Button>
                     </ButtonGroup>
                       
@@ -43,7 +43,7 @@ const AdminMembershipPackage = (props) => {
                     <td>{"Premium"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership`}>Edit</a> &nbsp;
+                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership/`}>Edit</a> &nbsp;
                       <Button color="danger">Delete</Button>
                     </ButtonGroup>
                     </td>

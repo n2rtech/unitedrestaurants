@@ -42,7 +42,7 @@ const FeaturedVendors = (props) => {
                   <tr key={i}>
                     <td>{vendor.name}</td>
                     <td className="text-right">
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-vendor/${vendor.id}`}>Edit</a>
+                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-vendor/${vendor.id}/`}>Edit</a>
                     </td>
                   </tr>
                   ))}

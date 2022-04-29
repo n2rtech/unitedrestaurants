@@ -23,7 +23,7 @@ const PromotionsDiscount = (props) => {
                     <td>{"Yearly Discount"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-promotions-discount`}>Edit</a> &nbsp;
+                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-promotions-discount/`}>Edit</a> &nbsp;
                       <Button color="danger">Delete</Button>
                     </ButtonGroup>
                       
@@ -33,7 +33,7 @@ const PromotionsDiscount = (props) => {
                     <td>{"Bulk Purchase"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-promotions-discount`}>Edit</a> &nbsp;
+                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-promotions-discount/`}>Edit</a> &nbsp;
                       <Button color="danger">Delete</Button>
                     </ButtonGroup>
                       
@@ -43,7 +43,7 @@ const PromotionsDiscount = (props) => {
                     <td>{"Happy Hours"}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-promotions-discount`}>Edit</a> &nbsp;
+                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-promotions-discount/`}>Edit</a> &nbsp;
                       <Button color="danger">Delete</Button>
                     </ButtonGroup>
                     </td>
