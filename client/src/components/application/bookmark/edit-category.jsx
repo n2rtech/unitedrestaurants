@@ -5,9 +5,11 @@ import ImageUploader from 'react-images-upload';
 import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const EditCategory = (props) => {
 
+const history = useHistory();
 const params = useParams();
 const [image, setimage] = useState({ pictures: [] })
 const [catData, setCatData] = useState([]);
@@ -91,7 +93,13 @@ const handleTopMenuChange = (evt) => {
           axios.put(`/api/categories/`+`${params.id}`,
             bodyParameters,
             config
-          ).then(response => toast.success("Category updated !")).catch(error => console.log('Form submit error', error))
+            ).then(response => {
+              toast.success("Category updated !")
+              setTimeout(() => {
+                history.push('/dashboard/admin/categories/');
+              }, 1000);
+            }
+          ).catch(error => console.log('Form submit error', error))
 
       };
 
@@ -129,11 +137,11 @@ const handleTopMenuChange = (evt) => {
             <FormGroup>
               <Label>Display in Top Menu</Label>
               <div className="radio radio-primary m-l-20">
-                <Input id="no-top" type="radio" value="0" name="radio2" onChange={handleTopMenuChange} checked={topMenu===0}/>
+                <Input id="no-top" type="radio" value="0" name="radio2" onChange={handleTopMenuChange} checked={topMenu==0}/>
                 <Label className="mb-10" for="no-top">No</Label>
               </div>
               <div className="radio radio-primary m-l-20">
-                <Input id="yes-menu" type="radio" value="1" name="radio2" onChange={handleTopMenuChange} checked={topMenu===1}/>
+                <Input id="yes-menu" type="radio" value="1" name="radio2" onChange={handleTopMenuChange} checked={topMenu==1}/>
                 <Label className="mb-10" for="yes-menu">Yes</Label>
               </div>
             </FormGroup>

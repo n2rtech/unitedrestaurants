@@ -159,19 +159,19 @@ const handleNameChange = e => {
                   <Form className="form theme-form">
                     <FormGroup>
                       <Label htmlFor="exampleFormControlInput">{"Name"}</Label>
-                      <Input className="form-control" name="name" onChange={handleNameChange} type="name" placeholder="Name" />
+                      <Input className="form-control" name="name" value={filterName} onChange={handleNameChange} type="name" placeholder="Name" />
                     </FormGroup>
                     <FormGroup>
                       <Label htmlFor="exampleFormControlInput1">{"Email"}</Label>
-                      <Input className="form-control" name="email" onChange={handleEmailChange} type="email" placeholder="Email" />
+                      <Input className="form-control" name="email" value={filterEmail} onChange={handleEmailChange} type="email" placeholder="Email" />
                     </FormGroup>
                     <FormGroup>
                       <Label htmlFor="exampleFormControlInput1">{"Phone Number"}</Label>
-                      <Input className="form-control" name="mobile" onChange={handleMobileChange} type="tel" placeholder="Phone Number" />
+                      <Input className="form-control" name="mobile" value={filterMobile} onChange={handleMobileChange} type="tel" placeholder="Phone Number" />
                     </FormGroup>
                     <FormGroup>
                       <Label htmlFor="exampleFormControlInput1">{"Country"}</Label>
-                      <Input type="select" name="country" onChange={handleCountryChange} className="form-control digits" defaultValue="">
+                      <Input type="select" name="country" value={filterCountry} onChange={handleCountryChange} className="form-control digits" defaultValue="">
                       <option value="">Please Select Country</option>
                       {countryData.map((country , i ) => (
                         <Fragment key={i}>

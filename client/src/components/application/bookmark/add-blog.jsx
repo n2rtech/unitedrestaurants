@@ -5,13 +5,17 @@ import CKEditors from "react-ckeditor-component";
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import ImageUploader from 'react-images-upload';
+import { useHistory } from 'react-router-dom'
 
 const AddBlog = () => {
-const token = localStorage.getItem("token");
-const [content,setContent] = useState('');
-const [titleData, setTitleData] = useState('');
-const [showhome , setShowhome]  = useState('0');
-const [image, setimage] = useState({ pictures: [] })
+
+  const history = useHistory()
+
+  const token = localStorage.getItem("token");
+  const [content,setContent] = useState('');
+  const [titleData, setTitleData] = useState('');
+  const [showhome , setShowhome]  = useState('0');
+  const [image, setimage] = useState({ pictures: [] })
 
     const onChange = (evt) => {
         const newContent = evt.editor.getData();
@@ -53,7 +57,12 @@ const [image, setimage] = useState({ pictures: [] })
         axios.post(`/api/blogs/`,
           bodyParameters,
           config
-        ) .then(response => toast.success("Blog content added !")  )
+        ) .then(response => {
+          toast.success("Blog content added !");
+          setTimeout(() => {
+            history.push('/dashboard/admin/blogs');
+          }, 1000);
+        })
            .catch(error => console.log('Form submit error', error))
     };
 
@@ -66,11 +75,11 @@ const [image, setimage] = useState({ pictures: [] })
         <h5>Show on Home page</h5>
         <FormGroup className="m-checkbox-inline custom-radio-ml">
           <div className="radio radio-primary">
-            <Input id="no-home" type="radio" name="radio1" value="0" onChange = {onChangehome} checked={showhome===0}  />
+            <Input id="no-home" type="radio" checked name="radio1" value="0" onChange = {onChangehome} checked={showhome==0}  />
             <Label className="mb-0" for="no-home">No</Label>
           </div>
           <div className="radio radio-primary">
-            <Input id="yes-home" type="radio" name="radio1" value="1" onChange = {onChangehome}  checked={showhome===1}/>
+            <Input id="yes-home" type="radio" name="radio1" value="1" onChange = {onChangehome}  checked={showhome==1}/>
             <Label className="mb-0" for="yes-home">Yes</Label>
           </div>
         </FormGroup>

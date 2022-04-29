@@ -2,10 +2,12 @@ import React, { Fragment, useState , useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import {toast} from 'react-toastify';
+import { useHistory } from "react-router-dom";
 import axios from 'axios'
 
 const AddUser = (props) => {
 
+   const history = useHistory();
   const [username, setUserName] = useState()
   const [useremail, setUserEmail] = useState()
   const [userpassword, setUserPassword] = useState()
@@ -62,7 +64,12 @@ const AddUser = (props) => {
       axios.post(`/api/users/register/`,
         bodyParameters,
         config
-      ) .then(response => toast.success("User has been added !")  )
+      ) .then(response => {
+        toast.success("User has been added !");
+        setTimeout(function() {
+          history.push("/dashboard/admin/users-list");
+        }, 2500); 
+      })
          .catch(error => console.log('Form submit error', error))
   };
 

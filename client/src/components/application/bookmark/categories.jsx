@@ -83,9 +83,12 @@ const Categories = (props) => {
                .catch(error => console.log('Delete error', error))
           SweetAlert.fire(
             'Deleted!',
-            'Your file has been deleted.',
+            'Your Category has been deleted.',
             'success'
-          )
+          );
+          setTimeout(() => {
+                window.location.reload(false);
+              }, 1000);
         }
         else {
           SweetAlert.fire(

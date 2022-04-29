@@ -54,9 +54,12 @@ const Userslist = (props) => {
       
       SweetAlert.fire(
         'Deleted!',
-        'Your file has been deleted.',
+        'Your User has been deleted.',
         'success'
-      )
+      );
+      setTimeout(() => {
+                window.location.reload(false);
+              }, 1000);
     }
     else {
       SweetAlert.fire(
