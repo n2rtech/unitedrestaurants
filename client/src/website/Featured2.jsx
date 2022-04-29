@@ -58,7 +58,7 @@ const Featured2 = () => {
                 </CardTitle>
                 
                 <CardText>
-                  {item.about_business}
+                {(item.about_business.substring(0, 100) + "...")}
                 </CardText>
                 <Button>{ item.user_id == 0 ?  
                     

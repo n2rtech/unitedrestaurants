@@ -38,8 +38,8 @@ const addDefaultSrc = (ev) => {
       </div> : '' }
         <div style={{ position: "relative" }}>
           <Carousel responsive={responsive}>
-            <div className="customcard">
             {hotData.map((item , i ) => (
+            <div className="customcard">
                     <Card key = {i}>
                     <div className="ribbon"><p> {item.discount}% off</p></div>
                     <div className="hImage">
@@ -52,13 +52,14 @@ const addDefaultSrc = (ev) => {
                     </CardTitle>
                     
                     <CardText>
-                      {item.about_business}
+                    {(item.about_business.substring(0, 100) + "...")}
                     </CardText>
                     <Button><a href={`#`}> SEE SALE</a></Button>
                   </Card>
-              ))
-            }
+              
             </div> 
+            ))
+            }
           </Carousel>
         </div>
       </div>
