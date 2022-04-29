@@ -123,6 +123,8 @@ const Root = (props) =>  {
         
           <Route exact path={`${process.env.PUBLIC_URL}/:any`} render={() => <Error404/>} />
 
+          {/* <Route exact path={`${process.env.PUBLIC_URL}/:any/:any`} render={() => <Error404/>} /> */}
+
           {currentUser !== null || authenticated || jwt_token  ?
           
           <App>

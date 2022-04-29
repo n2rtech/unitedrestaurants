@@ -95,16 +95,16 @@ export const MENUITEMS = [
 
     //     ]
     // },
-    {
-        menutitle:"Promotions/discounts",
-        menucontent:"Promotions/discounts",
-        Items:[
-            {
-                title: 'Promotions/discounts', path: `${process.env.PUBLIC_URL}/dashboard/admin/promotions-discount`, icon: Gift, type: 'link', active: false, 
-            },
+    // {
+    //     menutitle:"Promotions/discounts",
+    //     menucontent:"Promotions/discounts",
+    //     Items:[
+    //         {
+    //             title: 'Promotions/discounts', path: `${process.env.PUBLIC_URL}/dashboard/admin/promotions-discount`, icon: Gift, type: 'link', active: false, 
+    //         },
 
-        ]
-    },
+    //     ]
+    // },
     {
         menutitle:"Accounts Payable",
         menucontent:"Accounts Payable",

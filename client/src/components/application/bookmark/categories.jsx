@@ -107,7 +107,7 @@ const Categories = (props) => {
           <Row>
             <Col sm="6">&nbsp;</Col>
             <Col sm="6">
-              <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-category`} className="btn btn-primary pull-right">{"Add New"}</a>
+              <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-category/`} className="btn btn-primary pull-right">{"Add New"}</a>
             </Col>
           </Row>
           <div className="table-responsive m-t-20">
@@ -137,7 +137,7 @@ const Categories = (props) => {
 
                   </td>
                   <td className="text-right">
-                    <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-category/${item.id}`}>Edit</a> &nbsp;
+                    <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-category/${item.id}/`}>Edit</a> &nbsp;
                     <Button color="danger" onClick={() => handleRemoveCategory(item.id)}>{"Delete"}</Button>
                   </td>
                 </tr>

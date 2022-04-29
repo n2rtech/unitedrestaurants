@@ -76,7 +76,7 @@ const Countries = (props) => {
               <Col sm="6"></Col>
               <Col sm="6">
                 <div className="pull-right">
-                  <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-countries`}>Add New</a>
+                  <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-countries/`}>Add New</a>
                 </div>
               </Col>
             </Row>
@@ -96,7 +96,7 @@ const Countries = (props) => {
                     <td>{country.code}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-countries/${country.id}`}>Edit</a> &nbsp;
+                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-countries/${country.id}/`}>Edit</a> &nbsp;
                       <Button color="danger" onClick={() => handleDelete(country.id)}>Delete</Button>
                     </ButtonGroup>
                       
