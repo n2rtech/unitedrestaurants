@@ -89,7 +89,7 @@ const ContactEnquiries = (props) => {
                     <td>{Inquiry.phone_number}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <a className="btn btn-info" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/view-contact-inquiry/${Inquiry.id}`}>View</a> &nbsp;
+                      <a className="btn btn-info" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/view-contact-inquiry/${Inquiry.id}/`}>View</a> &nbsp;
                       <Button color="danger" onClick={() => handleDelete(Inquiry.id)}>Delete</Button>
                     </ButtonGroup>
                       
