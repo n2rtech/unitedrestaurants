@@ -84,9 +84,9 @@ router.post("/register", (req, res) => {
             name: name,
             mobile: req.body.mobile,
             ownermobile: req.body.ownermobile,
-            address: req.body.address,
-            latitude: req.body.latitude,
-            longitude: req.body.longitude,
+            address: req.body.address||'Please set Address',
+            latitude: req.body.latitude||0,
+            longitude: req.body.longitude||0,
             category_id: req.body.category_id,
             country_id: req.body.country_id
           })
@@ -108,9 +108,9 @@ router.post("/register", (req, res) => {
                 var user_id = user.id;
                 var email = req.body.email;
                 var name = req.body.name;
-                var address = req.body.address;
-                var latitude = req.body.latitude;
-                var longitude = req.body.longitude;
+                var address = req.body.address||'Please set Address';
+                var latitude = req.body.latitude||0;
+                var longitude = req.body.longitude||0;
                 var mobile = req.body.mobile;
                 var ownermobile = req.body.ownermobile;
                 var iscode = Math.random() * (9999999999 - 111111) + 111111;

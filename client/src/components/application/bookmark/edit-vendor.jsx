@@ -4,8 +4,12 @@ import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button } from 
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import {toast} from 'react-toastify';
+import { useHistory } from 'react-router-dom'
 
 const EditVendor = (props) => {
+
+    const history = useHistory()
+
 const params = useParams();	
 const token = localStorage.getItem("token");
 const [options,setOptions] = useState([])
@@ -108,7 +112,12 @@ useMemo(() => {
       axios.put(`/api/vendors/`+`${params.id}`,
         bodyParameters,
         config
-      ) .then(response => toast.success("Vendor details are updated !")  )
+      ) .then(response => {
+        toast.success("Vendor details are updated !");
+        setTimeout(() => {
+            history.push('/dashboard/admin/all-vendors');
+          }, 1000);
+      })
          .catch(error => console.log('Form submit error', error))
 
   };
@@ -165,10 +174,10 @@ useMemo(() => {
                 <Label htmlFor="exampleFormControlInput1">{"Phone Number"}</Label>
                 <Input className="form-control"  onChange = {onChangeMobile}  value={Mobile}  type="tel" placeholder="8090895865" />
               </FormGroup>
-              <FormGroup>
+              {/*<FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
                 <Input className="form-control"  onChange = {onChangeAddress}  value={Address} type="name" placeholder="C6, Sector 7, Noida" />
-              </FormGroup>
+              </FormGroup>*/}
 
               <FormGroup>
             <Label htmlFor="exampleFormControlSelect9">Parent category(if any?)</Label>
