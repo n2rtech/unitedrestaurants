@@ -423,10 +423,13 @@ router.get('/', (req, res) => {
             }
           },
           ]
-        }};
+        },
+        order: [['id', 'DESC']],
+      };
 
       }else{
         var conditions = {
+          order: [['id', 'DESC']]
       };
       }
 

@@ -129,7 +129,7 @@ useMemo(() => {
         <Card>
           <CardBody>
             <Form className="form theme-form">
-              <h5>Show in Hot deals</h5>
+              {/*<h5>Show in Hot deals</h5>
               <FormGroup className="m-checkbox-inline custom-radio-ml">
              
               
@@ -143,7 +143,7 @@ useMemo(() => {
                 </div>
               
                 
-              </FormGroup>
+              </FormGroup>*/}
               <h5 className="m-t-30">Show in Featured Business</h5>
               <FormGroup className="m-checkbox-inline custom-radio-ml">
 
