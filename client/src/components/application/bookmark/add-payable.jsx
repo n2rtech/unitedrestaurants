@@ -3,9 +3,11 @@ import Breadcrumb from '../../../layout/breadcrumb'
 import { Container,Card, CardBody, Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
+import { useHistory } from "react-router-dom";
 
 const AddAccountsPayable = (props) => {
 
+   const history = useHistory();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const token = localStorage.getItem("token");
@@ -25,7 +27,10 @@ const AddAccountsPayable = (props) => {
       userData,
       config
       ) .then(response => {
-        toast.success("Account Payable added !")
+        toast.success("Account Payable added !");
+        setTimeout(function() {
+          history.push("/dashboard/admin/accounts-payable");
+        }, 1500); 
       }).catch(error => console.log('Form submit error', error))
     }
 

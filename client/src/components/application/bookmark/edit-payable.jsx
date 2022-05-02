@@ -4,10 +4,12 @@ import { Container,Card, CardBody,Form, FormGroup, Input, Label, Button } from '
 import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
 import axios from 'axios'
+import { useHistory } from "react-router-dom";
 
 const EditAccountsPayable = (props) => {
 
   const params = useParams();
+  const history = useHistory();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
@@ -45,7 +47,10 @@ const EditAccountsPayable = (props) => {
       userData,
       config
       ) .then(response => {
-        toast.success("Accounts Payable updated !")
+        toast.success("Accounts Payable updated !");
+        setTimeout(function() {
+          history.push("/dashboard/admin/accounts-payable");
+        }, 1500); 
       })
       .catch(error => console.log('Form submit error', error))
     }
