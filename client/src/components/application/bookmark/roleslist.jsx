@@ -5,6 +5,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import axios from 'axios'
 import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify';
+import { useHistory } from 'react-router-dom'
 
 const RolesList = (props) => {
 
@@ -15,7 +16,8 @@ const RolesList = (props) => {
   const [permissionsData, setPermissionsData] = useState({});
   const [roleData, setRoleData] = useState({});
   const token = localStorage.getItem("token");
-
+  const history = useHistory()
+  
   useEffect(() => {
     const GetData = async () => {
       const config = {
@@ -52,9 +54,12 @@ const RolesList = (props) => {
       bodyParameters,
       config
       ) .then(response => {
-        console.log('Submited Successfully');
         toast.success("Permissions Assigned to role!")
+        setTimeout(() => {
+          history.push('/pages/roles/');
+      }, 1000);
       })
+
     .catch(error => console.log('Form submit error', error))
 
   };

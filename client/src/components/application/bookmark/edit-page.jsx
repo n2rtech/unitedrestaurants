@@ -5,12 +5,13 @@ import CKEditors from "react-ckeditor-component";
 import { useParams } from 'react-router-dom'
 import {toast} from 'react-toastify';
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const EditPage = () => {
 
   const token = localStorage.getItem("token");
-
-const [content,setContent] = useState('') 
+  const history = useHistory()
+  const [content,setContent] = useState('') 
     const onChange = (evt) => {
         const newContent = evt.editor.getData();
         setContent(newContent)
@@ -43,7 +44,12 @@ const [content,setContent] = useState('')
         axios.put(`/api/pages/`+`${params.id}`,
           bodyParameters,
           config
-        ) .then(response => toast.success("Page content updated !")  )
+        ) .then(response => {
+          toast.success("Page Content Updated!")
+          setTimeout(() => {
+            history.push('/dashboard/admin/manage-pages/');
+        }, 1000);
+        })
            .catch(error => console.log('Form submit error', error))
 
            

@@ -133,8 +133,6 @@ const Categories = (props) => {
                       item.name
                     }
 
-               
-
                   </td>
                   <td className="text-right">
                     <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-category/${item.id}/`}>Edit</a> &nbsp;
