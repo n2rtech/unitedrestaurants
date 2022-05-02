@@ -8,135 +8,139 @@ import {toast} from 'react-toastify';
 import MyGoogleMapEdit from './MyGoogleMapEdit';
 
 const VendorProfile = (props) => {
+
   const [multiSelections, setMultiSelections] = useState([]);
   const [options,setOptions] = useState([])
   const token = localStorage.getItem("token");
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [managername, setManagerName] = useState('')
+  const [manageremail, setManagerEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [ownerphone, setOwnerPhone] = useState('')
+  const [fax, setFax] = useState('')
+  const [address, setAddress] = useState('')
+  const [latitude, setLatitude] = useState(0)
+  const [longitude, setLongitude] = useState(0)
+  const [websitelink, setWebsitelink] = useState()
+  const [fblink, setFblink] =  useState('')
+  const [instalink, setInstalink] = useState('')
+  const [youtubelink, setYoutubelink] = useState('')
+  const [aboutbusiness, setAboutBusiness] = useState('')
+  const [categories, setCategory] = useState()
+  const [location, setLocation] = useState({})
+  const [image, setimage] = useState({ pictures: [] , pictureFiles: [] })
+
   useEffect(() => {
     const GetData = async () => {
-        const config = {
-    headers: {'Authorization': 'JWT '+token }
-  };
+      const config = {
+        headers: {'Authorization': 'JWT '+token }
+      };
       const result = await axios('/api/categories/catlist',config);
       setOptions(result.data);
     };
     GetData();
   }, []);
 
-  const [image, setimage] = useState({ pictures: [] , pictureFiles: [] })
 
-    const onDrop = (pictureFiles, pictureDataURLs) => {
-        setimage({
-            ...image, pictureFiles
-        });
-    }
+  const onDrop = (pictureFiles, pictureDataURLs) => {
+    setimage({
+      ...image, pictureFiles
+    });
+  }
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [managername, setManagerName] = useState('')
-    const [manageremail, setManagerEmail] = useState('')
-    const [phone, setPhone] = useState('')
-    const [ownerphone, setOwnerPhone] = useState('')
-    const [fax, setFax] = useState('')
-    const [address, setAddress] = useState('')
-    const [latitude, setLatitude] = useState(0)
-    const [longitude, setLongitude] = useState(0)
-    const [websitelink, setWebsitelink] = useState()
-    const [fblink, setFblink] =  useState('')
-    const [instalink, setInstalink] = useState('')
-    const [youtubelink, setYoutubelink] = useState('')
-    const [aboutbusiness, setAboutBusiness] = useState('')
-    const [categories, setCategory] = useState()
-    const [location, setLocation] = useState({})
 
-    const onChangeName = (event) => {
-      setName(event.target.value);
-    };
 
-    const ChangeLongitude1 = (data) => {
-      setLongitude(data);
-    }
+  const onChangeName = (event) => {
+    setName(event.target.value);
+  };
 
-    const ChangeLatitude1 = (data) => {
-      setLatitude(data);
-    }
+  const ChangeLongitude1 = (data) => {
+    setLongitude(data);
+  }
 
-    const ChangeAddress1 = (data) => {
-      setAddress(data);
-    }
+  const ChangeLatitude1 = (data) => {
+    setLatitude(data);
+  }
 
-    const onChangeEmail = (event) => {
-      setEmail(event.target.value);
-    };
+  const ChangeAddress1 = (data) => {
+    setAddress(data);
+  }
 
-    const onChangeManagerEmail = (event) => {
-      setManagerEmail(event.target.value);
-    };
-    const onChangeManagerName = (event) => {
-      setManagerName(event.target.value);
-    };
-    const onChangePhone = (event) => {
-      setPhone(event.target.value);
-    };
-    const onChangeOwnerPhone = (event) => {
-      setOwnerPhone(event.target.value);
-    }
-    const onChangefax = (event) => {
-      setFax(event.target.value);
-    };
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+  };
 
-    const onChangeaddress = (event) => {
-      setAddress(event.target.value);
-    };
+  const onChangeManagerEmail = (event) => {
+    setManagerEmail(event.target.value);
+  };
+  const onChangeManagerName = (event) => {
+    setManagerName(event.target.value);
+  };
+  const onChangePhone = (event) => {
+    setPhone(event.target.value);
+  };
+  const onChangeOwnerPhone = (event) => {
+    setOwnerPhone(event.target.value);
+  }
+  const onChangefax = (event) => {
+    setFax(event.target.value);
+  };
 
-    const onChangLongitude = (event) => {
-      setLongitude(event.target.value);
-    };
+  const onChangeaddress = (event) => {
+    setAddress(event.target.value);
+  };
 
-    const onChangeLatitude = (event) => {
-      setLatitude(event.target.value);
-    };
+  const onChangLongitude = (event) => {
+    setLongitude(event.target.value);
+  };
 
-    const onChangewebsitelink = (event) => {
-      setWebsitelink(event.target.value);
-    };
+  const onChangeLatitude = (event) => {
+    setLatitude(event.target.value);
+  };
 
-    const onChangeFblink = (event) => {
-      setFblink(event.target.value);
-    };
+  const onChangewebsitelink = (event) => {
+    setWebsitelink(event.target.value);
+  };
 
-    const onChangeInstalink = (event) => {
-      setInstalink(event.target.value);
-    };
+  const onChangeFblink = (event) => {
+    setFblink(event.target.value);
+  };
 
-    const onChangeYoutubelink = (event) => {
-      setYoutubelink(event.target.value);
-    };
+  const onChangeInstalink = (event) => {
+    setInstalink(event.target.value);
+  };
 
-    const onChangeAboutbusiness = (event) => {
-      setAboutBusiness(event.target.value);
-    };
+  const onChangeYoutubelink = (event) => {
+    setYoutubelink(event.target.value);
+  };
 
-    const [profileData, setProfileData] = useState({});
-    const id = localStorage.getItem("id");
+  const onChangeAboutbusiness = (event) => {
+    setAboutBusiness(event.target.value);
+  };
 
-    const [flagData, setFlagData] = useState({});
+  const [profileData, setProfileData] = useState({});
+  const id = localStorage.getItem("id");
 
-    useEffect(() => {
-      const GetData = async () => {
-          const config = {
-      headers: {'Authorization': 'JWT '+token }
-    };
-        const result = await axios('/api/vendors/profile/'+`${id}`,config);
-        setFlagData(result.data);
+  const [flagData, setFlagData] = useState({});
+
+  useEffect(() => {
+    const GetData = async () => {
+      const config = {
+        headers: {'Authorization': 'JWT '+token }
       };
-      GetData();
-    }, []);
-
-    useEffect(() => {
-      const GetData = async () => {
-          const config = {
-      headers: {'Authorization': 'JWT '+token }
+      const result = await axios('/api/vendors/profile/'+`${id}`,config);
+      setFlagData(result.data);
     };
+    GetData();
+  }, []);
+
+  useEffect(() => {
+
+    const GetData = async () => {
+      const config = {
+        headers: {'Authorization': 'JWT '+token }
+      };
 
     if(flagData != '') {
       const result = await axios('/api/vendors/profile/'+`${id}`,config);
@@ -185,50 +189,50 @@ const VendorProfile = (props) => {
       GetData();
     }, []);
 
-    // Update details query
+  const handleSubmit = event => {
+    event.preventDefault();
 
-    const handleSubmit = event => {
-      event.preventDefault();
+    var categories_arr = [];
 
-
-// Category Array
-var categories_arr = [];
-
-const categorys = multiSelections.map((user) => {
-  categories_arr.indexOf(user.id) === -1 ? categories_arr.push(user.id) : console.log("This item already exists");
-});
-      const config = {
-        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
-        };
-          const bodyParameters = new FormData();
-          bodyParameters.set('business_name', name);
-          bodyParameters.set('business_email' , email);
-          bodyParameters.set('manager_name',managername);
-          bodyParameters.set('manager_email' , manageremail);
-          bodyParameters.set('phone', phone);
-          bodyParameters.set('ownerphone', ownerphone);
-          bodyParameters.set('fax', fax);
-          if(image.pictureFiles.length != 0) {
-            bodyParameters.set('banner', image.pictureFiles[0]);
-          } else {
-            bodyParameters.set('banner', image.pictureFiles);
-          } 
-          bodyParameters.set('address', address);
-          bodyParameters.set('latitude', latitude);
-          bodyParameters.set('longitude', longitude);
-          bodyParameters.set('about_business', aboutbusiness);
-          bodyParameters.set('categories', JSON.stringify(categories_arr));
-          bodyParameters.set('website_link', websitelink);
-          bodyParameters.set('facebook', fblink);
-          bodyParameters.set('instagram' , instalink);
-          bodyParameters.set('youtube' , youtubelink);
-          var profile_id = profileData.id;
-        axios.put('/api/vendors/profile/'+`${id}`,
-          bodyParameters,
-          config
-        ) .then(response => toast.success("Profile updated !"))
-           .catch(error => console.log('Form submit error', error))
-  
+    const categorys = multiSelections.map((user) => {
+      categories_arr.indexOf(user.id) === -1 ? categories_arr.push(user.id) : console.log("This item already exists");
+    });
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+    };
+    const bodyParameters = new FormData();
+    bodyParameters.set('business_name', name);
+    bodyParameters.set('business_email' , email);
+    bodyParameters.set('manager_name',managername);
+    bodyParameters.set('manager_email' , manageremail);
+    bodyParameters.set('phone', phone);
+    bodyParameters.set('ownerphone', ownerphone);
+    bodyParameters.set('fax', fax);
+    if(image.pictureFiles.length != 0) {
+      bodyParameters.set('banner', image.pictureFiles[0]);
+    } else {
+      bodyParameters.set('banner', image.pictureFiles);
+    } 
+    bodyParameters.set('address', address);
+    bodyParameters.set('latitude', latitude);
+    bodyParameters.set('longitude', longitude);
+    bodyParameters.set('about_business', aboutbusiness);
+    bodyParameters.set('categories', JSON.stringify(categories_arr));
+    bodyParameters.set('website_link', websitelink);
+    bodyParameters.set('facebook', fblink);
+    bodyParameters.set('instagram' , instalink);
+    bodyParameters.set('youtube' , youtubelink);
+    var profile_id = profileData.id;
+    axios.put('/api/vendors/profile/'+`${id}`,
+      bodyParameters,
+      config
+      ) .then(response => {
+        toast.success("Profile updated !");
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
+      })
+      .catch(error => console.log('Form submit error', error))
     };
 
     const addDefaultImage = (event) => {
