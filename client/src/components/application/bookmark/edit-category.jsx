@@ -21,6 +21,7 @@ const onDrop = (pictureFiles) => {
 }
 
 const [catname,setCatname] = useState('');
+const [catImage,setCatImage] = useState('');
 const [parentCat,setParentCat] = useState('');
 const [status,setStatus] = useState(0);
 const [topMenu,setTopMenu] = useState('');
@@ -58,6 +59,7 @@ const handleTopMenuChange = (evt) => {
           .then(
             (result) => {              
                 setCatname(result.name);
+                setCatImage(result.image);
                 if(result.status === 'true' || result.status === true || result.status === 1 || result.status === true){
                   setStatus(1);
                 }
@@ -146,6 +148,13 @@ const handleTopMenuChange = (evt) => {
               </div>
             </FormGroup>
             <FormGroup>
+
+             <Label htmlFor="exampleFormControlInput1">{"Category banner"}</Label>
+              {(catImage != '') ? 
+                <img className="img-thumbnail" src={`/api/uploads/categories/${catImage}`} />
+              : ''  
+              }
+
               <ImageUploader
                   withIcon={false}
                   withPreview={true}
