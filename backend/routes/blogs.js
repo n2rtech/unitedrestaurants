@@ -9,6 +9,7 @@ require('../config/passport')(passport);
 const path = require('path');
 var fs = require('fs');
 var multer  = require('multer');
+const sharp = require("sharp");
 
 
 
@@ -39,12 +40,27 @@ const imageUpload = multer({
 
 
 // Create a new Blog
-router.post('/', imageUpload.single('image'), (req, res) => {
-        if (!req.body.content) {
+router.post('/', imageUpload.single('image'), async (req, res) => {
+
+    if (!req.file || !req.body.content) {
             res.status(400).send({
-                msg: 'Please pass Blog Content.'
+                msg: 'Please pass Image or pass content!'
             })
         } else {
+
+            const filename = req.file.originalname.replace(/\..+$/, "");
+            const newFilename = `blogs-${filename}-${Date.now()}.jpg`;
+            await sharp(req.file.path)
+            .resize(533, 280, {
+                fit: sharp.fit.inside,
+                withoutEnlargement: true, 
+            })
+            .toFormat("jpg")
+            .jpeg({ quality: 95 })
+            .toFile(
+                path.resolve(req.file.destination,newFilename)
+                )
+            // fs.unlinkSync(req.file.path);
 
             if (req.file) {
                 image = req.file.filename;
@@ -55,7 +71,8 @@ router.post('/', imageUpload.single('image'), (req, res) => {
             Blog
                 .create({
                     name: req.body.name,
-                    image: image,
+                    image: newFilename,
+                    large_image: image,
                     show_on_home: req.body.show_on_home,
                     content: req.body.content
                 })
