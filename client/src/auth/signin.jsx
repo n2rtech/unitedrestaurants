@@ -75,6 +75,7 @@ const Logins = (props) => {
         localStorage.setItem('id', decoded.id);
         localStorage.setItem('name', decoded.name);
         localStorage.setItem('role', 'admin');
+        localStorage.setItem('adminloggedin', true);
         if(decoded.role == 'admin'){
           window.location.href = `${process.env.PUBLIC_URL}/dashboard/admin/`
         } else {

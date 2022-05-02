@@ -54,7 +54,9 @@ const Rightbar = (props) => {
 
   const  Logout_From_Auth0 = () =>  {
     localStorage.removeItem("auth0_profile")
-    localStorage.setItem("authenticated",false)
+    localStorage.setItem("adminloggedin", false);
+    localStorage.setItem("vendorloggedin", false);
+    localStorage.setItem("authenticated",false);
     history.push(`${process.env.PUBLIC_URL}/login`)
     logout()
   }
