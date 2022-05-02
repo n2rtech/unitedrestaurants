@@ -69,8 +69,27 @@ const AddUser = (props) => {
         setTimeout(function() {
           history.push("/dashboard/admin/users-list");
         }, 2500); 
-      })
-         .catch(error => console.log('Form submit error', error))
+      }).catch((error) => {
+        if (error.response) {
+          if(error.response.data.name){
+            setTimeout(() => {
+              toast.error(error.response.data.name);
+          }, 200);
+          }else if(error.response.data.password){
+            setTimeout(() => {
+              toast.error(error.response.data.password);
+          }, 200);
+          }else if(error.response.data.error){
+            setTimeout(() => {
+              toast.error(error.response.data.error);
+          }, 200);
+          } else if(error.response.data.error){
+            setTimeout(() => {
+              toast.error(error.response.data.error);
+          }, 200);
+          }
+        } 
+    });
   };
 
   return (
