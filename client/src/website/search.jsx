@@ -11,25 +11,6 @@ import {useParams} from 'react-router-dom'
 const Home = (props) => {
 
   const params = useParams();
-
-  useMemo(() => {
-  
-    const config = {
-        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
-        };
- 
-    fetch('/api/site-settings/getsettings' , config)
-      .then(res => res.json())
-      .then(
-        (result) => {  
-          
-        },
-        (error) => {
-          
-        }
-        )
-  }, []);
-
   const [featuredData, setFeaturedData] = useState([]);
   const [addSpaces, setAddSpaces] = useState([]);
   const [hotData, setHotData] = useState([]);
@@ -77,7 +58,7 @@ const addDefaultSrc = (ev) => {
         <Col xs="12" className="p-0">     
            <Header countrycode = {params.id}/>
            <SearchBar/>
-    
+    {hotData && hotData.length ? 
       <div className="hotdeals">
        <Container className="p-0"> 
        <h1>hot deals you can't miss</h1>
@@ -131,10 +112,11 @@ const addDefaultSrc = (ev) => {
       {hotData.length > 0 ? '' : <center><h5>There are no listing matching with your search keyword</h5></center>}
     </Container>
     </div>
+    : '' }
 
 
     {/* FEATURED BUSINESSES */}
-    
+    {featuredData && featuredData.length ? 
     <div className="hotdeals">
        <Container className="p-0"> 
        <h1>Featured businesses</h1>
@@ -189,11 +171,12 @@ const addDefaultSrc = (ev) => {
       {featuredData.length > 0 ? '' : <center><h5>There are no listing matching with your search keyword</h5></center>}
     </Container>
     </div>
+    : '' }
     
 
 
           {/* ADVERTISMENT SPACES */}
-
+          {addSpaces && addSpaces.length ? 
       <div className="advertise">
         <Container fluid={true} className="p-0">
           <h2>advertise your business here</h2>
@@ -216,9 +199,10 @@ const addDefaultSrc = (ev) => {
         {addSpaces.length > 0 ? '' : <center><h5>There are no listing matching with your search keyword</h5></center>}
         </Container>
       </div>
+      : '' }
 
       {/* LATEST ADDITIONS */}
-
+      {latestData && latestData.length ?    
       <div className="latestadditions">
        <Container className="p-0"> 
        <h3>latest additions</h3>
@@ -267,6 +251,7 @@ const addDefaultSrc = (ev) => {
       {latestData.length > 0 ? '' : <center><h6 style={{color: "white "}}>There are no listing matching with your search keyword</h6></center>}
     </Container>
     </div>
+    : '' }
 
 
         <Footer />
