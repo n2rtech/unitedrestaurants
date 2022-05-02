@@ -59,8 +59,8 @@ const SearchBar = () => {
 
     const cat = parseInt(catid);
     const address = localStorage.getItem('address') || '';
-    const latitude = parseFloat(localStorage.getItem('latitude') || '');
-    const longitude = parseFloat(localStorage.getItem('longitude') || '');
+    const latitude = parseFloat(localStorage.getItem('latitude') || 0);
+    const longitude = parseFloat(localStorage.getItem('longitude') || 0);
     const country_code = localStorage.getItem('country_code');
 
     if(isNaN(cat)) {

@@ -677,6 +677,19 @@ router.get('/get/:id', (req, res) => {
 });
 
 
+router.get('/getCatById/:id', (req, res) => {
+    Category
+        .findByPk(req.params.id)
+        .then((category) => {
+            if (category == null) {
+                res.status(200).send([])
+            }else{
+            res.status(200).send(category)
+        }
+        })
+});
+
+
 router.get('/getrestaurants/:id', (req, res) => {
 
     var filter = req.query.filter;

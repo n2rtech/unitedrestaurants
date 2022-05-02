@@ -26,16 +26,14 @@ const BusinessListing = (props) => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(6);
   const [filter, setFilter] = useState('');
+  const [categoryName, setCategoryName] = useState('');
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [showPagination, setShowPagination] = useState(false);
   const [loader, setLoader] = useState(<BallTriangle color="#00BFFF" height={100} width={300} />);
   const [showMore, setShowMore] = useState(false);
 
-  console.log("Parameter Id" , params.id);
-
   useEffect(() => {
     const getComments = async () => {
-  console.log('First Step');
       var config1 = {
         method: 'get',
         url: '/api/categories/getrest/'+`${params.id}`,
@@ -119,6 +117,22 @@ const BusinessListing = (props) => {
         setActivePage(result.data.currentPage);
         setPagesCount(result.data.totalPages);
         setShowPagination(((result.data.totalItems > 0 ) ?? true));
+      })
+      .catch(function (error) {
+      });
+
+
+      var config = {
+        method: 'get',
+        url: '/api/categories/getCatById/'+`${params.id}`,
+        headers: { 
+          'Content-Type': 'application/json'
+        }
+      };
+
+      axios(config)
+      .then(function (result) {
+        setCategoryName(result.data.name);
       })
       .catch(function (error) {
       });
@@ -308,7 +322,7 @@ const BusinessListing = (props) => {
         <SearchBar/>
         <Container>
           <div className="hotdeals BusinessListing">
-            <h4>Restaurants</h4>
+            <h4>{categoryName}</h4>
             <Row>
 
             <InfiniteScroll
