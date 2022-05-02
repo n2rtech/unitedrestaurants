@@ -79,7 +79,6 @@ router.get('/', passport.authenticate('vendor', {
 
 // Get Job by ID
 router.get('/:id', (req, res) => {
-    console.log("userid", req.params.id);
     Vendor
         .findByPk(
             req.params.id
