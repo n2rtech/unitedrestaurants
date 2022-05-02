@@ -7,7 +7,7 @@ export const MENUITEMS = [
         menucontent:"Dashboard",
         Items:[
             {
-                title: 'Dashboard', path: `${process.env.PUBLIC_URL}/dashboard`, icon: Layers, type: 'link', active: false,
+                title: 'Dashboard', path: `${process.env.PUBLIC_URL}/dashboard/vendor`, icon: Layers, type: 'link', active: false,
             }
         ]
     },
