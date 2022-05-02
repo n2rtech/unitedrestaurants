@@ -341,17 +341,17 @@ const BusinessListing = (props) => {
                                     <div className="customcard">
                                     <Card>
                                       <div className="hImage">
-                                        <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}`}>
+                                        <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                                           <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} />
                                         </a>
                                       </div>
                                       <CardTitle tag="h5">
-                                        <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}`}>{item.business_name}</a>
+                                        <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>{item.business_name}</a>
                                       </CardTitle>
                                       <CardText>
                                         {showMore ? item.about_business : `${item.about_business.substring(0, 400)}`+'...'}
                                       </CardText>
-                                      <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}`}> SEE DETAILS</a></Button>
+                                      <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}> SEE DETAILS</a></Button>
                                     </Card>
                                   </div>
                                   </Col>
