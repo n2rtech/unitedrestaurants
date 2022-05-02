@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     show_on_home: DataTypes.INTEGER,
     name: DataTypes.STRING,
     content: DataTypes.STRING,
-    image: DataTypes.STRING
+    image: DataTypes.STRING,
+    large_image: DataTypes.STRING,
   }, {
     sequelize,
     paranoid:true,
