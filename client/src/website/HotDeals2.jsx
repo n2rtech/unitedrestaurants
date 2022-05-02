@@ -43,18 +43,18 @@ const addDefaultSrc = (ev) => {
                     <Card key = {i}>
                     <div className="ribbon"><p> {item.discount}% off</p></div>
                     <div className="hImage">
-                      <a href={`#`}>
+                      <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                         <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/${item.banner}`}/>
                       </a>
                     </div>
                     <CardTitle tag="h5">
-                      <a href={`#`}>{item.business_name}</a>
+                      <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>{item.business_name}</a>
                     </CardTitle>
                     
                     <CardText>
                     {(item.about_business.substring(0, 100) + "...")}
                     </CardText>
-                    <Button><a href={`#`}> SEE SALE</a></Button>
+                    <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}> SEE SALE</a></Button>
                   </Card>
               
             </div> 
