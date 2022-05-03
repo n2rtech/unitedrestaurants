@@ -74,8 +74,9 @@ const Logins = (props) => {
         localStorage.setItem('token', user.data.token);
         localStorage.setItem('id', decoded.id);
         localStorage.setItem('name', decoded.name);
+        localStorage.setItem('vendorloggedin', true);
         localStorage.setItem('role', 'vendor');
-	localStorage.setItem('vendor_country_id', decoded.country_id);
+	      localStorage.setItem('vendor_country_id', decoded.country_id);
         window.location.href = `${process.env.PUBLIC_URL}/dashboard/vendor/`
         return user.data;
       }).catch((error) => {
