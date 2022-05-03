@@ -33,6 +33,7 @@ const HomeBlog2 = () => {
 
   return (
       <Container>
+      { blogData && blogData.length ? 
         <div className="blogs-section hotdeals">
           <h4>For you to read</h4>
           <div style={{ position: "relative" }}>
@@ -70,6 +71,7 @@ const HomeBlog2 = () => {
             </Carousel>
           </div>
         </div>
+        : '' }
       </Container>
   )
 }
