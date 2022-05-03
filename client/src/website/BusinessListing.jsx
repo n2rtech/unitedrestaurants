@@ -24,7 +24,7 @@ const BusinessListing = (props) => {
   const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);  
   const [pagesCount, setPagesCount] = useState(0);
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(6);
+  const [size, setSize] = useState(3);
   const [filter, setFilter] = useState('');
   const [categoryName, setCategoryName] = useState('');
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
@@ -71,11 +71,8 @@ const BusinessListing = (props) => {
    const fetchComments = async () => {
 
     let url = `/api/categories/getrest/${params.id}?filter=${filter}&country=${country}&page=${page}&size=${size}`;
-
     const res = await axios.get(url);
-    console.log("fetch Data" , res);
     const data = await res.data.vendors;
-    console.log("fetch Data" , data);
     return data;
    } 
 
@@ -84,11 +81,11 @@ const BusinessListing = (props) => {
 
     setItems([...items, ...commentsFromServer]);
 
-    if(commentsFromServer.length === 0 || commentsFromServer.length < 6) {
+    if(commentsFromServer.length === 0 || commentsFromServer.length < 3) {
       sethasMore(false);
     }
   
-    setPage(page + 4);
+    setPage(page + 1);
  }
 
 
@@ -111,7 +108,7 @@ const BusinessListing = (props) => {
 
       axios(config)
       .then(function (result) {
-        setLoader('There are no business listing available');
+        setLoader('There is no business listing available');
         setVendorData(result.data.vendors);
         setTotalItemsCount(result.data.totalItems);  
         setActivePage(result.data.currentPage);
@@ -358,35 +355,9 @@ const BusinessListing = (props) => {
                                   )) 
                               }
                       </Row>
-            
-
                 </InfiniteScroll>
-
-
-
-              
-
-              
             </Row>  
-             : <p style={{ textAlign:'center' }}>There is listing found!</p> }
-
-            {/* <div className="d-flex justify-content-center">
-              <Pagination
-              activePage={activePage}
-              itemsCountPerPage={size}
-              totalItemsCount={totalItemsCount}
-              pageRangeDisplayed={pageRangeDisplayed}
-              onChange={handlePageChange}
-              itemClass="page-item"
-              linkClass="page-link"
-              prevPageText="Prev"
-              nextPageText="Next"
-              lastPageText="Last"
-              firstPageText="First"
-
-              />
-          </div>    */}
-
+             : <p style={{ textAlign:'center' }}>There is no listing found!</p> }
           </div>
         </Container>
         <Footer2/>
