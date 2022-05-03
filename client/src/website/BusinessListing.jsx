@@ -323,8 +323,8 @@ const BusinessListing = (props) => {
         <Container>
           <div className="hotdeals BusinessListing">
             <h4>{categoryName}</h4>
+            { (items && items.length) ? 
             <Row>
-
             <InfiniteScroll
                     dataLength={items.length} 
                     next={fetchData}
@@ -362,10 +362,13 @@ const BusinessListing = (props) => {
 
                 </InfiniteScroll>
 
+
+
               
 
               
             </Row>  
+             : <p style={{ textAlign:'center' }}>There is listing found!</p> }
 
             {/* <div className="d-flex justify-content-center">
               <Pagination
