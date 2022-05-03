@@ -1,12 +1,36 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Card, CardBody, Button, ButtonGroup } from 'reactstrap'
+import {toast} from 'react-toastify';
+import axios from 'axios'
+import SweetAlert from 'sweetalert2'
 
 const AdminMembershipPackage = (props) => {
 
+  const token = localStorage.getItem("token");
+  const [membershipData, setMembershipData] = useState([]);
+
+  useEffect(() => {
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+    };
+
+    fetch("/api/membership" , config)
+    .then(res => res.json())
+    .then(
+      (result) => { 
+        setMembershipData(result);
+      },
+      (error) => { 
+      });
+  }, []);
+
+
+
   return (
     <Fragment>
-      <Breadcrumb parent="Apps" title="Add Membership Package" />
+      <Breadcrumb parent="Apps" title="Membership Packages" />
       <Container fluid={true}>
         <Card>
           <CardBody>
@@ -15,39 +39,28 @@ const AdminMembershipPackage = (props) => {
                 <thead>
                     <tr>
                         <th scope="col">{"Membership Name"}</th>
+                        <th scope="col">{"Membership Interval"}</th>
+                        <th scope="col">{"Membership Price"}</th>
                         <th scope="col" className="text-right">{"Action"}</th>
                     </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>{"Free"}</td>
+                {membershipData.map((membership , i ) => (
+                  <tr key={i}>
+                    <td>{membership.name}</td>
+                    <td>{membership.interval}</td>
+                    <td>{membership.price}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership/`}>Edit</a> &nbsp;
-                      <Button color="danger">Delete</Button>
-                    </ButtonGroup>
-                      
+                    {
+                      (membership.id == 1 || membership.id === 1) ?
+                      <><a className="btn btn-success" disabled={true}>Edit</a> &nbsp;</>
+                     : <><a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership/${membership.id}`}>Edit</a> &nbsp;</>
+                   }
+                    </ButtonGroup>                      
                     </td>
                   </tr>
-                  <tr>
-                    <td>{"Standard"}</td>
-                    <td className="text-right">
-                    <ButtonGroup>
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership/`}>Edit</a> &nbsp;
-                      <Button color="danger">Delete</Button>
-                    </ButtonGroup>
-                      
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>{"Premium"}</td>
-                    <td className="text-right">
-                    <ButtonGroup>
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership/`}>Edit</a> &nbsp;
-                      <Button color="danger">Delete</Button>
-                    </ButtonGroup>
-                    </td>
-                  </tr>
+                  ))} 
                 </tbody>
               </Table>
             </div>

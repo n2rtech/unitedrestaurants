@@ -445,7 +445,7 @@ export const routes = [
         { path:"/dashboard/admin/video-membership-vendors", Component:VideoMembershipVendors},
         { path:"/dashboard/admin/add-vendor", Component:AddVendor},
         { path:"/dashboard/admin/admin-membership-package", Component:AdminMembershipPackage},
-        { path:"/dashboard/admin/edit-admin-membership", Component:EditAdminMembership},
+        { path:"/dashboard/admin/edit-admin-membership/:id", Component:EditAdminMembership},
         { path:"/dashboard/admin/promotions-discount", Component:PromotionsDiscount},
         { path:"/dashboard/admin/edit-promotions-discount", Component:EditPromotionsDiscount},
         { path:"/app/bookmark", Component:Bookmark},

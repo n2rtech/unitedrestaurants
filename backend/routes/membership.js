@@ -56,19 +56,13 @@ router.post('/', passport.authenticate('jwt', {
 });
 
 // Get List of Memberships
-router.get('/', passport.authenticate('jwt', {
-    session: false
-}), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Membership packages').then((rolePerm) => {
+router.get('/', (req, res) => {
         Membership
             .findAll({})
             .then((memberships) => res.status(200).send(memberships))
             .catch((error) => {
                 res.status(400).send(error);
             });
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
 });
 
 // Get Membership by ID
@@ -92,7 +86,6 @@ router.get('/:id', passport.authenticate('jwt', {
 router.put('/:id', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Membership packages').then((rolePerm) => {
         if (!req.params.id || !req.body.name || !req.body.description) {
             res.status(400).send({
                 msg: 'Please pass Membership ID, name or description.'
@@ -133,9 +126,6 @@ router.put('/:id', passport.authenticate('jwt', {
                     res.status(400).send(error);
                 });
         }
-    }).catch((error) => {
-        res.status(403).send(error);
-    });
 });
 
 // Delete a Membership
