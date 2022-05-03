@@ -6,8 +6,8 @@ import axios from 'axios'
 const VendorEcommerce = (props) => {
 
     const[walletbalance,setWalletBallance] = useState()
-    const token = localStorage.getItem("token");
     useEffect(() => {
+    const token = localStorage.getItem("token");
       const GetData = async () => {
       const config = {
         headers: {'Authorization': 'JWT '+token }
