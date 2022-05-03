@@ -55,6 +55,33 @@ const SearchBar = () => {
     setCatid(event.target.value);
   }
 
+  const setCurrentLocation1 = () => {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {          
+            localStorage.setItem('longitude' , position.coords.longitude);
+            localStorage.setItem('latitude' , position.coords.latitude);
+          document.getElementById('search_address_lat').value=(position.coords.latitude);
+          document.getElementById('search_address_lan').value=(position.coords.longitude);
+          getReverseGeocodingData(position.coords.latitude,position.coords.longitude);
+        });
+      }
+    }
+
+    const  getReverseGeocodingData = (lat, lng) => {
+      var latlng = new window.google.maps.LatLng(lat, lng);
+      var geocoder = new window.google.maps.Geocoder();
+      geocoder.geocode({ 'latLng': latlng },  (results, status) =>{
+        if (status !== window.google.maps.GeocoderStatus.OK) {
+          alert(status);
+        }
+        if (status == window.google.maps.GeocoderStatus.OK) {
+          var address = (results[0].formatted_address);
+          localStorage.setItem('address' , address);
+          document.getElementById('searchAddress').value = address;
+        }
+      });
+    }
+
   const HandleSearch = (searchvalue , catid) => {
 
     const cat = parseInt(catid);
@@ -109,7 +136,7 @@ const SearchBar = () => {
               </div>
               <div className="col-sm-8 p-0">
                 <InputGroup>
-                  <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
+                  <InputGroupAddon onClick={setCurrentLocation1} addonType="prepend"><InputGroupText><i  title="Use my Current Location" className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
                   <Input type="text" defaultValue={address} name="address" id="searchAddress" className="form-control digits" onChange  = {OnChangeSearch} placeholder="Search Address" />                
                   <Input type="hidden" defaultValue={latitude} name="latitude" id="search_address_lat" />                
                   <Input type="hidden" defaultValue={longitude} name="longitude" id="search_address_lan" />                
