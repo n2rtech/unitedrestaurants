@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
 import { Container } from 'reactstrap'
 
-const Header2 = React.lazy(() => import("./header2.jsx"));
-const Footer2 = React.lazy(() => import("./footer2.jsx"));
-const SearchBar = React.lazy(() => import("./SearchBar.jsx"));
+import Header2 from "./header2.jsx";
+import Footer2 from "./footer2.jsx";
+import SearchBar from "./SearchBar.jsx";
 const HotDeals2 = React.lazy(() => import("./HotDeals2.jsx"));
 const Featured2 = React.lazy(() => import("./Featured2.jsx"));
 const Advertise2 = React.lazy(() => import("./Advertise2.jsx"));

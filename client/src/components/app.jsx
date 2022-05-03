@@ -30,13 +30,11 @@ const App = ({children , sidebar}) => {
         <Header/>
         <div className="page-body-wrapper">
           {getSidebar(localStorage.getItem("role"))}
-        z
           <div className="page-body">
             {children}
           </div>
           <Footer/>
         </div>
-      
       </div>
       <ToastContainer/>
     </Fragment>
