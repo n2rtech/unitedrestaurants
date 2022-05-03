@@ -115,7 +115,7 @@ useMemo(() => {
       ) .then(response => {
         toast.success("Vendor details are updated !");
         setTimeout(() => {
-            history.push('/dashboard/admin/all-vendors');
+            history.push('/dashboard/admin/all-vendors/');
           }, 1000);
       })
          .catch(error => console.log('Form submit error', error))

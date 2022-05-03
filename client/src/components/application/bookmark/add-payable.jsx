@@ -29,7 +29,7 @@ const AddAccountsPayable = (props) => {
       ) .then(response => {
         toast.success("Account Payable added !");
         setTimeout(function() {
-          history.push("/dashboard/admin/accounts-payable");
+          history.push("/dashboard/admin/accounts-payable/");
         }, 1500); 
       }).catch(error => console.log('Form submit error', error))
     }

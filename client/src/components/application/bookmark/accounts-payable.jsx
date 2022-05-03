@@ -75,7 +75,7 @@ const AccountsPayable = (props) => {
               <Col sm="6"></Col>
               <Col sm="6">
                 <div className="pull-right">
-                  <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/admin/add-payable`}>Add New</a>
+                  <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/admin/add-payable/`}>Add New</a>
                 </div>
               </Col>
             </Row>
@@ -93,7 +93,7 @@ const AccountsPayable = (props) => {
                     <td>{accPay.name}</td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-payable/${accPay.id}`}>Edit</a> &nbsp;
+                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-payable/${accPay.id}/`}>Edit</a> &nbsp;
                       <Button onClick={() => handleDelete(accPay.id)} color="danger">Delete</Button>
                     </ButtonGroup>                      
                     </td>
