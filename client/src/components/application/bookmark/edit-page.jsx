@@ -52,8 +52,6 @@ const EditPage = () => {
         })
            .catch(error => console.log('Form submit error', error))
 
-           
-  
     };
 
   return (

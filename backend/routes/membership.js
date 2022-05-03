@@ -88,6 +88,55 @@ router.get('/:id', passport.authenticate('jwt', {
         });
 });
 
+// Save Package
+
+
+// Update Membership by ID
+router.put('/savepackage/:id', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+    helper.checkPermission(req.user.role_id, 'Membership packages').then((rolePerm) => {
+        if (!req.params.id || !req.body.name || !req.body.description) {
+            res.status(400).send({
+                msg: 'Please pass name or description.'
+            }) 
+        } else  {
+            Membership
+            .findByPk(req.params.id)
+            .then((membership) => {
+
+                if (req.body.name) {
+                    var slug = req.body.name
+                    .toLowerCase()
+                    .replace(/ /g, '-')
+                    .replace(/[^\w-]+/g, '');
+                }else{
+                    var slug = membership.slug;
+                }
+
+                Membership.update({
+                    name: req.body.name || membership.name,
+                    description: req.body.description || membership.description,
+                    price: req.body.price || membership.price,
+                }, {
+                    where: {
+                        id: req.params.id
+                    }
+                }).then(_ => {
+                    res.status(200).send({
+                        'message': 'Membership updated'
+                    });
+                }).catch(err => res.status(400).send(err));
+            })
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+            }
+    }).catch((error) => {
+        res.status(403).send(error);
+    });
+});
+
 // Update a Membership
 router.put('/:id', passport.authenticate('jwt', {
     session: false
