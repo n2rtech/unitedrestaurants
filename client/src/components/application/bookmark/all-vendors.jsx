@@ -215,7 +215,8 @@ const handleNameChange = e => {
                           <td>{vendor.name}</td>
                           <td className="text-right">
                             <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-vendor/${vendor.id}/`}>Edit</a> &nbsp; 
-                            <a className="btn btn-primary" onClick={() => handleSuspend(vendor.id)}>Suspend</a> &nbsp; 
+                            {  (vendor.is_suspended) ? <> <a className="btn btn-primary">Suspended</a> &nbsp; </>
+                            : <> <a className="btn btn-primary" onClick={() => handleSuspend(vendor.id)}>Suspend</a> &nbsp; </>}
                             <a className="btn btn-danger" onClick={() => handleUnsubscribe(vendor.id)}>Unsubscribe</a>
                           </td>
                         </tr>
