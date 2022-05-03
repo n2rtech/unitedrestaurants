@@ -842,7 +842,8 @@ router.get('/getrest/:category', (req, res) => {
               },              
               attributes: ['id','about_business', 'banner', 'business_name','user_id'],
               offset,
-              limit
+              limit,
+              order: [ [ 'createdAt', 'DESC' ]]
             }
           }else{
             condition = {
@@ -851,11 +852,10 @@ router.get('/getrest/:category', (req, res) => {
               },
               attributes: ['id','about_business', 'banner', 'business_name','user_id'],
               offset,
-              limit
+              limit,
+              order: [ [ 'createdAt', 'DESC' ]]
             }
-          }
-
-         
+          }         
           app.db(table_name)
           .findAndCountAll(condition)
           .then(vendors => {
