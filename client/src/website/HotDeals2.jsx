@@ -39,8 +39,8 @@ const addDefaultSrc = (ev) => {
         <div style={{ position: "relative" }}>
           <Carousel responsive={responsive}>
             {hotData.map((item , i ) => (
-            <div className="customcard">
-                    <Card key = {i}>
+            <div className="customcard" key = {i}>
+                    <Card>
                     <div className="ribbon"><p> {item.discount}% off</p></div>
                     <div className="hImage">
                       <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
