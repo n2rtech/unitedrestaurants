@@ -225,6 +225,10 @@ router.get('/list', (req, res) => {
 
     if (category && !address) {
         var conditions = {
+
+            attributes: [
+            'id','image','user_id'
+            ],
             where:{
                 country_code: { [Op.eq]: req.query.country },
                 categories: {
@@ -241,7 +245,6 @@ router.get('/list', (req, res) => {
             'id','image','user_id',
             [Sequelize.literal(haversine), 'distance'],
             ],
-
             where:{
                 country_code: { [Op.eq]: req.query.country },
                 categories: {
@@ -254,6 +257,11 @@ router.get('/list', (req, res) => {
         }
     }else {
         var conditions = {
+
+            attributes: [
+            'id','image','user_id'
+            ],
+            
             where:{
                 country_code: { [Op.eq]: req.query.country }
             },

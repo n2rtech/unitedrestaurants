@@ -103,3 +103,5 @@ export default Latestadditions2;
       items: 1
     }
   };
+
+  /*src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`}*/

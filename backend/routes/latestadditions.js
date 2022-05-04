@@ -64,8 +64,6 @@ router.get('/', (req, res) => {
         )
     )`;
 
-    // return res.status(200).send(haversine);
-
     var code = req.query.country;
     
     if (code == 'ita') {
@@ -91,6 +89,9 @@ router.get('/', (req, res) => {
     if (category && filter && !address) {
         var conditions = {
 
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
             where:{
                 business_name: {
                     [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
@@ -105,6 +106,9 @@ router.get('/', (req, res) => {
     }else if (category && !address) {
         var conditions = {
 
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
             where:{
                 categories: {
                     [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
@@ -117,7 +121,7 @@ router.get('/', (req, res) => {
         var conditions = {
 
             attributes: [
-            'id','business_name','about_business','user_id',
+            'id','business_name','about_business','banner','createdAt','user_id',
             [Sequelize.literal(haversine), 'distance'],
             ],
 
@@ -132,6 +136,10 @@ router.get('/', (req, res) => {
         }
     }else{
         var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
             limit: 10,
             order: [ ['createdAt', 'DESC' ]]
         }
