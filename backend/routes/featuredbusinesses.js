@@ -392,8 +392,8 @@ router.put('/:id', function (req, res) {
         }
 });
 
-// Delete a HotDeal
-router.delete('/:id', (req, res) => {
+    // Delete a HotDeal
+    router.delete('/:id', (req, res) => {
         if (!req.params.id) {
             res.status(400).send({
                 msg: 'Please pass menuitem ID.'
@@ -422,6 +422,48 @@ router.delete('/:id', (req, res) => {
                     res.status(400).send(error);
                 });
         }
-});
+    });
+
+
+    router.get('/featured/all', (req, res) => {
+
+        code = req.query.country||'usa';
+        const { page, size } = req.query;
+        const { limit, offset } = getPagination(page, size);
+        
+        condition = {
+            attributes: ['id','about_business', 'banner', 'business_name','user_id'],
+            where: {country : code, about_business : {[Op.not]: null}},
+            offset,
+            limit,
+            order: [ [ 'createdAt', 'DESC' ]]
+        }       
+        FeaturedBusiness
+        .findAndCountAll(condition)
+        .then(vendors => {
+            const response = getPagingData(vendors, page, limit);
+            res.status(200).send(response)
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(400).send('error2');
+        });
+    });
+
+
+    const getPagination = (page=1, size) => {
+      const limit = size ? +size : 3;
+      const offset =  (page-1) * limit;
+
+      return { limit, offset };
+  };
+
+  const getPagingData = (data, page, limit) => {
+      const { count: totalItems, rows: vendors } = data;
+      const currentPage = page ? +page : 0;
+      const totalPages = Math.ceil(totalItems / limit);
+
+      return { totalItems, vendors, totalPages, currentPage };
+  };
 
 module.exports = router;

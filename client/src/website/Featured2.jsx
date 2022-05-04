@@ -37,7 +37,7 @@ const Featured2 = () => {
       <div className="hotdeals">
       {featuredData && featuredData.length ? <h1>Featured businesses</h1> : '' }
        {featuredData && featuredData.length > 6 ? <div className="seeall">
-        <a href="/restaurants">SEE ALL</a>
+        <a href="/FeaturedListing">SEE ALL</a>
       </div> : '' }
       
         <div style={{ position: "relative" }}>
@@ -58,7 +58,7 @@ const Featured2 = () => {
                 </CardTitle>
                 
                 <CardText>
-                {(item.about_business.substring(0, 100) + "...")}
+                {(item.about_business && item.about_business.length >= 100) ?(item.about_business.substring(0, 100) + "...") : item.about_business}
                 </CardText>
                 <Button>{ item.user_id == 0 ?  
                     

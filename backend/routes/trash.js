@@ -4,6 +4,7 @@ const Role = require('../models').Role;
 const Vendor = require('../models').Vendor;
 const User = require('../models').User;
 const Blog = require('../models').Blog;
+const ContactInquiry = require('../models').ContactInquiry;
 const Category = require('../models').Category;
 const AccountsPayable = require('../models').AccountsPayable;
 const Country = require('../models').Country;
@@ -55,6 +56,12 @@ router.get('/', (req, res) => {
               paranoid:false
             })
             .then((blogs) => {
+              ContactInquiry
+            .findAll({ 
+              where: {deletedAt: {[Op.ne]: null}},
+              paranoid:false
+            })
+            .then((contactinquiry) => {
               var data = {
                 vendors : vendors,
                 users : users,
@@ -62,8 +69,13 @@ router.get('/', (req, res) => {
                 categories : categories,
                 blogs : blogs,
                 accountpayables : accountspayables,
+                contactinquiry : contactinquiry
               }
               res.status(200).send(data)
+            })
+            .catch((error) => {
+              res.status(400).send('error');
+            });
             })
             .catch((error) => {
               res.status(400).send('error');

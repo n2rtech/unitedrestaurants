@@ -45,6 +45,9 @@ const HomeBlog2 = () => {
       { blogData && blogData.length ? 
         <div className="blogs-section hotdeals">
           <h4>For you to read</h4>
+          {blogData && blogData.length > 2 ?  <div className="seeall">
+        <a href="/bloglist">SEE ALL</a>
+      </div> : '' }
           <div style={{ position: "relative" }}>
             <Carousel responsive={responsive}>
             {blogData.map((blog , i ) => (

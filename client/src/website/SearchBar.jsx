@@ -126,7 +126,7 @@ const SearchBar = () => {
                         options={options}
                         placeholder="Please Select Category"
                     />*/}
-                  <Input type="select" name="select" className="form-control digits" value = {catid} placeholder="Please select categories" onChange = {OnChangecatid}>
+                  <Input type="select" name="select" className="form-control digits" value = {catid ? catid : "0" } placeholder="Please select categories" onChange = {OnChangecatid}>
                   <option value="0">Please Select Category</option>
                     {categories && categories.map((item,i) => (
                         <option key={i} value={item.id}>{item.name}</option>

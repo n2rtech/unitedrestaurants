@@ -34,7 +34,7 @@ const addDefaultSrc = (ev) => {
       <div className="hotdeals">
       {hotData && hotData.length ? <h1>Hot Deals you can't miss</h1> : '' }
       {hotData && hotData.length  > 6 ? <div className="seeall">
-        <a href="/restaurants">SEE ALL</a>
+        <a href="/HotDealsListing">SEE ALL</a>
       </div> : '' }
         <div style={{ position: "relative" }}>
           <Carousel responsive={responsive}>

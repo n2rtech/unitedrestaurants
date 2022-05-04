@@ -19,6 +19,7 @@ import Home from './website/home2'
 import Home2 from './website/home2'
 import Restaurants from './website/restaurants'
 import Blog from './website/blog'
+import Bloglist from './website/bloglist'
 import Details from './website/resturent/details'
 import NewDetails from './website/resturent/newdetails'
 import Blogdetails from './website/blog/blogdetails'
@@ -29,6 +30,8 @@ import Customerservices from './website/customerservices'
 import Technicalsupport from './website/technicalsupport'
 import Sales from './website/sales'
 import BusinessListing from './website/BusinessListing'
+import FeaturedListing from './website/FeaturedListing'
+import HotDealsListing from './website/HotDealsListing'
 import LatestListing from './website/LatestListing'
 import BusinessDetails from './website/BusinessDetails'
 import Privacypolicy from './website/privacypolicy'
@@ -88,6 +91,7 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/blog/blogdetails/:id`} component={Blogdetails} />
            <Route  path={`${process.env.PUBLIC_URL}/restaurants`} component={Restaurants} />
            <Route  path={`${process.env.PUBLIC_URL}/blog`} component={Blog} />
+           <Route  path={`${process.env.PUBLIC_URL}/bloglist`} component={Bloglist} />
            <Route  path={`${process.env.PUBLIC_URL}/searchresturent`} component={Searchresturent} />
            <Route  path={`${process.env.PUBLIC_URL}/gallery`} component={Gallery} />
            <Route  path={`${process.env.PUBLIC_URL}/aboutus`} component={Aboutus} />
@@ -95,6 +99,8 @@ const Root = (props) =>  {
            <Route  path={`${process.env.PUBLIC_URL}/technicalsupport`} component={Technicalsupport} />
            <Route  path={`${process.env.PUBLIC_URL}/sales`} component={Sales} />
            <Route  path={`${process.env.PUBLIC_URL}/BusinessListing/:id`} component={BusinessListing} />
+           <Route  path={`${process.env.PUBLIC_URL}/FeaturedListing`} component={FeaturedListing} />
+           <Route  path={`${process.env.PUBLIC_URL}/HotDealsListing`} component={HotDealsListing} />
            <Route  path={`${process.env.PUBLIC_URL}/LatestListing`} component={LatestListing} />
            <Route  path={`${process.env.PUBLIC_URL}/BusinessDetails/:id`} component={BusinessDetails} />
            <Route  path={`${process.env.PUBLIC_URL}/privacypolicy`} component={Privacypolicy} />

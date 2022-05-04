@@ -320,7 +320,7 @@ const LatestListing = (props) => {
         <SearchBar/>
         <Container>
           <div className="hotdeals LatestListing">
-            <h4>{categoryName}</h4>
+            <h4>{'LATEST ADDITIONS'}</h4>
             { (items && items.length) ? 
             <Row>
             <InfiniteScroll
