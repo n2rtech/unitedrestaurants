@@ -138,7 +138,7 @@ router.get('/', (req, res) => {
             attributes: [
             'id','business_name','about_business','banner','createdAt','user_id'
             ],
-            limit: parseInt(req.query.size),
+            limit: 10,
             order: [ ['createdAt', 'DESC' ]]
         }
     }
