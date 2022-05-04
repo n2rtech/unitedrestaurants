@@ -3,6 +3,9 @@ import Carousel from "react-multi-carousel";
 import { Container, Col, Card, CardTitle, CardText, Button} from 'reactstrap'
 import "react-multi-carousel/lib/styles.css";
 import moment from 'moment';
+import axios from 'axios';
+
+
 const HomeBlog2 = () => {
 
   const [blogData, setBlogData] = useState([]);
@@ -12,18 +15,24 @@ const HomeBlog2 = () => {
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
+
+        await axios.get('/api/blogs/get' , config)
+        .then((getData) => {
+          setBlogData(getData.data);
+        });
+
  
-    await fetch("/api/blogs/get" , config)
+    /*await fetch("/api/blogs/get" , config)
       .then(res => res.json())
       .then(
         (result) => {
           
-          setBlogData(result);
+          // setBlogData(result);
         },
         (error) => {
           
         }
-      )
+      )*/
   }, []);
 
   const addDefaultSrc = (ev) => {
@@ -41,7 +50,6 @@ const HomeBlog2 = () => {
             {blogData.map((blog , i ) => (
 
               <div className="customcard" key={i}>
-                { blog.show_on_home  == 1 ? 
                 <Card>
                   <div className="hImage">
                   <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`}>
@@ -60,11 +68,6 @@ const HomeBlog2 = () => {
                   </CardText>
                   <Button><a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`} className="readmore">READ MORE</a></Button>
                 </Card>
-                :
-              
-                ''
-              
-              }
               
               </div> 
                ))}

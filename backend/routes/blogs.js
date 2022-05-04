@@ -133,8 +133,10 @@ router.get('/', passport.authenticate('jwt', {
 router.get('/get', (req, res) => { 
     Blog
     .findAll({
-        where:{show_on_home:1},
-        order: [ [ 'createdAt', 'DESC' ]]
+       attributes: ['id','content','image','user_id'],
+       where:{show_on_home:1},
+       limit: 5,
+       order: [ [ 'createdAt', 'DESC' ]]
     })
     .then((blog) => res.status(200).send(blog))
     .catch((error) => {
