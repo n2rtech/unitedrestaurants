@@ -46,7 +46,7 @@ const Featured2 = () => {
             <div className="customcard" key={i}>
               <Card> 
                 <div className="hImage">
-                <a href={`${process.env.PUBLIC_URL}/resturent/details/${item.user_id}`}>
+                <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
                      alt="Menu-Icon"/>
                       </a>
