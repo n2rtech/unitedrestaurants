@@ -63,9 +63,13 @@ const HomeBlog2 = () => {
                   <p>
                     {moment(blog.createdAt).fromNow()}
                   </p>
-                  <CardText>
-                     <div dangerouslySetInnerHTML={{__html: `<p>${(blog.content).substring(0, 270)}...</p>`}} />
-                  </CardText>
+                  { (blog.content.length <= 270) ?
+                    <CardText dangerouslySetInnerHTML={{__html: `${(blog.content).substring(0, 270)}`}}>
+                    </CardText> 
+                    : 
+                    <CardText dangerouslySetInnerHTML={{__html: `${(blog.content).substring(0, 270)} ...`}}>
+                    </CardText>
+                  }
                   <Button><a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`} className="readmore">READ MORE</a></Button>
                 </Card>
               

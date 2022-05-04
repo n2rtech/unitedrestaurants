@@ -133,7 +133,7 @@ router.get('/', passport.authenticate('jwt', {
 router.get('/get', (req, res) => { 
     Blog
     .findAll({
-       attributes: ['id','content','image','user_id'],
+        attributes: ['id','content','image','user_id','createdAt'],
        where:{show_on_home:1},
        limit: 5,
        order: [ [ 'createdAt', 'DESC' ]]
