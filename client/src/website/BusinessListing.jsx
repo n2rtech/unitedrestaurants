@@ -6,8 +6,6 @@ import Carousel from "react-multi-carousel";
 import { Container, Row, Col, Card, CardTitle, CardText, Button } from 'reactstrap'
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { BallTriangle } from  'react-loader-spinner'
-import Pagination from "react-js-pagination";
 import "react-multi-carousel/lib/styles.css";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -18,18 +16,11 @@ const BusinessListing = (props) => {
   const [items , setItems] = useState([]);
   const [hasMore, sethasMore] = useState(true);
 
-  const [vendorData, setVendorData] = useState([]);
-  const [activePage, setActivePage] = useState(0);
-  const [totalItemsCount, setTotalItemsCount] = useState(0); 
-  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);  
-  const [pagesCount, setPagesCount] = useState(0);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(3);
   const [filter, setFilter] = useState('');
   const [categoryName, setCategoryName] = useState('');
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
-  const [showPagination, setShowPagination] = useState(false);
-  const [loader, setLoader] = useState(<BallTriangle color="#00BFFF" height={100} width={300} />);
   const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
@@ -51,14 +42,7 @@ const BusinessListing = (props) => {
 
       await axios(config1)
       .then(function (result) {
-        console.log("START WITH FINISH END");
-        setLoader('There are no business listing available');
         setItems(result.data.vendors);
-        setVendorData(result.data.vendors);
-        setTotalItemsCount(result.data.totalItems);  
-        setActivePage(result.data.currentPage);
-        setPagesCount(result.data.totalPages);
-        setShowPagination(((result.data.totalItems > 0 ) ?? true));
       })
       .catch(function (error) {
       });
@@ -92,35 +76,6 @@ const BusinessListing = (props) => {
 
   useEffect(() => {
 
-
-      // var config = {
-      //   method: 'get',
-      //   url: '/api/categories/getrest/'+`${params.id}`,
-      //   headers: { 
-      //     'Content-Type': 'application/json'
-      //   },
-      //   params : {
-      //     'filter': filter,
-      //     'country': country,
-      //     'page': page,
-      //     'size': size,
-      //     'new' : 2
-      //   }
-      // };
-
-      // axios(config)
-      // .then(function (result) {
-      //   setLoader('There is no business listing available');
-      //   setVendorData(result.data.vendors);
-      //   setTotalItemsCount(result.data.totalItems);  
-      //   setActivePage(result.data.currentPage);
-      //   setPagesCount(result.data.totalPages);
-      //   setShowPagination(((result.data.totalItems > 0 ) ?? true));
-      // })
-      // .catch(function (error) {
-      // });
-
-
       var config = {
         method: 'get',
         url: '/api/categories/getCatById/'+`${params.id}`,
@@ -140,179 +95,6 @@ const BusinessListing = (props) => {
 
   const addDefaultSrc = (ev) => {
     ev.target.src = `${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`;
-  }
-
-  const handlePreviousClick = (e) => {
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'page': activePage-1,
-        'size': size
-      }
-    };
-
-    axios(config)
-    .then(function (result) {
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    })
-    .catch(function (error) {
-    });
-
-  };
-
-
-  const handleNextClick = (e) => {
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'filter': filter,
-        'country': country,
-        'page': activePage+1,
-        'size': size
-      }
-    };
-
-    axios(config)
-    .then(function (result) {
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    })
-    .catch(function (error) {
-    });
-
-  };
-
-  const handlePageClick = (e, pageNumber) => {
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'filter': filter,
-        'country': country,
-        'page': pageNumber+1,
-        'size': size
-      }
-    };
-
-    axios(config)
-    .then(function (result) {
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    })
-    .catch(function (error) {
-
-    });
-
-  };
-
-  const handleFirstClick = (e) => {
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'filter'  : filter,
-        'country' : country,
-        'page'    : page,
-        'size'    : size
-      }
-    };
-
-    axios(config)
-    .then(function (result) {
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    })
-    .catch(function (error) {
-    }); 
-
-  };
-
-  const handleLastClick = (e) => {
-
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`+'?filter='+filter+'&country='+country+'&page='+pagesCount+'&size='+size,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'filter': filter,
-        'country': country,
-        'page': pagesCount,
-        'size': size
-      }
-    };
-
-    axios(config)
-    .then(function (result) {
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    })
-    .catch(function (error) {
-    }); 
-
-  };
-
-
-  const handlePageChange = (pageNumber) => {
-
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'filter': filter,
-        'country': country,
-        'page': pageNumber,
-        'size': size
-      }
-    };
-
-    axios(config)
-    .then(result=>{
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    });
   }
 
   return (
