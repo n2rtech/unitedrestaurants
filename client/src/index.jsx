@@ -1,5 +1,5 @@
 import React, { Fragment,useState } from 'react'
-import ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom';
 import './index.scss';
 import {auth0} from './data/config';
 import {BrowserRouter,Switch,Route,Redirect} from 'react-router-dom'
@@ -71,7 +71,6 @@ const Root = (props) =>  {
         <Provider store={store}>
         <BrowserRouter basename={`/`}>
         <Switch>
-          {/*<Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />*/}
           <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home2} />
           <Route exact path={`${process.env.PUBLIC_URL}/search/:id`} component={Search} />
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
@@ -119,48 +118,39 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/resetPwd`} component={Resetpwd}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/errors/error400`} component={Error400}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/maintenance`} component={Maintenance}></Route>
-          
           <Route  path={`${process.env.PUBLIC_URL}/callback`} render={() => <Callback/>} />
-
-        
           <Route exact path={`${process.env.PUBLIC_URL}/:any`} render={() => <Error404/>} />
-
           <Route exact path={`${process.env.PUBLIC_URL}/admin/login`} render={() => <Error404/>} />
-
-          {/* <Route exact path={`${process.env.PUBLIC_URL}/:any/:any`} render={() => <Error404/>} /> */}
-
+          <Route exact path={`${process.env.PUBLIC_URL}/vendor/:any`} render={() => <Error404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/admin/:any`} render={() => <Error404/>} />
           {currentUser !== null || authenticated || jwt_token  ?
-          
-          <App>
-          <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
-            if(localStorage.getItem("role") === 'admin') {
-              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/admin/`} />)
-            } else {
-              return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/vendor/`} />)
-            }
+              <App>
+              <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
+                if(localStorage.getItem("role") === 'admin') {
+                  return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/admin/`} />)
+                } else {
+                  return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/vendor/`} />)
+                }   
+              }} /> 
+              <TransitionGroup>
+                  {routes.map(({ path, Component }) => (
+                    <Route key={path}  exact path={`${process.env.PUBLIC_URL}${path}`}>
+                        {({ match }) => (
+                            <CSSTransition 
+                              in={match != null}
+                              timeout={100}
+                              classNames={anim} 
+                              unmountOnExit>
+                              <div><Component/></div>
+                            </CSSTransition> 
+                        )}
+                    </Route>
+                    ))}
+              </TransitionGroup> 
               
-          }} /> 
-          <TransitionGroup>
-              {routes.map(({ path, Component }) => (
-                <Route key={path}  exact  path={`${process.env.PUBLIC_URL}${path}`}>
-                    {({ match }) => (
-                        <CSSTransition 
-                          in={match != null}
-                          timeout={100}
-                          classNames={anim} 
-                          unmountOnExit>
-                          <div><Component/></div>
-                        </CSSTransition> 
-                    )}
-                </Route>
-                ))}
-          </TransitionGroup> 
-          
-          </App>
-          :
-          <Redirect to={`${process.env.PUBLIC_URL}/home/usa`} />
-
-
+              </App>
+            :
+                <Redirect to={`${process.env.PUBLIC_URL}/home/usa`} />
           }      
         </Switch>
        

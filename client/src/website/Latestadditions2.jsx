@@ -6,7 +6,6 @@ import axios from 'axios';
 
 const Latestadditions2 = (props) => {
   const [latestData, setLatestData] = useState([]);
-  const code = localStorage.getItem('country_code');
   useEffect(() => {
     const code = localStorage.getItem('country_code');
   
@@ -14,10 +13,16 @@ const Latestadditions2 = (props) => {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
 
-          axios.get('/api/latest-additions?country='+`${code}` , config)
+        async function getResult() {
+          await axios.get('/api/latest-additions?country='+`${code}` , config)
           .then((getData) => {
             setLatestData(getData.data);
           });
+        }
+
+        getResult();
+
+         
 
   }, []);
 

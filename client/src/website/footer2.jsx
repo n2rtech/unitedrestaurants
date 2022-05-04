@@ -6,13 +6,13 @@ const Footer2 = (props) => {
 
 	const [socialdata, setSocialData] = useState([]);
 
-  useMemo(() => {
+  useMemo( async() => {
   
     const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNjcwMzYxOCwiZXhwIjoxNjY4MjYwNTQ0fQ.eIG5Q29TaWU_B3-SpXQp38ROC3lO7dRCUTog5wkPWwQ'}
         };
  
-    fetch('/api/site-settings/getsettings' , config)
+    await fetch('/api/site-settings/getsettings' , config)
       .then(res => res.json())
       .then(
         (result) => {  
