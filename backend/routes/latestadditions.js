@@ -68,7 +68,7 @@ router.get('/', (req, res) => {
     
     if (code == 'ita') {
         var table_name = 'VendorIta';
-    }else{
+    } else {
         if(Array.isArray(code)) {
             var codee = code[0].charAt(0).toUpperCase() + code[0].slice(1);
         } else {
@@ -81,7 +81,6 @@ router.get('/', (req, res) => {
     if (table_name == 'VendorNull') {
         var table_name = 'VendorIta';
     }
-
 
     var category = req.query.category;
     var filter = req.query.filter;
@@ -103,7 +102,7 @@ router.get('/', (req, res) => {
             limit: 10,
             order: [ ['createdAt', 'DESC' ]]
         }
-    }else if (category && !address) {
+    } else if (category && !address) {
         var conditions = {
 
             attributes: [
@@ -117,7 +116,7 @@ router.get('/', (req, res) => {
             limit: 10,
             order: [ ['createdAt', 'DESC' ]]
         }
-    }else if (address) {
+    } else if (address) {
         var conditions = {
 
             attributes: [
@@ -134,13 +133,12 @@ router.get('/', (req, res) => {
             order: [ ['createdAt', 'DESC'] ],
             having: Sequelize.literal(`distance <= 50`),
         }
-    }else{
+    } else {
         var conditions = {
-
             attributes: [
             'id','business_name','about_business','banner','createdAt','user_id'
             ],
-            limit: 10,
+            limit: parseInt(req.query.size),
             order: [ ['createdAt', 'DESC' ]]
         }
     }
@@ -153,8 +151,6 @@ router.get('/', (req, res) => {
     });
 });
 
-
-
 router.get('/list/:id', (req, res) => {   
     HotDeal
     .findAll({where:{user_id:req.params.id}})
@@ -163,9 +159,6 @@ router.get('/list/:id', (req, res) => {
         res.status(400).send(error);
     });
 });
-
-
-
 
 // Get HotDeal by ID
 router.get('/:id', (req, res) => {

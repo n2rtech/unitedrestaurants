@@ -1,305 +1,121 @@
-import React,{useState,useMemo} from 'react';
-import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText, List, Button } from 'reactstrap'
+import React,{useState,useEffect} from 'react';
+import { Container, Row, Col, Card, CardTitle, CardText, Button } from 'reactstrap'
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { BallTriangle } from  'react-loader-spinner'
-import Pagination from "react-js-pagination";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Restaurantlist = (props) => {
   const params = useParams();
+  const [items , setItems] = useState([]);
+  const [hasMore, sethasMore] = useState(true);
 
-  const [vendorData, setVendorData] = useState([]);
-  const [activePage, setActivePage] = useState(0);
-  const [totalItemsCount, setTotalItemsCount] = useState(0); 
-  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);  
-  const [pagesCount, setPagesCount] = useState(0);
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(100);
+  const [size, setSize] = useState(3);
   const [filter, setFilter] = useState('');
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
-  const [showPagination, setShowPagination] = useState(false);
-  const [loader, setLoader] = useState(<BallTriangle color="#00BFFF" height={100} width={300} />);
+  const [showMore, setShowMore] = useState(false);
+  
+  useEffect(() => {
+    const getComments = async () => {
+      var config1 = {
+        method: 'get',
+        url: '/api/latest-additions?country='+`${country}`,
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        params : {
+          'filter': filter,
+          'country': country,
+          'page': page,
+          'size': size
+        }
+      };
 
+      await axios(config1)
+      .then(function (result) {
+        setItems(result.data);
+      })
+      .catch(function (error) {
+      });
 
-  useMemo(() => {
-
-    setTimeout(async () => {
-    var config = {
-      method: 'get',
-      url: '/api/latest-additions?country='+`${country}`,
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      params : {
-        'filter': filter,
-        'country': country,
-        'page': page,
-        'size': size
-      }
     };
+    setPage(page + 1);
+    getComments();
+   }, []);
 
-    axios(config)
-    .then(function (result) {
-      setLoader('There are no business listing available');
-      setVendorData(result.data);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    })
-    .catch(function (error) {
-    });
-    }, 400)
-  }, []);
+
+   const fetchComments = async () => {
+
+    let url = '/api/latest-additions?country='+`${country}`+`?filter=${filter}&country=${country}&page=${page}&size=${size}`;
+    const res = await axios.get(url);
+    const data = res.data;
+    return data;
+   } 
+
+   const fetchData =  async () => {
+    const commentsFromServer = await fetchComments();
+
+    setItems([...items, ...commentsFromServer]);
+
+    if(commentsFromServer.length === 0 || commentsFromServer.length < 3) {
+      sethasMore(false);
+    }
+  
+    setPage(page + 1);
+ }
 
   const addDefaultSrc = (ev) => {
     ev.target.src = `${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`;
   }
 
-  const handlePreviousClick = (e) => {
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'page': activePage-1,
-        'size': size
-      }
-    };
-
-    axios(config)
-    .then(function (result) {
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    })
-    .catch(function (error) {
-    });
-
-  };
-
-
-  const handleNextClick = (e) => {
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'filter': filter,
-        'country': country,
-        'page': activePage+1,
-        'size': size
-      }
-    };
-
-    axios(config)
-    .then(function (result) {
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    })
-    .catch(function (error) {
-    });
-
-  };
-
-  const handlePageClick = (e, pageNumber) => {
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'filter': filter,
-        'country': country,
-        'page': pageNumber+1,
-        'size': size
-      }
-    };
-
-    axios(config)
-    .then(function (result) {
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    })
-    .catch(function (error) {
-
-    });
-
-  };
-
-  const handleFirstClick = (e) => {
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'filter'  : filter,
-        'country' : country,
-        'page'    : page,
-        'size'    : size
-      }
-    };
-
-    axios(config)
-    .then(function (result) {
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    })
-    .catch(function (error) {
-    }); 
-
-  };
-
-  const handleLastClick = (e) => {
-
-    e.preventDefault();
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`+'?filter='+filter+'&country='+country+'&page='+pagesCount+'&size='+size,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'filter': filter,
-        'country': country,
-        'page': pagesCount,
-        'size': size
-      }
-    };
-
-    axios(config)
-    .then(function (result) {
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-    })
-    .catch(function (error) {
-    }); 
-
-  };
-
-
-    const handlePageChange = (pageNumber) => {
-
-    var config = {
-      method: 'get',
-      url: '/api/categories/getrest/'+`${params.id}`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params : {
-        'filter': filter,
-        'country': country,
-        'page': pageNumber,
-        'size': size
-      }
-    };
-
-    axios(config)
-  .then(result=>{
-      setVendorData(result.data.vendors);
-      setTotalItemsCount(result.data.totalItems);  
-      setActivePage(result.data.currentPage);
-      setPagesCount(result.data.totalPages);
-      setShowPagination(((result.data.totalItems > 0 ) ?? true));
-  });
-}
+  console.log("Items Length" , items);
 
   return (
     <div className="resturentlist">
       <h1>{params.cat}</h1>              
       <Container className="p-0">
         <div className="hr">
-      <img src={`${process.env.PUBLIC_URL}/assets/images/hr.png`} 
-                     alt="Menu-Icon"/>
-       </div>
+          <img src={`${process.env.PUBLIC_URL}/assets/images/hr.png`} alt="Menu-Icon"/>
+        </div>
+
+        { (items && items.length) ? 
       <Row className="m-0">
-      { vendorData.length > 0 ? (vendorData).map((item , i) => (
-           <Col sm="4" xs="12" key={i}>     
-           <div className="customcard">
-           <Card>
-             <CardBody>
-               <Row>    
-                 <Col sm="12" xs="12">
-                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
-                    <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} alt="Menu-Icon"/></a>
-                 </Col>
-                  
-                 <Col sm="12" xs="12">
-                  <CardTitle tag="h5">
-                    <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}></a>
-                  </CardTitle>
-                  <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                  > {item.business_name}
-                  </CardSubtitle>
-                  </Col>
-                  </Row>
-                  <CardText>
-                      {item.about_business}
-                  </CardText>
-
-                  { item.user_id == 0 ?  
-                     <Button>
-                      <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}_${localStorage.getItem('country_code')}`}>
-                          VIEW
-                      </a> </Button> 
-                    : 
-                       <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
-                       VIEW
-                        </a></Button>
-                   }
-                
-                </CardBody>
-              </Card>
-             </div>
-         </Col>
-      )) : <Col style={{padding: "16px",display: "flex", 'align-items': "center", 'flex-wrap': "wrap",'justify-content': "center"}}><center>{loader}</center></Col> }
-       
-        <Col sm="12" xs="12">
-          <div className="d-flex justify-content-center">
-                        <Pagination
-                        activePage={activePage}
-                        itemsCountPerPage={size}
-                        totalItemsCount={totalItemsCount}
-                        pageRangeDisplayed={pageRangeDisplayed}
-                        onChange={handlePageChange}
-                        itemClass="page-item"
-                        linkClass="page-link"
-                        prevPageText="Prev"
-                        nextPageText="Next"
-                        lastPageText="Last"
-                        firstPageText="First"
-
-                        />
-                    </div> 
-        </Col>
-        </Row>
+        <InfiniteScroll
+                    dataLength={items.length} 
+                    next={fetchData}
+                    hasMore={hasMore}
+                    loader={<h4></h4>}
+                    endMessage={
+                      <p style={{ textAlign: 'center' }}>
+                        <b>Yay! You have seen it all</b>
+                      </p>
+                    }>
+                      <Row>
+                              { (items).map((item , i) => (
+                                <Col sm="4" key={i}>
+                                    <div className="customcard">
+                                    <Card>
+                                      <div className="hImage">
+                                        <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
+                                          <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} />
+                                        </a>
+                                      </div>
+                                      <CardTitle tag="h5">
+                                        <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>{item.business_name}</a>
+                                      </CardTitle>
+                                      <CardText>
+                                        {showMore ? item.about_business : `${item.about_business.substring(0, 400)}`+'...'}
+                                      </CardText>
+                                      <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}> SEE DETAILS</a></Button>
+                                    </Card>
+                                  </div>
+                                  </Col>
+                                  )) 
+                              }
+                      </Row>
+                </InfiniteScroll>
+      </Row>
+      : <p style={{ textAlign:'center' }}>There is no listing found!</p> }
       </Container>
     </div>
   );
