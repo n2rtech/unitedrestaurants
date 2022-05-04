@@ -130,7 +130,7 @@ const BusinessListing = (props) => {
                                         <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>{item.business_name}</a>
                                       </CardTitle>
                                       <CardText>
-                                        {showMore ? item.about_business : `${item.about_business.substring(0, 400)}`+'...'}
+                                        {(item.about_business && item.about_business.length <= 400) ? item.about_business : `${item.about_business.substring(0, 400)}`+'...'}
                                       </CardText>
                                       <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}> SEE DETAILS</a></Button>
                                     </Card>
