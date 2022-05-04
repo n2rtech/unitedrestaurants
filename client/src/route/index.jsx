@@ -269,6 +269,7 @@ import Todo from "../components/application/todo-app"
 
 // todo-firebase-app
 import TodoFirebase from "../components/application/todo-firebase-app"
+import Error404 from '../pages/errors/error404'
    
 
 
@@ -278,10 +279,10 @@ export const routes = [
         { path:"/oauth2callback", Component:YoutubeCallback },
 
 
-        { path:"/dashboard/admin/", Component:AdminDefault},
+        localStorage.getItem('adminloggedin') === 'true' ? { path:"/dashboard/admin/", Component:AdminDefault} : { path:"/dashboard/admin/", Component:Error404},
+        localStorage.getItem('vendorloggedin') === 'true' ? { path:"/dashboard/vendor/", Component:VendorEcommerce} : { path:"/dashboard/vendor/", Component:Error404},
         { path:"/dashboard/admin/pages", Component:pagesList},
         { path:"/dashboard/default/", Component:Default},
-        { path:"/dashboard/vendor/", Component:VendorEcommerce},
         { path:"/dashboard/user/", Component:User},
         { path:"/dashboard/", Component:Ecommerce},
 

@@ -21,22 +21,66 @@ const getSidebar = (role) => {
   }
 }
 
+console.info('ssdsd', localStorage.getItem('adminloggedin'));
+
 const App = ({children , sidebar}) => {
   return (
     <Fragment>
-      <Loader/>
-      <Taptop/>
-      <div className="page-wrapper compact-wrapper" id="pageWrapper">
-        <Header/>
-        <div className="page-body-wrapper">
-          {getSidebar(localStorage.getItem("role"))}
-          <div className="page-body">
-            {children}
+      {   localStorage.getItem('adminloggedin') === 'true'
+          ? 
+          <div>
+                <Loader/>
+                <Taptop/>
+                <div className="page-wrapper compact-wrapper" id="pageWrapper">
+                  <Header/>
+                  <div className="page-body-wrapper">
+                    {getSidebar(localStorage.getItem("role"))}
+                    <div className="page-body">
+                      {children}
+                    </div>
+                    <Footer/>
+                  </div>
+                </div>
+                <ToastContainer/>
           </div>
-          <Footer/>
-        </div>
-      </div>
-      <ToastContainer/>
+          
+          :
+
+          localStorage.getItem('vendorloggedin') === 'true' ?
+
+                <div>
+                    <Loader/>
+                    <Taptop/>
+                    <div className="page-wrapper compact-wrapper" id="pageWrapper">
+                      <Header/>
+                      <div className="page-body-wrapper">
+                        {getSidebar(localStorage.getItem("role"))}
+                        <div className="page-body">
+                          {children}
+                        </div>
+                        <Footer/>
+                      </div>
+                    </div>
+                    <ToastContainer/>
+                </div> 
+
+                : 
+                
+                <div>
+                      <Loader/>
+                      <Taptop/>
+                        <div className="page-body-wrapper">
+                          <div className="page-body">
+                            {children}
+                          </div>
+                        </div>
+                      <ToastContainer/>
+                </div> 
+
+          
+      }
+
+      
     </Fragment>
   );
 }
