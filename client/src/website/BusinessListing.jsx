@@ -44,11 +44,12 @@ const BusinessListing = (props) => {
           'filter': filter,
           'country': country,
           'page': page,
-          'size': size
+          'size': size,
+          'new' : 1
         }
       };
 
-      axios(config1)
+      await axios(config1)
       .then(function (result) {
         console.log("START WITH FINISH END");
         setLoader('There are no business listing available');
@@ -64,7 +65,7 @@ const BusinessListing = (props) => {
 
   
     };
-  
+    setPage(page + 1);
     getComments();
    }, []);
 
@@ -72,7 +73,7 @@ const BusinessListing = (props) => {
 
     let url = `/api/categories/getrest/${params.id}?filter=${filter}&country=${country}&page=${page}&size=${size}`;
     const res = await axios.get(url);
-    const data = await res.data.vendors;
+    const data = res.data.vendors;
     return data;
    } 
 
@@ -92,31 +93,32 @@ const BusinessListing = (props) => {
   useEffect(() => {
 
 
-      var config = {
-        method: 'get',
-        url: '/api/categories/getrest/'+`${params.id}`,
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        params : {
-          'filter': filter,
-          'country': country,
-          'page': page,
-          'size': size
-        }
-      };
+      // var config = {
+      //   method: 'get',
+      //   url: '/api/categories/getrest/'+`${params.id}`,
+      //   headers: { 
+      //     'Content-Type': 'application/json'
+      //   },
+      //   params : {
+      //     'filter': filter,
+      //     'country': country,
+      //     'page': page,
+      //     'size': size,
+      //     'new' : 2
+      //   }
+      // };
 
-      axios(config)
-      .then(function (result) {
-        setLoader('There is no business listing available');
-        setVendorData(result.data.vendors);
-        setTotalItemsCount(result.data.totalItems);  
-        setActivePage(result.data.currentPage);
-        setPagesCount(result.data.totalPages);
-        setShowPagination(((result.data.totalItems > 0 ) ?? true));
-      })
-      .catch(function (error) {
-      });
+      // axios(config)
+      // .then(function (result) {
+      //   setLoader('There is no business listing available');
+      //   setVendorData(result.data.vendors);
+      //   setTotalItemsCount(result.data.totalItems);  
+      //   setActivePage(result.data.currentPage);
+      //   setPagesCount(result.data.totalPages);
+      //   setShowPagination(((result.data.totalItems > 0 ) ?? true));
+      // })
+      // .catch(function (error) {
+      // });
 
 
       var config = {
