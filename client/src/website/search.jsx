@@ -63,7 +63,7 @@ const addDefaultSrc = (ev) => {
        <Container className="p-0"> 
        <h1>hot deals you can't miss</h1>
        {hotData.length > 6 ? <div className="seeall">
-        <a href="/restaurants">SEE ALL</a>
+        <a href="/HotDealsListing">SEE ALL</a>
       </div> : '' }
        
       <div style={{ position: "relative" }}>
@@ -121,7 +121,7 @@ const addDefaultSrc = (ev) => {
        <Container className="p-0"> 
        <h1>Featured businesses</h1>
        {featuredData.length > 6 ? <div className="seeall">
-        <a href="/restaurants">SEE ALL</a>
+        <a href="/FeaturedListing">SEE ALL</a>
       </div> : '' }
       <div style={{ position: "relative" }}>
         <Carousel responsive={responsive}>
