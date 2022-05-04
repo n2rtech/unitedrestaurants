@@ -1,15 +1,12 @@
-import React from 'react';
+import React,{useState,useMemo,Fragment} from 'react';
 import { Container, Row, Col} from 'reactstrap'
 import './css/header.css'
 import Logo from './Logo.jsx'
 import Navbarmenu from './Navbar.jsx'
-
-// import HeaderSocial from './HeaderSocial';
+import GoogleTranslate from './googletranslate';
+import HeaderSocial from './HeaderSocial';
 import SiteHeading from './SiteHeading';
 import Countryflag from './countryflag';
-
-const GoogleTranslate = React.lazy(() => import("./googletranslate.jsx")); 
-const HeaderSocial = React.lazy(() => import("./HeaderSocial.jsx"));
                       
   const Header2 = () => {
 

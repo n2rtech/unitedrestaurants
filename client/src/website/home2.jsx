@@ -1,10 +1,14 @@
-import React, { lazy,Suspense } from "react";
+import React, { Suspense } from "react";
 import { Container } from 'reactstrap'
 
 import Header2 from "./header2.jsx";
 import Footer2 from "./footer2.jsx";
 import SearchBar from "./SearchBar.jsx";
-
+const HotDeals2 = React.lazy(() => import("./HotDeals2.jsx"));
+const Featured2 = React.lazy(() => import("./Featured2.jsx"));
+const Advertise2 = React.lazy(() => import("./Advertise2.jsx"));
+const Latestadditions2 = React.lazy(() => import("./Latestadditions2.jsx"));
+const HomeBlog2 = React.lazy(() => import("./HomeBlog2.jsx"));
 
 const Home2 = () => {
   localStorage.removeItem('catid');
@@ -12,8 +16,6 @@ const Home2 = () => {
   localStorage.removeItem('address');
   localStorage.removeItem('latitude');
   localStorage.removeItem('longitude');
-
-  
   return (
     <Suspense fallback={<div></div>}>
        <Container fluid={true} className="p-0">
@@ -30,11 +32,5 @@ const Home2 = () => {
      
   );
 }
-
-const HotDeals2 = lazy(() => import("./HotDeals2.jsx"));
-const Featured2 = lazy(() => import("./Featured2.jsx"));
-const Advertise2 = lazy(() => import("./Advertise2.jsx"));
-const Latestadditions2 = lazy(() => import("./Latestadditions2.jsx"));
-const HomeBlog2 = lazy(() => import("./HomeBlog2.jsx"));
 
 export default Home2;
