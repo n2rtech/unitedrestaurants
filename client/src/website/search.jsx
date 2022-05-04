@@ -69,8 +69,8 @@ const addDefaultSrc = (ev) => {
       <div style={{ position: "relative" }}>
         <Carousel responsive={responsive}>
         {hotData && hotData.map((item , i ) => (
-          <Col sm="12">
-            <div className="customcard" key={i}>
+          <Col sm="12" key={i}>
+            <div className="customcard">
               <Card>
                 <div className="ribbon"><p> { item.discount.indexOf(".00") == '-1' ? item.discount : item.discount.substring(0,item.discount.indexOf(".")) }% off</p></div>
                 <CardBody>
@@ -126,8 +126,8 @@ const addDefaultSrc = (ev) => {
       <div style={{ position: "relative" }}>
         <Carousel responsive={responsive}>
         {featuredData ? featuredData.map((item , i ) => (
-          <Col sm="12">
-            <div className="customcard" key={i}>
+          <Col sm="12" key={i}>
+            <div className="customcard" >
               <Card
               >
                 <CardBody>
@@ -207,12 +207,12 @@ const addDefaultSrc = (ev) => {
        <Container className="p-0"> 
        <h3>latest additions</h3>
        {latestData.length > 2 ?  <div className="seeall">
-        <a href="/restaurants">SEE ALL</a>
+        <a href="/LatestListing">SEE ALL</a>
       </div> : '' }
       <div style={{ position: "relative" }}>
         <Carousel responsive={responsive}>
         {latestData.map((item , i ) => (
-          <Col sm="12">
+          <Col sm="12" key={i}>
             <div className="customcard" key={i}> 
               <Card>
                  <CardBody>

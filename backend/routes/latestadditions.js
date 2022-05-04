@@ -241,4 +241,63 @@ router.delete('/:id', (req, res) => {
         }
 });
 
+
+router.get('/latest/all', (req, res) => {
+
+        const { page, size } = req.query;
+        const { limit, offset } = getPagination(page, size);
+        
+        condition = {
+            attributes: ['id','about_business', 'banner', 'business_name','user_id'],
+            offset,
+            limit,
+            order: [ [ 'createdAt', 'DESC' ]]
+        } 
+
+        var code = req.query.country||'usa';
+
+        if (code == 'ita') {
+            var table_name = 'VendorIta';
+        }else{
+            if(Array.isArray(code)) {
+                var codee = code[0].charAt(0).toUpperCase() + code[0].slice(1);
+            } else {
+                var codee = code.charAt(0).toUpperCase() + code.slice(1);
+            }
+
+            var table_name = 'Vendor' + codee;
+        }
+
+        if (table_name == 'VendorNull') {
+            var table_name = 'VendorIta';
+        }
+
+        app.db(table_name)
+        .findAndCountAll(condition)
+        .then(vendors => {
+            const response = getPagingData(vendors, page, limit);
+            res.status(200).send(response)
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(400).send('error2');
+        });
+    });
+
+
+    const getPagination = (page=1, size) => {
+      const limit = size ? +size : 3;
+      const offset =  (page-1) * limit;
+
+      return { limit, offset };
+  };
+
+  const getPagingData = (data, page, limit) => {
+      const { count: totalItems, rows: vendors } = data;
+      const currentPage = page ? +page : 0;
+      const totalPages = Math.ceil(totalItems / limit);
+
+      return { totalItems, vendors, totalPages, currentPage };
+  };
+
 module.exports = router;

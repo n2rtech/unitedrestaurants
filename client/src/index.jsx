@@ -29,6 +29,7 @@ import Customerservices from './website/customerservices'
 import Technicalsupport from './website/technicalsupport'
 import Sales from './website/sales'
 import BusinessListing from './website/BusinessListing'
+import LatestListing from './website/LatestListing'
 import BusinessDetails from './website/BusinessDetails'
 import Privacypolicy from './website/privacypolicy'
 import Howitwork from './website/howitwork'
@@ -94,6 +95,7 @@ const Root = (props) =>  {
            <Route  path={`${process.env.PUBLIC_URL}/technicalsupport`} component={Technicalsupport} />
            <Route  path={`${process.env.PUBLIC_URL}/sales`} component={Sales} />
            <Route  path={`${process.env.PUBLIC_URL}/BusinessListing/:id`} component={BusinessListing} />
+           <Route  path={`${process.env.PUBLIC_URL}/LatestListing`} component={LatestListing} />
            <Route  path={`${process.env.PUBLIC_URL}/BusinessDetails/:id`} component={BusinessDetails} />
            <Route  path={`${process.env.PUBLIC_URL}/privacypolicy`} component={Privacypolicy} />
            <Route  path={`${process.env.PUBLIC_URL}/howitwork`} component={Howitwork} />
