@@ -409,7 +409,9 @@ router.get("/subcat/:id", (req, res) => {
 
 router.get("/all", (req, res) => {
     Category
-    .findAll()
+    .findAll({
+        attributes: ['id','name', 'image'],
+    })
     .then((category) => {
         res.status(200).send(category)
     })
