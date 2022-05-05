@@ -50,7 +50,10 @@ const Roles = (props) => {
                               <th scope="row">{item.role_description}</th>
                               <th scope="row">{item.createdAt}</th>
                               <th scope="row">{item.updatedAt}</th>
-                              <th scope="row"><a href={`${process.env.PUBLIC_URL}/dashboard/admin/roleslist/${item.id}/`}><i className  ="fa fa-edit"></i></a></th>
+                              {((item.role_name == 'admin' || item.role_name == 'vendor') || item.role_name == 'Admin' || item.role_name == 'Vendor') ?
+                              <><th scope="row"><a ><i className  ="fa fa-edit"></i></a></th></> :
+                              <><th scope="row"><a href={`${process.env.PUBLIC_URL}/dashboard/admin/roleslist/${item.id}/`}><i className  ="fa fa-edit"></i></a></th></>
+                            }
                          </tr>
                         ))}
                     </tbody>

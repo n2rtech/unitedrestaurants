@@ -455,6 +455,32 @@ router.get('/', (req, res) => {
 
 
 
+router.get("/with/role", async (req, res) => {
+    let getData = await User.findAll({order: [['id', 'DESC']]});
+    if (getData) {
+        let CatList = await catLists(getData);
+        res.status(200).send(CatList)
+    }
+});
+
+
+async function catLists(getData) {
+    let CategoryList = [];
+
+    for (let data of getData) {
+        let role = await Role.findByPk(data.role_id);
+        CategoryList.push({
+            id:data.id,
+            name:data.name,
+            role_id:data.role_id,
+            role:role,
+        })
+    }
+    return CategoryList;
+}
+
+
+
 // Delete a User
 router.delete('/:id', (req, res) => {
     if (!req.params.id) {

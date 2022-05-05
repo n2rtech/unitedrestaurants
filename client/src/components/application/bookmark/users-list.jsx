@@ -18,7 +18,7 @@ const Userslist = (props) => {
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
           };
   
-    axios.get('/api/users/' , config).then((response) => {
+    axios.get('/api/users/with/role' , config).then((response) => {
       setUsers(response.data);
     });
   
@@ -88,6 +88,7 @@ const Userslist = (props) => {
                 <thead>
                     <tr>
                         <th scope="col">{"Users Name"}</th>
+                        <th scope="col">{"Role Name"}</th>
                         <th scope="col" className="text-right">{"Action"}</th>
                     </tr>
                 </thead>
@@ -95,10 +96,17 @@ const Userslist = (props) => {
                   {users.map((item , i) => 
                     <tr>
                     <td>{item.name}</td>
+                    <td>{item.role ? item.role.role_name : ''}</td>
+                    {item.role.role_name == 'admin' ? 
                     <td className="text-right">
+                     <a  className="btn btn-success">Edit</a> &nbsp;
+                     <a className="btn btn-danger" >Delete</a> 
+                   </td> :
+                   <td className="text-right">
                      <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-user/`+`${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
                      <a className="btn btn-danger" onClick = {() => handleDelete(item.id)} >Delete</a> 
                    </td>
+                 }
                   </tr>
                   )}
                 </tbody>

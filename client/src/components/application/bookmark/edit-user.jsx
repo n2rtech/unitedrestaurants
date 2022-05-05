@@ -34,6 +34,7 @@ const Edituser = (props) => {
       const result = await axios('/api/users/'+`${params.id}`,config);
       setUserEmail(result.data.email)
       setUserName(result.data.name)
+      setRoleDataAssign(result.data.role_id);
     };
     GetData();
   }, []);
@@ -49,9 +50,7 @@ const Edituser = (props) => {
       };
       const result = await axios('/api/roles',config);
       setRolesData(result.data);
-
-      const resultRole = await axios(`/api/users/`+`${params.id}`,config);
-      setRoleDataAssign(resultRole.data.role_id);
+      
     };
     GetData();
   }, []);
