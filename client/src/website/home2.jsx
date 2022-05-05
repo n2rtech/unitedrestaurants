@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { Container } from 'reactstrap'
-
 import Header2 from "./header2.jsx";
 import Footer2 from "./footer2.jsx";
 import SearchBar from "./SearchBar.jsx";
@@ -29,7 +28,6 @@ const Home2 = () => {
         <Footer2/>
       </Container>
     </Suspense>
-     
   );
 }
 

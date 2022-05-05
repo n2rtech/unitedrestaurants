@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col} from 'reactstrap'
-import Header from './header.jsx'
-import Footer from './footer.jsx'
+import Header from './header2.jsx'
+import Footer from './footer2.jsx'
 
 const Visitors = (props) => {
 

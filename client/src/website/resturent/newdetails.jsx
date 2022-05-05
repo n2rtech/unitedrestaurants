@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'reactstrap'
-import Header from '../header.jsx'
-import Footer from '../footer.jsx'
+import Header from '../header2.jsx'
+import Footer from '../footer2.jsx'
 import NewDetailpage from './newdetailpage.jsx';
 import '../css/style.css'
 const Newdetails = (props) => {
