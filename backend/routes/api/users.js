@@ -264,6 +264,13 @@ router.get('/vendors', passport.authenticate('jwt', {
   });
 });
 
+
+router.get("/logout/:id", (req,res) => {
+  res.status(400).send('krishna mishra');
+  console.log("Vendor Id in Logout Function", req);
+});
+
+
 router.get('/role/:id', (req, res) => {
   User
   .findByPk(req.params.id)
@@ -435,7 +442,8 @@ router.get('/', (req, res) => {
       model: Role,
       as: 'role',
     }
-    ]
+    ],
+    order: [['id', 'DESC']]
   })
   .then((users) => {
     res.status(200).send(users)
