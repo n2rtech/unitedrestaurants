@@ -80,7 +80,7 @@ const VendorCoupon = (props) => {
             <Col sm="6"></Col>
             <Col sm="6">
               <div className="pull-right">
-                <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-vendor-coupon`} className="btn btn-primary">Add New</a>
+                <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-vendor-coupon/`} className="btn btn-primary">Add New</a>
               </div>
             </Col>
           </Row>
