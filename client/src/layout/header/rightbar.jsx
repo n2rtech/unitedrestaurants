@@ -50,6 +50,7 @@ const Rightbar = (props) => {
     localStorage.removeItem('token');
     localStorage.setItem("adminloggedin", false);
     localStorage.setItem("vendorloggedin", false);
+    localStorage.setItem("userloggedin", false);
     firebase_app.auth().signOut()
     history.push(`${process.env.PUBLIC_URL}/login`)
   }

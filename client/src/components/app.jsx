@@ -66,6 +66,26 @@ const App = ({children , sidebar}) => {
 
                 : 
                 
+                localStorage.getItem('userloggedin') === 'true' ?
+
+                <div>
+                    <Loader/>
+                    <Taptop/>
+                    <div className="page-wrapper compact-wrapper" id="pageWrapper">
+                      <Header/>
+                      <div className="page-body-wrapper">
+                        {getSidebar(localStorage.getItem("role"))}
+                        <div className="page-body">
+                          {children}
+                        </div>
+                        <Footer/>
+                      </div>
+                    </div>
+                    <ToastContainer/>
+                </div> 
+
+                : 
+                
                 <div>
                       <Loader/>
                       <Taptop/>

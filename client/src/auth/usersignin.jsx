@@ -75,6 +75,7 @@ const Logins = (props) => {
         localStorage.setItem('token', user.data.token);
         localStorage.setItem('id', decoded.id);
         localStorage.setItem('name', decoded.name);
+        localStorage.setItem('userloggedin', true);
         localStorage.setItem('role', 'user');
 	localStorage.setItem('role_id', decoded.role_id);
         window.location.href = `${process.env.PUBLIC_URL}/dashboard/user/`
