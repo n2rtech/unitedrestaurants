@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { Container, Row, Col, Card, CardTitle, CardText, Button } from 'reactstrap'
+import { Container, Row, Col, Card, CardTitle, CardText, CardBody ,Button } from 'reactstrap'
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -92,9 +92,11 @@ const Restaurantlist = (props) => {
                     }>
                       <Row>
                               { (items).map((item , i) => (
-                                <Col sm="4" key={i}>
+                                <Col sm="4" xs="12" key={i}>     
                                     <div className="customcard">
                                     <Card>
+                                    <CardBody>
+                                    <Row>  
                                       <div className="hImage">
                                         <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                                           <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} />
@@ -103,10 +105,21 @@ const Restaurantlist = (props) => {
                                       <CardTitle tag="h5">
                                         <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>{item.business_name}</a>
                                       </CardTitle>
+                                     </Row> 
                                       <CardText>
                                         {showMore ? item.about_business : `${item.about_business.substring(0, 400)}`+'...'}
                                       </CardText>
-                                      <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}> SEE DETAILS</a></Button>
+                                      { item.user_id == 0 ?  
+                                        <Button>
+                                          <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.id}_${localStorage.getItem('country_code')}`}>
+                                              VIEW
+                                          </a> </Button> 
+                                        : 
+                                          <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
+                                          VIEW
+                                            </a></Button>
+                                      }
+                                    </CardBody>
                                     </Card>
                                   </div>
                                   </Col>
