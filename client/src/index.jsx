@@ -131,6 +131,31 @@ const Root = (props) =>  {
           <Route exact path={`${process.env.PUBLIC_URL}/admin/login`} render={() => <Error404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/vendor/:any`} render={() => <Error404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/admin/:any`} render={() => <Error404/>} />
+
+             {/* <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/`} render={() => {
+                if(localStorage.getItem("vendorloggedin") === 'false') {
+                  return (<Redirect to={`${process.env.PUBLIC_URL}/error/`} />)
+                } else {
+                  return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/vendor/`} />)
+                }   
+              }} /> 
+
+              <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin`} render={() => {
+                  if(localStorage.getItem("adminloggedin") === 'false') {
+                       return (<Redirect to={`${process.env.PUBLIC_URL}/error/`} />)
+                  } else {
+                       return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/admin`} />)
+                  }   
+              }} /> 
+
+            <Route exact path={`${process.env.PUBLIC_URL}/dashboard/user`} render={() => {
+                if(localStorage.getItem("userloggedin") === 'false') {
+                  return (<Redirect to={`${process.env.PUBLIC_URL}/error/`} />)
+                } else {
+                  return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/user/`} />)
+                }   
+              }} />  */}
+
           {currentUser !== null || authenticated || jwt_token  ?
               <App>
               <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
