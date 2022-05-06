@@ -60,6 +60,125 @@ const validateLoginInput = require("../../validation/login");
 const { exit } = require("process");
 
 
+
+router.get('/by-serach/all', (req, res) => {
+
+
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+
+
+    var address = req.query.address;
+    var latitude = req.query.latitude;
+    var longitude = req.query.longitude;
+
+    const haversine = `(
+        6371 * acos(
+            cos(radians(${latitude}))
+            * cos(radians(latitude))
+            * cos(radians(longitude) - radians(${longitude}))
+            + sin(radians(${latitude})) * sin(radians(latitude))
+        )
+    )`;
+
+    var code = req.query.country||'usa';
+    
+    if (code == 'ita') {
+        var table_name = 'VendorIta';
+    } else {
+        if(Array.isArray(code)) {
+            var codee = code[0].charAt(0).toUpperCase() + code[0].slice(1);
+        } else {
+            var codee = code.charAt(0).toUpperCase() + code.slice(1);
+        }
+        
+        var table_name = 'Vendor' + codee;
+    }
+
+    if (table_name == 'VendorNull') {
+        var table_name = 'VendorIta';
+    }
+
+    var category = req.query.category;
+    var filter = req.query.filter;
+
+    if (category && filter && !address) {
+        var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
+            where:{
+                business_name: {
+                    [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+                },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+    } else if (category && !address) {
+        var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
+            where:{
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+    } else if (address) {
+        var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id',
+            [Sequelize.literal(haversine), 'distance'],
+            ],
+
+            where:{
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC'] ],
+            having: Sequelize.literal(`distance <= 50`),
+            subQuery: true
+        }
+    } else {
+        var conditions = {
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+    }
+
+    console.log(conditions);
+    // res.status(200).send('www');
+
+    app.db(table_name)
+    .findAndCountAll(conditions)
+    .then((vendors) => {
+      const response = getPagingData(vendors, page, limit);
+            res.status(200).send(response)
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
 router.post("/register", (req, res) => {
   const {errors, isValid } = validateRegisterInput(req.body);
 
@@ -786,8 +905,6 @@ router.put('/:id', (req, res) => {
             DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + user.id +'"', function (err, vendor_pro) {
               if (err) throw err;
               if (vendor_pro[0]) {
-                console.log(vendor_pro[0]);
-                exit;
                 var user_id = user.id;
                 var country_id = user.country_id;
                 var name = req.body.name;
