@@ -94,8 +94,8 @@ export const routes = [
         { path:"/oauth2callback", Component:YoutubeCallback },
 
 
-        { path:"/dashboard/admin/", Component:AdminDefault} 
-        { path:"/dashboard/vendor/", Component:VendorEcommerce} 
+        { path:"/dashboard/admin/", Component:AdminDefault} ,
+        { path:"/dashboard/vendor/", Component:VendorEcommerce} ,
        
         
         { path:"/dashboard/default/", Component:Default},
