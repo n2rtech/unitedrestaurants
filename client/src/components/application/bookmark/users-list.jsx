@@ -88,6 +88,7 @@ const Userslist = (props) => {
                 <thead>
                     <tr>
                         <th scope="col">{"Users Name"}</th>
+                        <th scope="col">{"Users Email"}</th>
                         <th scope="col">{"Role Name"}</th>
                         <th scope="col" className="text-right">{"Action"}</th>
                     </tr>
@@ -97,6 +98,7 @@ const Userslist = (props) => {
                     <tr>
                     <td>{item.name}</td>
                     <td>{item.role ? item.role.role_name : ''}</td>
+                    <td>{item.email}</td>
                     {item.role.role_name == 'admin' ? 
                     <td className="text-right">
                      <a  className="btn btn-success">Edit</a> &nbsp;

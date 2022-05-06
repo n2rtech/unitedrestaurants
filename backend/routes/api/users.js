@@ -472,6 +472,7 @@ async function catLists(getData) {
         CategoryList.push({
             id:data.id,
             name:data.name,
+            email:data.email,
             role_id:data.role_id,
             role:role,
         })
