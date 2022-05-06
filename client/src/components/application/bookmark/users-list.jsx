@@ -97,8 +97,8 @@ const Userslist = (props) => {
                   {users.map((item , i) => 
                     <tr>
                     <td>{item.name}</td>
-                    <td>{item.role ? item.role.role_name : ''}</td>
                     <td>{item.email}</td>
+                    <td>{item.role ? item.role.role_name : ''}</td>
                     {item.role.role_name == 'admin' ? 
                     <td className="text-right">
                      <a  className="btn btn-success">Edit</a> &nbsp;
