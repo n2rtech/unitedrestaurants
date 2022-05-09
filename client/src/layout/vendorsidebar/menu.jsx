@@ -39,24 +39,6 @@ export const MENUITEMS = [
         ]
     },
     {
-        menutitle:"My Wallet",
-        menucontent:"My Wallet",
-        Items:[
-            {
-                title: 'My Wallet', path: `${process.env.PUBLIC_URL}/dashboard/vendor/my-wallet`, icon: DollarSign, type: 'link', active: false,
-            }
-        ]
-    },
-    // {
-    //     menutitle:"Payment Method",
-    //     menucontent:"Payment Method",
-    //     Items:[
-    //         {
-    //             title: 'Payment Method', path: `${process.env.PUBLIC_URL}/dashboard/vendor/payment-method/${localStorage.getItem("id")}`, icon: Send, type: 'link', active: false,
-    //         }
-    //     ]
-    // },
-    {
         menutitle:"Membership Package",
         menucontent:"Membership Package",
         Items:[

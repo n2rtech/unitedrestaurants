@@ -300,17 +300,13 @@ const VendorProfile = (props) => {
             <Label htmlFor="exampleFormControlInput1">{"About Business"}</Label>
             <Input type="textarea" className="form-control" onChange = {onChangeAboutbusiness} value={aboutbusiness} rows="3"/>
           </FormGroup>
-            <FormGroup>
-               <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
-               <Input type="textarea" className="form-control" value={address} onChange={onChangeaddress} rows="3"/>
-            </FormGroup>
-
-            <Row>
-              <Col sm="12" xs="12">
+          <FormGroup>
+             <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
+             <Input type="textarea" className="form-control" value={address} onChange={onChangeaddress} rows="3"/>
+          </FormGroup>
+          <FormGroup className="mLoc">
               {location.address ? <MyGoogleMapEdit location={location} onChangeLongitude={ChangeLongitude1} onChangeLatitude={ChangeLatitude1}  onChangeAddress={ChangeAddress1} latitude={parseFloat(latitude)} longitude={parseFloat(longitude)} address={address} /> : ''}
-              </Col>
-            </Row>
-
+          <FormGroup>
             <Row>
               <Col sm="6" xs="12">
                 <FormGroup>
