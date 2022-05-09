@@ -36,7 +36,7 @@ const BusinessGallery = () => {
       </Carousel>
       :
       <div>
-            <img src={`${process.env.PUBLIC_URL}/assets/images/h5.jpeg`}/>
+            <img src={`${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`}/>
         </div>
       }
       </>
