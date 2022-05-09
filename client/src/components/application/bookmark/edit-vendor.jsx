@@ -19,8 +19,8 @@ const [Mobile , setMobile] = useState();
 const [Address , setAddress] = useState();
 const [Country , setCountry] = useState();
 const [Featured , setFeatured] = useState();
-const [Hotdeals , setHotdeals] = useState('0');
-const [category_id , setCategory] = useState('0');
+const [Hotdeals , setHotdeals] = useState(0);
+const [category_id , setCategory] = useState(0);
 
 useMemo(() => {
   const config = {
@@ -50,6 +50,7 @@ useMemo(() => {
   }
 
   const onChangefeatured = (event) => {
+    console.log("Featured Change" , event.target.value);
     setFeatured(event.target.value);
   }
 
@@ -68,13 +69,18 @@ useMemo(() => {
         };
 
   axios.get('/api/vendors/'+`${params.id}` , config).then((response) => {
+
+
+    console.log("Body Parameters" , response);
+      
+
       setName(response.data[0].name);
       setEmail(response.data[0].email);
       setMobile(response.data[0].mobile);
       setAddress(response.data[0].address);
       setCountry(response.data[0].country_id);
       setCategory(response.data[0].category_id);
-      setFeatured(response.data[0].featured_business);
+      setFeatured(parseInt(response.data[0].featured_business));
       setHotdeals(response.data[0].hot_deal);
     });
 
@@ -105,10 +111,10 @@ useMemo(() => {
         address: Address,
         country_id: Country,
         category_id: category_id,
-        featured_business: Featured,
+        featured_business: parseInt(Featured),
         hot_deals: Hotdeals,
       };
-      
+
       axios.put(`/api/vendors/`+`${params.id}`,
         bodyParameters,
         config
@@ -148,18 +154,15 @@ useMemo(() => {
               <FormGroup className="m-checkbox-inline custom-radio-ml">
 
                 <div className="radio radio-primary">
-                  <Input id="no-featured" type="radio" onChange={onChangefeatured} value="0" name="radio2" checked={Featured==0} />
+                  <Input id="no-featured" type="radio" onChange={onChangefeatured} value='0' name="radio2" checked={Featured==0} />
                   <Label className="mb-0" for="no-featured">No</Label>
                 </div>
 
                 <div className="radio radio-primary">
-                <Input id="yes-featured" type="radio" onChange={onChangefeatured} value="1" name="radio2" checked={Featured==1}  />
+                <Input id="yes-featured" type="radio" onChange={onChangefeatured} value='1' name="radio2" checked={Featured==1}  />
                 <Label className="mb-0" for="yes-featured">Yes</Label>
                 </div>
-              
-              
-                
-               
+
               </FormGroup>
               <div>&nbsp;</div>
               <FormGroup>

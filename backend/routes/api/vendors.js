@@ -1005,7 +1005,7 @@ router.put('/:id', (req, res) => {
         country_id: req.body.country_id || user.country_id,
         category_id: req.body.category_id || user.category_id,
         address: req.body.address || user.address,  
-        featured_business: req.body.featured_business || user.featured_business,
+        featured_business: req.body.featured_business,
         hot_deal: req.body.hot_deals || user.hot_deal,
         business_dvertise: (req.body.business_dvertise || user.business_dvertise)
       }, {
@@ -1028,10 +1028,10 @@ router.put('/:id', (req, res) => {
               var table_name = 'Vendor' + codee + 's';
             }
 
-            DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + user.id +'"', function (err, vendor_pro) {
+            DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + req.params.id +'"', function (err, vendor_pro) {
               if (err) throw err;
               if (vendor_pro[0]) {
-                var user_id = user.id;
+                var user_id = req.params.id;
                 var country_id = user.country_id;
                 var name = req.body.name;
                 var banner = vendor_pro[0].banner;
@@ -1052,7 +1052,7 @@ router.put('/:id', (req, res) => {
                   DB.query("INSERT INTO FeaturedBusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`, `categories`, `address`, `latitude`, `longitude`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', '"+categories+"', '"+address+"', '"+latitude+"', '"+longitude+"' ,NOW(), '')");
                 }
 
-                if (req.body.hot_deals || req.body.featured_business) {
+                if (req.body.featured_business) {
                   DB.query("INSERT INTO BusinessAdvertises (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', NOW(), '')");
                 }
 
