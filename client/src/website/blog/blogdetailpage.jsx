@@ -29,7 +29,7 @@ const Detailpage = (props) => {
   return (
 	
     <div className="blogsingle">             
-      <Container fluid={true} className="p-0">    
+      <Container>    
 	  
       <Row className="m-0">
 		  
