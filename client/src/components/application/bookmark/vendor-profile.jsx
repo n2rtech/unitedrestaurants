@@ -306,6 +306,7 @@ const VendorProfile = (props) => {
           </FormGroup>
           <FormGroup className="mLoc">
               {location.address ? <MyGoogleMapEdit location={location} onChangeLongitude={ChangeLongitude1} onChangeLatitude={ChangeLatitude1}  onChangeAddress={ChangeAddress1} latitude={parseFloat(latitude)} longitude={parseFloat(longitude)} address={address} /> : ''}
+         </FormGroup>
           <FormGroup>
             <Row>
               <Col sm="6" xs="12">
@@ -321,6 +322,7 @@ const VendorProfile = (props) => {
                 </FormGroup>
               </Col>
             </Row>
+            </FormGroup>
             <FormGroup>
               <Label htmlFor="exampleFormControlInput1">{"Please select categories that best describe your business"}</Label>
               <Typeahead

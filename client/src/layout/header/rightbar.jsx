@@ -52,7 +52,7 @@ const Rightbar = (props) => {
     localStorage.setItem("vendorloggedin", false);
     localStorage.setItem("userloggedin", false);
     firebase_app.auth().signOut()
-    history.push(`${process.env.PUBLIC_URL}/login`)
+    history.push(`${process.env.PUBLIC_URL}/vendor/login`)
   }
 
   const  Logout_From_Auth0 = () =>  {
@@ -60,7 +60,7 @@ const Rightbar = (props) => {
     localStorage.setItem("adminloggedin", false);
     localStorage.setItem("vendorloggedin", false);
     localStorage.setItem("authenticated",false);
-    history.push(`${process.env.PUBLIC_URL}/login`)
+    history.push(`${process.env.PUBLIC_URL}/vendor/login`)
     logout()
   }
 
