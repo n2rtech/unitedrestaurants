@@ -100,7 +100,9 @@ router.get('/by-serach/all', async (req, res) => {
     var category = req.query.category;
     var filter = req.query.filter;
 
-    if (category && filter && !address) {
+    if (filter && !address) {
+      //for only filter search
+      console.log('for only filter search');
         var conditions = {
 
             attributes: [
@@ -118,7 +120,31 @@ router.get('/by-serach/all', async (req, res) => {
             limit,
             order: [ ['createdAt', 'DESC' ]]
         }
-    } else if (category && !address) {
+    } else if (filter && address) {
+
+      console.log('filter and serach both');
+        var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id',
+            [Sequelize.literal(haversine), 'distance']
+            ],
+            where:{
+                business_name: {
+                    [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+                },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]],
+            having: Sequelize.literal(`distance <= 50`),
+        }
+    } else if (!address && !filter) {
+      //for only category search
+      console.log('only category search!')
         var conditions = {
 
             attributes: [
@@ -133,7 +159,9 @@ router.get('/by-serach/all', async (req, res) => {
             limit,
             order: [ ['createdAt', 'DESC' ]]
         }
-    } else if (address) {
+    } else if (address && !filter) {
+      //for only address search
+      console.log('Only Address section!')
         var conditions = {
 
             attributes: [
@@ -149,24 +177,7 @@ router.get('/by-serach/all', async (req, res) => {
             offset,
             limit,
             order: [ ['createdAt', 'DESC'] ],
-            having: Sequelize.literal(`distance <= 50`),
-            subQuery: true
-        }
-
-        var conditions1 = {
-
-            attributes: [
-            'id','business_name','about_business','banner','createdAt','user_id','address',
-            [Sequelize.literal(haversine), 'distance'],
-            ],
-
-            where:{
-                categories: {
-                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
-                }
-            },
-            order: [ ['createdAt', 'DESC'] ],
-            having: Sequelize.literal(`distance <= 50`),
+            having: Sequelize.literal(`distance <= 50`)
         }
 
     } else {
@@ -180,10 +191,7 @@ router.get('/by-serach/all', async (req, res) => {
         }
     }
 
-    console.log(conditions);
-    // res.status(200).send('www');
-
-    var counts = await app.db(table_name).count(conditions1);
+    var counts = await app.db(table_name).count(conditions);
 
     if (counts <= 0 && address) {
       var conditions = {
@@ -203,30 +211,10 @@ router.get('/by-serach/all', async (req, res) => {
             limit,
             order: [ ['createdAt', 'DESC' ]]
         }
-
-
-        var conditions1 = {
-
-            attributes: [
-            'id','business_name','about_business','banner','createdAt','user_id'
-            ],
-            where:{
-                address: {
-                    [Op.like]: req.query.address ? '%'+req.query.address+'%' : ''
-                },
-                categories: {
-                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
-                }
-            },
-            offset,
-            limit,
-            order: [ ['createdAt', 'DESC' ]]
-        }
-
     }
 
 
-    var counts = await app.db(table_name).count(conditions1);
+    var counts = await app.db(table_name).count(conditions);
 
      if (counts <= 0 && address) {
        var new_address = address.split(" ");
@@ -259,40 +247,9 @@ router.get('/by-serach/all', async (req, res) => {
             limit,
             order: [ ['createdAt', 'DESC' ]]
         }
-
-
-        var conditions1 = {
-
-            attributes: [
-            'id','business_name','about_business','banner','createdAt','user_id'
-            ],
-            where:{
-                categories: {
-                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
-                },
-                [Op.or]: [
-                {
-                  address: 
-                  {
-                    [Op.like]: '%'+new_address[0]+'%'
-                  }
-                }, 
-                {
-                  address: 
-                  {
-                    [Op.like]: '%'+new_address[1]+'%'
-                  }
-                },
-                ]
-            },
-            offset,
-            limit,
-            order: [ ['createdAt', 'DESC' ]]
-        }
-
     }
     
-    var counts = await app.db(table_name).count(conditions1);
+    var counts = await app.db(table_name).count(conditions);
 
     app.db(table_name)
     .findAll(conditions)

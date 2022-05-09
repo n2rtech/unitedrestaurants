@@ -57,7 +57,7 @@ const SearchBusiness = (props) => {
 
    const fetchComments = async () => {
 
-    let url = `/api/vendors/by-serach/all?${decodedData}?&page=${page}&size=${size}`;
+    let url = `/api/vendors/by-serach/all?${decodedData}&page=${page}&size=${size}`;
     const res = await axios.get(url);
     const data = res.data.data;
     return data;
