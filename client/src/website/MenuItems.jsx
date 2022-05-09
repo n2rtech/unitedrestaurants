@@ -27,7 +27,7 @@ export default function MenuItems() {
         <div className="menu-items">
           <h5>Menu Items</h5>
           <ul className="list-inline">
-            <div dangerouslySetInnerHTML={{ __html: menuItemsData.content }} />
+            <li dangerouslySetInnerHTML={{ __html: menuItemsData.content }} />
           </ul>
         </div>
       </div>

@@ -48,10 +48,7 @@ const Footer2 = (props) => {
 								<a href={`${process.env.PUBLIC_URL}/aboutus`}>About us</a>
 							</li>
 							<li key="2">
-								<a href={`${process.env.PUBLIC_URL}/contact`}>Contact Me</a>
-							</li>
-							<li key="3">
-								<a href={`${process.env.PUBLIC_URL}/contactus`}>Contact us</a>
+								<a href={`${process.env.PUBLIC_URL}/contact`}>Contact us</a>
 							</li>
 							<li key="4">
 								<a href={`${process.env.PUBLIC_URL}/customerservices`}>Customer Service</a>
