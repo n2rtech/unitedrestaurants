@@ -21,22 +21,10 @@ const HomeBlog2 = () => {
           setBlogData(getData.data);
         });
 
- 
-    /*await fetch("/api/blogs/get" , config)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          
-          // setBlogData(result);
-        },
-        (error) => {
-          
-        }
-      )*/
   }, []);
 
   const addDefaultSrc = (ev) => {
-    ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h5.jpeg`;
+    ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
   }
 
 

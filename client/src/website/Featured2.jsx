@@ -1,3 +1,4 @@
+
 import React,{useState,useEffect} from 'react';
 import Carousel from "react-multi-carousel";
 import { Container, Card, CardTitle, CardText, Button } from 'reactstrap'
@@ -29,7 +30,8 @@ const Featured2 = () => {
   }, []);
 
   const addDefaultSrc = (ev) => {
-    ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h4.jpeg`;
+    // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h4.jpeg`;
+    ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
   }
 
   return (
