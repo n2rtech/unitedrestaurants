@@ -98,9 +98,11 @@ const SearchBar = () => {
       )
     } else {
       localStorage.setItem('catid' , catid);
-      localStorage.setItem('filter' , searchvalue);
-      const url = base64.encode(`&country=${country_code}&filter=${searchvalue}&category=${catid}&address=${address}&latitude=${latitude}&longitude=${longitude}`)
-      history.push(`/search/${url}`);
+      // localStorage.setItem('filter' , searchvalue);
+      // const url = base64.encode(`&country=${country_code}&filter=${searchvalue}&category=${catid}&address=${address}&latitude=${latitude}&longitude=${longitude}`)
+      const url = base64.encode(`&country=${country_code}&category=${catid}&address=${address}&latitude=${latitude}&longitude=${longitude}`)
+      history.push(`/SearchBusiness/${url}`);
+      // history.push(`/search/${url}`);
       window.location.reload(false);
     }
   }

@@ -61,12 +61,10 @@ const { exit } = require("process");
 
 
 
-router.get('/by-serach/all', (req, res) => {
-
+router.get('/by-serach/all', async (req, res) => {
 
   const { page, size } = req.query;
   const { limit, offset } = getPagination(page, size);
-
 
     var address = req.query.address;
     var latitude = req.query.latitude;
@@ -139,7 +137,7 @@ router.get('/by-serach/all', (req, res) => {
         var conditions = {
 
             attributes: [
-            'id','business_name','about_business','banner','createdAt','user_id',
+            'id','business_name','about_business','banner','createdAt','user_id','address',
             [Sequelize.literal(haversine), 'distance'],
             ],
 
@@ -154,6 +152,23 @@ router.get('/by-serach/all', (req, res) => {
             having: Sequelize.literal(`distance <= 50`),
             subQuery: true
         }
+
+        var conditions1 = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id','address',
+            [Sequelize.literal(haversine), 'distance'],
+            ],
+
+            where:{
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            order: [ ['createdAt', 'DESC'] ],
+            having: Sequelize.literal(`distance <= 50`),
+        }
+
     } else {
         var conditions = {
             attributes: [
@@ -168,10 +183,121 @@ router.get('/by-serach/all', (req, res) => {
     console.log(conditions);
     // res.status(200).send('www');
 
+    var counts = await app.db(table_name).count(conditions1);
+
+    if (counts <= 0 && address) {
+      var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
+            where:{
+                address: {
+                    [Op.like]: req.query.address ? '%'+req.query.address+'%' : ''
+                },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+
+
+        var conditions1 = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
+            where:{
+                address: {
+                    [Op.like]: req.query.address ? '%'+req.query.address+'%' : ''
+                },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+
+    }
+
+
+    var counts = await app.db(table_name).count(conditions1);
+
+     if (counts <= 0 && address) {
+       var new_address = address.split(" ");
+      var conditions = {
+
+
+            attributes: [
+            'id','business_name','about_business','address','banner','createdAt','user_id'
+            ],
+            where:{
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                },
+                [Op.or]: [
+                {
+                  address: 
+                  {
+                    [Op.like]: '%'+new_address[0]+'%'
+                  }
+                }, 
+                {
+                  address: 
+                  {
+                    [Op.like]: '%'+new_address[1]+'%'
+                  }
+                },
+                ]
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+
+
+        var conditions1 = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
+            where:{
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                },
+                [Op.or]: [
+                {
+                  address: 
+                  {
+                    [Op.like]: '%'+new_address[0]+'%'
+                  }
+                }, 
+                {
+                  address: 
+                  {
+                    [Op.like]: '%'+new_address[1]+'%'
+                  }
+                },
+                ]
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+
+    }
+    
+    var counts = await app.db(table_name).count(conditions1);
+
     app.db(table_name)
-    .findAndCountAll(conditions)
+    .findAll(conditions)
     .then((vendors) => {
-      const response = getPagingData(vendors, page, limit);
+      const response = getPagingDataAll(vendors, page, limit, counts);
             res.status(200).send(response)
     })
     .catch((error) => {
@@ -1349,6 +1475,15 @@ const getPagingData = (data, page, limit) => {
   const totalPages = Math.ceil(totalItems / limit);
 
   return { totalItems, tutorials, totalPages, currentPage };
+};
+
+
+const getPagingDataAll = (data, page, limit, totalItems) => {
+  const count = totalItems;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, data, totalPages, currentPage };
 };
 
 

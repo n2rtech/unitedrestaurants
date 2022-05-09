@@ -14,6 +14,7 @@ import Signin from './auth/signin'
 import Vendorsignin from './auth/vendorsignin'
 import Usersignin from './auth/usersignin'
 import Search from './website/search'
+import SearchBusiness from './website/SearchBusiness'
 import Sitemap from './website/sitemap'
 import Home from './website/home2'
 import Home2 from './website/home2'
@@ -77,6 +78,7 @@ const Root = (props) =>  {
         <Switch>
           <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home2} />
           <Route exact path={`${process.env.PUBLIC_URL}/search/:id`} component={Search} />
+          <Route exact path={`${process.env.PUBLIC_URL}/SearchBusiness/:id`} component={SearchBusiness} />
           <Route  path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
           <Route  path={`${process.env.PUBLIC_URL}/message`} component={Signupmsg} />
           <Route  path={`${process.env.PUBLIC_URL}/sitemap`} component={Sitemap} />
