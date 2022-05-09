@@ -134,7 +134,13 @@ const SearchBar = () => {
                   </Input>
                 </InputGroup>
               </div>
-              <div className="col-sm-8 p-0">
+              <div className="col-sm-3 p-0">
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-cube"></i></InputGroupText></InputGroupAddon>
+                  <Input type="text" name="name" id="" className="form-control" placeholder="Dish, Cuisine, Restaurant" />
+                </InputGroup>
+              </div>
+              <div className="col-sm-5 p-0">
                 <InputGroup>
                   <InputGroupAddon onClick={setCurrentLocation1} addonType="prepend"><InputGroupText><i  title="Use my Current Location" className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
                   <Input type="text" defaultValue={address} name="address" id="searchAddress" className="form-control digits" onChange  = {OnChangeSearch} placeholder="Search Address" />                
