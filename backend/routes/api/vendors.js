@@ -60,6 +60,208 @@ const validateLoginInput = require("../../validation/login");
 const { exit } = require("process");
 
 
+
+router.get('/by-serach/all', async (req, res) => {
+
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+
+    var address = req.query.address;
+    var latitude = req.query.latitude;
+    var longitude = req.query.longitude;
+
+    const haversine = `(
+        6371 * acos(
+            cos(radians(${latitude}))
+            * cos(radians(latitude))
+            * cos(radians(longitude) - radians(${longitude}))
+            + sin(radians(${latitude})) * sin(radians(latitude))
+        )
+    )`;
+
+    var code = req.query.country||'usa';
+    
+    if (code == 'ita') {
+        var table_name = 'VendorIta';
+    } else {
+        if(Array.isArray(code)) {
+            var codee = code[0].charAt(0).toUpperCase() + code[0].slice(1);
+        } else {
+            var codee = code.charAt(0).toUpperCase() + code.slice(1);
+        }
+        
+        var table_name = 'Vendor' + codee;
+    }
+
+    if (table_name == 'VendorNull') {
+        var table_name = 'VendorIta';
+    }
+
+    var category = req.query.category;
+    var filter = req.query.filter;
+
+    if (filter && !address) {
+      //for only filter search
+      console.log('for only filter search');
+        var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
+            where:{
+                business_name: {
+                    [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+                },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+    } else if (filter && address) {
+
+      console.log('filter and serach both');
+        var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id',
+            [Sequelize.literal(haversine), 'distance']
+            ],
+            where:{
+                business_name: {
+                    [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+                },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]],
+            having: Sequelize.literal(`distance <= 50`),
+        }
+    } else if (!address && !filter) {
+      //for only category search
+      console.log('only category search!')
+        var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
+            where:{
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+    } else if (address && !filter) {
+      //for only address search
+      console.log('Only Address section!')
+        var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id','address',
+            [Sequelize.literal(haversine), 'distance'],
+            ],
+
+            where:{
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC'] ],
+            having: Sequelize.literal(`distance <= 50`)
+        }
+
+    } else {
+        var conditions = {
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+    }
+
+    var counts = await app.db(table_name).count(conditions);
+
+    if (counts <= 0 && address) {
+      var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id'
+            ],
+            where:{
+                address: {
+                    [Op.like]: req.query.address ? '%'+req.query.address+'%' : ''
+                },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+    }
+
+
+    var counts = await app.db(table_name).count(conditions);
+
+     if (counts <= 0 && address) {
+       var new_address = address.split(" ");
+      var conditions = {
+
+
+            attributes: [
+            'id','business_name','about_business','address','banner','createdAt','user_id'
+            ],
+            where:{
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                },
+                [Op.or]: [
+                {
+                  address: 
+                  {
+                    [Op.like]: '%'+new_address[0]+'%'
+                  }
+                }, 
+                {
+                  address: 
+                  {
+                    [Op.like]: '%'+new_address[1]+'%'
+                  }
+                },
+                ]
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC' ]]
+        }
+    }
+    
+    var counts = await app.db(table_name).count(conditions);
+
+    app.db(table_name)
+    .findAll(conditions)
+    .then((vendors) => {
+      const response = getPagingDataAll(vendors, page, limit, counts);
+            res.status(200).send(response)
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
 router.post("/register", (req, res) => {
   const {errors, isValid } = validateRegisterInput(req.body);
 
@@ -760,7 +962,7 @@ router.put('/:id', (req, res) => {
         country_id: req.body.country_id || user.country_id,
         category_id: req.body.category_id || user.category_id,
         address: req.body.address || user.address,  
-        featured_business: req.body.featured_business || user.featured_business,
+        featured_business: req.body.featured_business,
         hot_deal: req.body.hot_deals || user.hot_deal,
         business_dvertise: (req.body.business_dvertise || user.business_dvertise)
       }, {
@@ -783,12 +985,10 @@ router.put('/:id', (req, res) => {
               var table_name = 'Vendor' + codee + 's';
             }
 
-            DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + user.id +'"', function (err, vendor_pro) {
+            DB.query('SELECT * FROM '+table_name+' WHERE user_id ="' + req.params.id +'"', function (err, vendor_pro) {
               if (err) throw err;
               if (vendor_pro[0]) {
-                console.log(vendor_pro[0]);
-                exit;
-                var user_id = user.id;
+                var user_id = req.params.id;
                 var country_id = user.country_id;
                 var name = req.body.name;
                 var banner = vendor_pro[0].banner;
@@ -809,7 +1009,7 @@ router.put('/:id', (req, res) => {
                   DB.query("INSERT INTO FeaturedBusinesses (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`, `categories`, `address`, `latitude`, `longitude`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', '"+categories+"', '"+address+"', '"+latitude+"', '"+longitude+"' ,NOW(), '')");
                 }
 
-                if (req.body.hot_deals || req.body.featured_business) {
+                if (req.body.featured_business) {
                   DB.query("INSERT INTO BusinessAdvertises (user_id, `country_id`, `country`, `business_name`, `about_business`, `banner`,`createdAt`, `updatedAt`) VALUES ("+user_id+", '"+country_id+"', '"+country+"', '"+req.body.name+"', '"+about_business+"', '"+banner+"', NOW(), '')");
                 }
 
@@ -1232,6 +1432,15 @@ const getPagingData = (data, page, limit) => {
   const totalPages = Math.ceil(totalItems / limit);
 
   return { totalItems, tutorials, totalPages, currentPage };
+};
+
+
+const getPagingDataAll = (data, page, limit, totalItems) => {
+  const count = totalItems;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, data, totalPages, currentPage };
 };
 
 

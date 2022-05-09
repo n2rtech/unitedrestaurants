@@ -36,6 +36,10 @@ const SearchBar = () => {
   const [catid, setCatid] = useState(localStorage.getItem('catid'));
 
   const OnChangeSearch = (event) => {
+      setAddress(event.target.value);
+  }
+
+  const OnChangeFilter = (event) => {
       setSearchInput(event.target.value);
   }
 
@@ -100,7 +104,9 @@ const SearchBar = () => {
       localStorage.setItem('catid' , catid);
       localStorage.setItem('filter' , searchvalue);
       const url = base64.encode(`&country=${country_code}&filter=${searchvalue}&category=${catid}&address=${address}&latitude=${latitude}&longitude=${longitude}`)
-      history.push(`/search/${url}`);
+      // const url = base64.encode(`&country=${country_code}&category=${catid}&address=${address}&latitude=${latitude}&longitude=${longitude}`)
+      history.push(`/SearchBusiness/${url}`);
+      // history.push(`/search/${url}`);
       window.location.reload(false);
     }
   }
@@ -136,14 +142,18 @@ const SearchBar = () => {
               </div>
               <div className="col-sm-3 p-0">
                 <InputGroup>
+
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-cube"></i></InputGroupText></InputGroupAddon>
                   <Input type="text" name="name" id="" className="form-control" placeholder="Dish, Cuisine, Restaurant" />
+
+                  <Input type="text" defaultValue={searchinput} name="filter" className="form-control digits" onChange  = {OnChangeFilter} placeholder="Search by Business..." />                
+
                 </InputGroup>
               </div>
               <div className="col-sm-5 p-0">
                 <InputGroup>
                   <InputGroupAddon onClick={setCurrentLocation1} addonType="prepend"><InputGroupText><i  title="Use my Current Location" className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
-                  <Input type="text" defaultValue={address} name="address" id="searchAddress" className="form-control digits" onChange  = {OnChangeSearch} placeholder="Search Address" />                
+                  <Input type="text" defaultValue={address} name="address" id="searchAddress" className="form-control digits" onChange={OnChangeSearch} placeholder="Search Address" />                
                   <Input type="hidden" defaultValue={latitude} name="latitude" id="search_address_lat" />                
                   <Input type="hidden" defaultValue={longitude} name="longitude" id="search_address_lan" />                
                   </InputGroup>

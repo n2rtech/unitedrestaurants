@@ -27,7 +27,8 @@ const Latestadditions2 = (props) => {
   }, []);
 
 const addDefaultSrc = (ev) => {
-  ev.target.src = `${process.env.PUBLIC_URL}/assets/images/foodimg1.png`;
+  // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/foodimg1.png`;
+  ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
 }
   return (
       <div className="latestadditions">
@@ -45,7 +46,7 @@ const addDefaultSrc = (ev) => {
                  <CardBody>
                    <Row>
                     <Col sm="4" xs="4">
-                    <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/assets/images/foodimg1.png`} 
+                    <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/item.banner`} 
                      alt="Menu-Icon"/>
                    </Col>
                    <Col sm="8" xs="8">

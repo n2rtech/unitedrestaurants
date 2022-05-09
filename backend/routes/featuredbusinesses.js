@@ -282,7 +282,6 @@ router.get('/', (req, res) => {
             'id','business_name','about_business','user_id',
             [Sequelize.literal(haversine), 'distance'],
             ],
-
             where: {
                 [Op.and]:
                 [

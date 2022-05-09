@@ -25,7 +25,8 @@ const HotDeals2 = () => {
   }, []);
 
 const addDefaultSrc = (ev) => {
-  ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h4.jpeg`;
+  // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h4.jpeg`;
+  ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
 }
 
 

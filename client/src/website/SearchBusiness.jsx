@@ -9,9 +9,13 @@ import axios from 'axios';
 import "react-multi-carousel/lib/styles.css";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-const BusinessListing = (props) => {
+const SearchBusiness = (props) => {
 
   const params = useParams();
+  var base64 = require('base-64');
+  var decodedData = base64.decode(`${params.id}`);
+  console.log('decodedData',decodedData);
+
 
   const [items , setItems] = useState([]);
   const [hasMore, sethasMore] = useState(true);
@@ -27,13 +31,11 @@ const BusinessListing = (props) => {
     const getComments = async () => {
       var config1 = {
         method: 'get',
-        url: '/api/categories/getrest/'+`${params.id}`,
+        url: '/api/vendors/by-serach/all?'+`${decodedData}`,
         headers: { 
           'Content-Type': 'application/json'
         },
         params : {
-          'filter': filter,
-          'country': country,
           'page': page,
           'size': size,
           'new' : 1
@@ -42,7 +44,7 @@ const BusinessListing = (props) => {
 
       await axios(config1)
       .then(function (result) {
-        setItems(result.data.vendors);
+        setItems(result.data.data);
       })
       .catch(function (error) {
       });
@@ -55,9 +57,9 @@ const BusinessListing = (props) => {
 
    const fetchComments = async () => {
 
-    let url = `/api/categories/getrest/${params.id}?filter=${filter}&country=${country}&page=${page}&size=${size}`;
+    let url = `/api/vendors/by-serach/all?${decodedData}&page=${page}&size=${size}`;
     const res = await axios.get(url);
-    const data = res.data.vendors;
+    const data = res.data.data;
     return data;
    } 
 
@@ -94,8 +96,7 @@ const BusinessListing = (props) => {
   }, []);
 
   const addDefaultSrc = (ev) => {
-    // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`;
-    ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
+    ev.target.src = `${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`;
   }
 
   return (
@@ -103,7 +104,7 @@ const BusinessListing = (props) => {
         <Header2/>
         <SearchBar/>
         <Container>
-          <div className="hotdeals BusinessListing">
+          <div className="hotdeals SearchBusiness">
             <h4>{categoryName}</h4>
             { (items && items.length) ? 
             <Row>
@@ -150,4 +151,4 @@ const BusinessListing = (props) => {
   );
 }
 
-export default BusinessListing;
+export default SearchBusiness;
