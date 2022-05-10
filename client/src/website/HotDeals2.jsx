@@ -45,7 +45,7 @@ const addDefaultSrc = (ev) => {
                     <div className="ribbon"><p> {item.discount}% off</p></div>
                     <div className="hImage">
                       <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
-                        <img onError = {addDefaultSrc} style = {{ 'width': '348px' , 'height' : '232px' }} src={`${process.env.PUBLIC_URL}/api/uploads/${item.banner}`}/>
+                        <img onError = {addDefaultSrc} style = {{ 'width': '348px' , 'height' : '232px' }} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`}/>
                       </a>
                     </div>
                     <CardTitle tag="h5">
