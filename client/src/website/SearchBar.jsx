@@ -7,8 +7,9 @@ import TypeaheadOne from './typeahead-one';
 import axios from 'axios'
 import SweetAlert from 'sweetalert2'     
 
-    
+
 const SearchBar = () => {
+  
   var base64 = require('base-64');
   const history = useHistory()
   const [countries , setCountries] = useState([]);
