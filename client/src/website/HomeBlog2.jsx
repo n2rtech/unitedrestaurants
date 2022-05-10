@@ -39,32 +39,33 @@ const HomeBlog2 = () => {
           <div style={{ position: "relative" }}>
             <Carousel responsive={responsive}>
             {blogData.map((blog , i ) => (
-
-              <div className="customcard" key={i}>
-                <Card>
-                  <div className="hImage">
-                  <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`}>
-                      <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${blog.image}`} 
-                     alt="Menu-Icon" className="img-fluid" />
-                    </a>
-                  </div>
-                  <CardTitle tag="h5">
-                  <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`}>{blog.name}</a>
-                  </CardTitle>
-                  <p>
-                    {moment(blog.createdAt).fromNow()}
-                  </p>
-                  { (blog.content.length <= 270) ?
-                    <CardText dangerouslySetInnerHTML={{__html: `${(blog.content).substring(0, 270)}`}}>
-                    </CardText> 
-                    : 
-                    <CardText dangerouslySetInnerHTML={{__html: `${(blog.content).substring(0, 270)} ...`}}>
-                    </CardText>
-                  }
-                  <Button><a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`} className="readmore">READ MORE</a></Button>
-                </Card>
-              
-              </div> 
+               blog.show_on_home && 
+                  <div className="customcard" key={i}>
+                    <Card>
+                      <div className="hImage">
+                      <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`}>
+                          <img onError={addDefaultSrc} style = {{ 'width': '533px' , 'height' : '400px' }}  src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${blog.image}`} 
+                        alt="Menu-Icon" className="img-fluid" />
+                        </a>
+                      </div>
+                      <CardTitle tag="h5">
+                      <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`}>{blog.name}</a>
+                      </CardTitle>
+                      <p>
+                        {moment(blog.createdAt).fromNow()}
+                      </p>
+                      { (blog.content.length <= 270) ?
+                        <CardText dangerouslySetInnerHTML={{__html: `${(blog.content).substring(0, 270)}`}}>
+                        </CardText> 
+                        : 
+                        <CardText dangerouslySetInnerHTML={{__html: `${(blog.content).substring(0, 270)} ...`}}>
+                        </CardText>
+                      }
+                      <Button><a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${blog.id}`} className="readmore">READ MORE</a></Button>
+                    </Card>
+                  
+                  </div> 
+                
                ))}
             </Carousel>
           </div>

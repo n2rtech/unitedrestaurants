@@ -26,7 +26,7 @@ export default function JobOpenings() {
           <h5>Job Openings</h5>
           <ul className="list-unstyled">
           {jobsData.map((jobs , i ) => (
-            <li key={i}><i className="fa fa-check"></i> {jobs.job_name} </li>
+            <li key={i}><i className="fa fa-check"></i> {jobs.job_name} : {jobs.job_description} </li>
             ))}
           </ul>
         </div>
