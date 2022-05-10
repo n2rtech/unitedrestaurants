@@ -99,7 +99,7 @@ const Restaurantlist = (props) => {
                                     <Row>  
                                       <div className="hImage">
                                         <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
-                                          <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} />
+                                          <img onError={addDefaultSrc} style = {{ 'width': '338px' , 'height' : '242px' }} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} />
                                         </a>
                                       </div>
                                       <CardTitle tag="h5">
@@ -107,7 +107,7 @@ const Restaurantlist = (props) => {
                                       </CardTitle>
                                      </Row> 
                                       <CardText>
-                                        {showMore ? item.about_business : `${item.about_business.substring(0, 400)}`+'...'}
+                                      {(item.about_business && item.about_business.length >= 100) ? (item.about_business.substring(0, 116) + "...") : item.about_business == 'null' ? '' : item.about_business}
                                       </CardText>
                                       { item.user_id == 0 ?  
                                         <Button>

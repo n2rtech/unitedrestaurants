@@ -45,7 +45,17 @@ const Rightbar = (props) => {
     }
   }, []);
 
-  const Logout_From_Firebase = () => {
+  const Logout_From_Auth0Admin = () => {
+    localStorage.removeItem('profileURL')
+    localStorage.removeItem('token');
+    localStorage.setItem("adminloggedin", false);
+    localStorage.setItem("vendorloggedin", false);
+    localStorage.setItem("userloggedin", false);
+    firebase_app.auth().signOut()
+    history.push(`${process.env.PUBLIC_URL}/login`)
+  }
+
+  const Logout_From_Auth0vendor = () => {
     localStorage.removeItem('profileURL')
     localStorage.removeItem('token');
     localStorage.setItem("adminloggedin", false);
@@ -55,7 +65,7 @@ const Rightbar = (props) => {
     history.push(`${process.env.PUBLIC_URL}/vendor/login`)
   }
 
-  const  Logout_From_Auth0 = () =>  {
+  const  Logout_From_Firebase = () =>  {
     localStorage.removeItem("auth0_profile")
     localStorage.setItem("adminloggedin", false);
     localStorage.setItem("vendorloggedin", false);
@@ -76,7 +86,13 @@ const Rightbar = (props) => {
               </div>
             </div>
             <ul className="profile-dropdown onhover-show-div">
-              <li onClick={authenticated ? Logout_From_Auth0 : Logout_From_Firebase}><LogIn /><span>{LogOut}</span></li>
+               {
+                  localStorage.getItem('adminloggedin') === 'true' ? 
+                  <li onClick={Logout_From_Auth0Admin}><LogIn /><span>{LogOut}</span></li>
+                  :
+                  <li onClick={Logout_From_Auth0vendor }><LogIn /><span>{LogOut}</span></li>
+               }
+              
             </ul>
           </li>
         </ul>

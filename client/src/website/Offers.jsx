@@ -28,7 +28,7 @@ export default function Offers() {
           <h5>Deals/Offer</h5>
           <ul className="list-unstyled">
           {couponsData.map((coupons , i ) => (
-            <li key={i}><i className="fa fa-check"></i> {coupons.deal_name}</li>
+            <li key={i}><i className="fa fa-check"></i> {coupons.deal_name} : {coupons.deal_description}</li> 
           ))}
           </ul>
         </div>
