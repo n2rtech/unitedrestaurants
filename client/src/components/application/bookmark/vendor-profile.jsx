@@ -30,6 +30,7 @@ const VendorProfile = (props) => {
   const [categories, setCategory] = useState()
   const [location, setLocation] = useState({})
   const [image, setimage] = useState({ pictures: [] , pictureFiles: [] })
+  const [errmsg , setErrmsg] = useState(false);
 
   useEffect(() => {
     const GetData = async () => {
@@ -194,6 +195,16 @@ const VendorProfile = (props) => {
 
     var categories_arr = [];
 
+    if(aboutbusiness.length < 5 || aboutbusiness.length == 0) {
+      setErrmsg(true);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      });
+      toast.error("About Business field is required!");
+    } else {
+      setErrmsg(false);
     const categorys = multiSelections.map((user) => {
       categories_arr.indexOf(user.id) === -1 ? categories_arr.push(user.id) : console.log("This item already exists");
     });
@@ -233,6 +244,8 @@ const VendorProfile = (props) => {
         }, 1500);
       })
       .catch(error => console.log('Form submit error', error))
+    }
+    
     };
 
     const addDefaultImage = (event) => {
@@ -297,9 +310,12 @@ const VendorProfile = (props) => {
             </Col>
           </Row>
           <FormGroup>
-            <Label htmlFor="exampleFormControlInput1">{"About Business"}</Label>
+            {errmsg ? <Label htmlFor="exampleFormControlInput1" style={{color: "red"}}>{"About Business"}</Label> : 
+              <Label htmlFor="exampleFormControlInput1">{"About Business"}</Label>
+            }
+            
             <Input type="textarea" className="form-control" onChange = {onChangeAboutbusiness} value={aboutbusiness} rows="3"/>
-          </FormGroup>
+          </FormGroup>         
           <FormGroup>
              <Label htmlFor="exampleFormControlInput1">{"Address"}</Label>
              <Input type="textarea" className="form-control" value={address} onChange={onChangeaddress} rows="3"/>
