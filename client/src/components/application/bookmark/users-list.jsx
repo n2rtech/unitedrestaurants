@@ -5,26 +5,62 @@ import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import SweetAlert from 'sweetalert2'
+import Pagination from "react-js-pagination";
 
 const Userslist = (props) => {
 
   const [users, setUsers] = useState([]);
   const token = localStorage.getItem("token");
   const history = useHistory()
+
+  const [activePage, setActivePage] = useState(0);
+  const [totalItemsCount, setTotalItemsCount] = useState(1);  
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(6);
+  const [pagesCount, setPagesCount] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [size, setSize] = useState(6);
   
     useEffect(() => {
     
       const config = {
-          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token}
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token},
+          params : {
+        'page': 1,
+        'size': size
+      }
+
           };
   
-    axios.get('/api/users/with/role' , config).then((response) => {
-      setUsers(response.data);
+    axios.get('/api/users/with/role' , config).then((result) => {
+      setUsers(result.data.users);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
     });
   
     }, []);
   
     console.log(users);
+
+    const handlePageChange = (pageNumber) => {
+    var config = {
+      method: 'get',
+      url: '/api/users/with/role',
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params : {
+        'page': pageNumber,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(result=>{
+      setUsers(result.data.users);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+    });
+  }
 
  // Delete functionality
 
@@ -89,7 +125,6 @@ const Userslist = (props) => {
                     <tr>
                         <th scope="col">{"Users Name"}</th>
                         <th scope="col">{"Users Email"}</th>
-                        <th scope="col">{"Role Name"}</th>
                         <th scope="col" className="text-right">{"Action"}</th>
                     </tr>
                 </thead>
@@ -98,21 +133,29 @@ const Userslist = (props) => {
                     <tr>
                     <td>{item.name}</td>
                     <td>{item.email}</td>
-                    <td>{item.role ? item.role.role_name : ''}</td>
-                    {item.role.role_name == 'admin' ? 
-                    <td className="text-right">
-                     <a  className="btn btn-success">Edit</a> &nbsp;
-                     <a className="btn btn-danger" >Delete</a> 
-                   </td> :
                    <td className="text-right">
                      <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-user/`+`${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
                      <a className="btn btn-danger" onClick = {() => handleDelete(item.id)} >Delete</a> 
                    </td>
-                 }
                   </tr>
                   )}
                 </tbody>
               </Table>
+              <div className="d-flex justify-content-center">
+              <Pagination
+              activePage={activePage}
+              itemsCountPerPage={size}
+              totalItemsCount={totalItemsCount}
+              pageRangeDisplayed={pageRangeDisplayed}
+              onChange={handlePageChange}
+              itemClass="page-item"
+              linkClass="page-link"
+              prevPageText="Prev"
+              nextPageText="Next"
+              lastPageText="Last"
+              firstPageText="First"
+              />
+              </div>
             </div>
           </CardBody>
         </Card>  
