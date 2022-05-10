@@ -3,63 +3,137 @@ import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Row, Col, Card, CardBody, Button } from 'reactstrap'
 import axios from 'axios'
 import SweetAlert from 'sweetalert2'
+import Pagination from "react-js-pagination";
 
 const Categories = (props) => {
 
   const [generalData, setGeneralData] = useState([]);
   const token = localStorage.getItem("token");
+
+  const [activePage, setActivePage] = useState(0);
+  const [totalItemsCount, setTotalItemsCount] = useState(1);  
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(6);
+  const [pagesCount, setPagesCount] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [size, setSize] = useState(6);
+
   useEffect(() => {
-  
-      const config = {
-          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
-          };
-  
-          
-      fetch("/api/categories" , config)
-        .then(res => res.json())
-        .then(
-          (result) => {
 
-              for (const [i, element] of result.entries()) {
+    var config = {
+      method: 'get',
+      url: '/api/categories/with-paginate/',
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params : {
+        'page': 1,
+        'size': size
+      }
+    };
 
-                result[i].parent_1 = '';
-                result[i].parent_2 = '';
-                result[i].parent_3 = '';
-                result[i].parent_4 = '';
+    axios(config)
+    .then(result=>{
+      let newResult = result.data.categories;
 
-              var parent = element.parent_category;
+      for (const [i, element] of newResult.entries()) {
 
-              if(parent){
-                result[i].parent_1 = parent.name;
-                if(parent.parent_category){
-                  var nextparent = parent.parent_category; 
+        newResult[i].parent_1 = '';
+        newResult[i].parent_2 = '';
+        newResult[i].parent_3 = '';
+        newResult[i].parent_4 = '';
 
-                  result[i].parent_2 = nextparent.name;
+        var parent = element.parent_category;
 
-                  if(nextparent.parent_category){
-                    var nextnextparent = nextparent.parent_category;
+        if(parent){
+          newResult[i].parent_1 = parent.name;
+          if(parent.parent_category){
+            var nextparent = parent.parent_category; 
 
-                     result[i].parent_3 = nextnextparent.name;
+            newResult[i].parent_2 = nextparent.name;
 
-                    if(nextnextparent.parent_category){
-                      var nectnextnextparent = nextnextparent.parent_category;
-                       result[i].parent_4 = nectnextnextparent.name;
-                    }
+            if(nextparent.parent_category){
+              var nextnextparent = nextparent.parent_category;
 
-                  }
+              newResult[i].parent_3 = nextnextparent.name;
 
-                }
+              if(nextnextparent.parent_category){
+                var nectnextnextparent = nextnextparent.parent_category;
+                newResult[i].parent_4 = nectnextnextparent.name;
               }
 
             }
-            
-              setGeneralData(result);
-          },
-          (error) => {
-            
+
           }
-        )
-    }, []);
+        }
+
+      }
+
+      setGeneralData(newResult);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+    },
+    (error) => {
+
+    }
+    )
+  }, []);
+
+
+  const handlePageChange = (pageNumber) => {
+    var config = {
+      method: 'get',
+      url: '/api/categories/with-paginate/',
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params : {
+        'page': pageNumber,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(result=>{
+
+      let newResult = result.data.categories;
+
+      for (const [i, element] of newResult.entries()) {
+
+        newResult[i].parent_1 = '';
+        newResult[i].parent_2 = '';
+        newResult[i].parent_3 = '';
+        newResult[i].parent_4 = '';
+
+        var parent = element.parent_category;
+
+        if(parent){
+          newResult[i].parent_1 = parent.name;
+          if(parent.parent_category){
+            var nextparent = parent.parent_category; 
+
+            newResult[i].parent_2 = nextparent.name;
+
+            if(nextparent.parent_category){
+              var nextnextparent = nextparent.parent_category;
+
+              newResult[i].parent_3 = nextnextparent.name;
+
+              if(nextnextparent.parent_category){
+                var nectnextnextparent = nextnextparent.parent_category;
+                newResult[i].parent_4 = nectnextnextparent.name;
+              }
+
+            }
+
+          }
+        }
+
+      }
+
+
+      setGeneralData(newResult);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+    });
+  }
 
 
     const handleRemoveCategory = (id) => {
@@ -142,6 +216,21 @@ const Categories = (props) => {
               ))}
               </tbody>
             </Table>
+            <div className="d-flex justify-content-center">
+              <Pagination
+              activePage={activePage}
+              itemsCountPerPage={size}
+              totalItemsCount={totalItemsCount}
+              pageRangeDisplayed={pageRangeDisplayed}
+              onChange={handlePageChange}
+              itemClass="page-item"
+              linkClass="page-link"
+              prevPageText="Prev"
+              nextPageText="Next"
+              lastPageText="Last"
+              firstPageText="First"
+              />
+              </div>
           </div>
         </CardBody>
         </Card>

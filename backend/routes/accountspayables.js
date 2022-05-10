@@ -55,6 +55,29 @@ router.get('/', passport.authenticate('jwt', {
 });
 
 
+router.get('/all', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {   
+
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    AccountsPayable
+    .findAndCountAll({
+        offset,
+        limit,
+        order: [ [ 'createdAt', 'DESC' ]]
+    })
+    .then((accountspayables) => {
+        const response = getPagingData(accountspayables, page, limit);
+        res.status(200).send(response)
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+
 
 // Get AccountsPayable by ID
 router.get('/:id', (req, res) => {
@@ -165,5 +188,21 @@ router.get("/deleted", (req, res) => {
         res.status(400).send('error');
     });
 });
+
+
+const getPagination = (page=1, size) => {
+      const limit = size ? +size : 3;
+      const offset =  (page-1) * limit;
+
+      return { limit, offset };
+  };
+
+  const getPagingData = (data, page, limit) => {
+      const { count: totalItems, rows: accountspayables } = data;
+      const currentPage = page ? +page : 1;
+      const totalPages = Math.ceil(totalItems / limit);
+
+      return { totalItems, accountspayables, totalPages, currentPage };
+  };
 
 module.exports = router;

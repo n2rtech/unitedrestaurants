@@ -1506,6 +1506,192 @@ function generatePassword(pwd) {
 };
 
 
+router.get('/with-paginate/:key', (req, res) => {
+
+
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+
+  if (req.params.key == "membership") {
+    var conditions = {
+      where: {
+        membership_id: {
+          [Op.ne]: null
+        }
+      },
+      limit,offset
+    };
+  }
+
+
+  else if (req.params.key == "no-membership") {
+    var conditions = {
+      where: {
+        membership_id: {
+          [Op.eq]: null
+        }
+      },
+      limit,offset
+    };
+  }
+
+
+  else if (req.params.key == "suspended") {
+    var conditions = {
+      where: {
+        is_suspended: {
+          [Op.eq]: 1
+        }
+      },
+      limit,offset
+    };
+  }
+
+
+  else if (req.params.key == "featured") {
+    var conditions = {  include: {
+      model: FeaturedBusiness,
+      as: 'featured',
+      required: true
+    },
+  limit,offset};
+  }
+
+
+  else if (req.params.key == "hot-deals") {
+    var conditions = {  include: {
+      model: HotDeal,
+      as: 'hot_deals',
+      required: true
+    },
+    limit,offset
+  };
+}
+
+
+  else if (req.params.key == "add-space") {
+    var conditions = {
+      where: {
+        adds_membership_id: {
+          [Op.ne]: null
+        }
+      },
+      limit,offset
+    };
+  }
+
+  else if (req.params.key == "video-membership") {
+    var conditions = {
+      where: {
+        video_membership_id: {
+          [Op.ne]: null
+        }
+      },
+      limit,offset
+    };
+  }
+  else{
+
+    var conditions = { 
+      where:{
+        id: req.params.key
+      },
+      limit,offset
+    };
+  }
+
+  
+
+  Vendor.findAndCountAll(conditions)
+  .then((vendors) => {          
+    if (vendors) {
+      res.status(200).send(getPagingVandorsData(vendors,page,limit))
+    } else {
+      res.status(404).send({
+        'message': 'Vendors not found',
+        'data' : []
+      });
+    }
+  })
+  .catch((error) => {
+    res.status(400).send(error);
+  });
+});
+
+
+router.get('/all/with-paginate', (req, res) => {
+
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+
+  Vendor.findAll()
+  .then((roles) => {          
+    if (roles) {
+      if (req.query.name || req.query.email || req.query.mobile || req.query.country) {
+      var conditions = {
+        where: {
+
+          [Op.or]: [
+          {
+            name: {
+              [Op.like]: req.query.name ? '%'+req.query.name+'%' : ''
+            }
+          },
+          {
+            email: {
+              [Op.like]: req.query.email ? '%'+req.query.email+'%' : ''
+            }
+          },
+          {
+            mobile: {
+              [Op.like]: req.query.mobile ? '%'+req.query.mobile+'%' : ''
+            }
+          },
+          {
+            country_id: {
+              [Op.eq]: req.query.country ? req.query.country : ''
+            }
+          },
+          ]
+        },
+        order: [['id', 'DESC']],
+        offset,
+        limit
+      };
+
+      }else{
+        var conditions = {
+          order: [['id', 'DESC']],
+          offset,
+          limit
+      };
+      }
+
+      Vendor.findAndCountAll(conditions)
+      .then(users => {
+       res.status(200).send(getPagingVandorsData(users,page,limit))
+     })
+      .catch(err => res.status(400).send(err));
+    } else {
+      res.status(404).send({
+        'message': 'Vendors not found'
+      });
+    }
+  })
+  .catch((error) => {
+    res.status(400).send(error);
+  });
+});
+
+const getPagingVandorsData = (data, page, limit) => {
+  const { count: totalItems, rows: vendors } = data;
+  const currentPage = page ? +page : 1;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, vendors, totalPages, currentPage };
+};
+
+
 
 
 module.exports = router;

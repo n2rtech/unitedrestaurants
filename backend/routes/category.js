@@ -162,7 +162,52 @@ router.get('/', passport.authenticate('jwt', {
 });
 
 
+router.get('/with-paginate', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+        Category
+        .findAndCountAll({
+            include: [
+            {
+                model: Category,
+                as: 'parent_category',
+                include: [
+                {
+                    model: Category,
+                    as: 'parent_category',
+                    include: [
+                    {
+                        model: Category,
+                        as: 'parent_category',
+                        include: [
+                        {
+                            model: Category,
+                            as: 'parent_category',
 
+                        }
+                        ]
+
+                    }
+                    ]
+
+                }
+                ]
+            },
+            ],
+            limit,
+            offset,
+
+        })
+            .then((category) => {
+
+                res.status(200).send(getPagingCategoryData(category, page, limit))
+            })
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+});
 
 
 // Get List of Categories
@@ -901,6 +946,14 @@ const getPagingData = (data, page, limit) => {
   const totalPages = Math.ceil(totalItems / limit);
 
   return { totalItems, vendors, totalPages, currentPage };
+};
+
+const getPagingCategoryData = (data, page, limit) => {
+  const { count: totalItems, rows: categories } = data;
+  const currentPage = page ? +page : 1;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, categories, totalPages, currentPage };
 };
 
 const getPagingData1 = (data, page, limit) => {

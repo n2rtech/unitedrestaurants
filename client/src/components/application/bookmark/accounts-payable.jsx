@@ -4,23 +4,37 @@ import { Table, Container, Row, Col, Card, CardBody,Button, ButtonGroup } from '
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import SweetAlert from 'sweetalert2'
+import Pagination from "react-js-pagination";
 
 const AccountsPayable = (props) => {
 
   const token = localStorage.getItem("token");
   const [accountsPayableData, setAccountsPayableData] = useState([]);
+  const [activePage, setActivePage] = useState(0);
+  const [totalItemsCount, setTotalItemsCount] = useState(1);  
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(6);
+  const [pagesCount, setPagesCount] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [size, setSize] = useState(6);
 
   useEffect(() => {
 
     const config = {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params : {
+        'page': 1,
+        'size': 4 
+      }
     };
 
-    fetch("/api/accounts-payable" , config)
+    fetch("/api/accounts-payable/all" , config)
     .then(res => res.json())
     .then(
       (result) => { 
-        setAccountsPayableData(result);
+        setAccountsPayableData(result.accountspayables);
+        setTotalItemsCount(result.totalItems);  
+        setActivePage(result.currentPage);
+        setPagesCount(result.totalPages);
       },
       (error) => { 
       });
@@ -65,6 +79,28 @@ const AccountsPayable = (props) => {
     })
   }
 
+  
+
+  const handlePageChange = (pageNumber) => {
+    var config = {
+      method: 'get',
+      url: '/api/accounts-payable/all/',
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params : {
+        'page': pageNumber,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(result=>{
+      setAccountsPayableData(result.data.accountspayables);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+    });
+  }
+
   return (
     <Fragment>
       <Breadcrumb parent="Apps" title="Accounts Payable" />
@@ -101,6 +137,21 @@ const AccountsPayable = (props) => {
                   ))}                  
                 </tbody>
               </Table>
+              <div className="d-flex justify-content-center">
+              <Pagination
+              activePage={activePage}
+              itemsCountPerPage={size}
+              totalItemsCount={totalItemsCount}
+              pageRangeDisplayed={pageRangeDisplayed}
+              onChange={handlePageChange}
+              itemClass="page-item"
+              linkClass="page-link"
+              prevPageText="Prev"
+              nextPageText="Next"
+              lastPageText="Last"
+              firstPageText="First"
+              />
+              </div>
             </div>
           </CardBody>
         </Card>  
