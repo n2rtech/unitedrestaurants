@@ -5,7 +5,9 @@ import { useHistory } from 'react-router-dom';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import TypeaheadOne from './typeahead-one';
 import axios from 'axios'
-import SweetAlert from 'sweetalert2'         
+import SweetAlert from 'sweetalert2'     
+
+    
 const SearchBar = () => {
   var base64 = require('base-64');
   const history = useHistory()
