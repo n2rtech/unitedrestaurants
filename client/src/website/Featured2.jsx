@@ -49,7 +49,7 @@ const Featured2 = () => {
               <Card> 
                 <div className="hImage">
                 <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
-                    <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
+                    <img onError={addDefaultSrc} style = {{ 'width': '348px' , 'height' : '232px' }} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
                      alt="Menu-Icon"/>
                       </a>
                 </div>
@@ -60,7 +60,7 @@ const Featured2 = () => {
                 </CardTitle>
                 
                 <CardText>
-                {(item.about_business && item.about_business.length >= 100) ?(item.about_business.substring(0, 100) + "...") : item.about_business}
+                {(item.about_business && item.about_business.length >= 100) ? (item.about_business.substring(0, 116) + "...") : item.about_business == 'null' ? '' : item.about_business}
                 </CardText>
                 <Button>{ item.user_id == 0 ?  
                     

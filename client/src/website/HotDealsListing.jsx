@@ -75,7 +75,8 @@ const HotDealsListing = (props) => {
   
 
   const addDefaultSrc = (ev) => {
-    ev.target.src = `${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`;
+    // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`;
+    ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
   }
 
  
@@ -104,14 +105,14 @@ const HotDealsListing = (props) => {
                                     <Card>
                                       <div className="hImage">
                                         <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
-                                          <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} />
+                                          <img onError={addDefaultSrc} style = {{ 'width': '348px' , 'height' : '232px' }} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} />
                                         </a>
                                       </div>
                                       <CardTitle tag="h5">
                                         <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>{item.business_name}</a>
                                       </CardTitle>
                                       <CardText>
-                                        {(item.about_business && item.about_business.length >= 400) ? (item.about_business.substring(0, 400) + "...") : item.about_business}
+                                      {(item.about_business && item.about_business.length >= 100) ? (item.about_business.substring(0, 116) + "...") : item.about_business == 'null' ? '' : item.about_business}
                                       </CardText>
                                       <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}> SEE DETAILS</a></Button>
                                     </Card>
