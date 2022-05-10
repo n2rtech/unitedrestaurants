@@ -12,6 +12,7 @@ const SearchBar = () => {
   const [countries , setCountries] = useState([]);
   const [categories , setCategories] = useState([]);
   const [address , setAddress] = useState(localStorage.getItem('address'));
+  const [address1 , setAddress1] = useState(localStorage.getItem('address1'));
   const [latitude , setLatitude] = useState(localStorage.getItem('latitude'));
   const [longitude , setLongitude] = useState(localStorage.getItem('longitude'));
   useEffect( async () => {
@@ -36,15 +37,11 @@ const SearchBar = () => {
   const [catid, setCatid] = useState(localStorage.getItem('catid'));
 
   const OnChangeSearch = (event) => {
-      setAddress(event.target.value);
+      setAddress1(event.target.value);
   }
 
   const OnChangeFilter = (event) => {
       setSearchInput(event.target.value);
-  }
-
-  const handleAddressChange = (event) => {
-      setAddress(event.target.value);
   }
 
   const handleLatitudeChange = (event) => {
@@ -86,9 +83,10 @@ const SearchBar = () => {
       });
     }
 
-  const HandleSearch = (searchvalue , catid) => {
+  const HandleSearch = (searchvalue , catid, addresss) => {
 
     const cat = parseInt(catid);
+    const address1 = addresss;
     const address = localStorage.getItem('address') || '';
     const latitude = parseFloat(localStorage.getItem('latitude') || 0);
     const longitude = parseFloat(localStorage.getItem('longitude') || 0);
@@ -103,7 +101,8 @@ const SearchBar = () => {
     } else {
       localStorage.setItem('catid' , catid);
       localStorage.setItem('filter' , searchvalue);
-      const url = base64.encode(`&country=${country_code}&filter=${searchvalue}&category=${catid}&address=${address}&latitude=${latitude}&longitude=${longitude}`)
+      localStorage.setItem('address1' , address1);
+      const url = base64.encode(`&country=${country_code}&filter=${searchvalue}&category=${catid}&address=${address}&address1=${address1}&latitude=${latitude}&longitude=${longitude}`)
       // const url = base64.encode(`&country=${country_code}&category=${catid}&address=${address}&latitude=${latitude}&longitude=${longitude}`)
       history.push(`/SearchBusiness/${url}`);
       // history.push(`/search/${url}`);
@@ -152,13 +151,13 @@ const SearchBar = () => {
               <div className="col-sm-5 p-0">
                 <InputGroup>
                   <InputGroupAddon onClick={setCurrentLocation1} addonType="prepend"><InputGroupText><i  title="Use my Current Location" className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
-                  <Input type="text" defaultValue={address} name="address" id="searchAddress" className="form-control digits" onChange={OnChangeSearch} placeholder="Location.." />                
+                  <Input type="text" defaultValue={address ? address : address1} name="address" id="searchAddress" className="form-control digits" onChange={OnChangeSearch} placeholder="Location.." />                
                   <Input type="hidden" defaultValue={latitude} name="latitude" id="search_address_lat" />                
                   <Input type="hidden" defaultValue={longitude} name="longitude" id="search_address_lan" />                
                   </InputGroup>
               </div>
               <div className="col-sm-1">
-                <Button color="primary" onClick={() => HandleSearch(searchinput,catid)}><i className="fa fa-search"></i></Button>
+                <Button color="primary" onClick={() => HandleSearch(searchinput,catid,address1)}><i className="fa fa-search"></i></Button>
               </div>
             </Row>
           </Form>

@@ -67,6 +67,7 @@ router.get('/by-serach/all', async (req, res) => {
   const { limit, offset } = getPagination(page, size);
 
     var address = req.query.address;
+    var address1 = req.query.address1;
     var latitude = req.query.latitude;
     var longitude = req.query.longitude;
 
@@ -100,7 +101,7 @@ router.get('/by-serach/all', async (req, res) => {
     var category = req.query.category;
     var filter = req.query.filter;
 
-    if (filter && !address) {
+    if (filter && !address && !address1) {
       //for only filter search
       console.log('for only filter search');
         var conditions = {
@@ -120,7 +121,7 @@ router.get('/by-serach/all', async (req, res) => {
             limit,
             order: [ ['createdAt', 'DESC' ]]
         }
-    } else if (filter && address) {
+    } else if (filter && address && address1) {
 
       console.log('filter and serach both');
         var conditions = {
@@ -142,7 +143,7 @@ router.get('/by-serach/all', async (req, res) => {
             order: [ ['createdAt', 'DESC' ]],
             having: Sequelize.literal(`distance <= 50`),
         }
-    } else if (!address && !filter) {
+    } else if (!address && !filter && !address1) {
       //for only category search
       console.log('only category search!')
         var conditions = {
@@ -178,6 +179,53 @@ router.get('/by-serach/all', async (req, res) => {
             limit,
             order: [ ['createdAt', 'DESC'] ],
             having: Sequelize.literal(`distance <= 50`)
+        }
+
+    } else if (!address && !filter && address1) {
+      //for only address search
+      console.log('Only Address1 section!')
+        var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id','address',
+            ],
+
+            where:{
+              address: {
+                    [Op.like]: req.query.address1 ? '%'+req.query.address1+'%' : ''
+                },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC'] ]
+        }
+
+    } else if (!address && filter && address1) {
+      //for only address search
+      console.log('Only Address section!')
+        var conditions = {
+
+            attributes: [
+            'id','business_name','about_business','banner','createdAt','user_id','address',
+            ],
+
+            where:{
+              address: {
+                    [Op.like]: req.query.address1 ? '%'+req.query.address1+'%' : ''
+                },
+                business_name: {
+                    [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+                },
+                categories: {
+                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+                }
+            },
+            offset,
+            limit,
+            order: [ ['createdAt', 'DESC'] ]
         }
 
     } else {
