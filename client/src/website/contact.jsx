@@ -5,6 +5,7 @@ import Footer2 from './footer2.jsx'
 import SearchBar from './SearchBar.jsx'
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import SweetAlert from 'sweetalert2'
 
 const Contact = (props) => {
 
@@ -106,7 +107,11 @@ const Contact = (props) => {
       { 
         if (res.data.succeed === true) {
           setTimeout(() => {
-            toast.success(res.data.message);
+            SweetAlert.fire(
+              'Alert!',
+              'Contact Inquiry sended successfully',
+              'Success'
+            )
           }, 200);
           setName('');
           setPhoneNumber('');
