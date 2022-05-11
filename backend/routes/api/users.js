@@ -427,6 +427,15 @@ const getPagingData = (data, page, limit) => {
 };
 
 
+const getPagingUsersData = (data, page, limit) => {
+  const { count: totalItems, rows: users } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, users, totalPages, currentPage };
+};
+
+
 function generatePassword(pwd) {
     let hash = bcrypt.hashSync(pwd, 10);
     return hash;
@@ -456,10 +465,14 @@ router.get('/', (req, res) => {
 
 
 router.get("/with/role", async (req, res) => {
-    let getData = await User.findAll({order: [['id', 'DESC']]});
+
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+
+    let getData = await User.findAndCountAll({order: [['id', 'DESC']],limit,offset});
     if (getData) {
-        let CatList = await catLists(getData);
-        res.status(200).send(CatList)
+        // let CatList = await catLists(getData.rows);
+        res.status(200).send(getPagingUsersData(getData,page,limit))
     }
 });
 
