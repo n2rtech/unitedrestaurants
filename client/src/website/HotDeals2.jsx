@@ -24,6 +24,12 @@ const HotDeals2 = () => {
 
   }, []);
 
+  const uniqueTags = [];
+  hotData.map((item) => {
+    var findItem = uniqueTags.find((x) => x.user_id === item.user_id);
+    if (!findItem) uniqueTags.push(item);
+  });
+
 const addDefaultSrc = (ev) => {
   // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h4.jpeg`;
   ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
@@ -39,7 +45,7 @@ const addDefaultSrc = (ev) => {
       </div> : '' }
         <div style={{ position: "relative" }}>
           <Carousel responsive={responsive}>
-            {hotData.map((item , i ) => (
+            {uniqueTags.map((item , i ) => (
             <div className="customcard" key = {i}>
                     <Card>
                     <div className="ribbon"><p> {item.discount}% off</p></div>
