@@ -57,6 +57,8 @@ import Forgetpwd from "./pages/authentication/forgetpwd"
 import Resetpwd from "./pages/authentication/resetpwd"
 import Error400 from "./pages/errors/error400"
 import Error404 from "./pages/errors/error404"
+import AdminError404  from "./pages/errors/adminerror404"
+import VendorError404 from "./pages/errors/vendorerror404"
 // Maintenance
 import Maintenance from "./pages/maintenance"
 import Callback from './auth/callback'
@@ -134,15 +136,51 @@ const Root = (props) =>  {
           <Route exact path={`${process.env.PUBLIC_URL}/vendor/:any`} render={() => <Error404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/admin/:any`} render={() => <Error404/>} />
 
-             {/* <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/`} render={() => {
-                if(localStorage.getItem("vendorloggedin") === 'false') {
-                  return (<Redirect to={`${process.env.PUBLIC_URL}/error/`} />)
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/sale-items/:any`} render={() => <VendorError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/vendor-profile/`} render={() => <VendorError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/menu-items/:any`} render={() => <VendorError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/vendor-membership-package/`} render={() => <VendorError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/vendor-coupon/`} render={() => <VendorError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/vendor-photogallery/`} render={() => <VendorError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/vendor-videogallery/`} render={() => <VendorError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/vendor-youtube/`} render={() => <VendorError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/job-openings/`} render={() => <VendorError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/adds-membership/`} render={() => <VendorError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/ad-spaces/`} render={() => <VendorError404/>} />
+
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/manage-pages/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/blogs/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/categories/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/all-vendors/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/all-membership/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/edit-vendor/:any`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/suspended-vendors/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/featured-vendors/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/hot-deals-vendors/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/add-space-vendors//`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/admin-membership-package/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/accounts-payable/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/countries/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/adsense/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/contact-enquiries/`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/trash/:any`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/backup/:any`} render={() => <AdminError404/>} />
+
+              {/* <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/`} render={() => {
+                if(localStorage.getItem("vendorloggedin") == 'true') {
+                  return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/vendor//`} />)
                 } else {
-                  return (<Redirect to={`${process.env.PUBLIC_URL}/dashboard/vendor/`} />)
+                  return (<Redirect to={`${process.env.PUBLIC_URL}/error/`} />)
                 }   
               }} /> 
 
-              <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin`} render={() => {
+              <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/`} render={() => {
+                if(!localStorage.getItem("adminloggedin") == 'true') {
+                  return (<Redirect to={`${process.env.PUBLIC_URL}/error/`} />)
+                }  
+              }} />          */}
+
+             {/* <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin`} render={() => {
                   if(localStorage.getItem("adminloggedin") === 'false') {
                        return (<Redirect to={`${process.env.PUBLIC_URL}/error/`} />)
                   } else {
