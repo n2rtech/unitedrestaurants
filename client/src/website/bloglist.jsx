@@ -72,7 +72,7 @@ const Bloglist = (props) => {
   }
 
   const addDefaultSrc = (ev) => {
-    ev.target.src = `${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`;
+      ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
   }
 
 
@@ -101,17 +101,17 @@ const Bloglist = (props) => {
                             <Card>
                               <div className="hImage">
                                 <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${item.id}`}>
-                                  <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${item.image}`} />
+                                  <img onError={addDefaultSrc} style = {{ 'width': '338' , 'height' : '224' }} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${item.image}`} />
                                 </a>
                               </div>
                               <CardTitle tag="h5">
                                 <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${item.id}`}>{item.name}</a>
                               </CardTitle>
-                              { (item.content.length <= 270) ?
+                              { (item.content.length <= 100) ?
                                 <CardText dangerouslySetInnerHTML={{__html: `${(item.content)}`}}>
                                 </CardText> 
                                 : 
-                                <CardText dangerouslySetInnerHTML={{__html: `${(item.content).substring(0, 270)} ...`}}>
+                                <CardText dangerouslySetInnerHTML={{__html: `${(item.content).substring(0, 112)} ...`}}>
                                 </CardText>
                               }
                               <Button><a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${item.id}`}> SEE DETAILS</a></Button>
