@@ -12,8 +12,9 @@ const helper = new Helper();
 
 // Create a new VendorCoupon
 router.post('/', (req, res) => {
-        if (!req.body.deal_name || !req.body.deal_description) {
-            res.status(400).send({
+        if (!req.body.deal_name || !req.body.deal_description || !req.body.start_date) {
+            res.status(203).send({
+                status: 203,
                 msg: 'Please pass Job name or description.'
             })
         } else {
@@ -115,7 +116,11 @@ router.get('/', passport.authenticate('vendor', {
     session: false
 }), function (req, res) {   
     VendorCoupon
-    .findAll({where:{user_id:req.user.id}})
+    .findAll({where:{user_id:req.user.id} , 
+        order: [
+            ['id', 'DESC'],
+        ],
+        })
     .then((vendorcoupons) => res.status(200).send(vendorcoupons))
     .catch((error) => {
         res.status(400).send(error);

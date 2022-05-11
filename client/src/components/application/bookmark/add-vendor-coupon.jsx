@@ -12,6 +12,7 @@ const AddVendorCoupon = (props) => {
   const [discount, setDiscount] = useState(0)
   const [startdate, setStartDate] = useState()
   const [enddate, setEndDate] = useState()
+  const [errmsg, setErrMsg] = useState(false)
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
   const vendor_country_id = localStorage.getItem("vendor_country_id");
@@ -29,21 +30,28 @@ const AddVendorCoupon = (props) => {
   };
 
   const onChangeStartDate = (event) => {
-    setStartDate(event.target.value);
+    const d2 = event.target.value;
+  
+    if(userdetails >= d2) {
+      setErrMsg(true);
+    } else {
+      setStartDate(event.target.value);
+    }
+    
   }
 
   const onChangeEndDate = (event) => {
     setEndDate(event.target.value);
   }
 
-  const [userdetails, setUserDetails] = useState()
+  const [userdetails, setUserDetails] = useState(new Date())
   useEffect(() => {
     const GetData = async () => {
         const config = {
     headers: {'Authorization': 'JWT '+token }
   };
-      const result = axios.get('/api/vendors/'+`${id}`,config);
-      setUserDetails(result.data)
+      const result = await axios.get('/api/vendor-coupons/',config);
+      setUserDetails(result.data[0].end_date)
     };
     GetData();
   }, []);
@@ -70,14 +78,28 @@ const handleSubmit = event => {
       bodyParameters,
       config
     ) .then(response => {
-      toast.success("Coupon / Deals Added !")
+      console.log(response);
+      if(response.status == 203) {
+        toast.error("FIll form correctly");
+      } else {
+        toast.success("Coupon / Deals Added !")
         setTimeout(() => {
           history.push('/dashboard/vendor/vendor-coupon/');
         }, 1000);
+      }
+
     }  
     
     )
        .catch(error => console.log('Form submit error', error))
+};
+
+const disablePastDate = () => {
+  const today = new Date();
+  const dd = String(today.getDate() ).padStart(1, "0");
+  const mm = String(today.getMonth() +1).padStart(2, "0"); //January is 0!
+  const yyyy = today.getFullYear();
+  return yyyy + "-" + mm + "-" + dd;
 };
 
   return (
@@ -101,11 +123,12 @@ const handleSubmit = event => {
               </FormGroup>
               <FormGroup>
                 <Label>{"Start Date"}</Label>
-                <Input className="form-control digits" type="date" value = {startdate} onChange = {onChangeStartDate} />
+                <Input className="form-control digits" type="date" value = {startdate} onChange = {onChangeStartDate}  min={disablePastDate()}/>
               </FormGroup>
+              {errmsg && <div style = {{color: "red"}}>Warning : Already created deals date fall between this date, pick another date.</div>}
               <FormGroup>
                 <Label>{"End Date"}</Label>
-                <Input className="form-control digits" type="date" value = {enddate}  onChange = {onChangeEndDate}  />
+                <Input className="form-control digits" type="date" value = {enddate}  onChange = {onChangeEndDate}   min={disablePastDate()}/>
               </FormGroup>
               <FormGroup>
                 <Button  color="primary" onClick = {handleSubmit} >{"Save"}</Button>

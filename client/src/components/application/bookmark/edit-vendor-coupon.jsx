@@ -92,6 +92,14 @@ const handleSubmit = event => {
 
 };
 
+const disablePastDate = () => {
+  const today = new Date();
+  const dd = String(today.getDate() ).padStart(1, "0");
+  const mm = String(today.getMonth() +1).padStart(2, "0"); //January is 0!
+  const yyyy = today.getFullYear();
+  return yyyy + "-" + mm + "-" + dd;
+};
+
   return (
     <Fragment>
       <Breadcrumb parent="Apps" title="Deals or Promotions" />
@@ -113,11 +121,11 @@ const handleSubmit = event => {
               </FormGroup>
               <FormGroup>
                 <Label>{"Start Date"}</Label>
-                <Input className="form-control digits" type="date" value = {startdate} onChange = {onChangeStartDate} />
+                <Input className="form-control digits" type="date" value = {startdate} onChange = {onChangeStartDate} min={disablePastDate()}/>
               </FormGroup>
               <FormGroup>
                 <Label>{"End Date"}</Label>
-                <Input className="form-control digits" type="date" value = {enddate}  onChange = {onChangeEndDate}  />
+                <Input className="form-control digits" type="date" value = {enddate}  onChange = {onChangeEndDate}  min={disablePastDate()}/>
               </FormGroup>
               <FormGroup>
                 <Button  color="primary" onClick = {handleSubmit} >{"Save"}</Button>
