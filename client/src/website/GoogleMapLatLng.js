@@ -51,10 +51,10 @@ export class GoogleMapLatLng extends Component {
   render() {
     if(this.state.lat)
     return (
+      <div style={{ height:'250px', width:'100%', position: 'relative' }}>
       <Map
         google={this.props.google}
         zoom={14}
-        style={mapStyles}
         initialCenter={
           {
             lat: this.state.lat,
@@ -76,6 +76,7 @@ export class GoogleMapLatLng extends Component {
           </div>
         </InfoWindow>
         </Map>
+        </div>
     );
   return (
       <h1>.....</h1>
