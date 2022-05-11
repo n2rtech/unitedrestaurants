@@ -5,6 +5,7 @@ import { Database, ShoppingBag, MessageCircle, UserPlus } from 'react-feather';
 import CountUp from 'react-countup';
 import { TotalVendors,MembershipsVendor,VendorAdded,SupendedVendors } from '../../../constant'
 import { Today } from '../../../constant'
+import moment from 'moment';
 
 const AdminDefault = (props) => {
 
@@ -212,9 +213,9 @@ const AdminDefault = (props) => {
                             <td><img className="img-fluid img-40 rounded-circle mb-3" src={require("../../../assets/images/appointment/app-ent.jpg")} alt="" />
                               <div className="status-circle bg-primary"></div>
                             </td>
-                            <td className="img-content-box"><span className="d-block">{vendor.name}</span><span className="font-roboto">{vendor.createdAt}</span></td>
+                            <td className="img-content-box"><span className="d-block">{vendor.name}</span><span className="font-roboto">{moment(vendor.createdAt).format("DD MMMM YYYY LTS")}</span></td>
                             <td>
-                              <p className="m-0 font-primary">{vendor.createdAt}</p>
+                              <p className="m-0 font-primary">{moment(vendor.createdAt).fromNow()}</p>
                             </td>
                           </tr>
                           ))}
