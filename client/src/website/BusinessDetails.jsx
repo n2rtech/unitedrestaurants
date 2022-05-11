@@ -52,13 +52,13 @@ const BusinessDetails = () => {
                 <JobOpenings/>
               </Col>
               <Col sm="5">
+                <div className="mapDiv">{location.lat ? <GoogleMapLatLng location={location} /> : '' }</div>
+                <div className="clearfix" / >
                 <div className="details-right">
-                  
-                  {location.lat ? <GoogleMapLatLng location={location} /> : '' }
+                  <RestaurantContact/>
+                  <SaleItems/>
+                  <BusinessVideo/>
                 </div>
-                <RestaurantContact/>
-                <SaleItems/>
-                <BusinessVideo/>
               </Col>
             </Row>
           </div>

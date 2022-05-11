@@ -3,7 +3,8 @@ import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 
 const mapStyles = {
   width: '95%',
-  height: '220px'
+  height: '300px',
+  position: 'relative'
 };
 
 export class GoogleMapLatLng extends Component {
@@ -50,7 +51,6 @@ export class GoogleMapLatLng extends Component {
   render() {
     if(this.state.lat)
     return (
-      <div style={{ height:'153px' }}>
       <Map
         google={this.props.google}
         zoom={14}
@@ -71,12 +71,11 @@ export class GoogleMapLatLng extends Component {
           visible={this.state.showingInfoWindow}
           onClose={this.onClose}
         >
-          <div>
+          <div className="ypm">
             <h4>{this.state.selectedPlace.name}</h4>
           </div>
         </InfoWindow>
         </Map>
-        </div>
     );
   return (
       <h1>.....</h1>
