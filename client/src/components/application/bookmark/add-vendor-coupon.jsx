@@ -16,6 +16,7 @@ const AddVendorCoupon = (props) => {
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
   const vendor_country_id = localStorage.getItem("vendor_country_id");
+  
 
   const onChangeDealname = (event) => {
     setDealname(event.target.value);
@@ -35,6 +36,7 @@ const AddVendorCoupon = (props) => {
     if(userdetails >= d2) {
       setErrMsg(true);
     } else {
+      setErrMsg(false);
       setStartDate(event.target.value);
     }
     
@@ -128,7 +130,7 @@ const disablePastDate = () => {
               {errmsg && <div style = {{color: "red"}}>Warning : Already created deals date fall between this date, pick another date.</div>}
               <FormGroup>
                 <Label>{"End Date"}</Label>
-                <Input className="form-control digits" type="date" value = {enddate}  onChange = {onChangeEndDate}   min={disablePastDate()}/>
+                <Input className="form-control digits" type="date" value = {enddate}  onChange = {onChangeEndDate}   min={startdate}/>
               </FormGroup>
               <FormGroup>
                 <Button  color="primary" onClick = {handleSubmit} >{"Save"}</Button>
