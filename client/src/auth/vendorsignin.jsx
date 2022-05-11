@@ -5,7 +5,9 @@ import man from '../assets/images/dashboard/profile.jpg';
 import {Container,Row,Col,Form,FormGroup,Input,Label,Button,NavItem, NavLink, Nav,TabContent,TabPane} from 'reactstrap'
 import {firebase_app,Jwt_token } from '../data/config'
 import { useAuth0 } from '@auth0/auth0-react'
-import { toast } from 'react-toastify';
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import {toast} from 'react-toastify';
 import {withRouter} from 'react-router-dom'
 import {Password,SignIn, EmailAddress,CreateAccount,FIREBASE,AUTH0,JWT} from '../constant';
 
@@ -82,23 +84,18 @@ const Logins = (props) => {
       }).catch((error) => {
         if (error.response) {
           if(error.response.data.error.email){
-            setTimeout(() => {
-              toast.error(error.response.data.error.email);
-          }, 200);
+              toast.success(error.response.data.error.email);
           }else{
-            setTimeout(() => {
-              toast.error(error.response.data.error.password);
-          }, 200);
+              toast.success(error.response.data.error.password);
           }
-          setTimeout(() => {
-              toast.error(error.response.data.error);
-          }, 200);
+          toast.success(error.response.data.error);
         } 
     });
     }
 
     return (
         <Container fluid={true} className="p-0">
+        <ToastContainer autoClose={5000}  />
         <Row>
         <Col xs="12">     
           <div className="login-card">
