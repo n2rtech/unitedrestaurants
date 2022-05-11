@@ -54,11 +54,9 @@ const BusinessDetails = () => {
               <Col sm="5">
                 <div className="mapDiv">{location.lat ? <GoogleMapLatLng location={location} /> : '' }</div>
                 <div className="clearfix" / >
-                <div className="details-right">
                   <RestaurantContact/>
                   <SaleItems/>
                   <BusinessVideo/>
-                </div>
               </Col>
             </Row>
           </div>

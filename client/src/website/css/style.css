@@ -2184,7 +2184,12 @@ form.browse .btn-primary a{
 .job-openings h4{
     font-size: 16px;
 }
-
+.mapDiv{
+    margin-bottom: 295px;
+}
+.details-right .contact li:last-child{
+    border-bottom: none;
+}
 
 
 
