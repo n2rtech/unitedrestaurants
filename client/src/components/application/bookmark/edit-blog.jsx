@@ -131,7 +131,7 @@ const [showhome , setShowhome]  = useState('0');
               singleImage={true}
               buttonText="Upload Image"
               onChange={onDrop}
-              imgExtension={[".jpg", ".gif", ".png", ".gif", ".svg"]}
+              imgExtension={[".jpeg", ".jpg", ".gif", ".png", ".svg", ".webp"]}
               maxFileSize={1048576}
               fileSizeError=" file size is too big"
             />
