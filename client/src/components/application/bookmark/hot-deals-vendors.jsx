@@ -1,27 +1,66 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Card, CardBody } from 'reactstrap'
+import Pagination from "react-js-pagination";
+import axios from 'axios'
 
 const HotDealsVendors = (props) => {
 
   const token = localStorage.getItem("token");
   const [vendorData, setVendorData] = useState([]);
 
+   const [activePage, setActivePage] = useState(0);
+  const [totalItemsCount, setTotalItemsCount] = useState(1);  
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);
+  const [pagesCount, setPagesCount] = useState(20);
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [size, setSize] = useState(20);
+
   useEffect(() => {
 
-    const config = {
+    var config = {
+      method: 'get',
+      url: '/api/vendors/with-paginate/hot-deals',
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params : {
+        'page': 1,
+        'size': size
+      }
     };
 
-    fetch("/api/vendors/hot-deals" , config)
-    .then(res => res.json())
+    axios(config)
     .then(
       (result) => { 
-        setVendorData(result);
+        setVendorData(result.data.vendors);
+        setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
       },
       (error) => { 
       });
   }, []);
+
+
+  const handlePageChange = (pageNumber) => {
+    var config = {
+      method: 'get',
+      url: '/api/vendors/with-paginate/hot-deals',
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params : {
+        'page': pageNumber,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(result=>{
+      setVendorData(result.data.vendors);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+    });
+  }
+
 
   return (
     <Fragment>
@@ -48,6 +87,21 @@ const HotDealsVendors = (props) => {
                   ))}
                 </tbody>
               </Table>
+              <div className="d-flex justify-content-center">
+              <Pagination
+              activePage={activePage}
+              itemsCountPerPage={size}
+              totalItemsCount={totalItemsCount}
+              pageRangeDisplayed={pageRangeDisplayed}
+              onChange={handlePageChange}
+              itemClass="page-item"
+              linkClass="page-link"
+              prevPageText="Prev"
+              nextPageText="Next"
+              lastPageText="Last"
+              firstPageText="First"
+              />
+              </div>
             </div>
           </CardBody>
         </Card>  

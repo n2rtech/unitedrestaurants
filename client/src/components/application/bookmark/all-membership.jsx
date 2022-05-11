@@ -11,10 +11,10 @@ const token = localStorage.getItem("token");
 
   const [activePage, setActivePage] = useState(0);
   const [totalItemsCount, setTotalItemsCount] = useState(1);  
-  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(6);
-  const [pagesCount, setPagesCount] = useState(6);
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);
+  const [pagesCount, setPagesCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1); 
-  const [size, setSize] = useState(6);
+  const [size, setSize] = useState(20);
 
   useEffect(() => {
 
