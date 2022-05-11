@@ -43,6 +43,10 @@ router.get('/', passport.authenticate('jwt', {
 }), function (req, res) {
         Role
             .findAll({
+                 where:{
+                    role_name: {
+                        [Op.ne]: 'vendor'}
+                    },
                 include: [
                     {
                         model: Permission,
