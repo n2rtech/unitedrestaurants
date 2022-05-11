@@ -1115,6 +1115,36 @@ router.get('/suspend/:id', (req, res) => {
   }
 });
 
+
+// approve a vendor
+router.get('/approve/:id', (req, res) => {
+  if (!req.params.id) {
+    res.status(400).send({
+      msg: 'Please pass ID.'
+    })
+  } else {
+    Vendor
+    .findByPk(req.params.id)
+    .then((user) => {
+
+      Vendor.update({
+        is_suspended: 0
+      }, {
+        where: {
+          id: req.params.id
+        }
+      }).then(_ => {
+        res.status(200).send({
+              'message': 'Vendor Approved'
+            });
+      }).catch(err => res.status(400).send(err));
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
+  }
+});
+
 // Get Profile by ID
 router.get('/profile/:id', (req, res) => {
   Vendor

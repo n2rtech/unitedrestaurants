@@ -2,6 +2,8 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Card, CardBody } from 'reactstrap'
 import Pagination from "react-js-pagination";
+import SweetAlert from 'sweetalert2'
+import {toast} from 'react-toastify';
 import axios from 'axios'
 
 const SuspendedVendors = (props) => {
@@ -60,6 +62,40 @@ const SuspendedVendors = (props) => {
       setPagesCount(result.data.totalPages);
     });
   }
+
+  const handleApprove = (id) => {
+    SweetAlert.fire({
+      title: 'Are you sure?',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ok',
+      cancelButtonText: 'cancel',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        const token   = localStorage.getItem("token");
+        const user_id = localStorage.getItem("id");
+        const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+          };
+        axios.get('/api/vendors/approve/'+`${id}` ,config )
+        .then(response => {
+          toast.success('Vendor is successfully Approved.');
+          setTimeout(function(){
+          window.location.reload(false);
+        }, 1500);
+        })
+        .catch(error => console.log('Form submit error', error))
+      }
+      else {
+        SweetAlert.fire(
+          'Not Approved'
+        )
+      }
+    })
+  }
+
   return (
     <Fragment>
       <Breadcrumb parent="Apps" title="Suspended Vendors" />
@@ -80,7 +116,7 @@ const SuspendedVendors = (props) => {
                     <td>{vendor.name}</td>
                     <td className="text-right">
                       <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-vendor/${vendor.id}`}>Edit</a>
-                      <a className="btn btn-primary" href={`${process.env.PUBLIC_URL}/dashboard/`}>Approve</a>
+                      <a className="btn btn-primary" onClick={() => handleApprove(vendor.id)}>Approve</a>
                     </td>
                   </tr>
                   ))}
