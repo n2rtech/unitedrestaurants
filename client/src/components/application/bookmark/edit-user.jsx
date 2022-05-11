@@ -48,7 +48,7 @@ const Edituser = (props) => {
       const config = {
         headers: {'Authorization': 'JWT '+token }
       };
-      const result = await axios('/api/roles',config);
+      const result = await axios('/api/roles/all',config);
       setRolesData(result.data);
       
     };

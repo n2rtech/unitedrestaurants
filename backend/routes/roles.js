@@ -8,6 +8,8 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
+const Sequelize = require('sequelize');
+const Op = require('sequelize').Op
 
 // Create a new Role
 router.post('/', passport.authenticate('jwt', {
@@ -52,6 +54,23 @@ router.get('/', passport.authenticate('jwt', {
                         as: 'users',
                     }*/
                 ]
+            })
+            .then((roles) => res.status(200).send(roles))
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+});
+
+
+router.get('/all', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+        Role
+            .findAll({
+                where:{
+                    role_name: {
+                        [Op.ne]: 'vendor'}
+                    }
             })
             .then((roles) => res.status(200).send(roles))
             .catch((error) => {
