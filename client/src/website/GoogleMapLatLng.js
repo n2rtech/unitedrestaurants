@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 
 const mapStyles = {
-  width: '92%',
-  height: '170px'
+  width: '95%',
+  height: '300px',
+  position: 'relative'
 };
 
 export class GoogleMapLatLng extends Component {
+
 
  constructor(props, context) {
     super(props, context);
@@ -21,7 +23,7 @@ export class GoogleMapLatLng extends Component {
   }
 
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.location.lat !== this.state.lat) {
       this.setState({ lat: nextProps.location.lat });
       this.setState({ lng: nextProps.location.lng });
@@ -49,10 +51,10 @@ export class GoogleMapLatLng extends Component {
   render() {
     if(this.state.lat)
     return (
-      <div style={{ height:'250px', width:'100%', position: 'relative' }}>
       <Map
         google={this.props.google}
         zoom={14}
+        style={mapStyles}
         initialCenter={
           {
             lat: this.state.lat,
@@ -69,12 +71,11 @@ export class GoogleMapLatLng extends Component {
           visible={this.state.showingInfoWindow}
           onClose={this.onClose}
         >
-          <div>
+          <div className="ypm">
             <h4>{this.state.selectedPlace.name}</h4>
           </div>
         </InfoWindow>
         </Map>
-        </div>
     );
   return (
       <h1>.....</h1>

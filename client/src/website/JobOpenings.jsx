@@ -22,11 +22,11 @@ export default function JobOpenings() {
     <>
     {jobsData && jobsData.length ?
       <div className="details-left">
-        <div className="menu-items offers">
+        <div className="menu-items offers job-openings">
           <h5>Job Openings</h5>
           <ul className="list-unstyled">
           {jobsData.map((jobs , i ) => (
-            <li key={i}><i className="fa fa-check"></i> {jobs.job_name} : {jobs.job_description} </li>
+            <li key={i}> <h4>{jobs.job_name} :</h4> {jobs.job_description} </li>
             ))}
           </ul>
         </div>

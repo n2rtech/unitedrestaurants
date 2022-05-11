@@ -73,6 +73,11 @@ const HotDealsListing = (props) => {
 
 
   
+ const uniqueTags = [];
+ items.map((item) => {
+   var findItem = uniqueTags.find((x) => x.user_id === item.user_id);
+   if (!findItem) uniqueTags.push(item);
+ });
 
   const addDefaultSrc = (ev) => {
     // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`;
@@ -99,7 +104,7 @@ const HotDealsListing = (props) => {
                       </p>
                     }>
                       <Row>
-                              { (items).map((item , i) => (
+                              { (uniqueTags).map((item , i) => (
                                 <Col sm="4" key={i}>
                                     <div className="customcard">
                                     <Card>
