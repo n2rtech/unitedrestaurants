@@ -107,7 +107,7 @@ router.get('/by-serach/all', async (req, res) => {
 
     if (filter && !address && !address1) {
       //for only filter search
-      console.log('for only filter search');
+      console.log('for only filter search updated');
         var conditions = {
 
           attributes: [

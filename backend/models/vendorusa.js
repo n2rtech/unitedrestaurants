@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-
       VendorUsa.hasOne(models.SaleItem, {
         sourceKey : 'user_id',
         foreignKey: 'user_id',
@@ -21,8 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey : 'user_id',
         foreignKey: 'user_id',
         as:'menuitems'
-      });
-      
+      });      
 
       // define association here
     }
