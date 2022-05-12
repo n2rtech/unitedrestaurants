@@ -4,6 +4,7 @@ import { Table, Container, Row, Col, Card, ButtonGroup, CardBody, Form, FormGrou
 import SweetAlert from 'sweetalert2'
 import {toast} from 'react-toastify';
 import axios from 'axios'
+import Pagination from "react-js-pagination";
 
 const AllVendors = (props) => {
   const token = localStorage.getItem("token");
@@ -14,25 +15,34 @@ const AllVendors = (props) => {
   const [filterMobile, setFilterMobile] = useState('');  
   const [filterCountry, setFilterCountry] = useState(''); 
 
+  const [activePage, setActivePage] = useState(0);
+  const [totalItemsCount, setTotalItemsCount] = useState(1);  
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);
+  const [pagesCount, setPagesCount] = useState(20);
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [size, setSize] = useState(20);
+
   useEffect(() => {
 
-    const config = {
+    var config = {
+      method: 'get',
+      url: '/api/vendors/all/with-paginate',
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
       params : {
         'page': 1,
-        'size': 4 
+        'size': size
       }
     };
 
-    fetch("/api/vendors" , config)
-    .then(res => res.json())
-    .then(
-      (result) => { 
-        console.log()
-        setVendorData(result);  
-      },
-      (error) => { 
-      });
+    axios(config)
+    .then((result) => { 
+      setVendorData(result.data.vendors);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+    },
+    (error) => { 
+    });
     axios.get(`/api/Countries/list`)
     .then((getData) => {
       setCountryData(getData.data);
@@ -40,7 +50,32 @@ const AllVendors = (props) => {
   }, []);
 
 
-const handleNameChange = e => {
+  const handlePageChange = (pageNumber) => {
+    var config = {
+      method: 'get',
+      url: '/api/vendors/all/with-paginate',
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params : {
+        'page': pageNumber,
+        'size': size,
+        'name':filterName,
+        'email':filterEmail,
+        'mobile':filterMobile,
+        'country':filterCountry,
+      }
+    };
+
+    axios(config)
+    .then(result=>{
+      setVendorData(result.data.vendors);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+    });
+  }
+
+
+  const handleNameChange = e => {
     const filterName = e.target.value;
     setFilterName(filterName);
   };
@@ -62,28 +97,36 @@ const handleNameChange = e => {
 
 
   const resetFilter = () => {
-   setFilterName("");
-   setFilterEmail("");
-   setFilterMobile("");
-   setFilterCountry("");
-   const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+     setFilterName("");
+     setFilterEmail("");
+     setFilterMobile("");
+     setFilterCountry("");
+     const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params: {page:1,size:size}
     };
-   axios.get('/api/vendors',config)
-   .then(result=>{
-     setVendorData(result.data);  
+    axios.get('/api/vendors/all/with-paginate',config)
+    .then(result=>{
+     setVendorData(result.data.vendors); 
+     setTotalItemsCount(result.data.totalItems);  
+     setActivePage(result.data.currentPage);
+     setPagesCount(result.data.totalPages);
    }); 
- }
+  }
 
   const findByFilter = () => {
 
     const config = {
-      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params: {page:1,size:size}
     };
 
-    axios(`/api/vendors?name=${filterName}&email=${filterEmail}&mobile=${filterMobile}&country=${filterCountry}`,config)
+    axios(`/api/vendors/all/with-paginate?name=${filterName}&email=${filterEmail}&mobile=${filterMobile}&country=${filterCountry}`,config)
     .then(result => {
-      setVendorData(result.data); 
+      setVendorData(result.data.vendors); 
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
     })
     .catch(e => {
       console.log(e);
@@ -107,7 +150,12 @@ const handleNameChange = e => {
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
           };
         axios.get('/api/vendors/suspend/'+`${id}` ,config )
-        .then(response => toast.success('Vendor is successfully suspended.'))
+        .then(response => {
+          toast.success('Vendor is successfully suspended.');
+          setTimeout(function(){
+          window.location.reload(false);
+        }, 1500);
+        })
         .catch(error => console.log('Form submit error', error))
       }
       else {
@@ -136,7 +184,12 @@ const handleNameChange = e => {
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
           };
         axios.get('/api/vendors/unsubscribe/'+`${id}` ,config )
-        .then(response => toast.success('Vendor is successfully Unsubscribe.'))
+        .then(response => {
+          toast.success('Vendor is successfully Unsubscribe.');
+          setTimeout(function(){
+          window.location.reload(false);
+        }, 1500);
+        })
         .catch(error => console.log('Form submit error', error))
       }
       else {
@@ -223,6 +276,21 @@ const handleNameChange = e => {
                        ))}
                       </tbody>
                     </Table>
+                    <div className="d-flex justify-content-center">
+                      <Pagination
+                      activePage={activePage}
+                      itemsCountPerPage={size}
+                      totalItemsCount={totalItemsCount}
+                      pageRangeDisplayed={pageRangeDisplayed}
+                      onChange={handlePageChange}
+                      itemClass="page-item"
+                      linkClass="page-link"
+                      prevPageText="Prev"
+                      nextPageText="Next"
+                      lastPageText="Last"
+                      firstPageText="First"
+                      />
+                      </div>
                   </div>
                 </CardBody>
               </Card>
