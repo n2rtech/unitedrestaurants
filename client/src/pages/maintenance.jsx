@@ -17,9 +17,7 @@ const Maintenance = (props) => {
               <h2 className="headline">{MAINTENANCE}</h2>
             </div>
             <h4 className="sub-content">{"Our Site is Currently under maintenance We will be back Shortly"}<br/>{"Thank You For Patience"}</h4>
-            <div>
-              <Link to={`${process.env.PUBLIC_URL}/dashboard/default/`}><Button color="primary-gradien" size='lg' className="text-light">{BACK_TO_HOME_PAGE}</Button></Link>
-            </div>
+            
           </Container>
         </div>
       </div>
