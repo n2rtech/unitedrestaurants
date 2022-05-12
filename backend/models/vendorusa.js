@@ -13,13 +13,11 @@ module.exports = (sequelize, DataTypes) => {
 
       VendorUsa.hasOne(models.SaleItem, {
         foreignKey: 'user_id',
-        sourceKey : 'user_id',
         as:'sale_items',
       });
 
       VendorUsa.hasOne(models.MenuItem, {
         foreignKey: 'user_id',
-        sourceKey : 'user_id',
         as:'menu_items',
       });      
 
@@ -27,7 +25,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   VendorUsa.init({
-    user_id: DataTypes.INTEGER,
+    user_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     business_name: DataTypes.STRING,
     about_business: DataTypes.TEXT('long'),
     business_email: DataTypes.STRING,
