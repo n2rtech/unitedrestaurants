@@ -111,18 +111,18 @@ const handleSubmit = event => {
     } else {
 
         console.log('body' , bodyParameters);
-        // axios.put(`/api/vendor-coupons/`+`${params.id}`,
-        //   bodyParameters,
-        //   config
-        // ) .then(response => {
-        //   toast.success("Successfully updated !")
-        //     setTimeout(() => {
-        //       history.push('/dashboard/vendor/vendor-coupon/');
-        //     }, 1000);
-        // }  
+        axios.put(`/api/vendor-coupons/`+`${params.id}`,
+          bodyParameters,
+          config
+        ) .then(response => {
+          toast.success("Successfully updated !")
+            setTimeout(() => {
+              history.push('/dashboard/vendor/vendor-coupon/');
+            }, 1000);
+        }  
         
-        // )
-        //    .catch(error => console.log('Form submit error', error))
+        )
+           .catch(error => console.log('Form submit error', error))
     }
 
 
