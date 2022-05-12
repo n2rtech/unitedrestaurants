@@ -6,7 +6,7 @@ const Maintenance = (props) => {
     return (
         <Fragment>
         <div className="page-wrapper">
-        <div className="error-wrapper maintenance-bg">
+        <div className="error-wrapper maintenance-bgk">
           <Container>
             <ul className="maintenance-icons">
               <li><i className="fa fa-cog"></i></li>
