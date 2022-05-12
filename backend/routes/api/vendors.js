@@ -27,6 +27,8 @@ const helper = new Helper();
 const Op = require('sequelize').Op
 const store = require('store')
 
+const sharp = require("sharp");
+
 
 const app = express();
 app.db = (model) => db[model];
@@ -122,6 +124,7 @@ router.get('/by-serach/all', async (req, res) => {
             as:'menuitems'
           }
           ],
+          
 
           where:{
             categories: {
@@ -1296,21 +1299,45 @@ router.get('/profile/:id', (req, res) => {
 
 
 // Update a Profile
-router.put('/profile/:id', imageUpload.single('banner'), (req, res) => {
-
+router.put('/profile/:id', imageUpload.single('banner'), async (req, res) => {
+//640*427
   if (!req.params.id || !req.body.business_name || !req.body.business_email) {
     res.status(400).send({
       msg: 'Please pass Profile ID, name or email.'
     })
   } else {
+
+    if (req.file) {
+      const filename = req.file.originalname.replace(/\..+$/, "");
+            const newFilename = `profile-${filename}-${Date.now()}.jpg`;
+            await sharp(req.file.path)
+            .resize(640, 427, {
+                fit: sharp.fit.inside,
+                withoutEnlargement: true, 
+            })
+            .toFormat("jpg")
+            .jpeg({ quality: 95 })
+            .toFile(
+                path.resolve(req.file.destination,newFilename)
+                )
+            fs.unlinkSync(req.file.path);
+            if (req.file) {
+                var image = newFilename;
+             }else{
+                var image = '';
+             }
+    }
     Vendor
     .findByPk(req.params.id)
     .then((profile) => {
-      //console.log("Profile" , req.body);
       if (req.file) {
         /*var filePath = path.resolve('./')+'/uploads/banner/'+profile.banner; 
         fs.unlinkSync(filePath);*/
-        var image = req.file.filename;
+
+
+        
+
+            
       }
 
       var tables_name = 'countries'.charAt(0).toUpperCase() + 'countries'.slice(1);
