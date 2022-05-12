@@ -12,6 +12,9 @@ const EditVendorCoupon = (props) => {
   const [discount, setDiscount] = useState(0)
   const [startdate, setStartDate] = useState()
   const [enddate, setEndDate] = useState()
+  const [starterrmsg, setStartErrMsg] = useState(false)
+  const [enderrmsg, setEndErrMsg] = useState(false)
+  const [othererror , setOtherEndErrMsg] = useState(false)
   const [coupon_id , setCouponid] = useState();
   const params = useParams();
   const token = localStorage.getItem("token");
@@ -31,11 +34,36 @@ const EditVendorCoupon = (props) => {
   };
 
   const onChangeStartDate = (event) => {
-    setStartDate(event.target.value);
+    if(userStartDate.length > 0) {
+        userStartDate.some((item) => {
+           if((item.start_date.replace(' 00:00:00','') < event.target.value || item.start_date.replace(' 00:00:00','') == event.target.value) && item.end_date.replace(' 00:00:00','') >= event.target.value) {
+              setStartErrMsg(true);
+              setStartDate('');
+              return true;
+           } else {
+              setStartErrMsg(false);
+              setStartDate(event.target.value);
+           }
+        })
+    } else {
+      setStartDate(event.target.value);
+    }
   }
 
   const onChangeEndDate = (event) => {
+    if(userStartDate.length > 0) {
+      userStartDate.some((item) => {
+         if((item.start_date.replace(' 00:00:00','') < event.target.value || item.start_date.replace(' 00:00:00','') == event.target.value) && item.end_date.replace(' 00:00:00','') >= event.target.value) {
+            setEndErrMsg(true);
+            return true;
+         } else {
+            setEndErrMsg(false);
+            setEndDate(event.target.value);
+         }
+      })
+  } else {
     setEndDate(event.target.value);
+  }
   }
 
   useEffect(() => {
@@ -76,20 +104,51 @@ const handleSubmit = event => {
       country_id: vendor_country_id
 
     };
-    axios.put(`/api/vendor-coupons/`+`${params.id}`,
-      bodyParameters,
-      config
-    ) .then(response => {
-      toast.success("Successfully updated !")
-        setTimeout(() => {
-          history.push('/dashboard/vendor/vendor-coupon/');
-        }, 1000);
-    }  
-    
-    )
-       .catch(error => console.log('Form submit error', error))
+
+    if(startdate > enddate) {
+        setOtherEndErrMsg(true);
+        return true;
+    } else {
+
+        console.log('body' , bodyParameters);
+        // axios.put(`/api/vendor-coupons/`+`${params.id}`,
+        //   bodyParameters,
+        //   config
+        // ) .then(response => {
+        //   toast.success("Successfully updated !")
+        //     setTimeout(() => {
+        //       history.push('/dashboard/vendor/vendor-coupon/');
+        //     }, 1000);
+        // }  
+        
+        // )
+        //    .catch(error => console.log('Form submit error', error))
+    }
 
 
+
+};
+
+const [userStartDate, setUserStartDate] = useState(new Date())
+useEffect(() => {
+  const GetData = async () => {
+      const config = {
+  headers: {'Authorization': 'JWT '+token }
+};
+    const result = await axios.get('/api/vendor-coupons/startdate/',config);
+    if(result.data.length > 0) {
+      setUserStartDate(result.data);
+    }
+  };
+  GetData();
+}, []);
+
+const disablePastDate = () => {
+  const today = new Date();
+  const dd = String(today.getDate() ).padStart(1, "0");
+  const mm = String(today.getMonth() +1).padStart(2, "0"); //January is 0!
+  const yyyy = today.getFullYear();
+  return yyyy + "-" + mm + "-" + dd;
 };
 
   return (
@@ -113,12 +172,15 @@ const handleSubmit = event => {
               </FormGroup>
               <FormGroup>
                 <Label>{"Start Date"}</Label>
-                <Input className="form-control digits" type="date" value = {startdate} onChange = {onChangeStartDate} />
+                <Input className="form-control digits" type="date" value = {startdate} onChange = {onChangeStartDate} min={disablePastDate()}/>
               </FormGroup>
+              {starterrmsg && <div style = {{color: "red"}}>Warning : Already created deals date fall between this date, pick another date.</div>}
               <FormGroup>
                 <Label>{"End Date"}</Label>
                 <Input className="form-control digits" type="date" value = {enddate}  onChange = {onChangeEndDate}  min={startdate}/>
               </FormGroup>
+              {enderrmsg && <div style = {{color: "red"}}>Warning : Already created deals date fall between this date, pick another date.</div>}
+              {othererror && <div style = {{color: "red"}}>Warning : Start date should be smaller than end date, pick another date.</div>}
               <FormGroup>
                 <Button  color="primary" onClick = {handleSubmit} >{"Save"}</Button>
               </FormGroup>

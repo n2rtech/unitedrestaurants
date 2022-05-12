@@ -70,9 +70,7 @@ const HotDealsListing = (props) => {
   
     setPage(page + 1);
  }
-
-
-  
+ 
  const uniqueTags = [];
  items.map((item) => {
    var findItem = uniqueTags.find((x) => x.user_id === item.user_id);

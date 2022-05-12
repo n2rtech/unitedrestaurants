@@ -127,7 +127,36 @@ router.get('/', passport.authenticate('vendor', {
     });
 });
 
+router.get('/startdate', passport.authenticate('vendor', {
+    session: false
+}), function (req, res) {   
+    VendorCoupon
+    .findAll({where:{user_id:req.user.id} , 
+        attributes: ['start_date' , 'end_date'],
+        order: [
+            ['id', 'DESC'],
+        ],
+        })
+    .then((vendorcoupons) => res.status(200).send(vendorcoupons))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
 
+router.get('/enddate', passport.authenticate('vendor', {
+    session: false
+}), function (req, res) {   
+    VendorCoupon
+    .findAll({where:{user_id:req.user.id} , 
+        order: [
+            ['id', 'DESC'],
+        ],
+        })
+    .then((vendorcoupons) => res.status(200).send(vendorcoupons))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
 
 // Get VendorCoupon by ID
 router.get('/:id', (req, res) => {

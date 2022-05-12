@@ -12,7 +12,8 @@ const AddVendorCoupon = (props) => {
   const [discount, setDiscount] = useState(0)
   const [startdate, setStartDate] = useState()
   const [enddate, setEndDate] = useState()
-  const [errmsg, setErrMsg] = useState(false)
+  const [starterrmsg, setStartErrMsg] = useState(false)
+  const [enderrmsg, setEndErrMsg] = useState(false)
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
   const vendor_country_id = localStorage.getItem("vendor_country_id");
@@ -31,32 +32,52 @@ const AddVendorCoupon = (props) => {
   };
 
   const onChangeStartDate = (event) => {
-    const d2 = event.target.value;
-  
-    if(userdetails >= d2) {
-      setErrMsg(true);
+    if(userStartDate.length > 0) {
+        userStartDate.some((item) => {
+           if((item.start_date.replace(' 00:00:00','') < event.target.value || item.start_date.replace(' 00:00:00','') == event.target.value) && item.end_date.replace(' 00:00:00','') >= event.target.value) {
+              setStartErrMsg(true);
+              return true;
+           } else {
+              setStartErrMsg(false);
+              setStartDate(event.target.value);
+           }
+        })
     } else {
-      setErrMsg(false);
       setStartDate(event.target.value);
     }
-    
   }
 
   const onChangeEndDate = (event) => {
+    if(userStartDate.length > 0) {
+      userStartDate.some((item) => {
+         if((item.start_date.replace(' 00:00:00','') < event.target.value || item.start_date.replace(' 00:00:00','') == event.target.value) && item.end_date.replace(' 00:00:00','') >= event.target.value) {
+            setEndErrMsg(true);
+            return true;
+         } else {
+            setEndErrMsg(false);
+            setEndDate(event.target.value);
+         }
+      })
+  } else {
     setEndDate(event.target.value);
   }
+  }
 
-  const [userdetails, setUserDetails] = useState(new Date())
+  const [userStartDate, setUserStartDate] = useState(new Date())
   useEffect(() => {
     const GetData = async () => {
         const config = {
     headers: {'Authorization': 'JWT '+token }
   };
-      const result = await axios.get('/api/vendor-coupons/',config);
-      setUserDetails(result.data[0].end_date)
+      const result = await axios.get('/api/vendor-coupons/startdate/',config);
+      if(result.data.length > 0) {
+        setUserStartDate(result.data);
+      }
     };
     GetData();
   }, []);
+
+
 
 const history = useHistory()
 
@@ -125,13 +146,14 @@ const disablePastDate = () => {
               </FormGroup>
               <FormGroup>
                 <Label>{"Start Date"}</Label>
-                <Input className="form-control digits" type="date" value = {startdate} onChange = {onChangeStartDate}  min={disablePastDate()}/>
+                <Input className="form-control digits" type="date" value = {startdate} onChange = {onChangeStartDate} min={disablePastDate()}/>
               </FormGroup>
-              {errmsg && <div style = {{color: "red"}}>Warning : Already created deals date fall between this date, pick another date.</div>}
+              {starterrmsg && <div style = {{color: "red"}}>Warning : Already created deals date fall between this date, pick another date.</div>}
               <FormGroup>
                 <Label>{"End Date"}</Label>
-                <Input className="form-control digits" type="date" value = {enddate}  onChange = {onChangeEndDate}   min={startdate}/>
+                <Input className="form-control digits" type="date" value = {enddate}  onChange = {onChangeEndDate} min={startdate}/>
               </FormGroup>
+              {enderrmsg && <div style = {{color: "red"}}>Warning : Already created deals date fall between this date, pick another date.</div>}
               <FormGroup>
                 <Button  color="primary" onClick = {handleSubmit} >{"Save"}</Button>
               </FormGroup>
