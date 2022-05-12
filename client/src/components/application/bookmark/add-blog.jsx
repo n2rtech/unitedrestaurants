@@ -60,7 +60,7 @@ const AddBlog = () => {
         ) .then(response => {
           toast.success("Blog content added !");
           setTimeout(() => {
-            history.push('/dashboard/admin/blogs');
+            history.push('/dashboard/admin/blogs/');
           }, 1000);
         })
            .catch(error => console.log('Form submit error', error))
