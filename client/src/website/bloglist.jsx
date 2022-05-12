@@ -101,7 +101,7 @@ const Bloglist = (props) => {
                             <Card>
                               <div className="hImage">
                                 <a href={`${process.env.PUBLIC_URL}/blog/blogdetails/${item.id}`}>
-                                  <img onError={addDefaultSrc} style = {{ 'width': '338' , 'height' : '224' }} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${item.image}`} />
+                                  <img onError={addDefaultSrc} style = {{ 'width': '338px' , 'height' : '224px' }} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${item.image}`} />
                                 </a>
                               </div>
                               <CardTitle tag="h5">

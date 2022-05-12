@@ -16,7 +16,7 @@ const HotDealsListing = (props) => {
   const [hasMore, sethasMore] = useState(true);
 
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(3);
+  const [size, setSize] = useState(4);
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [loader, setLoader] = useState(<BallTriangle color="#00BFFF" height={100} width={300} />);
   const [showMore, setShowMore] = useState(false);
@@ -64,7 +64,7 @@ const HotDealsListing = (props) => {
 
     setItems([...items, ...commentsFromServer]);
 
-    if(commentsFromServer.length === 0 || commentsFromServer.length < 3) {
+    if(commentsFromServer.length === 0 || commentsFromServer.length < 4) {
       sethasMore(false);
     }
   
