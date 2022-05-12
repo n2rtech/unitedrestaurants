@@ -117,11 +117,11 @@ router.get('/by-serach/all', async (req, res) => {
           include: [
           {
             model: SaleItem, 
-            as:'saleitems'
+            as:'sale_items'
           },
           {
             model: MenuItem,
-            as:'menuitems'
+            as:'menu_items'
           }
           ],
           
@@ -138,13 +138,13 @@ router.get('/by-serach/all', async (req, res) => {
               }
             }, 
             {
-              '$saleitems.content$': 
+              '$sale_items.content$': 
               {
                 [Op.like]: '%'+req.query.filter+'%'
               }
             },
             {
-              '$menuitems.content$': 
+              '$menu_items.content$': 
               {
                 [Op.like]: '%'+req.query.filter+'%'
               }
@@ -167,11 +167,11 @@ router.get('/by-serach/all', async (req, res) => {
             include: [
             {
               model: SaleItem, 
-              as:'saleitems'
+              as:'sale_items'
             },
             {
               model: MenuItem,
-              as:'menuitems'
+              as:'menu_items'
             }
             ],
 
@@ -187,13 +187,13 @@ router.get('/by-serach/all', async (req, res) => {
                 }
               }, 
               {
-                '$saleitems.content$': 
+                '$sale_items.content$': 
                 {
                   [Op.like]: '%'+req.query.filter+'%'
                 }
               },
               {
-                '$menuitems.content$': 
+                '$menu_items.content$': 
                 {
                   [Op.like]: '%'+req.query.filter+'%'
                 }

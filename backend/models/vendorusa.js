@@ -10,22 +10,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
      static associate(models) {
+
       VendorUsa.hasOne(models.SaleItem, {
-        sourceKey : 'user_id',
-        targetKey : 'user_id',
-        onDelete: 'NO ACTION',
-        onUpdate: 'NO ACTION',
         foreignKey: 'user_id',
-        as:'saleitems'
+        sourceKey : 'user_id',
+        as:'sale_items',
       });
 
       VendorUsa.hasOne(models.MenuItem, {
-        sourceKey : 'user_id',
-        targetKey : 'user_id',
-        onDelete: 'NO ACTION',
-        onUpdate: 'NO ACTION',
         foreignKey: 'user_id',
-        as:'menuitems'
+        sourceKey : 'user_id',
+        as:'menu_items',
       });      
 
       // define association here
