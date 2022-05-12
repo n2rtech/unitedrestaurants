@@ -40,14 +40,20 @@ router.post('/', (req, res) => {
 // Get List of ContactInquiry
 
 router.get('/', (req, res) => {
+
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
     ContactInquiry
-    .findAll({
+    .findAndCountAll({
         order: 
         [
             ['createdAt', 'DESC'],
-        ]
+        ],
+        limit,
+        offset
     })
-    .then((contact_inquiry) => res.status(200).send(contact_inquiry))
+    .then((contact_inquiry) => res.status(200).send(getPagingData(contact_inquiry,page,limit)))
     .catch((error) => {
         res.status(400).send(error);
     });
@@ -137,5 +143,22 @@ router.post('/restore', (req, res) => {
         });
     }).catch(err => res.status(400).send(err));
 });
+
+
+const getPagination = (page=1, size) => {
+      const limit = size ? +size : 3;
+      const offset =  (page-1) * limit;
+
+      return { limit, offset };
+  };
+
+
+  const getPagingData = (data, page, limit) => {
+      const { count: totalItems, rows: contactenquries } = data;
+      const currentPage = page ? +page : 1;
+      const totalPages = Math.ceil(totalItems / limit);
+      return { totalItems, contactenquries, totalPages, currentPage };
+  };
+
 
 module.exports = router;
