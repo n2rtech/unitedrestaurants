@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const nodemailer = require("nodemailer");
 const User = require('../../models').User;
+const MenuItem = require('../../models').MenuItem;
+const SaleItem = require('../../models').SaleItem;
 const db = require('../../models');
 const Vendor = require('../../models').Vendor;
 const Membership = require('../../models').Membership;
@@ -106,21 +108,50 @@ router.get('/by-serach/all', async (req, res) => {
       console.log('for only filter search');
         var conditions = {
 
-            attributes: [
-            'id','business_name','about_business','banner','createdAt','user_id'
-            ],
-            where:{
-                business_name: {
-                    [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
-                },
-                categories: {
-                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
-                }
+          attributes: [
+          'id','business_name','about_business','banner','createdAt','user_id'
+          ],
+
+          include: [
+          {
+            model: SaleItem, 
+            as:'saleitems'
+          },
+          {
+            model: MenuItem,
+            as:'menuitems'
+          }
+          ],
+
+          where:{
+            categories: {
+              [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
             },
-            offset,
-            limit,
-            order: [ ['createdAt', 'DESC' ]]
-        }
+            [Op.or]: [
+            {
+              business_name: 
+              {
+                [Op.like]: '%'+req.query.filter+'%'
+              }
+            }, 
+            {
+              '$saleitems.content$': 
+              {
+                [Op.like]: '%'+req.query.filter+'%'
+              }
+            },
+            {
+              '$menuitems.content$': 
+              {
+                [Op.like]: '%'+req.query.filter+'%'
+              }
+            },
+            ]
+          },
+          offset,
+          limit,
+          order: [ ['createdAt', 'DESC' ]]
+      }
     } else if (filter && address && address1) {
 
       console.log('filter and serach both');
@@ -130,13 +161,41 @@ router.get('/by-serach/all', async (req, res) => {
             'id','business_name','about_business','banner','createdAt','user_id',
             [Sequelize.literal(haversine), 'distance']
             ],
+            include: [
+            {
+              model: SaleItem, 
+              as:'saleitems'
+            },
+            {
+              model: MenuItem,
+              as:'menuitems'
+            }
+            ],
+
             where:{
-                business_name: {
-                    [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
-                },
-                categories: {
-                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+              categories: {
+                [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
+              },
+              [Op.or]: [
+              {
+                business_name: 
+                {
+                  [Op.like]: '%'+req.query.filter+'%'
                 }
+              }, 
+              {
+                '$saleitems.content$': 
+                {
+                  [Op.like]: '%'+req.query.filter+'%'
+                }
+              },
+              {
+                '$menuitems.content$': 
+                {
+                  [Op.like]: '%'+req.query.filter+'%'
+                }
+              },
+              ]
             },
             offset,
             limit,
@@ -205,24 +264,55 @@ router.get('/by-serach/all', async (req, res) => {
 
     } else if (!address && filter && address1) {
       //for only address search
-      console.log('Only Address section!')
+      console.log('Only Address and address1 section!')
         var conditions = {
 
             attributes: [
             'id','business_name','about_business','banner','createdAt','user_id','address',
             ],
 
-            where:{
-              address: {
-                    [Op.like]: req.query.address1 ? '%'+req.query.address1+'%' : ''
-                },
-                business_name: {
-                    [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
-                },
-                categories: {
-                    [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
-                }
+            include: [
+          {
+            model: SaleItem, 
+            as:'saleitems'
+          },
+          {
+            model: MenuItem,
+            as:'menuitems'
+          }
+          ],
+
+          where:{
+            categories: {
+              [Op.like]: req.query.category ? '%'+req.query.category+'%' : ''
             },
+            [Op.or]: [
+            {
+              address: 
+              {
+                [Op.like]: '%'+req.query.address1+'%'
+              }
+            },
+            {
+              business_name: 
+              {
+                [Op.like]: '%'+req.query.filter+'%'
+              }
+            }, 
+            {
+              '$saleitems.content$': 
+              {
+                [Op.like]: '%'+req.query.filter+'%'
+              }
+            },
+            {
+              '$menuitems.content$': 
+              {
+                [Op.like]: '%'+req.query.filter+'%'
+              }
+            },
+            ]
+          },
             offset,
             limit,
             order: [ ['createdAt', 'DESC'] ]
@@ -242,6 +332,7 @@ router.get('/by-serach/all', async (req, res) => {
     var counts = await app.db(table_name).count(conditions);
 
     if (counts <= 0 && address) {
+      console.log('counts1 section!');
       var conditions = {
 
             attributes: [
@@ -265,6 +356,9 @@ router.get('/by-serach/all', async (req, res) => {
     var counts = await app.db(table_name).count(conditions);
 
      if (counts <= 0 && address) {
+
+      console.log('counts2 section!');
+
        var new_address = address.split(" ");
       var conditions = {
 
