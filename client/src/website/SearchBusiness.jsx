@@ -14,8 +14,6 @@ const SearchBusiness = (props) => {
   const params = useParams();
   var base64 = require('base-64');
   var decodedData = base64.decode(`${params.id}`);
-  console.log('decodedData',decodedData);
-
 
   const [items , setItems] = useState([]);
   const [hasMore, sethasMore] = useState(true);
@@ -109,41 +107,41 @@ const SearchBusiness = (props) => {
             { (items && items.length) ? 
             <Row>
             <InfiniteScroll
-                    dataLength={items.length} 
-                    next={fetchData}
-                    hasMore={hasMore}
-                    loader={<h4></h4>}
-                    endMessage={
-                      <p style={{ textAlign: 'center' }}>
-                        <b>Yay! You have seen it all</b>
-                      </p>
-                    }>
-                      <Row>
-                              { (items).map((item , i) => (
-                                <Col sm="4" key={i}>
-                                    <div className="customcard">
-                                    <Card>
-                                      <div className="hImage">
-                                        <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
-                                          <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} />
-                                        </a>
-                                      </div>
-                                      <CardTitle tag="h5">
-                                        <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>{item.business_name}</a>
-                                      </CardTitle>
-                                      <CardText>
-                                        {(item.about_business && item.about_business.length <= 400) ? item.about_business : `${item.about_business.substring(0, 400)}`+'...'}
-                                      </CardText>
-                                      <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}> SEE DETAILS</a></Button>
-                                    </Card>
-                                  </div>
-                                  </Col>
-                                  )) 
-                              }
-                      </Row>
-                </InfiniteScroll>
+              dataLength={items.length} 
+              next={fetchData}
+              hasMore={hasMore}
+              loader={<h4></h4>}
+              endMessage={
+                <p style={{ textAlign: 'center' }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }>
+              <Row>
+                { (items).map((item , i) => (
+                  <Col sm="4" key={i}>
+                      <div className="customcard">
+                      <Card>
+                        <div className="hImage">
+                          <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
+                            <img onError={addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} />
+                          </a>
+                        </div>
+                        <CardTitle tag="h5">
+                          <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>{item.business_name}</a>
+                        </CardTitle>
+                        <CardText>
+                          {(item.about_business && item.about_business.length <= 400) ? item.about_business : `${item.about_business.substring(0, 400)}`+'...'}
+                        </CardText>
+                        <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}> SEE DETAILS</a></Button>
+                      </Card>
+                    </div>
+                    </Col>
+                    )) 
+                  }
+                </Row>
+              </InfiniteScroll>
             </Row>  
-             : <p style={{ textAlign:'center' }}>There is no listing found!</p> }
+             : <p style={{ textAlign:'center' }}>There are no listing found!</p> }
           </div>
         </Container>
         <Footer2/>
