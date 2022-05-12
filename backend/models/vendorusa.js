@@ -9,15 +9,21 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+     static associate(models) {
       VendorUsa.hasOne(models.SaleItem, {
         sourceKey : 'user_id',
+        targetKey : 'user_id',
+        onDelete: 'NO ACTION',
+        onUpdate: 'NO ACTION',
         foreignKey: 'user_id',
         as:'saleitems'
       });
 
       VendorUsa.hasOne(models.MenuItem, {
         sourceKey : 'user_id',
+        targetKey : 'user_id',
+        onDelete: 'NO ACTION',
+        onUpdate: 'NO ACTION',
         foreignKey: 'user_id',
         as:'menuitems'
       });      
