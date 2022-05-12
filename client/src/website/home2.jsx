@@ -13,6 +13,7 @@ const Home2 = () => {
   localStorage.removeItem('catid');
   localStorage.removeItem('filter');
   localStorage.removeItem('address');
+  localStorage.removeItem('address1');
   localStorage.removeItem('latitude');
   localStorage.removeItem('longitude');
   return (
