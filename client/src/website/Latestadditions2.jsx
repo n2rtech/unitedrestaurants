@@ -46,7 +46,7 @@ const addDefaultSrc = (ev) => {
                  <CardBody>
                    <Row>
                     <Col sm="4" xs="4">
-                    <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/item.banner`} 
+                    <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
                      alt="Menu-Icon"/>
                    </Col>
                    <Col sm="8" xs="8">
