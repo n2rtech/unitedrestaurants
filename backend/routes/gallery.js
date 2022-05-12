@@ -54,7 +54,7 @@ const resizeImages = async (req, res) => {
         const filename = file.originalname.replace(/\..+$/, "");
         const newFilename = `gallery-${filename}-${Date.now()}.jpg`;
         await sharp(file.path)
-        .resize(840, 420, {
+        .resize(640, 427, {
             fit: sharp.fit.inside,
             withoutEnlargement: true, 
         })
