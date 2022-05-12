@@ -477,8 +477,8 @@ router.post("/register", (req, res) => {
                   }
                 }));
 
-                DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `ownermobile`,  `fax`, `address`, `latitude`, `longitude`, `city`, `state`, `post_code`,  `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt` ) VALUES ("+user_id+", '"+name+"', NULL, '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', '"+ownermobile+"', NULL, '"+address+"', '"+latitude+"', '"+longitude+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NOW(), '')");
-                
+                DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `ownermobile`,  `fax`, `address`, `latitude`, `longitude`, `city`, `state`, `post_code`,  `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt` ) VALUES ("+user_id+", '"+name+"', '', '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', '"+ownermobile+"', '', '"+address+"', '"+latitude+"', '"+longitude+"', '', '', '', '["+req.body.category_id+"]', '', '', '', '', '', '', '', 1, '', NOW(), '')");
+                 
                 let transporter = nodemailer.createTransport({
                   host: "email-smtp.ap-south-1.amazonaws.com",
                   port: 587,
@@ -1269,8 +1269,9 @@ router.get('/profile/:id', (req, res) => {
               var name = vendor.name;
               var address = vendor.address;
               var mobile = vendor.mobile;
+              var categories = vendor.categories;
 
-              DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `fax`, `address`, `city`, `state`, `post_code`, `latitude`, `longitude`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+name+"', NULL, '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', NULL, '"+address+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NOW(), '')");
+              DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `fax`, `address`, `city`, `state`, `post_code`, `latitude`, `longitude`, `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt`) VALUES ("+user_id+", '"+name+"', '', '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', '', '"+address+"', '', '', '', '', '', '"+categories+"', '', '', '', '', '', '', '', 1, '', NOW(), '')");
 
               DB.query("SELECT * FROM " + table_name +" WHERE user_id =" + vendor.id, function (err, profile) {
                 if (err) throw err;
