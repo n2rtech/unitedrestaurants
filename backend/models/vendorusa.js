@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'user_id',
         as:'menuitems'
       });
+      
 
       // define association here
     }
