@@ -15,7 +15,7 @@ const SearchBar = () => {
   const [countries , setCountries] = useState([]);
   const [categories , setCategories] = useState([]);
   const [address , setAddress] = useState(localStorage.getItem('address'));
-  const [address1 , setAddress1] = useState(localStorage.getItem('address1'));
+  const [address1 , setAddress1] = useState(localStorage.getItem('address1')||'');
   const [latitude , setLatitude] = useState(localStorage.getItem('latitude'));
   const [longitude , setLongitude] = useState(localStorage.getItem('longitude'));
   useEffect( async () => {
