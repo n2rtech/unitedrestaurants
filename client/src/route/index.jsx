@@ -37,6 +37,7 @@ import Categories from "../components/application/bookmark/categories"
 import EditCategory from "../components/application/bookmark/edit-category"
 import AllVendors from "../components/application/bookmark/all-vendors"
 import EditVendor from "../components/application/bookmark/edit-vendor"
+import AllSaleItems from "../components/application/bookmark/all-sale-items"
 import AllMembership from "../components/application/bookmark/all-membership"
 import NoMembership from "../components/application/bookmark/no-membership"
 import SuspendedVendors from "../components/application/bookmark/suspended-vendors"
@@ -149,7 +150,7 @@ export const routes = [
         { path:"/dashboard/vendor/vendor-videogallery", Component:VendorVideoGallery},
         { path:"/dashboard/vendor/add-video-gallery/", Component:AddVendorVideoGallery},
         { path:"/dashboard/vendor/edit-video-gallery/:id", Component:EditVideoGallery},
-
+        { path:"/dashboard/vendor/all-sale-items", Component:AllSaleItems},
         { path:"/dashboard/vendor/vendor-youtube", Component:VendorYoutube},
         { path:"/dashboard/vendor/add-youtube-video", Component:AddYoutube},
 

@@ -1,11 +1,16 @@
 import React, { Fragment , useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import CKEditors from "react-ckeditor-component";
-import {Container,Row,Col,Card,CardHeader,CardBody, Button} from 'reactstrap'
+// import CKEditors from "react-ckeditor-component";
+import {Container,Row,Col,Card,CardHeader,CardBody, Button,FormGroup, Label, Input} from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
+import Dropzone from 'react-dropzone-uploader';
 
 const SaleItems =  () =>  {
+
+    const getUploadParams = ({ meta }) => { return { url: 'https://httpbin.org/post' } }
+    const handleChangeStatus = ({ meta, file }, status) => {
+    }
     
     const [content,setContent] = useState('')
     const [id,setId] = useState('') 
@@ -63,22 +68,47 @@ const SaleItems =  () =>  {
 
     return (
             <Fragment>
-                <Breadcrumb parent="Editors" title="Sale Items"/>
+                <Breadcrumb parent="Editors" title="Sale Item"/>
                 <Container fluid={true}>
                     <Row>
                         <Col sm="12">
                             <Card>
-                                <CardHeader>
-                                    <h5>{"List your sales items in the box"}</h5>
-                                </CardHeader>
                                 <CardBody>
-                                    <CKEditors
+                                <FormGroup>
+                                    <Label htmlFor="exampleFormControlInput1">Item name</Label>
+                                    <Input className="form-control"  type="name" placeholder="Name" />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>Item Description</Label>
+                                    <Input type="textarea" className="form-control"  rows="3"/>
+                                </FormGroup>
+                                <FormGroup>
+                                    <div className="dz-message needsclick">
+                                        <Dropzone
+                                            getUploadParams={getUploadParams}
+                                            onChangeStatus={handleChangeStatus}
+                                            maxFiles={1}
+                                            multiple={false}
+                                            canCancel={false}
+                                            inputContent="Drop A File"
+                                            styles={{
+                                                dropzone: { height: 200 },
+                                                dropzoneActive: { borderColor: 'green' },
+                                            }}
+                                        />
+                                    </div>
+                                </FormGroup>
+                                    {/*<CKEditors
                                         activeclassName="p10"
                                         content={content}
                                         events={{
                                             "change": onChange
                                         }}
-                                    />
+                                    />*/}
+                                    <FormGroup>
+                                        <Label htmlFor="exampleFormControlInput1">Contact Email</Label>
+                                        <Input className="form-control"  type="name" placeholder="Contact Email" />
+                                    </FormGroup>
                                     <div className="m-t-20">
                                     <Button onClick = {handleSubmit} color="primary">{"Save"}</Button>
                                     </div>
