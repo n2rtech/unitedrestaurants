@@ -77,7 +77,7 @@ const LatestListing = (props) => {
  }
 
   const addDefaultSrc = (ev) => {
-    ev.target.src = `${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`;
+    ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
   }
 
   return (

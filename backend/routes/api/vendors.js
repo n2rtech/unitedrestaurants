@@ -483,12 +483,12 @@ router.post("/register", (req, res) => {
                 DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `ownermobile`,  `fax`, `address`, `latitude`, `longitude`, `city`, `state`, `post_code`,  `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt` ) VALUES ("+user_id+", '"+name+"', '', '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', '"+ownermobile+"', '', '"+address+"', '"+latitude+"', '"+longitude+"', '', '', '', '["+req.body.category_id+"]', '', '', '', '', '', '', '', 1, '', NOW(), '')");
                  
                 let transporter = nodemailer.createTransport({
-                  host: "email-smtp.ap-south-1.amazonaws.com",
-                  port: 587,
-                  secure: false, // true for 465, false for other ports
+                  host: "smtp.googlemail.com",
+                  port: 465,
+                  secure: true, // true for 465, false for other ports
                   auth: {
-                    user: 'AKIAZNPJJA3ABJFYDXCU', // generated ethereal user
-                    pass: 'BN6wz8NRFQ+wL+1nsaGVzMLmKiFb/TAPpX77SqYILAw7', // generated ethereal password
+                    user: 'contact@n2rtechnologies.com', // generated ethereal user
+                    pass: 'contact#@785612', // generated ethereal password
                   },
                 });
 
@@ -509,7 +509,7 @@ router.post("/register", (req, res) => {
 
                  // send mail with defined transport object
                   let info = transporter.sendMail({
-                    from: 'United Restaurant <hello@najimfit.com>', // sender address
+                    from: 'United Restaurant', // sender address
                     to: email, // list of receivers
                     subject: "Vendor Verification mail", // Subject line
                     text: "kjhksdhfkjdshf?", // plain text body
