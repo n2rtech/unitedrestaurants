@@ -21,6 +21,7 @@ const LatestListing = (props) => {
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [loader, setLoader] = useState(<BallTriangle color="#00BFFF" height={100} width={300} />);
   const [showMore, setShowMore] = useState(false);
+  const [nocontent, setNocontent] = useState(false);
 
   useEffect(() => {
     const getComments = async () => {
@@ -42,6 +43,9 @@ const LatestListing = (props) => {
       .then(function (result) {
         setLoader('There are no business listing available');
         setItems(result.data.vendors);
+        if(result) {
+          setNocontent(true);
+        }
       })
       .catch(function (error) {
       });
@@ -119,7 +123,7 @@ const LatestListing = (props) => {
                 </Row>
               </InfiniteScroll>
             </Row>  
-             : <p style={{ textAlign:'center' }}>There is no listing found!</p> }
+              :   nocontent && <p style={{ textAlign:'center' }}>There is no listing found!</p> } 
           </div>
         </Container>
         <Footer2/>
