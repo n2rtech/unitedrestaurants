@@ -28,6 +28,7 @@ const Latestadditions2 = (props) => {
 
 const addDefaultSrc = (ev) => {
   // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/foodimg1.png`;
+  // <a href="/LatestListing">SEE ALL</a>
   ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
 }
   return (
@@ -35,7 +36,6 @@ const addDefaultSrc = (ev) => {
         <Container className="p-0"> 
         {latestData && latestData.length ?  <h3>latest additions</h3> : '' }
        {latestData && latestData.length > 2 ?  <div className="seeall">
-        <a href="/LatestListing">SEE ALL</a>
       </div> : '' }
           <div style={{ position: "relative" }}>
           <Carousel responsive={responsive}>
@@ -44,25 +44,18 @@ const addDefaultSrc = (ev) => {
             <div className="customcard">
               <Card>
                  <CardBody>
-                   <Row>
-                    <Col sm="4" xs="4">
-                    <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
+                   <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
                      alt="Menu-Icon"/>
-                   </Col>
-                   <Col sm="8" xs="8">
                   <CardTitle tag="h5">
                     <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     {item.business_name}
-                  </a>
+                    </a>
                   </CardTitle>
                   <CardSubtitle
                     className="mb-2 text-muted"
                     tag="h6"
-                  >
-                    Joined {item.createdAt}
-                                      </CardSubtitle>
-                  </Col>
-                  </Row>
+                  >Joined {item.createdAt}
+                  </CardSubtitle>
                   
                   <Button>
                     { item.user_id === 0 ?  

@@ -317,6 +317,7 @@ body {
     font-family: 'Poppins';
     margin-top: 10px;
     padding: 0 10px;
+    min-height: 66px;
 }
 .btn-secondary {
     background-color: #70081C !important;
@@ -2112,10 +2113,6 @@ form.browse .btn-primary a{
 .blogs-section .card-text{
     margin-bottom: 20px !important;
 }
-.blogs-section .react-multiple-carousel__arrow::before{
-    text-shadow: 2px 2px #71161d;
-    color: #fff !important;
-}
 .details-page{
     margin-top: 30px;
 }
@@ -2201,6 +2198,13 @@ form.browse .btn-primary a{
     margin-right: 0;
     margin-top: 20px;
     margin-bottom: 10px;
+}
+.react-multiple-carousel__arrow::before{
+    background: #ffd54c;
+    color: #70081C !important;
+    border-radius: 50px;
+    padding: 6px 17px;
+    font-size: 21px !important;
 }
 
 

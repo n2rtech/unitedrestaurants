@@ -31,6 +31,7 @@ const Featured2 = () => {
 
   const addDefaultSrc = (ev) => {
     // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h4.jpeg`;
+    // <a href="/FeaturedListing">SEE ALL</a>
     ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
   }
 
@@ -39,7 +40,7 @@ const Featured2 = () => {
       <div className="hotdeals">
       {featuredData && featuredData.length ? <h1>Featured businesses</h1> : '' }
        {featuredData && featuredData.length > 6 ? <div className="seeall">
-        <a href="/FeaturedListing">SEE ALL</a>
+       
       </div> : '' }
       
         <div style={{ position: "relative" }}>
