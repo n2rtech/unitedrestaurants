@@ -105,7 +105,6 @@ const SearchBusiness = (props) => {
           <div className="hotdeals SearchBusiness">
             <h4>{categoryName}</h4>
             { (items && items.length) ? 
-            <Row>
             <InfiniteScroll
               dataLength={items.length} 
               next={fetchData}
@@ -139,8 +138,7 @@ const SearchBusiness = (props) => {
                     )) 
                   }
                 </Row>
-              </InfiniteScroll>
-            </Row>  
+              </InfiniteScroll> 
              : <p style={{ textAlign:'center' }}>There are no listing found!</p> }
           </div>
         </Container>
