@@ -22,6 +22,7 @@ const BusinessListing = (props) => {
   const [categoryName, setCategoryName] = useState('');
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [showMore, setShowMore] = useState(false);
+  const [nocontent, setNocontent] = useState(false);
 
   useEffect(() => {
     const getComments = async () => {
@@ -43,6 +44,9 @@ const BusinessListing = (props) => {
       await axios(config1)
       .then(function (result) {
         setItems(result.data.vendors);
+        if(result) {
+          setNocontent(true);
+        }
       })
       .catch(function (error) {
       });
@@ -94,7 +98,6 @@ const BusinessListing = (props) => {
   }, []);
 
   const addDefaultSrc = (ev) => {
-    // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/resturent/resturentimg1.jpg`;
     ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
   }
 
@@ -111,12 +114,15 @@ const BusinessListing = (props) => {
                     dataLength={items.length} 
                     next={fetchData}
                     hasMore={hasMore}
-                    loader={<h4></h4>}
+                    loader={<h4>Loading...</h4>}
+                    pullDownToRefreshContent={
+                      <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
+                    }
                     endMessage={
                       <p style={{ textAlign: 'center' }}>
                         <b>Yay! You have seen it all</b>
                       </p>
-                    }>
+                    }>    
                       <Row>
                               { (items).map((item , i) => (
                                 <Col sm="4" key={i}>
@@ -133,7 +139,7 @@ const BusinessListing = (props) => {
                                       <CardText>
                                       {(item.about_business && item.about_business.length >= 100) ? (item.about_business.substring(0, 116) + "...") : item.about_business == 'null' ? '' : item.about_business}
                                       </CardText>
-                                      <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}> SEE DETAILS</a></Button>
+                                      <Button><a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>SEE DETAILS</a></Button>
                                     </Card>
                                   </div>
                                   </Col>
@@ -142,7 +148,7 @@ const BusinessListing = (props) => {
                       </Row>
                 </InfiniteScroll>
             </Row>  
-             : <p style={{ textAlign:'center' }}>There is no listing found!</p> }
+              :   nocontent && <p style={{ textAlign:'center' }}>There is no listing found!</p> } 
           </div>
         </Container>
         <Footer2/>
