@@ -12,10 +12,10 @@ const AccountsPayable = (props) => {
   const [accountsPayableData, setAccountsPayableData] = useState([]);
   const [activePage, setActivePage] = useState(0);
   const [totalItemsCount, setTotalItemsCount] = useState(1);  
-  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(6);
-  const [pagesCount, setPagesCount] = useState(6);
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(20);
+  const [pagesCount, setPagesCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1); 
-  const [size, setSize] = useState(6);
+  const [size, setSize] = useState(20);
 
   useEffect(() => {
 
@@ -23,18 +23,17 @@ const AccountsPayable = (props) => {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
       params : {
         'page': 1,
-        'size': 4 
+        'size': size 
       }
     };
 
-    fetch("/api/accounts-payable/all" , config)
-    .then(res => res.json())
+    axios("/api/accounts-payable/all" , config)
     .then(
       (result) => { 
-        setAccountsPayableData(result.accountspayables);
-        setTotalItemsCount(result.totalItems);  
-        setActivePage(result.currentPage);
-        setPagesCount(result.totalPages);
+        setAccountsPayableData(result.data.accountspayables);
+        setTotalItemsCount(result.data.totalItems);  
+        setActivePage(result.data.currentPage);
+        setPagesCount(result.data.totalPages);
       },
       (error) => { 
       });
