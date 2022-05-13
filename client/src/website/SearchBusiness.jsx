@@ -24,6 +24,7 @@ const SearchBusiness = (props) => {
   const [categoryName, setCategoryName] = useState('');
   const [country, setCountry] = useState(localStorage.getItem('country_code'));
   const [showMore, setShowMore] = useState(false);
+  const [nocontent, setNocontent] = useState(false);
 
   useEffect(() => {
     const getComments = async () => {
@@ -43,8 +44,12 @@ const SearchBusiness = (props) => {
       await axios(config1)
       .then(function (result) {
         setItems(result.data.data);
+        if(result.data.data) {
+          setNocontent(true);
+        }
       })
       .catch(function (error) {
+        console.log('Error' ,error);
       });
 
   
@@ -139,7 +144,7 @@ const SearchBusiness = (props) => {
                   }
                 </Row>
               </InfiniteScroll> 
-             : <p style={{ textAlign:'center' }}>There are no listing found!</p> }
+             :   nocontent && <p style={{ textAlign:'center' }}>There is no listing found!</p> } 
           </div>
         </Container>
         <Footer2/>
