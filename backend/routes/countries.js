@@ -39,17 +39,31 @@ router.post('/', passport.authenticate('jwt', {
 router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
-    helper.checkPermission(req.user.role_id, 'Countries').then((rolePerm) => {
-        Country
-            .findAll()
-            .then((countries) => res.status(200).send(countries))
-            .catch((error) => {
-                res.status(400).send(error);
-            });
-    }).catch((error) => {
-        res.status(403).send(error);
+    Country
+    .findAll({order:[['name','ASC']]})
+    .then((countries) => res.status(200).send(countries))
+    .catch((error) => {
+        res.status(400).send(error);
     });
 });
+
+
+// Get List of Categories
+router.get("/deleted", (req, res) => {
+    Country
+    .findAll( { where: {deletedAt: {[Op.ne]: null} 
+},
+    paranoid:false
+     })
+    .then((category) => {
+        res.status(200).send(category)
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(400).send('error');
+    });
+});
+
 
 
 
@@ -57,7 +71,7 @@ router.get('/', passport.authenticate('jwt', {
 // Get List of Countries
 router.get('/list', (req, res) => {
     Country
-    .findAll()
+    .findAll({order:[['name','ASC']]})
     .then((countries) => res.status(200).send(countries))
     .catch((error) => {
         res.status(400).send(error);
