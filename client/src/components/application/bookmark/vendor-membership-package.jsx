@@ -269,9 +269,9 @@ const VendorMembershipPackage = (props) => {
                         </ul>
                         
                           { planname === 'Free' ? 
-                            <div className="pricingtable-signup"><Button color="primary" size="lg" disabled>{"Active"}</Button></div> 
+                            <div className="pricingtable-signup"><Button color="primary" disabled>{"Active"}</Button></div> 
                             :
-                            <div className="pricingtable-signup"><Button color="primary" size="lg" onClick = {HandleMembership}>Included with paid plans</Button></div>
+                            <div className="pricingtable-signup"><Button color="primary" onClick = {HandleMembership}>Included with paid plans</Button></div>
                           }
                           
                       </div>
@@ -311,7 +311,7 @@ const VendorMembershipPackage = (props) => {
                               {"Amount"} : {cycleamountq} <br/>
                              <Button color="primary" size="lg" disabled>{"Active"}</Button><br/> 
                              <br/>
-                             <Button color="danger" size="lg" onClick={() => CancelSubscription(subscriptionid)}>{"cancel"}</Button>
+                             <Button color="danger" onClick={() => CancelSubscription(subscriptionid)}>{"cancel"}</Button>
                           </div> 
                           :
                           ''
@@ -349,10 +349,10 @@ const VendorMembershipPackage = (props) => {
                           <div className="pricingtable-signup">
                               {"Selected Cycle"} : {intervalq}<br/>
                               {"Amount"} : {cycleamountq} <br/>
-                             <Button color="primary" size="lg" disabled>{"Active"}</Button><br/>
+                             <Button color="primary" disabled>{"Active"}</Button><br/>
                               
                              <br/>
-                             <Button color="danger" size="lg" onClick={() => CancelSubscription(subscriptionid)}>{"cancel"}</Button>
+                             <Button color="danger" onClick={() => CancelSubscription(subscriptionid)}>{"Cancel"}</Button>
                           </div> 
                           :
                           
