@@ -105,10 +105,6 @@ const SaleItems =  () =>  {
                                             "change": onChange
                                         }}
                                     />*/}
-                                    <FormGroup>
-                                        <Label htmlFor="exampleFormControlInput1">Contact Email</Label>
-                                        <Input className="form-control"  type="name" placeholder="Contact Email" />
-                                    </FormGroup>
                                     <div className="m-t-20">
                                     <Button onClick = {handleSubmit} color="primary">{"Save"}</Button>
                                     </div>

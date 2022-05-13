@@ -1,4 +1,5 @@
 import React,{useState,useMemo,Fragment} from 'react';
+import { Row, Col} from 'reactstrap'
 import axios from 'axios'
 import {useParams} from 'react-router-dom'
 
@@ -22,11 +23,31 @@ export default function SaleItems() {
     <>
     {saleItemsData.content && saleItemsData.content.length ?
       <div className="details-left">
-        <div className="menu-items offers">
+        <div className="menu-items newSaleItems">
           <h5>Items for Sale</h5>
-          <ul className="list-unstyled">
-          <div dangerouslySetInnerHTML={{ __html: saleItemsData.content }} />
-          </ul>
+          <Row>
+            <Col sm="4">
+              <div className="saleBox">
+              <img src={`https://unitedrestaurants.com/api/uploads/banner/banner_1652102377378.jpeg`} style={{ width: "190px" }} />
+                <h3>Kitchen Items & Crockery</h3>
+                <p>Proin dapibus turpis vitae magna accumsan vitae molestie enim elementum quisque eget leo dictum elementum est id lobortis sapien vestibulum id sem</p>
+              </div>
+            </Col>
+            <Col sm="4">
+              <div className="saleBox">
+              <img src={`https://unitedrestaurants.com/api/uploads/banner/banner_1652102377378.jpeg`} style={{ width: "190px" }} />
+                <h3>Kitchen Items & Crockery</h3>
+                <p>Proin dapibus turpis vitae magna accumsan vitae molestie enim elementum quisque eget leo dictum elementum est id lobortis sapien vestibulum id sem</p>
+              </div>
+            </Col>
+            <Col sm="4">
+              <div className="saleBox">
+              <img src={`https://unitedrestaurants.com/api/uploads/banner/banner_1652102377378.jpeg`} style={{ width: "190px" }} />
+                <h3>Kitchen Items & Crockery</h3>
+                <p>Proin dapibus turpis vitae magna accumsan vitae molestie enim elementum quisque eget leo dictum elementum est id lobortis sapien vestibulum id sem</p>
+              </div>
+            </Col>
+          </Row>
         </div>
       </div>
       : '' }

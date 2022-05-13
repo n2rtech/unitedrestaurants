@@ -49,13 +49,13 @@ const BusinessDetails = () => {
                 </div>
                 <MenuItems/>
                 <Offers/>
+                <SaleItems/>
                 <JobOpenings/>
               </Col>
               <Col sm="5">
                 <div className="mapDiv">{location.lat ? <GoogleMapLatLng location={location} /> : '' }</div>
                 <div className="clearfix" / >
                   <RestaurantContact/>
-                  <SaleItems/>
                   <BusinessVideo/>
               </Col>
             </Row>
