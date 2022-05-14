@@ -267,7 +267,7 @@ const Register = (props) => {
                     </Input>
                   </FormGroup>
                   <FormGroup>
-                    <textarea className="form-control" placeholder="Location" id="search_address" defaultValue={address} name="address" onChange={handleChange} ></textarea>
+                    <textarea className="form-control" placeholder="Address.." id="search_address" defaultValue={address} name="address" onChange={handleChange} ></textarea>
                     <Input type="hidden" id="vendor_address_lan" name="latitude" ></Input>
                     <Input type="hidden" id="vendor_address_lat" name="longitude" ></Input>
                   </FormGroup>

@@ -154,7 +154,7 @@ const SearchBar = () => {
               <div className="col-sm-5 p-0">
                 <InputGroup>
                   <InputGroupAddon onClick={setCurrentLocation1} addonType="prepend"><InputGroupText><i  title="Use my Current Location" className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
-                  <Input type="text" defaultValue={address ? address : address1} name="address" id="searchAddress" className="form-control digits" onChange={OnChangeSearch} placeholder="Location.." />                
+                  <Input type="text" defaultValue={address ? address : address1} name="address" id="searchAddress" className="form-control digits" onChange={OnChangeSearch} placeholder="Address.." />                
                   <Input type="hidden" defaultValue={latitude} name="latitude" id="search_address_lat" />                
                   <Input type="hidden" defaultValue={longitude} name="longitude" id="search_address_lan" />                
                   </InputGroup>

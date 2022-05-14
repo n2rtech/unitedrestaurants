@@ -55,6 +55,13 @@ const AddVideoGallery = (props) => {
       <Container fluid={true}>
         <Card>
           <CardBody>
+          <h4>Note</h4>
+          <p>If you already have any videos of your establishment, foods, staff, etc.. please share link here.
+          To upload videos of parties you organised, promotions you are offering, foods, recipes etc. please follow these steps</p>
+          <p>1- Subscribe to our channel here (<a target={`_blank`} href={`https://www.youtube.com/channel/UC_jrlE1FD8fLQIzHdKTJuaQ`} >https://www.youtube.com/channel/UC_jrlE1FD8fLQIzHdKTJuaQ</a>)</p>
+          <p>2- Add title, description, select video</p>
+          <p>3- Upload "Upload button should not be active on first click, for one time give message please subscribe to our youtube channel</p>
+          <p></p>
             <Form className="form theme-form">
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">{"Video name"}</Label>
