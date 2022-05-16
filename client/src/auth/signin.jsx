@@ -8,6 +8,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { toast } from 'react-toastify';
 import {withRouter} from 'react-router-dom'
 import {Password,SignIn, EmailAddress,CreateAccount,FIREBASE,AUTH0,JWT } from '../constant';
+import SweetAlert from 'sweetalert2'
 
 const Logins = (props) => {
   
@@ -85,17 +86,23 @@ const Logins = (props) => {
       }).catch((error) => {
         if (error.response) {
           if(error.response.data.error.email){
-            setTimeout(() => {
-              toast.error(error.response.data.error.email);
-          }, 200);
+            SweetAlert.fire(
+              'Error!',
+               error.response.data.error.email,
+              'warning'
+            )          
           }else{
-            setTimeout(() => {
-              toast.error(error.response.data.error.password);
-          }, 200);
+            SweetAlert.fire(
+              'Error!',
+               error.response.data.error.password,
+              'warning'
+            )         
           }
-          setTimeout(() => {
-              toast.error(error.response.data.error);
-          }, 200);
+          SweetAlert.fire(
+            'Error!',
+             error.response.data.error,
+            'warning'
+          )          
         } 
     });
     }
