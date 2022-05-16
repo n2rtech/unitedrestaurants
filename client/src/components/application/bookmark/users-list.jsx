@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect , useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody } from 'reactstrap'
+import { Table, Container, Row, Col, Card, CardBody, Form, FormGroup, Input, Label } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
@@ -10,9 +10,10 @@ import Pagination from "react-js-pagination";
 const Userslist = (props) => {
 
   const [users, setUsers] = useState([]);
-  const [roles, setRoles] = useState([]);
   const token = localStorage.getItem("token");
   const history = useHistory()
+
+  const [filterData, setFilterData] = useState(''); 
 
   const [activePage, setActivePage] = useState(0);
   const [totalItemsCount, setTotalItemsCount] = useState(1);  
@@ -27,7 +28,8 @@ const Userslist = (props) => {
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*', 'Authorization': 'JWT '+token},
           params : {
         'page': 1,
-        'size': size
+        'size': size,
+        'filter':filterData
       }
 
           };
@@ -38,12 +40,8 @@ const Userslist = (props) => {
       setActivePage(result.data.currentPage);
       setPagesCount(result.data.totalPages);
     });
-
-    axios.get('/api/roles/all' , config).then((result) => {
-      setRoles(result.data);
-    });
   
-    }, []);
+    }, [filterData]);
   
     console.log(users);
 
@@ -54,7 +52,8 @@ const Userslist = (props) => {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
       params : {
         'page': pageNumber,
-        'size': size
+        'size': size,
+        filter:filterData
       }
     };
 
@@ -66,6 +65,11 @@ const Userslist = (props) => {
       setPagesCount(result.data.totalPages);
     });
   }
+
+  const handlefilterChange = e => {
+    const filterData = e.target.value;
+    setFilterData(filterData);
+  };
 
  // Delete functionality
 
@@ -117,20 +121,29 @@ const Userslist = (props) => {
         <Card>
           <CardBody>
           <Row className="m-b-20">
-            <Col sm="6"></Col>
+            <Col sm="6">
+
+            <Form className="form theme-form" autocomplete="off">
+                    <FormGroup>
+                      <Label htmlFor="exampleFormControlInput">{"Search Data :"}</Label>
+                      <Input className="form-control" name="name" autocomplete="off" value={filterData} onChange={handlefilterChange} type="name" placeholder="Please search name email or role" />
+                    </FormGroup>
+                    </Form>
+            </Col>
             <Col sm="6">
               <div className="pull-right">
                 <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/add-user/`} className="btn btn-primary">Add New</a>
               </div>
             </Col>
           </Row>
+
             <div className="table-responsive">
               <Table>
                 <thead>
                     <tr>
                         <th scope="col">{"Users Name"}</th>
                         <th scope="col">{"Users Email"}</th>
-                        <th scope="col">{"Role"}</th>
+                        <th scope="col">{"Users Role"}</th>
                         <th scope="col" className="text-right">{"Action"}</th>
                     </tr>
                 </thead>
@@ -139,11 +152,7 @@ const Userslist = (props) => {
                     <tr>
                     <td>{item.name}</td>
                     <td>{item.email}</td>
-                    <td>
-                      {roles.map((item2) => (
-                          (item2.id == item.role_id) ? item2.role_name : '' 
-                      ))}
-                    </td>
+                    <td>{item.role.role_name}</td>
                    <td className="text-right">
                      <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-user/`+`${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
                      <a className="btn btn-danger" onClick = {() => handleDelete(item.id)} >Delete</a> 
