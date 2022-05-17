@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     plan_type: DataTypes.STRING,
     plan_id: DataTypes.TEXT,
     product: DataTypes.TEXT,
+    discount: DataTypes.INTEGER,
+    discount_coupon_id: DataTypes.INTEGER,
     status: {
      type: DataTypes.BOOLEAN,
      allowNull: false,

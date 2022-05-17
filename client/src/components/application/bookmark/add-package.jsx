@@ -15,6 +15,10 @@ const [name, setName] = useState('');
 const [description, setDescription] = useState('');
 const [cycle,setCycle] = useState('');
 const [plantype,setPlanType] = useState('');
+const [cpcode , setCouponCode] = useState('');
+const [dischide , setDiscounthide] = useState(false)
+const [discvalue , setDiscvalue] = useState(0)
+
 
 function cycle_name(cycle) {
   if(cycle == 'month') {
@@ -58,6 +62,20 @@ function calculate_total_cycles(cycle) {
 
     const handlePlans = (e) => {
       setPlanType(e.target.value)
+    }
+
+    const handleCoupons = (e) => {
+      setCouponCode(e.target.value)
+    }
+
+    const handledisc = (e) => {
+      if(e.target.value == 0) {
+        setDiscounthide(false)
+        setDiscvalue(0)
+      } else {
+        setDiscounthide(true)
+        setDiscvalue(1)
+      }
     }
 
       const handleSubmit = event => {
@@ -129,7 +147,9 @@ function calculate_total_cycles(cycle) {
                       plan_type: plantype,
                       interval: cycle,
                       price: price,
-                      user_id:user_id
+                      user_id:user_id,
+                      discount: discvalue,
+                      coupon_id: cpcode
                     }
             
                   axios.post('/api/vendor-membership/plan-save/', bodyParameters ,config )
@@ -144,11 +164,29 @@ function calculate_total_cycles(cycle) {
             
               })
           }
-
-     
-         
-
       };
+      
+
+  const [coupons, setCoupons] = useState([]);
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+  
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+          };
+   
+      fetch("/api/coupons" , config)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setCoupons(result);
+          },
+          (error) => {}
+        )
+    }, []);
+
+    console.log(token);
+
 
   return (
     <Fragment>
@@ -169,6 +207,25 @@ function calculate_total_cycles(cycle) {
               <Label htmlFor="exampleFormControlInput1">{"Plan Name"}</Label>
               <Input className="form-control" onChange = {handleName} type="name" placeholder={'Enter Plan Name'} />
             </FormGroup>
+            <FormGroup>
+              <Label>Discount</Label>
+              <Input type="select" name="select" className="form-control digits" onChange = {handledisc} placeholder="Please Select">
+                <option>Select Coupons</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </Input>
+            </FormGroup>
+            {dischide && 
+                          <FormGroup id="couponhide">
+                            <Label>Discount Coupons</Label>
+                            <Input type="select" name="select" className="form-control digits" onChange = {handleCoupons} placeholder="Please Select">
+                              <option>Select Coupons</option>
+                              {coupons && coupons.map((cp,i) => (
+                                <option value={cp.id}>{cp.name}</option>
+                              ))}
+                            </Input>
+                          </FormGroup>
+            }
             <FormGroup>
             <Label htmlFor="exampleFormControlInput1">{"Description"}</Label>
             <Input type="textarea" className="form-control" onChange = {handleDescription} rows="3"/>

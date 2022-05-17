@@ -66,7 +66,7 @@ router.get('/', passport.authenticate('jwt', {
 }), function (req, res) {
         Coupon
             .findAll({
-                where:{deletedAt:null},
+                where:{status:1},
                 include: [{
                     model: User,
                     as: 'user',
