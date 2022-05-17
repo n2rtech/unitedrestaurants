@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   SaleItem.init({
     user_id: DataTypes.INTEGER,
     name: DataTypes.STRING,
+    image: DataTypes.TEXT,
     content: DataTypes.TEXT
   }, {
     sequelize,

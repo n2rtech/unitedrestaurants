@@ -8,6 +8,8 @@ const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
 const helper = new Helper();
+const path = require('path');
+var multer  = require('multer');
 
 // Create a new SaleItem
 router.post('/', (req, res) => {
@@ -26,6 +28,61 @@ router.post('/', (req, res) => {
                 .catch((error) => {
                     console.log(error);
                     res.status(400).send(error);
+                });
+        }
+});
+
+
+const imageStorage = multer.diskStorage({
+    destination: 'uploads/salesitems', 
+      filename: (req, file, cb) => {
+          cb(null, file.fieldname + '_' + Date.now() 
+             + path.extname(file.originalname))
+    }
+});
+
+
+
+const imageUpload = multer({
+      storage: imageStorage,
+      limits: {
+        fileSize: 1000000 
+      },
+      fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(png|jpg)$/)) { 
+           return cb(new Error('Please upload a Image'))
+         }
+       cb(undefined, true)
+    }
+}) 
+
+
+// Create a new Sales Items
+router.post('/add', imageUpload.single('image'),  function (req, res) {
+        if (!req.body.name || !req.body.content) {
+            res.status(400).send({
+                msg: 'Please pass sale item name or description.'
+            })
+        } else {
+            
+
+             if (req.file) {
+                image = req.file.filename;
+             }else{
+                image = '';
+             }
+
+             SaleItem
+                .create({
+                    name: req.body.name,
+                    user_id: req.body.user_id,
+                    image: image,
+                    content: req.body.content
+                })
+                .then((saleitem) => res.status(201).send(saleitem))
+                .catch((error) => {
+                    console.log(error);
+                    res.status(400).send('error');
                 });
         }
 });

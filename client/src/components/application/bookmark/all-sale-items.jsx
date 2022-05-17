@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect , useState } from 'react';
-import Breadcrumb from '../../../layout/breadcrumb'
-import { Table, Container, Row, Col, Card, CardBody } from 'reactstrap'
-import axios from 'axios'
+import Breadcrumb from '../../../layout/breadcrumb';
+import { Table, Container, Row, Col, Card, CardBody , Button } from 'reactstrap';
+import axios from 'axios';
 import {toast} from 'react-toastify';
-import SweetAlert from 'sweetalert2'
+import SweetAlert from 'sweetalert2';
 
 const AllSaleItems = (props) => {
 
-  const [jobsData, setJobsData] = useState([]);
+  const [salesData, setSalesData] = useState([]);
   const token = localStorage.getItem("token");
   useEffect(() => {
   
@@ -15,25 +15,18 @@ const AllSaleItems = (props) => {
           headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
           };
    
-      fetch("/api/jobs" , config)
+      fetch("/api/sale-items/list/"+localStorage.getItem('id') , config)
         .then(res => res.json())
         .then(
           (result) => {
-            setJobsData(result);
+            setSalesData(result);
           },
           (error) => {}
         )
     }, []);
 
-    console.log(token);
-
-    // Delete functionality
-    // Add New jobs opening
-
     const handleSubmit = event => {
       event.preventDefault();
-      
-  
       toast.success("Add Jobs Opening from here");
   
     };
@@ -70,8 +63,6 @@ const AllSaleItems = (props) => {
         }
       })
     }
-  
-
 
   return (
     <Fragment>
@@ -92,17 +83,24 @@ const AllSaleItems = (props) => {
                 <thead>
                     <tr>
                         <th scope="col">{"Item Name"}</th>
+                        <th scope="col">{"Item Description"}</th>
                         <th scope="col" className="text-right">{"Action"}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>Knife</td>
-                    <td className="text-right">
-                      <a href={"#"} className="btn btn-success">Edit</a> &nbsp;
-                      <a href={"#"} className="btn btn-danger">Delete</a> 
-                    </td>
-                  </tr>
+                  { salesData.map((item,i) => (
+                      <tr key={i}>
+                      <td>{item.name}</td>
+                      <td>{item.content}</td>
+                      <td className="text-right">
+                      <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-sales-items/${item.id}/`}>Edit</a> &nbsp;
+                       <Button color="danger">{"Delete"}</Button>
+                      </td>
+                    </tr>
+                      
+                  ))   
+                  }
+                   
                 </tbody>
               </Table>
             </div>
