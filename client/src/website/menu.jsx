@@ -59,6 +59,8 @@ useMemo(() => {
 
 }, []);
 
+console.log('Categories' , categoryData);
+
   return (
       <div className="headermenu">
         <Container fluid={true} className="p-0">
