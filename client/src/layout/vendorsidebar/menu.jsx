@@ -34,7 +34,7 @@ export const MENUITEMS = [
         menucontent:"Items for sale",
         Items:[
             {
-                title: 'Items for sale', path: `${process.env.PUBLIC_URL}/dashboard/vendor/all-sale-items/${localStorage.getItem("id")}`, icon: BarChart, type: 'link', active: false,
+                title: 'Items for sale', path: `${process.env.PUBLIC_URL}/dashboard/vendor/all-sale-items`, icon: BarChart, type: 'link', active: false,
             }
         ]
     },

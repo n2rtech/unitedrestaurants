@@ -120,50 +120,104 @@ router.get('/list/:id', (req, res) => {
     });
 });
 
-
-
-
 // Get SaleItem by ID
 router.get('/:id', (req, res) => {
     SaleItem
         .findOne({
             where:{
-           user_id : req.params.id
+           id : req.params.id
         }})
         .then((saleitem) => {
-            if (saleitem == null) {
-                SaleItem
-                .create({
-                    name: '',
-                    user_id: req.params.id,
-                    content: ''
-                })
-                .then((saleitem) => res.status(201).send(saleitem))
-                .catch((error) => {
-                    res.status(400).send(error);
-                });
-            }else{
-               res.status(201).send(saleitem); 
-            }
+            res.status(201).send(saleitem)
         })
         .catch((error) => {
             res.status(400).send(error);
         });
 });
 
+router.delete('/delete/:id', (req, res) => {
+    if (!req.params.id) {
+        res.status(400).send({
+            msg: 'Please pass Sales Item ID.'
+        })
+    } else {
+        SaleItem
+            .findByPk(req.params.id)
+            .then((SaleItem) => {
+                if (SaleItem) {
+                    SaleItem.destroy({
+                        where: {
+                            id: req.params.id
+                        }
+                    }).then(_ => {
+                        res.status(200).send({
+                            'message': 'Sales Item deleted'
+                        });
+                    }).catch(err => res.status(400).send(err));
+                } else {
+                    res.status(404).send({
+                        'message': 'Sales Item not found'
+                    });
+                }
+            })
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+    }
+});
+
 // Update a Menu Items
-router.put('/:id', function (req, res) {
-        if (!req.params.id || !req.body.content) {
+// router.put('/:id', function (req, res) {
+//         if (!req.params.id || !req.body.content) {
+//             res.status(400).send({
+//                 msg: 'Please pass Slet Item ID, description.'
+//             })
+//         } else {
+//             SaleItem
+//                 .findByPk(req.params.id)
+//                 .then((saleitem) => {
+//                     SaleItem.update({
+//                         user_id: req.body.user_id || saleitem.user_id,
+//                         content: req.body.content || saleitem.content
+//                     }, {
+//                         where: {
+//                             id: req.params.id
+//                         }
+//                     }).then(_ => {
+//                         res.status(200).send({
+//                             'message': 'Sales Item updated'
+//                         });
+//                     }).catch(err => res.status(400).send(err));
+//                 })
+//                 .catch((error) => {
+//                     res.status(400).send(error);
+//                 });
+//         }
+// });
+
+
+// Update a Category
+router.put('/:id', imageUpload.single('image'), function (req, res) {
+        if (!req.params.id || !req.body.name || !req.body.content) {
             res.status(400).send({
-                msg: 'Please pass Slet Item ID, description.'
+                msg: 'Please pass Sales Item ID, name or description.'
             })
         } else {
             SaleItem
                 .findByPk(req.params.id)
                 .then((saleitem) => {
+
+                    if (req.file) {
+                        var image = req.file.filename;
+                    }else{
+                        var image = saleitem.image;
+                    }
+
                     SaleItem.update({
-                        user_id: req.body.user_id || saleitem.user_id,
-                        content: req.body.content || saleitem.content
+                        name: req.body.name ,
+                        content: req.body.content ,
+                        user_id: req.body.user_id,
+                        image: image
                     }, {
                         where: {
                             id: req.params.id
@@ -179,7 +233,6 @@ router.put('/:id', function (req, res) {
                 });
         }
 });
-
 
 
 module.exports = router;

@@ -4,9 +4,10 @@ import { Table, Container, Row, Col, Card, CardBody , Button } from 'reactstrap'
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import SweetAlert from 'sweetalert2';
+import { useHistory } from 'react-router-dom'
 
 const AllSaleItems = (props) => {
-
+  const history = useHistory();
   const [salesData, setSalesData] = useState([]);
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -25,16 +26,11 @@ const AllSaleItems = (props) => {
         )
     }, []);
 
-    const handleSubmit = event => {
-      event.preventDefault();
-      toast.success("Add Jobs Opening from here");
-  
-    };
 
     const handleDelete = (id) => {
       SweetAlert.fire({
         title: 'Are you sure?',
-        text: "Once deleted, you will not be able to recover this coupon!",
+        text: "Once deleted, you will not be able to recover this sales item!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Ok',
@@ -46,8 +42,13 @@ const AllSaleItems = (props) => {
             headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
             };
     
-            axios.delete(`/api/jobs/`+`${id}`,config
-            ) .then(response => toast.success("Deleted Jobs !")  )
+            axios.delete(`/api/sale-items/delete/`+`${id}`,config
+            ) .then(response => {
+              toast.success("Deleted Sales Items !")  
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
+            })
                .catch(error => console.log('Form submit error', error))
           
           SweetAlert.fire(
@@ -94,13 +95,11 @@ const AllSaleItems = (props) => {
                       <td>{item.content}</td>
                       <td className="text-right">
                       <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-sales-items/${item.id}/`}>Edit</a> &nbsp;
-                       <Button color="danger">{"Delete"}</Button>
+                       <Button color="danger" onClick={() => handleDelete(item.id)}>{"Delete"}</Button>
                       </td>
                     </tr>
-                      
                   ))   
                   }
-                   
                 </tbody>
               </Table>
             </div>
