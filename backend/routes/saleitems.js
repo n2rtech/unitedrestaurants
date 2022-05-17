@@ -120,9 +120,6 @@ router.get('/list/:id', (req, res) => {
     });
 });
 
-
-
-
 // Get SaleItem by ID
 router.get('/:id', (req, res) => {
     SaleItem
@@ -149,6 +146,37 @@ router.get('/:id', (req, res) => {
         .catch((error) => {
             res.status(400).send(error);
         });
+});
+
+router.delete('/delete/:id', (req, res) => {
+    if (!req.params.id) {
+        res.status(400).send({
+            msg: 'Please pass Sales Item ID.'
+        })
+    } else {
+        SaleItem
+            .findByPk(req.params.id)
+            .then((SaleItem) => {
+                if (SaleItem) {
+                    SaleItem.destroy({
+                        where: {
+                            id: req.params.id
+                        }
+                    }).then(_ => {
+                        res.status(200).send({
+                            'message': 'Sales Item deleted'
+                        });
+                    }).catch(err => res.status(400).send(err));
+                } else {
+                    res.status(404).send({
+                        'message': 'Sales Item not found'
+                    });
+                }
+            })
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+    }
 });
 
 // Update a Menu Items
