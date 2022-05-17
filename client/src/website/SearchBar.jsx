@@ -123,8 +123,8 @@ const SearchBar = () => {
       <div className="Homebanner">
         <Container>
           <Form className="browse">
-            <Row>
-              <div className="col-sm-3 p-0">
+            <Row className="removeSpace">
+              <div className="col-sm-3 p-0 col-xs-12">
                 <InputGroup>
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-cube"></i></InputGroupText></InputGroupAddon>
                     {/*<Typeahead
@@ -142,7 +142,7 @@ const SearchBar = () => {
                   </Input>
                 </InputGroup>
               </div>
-              <div className="col-sm-3 p-0">
+              <div className="col-sm-3 p-0 col-xs-12">
                 <InputGroup>
 
                   <InputGroupAddon addonType="prepend"><InputGroupText><i className="fa fa-cube"></i></InputGroupText></InputGroupAddon>
@@ -151,7 +151,7 @@ const SearchBar = () => {
 
                 </InputGroup>
               </div>
-              <div className="col-sm-5 p-0">
+              <div className="col-sm-5 p-0 col-xs-12">
                 <InputGroup>
                   <InputGroupAddon onClick={setCurrentLocation1} addonType="prepend"><InputGroupText><i  title="Use my Current Location" className="fa fa-globe"></i></InputGroupText></InputGroupAddon>
                   <Input type="text" defaultValue={address ? address : address1} name="address" id="searchAddress" className="form-control digits" onChange={OnChangeSearch} placeholder="Address.." />                
@@ -159,8 +159,8 @@ const SearchBar = () => {
                   <Input type="hidden" defaultValue={longitude} name="longitude" id="search_address_lan" />                
                   </InputGroup>
               </div>
-              <div className="col-sm-1">
-                <Button color="primary" onClick={() => HandleSearch(searchinput,catid,address1)}><i className="fa fa-search"></i></Button>
+              <div className="col-sm-1 col-xs-12 phBtn">
+                <Button color="primary" onClick={() => HandleSearch(searchinput,catid,address1)}><i className="fa fa-search"></i> <span className="hidden-lg">Search</span></Button>
               </div>
             </Row>
           </Form>

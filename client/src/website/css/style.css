@@ -2211,7 +2211,27 @@ form.browse .btn-primary a{
 
 
 @media (max-width: 767px){
-
+form.browse {
+  padding-bottom: 40px;
+  padding-left: 0;
+}
+.form-control {
+  font-size: 13px !important;
+}
+.phBtn{
+    padding: 0;
+}
+.removeSpace{
+    margin: 0;
+}
+form.browse .btn-primary{
+    font-size: 13px;
+    width: 100%;
+    margin-top: 15px;
+}
+form.browse .btn-primary i {
+  font-size: 14px;
+}
 }
 
 

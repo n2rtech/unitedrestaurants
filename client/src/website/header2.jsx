@@ -14,7 +14,7 @@ import Countryflag from './countryflag';
     // DESKTOP HEADER 
       <div className="newHeader">
         <Container fluid={true}>
-          <Row>
+          <Row className="hidden-xs">
             <Col sm="2"><Logo/></Col>
             <Col sm="10">
               <Row>
@@ -37,26 +37,21 @@ import Countryflag from './countryflag';
               <Navbarmenu/>  
             </Col>      
           </Row>
-          <Row className="phoneHeader">
-            <Col xs="2">
-              <Navbarmenu/>
+          <Row className="phoneHeader hidden-lg">
+            <Col xs="6">
+              <Navbarmenu/> <span className="openNav">Open Navbar</span>
             </Col>
-            <Col xs="10">
+            <Col xs="2" style={{paddingRight: "0"}}>
+              <Countryflag />
+            </Col>
+            <Col xs="4" style={{paddingLeft: "0"}}>
+              <a className="vendorIn btn btn-primary" target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >Vendor Login</a>
+            </Col>
+            <Col xs="4" style={{paddingRight: "0"}}>
               <Logo/>
-              <SiteHeading/>
             </Col>
-          </Row>
-          <Row>
-            <Col xs="12">
-              <div className="header-right">
-                <div className="d-inline-flex">
-                  <Countryflag />
-                  <div className="glanguage">
-                    <GoogleTranslate />
-                  </div>
-                  <a className="vendorIn btn btn-primary" target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >Vendor Login</a>
-                </div>
-              </div>
+            <Col xs="8" style={{paddingLeft: "0"}}>
+              <SiteHeading/>
             </Col>
           </Row>
         </Container>
