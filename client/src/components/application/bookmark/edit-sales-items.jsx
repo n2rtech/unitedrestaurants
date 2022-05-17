@@ -32,12 +32,12 @@ const EditSalesItems = (props) => {
   }
 
   const [sales , SetSales] = useState();
-
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     
     const config = {
-        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IktyaXNobmEgTWlzaHJhIiwiZW1haWwiOiJrcmlzaG5hQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYzNzEyNTI5NSwiZXhwIjoxNjY4NjgyMjIxfQ.XQnBPN7Vc1zahxytp0YiGQG9DUOs7SU94tFtEvQiX78' }
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token}
         };
 
 
@@ -49,6 +49,36 @@ const EditSalesItems = (props) => {
     setCatImage(getData.data.image)
   });
   }, []);
+
+  const HandleSave = (event) => {
+    event.preventDefault();
+    
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+      };
+      
+      const bodyParameters = new FormData();
+      bodyParameters.set('name', name);
+      bodyParameters.set('content', content);
+      bodyParameters.set('user_id', localStorage.getItem('id'));
+      if(image.pictureFiles) {
+        bodyParameters.set('image', image.pictureFiles[0]);
+      } else {
+        bodyParameters.set('image', image.pictureFiles);
+      }
+
+      axios.put(`/api/sale-items/`+`${params.id}`,
+        bodyParameters,
+        config
+        ).then(response => {
+          toast.success("Sales Item updated !")
+          setTimeout(() => {
+            history.push('/dashboard/vendor/all-sale-items/');
+          }, 1000);
+        }
+      ).catch(error => console.log('Form submit error', error))
+
+  }
       
   return (
     <Fragment>
@@ -86,7 +116,7 @@ const EditSalesItems = (props) => {
                                     />
                                 </FormGroup>
                                     <div className="m-t-20">
-                                    <Button color="primary">{"Save"}</Button>
+                                    <Button color="primary" onClick = { HandleSave }>{"Save"}</Button>
                                     </div>
                                 </CardBody>
                             </Card>
