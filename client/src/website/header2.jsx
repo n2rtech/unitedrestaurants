@@ -11,6 +11,7 @@ import Countryflag from './countryflag';
   const Header2 = () => {
 
   return (
+    // DESKTOP HEADER 
       <div className="newHeader">
         <Container fluid={true}>
           <Row>
@@ -36,8 +37,31 @@ import Countryflag from './countryflag';
               <Navbarmenu/>  
             </Col>      
           </Row>
+          <Row className="phoneHeader">
+            <Col xs="2">
+              <Navbarmenu/>
+            </Col>
+            <Col xs="10">
+              <Logo/>
+              <SiteHeading/>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs="12">
+              <div className="header-right">
+                <div className="d-inline-flex">
+                  <Countryflag />
+                  <div className="glanguage">
+                    <GoogleTranslate />
+                  </div>
+                  <a className="vendorIn btn btn-primary" target = "_blank" href={`${process.env.PUBLIC_URL}/vendor/login`} >Vendor Login</a>
+                </div>
+              </div>
+            </Col>
+          </Row>
         </Container>
       </div>
+
   );
 
 }
