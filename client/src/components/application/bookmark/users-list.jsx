@@ -10,6 +10,7 @@ import Pagination from "react-js-pagination";
 const Userslist = (props) => {
 
   const [users, setUsers] = useState([]);
+  const [roles, setRoles] = useState();
   const token = localStorage.getItem("token");
   const history = useHistory()
 
@@ -39,6 +40,10 @@ const Userslist = (props) => {
       setTotalItemsCount(result.data.totalItems);  
       setActivePage(result.data.currentPage);
       setPagesCount(result.data.totalPages);
+    });
+
+    axios.get('/api/roles/all' , config).then((result) => {
+      setRoles(result.data);
     });
   
     }, [filterData]);
@@ -152,7 +157,11 @@ const Userslist = (props) => {
                     <tr>
                     <td>{item.name}</td>
                     <td>{item.email}</td>
-                    <td>{item.role.role_name}</td>
+                    <td>
+                      {roles && roles.map((rl) => (
+                        (rl.id == item.role_id) ? rl.role_name : ''
+                      ))}
+                    </td>
                    <td className="text-right">
                      <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-user/`+`${item.id}/`} className="btn btn-success">Edit</a> &nbsp;
                      <a className="btn btn-danger" onClick = {() => handleDelete(item.id)} >Delete</a> 

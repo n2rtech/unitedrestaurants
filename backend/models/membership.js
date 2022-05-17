@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     interval: DataTypes.STRING,
     price: DataTypes.DECIMAL,
     expired_on: DataTypes.DATE,
+    create_time: DataTypes.TEXT,
+    plan_type: DataTypes.STRING,
+    plan_id: DataTypes.TEXT,
+    product: DataTypes.TEXT,
     status: {
      type: DataTypes.BOOLEAN,
      allowNull: false,
