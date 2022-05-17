@@ -570,6 +570,7 @@ router.post("/login", (req, res) => {
   let sql = "SELECT * FROM "+table_name+" where email = '"+email+"'";
   DB.query(sql,(err,user)=>{
     if(err){
+      console.log('err', err);
       return res.status(404).json({ error: "Error in sql" });   
     }else if (!user[0]) {
       return res.status(404).json({ error: "Email or Password not found" });

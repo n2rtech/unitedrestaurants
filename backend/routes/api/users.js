@@ -464,7 +464,7 @@ router.get('/', (req, res) => {
 
 
 
-router.get("/with/role", async (req, res) => {
+/*router.get("/with/role", async (req, res) => {
 
   const { page, size } = req.query;
   const { limit, offset } = getPagination(page, size);
@@ -474,6 +474,54 @@ router.get("/with/role", async (req, res) => {
         // let CatList = await catLists(getData.rows);
         res.status(200).send(getPagingUsersData(getData,page,limit))
     }
+});*/
+
+
+router.get("/with/role", async (req, res) => {
+
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+
+  let getData = await User.findAndCountAll(
+  {
+    include: [
+    {
+      model: Role,
+      as: 'role',
+    }
+    ],
+
+    where: {
+      [Op.or]: [
+      {
+        name: {
+          [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+        }
+      },
+      {
+        email: {
+          [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+        }
+      },
+      {
+        mobile: {
+          [Op.like]: req.query.filter ? '%'+req.query.filter+'%' : ''
+        }
+      },
+      {
+              '$role.role_name$': 
+              {
+                [Op.like]: '%'+req.query.filter+'%'
+              }
+            },
+      ]
+    },
+    order: [['id', 'DESC']],limit,offset}
+    );
+  if (getData) {
+    // let CatList = await catLists(getData.rows);
+    res.status(200).send(getPagingUsersData(getData,page,limit))
+  }
 });
 
 

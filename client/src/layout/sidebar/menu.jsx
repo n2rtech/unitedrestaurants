@@ -15,7 +15,7 @@ export const MENUITEMS = [
         menucontent:"Manage Users",
         Items:[
             {
-                title: 'Manage Users', path: `${process.env.PUBLIC_URL}/dashboard/admin/users-list`, icon: UserCheck, type: 'link', active: false,
+                title: 'Manage Admin', path: `${process.env.PUBLIC_URL}/dashboard/admin/users-list`, icon: UserCheck, type: 'link', active: false,
             }
         ]
     },

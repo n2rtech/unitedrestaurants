@@ -69,6 +69,7 @@ import AddSpaces from "../components/application/bookmark/ad-spaces"
 import MenuItems from "../components/application/bookmark/menu-items"
 import AddCategory from "../components/application/bookmark/add-category"
 import SaleItems from "../components/application/bookmark/sale-items"
+import EditSaleItems from "../components/application/bookmark/edit-sales-items"
 import AccountsPayable from "../components/application/bookmark/accounts-payable"
 import AddCountries from "../components/application/bookmark/add-countries"
 import EditCountries from "../components/application/bookmark/edit-countries"
@@ -81,6 +82,8 @@ import AddUser from "../components/application/bookmark/add-user"
 import Userslist from "../components/application/bookmark/users-list"
 import Edituser from "../components/application/bookmark/edit-user"
 import Adsense from "../components/application/bookmark/adsense"
+import ManagePackage from "../components/application/bookmark/manage-membership-package"
+import AddPackage from "../components/application/bookmark/add-package"
 
 // Bookmark
 import Bookmark from "../components/application/bookmark"
@@ -151,6 +154,7 @@ export const routes = [
         { path:"/dashboard/vendor/add-video-gallery/", Component:AddVendorVideoGallery},
         { path:"/dashboard/vendor/edit-video-gallery/:id", Component:EditVideoGallery},
         { path:"/dashboard/vendor/all-sale-items", Component:AllSaleItems},
+        { path:"/dashboard/vendor/edit-sales-items/:id", Component:EditSaleItems},
         { path:"/dashboard/vendor/vendor-youtube", Component:VendorYoutube},
         { path:"/dashboard/vendor/add-youtube-video", Component:AddYoutube},
 
@@ -161,7 +165,7 @@ export const routes = [
         { path:"/dashboard/vendor/adds-membership", Component:AddsMembership},
         { path:"/dashboard/vendor/ad-spaces", Component:AddSpaces},
         { path:"/dashboard/vendor/menu-items/:id", Component:MenuItems},
-        { path:"/dashboard/vendor/sale-items/:id", Component:SaleItems},
+        { path:"/dashboard/vendor/sale-items/", Component:SaleItems},
         { path:"/dashboard/admin/accounts-payable", Component:AccountsPayable},
         { path:"/dashboard/admin/edit-payable/:id", Component:EditAccountsPayable},
         { path:"/dashboard/admin/add-payable", Component:AddAccountsPayable},
@@ -173,6 +177,9 @@ export const routes = [
         { path:"/dashboard/admin/blogs", Component:Blogs},
         { path:"/dashboard/admin/add-blog", Component:AddBlog},
         { path:"/dashboard/admin/edit-blog/:id", Component:EditBlog},
+        { path:"/dashboard/admin/manage-packages", Component:ManagePackage},
+        { path:"/dashboard/admin/add-package", Component:AddPackage},
+        
 
         // User Url's
 

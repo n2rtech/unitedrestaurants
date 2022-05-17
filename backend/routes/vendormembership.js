@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {DB} = require('../config/database');
 const VendorMembership = require('../models').VendorMembership;
+const Membership = require('../models').Membership;
 const MembershipTransaction = require('../models').MembershipTransaction;
 const FeaturedBusiness = require('../models').FeaturedBusiness;
 const Vendor = require('../models').Vendor;
@@ -63,6 +64,114 @@ router.get('/', passport.authenticate('jwt', {
 });
 
 
+router.get('/plan-list', function (req, res) {
+    Membership
+    .findAll()
+    .then((results) => res.status(200).send(results))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+// router.get('/plan-list-array', function (req, res) {
+//     Membership
+//     .findAll()
+//     .then((results) => res.status(200).send(results))
+//     .catch((error) => {
+//         res.status(400).send(error);
+//     });
+// });
+
+router.get('/plan-list-array', (req, res) => {
+    Membership
+    .findAll()
+    .then((result) => {
+      Membership
+      .findAll({ where:{
+        plan_type: 'free'
+      }
+    })
+      .then((free) => {
+        Membership
+      .findAll({ where:{
+        plan_type: 'standard'
+      },
+    })
+    .then((standard) => {
+        Membership
+      .findAll({ where:{
+        plan_type: 'premium'
+      },
+    })
+      .then((premium) => {
+        res.status(200).send({
+          'free': free,
+          'standard' : standard,
+          'premium' : premium
+        })
+      })
+      .catch((error) => {
+        res.status(400).send('error');
+      });
+      })
+      .catch((error) => {
+        res.status(400).send('error');
+      });
+      })
+      .catch((error) => {
+        res.status(400).send('error');
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(400).send('error1');
+    });
+  });
+
+// Activate Plan
+router.put('/activate-plan/:id', function (req, res) {
+    Membership
+        .findByPk(req.params.id)
+        .then((job) => {
+            Membership.update({
+                status: 1,
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            }).then(_ => {
+                res.status(200).send({
+                    'message': 'Plan de-activated'
+                });
+            }).catch(err => res.status(400).send(err));
+        })
+        .catch((error) => {
+            res.status(400).send(error);
+        });
+});
+
+// Deactivate Plan
+router.put('/deactivate-plan/:id', function (req, res) {
+        Membership
+            .findByPk(req.params.id)
+            .then((job) => {
+                Membership.update({
+                    status: 0,
+                }, {
+                    where: {
+                        id: req.params.id
+                    }
+                }).then(_ => {
+                    res.status(200).send({
+                        'message': 'Plan de-activated'
+                    });
+                }).catch(err => res.status(400).send(err));
+            })
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+});
+
 // Delete a VendorMembership
 router.delete('/:id', (req, res) => {
     if (!req.params.id) {
@@ -99,6 +208,34 @@ router.delete('/:id', (req, res) => {
     }
 });
 
+// Add New Membership Plans
+
+router.post('/plan-save', (req, res) => {
+    if (!req.body.name || !req.body.description) {
+        res.status(400).send({
+            msg: 'Please pass Plan name or description.'
+        })
+    } else {
+        Membership
+            .create({
+                name: req.body.name,
+                user_id: req.body.user_id,
+                description: req.body.description,
+                create_time: req.body.create_time,
+                plan_id: req.body.plan_id,
+                product: req.body.product_id,
+                plan_type: req.body.plan_type,
+                price: req.body.price,
+                interval: req.body.interval,
+                status: 1
+            })
+            .then((result) => res.status(201).send(result))
+            .catch((error) => {
+                console.log(error);
+                res.status(400).send(error);
+            });
+    }
+});
 
 // assign membership to user a Membership
 router.put('/asign-to-user/:id', (req, res) => {

@@ -11,6 +11,9 @@ import PaypalPremiumQuatertly from './paypalplans/paypalpremiumquarterly.jsx'
 import PaypalPremiumHalfyearly from './paypalplans/paypalpremiumhalfyearly.jsx'
 import PaypalPremiumYearly from './paypalplans/paypalpremiumyearly.jsx'
 
+import PaypalStandard from "./paypalplans/paypalstandard.jsx"
+import PaypalPremium from "./paypalplans/paypalpremium.jsx"
+
 
 import { Container, Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
 import { Standard } from '../../../constant';
@@ -20,6 +23,8 @@ import axios from 'axios'
 
 const VendorMembershipPackage = (props) => {
 
+  const [plansDataPremium, setPlansDataPremium] = useState([]);
+  const [plansDataStandard, setPlansDataStandard] = useState([]);
   const [activePlan, setActivePlan] = useState([]);
   const [planname, setPlanName] = useState('Free');
   const [subscriptionid, setSubscriptionId] = useState('');
@@ -41,17 +46,33 @@ const VendorMembershipPackage = (props) => {
         .then(
           (result) => {
             setActivePlan(result);
-            setPlanName(result.membership.name);
+            
+            if(result.membership) {
+              setPlanName(result.membership.name);
+              setIntervalq(result.membership.interval)
+              setAmountq(result.membership.price);
+            }
             if(result.transaction){
             setSubscriptionId(result.transaction.membership_subscription_id)
           }
-            setIntervalq(result.membership.interval)
-            setAmountq(result.membership.price);
+           
           },
           (error) => {
             
           }
         )
+
+
+      fetch("/api/vendor-membership/plan-list-array" , config)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setPlansDataStandard(result.standard);
+          setPlansDataPremium(result.premium);
+        },
+        (error) => {}
+      )
+
     }, []);
 
     console.log("Subscription_id" ,subscriptionid);
@@ -64,30 +85,9 @@ const VendorMembershipPackage = (props) => {
   const onChangeCycle = (event) => {
 
    if(planname === 'Free') {
-    if (event.target.value == 'Monthly') {
-      setAmount(5.99)
-      setInterval('/monthly')
-      setCycle(<PaypalStandardMonthly amount = {5.99} membership_id = {2} interval = {'Monthly'} currency = {'USD'}/>)
-    }  
-    else if (event.target.value === 'Quarterly') {
-      setAmount(16.00)
-      setInterval('/quaterly')
-      setCycle(
-        <PaypalStandardQuarterly amount = {16.00} membership_id = {4} interval = {'Quarterly'} currency = {'USD'}/>
-      )
-    } else if (event.target.value === 'Yearly') {
-      setAmount(65.00)
-      setInterval('/yearly')
-      setCycle (
-        <PaypalStandardYearly amount = {65.00} membership_id = {6} interval = {'Yearly'} currency = {'USD'}/>
-      )
-    } else {
-      setAmount(30.00)
-      setInterval('/half-yearly')
-      setCycle (
-        <PaypalStandardHalfyearly amount = {30.00} membership_id = {5} interval = {'HalfYearly'} currency = {'USD'}/>
-      )
-    }
+      setAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
+      setInterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
+      setCycle(<PaypalStandard plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)
    } else {
       SweetAlert.fire(
           'Alert!',
@@ -105,30 +105,9 @@ const VendorMembershipPackage = (props) => {
 
   const onChangePremiumCycle = (event) => {
     if(planname === 'Free') {
-      if (event.target.value === 'Monthly') {
-        setPremiumAmount(7.99)
-        setPreinterval('/monthly')
-        setPremiumCycle(<PaypalPremiumMonthly amount = {7.99} membership_id = {3} interval = {'Monthly'} currency = {'USD'}/>)
-      }  
-      else if (event.target.value === 'Quarterly') {
-        setPremiumAmount(29.00)
-        setPreinterval('/quarterly')
-        setPremiumCycle(
-          <PaypalPremiumQuatertly amount = {29.00} membership_id = {7} interval = {'Quarterly'} currency = {'USD'}/>
-        )
-      } else if (event.target.value === 'Yearly') {
-        setPremiumAmount(90.00)
-        setPreinterval('/yearly')
-        setPremiumCycle (
-          <PaypalPremiumYearly amount = {90.00} membership_id = {9} interval = {'Yearly'} currency = {'USD'}/>
-        )
-      } else {
-        setPremiumAmount(43.00)
-        setPreinterval('/half-yearly')
-        setPremiumCycle (
-          <PaypalPremiumHalfyearly amount = {43.00} membership_id = {8} interval = {'HalfYearly'} currency = {'USD'}/>
-        )
-      }
+      setPremiumAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
+      setPreinterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
+      setPremiumCycle(<PaypalPremium plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)
     } else {
       SweetAlert.fire(
         'Alert!',
@@ -276,6 +255,7 @@ const VendorMembershipPackage = (props) => {
                           
                       </div>
                     </Col>
+
                     <Col md="4" sm="6">
                       <div className="pricingtable">
                         <div className="pricingtable-header">
@@ -295,10 +275,14 @@ const VendorMembershipPackage = (props) => {
                           <Label htmlFor="exampleFormControlSelect9">{"Select your plan"}</Label>
                           <Input type="select" name="select" onChange = {onChangeCycle} className="form-control digits" defaultValue="1">
                             <option>{"Select Cycle"}</option>
-                            <option>{"Monthly"}</option>
-                            <option>{"Quarterly"}</option>
-                            <option>{"Half Yearly"}</option>
-                            <option>{"Yearly"}</option>
+                            {plansDataStandard && plansDataStandard.map((item , i) => (
+                                 <option value={item.interval} 
+                                 data-price={item.price}
+                                 data-id={item.id}
+                                 data-interval={item.interval}
+                                 data-plan_id={item.plan_id}
+                                 >{item.interval}</option>
+                            ))}
                           </Input>
                         </FormGroup>
                         
@@ -320,6 +304,7 @@ const VendorMembershipPackage = (props) => {
                         </div>
                       </div>
                     </Col>
+                    
                     <Col md="4" sm="6">
                       <div className="pricingtable">
                         <div className="pricingtable-header">
@@ -336,10 +321,14 @@ const VendorMembershipPackage = (props) => {
                           <Label htmlFor="exampleFormControlSelect9">{"Select your plan"}</Label>
                           <Input type="select" name="select" onChange = {onChangePremiumCycle}  className="form-control digits" defaultValue="1">
                             <option>{"Select Cycle"}</option>
-                            <option>{"Monthly"}</option>
-                            <option>{"Quarterly"}</option>
-                            <option>{"Half Yearly"}</option>
-                            <option>{"Yearly"}</option>
+                            {plansDataPremium && plansDataPremium.map((item , i) => (
+                                 <option value={item.interval} 
+                                 data-price={item.price}
+                                 data-id={item.id}
+                                 data-interval={item.interval}
+                                 data-plan_id={item.plan_id}
+                                 >{item.interval}</option>
+                            ))}
                           </Input>
                         </FormGroup>
                         <div className="pricingtable-signup">
