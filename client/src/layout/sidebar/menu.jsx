@@ -80,7 +80,7 @@ export const MENUITEMS = [
         menucontent:"Membership packages",
         Items:[
             {
-                title: 'Membership packages', path: `${process.env.PUBLIC_URL}/dashboard/admin/admin-membership-package`, icon: Grid, type: 'link', active: false, 
+                title: 'Membership packages', path: `${process.env.PUBLIC_URL}/dashboard/admin/manage-packages`, icon: Grid, type: 'link', active: false, 
             },
 
         ]
