@@ -84,6 +84,7 @@ import Edituser from "../components/application/bookmark/edit-user"
 import Adsense from "../components/application/bookmark/adsense"
 import ManagePackage from "../components/application/bookmark/manage-membership-package"
 import AddPackage from "../components/application/bookmark/add-package"
+import AddPromotion from "../components/application/bookmark/add-promotion-coupon"
 
 // Bookmark
 import Bookmark from "../components/application/bookmark"
@@ -140,7 +141,7 @@ export const routes = [
         { path:"/dashboard/admin/admin-membership-package", Component:AdminMembershipPackage},
         { path:"/dashboard/admin/edit-admin-membership/:id", Component:EditAdminMembership},
         { path:"/dashboard/admin/promotions-discount", Component:PromotionsDiscount},
-        { path:"/dashboard/admin/edit-promotions-discount", Component:EditPromotionsDiscount},
+        { path:"/dashboard/admin/edit-promotions-discount/:id", Component:EditPromotionsDiscount},
         { path:"/app/bookmark", Component:Bookmark},
        
         { path:"/dashboard/vendor/vendor-profile", Component:VendorProfile},
@@ -179,6 +180,7 @@ export const routes = [
         { path:"/dashboard/admin/edit-blog/:id", Component:EditBlog},
         { path:"/dashboard/admin/manage-packages", Component:ManagePackage},
         { path:"/dashboard/admin/add-package", Component:AddPackage},
+        { path:"/dashboard/admin/add-promotion-coupon", Component:AddPromotion},
         
 
         // User Url's
@@ -208,7 +210,7 @@ export const routes = [
         { path:"/dashboard/user/admin-membership-package", Component:AdminMembershipPackage},
         { path:"/dashboard/user/edit-admin-membership", Component:EditAdminMembership},
         { path:"/dashboard/user/promotions-discount", Component:PromotionsDiscount},
-        { path:"/dashboard/user/edit-promotions-discount", Component:EditPromotionsDiscount},
+        { path:"/dashboard/user/edit-promotions-discount/:id", Component:EditPromotionsDiscount},
         { path:"/dashboard/user/vendor-profile", Component:VendorProfile},
         { path:"/dashboard/user/my-wallet", Component:MyWallet},
         { path:"/dashboard/user/vendor-membership-package", Component:VendorMembershipPackage},

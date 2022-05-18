@@ -255,4 +255,25 @@ router.post('/permissions/:id', passport.authenticate('jwt', {
     });
 });
 
+router.post('/add', function (req, res) {
+        if (!req.body.name || !req.body.coupon_code) {
+            res.status(400).send({
+                msg: 'Please pass Coupon name or discount.'
+            })
+        } else {
+            Coupon
+                .create({
+                    name: req.body.name,
+                    code: req.body.coupon_code,
+                    status: req.body.status,
+                })
+                .then((coupon) => res.status(201).send(coupon))
+                .catch((error) => {
+                    console.log(error);
+                    res.status(400).send(error);
+                });
+        }
+    
+});
+
 module.exports = router;
