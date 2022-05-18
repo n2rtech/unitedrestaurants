@@ -50,6 +50,7 @@ import LoginWithBgImage from "./pages/authentication/loginWithBgImage"
 import LoginWithBgVideo from "./pages/authentication/loginWithBgVideo"
 import LoginWithValidation from "./pages/authentication/loginwithValidation"
 import Register from "./pages/authentication/register"
+import Forgetpassword from "./pages/authentication/forgetpwd"
 import RegisterWithBgImage from "./pages/authentication/registerWithBgImage"
 import RegisterWithBgVideo from "./pages/authentication/registerWithBgVideo"
 import UnlockUser from "./pages/authentication/unlockUser"
@@ -116,12 +117,13 @@ const Root = (props) =>  {
            <Route  path={`${process.env.PUBLIC_URL}/verifyEmail`} component={verifyEmail} />
            <Route  path={`${process.env.PUBLIC_URL}/visitors`} component={Visitors} />
            
-          <Route  path={`${process.env.PUBLIC_URL}/pages/auth/login`} component={Login}>
-          </Route>
+          <Route  path={`${process.env.PUBLIC_URL}/pages/auth/login`} component={Login}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/loginWithBgImg1`} component={LoginWithBgImage}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/loginWithBgImg2`} component={LoginWithBgVideo}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/loginWithValidation`} component={LoginWithValidation}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/signup`} component={Register}></Route>
+          <Route  path={`${process.env.PUBLIC_URL}/forgetpassword`} component={Forgetpassword}></Route>
+          <Route  path={`${process.env.PUBLIC_URL}/resetpassword`} component={Resetpwd}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/signup`} component={Register}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/signupWithImg1`} component={RegisterWithBgImage}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/auth/signupWithImg2`} component={RegisterWithBgVideo}></Route>

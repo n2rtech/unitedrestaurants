@@ -13,6 +13,7 @@ import PaypalPremiumYearly from './paypalplans/paypalpremiumyearly.jsx'
 
 import PaypalStandard from "./paypalplans/paypalstandard.jsx"
 import PaypalPremium from "./paypalplans/paypalpremium.jsx"
+import PremiumCoupon from "./paypalplans/premiumcoupon.jsx"
 
 
 import { Container, Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
@@ -75,12 +76,9 @@ const VendorMembershipPackage = (props) => {
 
     }, []);
 
-    console.log("Subscription_id" ,subscriptionid);
-
   const [cycle,setCycle] = useState();
   const [cycleamount,setAmount] = useState('0');
   const [cycleamountq,setAmountq] = useState('0');
-
 
   const onChangeCycle = (event) => {
 
@@ -102,13 +100,20 @@ const VendorMembershipPackage = (props) => {
   const [premiumcycle,setPremiumCycle] = useState()
   const [premiumamount,setPremiumAmount] = useState('0');
   const [preinterval,setPreinterval] = useState('');
+  const [PremiumCoupons,setPremiumCoupon] = useState(false);
 
   const onChangePremiumCycle = (event) => {
     if(planname === 'Free') {
-      setPremiumAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
-      setPreinterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
-      setPremiumCycle(<PaypalPremium plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)
-    } else {
+
+        if(event.target[event.target.selectedIndex].getAttribute('data-discount') == 1) {
+          setPremiumCoupon(true);
+        } else {
+          setPremiumAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
+          setPreinterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
+          setPremiumCycle(<PaypalPremium plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)    
+        }
+
+        } else {
       SweetAlert.fire(
         'Alert!',
         'First Cancel Current Subscription Plan.',
@@ -281,7 +286,7 @@ const VendorMembershipPackage = (props) => {
                                  data-id={item.id}
                                  data-interval={item.interval}
                                  data-plan_id={item.plan_id}
-                                 >{item.interval}</option>
+                                 >{item.interval} {item.discount == 1 ? '( Discount )' : '' }</option>
                             ))}
                           </Input>
                         </FormGroup>
@@ -327,10 +332,12 @@ const VendorMembershipPackage = (props) => {
                                  data-id={item.id}
                                  data-interval={item.interval}
                                  data-plan_id={item.plan_id}
-                                 >{item.interval}</option>
+                                 data-discount = {item.discount}
+                                 >{item.interval} {item.discount == 1 ? '( Discount )' : '' }</option>
                             ))}
                           </Input>
                         </FormGroup>
+                        {PremiumCoupons && <PremiumCoupon/>}
                         <div className="pricingtable-signup">
                         {premiumcycle}
                         { planname === 'Premium' ? 

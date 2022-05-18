@@ -7,7 +7,7 @@ import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
-const AddCategory = (props) => {
+const AddPackage = (props) => {
 
 const history = useHistory();
 const [price, setPrice] = useState(0)
@@ -255,4 +255,4 @@ function calculate_total_cycles(cycle) {
   );
 }
 
-export default AddCategory;
+export default AddPackage;

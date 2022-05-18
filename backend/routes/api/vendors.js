@@ -612,6 +612,129 @@ router.post("/login", (req, res) => {
   });
 });
 
+router.post("/reset_pswd", (req, res) => {
+
+  const email =  req.body.email;
+
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(req.body.password, salt, (err, hash) => {
+      if (err) throw err;           
+      Vendor.update({
+        password: hash
+      }, {
+        where: {
+          email: email
+        }
+      })
+      .then((result)=> {
+        let transporter = nodemailer.createTransport({
+        host: "smtp.googlemail.com",
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+          user: 'contact@n2rtechnologies.com', // generated ethereal user
+          pass: 'contact#@785612', // generated ethereal password
+        },
+      });
+  
+      transporter.verify(function (error, success) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Server is ready to take our messages",success);
+        }
+      });
+  
+       
+        if(req.hostname == 'localhost') {
+          var pathemail = 'http://localhost:3000'
+        } else {
+          var pathemail = req.hostname;
+        }
+  
+       // send mail with defined transport object
+        let info = transporter.sendMail({
+          from: 'United Restaurant', // sender address
+          to: email, // list of receivers
+          subject: "Reset Password Successfully", // Subject line
+          text: "kjhksdhfkjdshf?", // plain text body
+          html: '<div className="verification" style="background: #f6f6f6;max-width: 600px;margin: 0 auto; margin-top: 30px;"><h1 style="background: #781820;color: #fff;padding: 15px;font-size: 28px;text-align: center;margin-bottom: 22px;">United Restaurants</h1><p style="font-size: 15px;margin-bottom: 5px;padding-left: 25px;">Hello,</p><p style="font-size: 15px;margin-bottom: 5px;padding-left: 25px;">Your Password has been reset successfully</p></div>'
+        });
+                    
+      res.status(201).send({
+        succeed: true,
+        message: "Password has been reset successfully"
+      })
+    }) .catch(err => res.status(400).send(err));              
+    });     
+  });
+
+
+      
+});
+
+
+router.post("/email_verify_pswd", (req, res) => {
+
+  const email = req.body.email;
+  var table_name  = 'vendors'.charAt(0).toUpperCase() + 'vendors'.slice(1);
+  let sql = "SELECT * FROM "+table_name+" where email = '"+email+"'";
+  DB.query(sql,(err,user)=>{
+    if(err){
+      console.log('err', err);
+      res.status(201).send({ error: "Error in sql" });   
+      
+    }else if (!user[0]) {
+      res.status(201).send({ error: "Email is not found in our records" });
+    }else if(user[0].is_verified == 0){
+      res.status(201).send({ error: "Please verify your email to login" });
+    }else if(user[0].is_suspended == 1){
+      res.status(201).send({ error: "Your account is suspended Please contact site owner!" });
+    }else{
+
+      let transporter = nodemailer.createTransport({
+        host: "smtp.googlemail.com",
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+          user: 'contact@n2rtechnologies.com', // generated ethereal user
+          pass: 'contact#@785612', // generated ethereal password
+        },
+      });
+
+      transporter.verify(function (error, success) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Server is ready to take our messages",success);
+        }
+      });
+
+       
+        if(req.hostname == 'localhost') {
+          var pathemail = 'http://localhost:3000'
+        } else {
+          var pathemail = req.hostname;
+        }
+
+       // send mail with defined transport object
+        let info = transporter.sendMail({
+          from: 'United Restaurant', // sender address
+          to: email, // list of receivers
+          subject: "Vendor Reset Password", // Subject line
+          text: "kjhksdhfkjdshf?", // plain text body
+          html: '<div className="verification" style="background: #f6f6f6;max-width: 600px;margin: 0 auto; margin-top: 30px;"><h1 style="background: #781820;color: #fff;padding: 15px;font-size: 28px;text-align: center;margin-bottom: 22px;">United Restaurants</h1><p style="font-size: 15px;margin-bottom: 5px;padding-left: 25px;">Hello,</p><p style="font-size: 15px;margin-bottom: 5px;padding-left: 25px;">Please Reset your password from here</p><button class="btn btn-primary" style="margin-bottom: 40px;margin-top: 20px;margin-left: 25px;background-color: #7366ff !important;border-color: #7366ff !important;padding: 10px;width:40%;color:white;"><a href="'+pathemail+'/resetpassword" style="color: white;text-decoration: none; text-transform: uppercase">Reset Password</a></button></div>'
+          //html: '<body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;"><div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;"> We are thrilled to have you here! Get ready to dive into your new account. </div><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td bgcolor="#FFA73B" align="center"><table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;"><tr><td align="center" valign="top" style="padding: 40px 10px 40px 10px;"> </td></tr></table></td></tr><tr><td bgcolor="#FFA73B" align="center" style="padding: 0px 10px 0px 10px;"><table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;"><tr><td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;"><h1 style="font-size: 48px; font-weight: 400; margin: 2;">Welcome!</h1> <img src=" https://img.icons8.com/clouds/100/000000/handshake.png" width="125" height="120" style="display: block; border: 0px;" /></td></tr></table></td></tr></td></tr></table></body>'
+        });
+                    
+      res.status(201).send({
+        succeed: true,
+        message: "Password reset link has been sent to above provided email"
+      })
+
+    }
+  });
+});
 
 
 // Get Users by Role ID
