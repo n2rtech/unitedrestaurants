@@ -144,6 +144,7 @@ const Logins = (props) => {
                       }
                     </div>
                     <p className="mt-4 mb-0">{"Don't have account?"}<a className="ml-2" href="/signup">{CreateAccount}</a></p>
+                    <p className="mt-4 mb-0"><a className="ml-2" href="/forgetpassword">{'Forget Password?'}</a></p>
                   </Form>
                 </TabPane>
                 <TabPane  className="fade show" tabId="auth0">

@@ -66,7 +66,7 @@ router.get('/', passport.authenticate('jwt', {
 }), function (req, res) {
         Coupon
             .findAll({
-                where:{deletedAt:null},
+                where:{status:1},
                 include: [{
                     model: User,
                     as: 'user',
@@ -181,6 +181,25 @@ router.delete('/:id', passport.authenticate('jwt', {
 });
 
 
+// Apply a Coupon
+router.post('/apply', function (req, res) {
+    if (!req.body.coupon_code) {
+        res.status(201).send({
+            msg: 'Please enter coupon code.'
+        })
+    } else {
+        Coupon
+            .findAll({
+                where:{code : req.body.coupon_code}
+            })
+            .then((roles) => {
+                res.status(200).send(roles);
+            })
+            .catch((error) => {
+                res.status(400).send({error: 'Coupon not found / exists'});
+            });
+        }
+});
 
 
 // Restore a Coupon
@@ -234,6 +253,27 @@ router.post('/permissions/:id', passport.authenticate('jwt', {
     }).catch((error) => {
         res.status(403).send(error);
     });
+});
+
+router.post('/add', function (req, res) {
+        if (!req.body.name || !req.body.coupon_code) {
+            res.status(400).send({
+                msg: 'Please pass Coupon name or discount.'
+            })
+        } else {
+            Coupon
+                .create({
+                    name: req.body.name,
+                    code: req.body.coupon_code,
+                    status: req.body.status,
+                })
+                .then((coupon) => res.status(201).send(coupon))
+                .catch((error) => {
+                    console.log(error);
+                    res.status(400).send(error);
+                });
+        }
+    
 });
 
 module.exports = router;

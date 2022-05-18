@@ -13,9 +13,10 @@ import PaypalPremiumYearly from './paypalplans/paypalpremiumyearly.jsx'
 
 import PaypalStandard from "./paypalplans/paypalstandard.jsx"
 import PaypalPremium from "./paypalplans/paypalpremium.jsx"
+import PremiumCoupon from "./paypalplans/premiumcoupon.jsx"
 
 
-import { Container, Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
+import { Container, Row, Col, Card, CardBody, Button, Form ,FormGroup, Label, Input } from 'reactstrap'
 import { Standard } from '../../../constant';
 import SweetAlert from 'sweetalert2'
 import {toast} from 'react-toastify';
@@ -34,6 +35,98 @@ const VendorMembershipPackage = (props) => {
   const country_id = localStorage.getItem("vendor_country_id");
   const [interval,setInterval] = useState('');
   const [intervalq,setIntervalq] = useState('');
+  const [couponapplied,setCouponApplied] = useState(false);
+  const [standardcouponapplied, setStandardCouponapplied] = useState(false);
+
+    const [coupon_code, setCouponCode] = useState('');
+
+    const handlecoupon_code = (e) => {
+      setCouponCode(e.target.value);
+    }
+
+  const HandleCouponPremium = event => {
+    event.preventDefault();
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+localStorage.getItem('token') }
+      };
+
+      const bodyParameters = {
+        'coupon_code' : coupon_code,
+        'user_id' : localStorage.getItem('id')
+      }
+
+      axios.post(`/api/coupons/apply`,
+        bodyParameters,
+        config
+      ) .then(response => {
+        console.info("Response" , response);
+        console.info("Response Length" , response.data.length);
+            if(response.data.length == 0) {
+              SweetAlert.fire(
+                'Alert!',
+                'Coupon is not found / exists',
+                'warning'
+            )
+            } 
+
+            if(response.data.length > 0) {
+              SweetAlert.fire(
+                'Success',
+                'Coupon Applied',
+                'success'
+              )
+
+             setCouponApplied(true);
+             setPremiumCoupon(false);
+
+            }
+            
+      } )
+         .catch(error => console.log('Form submit error', error))
+    }
+
+    const HandleCouponStandard = event => {
+      event.preventDefault();
+  
+      const config = {
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+localStorage.getItem('token') }
+        };
+  
+        const bodyParameters = {
+          'coupon_code' : coupon_code,
+          'user_id' : localStorage.getItem('id')
+        }
+  
+        axios.post(`/api/coupons/apply`,
+          bodyParameters,
+          config
+        ) .then(response => {
+          console.info("Response" , response);
+          console.info("Response Length" , response.data.length);
+              if(response.data.length == 0) {
+                SweetAlert.fire(
+                  'Alert!',
+                  'Coupon is not found / exists',
+                  'warning'
+              )
+              } 
+  
+              if(response.data.length > 0) {
+                SweetAlert.fire(
+                  'Success',
+                  'Coupon Applied',
+                  'success'
+                )
+  
+               setStandardCouponapplied(true);
+               setStandardCoupon(false);
+  
+              }
+              
+        } )
+           .catch(error => console.log('Form submit error', error))
+      }
 
   useEffect(() => {
   
@@ -75,19 +168,30 @@ const VendorMembershipPackage = (props) => {
 
     }, []);
 
-    console.log("Subscription_id" ,subscriptionid);
-
   const [cycle,setCycle] = useState();
   const [cycleamount,setAmount] = useState('0');
   const [cycleamountq,setAmountq] = useState('0');
-
-
+  const [StandardCoupons,setStandardCoupon] = useState(false);
+  const [StandardwithCoupons,setStandardwithCoupon] = useState(false);
+  const [PremiumwithCoupons,setPremiumwithCoupons] = useState(false);
+  
   const onChangeCycle = (event) => {
 
    if(planname === 'Free') {
+    if(event.target[event.target.selectedIndex].getAttribute('data-discount') == 1) {
+      setStandardCoupon(true);
+      setStandardwithCoupon(false);
       setAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
       setInterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
       setCycle(<PaypalStandard plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)
+     } else {
+      setStandardCoupon(false);
+      setStandardwithCoupon(true);
+      setAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
+      setInterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
+      setCycle(<PaypalStandard plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)
+      }
+
    } else {
       SweetAlert.fire(
           'Alert!',
@@ -102,13 +206,26 @@ const VendorMembershipPackage = (props) => {
   const [premiumcycle,setPremiumCycle] = useState()
   const [premiumamount,setPremiumAmount] = useState('0');
   const [preinterval,setPreinterval] = useState('');
+  const [PremiumCoupons,setPremiumCoupon] = useState(false);
 
   const onChangePremiumCycle = (event) => {
     if(planname === 'Free') {
-      setPremiumAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
-      setPreinterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
-      setPremiumCycle(<PaypalPremium plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)
-    } else {
+
+        if(event.target[event.target.selectedIndex].getAttribute('data-discount') == 1) {
+          setPremiumCoupon(true);
+          setPremiumwithCoupons(false);
+          setPremiumAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
+          setPreinterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
+          setPremiumCycle(<PaypalPremium plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)    
+        } else {
+          setPremiumCoupon(false);
+          setPremiumwithCoupons(true);
+          setPremiumAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
+          setPreinterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
+          setPremiumCycle(<PaypalPremium plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)    
+        }
+
+        } else {
       SweetAlert.fire(
         'Alert!',
         'First Cancel Current Subscription Plan.',
@@ -281,14 +398,30 @@ const VendorMembershipPackage = (props) => {
                                  data-id={item.id}
                                  data-interval={item.interval}
                                  data-plan_id={item.plan_id}
-                                 >{item.interval}</option>
+                                 >{item.interval} {item.discount == 1 ? '( Discount )' : '' }</option>
                             ))}
                           </Input>
                         </FormGroup>
-                        
-                        <div className="pricingtable-signup">
-                        {cycle}
 
+                        {StandardCoupons && 
+
+                          <CardBody>
+                          <Form className="form theme-form">
+                              <FormGroup>
+                                <Label htmlFor="exampleFormControlInput1">{"Coupon Code"}</Label>
+                                <Input className="form-control" type="name" placeholder={'Enter Coupon Code'} onChange = {handlecoupon_code}/>
+                              </FormGroup>
+                                <div className="text-center">
+                              <Button color="primary" onClick = {HandleCouponStandard}>{"Apply"}</Button>
+                            </div>
+                          </Form>
+                          </CardBody>
+
+                          }
+                                                  
+                        <div className="pricingtable-signup">
+                        {standardcouponapplied && cycle} 
+                        {StandardwithCoupons && cycle}
                         { planname === 'Standard' ? 
                           <div className="pricingtable-signup">
                               {"Selected Cycle"} : {intervalq}<br/>
@@ -300,7 +433,6 @@ const VendorMembershipPackage = (props) => {
                           :
                           ''
                         }
-
                         </div>
                       </div>
                     </Col>
@@ -327,12 +459,31 @@ const VendorMembershipPackage = (props) => {
                                  data-id={item.id}
                                  data-interval={item.interval}
                                  data-plan_id={item.plan_id}
-                                 >{item.interval}</option>
+                                 data-discount = {item.discount}
+                                 >{item.interval} {item.discount == 1 ? '( Discount )' : '' }</option>
                             ))}
                           </Input>
                         </FormGroup>
+                        {PremiumCoupons && 
+
+                            <CardBody>
+                            <Form className="form theme-form">
+                                <FormGroup>
+                                  <Label htmlFor="exampleFormControlInput1">{"Coupon Code"}</Label>
+                                  <Input className="form-control" type="name" placeholder={'Enter Coupon Code'} onChange = {handlecoupon_code}/>
+                                </FormGroup>
+                                  <div className="text-center">
+                                <Button color="primary" onClick = {HandleCouponPremium}>{"Apply"}</Button>
+                              </div>
+                            </Form>
+                          </CardBody>
+                        
+                        }
+
+                        
                         <div className="pricingtable-signup">
-                        {premiumcycle}
+                        {couponapplied && premiumcycle} 
+                        {PremiumwithCoupons && premiumcycle}
                         { planname === 'Premium' ? 
                           
                           <div className="pricingtable-signup">

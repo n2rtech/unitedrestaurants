@@ -227,7 +227,9 @@ router.post('/plan-save', (req, res) => {
                 plan_type: req.body.plan_type,
                 price: req.body.price,
                 interval: req.body.interval,
-                status: 1
+                status: 1,
+                discount: req.body.discount,
+                discount_coupon_id: req.body.coupon_id
             })
             .then((result) => res.status(201).send(result))
             .catch((error) => {
