@@ -16,7 +16,7 @@ import PaypalPremium from "./paypalplans/paypalpremium.jsx"
 import PremiumCoupon from "./paypalplans/premiumcoupon.jsx"
 
 
-import { Container, Row, Col, Card, CardBody, Button, FormGroup, Label, Input } from 'reactstrap'
+import { Container, Row, Col, Card, CardBody, Button, Form ,FormGroup, Label, Input } from 'reactstrap'
 import { Standard } from '../../../constant';
 import SweetAlert from 'sweetalert2'
 import {toast} from 'react-toastify';
@@ -35,6 +35,54 @@ const VendorMembershipPackage = (props) => {
   const country_id = localStorage.getItem("vendor_country_id");
   const [interval,setInterval] = useState('');
   const [intervalq,setIntervalq] = useState('');
+  const [couponapplied,setCouponApplied] = useState(false);
+
+    const [coupon_code, setCouponCode] = useState('');
+
+    const handlecoupon_code = (e) => {
+      setCouponCode(e.target.value);
+    }
+
+  const HandleCoupon = event => {
+    event.preventDefault();
+
+    const config = {
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+localStorage.getItem('token') }
+      };
+
+      const bodyParameters = {
+        'coupon_code' : coupon_code,
+        'user_id' : localStorage.getItem('id')
+      }
+
+      axios.post(`/api/coupons/apply`,
+        bodyParameters,
+        config
+      ) .then(response => {
+        console.info("Response" , response);
+        console.info("Response Length" , response.data.length);
+            if(response.data.length == 0) {
+              SweetAlert.fire(
+                'Alert!',
+                'Coupon is not found / exists',
+                'warning'
+            )
+            } 
+
+            if(response.data.length > 0) {
+              SweetAlert.fire(
+                'Success',
+                'Coupon Applied',
+                'success'
+              )
+
+             setCouponApplied(true);
+
+            }
+            
+      } )
+         .catch(error => console.log('Form submit error', error))
+    }
 
   useEffect(() => {
   
@@ -107,6 +155,9 @@ const VendorMembershipPackage = (props) => {
 
         if(event.target[event.target.selectedIndex].getAttribute('data-discount') == 1) {
           setPremiumCoupon(true);
+          setPremiumAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
+          setPreinterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
+          setPremiumCycle(<PaypalPremium plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)    
         } else {
           setPremiumAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
           setPreinterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
@@ -337,9 +388,25 @@ const VendorMembershipPackage = (props) => {
                             ))}
                           </Input>
                         </FormGroup>
-                        {PremiumCoupons && <PremiumCoupon/>}
+                        {PremiumCoupons && 
+
+                            <CardBody>
+                            <Form className="form theme-form">
+                                <FormGroup>
+                                  <Label htmlFor="exampleFormControlInput1">{"Coupon Code"}</Label>
+                                  <Input className="form-control" type="name" placeholder={'Enter Coupon Code'} onChange = {handlecoupon_code}/>
+                                </FormGroup>
+                                  <div className="text-center">
+                                <Button color="primary" onClick = {HandleCoupon}>{"Apply"}</Button>
+                              </div>
+                            </Form>
+                          </CardBody>
+                        
+                        }
+
+                        
                         <div className="pricingtable-signup">
-                        {premiumcycle}
+                        {couponapplied && premiumcycle} 
                         { planname === 'Premium' ? 
                           
                           <div className="pricingtable-signup">

@@ -182,25 +182,23 @@ router.delete('/:id', passport.authenticate('jwt', {
 
 
 // Apply a Coupon
-router.post('/apply', passport.authenticate('jwt', {
-    session: false
-}), function (req, res) {
+router.post('/apply', function (req, res) {
+    if (!req.body.coupon_code) {
+        res.status(201).send({
+            msg: 'Please enter coupon code.'
+        })
+    } else {
         Coupon
             .findAll({
-                where:{code : req.body.coupon_code},
-                include: [{
-                    model: User,
-                    as: 'user',
-                },
-                {
-                    model: Category,
-                    as: 'category',
-                }]
+                where:{code : req.body.coupon_code}
             })
-            .then((roles) => res.status(200).send(roles))
+            .then((roles) => {
+                res.status(200).send(roles);
+            })
             .catch((error) => {
-                res.status(400).send(error);
+                res.status(400).send({error: 'Coupon not found / exists'});
             });
+        }
 });
 
 
