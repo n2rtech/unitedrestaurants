@@ -59,8 +59,6 @@ useMemo(() => {
 
 }, []);
 
-console.log('Categories' , categoryData);
-
   return (
       <div className="headermenu">
         <Container fluid={true} className="p-0">
@@ -75,7 +73,6 @@ console.log('Categories' , categoryData);
                   {categoryData.map((item , i) => (
                     <NavItem key={i}>
                     <a href={`${process.env.PUBLIC_URL}/category/${item.name}/${item.id}`}>  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.image}`} alt="Menu-Icon"/> </a>
-                    
                     {item.parent && (item.parent.length > 0) && <Dropdown title={item.name} key={i}>
                     {item.parent && (item.parent).map((item1 , i) => (<Fragment key={i}>
                       <Dropdown.Item> <a href={`${process.env.PUBLIC_URL}/category/${item.name}/${item1.id}`}>{item1.name}</a>
@@ -87,7 +84,7 @@ console.log('Categories' , categoryData);
                           {item2.parent_3 &&
                             <Fragment>
                             {(item2.parent_3).map((item3 , i) => (
-                              <Dropdown.Submenu kay={i}>
+                              <Dropdown.Submenu key={i}>
                               <Dropdown.Item><NavLink href={`${process.env.PUBLIC_URL}/category/${item.name}/${item3.id}`}>{item3.name}</NavLink></Dropdown.Item>
                               </Dropdown.Submenu>
                               ))}
@@ -104,7 +101,7 @@ console.log('Categories' , categoryData);
                       ))}
                     </Dropdown>
                   }
-                  {<div className="sigle-title">{item.name}</div> }
+                  {item.parent && (item.parent.length === 0) && <div className="sigle-title">{item.name}</div> }
                   </NavItem>
                   ))}                  
                 </Nav>
