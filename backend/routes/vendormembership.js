@@ -215,6 +215,38 @@ router.post('/plan-save', (req, res) => {
         res.status(400).send({
             msg: 'Please pass Plan name or description.'
         })
+    }
+    if(req.body.discount == 0) {
+        Membership
+        .findAll({where:{discount:0, plan_type : req.body.plan_type}})
+        .then((job) => {
+               if(job.length > 0) {
+                  res.status(201).send({error: "Already created for this interval plan"})
+               } else {
+                Membership
+                .create({
+                    name: req.body.name,
+                    user_id: req.body.user_id,
+                    description: req.body.description,
+                    create_time: req.body.create_time,
+                    plan_id: req.body.plan_id,
+                    product: req.body.product_id,
+                    plan_type: req.body.plan_type,
+                    price: req.body.price,
+                    interval: req.body.interval,
+                    status: 1,
+                    discount: req.body.discount,
+                    discount_coupon_id: req.body.coupon_id
+                })
+                res.status(201).send({msg: "Plan is successfully created"})
+                .catch((error) => {
+                    console.log(error);
+                    res.status(400).send(error);
+                });
+               }
+        }).catch((erro) => {
+
+        })
     } else {
         Membership
             .create({
@@ -231,7 +263,7 @@ router.post('/plan-save', (req, res) => {
                 discount: req.body.discount,
                 discount_coupon_id: req.body.coupon_id
             })
-            .then((result) => res.status(201).send(result))
+            res.status(201).send({msg: "Plan is successfully created"})
             .catch((error) => {
                 console.log(error);
                 res.status(400).send(error);
@@ -294,8 +326,7 @@ router.put('/asign-to-user/:id', (req, res) => {
                             var name = vendor_pro[0].business_name;
                             var banner = vendor_pro[0].banner;
                             var about_business = vendor_pro[0].about_business;
-                          
-                       
+
                             FeaturedBusiness.update({
                                 user_id: req.params.id ,
                                 country_id: req.body.country_id ,

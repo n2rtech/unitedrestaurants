@@ -154,10 +154,14 @@ function calculate_total_cycles(cycle) {
             
                   axios.post('/api/vendor-membership/plan-save/', bodyParameters ,config )
                   .then(response => {
-                    toast.success("Plan is successfully created !")
-                    setTimeout(() => {
+                    if(response.data.error) {
+                      toast.error(response.data.error);
+                    } else {
+                      toast.success(response.data.msg);
+                      setTimeout(() => {
                       history.push('/dashboard/admin/manage-packages/');
                     }, 1000);
+                    }
                   }
                 ).catch(error => console.log('Form submit error', error))
                 }
