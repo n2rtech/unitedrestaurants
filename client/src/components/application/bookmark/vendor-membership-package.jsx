@@ -77,6 +77,7 @@ const VendorMembershipPackage = (props) => {
               )
 
              setCouponApplied(true);
+             setPremiumCoupon(false);
 
             }
             
