@@ -5,7 +5,6 @@ import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
-
 // add-promotion-coupon
 
 const AddPromotionCoupon = (props) => {

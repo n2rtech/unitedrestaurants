@@ -43,6 +43,7 @@ const PromotionsDiscount = (props) => {
                     <tr>
                         <th scope="col">{"Coupon Name"}</th>
                         <th scope="col">{"Coupon Code"}</th>
+                        <th scope="col">{"Status"}</th>
                         <th scope="col" className="text-right">{"Action"}</th>
                     </tr>
                 </thead>
@@ -51,6 +52,7 @@ const PromotionsDiscount = (props) => {
                       <tr key={i}>
                       <td>{item.name}</td>
                       <td>{item.code}</td>
+                      <td>{item.status == 1 ? 'Enabled' : 'Disabled' }</td>
                       <td className="text-right">
                       <ButtonGroup>
                         <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-promotions-discount/${item.id}`}>Edit</a> &nbsp;

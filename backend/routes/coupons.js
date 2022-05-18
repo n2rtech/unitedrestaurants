@@ -65,17 +65,7 @@ router.get('/', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
         Coupon
-            .findAll({
-                where:{status:1},
-                include: [{
-                    model: User,
-                    as: 'user',
-                },
-                {
-                    model: Category,
-                    as: 'category',
-                }]
-            })
+            .findAll()
             .then((roles) => res.status(200).send(roles))
             .catch((error) => {
                 res.status(400).send(error);
@@ -214,6 +204,36 @@ router.post('/restore', passport.authenticate('jwt', {
     }).catch(err => res.status(400).send(err));
 });
 
+router.put('/update/:id', function (req, res) {
+   
+        if (!req.params.id || !req.body.name || !req.body.coupon_code) {
+            res.status(400).send({
+                msg: 'Please pass Coupon ID, name or description.'
+            })
+        } else {
+            Coupon
+                .findByPk(req.params.id)
+                .then((coupon) => {
+                    Coupon.update({
+                        name: req.body.name ,
+                        code: req.body.coupon_code,
+                        status: req.body.status
+                    }, {
+                        where: {
+                            id: req.params.id
+                        }
+                    }).then(_ => {
+                        res.status(200).send({
+                            'message': 'Coupon updated'
+                        });
+                    }).catch(err => res.status(400).send(err));
+                })
+                .catch((error) => {
+                    res.status(400).send(error);
+                });
+        }
+});
+
 
 // Add Permissions to Coupon
 router.post('/permissions/:id', passport.authenticate('jwt', {
@@ -274,6 +294,27 @@ router.post('/add', function (req, res) {
                 });
         }
     
+});
+
+// Get Coupon by ID
+router.get('/list/:id', function (req, res) {
+    Coupon
+        .findByPk(
+            req.params.id, {
+                include: [{
+                    model: User,
+                    as: 'user',
+                },
+                {
+                    model: Category,
+                    as: 'category',
+                }]
+            }
+        )
+        .then((roles) => res.status(200).send(roles))
+        .catch((error) => {
+            res.status(400).send(error);
+        });
 });
 
 module.exports = router;
