@@ -100,7 +100,7 @@ export const MENUITEMS = [
          menucontent:"Promotions/discounts",
          Items:[
              {
-                 title: 'Promotions/discounts', path: `${process.env.PUBLIC_URL}/dashboard/admin/promotions-discount`, icon: Gift, type: 'link', active: false, 
+                 title: 'Coupons', path: `${process.env.PUBLIC_URL}/dashboard/admin/promotions-discount`, icon: Gift, type: 'link', active: false, 
              },
     ]
      },

@@ -56,7 +56,6 @@ const PromotionsDiscount = (props) => {
                       <td className="text-right">
                       <ButtonGroup>
                         <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-promotions-discount/${item.id}`}>Edit</a> &nbsp;
-                        <Button color="danger">Delete</Button>
                       </ButtonGroup>
                         
                       </td>
