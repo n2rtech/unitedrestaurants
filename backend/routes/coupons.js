@@ -181,6 +181,27 @@ router.delete('/:id', passport.authenticate('jwt', {
 });
 
 
+// Apply a Coupon
+router.post('/apply', passport.authenticate('jwt', {
+    session: false
+}), function (req, res) {
+        Coupon
+            .findAll({
+                where:{code : req.body.coupon_code},
+                include: [{
+                    model: User,
+                    as: 'user',
+                },
+                {
+                    model: Category,
+                    as: 'category',
+                }]
+            })
+            .then((roles) => res.status(200).send(roles))
+            .catch((error) => {
+                res.status(400).send(error);
+            });
+});
 
 
 // Restore a Coupon
