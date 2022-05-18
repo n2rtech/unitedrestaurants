@@ -178,19 +178,19 @@ const VendorMembershipPackage = (props) => {
   const onChangeCycle = (event) => {
 
    if(planname === 'Free') {
-    if(event.target[event.target.selectedIndex].getAttribute('data-discount') == 1) {
+    if(event.target[event.target.selectedIndex].getAttribute('data1-discount') == 1) {
       setStandardCoupon(true);
       setStandardwithCoupon(false);
-      setAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
-      setInterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
-      setCycle(<PaypalStandard plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)
+      setAmount(event.target[event.target.selectedIndex].getAttribute('data1-price'))
+      setInterval(event.target[event.target.selectedIndex].getAttribute('data1-interval'))
+      setCycle(<PaypalStandard plan_id = {event.target[event.target.selectedIndex].getAttribute('data1-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data1-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data1-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data1-interval')} currency = {'USD'}/>)
      } else {
       setStandardCoupon(false);
       setStandardwithCoupon(true);
-      setAmount(event.target[event.target.selectedIndex].getAttribute('data-price'))
-      setInterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
-      setCycle(<PaypalStandard plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)
-      }
+      setAmount(event.target[event.target.selectedIndex].getAttribute('data1-price'))
+      setInterval(event.target[event.target.selectedIndex].getAttribute('data1-interval'))
+      setCycle(<PaypalStandard plan_id = {event.target[event.target.selectedIndex].getAttribute('data1-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data1-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data1-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data1-interval')} currency = {'USD'}/>)
+    }
 
    } else {
       SweetAlert.fire(
@@ -394,10 +394,11 @@ const VendorMembershipPackage = (props) => {
                             <option>{"Select Cycle"}</option>
                             {plansDataStandard && plansDataStandard.map((item , i) => (
                                  <option value={item.interval} 
-                                 data-price={item.price}
-                                 data-id={item.id}
-                                 data-interval={item.interval}
-                                 data-plan_id={item.plan_id}
+                                 data1-price={item.price}
+                                 data1-id={item.id}
+                                 data1-interval={item.interval}
+                                 data1-plan_id={item.plan_id}
+                                 data1-discount = {item.discount}
                                  >{item.interval} {item.discount == 1 ? '( Discount )' : '' }</option>
                             ))}
                           </Input>
@@ -412,7 +413,7 @@ const VendorMembershipPackage = (props) => {
                                 <Input className="form-control" type="name" placeholder={'Enter Coupon Code'} onChange = {handlecoupon_code}/>
                               </FormGroup>
                                 <div className="text-center">
-                              <Button color="primary" onClick = {HandleCouponStandard}>{"Apply"}</Button>
+                              <Button color="primary" onClick = {() => HandleCouponStandard()}>{"Apply"}</Button>
                             </div>
                           </Form>
                           </CardBody>

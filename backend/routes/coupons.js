@@ -61,9 +61,7 @@ router.get('/deleted', passport.authenticate('jwt', {
 
 
 // Get List of Coupons
-router.get('/', passport.authenticate('jwt', {
-    session: false
-}), function (req, res) {
+router.get('/',function (req, res) {
         Coupon
             .findAll()
             .then((roles) => res.status(200).send(roles))
