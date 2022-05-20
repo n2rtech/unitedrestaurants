@@ -56,7 +56,7 @@ body {
     background: none;
     color: #fff;
     font-weight: 400;
-    margin-top: 21px;
+    margin-top: 0px;
     }
 
 .mainheader{
@@ -1211,6 +1211,9 @@ table th, table td{
     background: none;
     color: #fff;
     font-weight: 400;
+    padding: 0;
+    height: auto;
+    font-size: 14px;
 }
 /*.headermenu .navbar-nav li.nav-item:first-child img{
     margin-bottom: -2px !important;
@@ -2003,7 +2006,7 @@ input::placeholder, textarea::placeholder{
 /* Macbook */
 @media (min-width: 1371px) and (max-width: 1440px){
 .navbar-nav li.nav-item {
-  padding-right: 15px !important;
+  padding-right: 56px !important;
 }
 }
 /* Desktop 1600px */

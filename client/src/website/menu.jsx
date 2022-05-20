@@ -73,7 +73,7 @@ console.log('categoryData',categoryData);
                       ))}
                     </Dropdown>
                   }
-                  {item.children && (item.children.length === 0) && <div className="sigle-title" style={{marginTop : '-2px'}}>{item.name}</div> }
+                  {item.children && (item.children.length === 0) && <div className="sigle-title">{item.name}</div> }
                   </NavItem>
                   )) : '' }                  
                 </Nav>
