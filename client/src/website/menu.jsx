@@ -42,7 +42,7 @@ console.log('categoryData',categoryData);
                   navbar>
                   {categoryData && categoryData.length ? categoryData.map((item , i) => (
                     <NavItem key={i}>
-                    <a href={`${process.env.PUBLIC_URL}/BusinessListing/${item.id}`}>  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.image}`} alt="Menu-Icon"/> </a>
+                    <a href={`${process.env.PUBLIC_URL}/BusinessListing/${item.id}`}>  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.image}`} alt="Menu-Icon"/>  <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"></polyline></svg> </a>
                     {item.children && (item.children.length > 0) && <Dropdown title={item.name} key={i}>
                     {item.children && (item.children).map((item1 , i) => (<Fragment key={i}>
                       <Dropdown.Item> <a href={`${process.env.PUBLIC_URL}/BusinessListing/${item1.id}`}>{item1.name}</a>
