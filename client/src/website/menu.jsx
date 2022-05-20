@@ -1,4 +1,4 @@
-import React,{useState,useMemo,Fragment} from 'react';
+import React,{useState,useEffect,Fragment} from 'react';
 import Dropdown from 'react-multilevel-dropdown';
 import { Container, Row, Col, Navbar, NavbarToggler, Collapse, NavItem, NavLink, Nav } from 'reactstrap'
 import axios from 'axios'
@@ -10,54 +10,24 @@ const [categoryData, setCategoryData] = useState([]);
 const addDefaultSrc = (ev) => {
   ev.target.src = `${process.env.PUBLIC_URL}/assets/images/menuicon/restaurant_Ic.png`;
 }
+const [isMenu, setisMenu] = useState(false);
+    const [menusData, setMenusData] = useState([]);
+    const [isResponsiveclose, setResponsiveclose] = useState(false);
 
-useMemo(() => {
-  axios.get(`/api/categories/top-menu`)
-    .then((result_data) => {
-      const result = result_data.data;
-      setCategoryData(result);
-      for (const [i, element] of result.entries()) {
-        result[i].parent = [];
-        var parent = element.id;
-        if(parent){
-          axios.get("/api/categories/subcat/"+parent)
-          .then((result1) => {
-            result[i].parent = result1.data;
-            setCategoryData(result);
-            if(result1.data){
-              const subparent = result1.data;
-              for (const [j, element1] of subparent.entries()) {
-                axios.get("/api/categories/subcat/"+element1.id)
-                .then((result2) => {
-                  if(result2.data){
-                    result[i].parent[j].parent_2 = result2.data;
-                  }
-                  setCategoryData(result);
-                  if(result2.data){
-                    const subsubparent = result2.data;
-                    for (const [k, element2] of subsubparent.entries()) {
-                      axios.get("/api/categories/subcat/"+element2.id)
-                      .then((result3) => {
-                        if(result3.data){
-                          result[i].parent[j].parent_2[k].parent_3 = result3.data;
-                        }
-                        setCategoryData(result);
-                      })
-                    }
-                  }else{
-                    setCategoryData(result);
-                  }
-                })
-              }
-            }else{
-              setCategoryData(result);
-            }
-          });
-        }
-      }
-    });
+    useEffect(() => {
 
-}, []);
+      (async () => {
+        axios.get(`/api/categories/listAndSubCategory`)
+        .then((result_data) => {
+          const result = result_data.data;
+          setCategoryData(result);
+        }); 
+      })();
+      
+
+    }, []);
+
+console.log('categoryData',categoryData);
 
   return (
       <div className="headermenu">
@@ -70,30 +40,32 @@ useMemo(() => {
                 <Nav
                   className="me-auto"
                   navbar>
-                  {categoryData.map((item , i) => (
+                  {categoryData && categoryData.length ? categoryData.map((item , i) => (
                     <NavItem key={i}>
-                    <a href={`${process.env.PUBLIC_URL}/category/${item.name}/${item.id}`}>  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.image}`} alt="Menu-Icon"/> </a>
-                    {item.parent && (item.parent.length > 0) && <Dropdown title={item.name} key={i}>
-                    {item.parent && (item.parent).map((item1 , i) => (<Fragment key={i}>
-                      <Dropdown.Item> <a href={`${process.env.PUBLIC_URL}/category/${item.name}/${item1.id}`}>{item1.name}</a>
-                      {item1.parent_2 &&
+                    <a href={`${process.env.PUBLIC_URL}/BusinessListing/${item.id}`}>  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/categories/${item.image}`} alt="Menu-Icon"/> </a>
+                    {item.children && (item.children.length > 0) && <Dropdown title={item.name} key={i}>
+                    {item.children && (item.children).map((item1 , i) => (<Fragment key={i}>
+                      <Dropdown.Item> <a href={`${process.env.PUBLIC_URL}/BusinessListing/${item1.id}`}>{item1.name}</a>
+                      {item1.children &&
                         <Fragment>
-                        {(item1.parent_2).map((item2 , i) => (
-                          <Dropdown.Submenu key={i}>
-                          <Dropdown.Item><NavLink href={`${process.env.PUBLIC_URL}/category/${item.name}/${item2.id}`} >{item2.name} </NavLink>
-                          {item2.parent_3 &&
+                        {item1.children && (item1.children.length > 0) &&
+                          <Dropdown.Submenu >
+                        {(item1.children).map((item2 , i) => (
+                          <Dropdown.Item key={i}><NavLink href={`${process.env.PUBLIC_URL}/BusinessListing/${item2.id}`} >{item2.name} </NavLink>
+                          {item2.children &&
                             <Fragment>
-                            {(item2.parent_3).map((item3 , i) => (
+                            {(item2.children).map((item3 , i) => (
                               <Dropdown.Submenu key={i}>
-                              <Dropdown.Item><NavLink href={`${process.env.PUBLIC_URL}/category/${item.name}/${item3.id}`}>{item3.name}</NavLink></Dropdown.Item>
+                              <Dropdown.Item><NavLink href={`${process.env.PUBLIC_URL}/BusinessListing/${item3.id}`}>{item3.name}</NavLink></Dropdown.Item>
                               </Dropdown.Submenu>
                               ))}
                             </Fragment>
                           }
 
                           </Dropdown.Item>   
-                          </Dropdown.Submenu>
                           ))}
+                          </Dropdown.Submenu>
+                        }
                         </Fragment>
                       }
                       </Dropdown.Item>
@@ -101,9 +73,9 @@ useMemo(() => {
                       ))}
                     </Dropdown>
                   }
-                  {item.parent && (item.parent.length === 0) && <div className="sigle-title">{item.name}</div> }
+                  {item.children && (item.children.length === 0) && <div className="sigle-title">{item.name}</div> }
                   </NavItem>
-                  ))}                  
+                  )) : '' }                  
                 </Nav>
               </Collapse>
             </Navbar>
