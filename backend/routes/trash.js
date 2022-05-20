@@ -3,6 +3,7 @@ const router = express.Router();
 const Role = require('../models').Role;
 const Vendor = require('../models').Vendor;
 const User = require('../models').User;
+const Trash = require('../models').Trash;
 const Blog = require('../models').Blog;
 const ContactInquiry = require('../models').ContactInquiry;
 const Category = require('../models').Category;
@@ -17,6 +18,11 @@ const db = require('../models');
 const {DB} = require('../config/database');
 const app = express();
 app.db = (model) => db[model];
+
+let maxTotalPage = 0;
+let maxTotalItems = 0;
+let maxCurrentPage = 0;
+
 
 // Get List of trash items
 router.get('/', (req, res) => {
@@ -103,6 +109,147 @@ router.get('/', (req, res) => {
     res.status(400).send('error');
   });
 });
+
+
+function catLists(getData,tableName,type) {
+    for (let data of getData) {
+        Trash
+          .create({
+            user_id: data.user_id,
+            name: data.name,
+            table_name: tableName,
+            table_id: data.id,
+            type: type
+          })
+    }
+    return true;
+}
+
+router.get('/get-all/pagination', async (req, res) => {
+  Trash.truncate();
+  Vendor
+  .findAll({ 
+    where: {deletedAt: {[Op.ne]: null}},
+    paranoid:false
+  })
+  .then((vendors) => {
+
+    let CatList = catLists(vendors,'Vendor','vendor');
+    User
+    .findAll({ 
+      where: {deletedAt: {[Op.ne]: null}},
+      paranoid:false
+    })
+    .then((users) => {
+
+      let CatList = catLists(users,'User','user');
+
+      Category
+      .findAll( {
+        where: {deletedAt: {[Op.ne]: null} },
+        paranoid:false
+      })
+      .then((categories) => {
+
+        let CatList = catLists(categories,'Category','category');
+
+        Country
+        .findAll( { where: {deletedAt: {[Op.ne]: null} 
+      },
+      paranoid:false
+    })
+        .then((countries) => {
+
+          let CatList = catLists(countries,'Country','country');
+
+          AccountsPayable
+          .findAll({ 
+            where: {deletedAt: {[Op.ne]: null}},
+            paranoid:false
+          })
+          .then((accountspayables) => {
+
+            let CatList = catLists(accountspayables,'Accounts Payable','accountsPayable');
+
+            Blog
+            .findAll({ 
+              where: {deletedAt: {[Op.ne]: null}},
+              paranoid:false
+            })
+            .then((blogs) => {
+
+              let CatList = catLists(blogs,'Blog ','blogs');
+              ContactInquiry
+            .findAll({ 
+              where: {deletedAt: {[Op.ne]: null}},
+              paranoid:false
+            })
+            .then((contactinquiry) => {
+
+              let CatList = catLists(contactinquiry,'Contact Enquiry','ContactInquiry');
+
+
+            ContactInquiry
+            .findAll({ 
+              where: {deletedAt: {[Op.ne]: null}},
+              paranoid:false
+            })
+            .then((contactinquiry) => {
+
+              const { page, size } = req.query;
+              const { limit, offset } = getPagination(page, size);
+
+              Trash.findAndCountAll({limit,offset})
+              .then((vendors) => {
+              res.status(200).send(getPagingVendorsData(vendors, page, limit));
+                });
+            })
+            .catch((error) => {
+              console.log('error',error);
+              res.status(400).send('error');
+            });
+
+            })
+            .catch((error) => {
+              console.log('error',error);
+              res.status(400).send('error');
+            });
+            })
+            .catch((error) => {
+              console.log('error',error);
+              res.status(400).send('error');
+            });
+          })
+          .catch((error) => {
+            console.log('error',error);
+            res.status(400).send('error');
+          });
+        })
+        .catch((error) => {
+          console.log('error',error);
+          res.status(400).send('error');
+        });
+      })
+      .catch((error) => {
+        console.log('error',error);
+        res.status(400).send('error');
+      });
+
+    })
+    .catch((error) => {
+      console.log('error',error);
+      res.status(400).send('error');
+    });
+
+  })
+  .catch((error) => {
+    res.status(400).send('error');
+  });
+});
+
+
+
+
 
 
 
@@ -203,9 +350,251 @@ router.get('/delete/:type/:id', (req, res) => {
 });
 
 
+router.get('/all/with-paginate', (req, res) => {
+
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+
+  Vendor
+  .findAndCountAll({
+    where: {deletedAt: {[Op.ne]: null}},
+    paranoid:false,
+    offset,
+    limit,
+    order: [ [ 'createdAt', 'DESC' ]]
+  })
+  .then((vendors) => {
+    User
+    .findAndCountAll({
+      where: {deletedAt: {[Op.ne]: null}},
+      paranoid:false,
+      offset,
+      limit,
+      order: [ [ 'createdAt', 'DESC' ]]
+    })
+    .then((users) => {
+      Category
+      .findAndCountAll( {
+        where: {deletedAt: {[Op.ne]: null} },
+        paranoid:false,
+        offset,
+        limit,
+        order: [ [ 'createdAt', 'DESC' ]]
+      })
+      .then((categories) => {
+        Country
+        .findAndCountAll( { 
+          where: {deletedAt: {[Op.ne]: null} ,
+        },
+        paranoid:false,
+        offset,
+        limit,
+        order: [ [ 'createdAt', 'DESC' ]]
+      })
+        .then((countries) => {
+          AccountsPayable
+          .findAndCountAll({ 
+            where: {deletedAt: {[Op.ne]: null}},
+            paranoid:false,
+            offset,
+            limit,
+            order: [ [ 'createdAt', 'DESC' ]]
+          })
+          .then((accountspayables) => {
+            Blog
+            .findAndCountAll({ 
+              where: {deletedAt: {[Op.ne]: null}},
+              paranoid:false,
+              offset,
+              limit,
+              order: [ [ 'createdAt', 'DESC' ]]
+            })
+            .then((blogs) => {
+              ContactInquiry
+              .findAndCountAll({ 
+                where: {deletedAt: {[Op.ne]: null}},
+                paranoid:false,
+                offset,
+                limit,
+                order: [ [ 'createdAt', 'DESC' ]]
+              })
+              .then((contactinquiry) => {
+                var data = {
+                  vendors : getPagingVendorsData(vendors, page, limit),
+                  users : getPagingUsersData(users, page, limit),
+                  country : getPagingCountriesData(countries, page, limit),
+                  categories : getPagingCategoriesData(categories, page, limit),
+                  blogs : getPagingBlogsData(blogs, page, limit),
+                  accountpayables : getPagingAccountspayablesData(accountspayables, page, limit),
+                  contactinquiry : getPagingContactinquiryData(contactinquiry, page, limit),
+                  totalPage: maxTotalPage||0,
+                  totalItems : maxTotalItems||0,
+                  currentPage : parseInt(page)
+                }
+                res.status(200).send(data)
+              })
+              .catch((error) => {
+                console.log(error);
+                res.status(400).send('error');
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+              res.status(400).send('error');
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            res.status(400).send('error');
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          res.status(400).send('error');
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(400).send('error');
+      });
+
+    })
+    .catch((error) => {
+      res.status(400).send('error');
+    });
+
+  })
+  .catch((error) => {
+    res.status(400).send('error');
+  });
+});
+
+
+const getPagination = (page=1, size) => {
+      const limit = size ? +size : 3;
+      const offset =  (page-1) * limit;
+
+      return { limit, offset };
+  };
+
+  const getPagingVendorsData = (data, page, limit) => {
+      const { count: totalItems, rows: vendors } = data;
+      const currentPage = page ? +page : 1;
+      const totalPages = Math.ceil(totalItems / limit);
+
+      if(maxTotalPage < totalPages) {
+        maxTotalPage = totalPages;
+      }
+
+      if(maxTotalItems < totalItems) {
+        maxTotalItems = totalItems;
+      }
+
+      if(maxCurrentPage < currentPage) {
+        maxCurrentPage = currentPage;
+      }
+
+      return { totalItems, vendors, totalPages, currentPage };
+  };
+
+
+  const getPagingUsersData = (data, page, limit) => {
+      const { count: totalItems, rows: users } = data;
+      const currentPage = page ? +page : 1;
+      const totalPages = Math.ceil(totalItems / limit);
+
+      
+
+      if(maxTotalItems < totalItems) {
+        maxTotalItems = totalItems;
+      }
+
+      
+
+      return { totalItems, users, totalPages, currentPage };
+  };
 
 
 
+  const getPagingCountriesData = (data, page, limit) => {
+      const { count: totalItems, rows: countries } = data;
+      const currentPage = page ? +page : 1;
+      const totalPages = Math.ceil(totalItems / limit);
 
+      
+
+      if(maxTotalItems < totalItems) {
+        maxTotalItems = totalItems;
+      }
+
+      
+
+      return { totalItems, countries, totalPages, currentPage };
+  };
+
+
+ const getPagingCategoriesData = (data, page, limit) => {
+      const { count: totalItems, rows: categories } = data;
+      const currentPage = page ? +page : 1;
+      const totalPages = Math.ceil(totalItems / limit);
+        console.log('maxTotalPage',maxTotalPage,'totalPages',totalPages);
+      
+
+      if(maxTotalItems < totalItems) {
+        maxTotalItems = totalItems;
+      }
+
+      
+
+      return { totalItems, categories, totalPages, currentPage };
+  };
+
+  const getPagingBlogsData = (data, page, limit) => {
+      const { count: totalItems, rows: blogs } = data;
+      const currentPage = page ? +page : 1;
+      const totalPages = Math.ceil(totalItems / limit);
+
+      
+
+      if(maxTotalItems < totalItems) {
+        maxTotalItems = totalItems;
+      }
+
+      
+
+      return { totalItems, blogs, totalPages, currentPage };
+  };
+
+  const getPagingAccountspayablesData = (data, page, limit) => {
+      const { count: totalItems, rows: accountspayables } = data;
+      const currentPage = page ? +page : 1;
+      const totalPages = Math.ceil(totalItems / limit);
+
+      
+
+      if(maxTotalItems < totalItems) {
+        maxTotalItems = totalItems;
+      }
+
+      
+
+      return { totalItems, accountspayables, totalPages, currentPage };
+  };
+
+  const getPagingContactinquiryData = (data, page, limit) => {
+      const { count: totalItems, rows: contactenquries } = data;
+      const currentPage = page ? +page : 1;
+      const totalPages = Math.ceil(totalItems / limit);
+
+      
+
+      if(maxTotalItems < totalItems) {
+        maxTotalItems = totalItems;
+      }
+
+      
+
+      return { totalItems, contactenquries, totalPages, currentPage };
+  };
 
 module.exports = router;

@@ -1,13 +1,15 @@
-import React, { Fragment, useState, useMemo } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 import { Table, Container, Card, CardBody,Button, ButtonGroup } from 'reactstrap'
 import {toast} from 'react-toastify';
 import axios from 'axios'
 import SweetAlert from 'sweetalert2'
+import Pagination from "react-js-pagination";
 
 const Trash = (props) => {
 
   const token = localStorage.getItem("token");
+  const [trashData, setTrashData] = useState([]);
   const [trashVendorData, setTrashVendorData] = useState([]);
   const [trashUserData, setTrashUserData]= useState([]);
   const [trashCountryData, setTrashCountryData] = useState([]);
@@ -15,26 +17,57 @@ const Trash = (props) => {
   const [trashAccountsPaybleData, setTrashAccountsPaybleData] = useState([]);
   const [trashBlogData, setTrashBlogData] = useState([]);
 
-  useMemo(() => {
+  const [activePage, setActivePage] = useState(0);
+  const [totalItemsCount, setTotalItemsCount] = useState(1);  
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(10);
+  const [pagesCount, setPagesCount] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [size, setSize] = useState(25);
 
-    const config = {
-        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+  useEffect(() => {
+
+    var config = {
+      method: 'get',
+      url: '/api/trash/get-all/pagination',
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params : {
+        'page': 1,
+        'size': size
+      }
     };
 
-    fetch("/api/trash" , config)
-    .then(res => res.json())
+    axios(config)
     .then(
       (result) => { 
-        setTrashVendorData(result.vendors);
-        setTrashUserData(result.users);
-        setTrashCategoryData(result.categories);
-        setTrashCountryData(result.country);
-        setTrashAccountsPaybleData(result.accountpayables);
-        setTrashBlogData(result.blogs);
+        setTrashData(result.data.vendors);
+        setTotalItemsCount(result.data.totalItems);  
+        setActivePage(result.data.currentPage);
+        setPagesCount(result.data.totalPages);
       },
       (error) => { 
       });
   }, []);
+
+
+  const handlePageChange = (pageNumber) => {
+    var config = {
+      method: 'get',
+      url: '/api/trash/get-all/pagination',
+      headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token },
+      params : {
+        'page': pageNumber,
+        'size': size
+      }
+    };
+
+    axios(config)
+    .then(result=>{
+      setTrashData(result.data.vendors);
+      setTotalItemsCount(result.data.totalItems);  
+      setActivePage(result.data.currentPage);
+      setPagesCount(result.data.totalPages);
+    });
+  }
 
   const handleClick = (page,id) => {
 
@@ -117,84 +150,35 @@ const Trash = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                {trashVendorData.map((vendor , i ) => (
+                {trashData.map((vendor , i ) => (
                   <tr key={i}>
-                    <td>{"Deleted Vendor"} <b>{ vendor.name }</b></td>
+                    <td>{"Deleted"} {vendor.table_name} <b>{ vendor.name }</b></td>
                     <td className="text-right">
                     <ButtonGroup>
-                      <Button color="success" onClick={() => handleClick('vendor',vendor.id)}>Restore</Button> &nbsp; 
-                      <a className="btn btn-danger" onClick={() => handleDelete('vendor',vendor.id)}>Delete Permanently</a>
+                      <Button color="success" onClick={() => handleClick(vendor.type,vendor.table_id)}>Restore</Button> &nbsp; 
+                      <a className="btn btn-danger" onClick={() => handleDelete(vendor.type,vendor.table_id)}>Delete Permanently</a>
                     </ButtonGroup>
                       
                     </td>
                   </tr>
                   ))}
-                  {trashCountryData.map((country , i ) => (
-                  <tr key={i}>
-                    <td>{"Deleted Country "} <b>{ country.name }</b></td>
-                    <td className="text-right">
-                    <ButtonGroup>
-                      <Button color="success" onClick={() => handleClick('country',country.id)}>Restore</Button> &nbsp; 
-                      <a className="btn btn-danger" onClick={() => handleDelete('country',country.id)}>Delete Permanently</a>
-                    </ButtonGroup>                      
-                    </td>
-                  </tr>
-                  ))}
-                  {trashCategoryData.map((category , i ) => (
-                  <tr key={i}>
-                    <td>{"Deleted Category"} <b>{ category.name }</b></td>
-                    <td className="text-right">
-                    <ButtonGroup>
-                      <Button color="success" onClick={() => handleClick('category',category.id)}>Restore</Button> &nbsp; 
-                      <a className="btn btn-danger" onClick={() => handleDelete('category',category.id)}>Delete Permanently</a>
-                    </ButtonGroup>
-                    </td>
-                  </tr>
-                  ))}
-                  {trashUserData.map((user , i ) => (
-                  <tr key={i}>
-                    <td>{"Deleted User"} <b>{user.name}</b></td>
-                    <td className="text-right">
-                    <ButtonGroup>
-                      <Button color="success" onClick={() => handleClick('user',user.id)}>Restore</Button> &nbsp; 
-                      <a className="btn btn-danger" onClick={() => handleDelete('user',user.id)}>Delete Permanently</a>
-                    </ButtonGroup>
-                    </td>
-                  </tr>
-                  ))}
-                  {trashAccountsPaybleData.map((accpay , i ) => (
-                  <tr key={i}>
-                    <td>{"Deleted Accounts Payable "} <b>{accpay.name}</b></td>
-                    <td className="text-right">
-                    <ButtonGroup>
-                      <Button color="success" onClick={() => handleClick('accountsPayable',accpay.id)}>Restore</Button> &nbsp; 
-                      <a className="btn btn-danger" onClick={() => handleDelete('accountsPayable',accpay.id)}>Delete Permanently</a>
-                    </ButtonGroup>
-                    </td>
-                  </tr>
-                  ))}
-                  {trashBlogData.map((blog , i ) => (
-                  <tr key={i}>
-                    <td>{"Deleted Blogs"} <b>{blog.name}</b></td>
-                    <td className="text-right">
-                    <ButtonGroup>
-                      <Button color="success" onClick={() => handleClick('blog',blog.id)}>Restore</Button> &nbsp; 
-                      <a className="btn btn-danger" onClick={() => handleDelete('blog',blog.id)}>Delete Permanently</a>
-                    </ButtonGroup>
-                    </td>
-                  </tr>
-                  ))}
-                  {/*<tr>
-                    <td>{"Deleted Promotions Name"}</td>
-                    <td className="text-right">
-                    <ButtonGroup>
-                      <Button color="success">Restore</Button> &nbsp; 
-                      <a className="btn btn-danger">Delete Permanently</a>
-                    </ButtonGroup>
-                    </td>
-                  </tr>*/}
                 </tbody>
               </Table>
+              <div className="d-flex justify-content-center">
+              <Pagination
+              activePage={activePage}
+              itemsCountPerPage={size}
+              totalItemsCount={totalItemsCount}
+              pageRangeDisplayed={pageRangeDisplayed}
+              onChange={handlePageChange}
+              itemClass="page-item"
+              linkClass="page-link"
+              prevPageText="Prev"
+              nextPageText="Next"
+              lastPageText="Last"
+              firstPageText="First"
+              />
+              </div>
             </div>
           </CardBody>
         </Card>  

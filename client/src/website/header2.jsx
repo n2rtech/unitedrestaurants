@@ -2,7 +2,7 @@ import React,{useState,useMemo,Fragment} from 'react';
 import { Container, Row, Col} from 'reactstrap'
 import './css/header.css'
 import Logo from './Logo.jsx'
-import Navbarmenu from './Navbar.jsx'
+import Menu from './menu.jsx'
 import GoogleTranslate from './googletranslate';
 import HeaderSocial from './HeaderSocial';
 import SiteHeading from './SiteHeading';
@@ -34,12 +34,12 @@ import Countryflag from './countryflag';
                   </div>
                 </Col>
               </Row>
-              <Navbarmenu/>  
+              <Menu/>  
             </Col>      
           </Row>
           <Row className="phoneHeader hidden-lg">
             <Col xs="6">
-              <Navbarmenu/> <span className="openNav">Open Navbar</span>
+              <Menu/> <span className="openNav">Open Navbar</span>
             </Col>
             <Col xs="2" style={{paddingRight: "0"}}>
               <Countryflag />
