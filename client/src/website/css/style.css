@@ -2206,7 +2206,14 @@ form.browse .btn-primary a{
     padding: 6px 17px;
     font-size: 21px !important;
 }
-
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: #ccc !important;
+   opacity: 1 !important;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #ccc !important;
+   opacity:  1 !important;
+}
 
 
 
@@ -2231,6 +2238,32 @@ form.browse .btn-primary{
 }
 form.browse .btn-primary i {
   font-size: 14px;
+}
+.hotdeals h4{
+    font-size: 18px;
+}
+.details-left img{
+    width: 100% !important;
+    height: auto !important;
+}
+.login-card .login-main.login-tab {
+  margin-top: 0;
+}
+.login-card {
+    padding-top: 30px;
+    padding-bottom: 0;
+    min-height: auto;
+}
+.login-card .login-main {
+    width: 100%;
+    padding: 15px;
+    box-shadow: none;
+}
+.login-card .login-main .theme-form h4 {
+  margin-bottom: 10px;
+}
+.theme-form img{
+    margin-bottom: 30px;
 }
 }
 
