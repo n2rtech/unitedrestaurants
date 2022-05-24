@@ -1214,6 +1214,14 @@ table th, table td{
     padding: 0;
     height: auto;
     font-size: 14px;
+    border: none;
+}
+.headermenu .navbar-nav .nav-item div ul{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.Logo img{
+    max-width: 200px;
 }
 /*.headermenu .navbar-nav li.nav-item:first-child img{
     margin-bottom: -2px !important;
@@ -2223,7 +2231,16 @@ input::-moz-placeholder { /* Mozilla Firefox 19+ */
     margin-left: 5px;
     margin-top: 3px;
 }
-
+.mskpo:after{
+    position: absolute;
+    content: "\f107";
+    font-family: fontAwesome;
+    font-size: 14px;
+    margin-left: 5px;
+}
+.navbar-nav li.nav-item svg{
+    display: none;
+}
 
 @media (max-width: 767px){
 form.browse {
