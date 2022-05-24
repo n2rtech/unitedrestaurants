@@ -198,7 +198,7 @@ router.get('/with-paginate', passport.authenticate('jwt', {
             ],
             limit,
             offset,
-
+            order: [['sort_order', 'ASC']]
         })
             .then((category) => {
 
@@ -556,6 +556,7 @@ router.put('/:id', passport.authenticate('jwt', {
                         parent_id: req.body.parent_id,
                         status: req.body.status,
                         top_menu: req.body.top_menu,
+                        sort_order: req.body.sort_order,
                         image: image
                     }, {
                         where: {
