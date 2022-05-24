@@ -2217,7 +2217,12 @@ input::-moz-placeholder { /* Mozilla Firefox 19+ */
    color: #ccc !important;
    opacity:  1 !important;
 }
-
+.navbar-nav li.nav-item a svg{
+    stroke: #fff;
+    float: right;
+    margin-left: 5px;
+    margin-top: 3px;
+}
 
 
 @media (max-width: 767px){
