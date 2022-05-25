@@ -289,7 +289,7 @@ router.get("/list", (req, res) => {
 
 // Get List of Categories
 router.get("/listAndSubCategory", async (req, res) => {
-    let getData = await Category.findAll({});
+    let getData = await Category.findAll({order: [['sort_order', 'DESC']]});
     if (getData) {
         let CatList = await catLists(getData);
         res.status(200).send(CatList)
