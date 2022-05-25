@@ -167,7 +167,8 @@ router.get("/adminListAndSubCategory", async (req, res) => {
     const { page, size } = req.query;
     const { limit, offset } = getPagination(page, size);
 
-    let getData = await Category.findAndCountAll({order: [['name', 'DESC']]});
+    let getData = await Category.findAndCountAll({offset,
+              limit,order: [['name', 'DESC']]});
     if (getData) {
         let CatList = await catListsAdmin(getData.rows);
         let finaldata = await getPagingCategoryDataAdmin(CatList, getData.count, page, limit);
@@ -241,7 +242,7 @@ router.get('/with-paginate', passport.authenticate('jwt', {
             ],
             limit,
             offset,
-            order: [['name','ASC']]
+            order: [['name','DESC']]
         })
             .then((category) => {
 
