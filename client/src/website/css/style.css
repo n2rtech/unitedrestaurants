@@ -2307,6 +2307,13 @@ div.sidebar-wrapper{
     height: 100vh !important;
     overflow-y: scroll !important;
 }
+#sidebar-menu{
+    height: 100em;
+}
+#sidebar-menu .sidebar-links{
+    height: auto !important;
+    overflow-y: scroll;
+}
 }
 
 
