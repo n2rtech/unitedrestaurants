@@ -766,7 +766,7 @@ body {
     padding-right: 50px;
 }
 .toggle-sidebar svg{
-    color: #fff;
+    color: #000;
 }
 .toggle-sidebar {
     position: absolute;
@@ -2289,6 +2289,18 @@ form.browse .btn-primary i {
 }
 .theme-form img{
     margin-bottom: 30px;
+}
+.back-btn{
+    background: #fff;
+    margin-top: -26px;
+    padding: 1px 13px;
+    z-index: 99990;
+    position: relative;
+    border-radius: 50px;
+    left: 40px;
+}
+.page-wrapper.compact-wrapper .page-header .header-wrapper .toggle-sidebar{
+    margin-left: 300px !important;
 }
 }
 
