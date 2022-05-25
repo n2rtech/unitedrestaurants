@@ -12,6 +12,7 @@ const AddCategory = (props) => {
 const history = useHistory();
 const [image, setimage] = useState({ pictures: [] , pictureFiles: [] })
 const [catData, setCatData] = useState([]);
+const [sortOrder,setSortOrder] = useState(0);
 const [status,setStatus] = useState(0);
 const [topMenu,setTopMenu] = useState(0);
 
@@ -37,6 +38,10 @@ const [topMenu,setTopMenu] = useState(0);
 
     const handleTopMenuChange = (evt) => {
       setTopMenu(evt.target.value)
+    }
+
+    const handleSortOrderChange = (evt) => {
+      setSortOrder(evt.target.value)
     }
 
     useEffect(() => {
@@ -65,6 +70,7 @@ const [topMenu,setTopMenu] = useState(0);
           bodyParameters.set('parent_id', parentCat);
           bodyParameters.set('description', catname);
           bodyParameters.set('top_menu', topMenu);
+          bodyParameters.set('sort_order', sortOrder);
           bodyParameters.set('status', status);
 
           axios.post(`/api/categories/add`,
@@ -119,6 +125,12 @@ const [topMenu,setTopMenu] = useState(0);
                 <Label className="mb-10" for="yes-menu">Yes</Label>
               </div>
             </FormGroup>
+
+            <FormGroup>
+              <Label htmlFor="exampleFormControlInput1">{"Sort Order"}</Label>
+              <Input className="form-control" value= {sortOrder} onChange = {handleSortOrderChange} type="number" placeholder='Sort Order' />
+            </FormGroup>
+
             <FormGroup>
               <ImageUploader
                   withIcon={false}

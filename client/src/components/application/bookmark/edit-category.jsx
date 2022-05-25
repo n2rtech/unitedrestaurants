@@ -21,6 +21,7 @@ const onDrop = (pictureFiles) => {
 }
 
 const [catname,setCatname] = useState('');
+const [sortOrder,setSortOrder] = useState(0);
 const [catImage,setCatImage] = useState('');
 const [parentCat,setParentCat] = useState('');
 const [status,setStatus] = useState(0);
@@ -32,6 +33,10 @@ const handleChange = (evt) => {
 
 const handleParentChange = (evt) => {
     setParentCat(evt.target.value)
+}
+
+const handleSortOrderChange = (evt) => {
+    setSortOrder(evt.target.value)
 }
 
 const handleStatusChange = (evt) => {
@@ -65,6 +70,7 @@ const handleTopMenuChange = (evt) => {
                 }
                 setTopMenu(result.top_menu);
                 setParentCat(result.parent_id);
+                setSortOrder(result.sort_order);
             },
             (error) => {
               
@@ -90,6 +96,7 @@ const handleTopMenuChange = (evt) => {
           bodyParameters.set('parent_id', parentCat);
           bodyParameters.set('description', catname);
           bodyParameters.set('top_menu', topMenu);
+          bodyParameters.set('sort_order', sortOrder);
           bodyParameters.set('status', status);
 
           axios.put(`/api/categories/`+`${params.id}`,
@@ -147,6 +154,12 @@ const handleTopMenuChange = (evt) => {
                 <Label className="mb-10" for="yes-menu">Yes</Label>
               </div>
             </FormGroup>
+
+            <FormGroup>
+              <Label htmlFor="exampleFormControlInput1">{"Sort Order"}</Label>
+              <Input className="form-control" value= {sortOrder} onChange = {handleSortOrderChange} type="number" placeholder='Sort Order' />
+            </FormGroup>
+
             <FormGroup>
 
              <Label htmlFor="exampleFormControlInput1">{"Category banner"}</Label>

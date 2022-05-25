@@ -189,6 +189,7 @@ const Categories = (props) => {
               <thead>
                   <tr>
                       <th scope="col">{"Name"}</th>
+                      <th scope="col">{"Sort Order"}</th>
                       <th scope="col" className="text-right">{"Action"}</th>
                   </tr>
               </thead>
@@ -208,6 +209,7 @@ const Categories = (props) => {
                     }
 
                   </td>
+                  <td>{item.sort_order}</td>
                   <td className="text-right">
                     <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-category/${item.id}/`}>Edit</a> &nbsp;
                     <Button color="danger" onClick={() => handleRemoveCategory(item.id)}>{"Delete"}</Button>

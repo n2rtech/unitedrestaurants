@@ -178,7 +178,7 @@ router.get('/get-all/pagination', async (req, res) => {
             })
             .then((blogs) => {
 
-              let CatList = catLists(blogs,'Blog ','blogs');
+              let CatList = catLists(blogs,'Blog ','blog');
               ContactInquiry
             .findAll({ 
               where: {deletedAt: {[Op.ne]: null}},
@@ -333,6 +333,7 @@ router.get('/delete/:type/:id', (req, res) => {
   else{
     var code = req.params.type;
     var table_name = code.charAt(0).toUpperCase() + code.slice(1);
+    console.log(table_name);
     app.db(table_name)
     .destroy({
       where: {
