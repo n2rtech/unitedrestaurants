@@ -33,7 +33,7 @@ const Categories = (props) => {
     .then(result=>{
       let newResult = result.data.categories;
 
-      /*for (const [i, element] of newResult.entries()) {
+     /* for (const [i, element] of newResult.entries()) {
 
         newResult[i].parent_1 = '';
         newResult[i].parent_2 = '';
@@ -94,7 +94,7 @@ const Categories = (props) => {
 
       let newResult = result.data.categories;
 
-      /*for (const [i, element] of newResult.entries()) {
+     /* for (const [i, element] of newResult.entries()) {
 
         newResult[i].parent_1 = '';
         newResult[i].parent_2 = '';
@@ -197,11 +197,13 @@ const Categories = (props) => {
               {generalData.map((item , i ) => (
                 <tr key={i}>
                   <td>   
-                  {item.name}
-                  <>
-                    {item.parent_category && ' > ' +item.parent_category.name }
-                    {item.parent_category && item.parent_category != null && item.parent_category.parent_category && ' > ' +item.parent_category.parent_category.name }
-                  </>                   
+
+                    
+
+                    {item.parent_category && item.parent_category != null && item.parent_category.parent_category && item.parent_category.parent_category.name }
+                  {(item.parent_category && item.parent_category.parent_category) ? (' > ' +item.parent_category.name) : (item.parent_category && item.parent_category.name) }
+                  {item.parent_category && item.parent_category != null ? ' > ' + item.name : item.name}
+
                   </td>
                   <td>{item.sort_order}</td>
                   <td className="text-right">
@@ -236,3 +238,16 @@ const Categories = (props) => {
 }
 
 export default Categories;
+
+/*{ 
+                      (item.parent_1) ? ((item.parent_2) ? ((item.parent_3) ? ((item.parent_4) ? 
+                      item.parent_4+' > '+item.parent_3+' > '+item.parent_2+' > '+item.parent_1+' > '+item.name : 
+                      item.parent_3+' > '+item.parent_2+' > '+item.parent_1+' > '+item.name
+                      ) :
+                       item.parent_2+' > '+item.parent_1+' > '+item.name ) : 
+                       item.parent_1+' > '+item.name) :
+                      item.name
+                    }
+                    {item.parent_category && item.parent_category != null && item.parent_category.parent_category && item.parent_category.parent_category.name }
+                  {(item.parent_category && item.parent_category.parent_category) ? (' > ' +item.parent_category.name) : (item.parent_category && item.parent_category.name) }
+                  {item.parent_category && item.parent_category != null ? ' > ' + item.name : item.name}*/
