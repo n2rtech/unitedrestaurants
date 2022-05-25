@@ -162,6 +162,49 @@ router.get('/', passport.authenticate('jwt', {
 });
 
 
+router.get("/adminListAndSubCategory", async (req, res) => {
+
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    let getData = await Category.findAndCountAll({order: [['name', 'DESC']]});
+    if (getData) {
+        let CatList = await catListsAdmin(getData.rows);
+        let finaldata = await getPagingCategoryDataAdmin(CatList, getData.count, page, limit);
+        res.status(200).send(finaldata);
+    }
+});
+
+
+const getPagingCategoryDataAdmin = (data, totalItems, page, limit) => {
+  const currentPage = page ? +page : 1;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, data, totalPages, currentPage };
+};
+
+async function catListsAdmin(getData,parentId=false) {
+    // console.log('getData',getData);
+    let CategoryList = [];
+    let parentCategoryId;
+    if (parentId == false) {
+
+        parentCategoryId = getData.filter(result=>result.top_menu==1);
+    }else{
+        parentCategoryId = getData.filter(result=>result.parent_id==parentId);
+    }
+    for (let data of parentCategoryId) {
+        CategoryList.push({
+            id:data.id,
+            name:data.name,
+            description:data.description,
+            image:data.image,
+            children: await catListsAdmin(getData,data.id)
+        })
+    }
+    return CategoryList;
+}
+
 router.get('/with-paginate', passport.authenticate('jwt', {
     session: false
 }), function (req, res) {
@@ -198,7 +241,7 @@ router.get('/with-paginate', passport.authenticate('jwt', {
             ],
             limit,
             offset,
-            order: [['sort_order', 'ASC']]
+            order: [['name','ASC']]
         })
             .then((category) => {
 
