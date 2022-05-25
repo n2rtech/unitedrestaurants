@@ -2302,6 +2302,11 @@ form.browse .btn-primary i {
 .page-wrapper.compact-wrapper .page-header .header-wrapper .toggle-sidebar{
     margin-left: 300px !important;
 }
+div.sidebar-wrapper{
+    z-index: 9999 !important;
+    height: 100vh !important;
+    overflow-y: scroll !important;
+}
 }
 
 
