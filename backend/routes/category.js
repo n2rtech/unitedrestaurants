@@ -217,18 +217,22 @@ router.get('/with-paginate', passport.authenticate('jwt', {
             {
                 model: Category,
                 as: 'parent_category',
+                order: [['name','DESC']],
                 include: [
                 {
                     model: Category,
                     as: 'parent_category',
+                    order: [['name','DESC']],
                     include: [
                     {
                         model: Category,
                         as: 'parent_category',
+                        order: [['name','DESC']],
                         include: [
                         {
                             model: Category,
                             as: 'parent_category',
+                            order: [['name','DESC']],
 
                         }
                         ]
@@ -242,7 +246,6 @@ router.get('/with-paginate', passport.authenticate('jwt', {
             ],
             limit,
             offset,
-            order: [['name','DESC']]
         })
             .then((category) => {
 
