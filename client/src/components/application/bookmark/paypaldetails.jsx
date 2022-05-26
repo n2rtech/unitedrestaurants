@@ -49,7 +49,7 @@ const Paypaldetails = (props) => {
       axios.put('/api/paypal/',
         bodyParameters,
         config
-        ) .then(response => toast.success("Profile updated !"))
+        ) .then(response => toast.success("Paypal updated !"))
       .catch(error => console.log('Form submit error', error))
 
     };
@@ -62,24 +62,18 @@ const Paypaldetails = (props) => {
         <Card>
           <CardBody>
             <Form className="form theme-form">
-            <FormGroup>
-                <Label htmlFor="exampleFormControlInput1">Test Mode</Label>
-                <Row className="m-l-10">
-                  <Col sm="1">
+              <Label htmlFor="exampleFormControlInput1">Test Mode</Label>
+                <FormGroup className="m-checkbox-inline custom-radio-ml">
                     <div className="radio radio-primary">
-                      <Input id="radio2" type="radio" onChange={onChangeMode} name="radio1" value="1" data-test={mode} checked ={mode === 1} />
-                      <Label for="radio2">{Option}<span className="digits"> {"Yes"}</span></Label>
+                      <Input id="no-featured" type="radio" onChange={onChangeMode} value='0' name="radio2" checked={mode==0} />
+                      <Label className="mb-0" for="no-featured">No</Label>
                     </div>
-                  </Col>
-                  <Col sm="1">
                     <div className="radio radio-primary">
-                      <Input id="radio1" type="radio" onChange={onChangeMode} data-test={mode} name="radio1" value="0" checked ={mode === 0} />
-                      <Label for="radio1">{Option}<span className="digits"> {"No"}</span></Label>
+                    <Input id="yes-featured" type="radio" onChange={onChangeMode} value='1' name="radio2" checked={mode==1}  />
+                    <Label className="mb-0" for="yes-featured">Yes</Label>
                     </div>
-                  </Col>
-                  
-                </Row>
-              </FormGroup>
+                </FormGroup>
+
               <FormGroup>
                 <Label htmlFor="exampleFormControlInput1">Client Id</Label>
                 <Input className="form-control" value={client_id} onChange={e => setClientid(e.target.value)}  type="name" />
