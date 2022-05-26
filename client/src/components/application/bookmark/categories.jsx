@@ -31,7 +31,7 @@ const Categories = (props) => {
 
     axios(config)
     .then(result=>{
-      let newResult = result.data.categories;
+      let newResult = result.data.data;
 
      /* for (const [i, element] of newResult.entries()) {
 
@@ -92,7 +92,7 @@ const Categories = (props) => {
     axios(config)
     .then(result=>{
 
-      let newResult = result.data.categories;
+      let newResult = result.data.data;
 
      /* for (const [i, element] of newResult.entries()) {
 
@@ -197,17 +197,15 @@ const Categories = (props) => {
               {generalData.map((item , i ) => (
                 <tr key={i}>
                   <td>   
-
+                  {(item.t2 && item.t2 != null) ? item.t1 + ' > ' : item.t1} {(item.t2 != null && item.t3 && item.t3 != null) ? item.t2 + ' > ' : item.t2} {item.t3 != null && item.t3}
                     
 
-                    {item.parent_category && item.parent_category != null && item.parent_category.parent_category && item.parent_category.parent_category.name }
-                  {(item.parent_category && item.parent_category.parent_category) ? (' > ' +item.parent_category.name) : (item.parent_category && item.parent_category.name) }
-                  {item.parent_category && item.parent_category != null ? ' > ' + item.name : item.name}
+                   
 
                   </td>
                   <td>{item.sort_order}</td>
                   <td className="text-right">
-                    <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-category/${item.id}/`}>Edit</a> &nbsp;
+                    <a className="btn btn-success" href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-category/${item.t3id && item.t2id && item.t1id ? item.t3id : (item.t2id && item.t1id ? item.t2id : item.t1id) }/`}>Edit</a> &nbsp;
                     <Button color="danger" onClick={() => handleRemoveCategory(item.id)}>{"Delete"}</Button>
                   </td>
                 </tr>

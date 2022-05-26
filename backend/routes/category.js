@@ -208,31 +208,43 @@ async function catListsAdmin(getData,parentId=false) {
 
 router.get('/with-paginate', passport.authenticate('jwt', {
     session: false
-}), function (req, res) {
+}), function async(req, res) {
     const { page, size } = req.query;
     const { limit, offset } = getPagination(page, size);
+
+    
+
+
+ DB.query('SELECT t1.id as t1id,t2.id as t2id,t3.id as t3id, t1.name as t1, t2.name as t2, t3.name as t3 FROM Categories t1 LEFT JOIN Categories t2 ON t1.id=t2.parent_id LEFT JOIN Categories t3 ON t2.id=t3.parent_id WHERE t1.parent_id=0 AND t1.deletedAt IS NULL ORDER BY t1.name LIMIT '+ limit +' OFFSET '+ offset , function (err, user) {
+    if (err) throw err;
+    if (user[0]) {
+        DB.query('SELECT count(t1.name) as totalRows FROM Categories t1 LEFT JOIN Categories t2 ON t1.id=t2.parent_id LEFT JOIN Categories t3 ON t2.id=t3.parent_id WHERE t1.parent_id=0 AND t1.deletedAt IS NULL ORDER BY t1.name', function (err, user1) {
+    if (err) throw err;
+    if (user1[0]) {
+        const total = user1[0].totalRows;
+return res.status(200).send(getPagingCategoryDataAdmin(user, total, page, limit));
+        }
+        });
+    } else {
+      return res.status(400).json({ error: "Email already exists" });
         Category
         .findAndCountAll({
             include: [
             {
                 model: Category,
                 as: 'parent_category',
-                order: [['name','DESC']],
                 include: [
                 {
                     model: Category,
                     as: 'parent_category',
-                    order: [['name','DESC']],
                     include: [
                     {
                         model: Category,
                         as: 'parent_category',
-                        order: [['name','DESC']],
                         include: [
                         {
                             model: Category,
                             as: 'parent_category',
-                            order: [['name','DESC']],
 
                         }
                         ]
@@ -246,6 +258,8 @@ router.get('/with-paginate', passport.authenticate('jwt', {
             ],
             limit,
             offset,
+            order: [['name','DESC']],
+
         })
             .then((category) => {
 
@@ -254,6 +268,8 @@ router.get('/with-paginate', passport.authenticate('jwt', {
             .catch((error) => {
                 res.status(400).send(error);
             });
+        }
+});
 });
 
 
