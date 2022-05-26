@@ -53,6 +53,7 @@ const VendorMembershipPackage = (props) => {
 
       const bodyParameters = {
         'coupon_code' : coupon_code,
+        'coupon_id' : PremiumCoupon_id,
         'user_id' : localStorage.getItem('id')
       }
 
@@ -87,7 +88,6 @@ const VendorMembershipPackage = (props) => {
     }
 
     const HandleCouponStandard = event => {
-      event.preventDefault();
   
       const config = {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+localStorage.getItem('token') }
@@ -95,6 +95,7 @@ const VendorMembershipPackage = (props) => {
   
         const bodyParameters = {
           'coupon_code' : coupon_code,
+          'coupon_id' : StandardCoupon_id,
           'user_id' : localStorage.getItem('id')
         }
   
@@ -171,6 +172,7 @@ const VendorMembershipPackage = (props) => {
   const [cycle,setCycle] = useState();
   const [cycleamount,setAmount] = useState('0');
   const [cycleamountq,setAmountq] = useState('0');
+  const [StandardCoupon_id,setStandardCoupon_id] = useState(0);
   const [StandardCoupons,setStandardCoupon] = useState(false);
   const [StandardwithCoupons,setStandardwithCoupon] = useState(false);
   const [PremiumwithCoupons,setPremiumwithCoupons] = useState(false);
@@ -181,12 +183,14 @@ const VendorMembershipPackage = (props) => {
     if(event.target[event.target.selectedIndex].getAttribute('data1-discount') == 1) {
       setStandardCoupon(true);
       setStandardwithCoupon(false);
+      setStandardCoupon_id(event.target[event.target.selectedIndex].getAttribute('data1-coupon_id'));
       setAmount(event.target[event.target.selectedIndex].getAttribute('data1-price').replace('.0000','.00'))
       setInterval(event.target[event.target.selectedIndex].getAttribute('data1-interval'))
       setCycle(<PaypalStandard plan_id = {event.target[event.target.selectedIndex].getAttribute('data1-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data1-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data1-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data1-interval')} currency = {'USD'}/>)
      } else {
       setStandardCoupon(false);
       setStandardwithCoupon(true);
+      setStandardCoupon_id(event.target[event.target.selectedIndex].getAttribute('data1-coupon_id'));
       setAmount(event.target[event.target.selectedIndex].getAttribute('data1-price').replace('.0000','.00'))
       setInterval(event.target[event.target.selectedIndex].getAttribute('data1-interval'))
       setCycle(<PaypalStandard plan_id = {event.target[event.target.selectedIndex].getAttribute('data1-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data1-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data1-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data1-interval')} currency = {'USD'}/>)
@@ -205,6 +209,7 @@ const VendorMembershipPackage = (props) => {
 
   const [premiumcycle,setPremiumCycle] = useState()
   const [premiumamount,setPremiumAmount] = useState('0');
+  const [PremiumCoupon_id,setPremiumCoupon_id] = useState(0);
   const [preinterval,setPreinterval] = useState('');
   const [PremiumCoupons,setPremiumCoupon] = useState(false);
 
@@ -214,12 +219,14 @@ const VendorMembershipPackage = (props) => {
         if(event.target[event.target.selectedIndex].getAttribute('data-discount') == 1) {
           setPremiumCoupon(true);
           setPremiumwithCoupons(false);
+          setPremiumCoupon_id(event.target[event.target.selectedIndex].getAttribute('data-coupon_id') );
           setPremiumAmount(event.target[event.target.selectedIndex].getAttribute('data-price').replace('.0000','.00'))
           setPreinterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
           setPremiumCycle(<PaypalPremium plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)    
         } else {
           setPremiumCoupon(false);
           setPremiumwithCoupons(true);
+          setPremiumCoupon_id(event.target[event.target.selectedIndex].getAttribute('data-coupon_id') );
           setPremiumAmount(event.target[event.target.selectedIndex].getAttribute('data-price').replace('.0000','.00'))
           setPreinterval(event.target[event.target.selectedIndex].getAttribute('data-interval'))
           setPremiumCycle(<PaypalPremium plan_id = {event.target[event.target.selectedIndex].getAttribute('data-plan_id')} amount = {event.target[event.target.selectedIndex].getAttribute('data-price')} membership_id = {event.target[event.target.selectedIndex].getAttribute('data-id')} interval = {event.target[event.target.selectedIndex].getAttribute('data-interval')} currency = {'USD'}/>)    
@@ -399,6 +406,7 @@ const VendorMembershipPackage = (props) => {
                                  data1-interval={item.interval}
                                  data1-plan_id={item.plan_id}
                                  data1-discount = {item.discount}
+                                 data1-coupon_id = {item.discount_coupon_id}
                                  >{item.interval} {item.discount == 1 ? '( Discount )' : '' }</option>
                             ))}
                           </Input>
@@ -461,6 +469,7 @@ const VendorMembershipPackage = (props) => {
                                  data-interval={item.interval}
                                  data-plan_id={item.plan_id}
                                  data-discount = {item.discount}
+                                 data-coupon_id = {item.discount_coupon_id}
                                  >{item.interval} {item.discount == 1 ? '( Discount )' : '' }</option>
                             ))}
                           </Input>

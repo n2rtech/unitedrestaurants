@@ -178,7 +178,7 @@ router.post('/apply', function (req, res) {
     } else {
         Coupon
             .findAll({
-                where:{code : req.body.coupon_code}
+                where:{code : req.body.coupon_code , id : req.body.coupon_id}
             })
             .then((roles) => {
                 res.status(200).send(roles);
