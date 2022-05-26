@@ -63,6 +63,7 @@ import VendorError404 from "./pages/errors/vendorerror404"
 // Maintenance
 import Maintenance from "./pages/maintenance"
 import Callback from './auth/callback'
+import Oauth2callback from "./components/application/bookmark/youtube-callback"
 
 const Root = (props) =>  {
   const anim = '';
@@ -133,7 +134,7 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/pages/errors/error400`} component={Error400}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/maintenance`} component={Maintenance}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/callback`} render={() => <Callback/>} />
-          <Route exact path={`${process.env.PUBLIC_URL}/:any`} render={() => <Error404/>} />
+          {/* <Route exact path={`${process.env.PUBLIC_URL}/:any`} render={() => <Error404/>} /> */}
           <Route exact path={`${process.env.PUBLIC_URL}/admin/login`} render={() => <Error404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/vendor/:any`} render={() => <Error404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/admin/:any`} render={() => <Error404/>} />
@@ -149,6 +150,7 @@ const Root = (props) =>  {
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/job-openings/`} render={() => <VendorError404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/adds-membership/`} render={() => <VendorError404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/ad-spaces/`} render={() => <VendorError404/>} />
+
 
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/manage-pages/`} render={() => <AdminError404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/blogs/`} render={() => <AdminError404/>} />
@@ -167,6 +169,7 @@ const Root = (props) =>  {
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/contact-enquiries/`} render={() => <AdminError404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/trash/:any`} render={() => <AdminError404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/backup/:any`} render={() => <AdminError404/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/oauth2callback?code=:any`} render={() => <Oauth2callback/>} />
 
               {/* <Route exact path={`${process.env.PUBLIC_URL}/dashboard/vendor/`} render={() => {
                 if(localStorage.getItem("vendorloggedin") == 'true') {
