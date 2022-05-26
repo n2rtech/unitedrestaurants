@@ -89,6 +89,8 @@ import AddPromotion from "../components/application/bookmark/add-promotion-coupo
 // Bookmark
 import Bookmark from "../components/application/bookmark"
 
+import PaypalDetails from "../components/application/bookmark/paypaldetails"
+
 import Error404 from '../pages/errors/error404'
    
 
@@ -143,6 +145,7 @@ export const routes = [
         { path:"/dashboard/admin/promotions-discount", Component:PromotionsDiscount},
         { path:"/dashboard/admin/edit-promotions-discount/:id", Component:EditPromotionsDiscount},
         { path:"/app/bookmark", Component:Bookmark},
+        { path:"/dashboard/admin/paypaldetails", Component:PaypalDetails},
        
         { path:"/dashboard/vendor/vendor-profile", Component:VendorProfile},
         { path:"/dashboard/vendor/my-wallet", Component:MyWallet},

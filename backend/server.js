@@ -17,6 +17,7 @@ const jobopenings = require("./routes/jobopenings");
 const videogallery = require("./routes/videogallery");
 
 const youtubevideo = require("./routes/youtubevideo");
+const paypal = require("./routes/paypalsettings");
 
 
 const vendorcoupons = require("./routes/vendorcoupons");
@@ -86,6 +87,7 @@ app.use(
 // Routes
 app.use("/api/users", users);
 app.use("/api/vendors", vendors);
+app.use("/api/paypal", paypal);
 
 app.use("/api/roles", roles);
 app.use("/api/countries", countries);

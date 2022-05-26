@@ -153,6 +153,7 @@ export const MENUITEMS = [
             {
                 title: 'Site settings', path: `${process.env.PUBLIC_URL}/app/bookmark`, icon: Settings, type: 'sub', active: false, children: [
                     { path: `${process.env.PUBLIC_URL}/app/bookmark`, title: 'Site settings', type: 'link' },
+                    { path: `${process.env.PUBLIC_URL}/dashboard/admin/paypaldetails`, title: 'Paypal settings', type: 'link' },
                     { path: `${process.env.PUBLIC_URL}/dashboard/admin/trash/`+localStorage.getItem("id"), title: 'Trash', type: 'link' },
                     { path: `${process.env.PUBLIC_URL}/dashboard/admin/backup/`+localStorage.getItem("id"), title: 'Backup', type: 'link' },
             ]

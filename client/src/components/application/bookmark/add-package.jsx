@@ -18,8 +18,44 @@ const [plantype,setPlanType] = useState('');
 const [cpcode , setCouponCode] = useState('');
 const [dischide , setDiscounthide] = useState(false)
 const [discvalue , setDiscvalue] = useState(0)
+const [Url , setUrl] = useState('https://api-m.sandbox.paypal.com');
 
+const [coupons, setCoupons] = useState([]);
+const token = localStorage.getItem("token");
+const [mode, setMode] = useState("");
+const [client_id, setClientid] = useState('')
+const [secret, setSecret] = useState('')
+const fetch = require('node-fetch');
+const clientIdAndSecret = `${client_id}:${secret}`;
+const basictoken = Buffer.from(clientIdAndSecret).toString('base64')
 
+  useEffect(() => {
+
+      const config = {
+          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+          };
+   
+      fetch("/api/coupons" , config)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setCoupons(result);
+          },
+          (error) => {}
+        )
+
+          axios.get(`/api/paypal/`,
+            config
+            ).then(result => {
+              console.info(result.data[0].client_id);
+              setMode(result.data[0].mode);
+              setClientid(result.data[0].client_id);
+              setSecret(result.data[0].secret);
+            }
+          ).catch(error => console.log('Form submit error', error))
+
+    }, []);
+    
 function cycle_name(cycle) {
   if(cycle == 'month') {
     return 'MONTH';
@@ -84,11 +120,15 @@ function calculate_total_cycles(cycle) {
           if(plantype == '' || name == '' || description == '' || cycle == '' || price == '') {
             toast.error("Please fill form carefully!")
           } else {
-            var client_id = 'AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t';
-            var secret = 'EMLe2XvwWWpke2ZYX9uW-SibKne2GR9x8N6e-xD8bZd6W8C8YdiuQIHxaTKh3rfOmiOxrUrwCbNevI9C';
-            var basictoken = 'QWRIYjBBRE1IVUFXeWtXUUQtdzhNQlIza3VwU3ZZN0FYRFZ6YVJPcnJNQlpnQVQwSDRiZmhubFhyeXd2cGxOYjJjaEc0TEMxekFiRDd4N3Q6RU1MZTJYdndXV3BrZTJaWVg5dVctU2liS25lMkdSOXg4TjZlLXhEOGJaZDZXOEM4WWRpdVFJSHhhVEtoM3JmT21pT3hyVXJ3Q2JOZXZJOUM=';
+
+            if(mode === 1) {
+              setUrl('https://api-m.paypal.com/');
+            } else {
+              setUrl("https://api-m.sandbox.paypal.com/");
+            }
+      
             axios({
-              url: `https://api-m.sandbox.paypal.com/v1/billing/plans/`,
+              url: `${Url}/v1/billing/plans/`,
               method: 'post',
               headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*' , 'Authorization': 'Basic '+basictoken },
               data: { 
@@ -171,26 +211,7 @@ function calculate_total_cycles(cycle) {
       };
       
 
-  const [coupons, setCoupons] = useState([]);
-  const token = localStorage.getItem("token");
-  useEffect(() => {
   
-      const config = {
-          headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
-          };
-   
-      fetch("/api/coupons" , config)
-        .then(res => res.json())
-        .then(
-          (result) => {
-            setCoupons(result);
-          },
-          (error) => {}
-        )
-    }, []);
-
-    console.log(token);
-
 
   return (
     <Fragment>
