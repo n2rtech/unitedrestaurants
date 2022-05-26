@@ -1,20 +1,8 @@
 import React, { Fragment , useEffect, useState } from 'react';
 import Breadcrumb from '../../../layout/breadcrumb'
 
-import PaypalStandardMonthly from './paypalplans/paypalstandardmonthly.jsx'
-import PaypalStandardQuarterly from './paypalplans/paypalstandardquarterly.jsx'
-import PaypalStandardHalfyearly from './paypalplans/paypalstandardhalfyearly.jsx'
-import PaypalStandardYearly from './paypalplans/paypalstandardyearly.jsx'
-
-import PaypalPremiumMonthly from './paypalplans/paypalpremiummonthly.jsx'
-import PaypalPremiumQuatertly from './paypalplans/paypalpremiumquarterly.jsx'
-import PaypalPremiumHalfyearly from './paypalplans/paypalpremiumhalfyearly.jsx'
-import PaypalPremiumYearly from './paypalplans/paypalpremiumyearly.jsx'
-
 import PaypalStandard from "./paypalplans/paypalstandard.jsx"
 import PaypalPremium from "./paypalplans/paypalpremium.jsx"
-import PremiumCoupon from "./paypalplans/premiumcoupon.jsx"
-
 
 import { Container, Row, Col, Card, CardBody, Button, Form ,FormGroup, Label, Input } from 'reactstrap'
 import { Standard } from '../../../constant';

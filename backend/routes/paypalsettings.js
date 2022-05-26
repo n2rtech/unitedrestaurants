@@ -46,4 +46,30 @@ router.put('/',  (req, res) => {
     }
 });
 
+router.get('/getaccesstoken/' , (req, res) => {
+
+            var request = require('request');
+            console.log("Tokens" , req.body.client_id);
+
+            request.post({
+                uri: "https://api.sandbox.paypal.com/v1/oauth2/token",
+                headers: {
+                    "Accept": "application/json",
+                    "Accept-Language": "en_US",
+                    "content-type": "application/x-www-form-urlencoded"
+                },
+                auth: {
+                'user': req.body.client_id,
+                'pass': req.body.secret
+                // 'sendImmediately': false
+            },
+            form: {
+                "grant_type": "client_credentials"
+            }
+            }, function(error, response, body) {
+                console.log(body);
+            });
+     
+    });
+
 module.exports = router;

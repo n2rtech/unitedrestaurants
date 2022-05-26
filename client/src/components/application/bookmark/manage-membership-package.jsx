@@ -9,6 +9,14 @@ const ManageMembershipPackage = (props) => {
 
   const [plansData, setPlansData] = useState([]);
   const token = localStorage.getItem("token");
+  const [mode, setMode] = useState("");
+  const [client_id, setClientid] = useState('')
+  const [secret, setSecret] = useState('')
+  const fetch = require('node-fetch');
+  const clientIdAndSecret = `${client_id}:${secret}`;
+  const basictoken = Buffer.from(clientIdAndSecret).toString('base64')
+  const [url , setUrl] = useState('https://api-m.sandbox.paypal.com');
+
   useEffect(() => {
   
       const config = {
@@ -23,17 +31,31 @@ const ManageMembershipPackage = (props) => {
           },
           (error) => {}
         )
+
+        axios.get(`/api/paypal/`,
+            config
+            ).then(result => {
+              console.info(result.data[0].client_id);
+              setMode(result.data[0].mode);
+              setClientid(result.data[0].client_id);
+              setSecret(result.data[0].secret);
+            }
+          ).catch(error => console.log('Form submit error', error))
+
     }, []);
 
     console.log(plansData);
 
     const HandleActivate = (plan_id,id) => {
       setLoading(true)
-      var client_id = 'AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t';
-      var secret = 'EMLe2XvwWWpke2ZYX9uW-SibKne2GR9x8N6e-xD8bZd6W8C8YdiuQIHxaTKh3rfOmiOxrUrwCbNevI9C';
-      var basictoken = 'QWRIYjBBRE1IVUFXeWtXUUQtdzhNQlIza3VwU3ZZN0FYRFZ6YVJPcnJNQlpnQVQwSDRiZmhubFhyeXd2cGxOYjJjaEc0TEMxekFiRDd4N3Q6RU1MZTJYdndXV3BrZTJaWVg5dVctU2liS25lMkdSOXg4TjZlLXhEOGJaZDZXOEM4WWRpdVFJSHhhVEtoM3JmT21pT3hyVXJ3Q2JOZXZJOUM=';
-      axios({
-        url: `https://api-m.sandbox.paypal.com/v1/billing/plans/`+`${plan_id}`+`/activate`,
+      if(mode === 1) {
+        setUrl('https://api-m.paypal.com/');
+      } else {
+        setUrl("https://api-m.sandbox.paypal.com/");
+      }
+
+       axios({
+        url: `${url}/v1/billing/plans/`+`${plan_id}`+`/activate`,
         method: 'post',
         headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*' , 'Authorization': 'Basic '+basictoken },
       })
@@ -66,12 +88,15 @@ const ManageMembershipPackage = (props) => {
     const HandleDeactivate = (plan_id,id) => {
 
       setLoading(true)
+      if(mode === 1) {
+        setUrl('https://api-m.paypal.com/');
+      } else {
+        setUrl("https://api-m.sandbox.paypal.com/");
+      }
 
-      var client_id = 'AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t';
-      var secret = 'EMLe2XvwWWpke2ZYX9uW-SibKne2GR9x8N6e-xD8bZd6W8C8YdiuQIHxaTKh3rfOmiOxrUrwCbNevI9C';
-      var basictoken = 'QWRIYjBBRE1IVUFXeWtXUUQtdzhNQlIza3VwU3ZZN0FYRFZ6YVJPcnJNQlpnQVQwSDRiZmhubFhyeXd2cGxOYjJjaEc0TEMxekFiRDd4N3Q6RU1MZTJYdndXV3BrZTJaWVg5dVctU2liS25lMkdSOXg4TjZlLXhEOGJaZDZXOEM4WWRpdVFJSHhhVEtoM3JmT21pT3hyVXJ3Q2JOZXZJOUM=';
+      //var basictoken = 'QWRIYjBBRE1IVUFXeWtXUUQtdzhNQlIza3VwU3ZZN0FYRFZ6YVJPcnJNQlpnQVQwSDRiZmhubFhyeXd2cGxOYjJjaEc0TEMxekFiRDd4N3Q6RU1MZTJYdndXV3BrZTJaWVg5dVctU2liS25lMkdSOXg4TjZlLXhEOGJaZDZXOEM4WWRpdVFJSHhhVEtoM3JmT21pT3hyVXJ3Q2JOZXZJOUM=';
       axios({
-        url: `https://api-m.sandbox.paypal.com/v1/billing/plans/`+`${plan_id}`+`/deactivate`,
+        url: `${url}/v1/billing/plans/`+`${plan_id}`+`/deactivate`,
         method: 'post',
         headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*' , 'Authorization': 'Basic '+basictoken },
       })
