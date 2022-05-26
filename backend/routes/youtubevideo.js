@@ -138,7 +138,7 @@ router.post('/', imageUpload.array('image',12),  function (req, res) {
       type: "oauth"
     , client_id: CREDENTIALS.web.client_id
     , client_secret: CREDENTIALS.web.client_secret
-    , redirect_url: CREDENTIALS.web.redirect_uris[0]
+    , redirect_url: CREDENTIALS.web.redirect_uris[1]
     });
 
     opn(oauth.generateAuthUrl({
@@ -152,7 +152,7 @@ router.post('/', imageUpload.array('image',12),  function (req, res) {
 
 // very basic example of uploading a video to youtube
 function setValues(title,desc,fileName , youtube_id) {
-  console.log("Inside run sample funciton..............");
+  console.log("Inside run sample function..............");
   store.set('youtube', { title: title , desc: desc , filename: fileName , youtube_id: youtube_id })
 }
 

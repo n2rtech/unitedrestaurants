@@ -20,7 +20,7 @@ const AddVideoGallery = (props) => {
     };
 
     const onChangeYoutubelink = (event) => {
-      setYoutubelink(event.target.value);
+      setUploadYoutubelink(event.target.value);
     };
 
     const onChangeMode = (event) => {
@@ -46,8 +46,8 @@ const AddVideoGallery = (props) => {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
       };
       const bodyParameters = {
-        video_name: videoname,
-        youtube_link: youtubelink,
+        video_name: uploadvideoname,
+        youtube_link: uploadyoutubelink,
         user_id : id
       };
       axios.post(`/api/video-gallery/`,
@@ -73,7 +73,7 @@ const AddVideoGallery = (props) => {
   const uploadid = localStorage.getItem("id");
 
   const onChangeVideonameupload = (event) => {
-    setVideoname(event.target.value);
+    setUploadVideoname(event.target.value);
   };
 
   const onChangeDesc = (event) => {
