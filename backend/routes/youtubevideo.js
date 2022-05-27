@@ -100,8 +100,8 @@ router.post('/oauth2callback', (req, res) => {
       media: {
             body: fs.createReadStream(store.get('youtube').filename)
         },
-        onBehalfOfContentOwner: "rdGmmSA0bHTTHI4zFVbMUQ",
-  onBehalfOfContentOwnerChannel: "UCrdGmmSA0bHTTHI4zFVbMUQ"
+        // onBehalfOfContentOwner: "rdGmmSA0bHTTHI4zFVbMUQ",
+        // onBehalfOfContentOwnerChannel: "UCrdGmmSA0bHTTHI4zFVbMUQ"
     }, (err, data) => {
         
       if(err) {
