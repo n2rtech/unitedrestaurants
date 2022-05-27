@@ -94,9 +94,14 @@ router.post('/oauth2callback', (req, res) => {
       , part: "snippet,status"
         // store.get('youtube').filename
         // Create the readable stream to upload the video
-      , media: {
+      ,
+     
+      
+      media: {
             body: fs.createReadStream(store.get('youtube').filename)
-        }
+        },
+        onBehalfOfContentOwner: "rdGmmSA0bHTTHI4zFVbMUQ",
+  onBehalfOfContentOwnerChannel: "UCrdGmmSA0bHTTHI4zFVbMUQ"
     }, (err, data) => {
         
       if(err) {
@@ -143,7 +148,10 @@ router.post('/', imageUpload.array('image',12),  function (req, res) {
 
     opn(oauth.generateAuthUrl({
       access_type: "offline"
-    , scope: ["https://www.googleapis.com/auth/youtube.upload"]
+     
+    , scope: ["https://www.googleapis.com/auth/youtube.upload","https://www.googleapis.com/auth/youtubepartner"],
+    include_granted_scopes: true,
+
     }), {wait: true
     }).then(cp => res.status(200).send( cp.spawnargs[1].replace('https://','')));
 
