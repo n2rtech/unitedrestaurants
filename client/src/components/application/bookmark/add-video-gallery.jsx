@@ -97,13 +97,15 @@ const AddVideoGallery = (props) => {
       bodyParameters.append('desc', desc);
       bodyParameters.append('image', youtubelink)
     
-    toast.success('Please wait for confirmation.......');
-    axios.post(`/api/youtubevideo/`, 
+    axios.post(`/api/youtubevideo/save/`, 
       bodyParameters,
       config
     ) .then(response => {
-      console.log(response.data);
-      seturl(response.data);
+        if(response.data.msg) {
+          toast.success('Uploaded Video Successfully')
+          setTimeout(history.push('/dashboard/vendor/vendor-videogallery/'), 1000);
+        }
+
     }).catch(error => { toast.error('Please upload files or fill title and description') })
 
 
@@ -159,9 +161,9 @@ const AddVideoGallery = (props) => {
                     </Form>
                   
         
-                  <CardBody>
+                  {/* <CardBody>
                     { url == '' ? '' : <Button color="primary" href={`//${url}`} target='_blank'>Please click here to verify youtube channel</Button>}
-                  </CardBody>
+                  </CardBody> */}
 
                   </div>
               

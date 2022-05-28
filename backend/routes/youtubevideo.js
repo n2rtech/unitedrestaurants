@@ -174,5 +174,18 @@ router.get('/:id', function (req, res) {
   });
 });
 
+router.post('/save', imageUpload.array('image',12),  function (req, res) {
+  //console.log("Inserted");
+  if (!req.body.video_name && !req.body.desc) {
+      res.status(400).send({
+          msg: 'Please upload files or fill title and description.'
+      })
+  } else {
+
+    res.status(200).send({"msg" : true})
+
+  }
+});
+
 
 module.exports = router;
