@@ -25,7 +25,6 @@ export default function BusinessVideo() {
 
   return (
     <>
-    {(videoGalleryData && videoGalleryData.length) ?
       <div className="details-left">
         <div className="menu-items offers">
           <h5>Videos</h5>
@@ -55,8 +54,7 @@ export default function BusinessVideo() {
             )) : <span style={{color:'red'}}> Not Available </span> }       
 
         </div>
-      </div>
-      : '' }
+      </div>     
 
     </>
   );
