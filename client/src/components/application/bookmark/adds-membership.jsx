@@ -10,6 +10,7 @@ import Paypalbuttongold from './advertisementpaypal/goldpaypal.jsx'
 
 const AddsMembership = (props) => {
 
+
   const [membershipsData, setAddmemberships] = useState([]);
   const user_id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
@@ -88,8 +89,8 @@ const AddsMembership = (props) => {
         if(event.target.value === 'Monthly') {
             getIdfromData('Monthly','gold');
         } else if(event.target.value === 'Quarterly') {
-            getIdfromData('Quarterly','gold');
-        } else if(event.target.value === 'Yearly') {
+            getIdfromData('Quarterly','bronze');
+        } else if(event.target.value === 'gold') {
             getIdfromData('Yearly','gold');
         } else {
             getIdfromData('HalfYearly','gold');
