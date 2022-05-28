@@ -4,6 +4,7 @@ const User = require('../models').User;
 const Role = require('../models').Role;
 const Permission = require('../models').Permission;
 const VideoGallery = require('../models').VideoGallery;
+const UploadVideoGallery = require('../models').Youtubevideo;
 const passport = require('passport');
 require('../config/passport')(passport);
 const Helper = require('../utils/helper');
@@ -48,7 +49,18 @@ router.get('/', passport.authenticate('vendor', {
 router.get('/list/:id', (req, res) => {
     VideoGallery
     .findAll({where:{user_id:req.params.id}})
-    .then((videogalleries) => res.status(200).send(videogalleries))
+    .then((videogalleries) => {
+        UploadVideoGallery
+        .findAll({where:{user_id:req.params.id}})
+        .then((uploadvideo) => {
+            res.status(200).send({
+                'youtube_gallery': videogalleries,
+                'uploadvideo' : uploadvideo
+              })
+        }).catch((error) => {
+        res.status(400).send(error);
+    });
+    })
     .catch((error) => {
         res.status(400).send(error);
     });
