@@ -89,7 +89,7 @@ const AddsMembership = (props) => {
         if(event.target.value === 'Monthly') {
             getIdfromData('Monthly','gold');
         } else if(event.target.value === 'Quarterly') {
-            getIdfromData('Quarterly','bronze');
+            getIdfromData('Quarterly','gold');
         } else if(event.target.value === 'gold') {
             getIdfromData('Yearly','gold');
         } else {
