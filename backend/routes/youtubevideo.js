@@ -43,7 +43,7 @@ const imageUpload = multer({
       fileSize: 9000000000000000
     },
     fileFilter(req, file, cb) {
-      if (!file.originalname.match(/\.(flv|mp4)$/)) { 
+      if (!file.originalname.match(/\.(flv|mp4|mov)$/)) { 
          return cb(new Error('Please upload a video file'))
        }
      cb(undefined, true)

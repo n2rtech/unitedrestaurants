@@ -33,9 +33,9 @@ export default function BusinessVideo() {
                   <source src={`${process.env.PUBLIC_URL}/api/uploads/youtubevideo/${uploadvideoGallery.video_link}`} />
                   <ControlBar autoHide={false} />
                 </Player>
-               
+                &nbsp;
               </div>
-            )) : <span style={{color:'red'}}> Not Available </span> }  
+            )) : <span style={{color:'red'}}>  </span> }  
 
           &nbsp;
 
@@ -45,9 +45,10 @@ export default function BusinessVideo() {
                  {videoGallery.youtube_link ? 
                 <iframe width="100%" height="260" src={videoGallery.youtube_link.replace('watch?v=' , 'embed/')} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                   : ''}
+                  &nbsp;
                 </div>
             </div>
-            )) : <span style={{color:'red'}}> Not Available </span> 
+            )) : <span style={{color:'red'}}>  </span> 
           }  
 
          
