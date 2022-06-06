@@ -186,8 +186,8 @@ export const routes = [
         { path:"/dashboard/admin/add-package", Component:AddPackage},
         { path:"/dashboard/admin/add-promotion-coupon", Component:AddPromotion},
         
-        { path:"/dashboard/admin/manage-adds", Component:ManageAdds},
-        { path:"/dashboard/admin/add-addvertisement-package", Component:AddvertisementPackage},
+        // { path:"/dashboard/admin/manage-adds", Component:ManageAdds},
+        // { path:"/dashboard/admin/add-addvertisement-package", Component:AddvertisementPackage},
         
 
         // User Url's
