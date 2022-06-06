@@ -86,8 +86,7 @@ import ManagePackage from "../components/application/bookmark/manage-membership-
 import AddPackage from "../components/application/bookmark/add-package"
 import AddPromotion from "../components/application/bookmark/add-promotion-coupon"
 
-import ManageAdds from "../components/application/bookmark/manage-adds-package"
-import AddvertisementPackage from "../components/application/bookmark/addvertisement-package"
+
 // Bookmark
 import Bookmark from "../components/application/bookmark"
 
