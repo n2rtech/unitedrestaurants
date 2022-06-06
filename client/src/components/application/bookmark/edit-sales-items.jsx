@@ -41,7 +41,7 @@ const EditSalesItems = (props) => {
         };
 
 
-  axios.get(`/api/sale-items/${params.id}`)
+  axios.get(`/api/sale-items/get/${params.id}`)
   .then((getData) => {
     SetSales(getData.data);
     setName(getData.data.name);

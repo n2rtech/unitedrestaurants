@@ -1,4 +1,4 @@
-import React,{useState,useMemo,Fragment} from 'react';
+import React,{useState,useEffect} from 'react';
 import { Row, Col} from 'reactstrap'
 import axios from 'axios'
 import {useParams} from 'react-router-dom'
@@ -8,9 +8,9 @@ export default function SaleItems() {
   const params = useParams();
   const id = `${params.id}`;
 
-  const[saleItemsData,setSaleItemsData] = useState({})
+  const[saleItemsData,setSaleItemsData] = useState([])
 
-  useMemo(() => {
+  useEffect(() => {
 
     axios.get(`/api/sale-items/${id}`)
     .then((result_data) => {
@@ -19,34 +19,27 @@ export default function SaleItems() {
 
   },[])
 
+  console.log("Sales Items", saleItemsData.length);
+
   return (
     <>
-    {saleItemsData.content && saleItemsData.content.length ?
+    {saleItemsData && saleItemsData.length > 0 ?
       <div className="details-left">
         <div className="menu-items newSaleItems">
           <h5>Items for Sale</h5>
           <Row>
-            <Col sm="4">
-              <div className="saleBox">
-              <img src={`https://unitedrestaurants.com/api/uploads/banner/banner_1652102377378.jpeg`} style={{ width: "190px" }} />
-                <h3>Kitchen Items & Crockery</h3>
-                <p>Proin dapibus turpis vitae magna accumsan vitae molestie enim elementum quisque eget leo dictum elementum est id lobortis sapien vestibulum id sem</p>
-              </div>
-            </Col>
-            <Col sm="4">
-              <div className="saleBox">
-              <img src={`https://unitedrestaurants.com/api/uploads/banner/banner_1652102377378.jpeg`} style={{ width: "190px" }} />
-                <h3>Kitchen Items & Crockery</h3>
-                <p>Proin dapibus turpis vitae magna accumsan vitae molestie enim elementum quisque eget leo dictum elementum est id lobortis sapien vestibulum id sem</p>
-              </div>
-            </Col>
-            <Col sm="4">
-              <div className="saleBox">
-              <img src={`https://unitedrestaurants.com/api/uploads/banner/banner_1652102377378.jpeg`} style={{ width: "190px" }} />
-                <h3>Kitchen Items & Crockery</h3>
-                <p>Proin dapibus turpis vitae magna accumsan vitae molestie enim elementum quisque eget leo dictum elementum est id lobortis sapien vestibulum id sem</p>
-              </div>
-            </Col>
+            {saleItemsData && saleItemsData.map((item,index) => (
+                <Col sm="4" key = {index}>
+                <div className="saleBox">
+                  { item.image  ?   <img src={`http://localhost:3000/api/uploads/salesitems/${item.image}`} style={{ width: "190px" }} /> : 
+                  
+                  <img src={`https://unitedrestaurants.com/api/uploads/banner/thumbnail.jpg`} style={{ width: "190px" }} /> }
+               
+                  <h3>{item.name}</h3>
+                  <p>{item.content}</p>
+                </div>
+              </Col>
+            ))}
           </Row>
         </div>
       </div>

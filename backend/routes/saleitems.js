@@ -123,11 +123,28 @@ router.get('/list/:id', (req, res) => {
 // Get SaleItem by ID
 router.get('/:id', (req, res) => {
     SaleItem
+        .findAll({
+            where:{
+           user_id : req.params.id
+        }})
+        .then((saleitem) => {
+            // console.log("Sales Items" , saleitem);
+            res.status(201).send(saleitem)
+        })
+        .catch((error) => {
+            res.status(400).send(error);
+        });
+});
+
+// Get SaleItem by ID
+router.get('/get/:id', (req, res) => {
+    SaleItem
         .findOne({
             where:{
            id : req.params.id
         }})
         .then((saleitem) => {
+            // console.log("Sales Items" , saleitem);
             res.status(201).send(saleitem)
         })
         .catch((error) => {
