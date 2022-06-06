@@ -86,6 +86,8 @@ import ManagePackage from "../components/application/bookmark/manage-membership-
 import AddPackage from "../components/application/bookmark/add-package"
 import AddPromotion from "../components/application/bookmark/add-promotion-coupon"
 
+import ManageAdds from "../components/application/bookmark/manage-adds-package"
+import AddvertisementPackage from "../components/application/bookmark/addvertisement-package"
 // Bookmark
 import Bookmark from "../components/application/bookmark"
 
@@ -184,6 +186,9 @@ export const routes = [
         { path:"/dashboard/admin/manage-packages", Component:ManagePackage},
         { path:"/dashboard/admin/add-package", Component:AddPackage},
         { path:"/dashboard/admin/add-promotion-coupon", Component:AddPromotion},
+        
+        { path:"/dashboard/admin/manage-adds", Component:ManageAdds},
+        { path:"/dashboard/admin/add-addvertisement-package", Component:AddvertisementPackage},
         
 
         // User Url's

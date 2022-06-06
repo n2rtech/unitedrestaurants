@@ -134,7 +134,7 @@ const Root = (props) =>  {
           <Route  path={`${process.env.PUBLIC_URL}/pages/errors/error400`} component={Error400}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/pages/maintenance`} component={Maintenance}></Route>
           <Route  path={`${process.env.PUBLIC_URL}/callback`} render={() => <Callback/>} />
-          {/* <Route exact path={`${process.env.PUBLIC_URL}/:any`} render={() => <Error404/>} /> */}
+          <Route exact path={`${process.env.PUBLIC_URL}/:any`} render={() => <Error404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/admin/login`} render={() => <Error404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/vendor/:any`} render={() => <Error404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/admin/:any`} render={() => <Error404/>} />
