@@ -30,8 +30,6 @@ const Featured2 = () => {
   }, []);
 
   const addDefaultSrc = (ev) => {
-    // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h4.jpeg`;
-    // <a href="/FeaturedListing">SEE ALL</a>
     ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
   }
 
@@ -50,8 +48,9 @@ const Featured2 = () => {
               <Card> 
                 <div className="hImage">
                 <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
-                    <img onError={addDefaultSrc} style = {{ 'width': '348px' , 'height' : '232px' }} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
-                     alt="Menu-Icon"/>
+                  {item.banner ?  <img onError={addDefaultSrc} style = {{ 'width': '348px' , 'height' : '232px' }} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
+                     alt="Menu-Icon"/> :  <img src={`${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`} alt="Menu-Icon"/>}
+                   
                       </a>
                 </div>
                 <CardTitle tag="h5">

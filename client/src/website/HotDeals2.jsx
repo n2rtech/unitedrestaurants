@@ -31,7 +31,6 @@ const HotDeals2 = () => {
   });
 
 const addDefaultSrc = (ev) => {
-  // ev.target.src = `${process.env.PUBLIC_URL}/assets/images/h4.jpeg`;
   ev.target.src = `${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`;
 }
 
@@ -51,7 +50,7 @@ const addDefaultSrc = (ev) => {
                     <div className="ribbon"><p> {item.discount}% off</p></div>
                     <div className="hImage">
                       <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
-                        <img onError = {addDefaultSrc} style = {{ 'width': '348px' , 'height' : '232px' }} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`}/>
+                        {item.banner ?  <img onError = {addDefaultSrc} style = {{ 'width': '348px' , 'height' : '232px' }} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`}/> :  <img src={`${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`} alt="Menu-Icon"/>}   
                       </a>
                     </div>
                     <CardTitle tag="h5">

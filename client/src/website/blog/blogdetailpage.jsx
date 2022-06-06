@@ -37,8 +37,11 @@ const Detailpage = (props) => {
         <Col sm="12" xs="12">
 		
         <div className="blogmedia">
-        	<img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${blogDetails.large_image}`} 
-                     alt="blog-single" className="img-fluid" />
+          { blogDetails.large_image ?  <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/blogs/${blogDetails.large_image}`} 
+                     alt="blog-single" className="img-fluid" /> : 
+                     
+                     <img src={`${process.env.PUBLIC_URL}api/uploads/banner/thumbnail.jpg`}   alt="blog-single" className="img-fluid" /> }
+        	
           </div>  
           <div className="blog-social">
           <List type="inline">

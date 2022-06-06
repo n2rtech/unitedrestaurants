@@ -44,8 +44,9 @@ const addDefaultSrc = (ev) => {
             <div className="customcard">
               <Card>
                  <CardBody>
-                   <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
-                     alt="Menu-Icon"/>
+                   {item.banner ? <img onError = {addDefaultSrc} src={`${process.env.PUBLIC_URL}/api/uploads/banner/${item.banner}`} 
+                     alt="Menu-Icon"/> : <img src={`${process.env.PUBLIC_URL}/api/uploads/banner/thumbnail.jpg`} alt="Menu-Icon"/>}
+                   
                   <CardTitle tag="h5">
                     <a href={`${process.env.PUBLIC_URL}/BusinessDetails/${item.user_id}`}>
                     {item.business_name}
