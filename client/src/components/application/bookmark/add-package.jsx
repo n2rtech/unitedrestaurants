@@ -18,7 +18,7 @@ const [plantype,setPlanType] = useState('');
 const [cpcode , setCouponCode] = useState('');
 const [dischide , setDiscounthide] = useState(false)
 const [discvalue , setDiscvalue] = useState(0)
-const [Url , setUrl] = useState('https://api-m.sandbox.paypal.com');
+const [Url , setUrl] = useState('');
 
 const [coupons, setCoupons] = useState([]);
 const token = localStorage.getItem("token");
@@ -48,6 +48,12 @@ const basictoken = Buffer.from(clientIdAndSecret).toString('base64')
             config
             ).then(result => {
               console.info(result.data[0].client_id);
+
+              if(result.data[0].mode === 1) {
+                setUrl("https://api-m.sandbox.paypal.com/");
+              } else {
+                setUrl("https://api-m.paypal.com/");
+              }
               setMode(result.data[0].mode);
               setClientid(result.data[0].client_id);
               setSecret(result.data[0].secret);
@@ -114,21 +120,34 @@ function calculate_total_cycles(cycle) {
       }
     }
 
+
       const handleSubmit = event => {
         event.preventDefault();
 
           if(plantype == '' || name == '' || description == '' || cycle == '' || price == '') {
             toast.error("Please fill form carefully!")
           } else {
-
-            if(mode === 1) {
-              setUrl('https://api-m.paypal.com/');
-            } else {
-              setUrl("https://api-m.sandbox.paypal.com/");
-            }
-      
+              console.log("Mode" , Url);
+        
+              const token = localStorage.getItem("token");
+              const config = {
+                headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+                };
+        
+                const bodyParameters = {
+                  name: name,
+                  description: description,
+                  discount: discvalue,
+                  plan_type: plantype
+                }    
+              axios.post('/api/vendor-membership/checkplans/', bodyParameters ,config )
+              .then(response => {
+                if(response.data.error) {
+                  toast.error(response.data.error);
+                } else {
+                            
             axios({
-              url: `${Url}/v1/billing/plans/`,
+              url: `${Url}v1/billing/plans/`,
               method: 'post',
               headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*' , 'Authorization': 'Basic '+basictoken },
               data: { 
@@ -204,9 +223,13 @@ function calculate_total_cycles(cycle) {
                     }
                   }
                 ).catch(error => console.log('Form submit error', error))
-                }
-            
+                } 
               })
+            }
+              }
+            ).catch(error => console.log('Form submit error', error))
+
+
           }
       };
       

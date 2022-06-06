@@ -3,6 +3,7 @@ const router = express.Router();
 const {DB} = require('../config/database');
 const VendorMembership = require('../models').VendorMembership;
 const Membership = require('../models').Membership;
+const AddsMembership = require('../models').AddsMembership;
 const MembershipTransaction = require('../models').MembershipTransaction;
 const FeaturedBusiness = require('../models').FeaturedBusiness;
 const Vendor = require('../models').Vendor;
@@ -72,15 +73,6 @@ router.get('/plan-list', function (req, res) {
         res.status(400).send(error);
     });
 });
-
-// router.get('/plan-list-array', function (req, res) {
-//     Membership
-//     .findAll()
-//     .then((results) => res.status(200).send(results))
-//     .catch((error) => {
-//         res.status(400).send(error);
-//     });
-// });
 
 router.get('/plan-list-array', (req, res) => {
     Membership
@@ -271,6 +263,35 @@ router.post('/plan-save', (req, res) => {
     }
 });
 
+
+router.post('/checkplans', (req, res) => {
+    if (!req.body.name || !req.body.description) {
+        res.status(400).send({
+            msg: 'Please pass Plan name or description.'
+        })
+    }
+    if(req.body.discount == 0) {
+        Membership
+        .findAll({where:{discount:0, plan_type : req.body.plan_type}})
+        .then((job) => {
+               if(job.length > 0) {
+                  res.status(201).send({error: "Already created for this interval plan"})
+               } else {
+                res.status(201).send({
+                    msg: true
+                })
+               }
+        }).catch((erro) => {
+
+        })
+        
+    } else {
+        res.status(201).send({
+            msg: true
+        })
+    }
+});
+
 // assign membership to user a Membership
 router.put('/asign-to-user/:id', (req, res) => {
         if (!req.params.id || !req.body.membership_id) {
@@ -394,6 +415,125 @@ router.put('/asign-to-user/:id', (req, res) => {
             });
         }
 });
+
+// Advertisement Pplans
+
+router.post('/adds-plan-save', (req, res) => {
+    if (!req.body.name || !req.body.description) {
+        res.status(400).send({
+            msg: 'Please pass Plan name or description.'
+        })
+    }
+    if(req.body.discount == 0) {
+        AddsMembership
+        .findAll({where:{discount:0, plan_type : req.body.plan_type}})
+        .then((job) => {
+               if(job.length > 0) {
+                  res.status(201).send({error: "Already created for this interval plan"})
+               } else {
+                AddsMembership
+                .create({
+                    name: req.body.name,
+                    user_id: req.body.user_id,
+                    description: req.body.description,
+                    create_time: req.body.create_time,
+                    plan_id: req.body.plan_id,
+                    product: req.body.product_id,
+                    plan_type: req.body.plan_type,
+                    price: req.body.price,
+                    interval: req.body.interval,
+                    status: 1,
+                    discount: req.body.discount,
+                    discount_coupon_id: req.body.coupon_id
+                })
+                res.status(201).send({msg: "Plan is successfully created"})
+                .catch((error) => {
+                    console.log(error);
+                    res.status(400).send(error);
+                });
+               }
+        }).catch((erro) => {
+
+        })
+    } else {
+        AddsMembership
+            .create({
+                name: req.body.name,
+                user_id: req.body.user_id,
+                description: req.body.description,
+                create_time: req.body.create_time,
+                plan_id: req.body.plan_id,
+                product: req.body.product_id,
+                plan_type: req.body.plan_type,
+                price: req.body.price,
+                interval: req.body.interval,
+                status: 1,
+                discount: req.body.discount,
+                discount_coupon_id: req.body.coupon_id
+            })
+            res.status(201).send({msg: "Plan is successfully created"})
+            .catch((error) => {
+                console.log(error);
+                res.status(400).send(error);
+            });
+    }
+});
+
+router.get('/adds-plan-list', function (req, res) {
+    AddsMembership
+    .findAll()
+    .then((results) => res.status(200).send(results))
+    .catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+router.get('/adds-plan-list-array', (req, res) => {
+    AddsMembership
+    .findAll()
+    .then((result) => {
+        AddsMembership
+      .findAll({ where:{
+        plan_type: 'silver'
+      }
+    })
+      .then((silver) => {
+        AddsMembership
+      .findAll({ where:{
+        plan_type: 'bronze'
+      },
+    })
+    .then((bronze) => {
+        AddsMembership
+      .findAll({ where:{
+        plan_type: 'gold'
+      },
+    })
+      .then((gold) => {
+        res.status(200).send({
+          'silver': silver,
+          'bronze' : bronze,
+          'gold' : gold
+        })
+      })
+      .catch((error) => {
+        res.status(400).send('error');
+      });
+      })
+      .catch((error) => {
+        res.status(400).send('error');
+      });
+      })
+      .catch((error) => {
+        res.status(400).send('error');
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(400).send('error1');
+    });
+  });
+
 
 
 module.exports = router;
