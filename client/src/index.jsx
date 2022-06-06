@@ -143,6 +143,7 @@ const Root = (props) =>  {
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/vendor-profile/`} render={() => <VendorError404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/menu-items/:any`} render={() => <VendorError404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/vendor-membership-package/`} render={() => <VendorError404/>} />
+          
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/vendor-coupon/`} render={() => <VendorError404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/vendor-photogallery/`} render={() => <VendorError404/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/dashboard/admin/vendor-videogallery/`} render={() => <VendorError404/>} />
