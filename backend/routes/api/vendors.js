@@ -483,12 +483,12 @@ router.post("/register", (req, res) => {
                 DB.query("INSERT INTO " + table_name +" (user_id, `business_name`, `about_business`, `business_email`, `manager_name`, `manager_email`, `owner_name`, `owner_email`, `phone`, `mobile`, `ownermobile`,  `fax`, `address`, `latitude`, `longitude`, `city`, `state`, `post_code`,  `categories`, `banner`, `website_link`, `facebook`, `instagram`, `youtube`, `gallery`, `video`, `status`, `deletedAt`, `createdAt`, `updatedAt` ) VALUES ("+user_id+", '"+name+"', '', '"+email+"', '"+name+"', '"+email+"', '"+name+"', '"+email+"', '"+mobile+"', '"+mobile+"', '"+ownermobile+"', '', '"+address+"', '"+latitude+"', '"+longitude+"', '', '', '', '["+req.body.category_id+"]', '', '', '', '', '', '', '', 1, '', NOW(), '')");
                  
                 let transporter = nodemailer.createTransport({
-                  host: "smtp.googlemail.com",
+                  host: "mail.unitedrestaurants.com",
                   port: 465,
                   secure: true, // true for 465, false for other ports
                   auth: {
-                    user: 'contact@n2rtechnologies.com', // generated ethereal user
-                    pass: 'sparx#@9921', // generated ethereal password
+                    user: 'norelpy@unitedrestaurants.com', // generated ethereal user
+                    pass: '7v3&0b+(UnOF', // generated ethereal password
                   },
                 });
 
@@ -628,12 +628,12 @@ router.post("/reset_pswd", (req, res) => {
       })
       .then((result)=> {
         let transporter = nodemailer.createTransport({
-        host: "smtp.googlemail.com",
+        host: "mail.unitedrestaurants.com",
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-          user: 'contact@n2rtechnologies.com', // generated ethereal user
-          pass: 'contact#@785612', // generated ethereal password
+          user: 'norelpy@unitedrestaurants.com', // generated ethereal user
+          pass: '7v3&0b+(UnOF', // generated ethereal password
         },
       });
   
@@ -693,12 +693,12 @@ router.post("/email_verify_pswd", (req, res) => {
     }else{
 
       let transporter = nodemailer.createTransport({
-        host: "smtp.googlemail.com",
+        host: "mail.unitedrestaurants.com",
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-          user: 'contact@n2rtechnologies.com', // generated ethereal user
-          pass: 'contact#@785612', // generated ethereal password
+          user: 'norelpy@unitedrestaurants.com', // generated ethereal user
+          pass: '7v3&0b+(UnOF', // generated ethereal password
         },
       });
 
