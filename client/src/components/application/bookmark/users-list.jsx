@@ -91,7 +91,7 @@ const Userslist = (props) => {
         headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+localStorage.getItem('token') }
         };
   
-        axios.delete(`/api/jobs/delete/`+`${id}`,config
+        axios.delete(`/api/users/`+`${id}`,config
         ) .then(response => {
           toast.success("User Deleted !")
           setTimeout(() => {

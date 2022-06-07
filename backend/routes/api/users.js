@@ -556,7 +556,11 @@ router.delete('/:id', (req, res) => {
       })
     } else {
       User
-        .findByPk(req.params.id)
+        .findOne({
+            where: {
+                id: req.params.id
+            }
+        })
         .then((user) => {
           
           if (user) {
