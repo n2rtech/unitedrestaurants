@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
 
 router.put('/',  (req, res) => {
 
-    if (!req.body.client_id || !req.body.secret) {
+    if (!req.body.testclient_id || !req.body.testsecret) {
         res.status(400).send({
             msg: 'Please pass paypal client id and secret.'
         })
@@ -26,8 +26,10 @@ router.put('/',  (req, res) => {
 
             Paypalsettings.update({
                 mode: req.body.mode ,
-                client_id: req.body.client_id,
-                secret: req.body.secret,
+                testclient_id: req.body.testclient_id,
+                testsecret: req.body.testsecret,
+                liveclient_id: req.body.liveclient_id,
+                livesecret: req.body.livesecret,
             }, {
                 where: {
                     id: 1

@@ -8,8 +8,13 @@ import {toast} from 'react-toastify';
 const Paypaldetails = (props) => {
   const token = localStorage.getItem("token");
   const [mode, setMode] = useState("");
-  const [client_id, setClientid] = useState("");
-  const [secret, setSecret] = useState("");
+  const [testclient_id, setTestClientid] = useState("");
+  const [testsecret, setTestSecret] = useState("");
+  const [liveclient_id, setLiveClientid] = useState("");
+  const [livesecret, setLiveSecret] = useState("");
+
+  const [testMode, setTestMode] = useState(true);
+  const [liveMode, setLiveMode] = useState(false);
 
   useEffect(() => {
 
@@ -22,8 +27,17 @@ const Paypaldetails = (props) => {
     .then(
       (result) => { 
         setMode(result[0].mode);
-        setClientid(result[0].client_id);
-        setSecret(result[0].secret);
+        setTestClientid(result[0].testclient_id);
+        setTestSecret(result[0].testsecret);
+        setLiveClientid(result[0].liveclient_id);
+        setLiveSecret(result[0].livesecret);
+        if(result[0].mode == 0) {
+          setTestMode(false);
+          setLiveMode(true);
+        } else {
+          setTestMode(true);
+          setLiveMode(false);
+        }
       },
       (error) => { 
       });
@@ -31,6 +45,13 @@ const Paypaldetails = (props) => {
 
     const onChangeMode = (event) => {
       setMode(event.target.value);
+      if(event.target.value == 0) {
+        setTestMode(false);
+        setLiveMode(true);
+      } else {
+        setTestMode(true);
+        setLiveMode(false);
+      }
     }
 
     const handleSubmit = event => {
@@ -38,8 +59,10 @@ const Paypaldetails = (props) => {
 
       const bodyParameters = {
         mode: mode,
-        secret: secret,
-        client_id: client_id
+        testsecret: testsecret,
+        testclient_id: testclient_id,
+        livesecret: livesecret,
+        liveclient_id: liveclient_id
       }
 
       const config = {
@@ -73,18 +96,38 @@ const Paypaldetails = (props) => {
                     <Label className="mb-0" for="yes-featured">Yes</Label>
                     </div>
                 </FormGroup>
+                {testMode && 
+                    <> 
+                      <FormGroup>
+                      <Label htmlFor="exampleFormControlInput1">Test Client Id</Label>
+                      <Input className="form-control" value={testclient_id} onChange={e => setTestClientid(e.target.value)}  type="text" />
+                      </FormGroup>
+                      <FormGroup>
+                      <Label htmlFor="exampleFormControlInput1">Test Secret</Label>
+                      <Input className="form-control" value={testsecret} onChange={e => setTestSecret(e.target.value)}  type="text" />
+                      </FormGroup>
+                      <FormGroup>
+                      <Button  color="primary" onClick={handleSubmit}>{"Save"}</Button>
+                      </FormGroup>
+                    </> 
+                 }
 
-              <FormGroup>
-                <Label htmlFor="exampleFormControlInput1">Client Id</Label>
-                <Input className="form-control" value={client_id} onChange={e => setClientid(e.target.value)}  type="name" />
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="exampleFormControlInput1">Secret</Label>
-                <Input className="form-control" value={secret} onChange={e => setSecret(e.target.value)}  type="name" />
-              </FormGroup>
-              <FormGroup>
-                <Button  color="primary" onClick={handleSubmit}>{"Save"}</Button>
-              </FormGroup>
+                {liveMode && 
+                    <> 
+                      <FormGroup>
+                      <Label htmlFor="exampleFormControlInput1">Live Client Id</Label>
+                      <Input className="form-control" value={liveclient_id} onChange={e => setLiveClientid(e.target.value)}  type="text" />
+                      </FormGroup>
+                      <FormGroup>
+                      <Label htmlFor="exampleFormControlInput1">Live Secret</Label>
+                      <Input className="form-control" value={livesecret} onChange={e => setLiveSecret(e.target.value)}  type="text" />
+                      </FormGroup>
+                      <FormGroup>
+                      <Button  color="primary" onClick={handleSubmit}>{"Save"}</Button>
+                      </FormGroup>
+                    </> 
+                 }
+
             </Form>
           </CardBody>
         </Card>  

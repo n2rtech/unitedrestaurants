@@ -22,12 +22,20 @@ const [Url , setUrl] = useState('');
 
 const [coupons, setCoupons] = useState([]);
 const token = localStorage.getItem("token");
-const [mode, setMode] = useState("");
-const [client_id, setClientid] = useState('')
-const [secret, setSecret] = useState('')
+const [mode, setMode] = useState('');
 const fetch = require('node-fetch');
-const clientIdAndSecret = `${client_id}:${secret}`;
-const basictoken = Buffer.from(clientIdAndSecret).toString('base64')
+
+const [testclient_id, setTestClientid] = useState('')
+const [testsecret, setTestSecret] = useState('')
+
+const TestclientIdAndSecret = `${testclient_id}:${testsecret}`;
+const Testbasictoken = Buffer.from(TestclientIdAndSecret).toString('base64')
+
+
+const [liveclient_id, setLiveClientid] = useState('')
+const [livesecret, setLiveSecret] = useState('')
+const LiveclientIdAndSecret = `${liveclient_id}:${livesecret}`;
+const Livebasictoken = Buffer.from(LiveclientIdAndSecret).toString('base64')
 
   useEffect(() => {
 
@@ -47,16 +55,16 @@ const basictoken = Buffer.from(clientIdAndSecret).toString('base64')
           axios.get(`/api/paypal/`,
             config
             ).then(result => {
-              console.info(result.data[0].client_id);
-
               if(result.data[0].mode === 1) {
                 setUrl("https://api-m.sandbox.paypal.com/");
+                setTestClientid(result.data[0].testclient_id);
+                setTestSecret(result.data[0].testsecret);
               } else {
                 setUrl("https://api-m.paypal.com/");
+                setLiveClientid(result.data[0].liveclient_id);
+                setLiveSecret(result.data[0].livesecret);
               }
               setMode(result.data[0].mode);
-              setClientid(result.data[0].client_id);
-              setSecret(result.data[0].secret);
             }
           ).catch(error => console.log('Form submit error', error))
 
@@ -145,11 +153,13 @@ function calculate_total_cycles(cycle) {
                 if(response.data.error) {
                   toast.error(response.data.error);
                 } else {
+
+                  const basictoken = (mode == 1) ? Testbasictoken : Livebasictoken;
                             
             axios({
               url: `${Url}v1/billing/plans/`,
               method: 'post',
-              headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*' , 'Authorization': 'Basic '+basictoken },
+              headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*' , 'Authorization': 'Basic '+  basictoken},
               data: { 
   
                   "product_id" : "united123456",

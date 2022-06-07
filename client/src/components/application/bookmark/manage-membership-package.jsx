@@ -9,11 +9,17 @@ const ManageMembershipPackage = (props) => {
 
   const [plansData, setPlansData] = useState([]);
   const token = localStorage.getItem("token");
-  const [client_id, setClientid] = useState('')
-  const [secret, setSecret] = useState('')
   const fetch = require('node-fetch');
-  const clientIdAndSecret = `${client_id}:${secret}`;
-  const basictoken = Buffer.from(clientIdAndSecret).toString('base64')
+  const [testclient_id, setTestClientid] = useState('')
+  const [testsecret, setTestSecret] = useState('')
+  const TestclientIdAndSecret = `${testclient_id}:${testsecret}`;
+  const Testbasictoken = Buffer.from(TestclientIdAndSecret).toString('base64')
+
+  const [liveclient_id, setLiveClientid] = useState('')
+  const [livesecret, setLiveSecret] = useState('')
+  const [mode, setMode] = useState('')
+  const LiveclientIdAndSecret = `${liveclient_id}:${livesecret}`;
+  const Livebasictoken = Buffer.from(LiveclientIdAndSecret).toString('base64')
   const [Url , setUrl] = useState('');
 
   useEffect(() => {
@@ -34,13 +40,15 @@ const ManageMembershipPackage = (props) => {
         axios.get(`/api/paypal/`,
             config
             ).then(result => {
-              if(result.data[0].mode === 1) {
+              if(result.data[0].mode == 1) {
                 setUrl("https://api-m.sandbox.paypal.com/");
+                setTestClientid(result.data[0].testclient_id);
               } else {
                 setUrl("https://api-m.paypal.com/");
+                setLiveClientid(result.data[0].liveclient_id);
+                setLiveSecret(result.data[0].livesecret);
               }
-              setClientid(result.data[0].client_id);
-              setSecret(result.data[0].secret);
+              setMode(result.data[0].mode);
             }
           ).catch(error => console.log('Form submit error', error))
 
@@ -50,7 +58,7 @@ const ManageMembershipPackage = (props) => {
 
     const HandleActivate = (plan_id,id) => {
       setLoading(true)
-
+      const basictoken = (mode == 1) ? Testbasictoken : Livebasictoken;
        axios({
         url: `${Url}/v1/billing/plans/`+`${plan_id}`+`/activate`,
         method: 'post',
@@ -85,7 +93,7 @@ const ManageMembershipPackage = (props) => {
     const HandleDeactivate = (plan_id,id) => {
 
       setLoading(true)
-
+      const basictoken = (mode == 1) ? Testbasictoken : Livebasictoken;
       //var basictoken = 'QWRIYjBBRE1IVUFXeWtXUUQtdzhNQlIza3VwU3ZZN0FYRFZ6YVJPcnJNQlpnQVQwSDRiZmhubFhyeXd2cGxOYjJjaEc0TEMxekFiRDd4N3Q6RU1MZTJYdndXV3BrZTJaWVg5dVctU2liS25lMkdSOXg4TjZlLXhEOGJaZDZXOEM4WWRpdVFJSHhhVEtoM3JmT21pT3hyVXJ3Q2JOZXZJOUM=';
       axios({
         url: `${Url}/v1/billing/plans/`+`${plan_id}`+`/deactivate`,

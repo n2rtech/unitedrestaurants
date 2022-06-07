@@ -15,8 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   };
   Paypalsettings.init({
     mode: DataTypes.INTEGER,
-    client_id: DataTypes.TEXT,
-    secret: DataTypes.TEXT,
+    testclient_id: DataTypes.TEXT,
+    testsecret: DataTypes.TEXT,
+    liveclient_id: DataTypes.TEXT,
+    livesecret: DataTypes.TEXT,
 
   }, {
     sequelize,

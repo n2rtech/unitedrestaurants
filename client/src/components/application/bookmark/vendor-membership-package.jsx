@@ -25,13 +25,19 @@ const VendorMembershipPackage = (props) => {
   const [couponapplied,setCouponApplied] = useState(false);
   const [standardcouponapplied, setStandardCouponapplied] = useState(false);
   const [coupon_code, setCouponCode] = useState('');
-  const [client_id, setClientid] = useState('')
-  const [secret, setSecret] = useState('')
+  const [testclient_id, setTestClientid] = useState('')
+  const [testsecret, setTestSecret] = useState('')
+  const [liveclient_id, setLiveClientid] = useState('')
+  const [livesecret, setLiveSecret] = useState('')
   const fetch = require('node-fetch');
-  const clientIdAndSecret = `${client_id}:${secret}`;
-  const basictoken = Buffer.from(clientIdAndSecret).toString('base64')
+  const [mode, setMode] = useState('');
+  const TestclientIdAndSecret = `${testclient_id}:${testsecret}`;
+  const LiveclientIdAndSecret = `${liveclient_id}:${livesecret}`;
+  const Testbasictoken = Buffer.from(TestclientIdAndSecret).toString('base64')
+  const Livebasictoken = Buffer.from(LiveclientIdAndSecret).toString('base64')
   const [Url , setUrl] = useState('');
-
+  const basictoken = '';
+  
     const handlecoupon_code = (e) => {
       setCouponCode(e.target.value);
     }
@@ -95,8 +101,6 @@ const VendorMembershipPackage = (props) => {
           bodyParameters,
           config
         ) .then(response => {
-          console.info("Response" , response);
-          console.info("Response Length" , response.data.length);
               if(response.data.length == 0) {
                 SweetAlert.fire(
                   'Alert!',
@@ -162,13 +166,16 @@ const VendorMembershipPackage = (props) => {
       axios.get(`/api/paypal/`,
             config
             ).then(result => {
-              if(result.data[0].mode === 1) {
+              if(result.data[0].mode == 1) {
                 setUrl("https://api-m.sandbox.paypal.com/");
+                setTestClientid(result.data[0].testclient_id);
+                setTestSecret(result.data[0].testsecret);
               } else {
                 setUrl("https://api-m.paypal.com/");
-              }
-              setClientid(result.data[0].client_id);
-              setSecret(result.data[0].secret);
+                setLiveClientid(result.data[0].liveclient_id);
+                setLiveSecret(result.data[0].livesecret);
+              }  
+              setMode(result.data[0].mode);
             }
           ).catch(error => console.log('Form submit error', error))
 
@@ -296,7 +303,7 @@ const VendorMembershipPackage = (props) => {
     }
 
     const CancelSubscription = (id) => {
-      
+      const basictoken = (mode == 1) ? Testbasictoken : Livebasictoken;
       SweetAlert.fire({
         title: 'Are you sure?',
         text: "Once cacncel, your current subscriptions plan has been de-activated!",
