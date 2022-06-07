@@ -30,7 +30,7 @@ const Logo = () => {
   return (
       <div className="Logo">
         <a href="/">
-          <img src={logo} onError = {defaultlogo} alt="United Restaurants"/>
+         { logo &&  <img src={logo} onError = {defaultlogo} alt="United Restaurants"/>} 
         </a>
       </div>
   );

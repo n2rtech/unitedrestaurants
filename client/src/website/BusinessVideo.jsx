@@ -42,9 +42,9 @@ export default function BusinessVideo() {
           { videoGalleryData.length > 0 ? videoGalleryData.map((videoGallery , i ) => (
               <div key={i} className="videodiv">
                 <div className="embed-responsive embed-responsive-16by9">
-                 {videoGallery.youtube_link ? 
+                 {videoGallery.youtube_link && 
                 <iframe width="100%" height="260" src={videoGallery.youtube_link.replace('watch?v=' , 'embed/')} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                  : ''}
+                  }
                   &nbsp;
                 </div>
             </div>

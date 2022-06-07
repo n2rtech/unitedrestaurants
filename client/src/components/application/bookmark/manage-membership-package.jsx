@@ -54,8 +54,6 @@ const ManageMembershipPackage = (props) => {
 
     }, []);
 
-    console.log(plansData);
-
     const HandleActivate = (plan_id,id) => {
       setLoading(true)
       const basictoken = (mode == 1) ? Testbasictoken : Livebasictoken;
@@ -162,7 +160,7 @@ const ManageMembershipPackage = (props) => {
                          <td>{item.price}</td>
                          <td className="text-right">
                          <ButtonGroup>
-                           {/* <Button color="btn btn-success" disabled = {item.name === 'Free' ? true : false} href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership/${item.id}`}>Edit</Button> &nbsp; */}
+                           <Button color="btn btn-success" disabled = {item.name === 'Free' ? true : false} href={`${process.env.PUBLIC_URL}/dashboard/admin/edit-admin-membership/${item.id}/`}>Edit</Button> &nbsp;
                            <Button color="success" disabled = {item.status == 1 ? true : false} onClick={() => HandleActivate(item.plan_id,item.id)}>Activate</Button>&nbsp;
                            <Button color="danger" disabled = {item.status == 0 ? true : false} onClick={() => HandleDeactivate(item.plan_id,item.id)}>De-activate</Button>
                          </ButtonGroup>                          
