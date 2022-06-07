@@ -52,7 +52,7 @@ const ManageMembershipPackage = (props) => {
       setLoading(true)
 
        axios({
-        url: `${url}/v1/billing/plans/`+`${plan_id}`+`/activate`,
+        url: `${Url}/v1/billing/plans/`+`${plan_id}`+`/activate`,
         method: 'post',
         headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*' , 'Authorization': 'Basic '+basictoken },
       })
