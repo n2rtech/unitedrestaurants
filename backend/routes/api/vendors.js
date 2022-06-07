@@ -706,7 +706,7 @@ router.post("/email_verify_pswd", (req, res) => {
         if (error) {
           console.log(error);
         } else {
-          console.log("Server is ready to take our messages",success);
+          console.log("Server is ready to take our messages yes ganesh",success);
         }
       });
 
