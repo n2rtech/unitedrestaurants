@@ -21,6 +21,7 @@ const AddSpaces = () => {
   const user_id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
   const country_id = localStorage.getItem("vendor_country_id");
+  const [loading, setLoading] = useState(false);
   const history = useHistory()
   useEffect(() => {
   
@@ -49,7 +50,7 @@ const AddSpaces = () => {
   const [membership_id, setMembershipid] = useState('');
  
    useEffect(() => {
-   
+    
        const config = {
            headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
        };
@@ -111,6 +112,7 @@ const AddSpaces = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    setLoading(true);
     const config = {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
       };
@@ -123,13 +125,11 @@ const AddSpaces = () => {
            bodyParameters.append('image', image.pictureFiles[i])
         }
 
-        // console.log("Body Parameters" , bodyParameters);
-        // return;
-
       axios.post('/api/ad-spaces/',
         bodyParameters,
         config
       ) .then(response => {
+        setLoading(false);
         toast.success("Submit")
         setTimeout(() => {
             window.location.reload();
@@ -164,12 +164,12 @@ const AddSpaces = () => {
                                         </div>
                                     </Col> 
                                 ))}
-
+                         { loading && <img src={`${process.env.PUBLIC_URL}/api/uploads/banner/loader.gif`}/> }  
                                         
                                 </Row>
                             </CardBody>
                         </Card>
-                    </Col>
+                    </Col> 
                 </Row>
 
                 <Row>

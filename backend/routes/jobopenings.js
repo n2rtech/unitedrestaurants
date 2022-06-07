@@ -138,4 +138,38 @@ router.delete('/:id', (req, res) => {
         }
 });
 
+
+router.delete('/delete/:id', (req, res) => {
+    console.log("USer" ,req.params.id);
+      if (!req.params.id) {
+        res.status(400).send({
+          msg: 'Please pass user ID.'
+        })
+      } else {
+        User
+          .findByPk(req.params.id)
+          .then((user) => {
+            
+            if (user) {
+              User.destroy({
+                where: {
+                  id: req.params.id
+                }
+              }).then(_ => {
+                res.status(200).send({
+                  'message': 'User deleted'
+                });
+              }).catch(err => res.status(400).send(err));
+            } else {
+              res.status(404).send({
+                'message': 'User not found'
+              });
+            }
+          })
+          .catch((error) => {
+            res.status(400).send(error);
+          });
+      }
+  });
+
 module.exports = router;

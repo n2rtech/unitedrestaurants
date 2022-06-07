@@ -488,7 +488,7 @@ router.post("/register", (req, res) => {
                   secure: true, // true for 465, false for other ports
                   auth: {
                     user: 'contact@n2rtechnologies.com', // generated ethereal user
-                    pass: 'contact#@785612', // generated ethereal password
+                    pass: 'sparx#@9921', // generated ethereal password
                   },
                 });
 
@@ -1966,7 +1966,6 @@ const getPagingVandorsData = (data, page, limit) => {
 
   return { totalItems, vendors, totalPages, currentPage };
 };
-
 
 
 

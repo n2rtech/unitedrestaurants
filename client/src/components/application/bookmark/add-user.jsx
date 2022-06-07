@@ -67,7 +67,7 @@ const AddUser = (props) => {
       ) .then(response => {
         toast.success("User has been added !");
         setTimeout(function() {
-          history.push("/dashboard/admin/users-list");
+          history.push("/dashboard/admin/users-list/");
         }, 2500); 
       }).catch((error) => {
         if (error.response) {

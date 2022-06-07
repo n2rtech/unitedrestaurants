@@ -82,8 +82,8 @@ const SaleItems =  () =>  {
                                         label=""
                                         buttonText="Upload Image/Icon"
                                         onChange={onDrop}
-                                        imgExtension={[".jpg", ".gif", ".png", ".gif", ".svg"]}
-                                        maxFileSize={1048576}
+                                        imgExtension={[".jpg", ".gif", ".png", ".gif", ".svg" , ".jpeg"]}
+                                        maxFileSize={9048576}
                                         fileSizeError=" file size is too big"
                                     />
                                 </FormGroup>

@@ -545,6 +545,7 @@ async function catLists(getData) {
 
 // Delete a User
 router.delete('/:id', (req, res) => {
+  console.log("USer" ,req.params.id);
     if (!req.params.id) {
       res.status(400).send({
         msg: 'Please pass user ID.'
@@ -553,6 +554,7 @@ router.delete('/:id', (req, res) => {
       User
         .findByPk(req.params.id)
         .then((user) => {
+          
           if (user) {
             User.destroy({
               where: {

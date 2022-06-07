@@ -14,6 +14,7 @@ const AddVideoGallery = (props) => {
     const [mode, setMode] = useState(0);
     const [upload, setUpload] = useState(false);
     const [linkvideo, setLinkvideo] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const onChangeVideoname = (event) => {
       setVideoname(event.target.value);
@@ -41,7 +42,6 @@ const AddVideoGallery = (props) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-
     const config = {
       headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
       };
@@ -86,7 +86,7 @@ const AddVideoGallery = (props) => {
 
   const handleSubmitUpload = event => {
   event.preventDefault();
-
+  setLoading(true);
   const config = {
     headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
     };
@@ -101,14 +101,12 @@ const AddVideoGallery = (props) => {
       bodyParameters,
       config
     ) .then(response => {
+        setLoading(false);
         if(response.data.msg) {
           toast.success('Uploaded Video Successfully')
           setTimeout(history.push('/dashboard/vendor/vendor-videogallery/'), 1000);
         }
-
     }).catch(error => { toast.error('Please upload files or fill title and description') })
-
-
 };
 
 
@@ -130,7 +128,8 @@ const AddVideoGallery = (props) => {
                     <Label className="mb-0" for="yes-featured"> Upload video</Label>
                     </div>
                 </FormGroup>
-                             
+
+                      { loading && <img src={`${process.env.PUBLIC_URL}/api/uploads/banner/loader.gif`}/> }       
 
                 {
                   upload && 

@@ -5,6 +5,7 @@ import {toast} from 'react-toastify';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import SweetAlert from 'sweetalert2'
+import { Player, ControlBar } from 'video-react';
 
 const VendorVideoGallery = (props) => {
 
@@ -125,8 +126,10 @@ const VendorVideoGallery = (props) => {
                     <td>{item.title}</td>
                     <td>{item.description}</td>
                     <td className="text-right">
-                    <iframe width="300" height="200" src={`https://www.youtube.com/embed/${item.youtube_video_id}`}>
-                      </iframe>
+                    <Player>
+                        <source src={`${process.env.PUBLIC_URL}/api/uploads/youtubevideo/${item.video_link}`} />
+                        <ControlBar autoHide={false} />
+                    </Player>
                       {/* <a href={`${process.env.PUBLIC_URL}/dashboard/${localStorage.getItem("role")}/edit-video-gallery/${item.id}`} className="btn btn-success">Edit</a> &nbsp;
                       <a className="btn btn-danger">Delete</a>  */}
                     </td>

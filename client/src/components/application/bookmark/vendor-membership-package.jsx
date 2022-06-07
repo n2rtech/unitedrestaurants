@@ -17,7 +17,6 @@ const VendorMembershipPackage = (props) => {
   const [activePlan, setActivePlan] = useState([]);
   const [planname, setPlanName] = useState('Free');
   const [subscriptionid, setSubscriptionId] = useState('');
-
   const token = localStorage.getItem("token");
   const user_id = localStorage.getItem("id");
   const country_id = localStorage.getItem("vendor_country_id");
@@ -25,8 +24,13 @@ const VendorMembershipPackage = (props) => {
   const [intervalq,setIntervalq] = useState('');
   const [couponapplied,setCouponApplied] = useState(false);
   const [standardcouponapplied, setStandardCouponapplied] = useState(false);
-
-    const [coupon_code, setCouponCode] = useState('');
+  const [coupon_code, setCouponCode] = useState('');
+  const [client_id, setClientid] = useState('')
+  const [secret, setSecret] = useState('')
+  const fetch = require('node-fetch');
+  const clientIdAndSecret = `${client_id}:${secret}`;
+  const basictoken = Buffer.from(clientIdAndSecret).toString('base64')
+  const [Url , setUrl] = useState('');
 
     const handlecoupon_code = (e) => {
       setCouponCode(e.target.value);
@@ -130,13 +134,13 @@ const VendorMembershipPackage = (props) => {
             setActivePlan(result);
             
             if(result.membership) {
-              setPlanName(result.membership.name);
+              setPlanName(result.membership.plan_type);
               setIntervalq(result.membership.interval)
               setAmountq(result.membership.price);
             }
             if(result.transaction){
-            setSubscriptionId(result.transaction.membership_subscription_id)
-          }
+                setSubscriptionId(result.transaction.membership_subscription_id)
+            }
            
           },
           (error) => {
@@ -154,6 +158,19 @@ const VendorMembershipPackage = (props) => {
         },
         (error) => {}
       )
+
+      axios.get(`/api/paypal/`,
+            config
+            ).then(result => {
+              if(result.data[0].mode === 1) {
+                setUrl("https://api-m.sandbox.paypal.com/");
+              } else {
+                setUrl("https://api-m.paypal.com/");
+              }
+              setClientid(result.data[0].client_id);
+              setSecret(result.data[0].secret);
+            }
+          ).catch(error => console.log('Form submit error', error))
 
     }, []);
 
@@ -290,11 +307,8 @@ const VendorMembershipPackage = (props) => {
         reverseButtons: true
       }).then((result) => {
         if (result.value) {
-          var client_id = 'AdHb0ADMHUAWykWQD-w8MBR3kupSvY7AXDVzaROrrMBZgAT0H4bfhnlXrywvplNb2chG4LC1zAbD7x7t';
-          var secret = 'EMLe2XvwWWpke2ZYX9uW-SibKne2GR9x8N6e-xD8bZd6W8C8YdiuQIHxaTKh3rfOmiOxrUrwCbNevI9C';
-          var basictoken = 'QWRIYjBBRE1IVUFXeWtXUUQtdzhNQlIza3VwU3ZZN0FYRFZ6YVJPcnJNQlpnQVQwSDRiZmhubFhyeXd2cGxOYjJjaEc0TEMxekFiRDd4N3Q6RU1MZTJYdndXV3BrZTJaWVg5dVctU2liS25lMkdSOXg4TjZlLXhEOGJaZDZXOEM4WWRpdVFJSHhhVEtoM3JmT21pT3hyVXJ3Q2JOZXZJOUM=';
           axios({
-            url: `https://api-m.sandbox.paypal.com/v1/billing/subscriptions/`+`${id}`+`/cancel`,
+            url: `${Url}/v1/billing/subscriptions/`+`${id}`+`/cancel`,
             method: 'post',
             headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*' , 'Authorization': 'Basic '+basictoken },
             data: { "reason": "test -- Not satisfied with the service" }
@@ -419,7 +433,7 @@ const VendorMembershipPackage = (props) => {
                         <div className="pricingtable-signup">
                         {standardcouponapplied && cycle} 
                         {StandardwithCoupons && cycle}
-                        { planname === 'Standard' ? 
+                        { planname === 'standard' ? 
                           <div className="pricingtable-signup">
                               {"Selected Cycle"} : {intervalq}<br/>
                               {"Amount"} : {cycleamountq} <br/>
@@ -482,7 +496,7 @@ const VendorMembershipPackage = (props) => {
                         <div className="pricingtable-signup">
                         {couponapplied && premiumcycle} 
                         {PremiumwithCoupons && premiumcycle}
-                        { planname === 'Premium' ? 
+                        { planname === 'premium' ? 
                           
                           <div className="pricingtable-signup">
                               {"Selected Cycle"} : {intervalq}<br/>

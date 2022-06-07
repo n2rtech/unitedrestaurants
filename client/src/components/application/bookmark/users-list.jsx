@@ -48,8 +48,6 @@ const Userslist = (props) => {
   
     }, [filterData]);
   
-    console.log(users);
-
     const handlePageChange = (pageNumber) => {
     var config = {
       method: 'get',
@@ -90,10 +88,10 @@ const Userslist = (props) => {
   }).then((result) => {
     if (result.value) {
       const config = {
-        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+token }
+        headers: { 'Content-Type': 'application/json'  ,'Access-Control-Allow-Origin': '*' , 'Authorization': 'JWT '+localStorage.getItem('token') }
         };
   
-        axios.delete(`/api/users/`+`${id}`,config
+        axios.delete(`/api/jobs/delete/`+`${id}`,config
         ) .then(response => {
           toast.success("User Deleted !")
           setTimeout(() => {
@@ -128,10 +126,10 @@ const Userslist = (props) => {
           <Row className="m-b-20">
             <Col sm="6">
 
-            <Form className="form theme-form" autocomplete="off">
+            <Form className="form theme-form" autoComplete="off">
                     <FormGroup>
                       <Label htmlFor="exampleFormControlInput">{"Search Data :"}</Label>
-                      <Input className="form-control" name="name" autocomplete="off" value={filterData} onChange={handlefilterChange} type="name" placeholder="Please search name email or role" />
+                      <Input className="form-control" name="name" autoComplete="off" value={filterData} onChange={handlefilterChange} type="name" placeholder="Please search name email or role" />
                     </FormGroup>
                     </Form>
             </Col>
@@ -154,7 +152,7 @@ const Userslist = (props) => {
                 </thead>
                 <tbody>
                   {users.map((item , i) => 
-                    <tr>
+                    <tr key = {i}>
                     <td>{item.name}</td>
                     <td>{item.email}</td>
                     <td>
