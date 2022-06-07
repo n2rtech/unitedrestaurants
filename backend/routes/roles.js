@@ -83,9 +83,7 @@ router.get('/all', passport.authenticate('jwt', {
 });
 
 // Get Role by ID
-router.get('/:id', passport.authenticate('jwt', {
-    session: false
-}), function (req, res) {
+router.get('/:id', (req, res) => {
     Role
         .findByPk(
             req.params.id, {
